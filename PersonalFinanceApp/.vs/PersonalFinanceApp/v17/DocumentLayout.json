@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{76317FF1-9E5E-4CF5-BEAA-2B9CACD58E26}|PersonalFinanceApp\\PersonalFinanceApp.csproj|d:\\github\\personalfinanceapp\\personalfinanceapp\\personalfinanceapp\\model\\monthlyexpenses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76317FF1-9E5E-4CF5-BEAA-2B9CACD58E26}|PersonalFinanceApp\\PersonalFinanceApp.csproj|solutionrelative:personalfinanceapp\\model\\monthlyexpenses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76317FF1-9E5E-4CF5-BEAA-2B9CACD58E26}|PersonalFinanceApp\\PersonalFinanceApp.csproj|d:\\github\\personalfinanceapp\\personalfinanceapp\\personalfinanceapp\\model\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76317FF1-9E5E-4CF5-BEAA-2B9CACD58E26}|PersonalFinanceApp\\PersonalFinanceApp.csproj|solutionrelative:personalfinanceapp\\model\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76317FF1-9E5E-4CF5-BEAA-2B9CACD58E26}|PersonalFinanceApp\\PersonalFinanceApp.csproj|d:\\github\\personalfinanceapp\\personalfinanceapp\\personalfinanceapp\\model\\expense.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76317FF1-9E5E-4CF5-BEAA-2B9CACD58E26}|PersonalFinanceApp\\PersonalFinanceApp.csproj|solutionrelative:personalfinanceapp\\model\\expense.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76317FF1-9E5E-4CF5-BEAA-2B9CACD58E26}|PersonalFinanceApp\\PersonalFinanceApp.csproj|d:\\github\\personalfinanceapp\\personalfinanceapp\\personalfinanceapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{76317FF1-9E5E-4CF5-BEAA-2B9CACD58E26}|PersonalFinanceApp\\PersonalFinanceApp.csproj|solutionrelative:personalfinanceapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{76317FF1-9E5E-4CF5-BEAA-2B9CACD58E26}|PersonalFinanceApp\\PersonalFinanceApp.csproj|d:\\github\\personalfinanceapp\\personalfinanceapp\\personalfinanceapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{76317FF1-9E5E-4CF5-BEAA-2B9CACD58E26}|PersonalFinanceApp\\PersonalFinanceApp.csproj|solutionrelative:personalfinanceapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -31,6 +47,57 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MonthlyExpenses.cs",
+              "DocumentMoniker": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\Model\\MonthlyExpenses.cs",
+              "RelativeDocumentMoniker": "PersonalFinanceApp\\Model\\MonthlyExpenses.cs",
+              "ToolTip": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\Model\\MonthlyExpenses.cs",
+              "RelativeToolTip": "PersonalFinanceApp\\Model\\MonthlyExpenses.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-16T12:28:07.162Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Category.cs",
+              "DocumentMoniker": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\Model\\Category.cs",
+              "RelativeDocumentMoniker": "PersonalFinanceApp\\Model\\Category.cs",
+              "ToolTip": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\Model\\Category.cs",
+              "RelativeToolTip": "PersonalFinanceApp\\Model\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-16T12:26:27.639Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Expense.cs",
+              "DocumentMoniker": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\Model\\Expense.cs",
+              "RelativeDocumentMoniker": "PersonalFinanceApp\\Model\\Expense.cs",
+              "ToolTip": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\Model\\Expense.cs",
+              "RelativeToolTip": "PersonalFinanceApp\\Model\\Expense.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-16T12:24:06.769Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "PersonalFinanceApp\\MainWindow.xaml",
+              "ToolTip": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\MainWindow.xaml",
+              "RelativeToolTip": "PersonalFinanceApp\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-09-16T12:20:03.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "PersonalFinanceApp\\MainWindow.xaml.cs",
