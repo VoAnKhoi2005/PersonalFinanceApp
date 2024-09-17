@@ -4,6 +4,11 @@
     {
         public readonly int ID;
         public string Name { get; set; }
-        public List<Expense> Expenses { get; set; }
+        public List<Expense> Expenses { get; }
+
+        public Category()
+        {
+            Expenses = new List<Expense>();
+        }
     }
 }

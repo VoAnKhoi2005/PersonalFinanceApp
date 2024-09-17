@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
+using PersonalFinanceApp.Model;
 
 namespace PersonalFinanceApp
 {
