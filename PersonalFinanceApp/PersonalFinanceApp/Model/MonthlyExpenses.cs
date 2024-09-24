@@ -3,9 +3,6 @@
     public class MonthlyExpenses
     {
         private int _month = 1;
-        private int _year = 0;
-        private decimal _limit = decimal.MaxValue;
-
         public int Month
         {
             get => _month;
@@ -18,6 +15,8 @@
             }
         }
 
+
+        private int _year = 0;
         public int Year
         {
             get => _year;
@@ -30,15 +29,16 @@
             }
         }
 
-        public decimal Limit
+        private decimal _budget = decimal.MaxValue;
+        public decimal Budget
         {
-            get => _limit;
+            get => _budget;
             set
             {
                 if (value < 0)
-                    _limit = 0;
+                    _budget = 0;
                 else
-                    _limit = value;
+                    _budget = value;
             }
         }
 

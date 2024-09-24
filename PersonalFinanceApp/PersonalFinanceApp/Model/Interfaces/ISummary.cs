@@ -1,4 +1,4 @@
-﻿namespace PersonalFinanceApp.Model
+﻿namespace PersonalFinanceApp.Model.Interfaces
 {
     public interface ISummary
     {

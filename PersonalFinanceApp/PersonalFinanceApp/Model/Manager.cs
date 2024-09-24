@@ -2,6 +2,7 @@
 {
     public class Manager
     {
+        #region Singleton
         private static Manager _instance = null;
         public static Manager Instance
         {
@@ -12,13 +13,16 @@
                 return _instance;
             }
         }
+        #endregion Singleton
+
+        public decimal Saving { get; }
+        public decimal Goal { get; set; }
+        private List<MonthlyExpenses> AllTimeExpensesList;
+        public MonthlyExpenses CurrentMonthlyExpenses { get; }
 
         private Manager()
         {
             AllTimeExpensesList = new List<MonthlyExpenses>();
         }
-
-        private List<MonthlyExpenses> AllTimeExpensesList;
-        public MonthlyExpenses CurrentMonthlyExpenses { get; }
     }
 }
