@@ -24,5 +24,6 @@ public class User
     [Range(0, 100000000000000)]
     public decimal MonthlyIncome { get; set; }
 
+    //Relationship
     public virtual List<ExpensesBook> ExpensesBooks { get; set; } = new List<ExpensesBook>();
 }

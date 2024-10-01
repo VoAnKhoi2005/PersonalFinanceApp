@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PersonalFinanceApp.Model
 {
@@ -22,9 +21,10 @@ namespace PersonalFinanceApp.Model
         [Range(0, 10000000000000)]
         public decimal Spending { get; set; }
         
+        //Relationship
+        [Required]
         public string UserID { get; set; }
         public virtual User User { get; set; }
-
         public virtual List<Expense> Expenses { get; set; } = new List<Expense>();
         public virtual List<Category> Categories { get; set; } = new List<Category>();
     }

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PersonalFinanceApp.Model
 {
@@ -26,11 +25,11 @@ namespace PersonalFinanceApp.Model
 
         public DateOnly RecurringDate { get; set; }
 
+        //Relationship
 
         [Required]
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
-
         [Required]
         public string ExpensesBookID { get; set; }
         public virtual ExpensesBook ExpensesBook { get; set; }
