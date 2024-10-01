@@ -1,14 +1,21 @@
-﻿namespace PersonalFinanceApp.Model
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PersonalFinanceApp.Model
 {
     public class Category
     {
-        public readonly int ID;
-        public string Name { get; set; }
-        public List<Expense> Expenses { get; }
+        [Key]
+        public int ID { get; set; }
 
-        public Category()
-        {
-            Expenses = new List<Expense>();
-        }
+        [Required]
+        [MinLength(1)]
+        public string Name { get; set; }
+
+        public virtual List<Expense> Expenses { get; set; }
+
+        [Required]
+        public string ExpensesBookID { get; set; }
+        public virtual ExpensesBook ExpensesBook { get; set; }
     }
 }

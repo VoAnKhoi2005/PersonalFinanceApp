@@ -1,25 +1,38 @@
-﻿namespace PersonalFinanceApp.Model
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PersonalFinanceApp.Model
 {
     public class Expense
     {
-        public readonly int ID;
-        private decimal _amount;
-        public decimal Amount
-        {
-            get => _amount;
-            set
-            {
-                if (value < 0)
-                    _amount = 0;
-                else
-                    _amount = value;
-            }
-        }
+        [Key]
+        public int ID { get; set; }
+
+        [Required]
+        [Range(1,1000000000000)]
+        public decimal Amount { get; set; }
+
+        [Required]
+        [MinLength(1)]
         public string Name { get; set; }
+
         public string Description { get; set; }
+
+        [Required]
         public DateOnly Date { get; set; }
-        public string CategoryName { get; set; }
+
+        [Required]
         public bool Recurring { get; set; }
+
         public DateOnly RecurringDate { get; set; }
+
+
+        [Required]
+        public string CategoryID { get; set; }
+        public virtual Category Category { get; set; }
+
+        [Required]
+        public string ExpensesBookID { get; set; }
+        public virtual ExpensesBook ExpensesBook { get; set; }
     }
 }
