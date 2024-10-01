@@ -28,7 +28,7 @@ namespace PersonalFinanceApp.Model
 
 
         [Required]
-        public string CategoryID { get; set; }
+        public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
 
         [Required]

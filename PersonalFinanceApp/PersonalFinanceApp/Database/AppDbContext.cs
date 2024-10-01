@@ -10,6 +10,11 @@ namespace PersonalFinanceApp.Database
         DbSet<Category> CategoriesTable { get; set; }
         DbSet<Expense> ExpensesTable { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=PFA.db");
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Setup relationship between table
