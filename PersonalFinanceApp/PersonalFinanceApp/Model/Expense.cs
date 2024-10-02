@@ -9,7 +9,7 @@ namespace PersonalFinanceApp.Model
 
         [Required]
         [Range(1,1000000000000)]
-        public decimal Amount { get; set; }
+        public long Amount { get; set; }
 
         [Required]
         [MinLength(1)]
@@ -26,12 +26,16 @@ namespace PersonalFinanceApp.Model
         public DateOnly RecurringDate { get; set; }
 
         //Relationship
-
         [Required]
         public int CategoryID { get; set; }
         public virtual Category Category { get; set; }
         [Required]
-        public string ExpensesBookID { get; set; }
+        [Range(1,12)]
+        public int ExBMonth { get; set; }
+
+        [Required]
+        [Range(1,3000)]
+        public int ExBYear { get; set; }
         public virtual ExpensesBook ExpensesBook { get; set; }
     }
 }

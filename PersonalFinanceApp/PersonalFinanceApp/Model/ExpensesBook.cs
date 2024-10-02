@@ -4,22 +4,19 @@ namespace PersonalFinanceApp.Model
 {
     public class ExpensesBook
     {
-        [Key]
-        public string ID { get; set; }
-
         [Required]
         [Range(1,12)]
-        private int Month { get; set; }
+        public int Month { get; set; }
 
         [Required]
         [Range(1,3000)]
-        private int Year { get; set; }
+        public int Year { get; set; }
 
-        [Range(0, 10000000000000)]
-        private decimal Budget { get; set; }
+        [Range(0, 1000000000000000)]
+        public long Budget { get; set; }
 
-        [Range(0, 10000000000000)]
-        public decimal Spending { get; set; }
+        [Range(0, 1000000000000000)]
+        public long Spending { get; set; }
         
         //Relationship
         [Required]

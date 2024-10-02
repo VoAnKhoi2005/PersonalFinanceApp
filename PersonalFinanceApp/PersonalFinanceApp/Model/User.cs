@@ -15,14 +15,14 @@ public class User
     [MinLength(8)]
     public string Password { get; set; }
 
-    [Range(0, 100000000000000)]
-    public decimal Saving { get; set; }
+    [Range(0, 1000000000000000)]
+    public long Saving { get; set; }
 
-    [Range(0, 100000000000000)]
-    public decimal Goal { get; set; }
+    [Range(0, 1000000000000000)]
+    public long Goal { get; set; }
 
-    [Range(0, 100000000000000)]
-    public decimal MonthlyIncome { get; set; }
+    [Range(0, 1000000000000000)]
+    public long MonthlyIncome { get; set; }
 
     //Relationship
     public virtual List<ExpensesBook> ExpensesBooks { get; set; } = new List<ExpensesBook>();

@@ -11,11 +11,16 @@ namespace PersonalFinanceApp.Model
         [MinLength(1)]
         public string Name { get; set; }
 
+        //Relationship
         public virtual List<Expense> Expenses { get; set; }
 
-        //Relationship
         [Required]
-        public string ExpensesBookID { get; set; }
+        [Range(1,12)]
+        public int ExBMonth { get; set; }
+
+        [Required]
+        [Range(1,3000)]
+        public int ExBYear { get; set; }
         public virtual ExpensesBook ExpensesBook { get; set; }
     }
 }

@@ -18,9 +18,9 @@ namespace PersonalFinanceApp.Migrations
                     UserID = table.Column<string>(type: "TEXT", nullable: false),
                     Username = table.Column<string>(type: "TEXT", maxLength: 40, nullable: false),
                     Password = table.Column<string>(type: "TEXT", nullable: false),
-                    Saving = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Goal = table.Column<decimal>(type: "TEXT", nullable: false),
-                    MonthlyIncome = table.Column<decimal>(type: "TEXT", nullable: false)
+                    Saving = table.Column<long>(type: "INTEGER", nullable: false),
+                    Goal = table.Column<long>(type: "INTEGER", nullable: false),
+                    MonthlyIncome = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,13 +31,15 @@ namespace PersonalFinanceApp.Migrations
                 name: "ExpensesBooksTable",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "TEXT", nullable: false),
-                    Spending = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Month = table.Column<int>(type: "INTEGER", nullable: false),
+                    Year = table.Column<int>(type: "INTEGER", nullable: false),
+                    Budget = table.Column<long>(type: "INTEGER", nullable: false),
+                    Spending = table.Column<long>(type: "INTEGER", nullable: false),
                     UserID = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExpensesBooksTable", x => x.ID);
+                    table.PrimaryKey("PK_ExpensesBooksTable", x => new { x.Month, x.Year });
                     table.ForeignKey(
                         name: "FK_ExpensesBooksTable_UserTable_UserID",
                         column: x => x.UserID,
@@ -53,16 +55,17 @@ namespace PersonalFinanceApp.Migrations
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    ExpensesBookID = table.Column<string>(type: "TEXT", nullable: false)
+                    ExBMonth = table.Column<int>(type: "INTEGER", nullable: false),
+                    ExBYear = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CategoriesTable", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_CategoriesTable_ExpensesBooksTable_ExpensesBookID",
-                        column: x => x.ExpensesBookID,
+                        name: "FK_CategoriesTable_ExpensesBooksTable_ExBMonth_ExBYear",
+                        columns: x => new { x.ExBMonth, x.ExBYear },
                         principalTable: "ExpensesBooksTable",
-                        principalColumn: "ID",
+                        principalColumns: new[] { "Month", "Year" },
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -72,14 +75,15 @@ namespace PersonalFinanceApp.Migrations
                 {
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Amount = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Amount = table.Column<long>(type: "INTEGER", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     Date = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     Recurring = table.Column<bool>(type: "INTEGER", nullable: false),
                     RecurringDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     CategoryID = table.Column<int>(type: "INTEGER", nullable: false),
-                    ExpensesBookID = table.Column<string>(type: "TEXT", nullable: false)
+                    ExBMonth = table.Column<int>(type: "INTEGER", nullable: false),
+                    ExBYear = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,17 +95,17 @@ namespace PersonalFinanceApp.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ExpensesTable_ExpensesBooksTable_ExpensesBookID",
-                        column: x => x.ExpensesBookID,
+                        name: "FK_ExpensesTable_ExpensesBooksTable_ExBMonth_ExBYear",
+                        columns: x => new { x.ExBMonth, x.ExBYear },
                         principalTable: "ExpensesBooksTable",
-                        principalColumn: "ID",
+                        principalColumns: new[] { "Month", "Year" },
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoriesTable_ExpensesBookID",
+                name: "IX_CategoriesTable_ExBMonth_ExBYear",
                 table: "CategoriesTable",
-                column: "ExpensesBookID");
+                columns: new[] { "ExBMonth", "ExBYear" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExpensesBooksTable_UserID",
@@ -114,9 +118,9 @@ namespace PersonalFinanceApp.Migrations
                 column: "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExpensesTable_ExpensesBookID",
+                name: "IX_ExpensesTable_ExBMonth_ExBYear",
                 table: "ExpensesTable",
-                column: "ExpensesBookID");
+                columns: new[] { "ExBMonth", "ExBYear" });
         }
 
         /// <inheritdoc />

@@ -11,7 +11,7 @@ using PersonalFinanceApp.Database;
 namespace PersonalFinanceApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241001151404_InitialCreate")]
+    [Migration("20241002015846_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -26,9 +26,11 @@ namespace PersonalFinanceApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ExpensesBookID")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ExBMonth")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ExBYear")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -36,7 +38,7 @@ namespace PersonalFinanceApp.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ExpensesBookID");
+                    b.HasIndex("ExBMonth", "ExBYear");
 
                     b.ToTable("CategoriesTable");
                 });
@@ -47,8 +49,8 @@ namespace PersonalFinanceApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("TEXT");
+                    b.Property<long>("Amount")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("INTEGER");
@@ -60,9 +62,11 @@ namespace PersonalFinanceApp.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ExpensesBookID")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ExBMonth")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ExBYear")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -78,24 +82,30 @@ namespace PersonalFinanceApp.Migrations
 
                     b.HasIndex("CategoryID");
 
-                    b.HasIndex("ExpensesBookID");
+                    b.HasIndex("ExBMonth", "ExBYear");
 
                     b.ToTable("ExpensesTable");
                 });
 
             modelBuilder.Entity("PersonalFinanceApp.Model.ExpensesBook", b =>
                 {
-                    b.Property<string>("ID")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Month")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Spending")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Year")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("Budget")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("Spending")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserID")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("ID");
+                    b.HasKey("Month", "Year");
 
                     b.HasIndex("UserID");
 
@@ -107,18 +117,18 @@ namespace PersonalFinanceApp.Migrations
                     b.Property<string>("UserID")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Goal")
-                        .HasColumnType("TEXT");
+                    b.Property<long>("Goal")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("MonthlyIncome")
-                        .HasColumnType("TEXT");
+                    b.Property<long>("MonthlyIncome")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Saving")
-                        .HasColumnType("TEXT");
+                    b.Property<long>("Saving")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -134,7 +144,7 @@ namespace PersonalFinanceApp.Migrations
                 {
                     b.HasOne("PersonalFinanceApp.Model.ExpensesBook", "ExpensesBook")
                         .WithMany("Categories")
-                        .HasForeignKey("ExpensesBookID")
+                        .HasForeignKey("ExBMonth", "ExBYear")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -151,7 +161,7 @@ namespace PersonalFinanceApp.Migrations
 
                     b.HasOne("PersonalFinanceApp.Model.ExpensesBook", "ExpensesBook")
                         .WithMany("Expenses")
-                        .HasForeignKey("ExpensesBookID")
+                        .HasForeignKey("ExBMonth", "ExBYear")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
