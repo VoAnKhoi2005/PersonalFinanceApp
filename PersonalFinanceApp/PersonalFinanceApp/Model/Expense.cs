@@ -15,7 +15,7 @@ namespace PersonalFinanceApp.Model
         [MinLength(1)]
         public string Name { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [Required]
         public DateOnly Date { get; set; }
@@ -23,7 +23,7 @@ namespace PersonalFinanceApp.Model
         [Required]
         public bool Recurring { get; set; }
 
-        public DateOnly RecurringDate { get; set; }
+        public DateOnly? RecurringDate { get; set; }
 
         //Relationship
         [Required]

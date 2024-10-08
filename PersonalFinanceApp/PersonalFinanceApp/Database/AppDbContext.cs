@@ -5,10 +5,11 @@ namespace PersonalFinanceApp.Database
 {
     public class AppDbContext : DbContext
     {
-        DbSet<User> UserTable { get; set; }
-        DbSet<ExpensesBook> ExpensesBooksTable { get; set; }
-        DbSet<Category> CategoriesTable { get; set; }
-        DbSet<Expense> ExpensesTable { get; set; }
+        //Table
+        public DbSet<User> UserTable { get; set; }
+        public DbSet<ExpensesBook> ExpensesBooksTable { get; set; }
+        public DbSet<Category> CategoriesTable { get; set; }
+        public DbSet<Expense> ExpensesTable { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

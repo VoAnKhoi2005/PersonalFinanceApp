@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PersonalFinanceApp.Database;
+using PersonalFinanceApp.Model;
 
 namespace PersonalFinanceApp
 {
