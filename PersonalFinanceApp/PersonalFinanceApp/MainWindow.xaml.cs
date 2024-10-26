@@ -20,6 +20,8 @@ namespace PersonalFinanceApp
         public MainWindow()
         {
             InitializeComponent();
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.ShowDialog();
         }
     }
 }
