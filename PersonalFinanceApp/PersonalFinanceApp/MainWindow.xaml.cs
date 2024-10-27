@@ -9,6 +9,7 @@ namespace PersonalFinanceApp
         public MainWindow()
         {
             InitializeComponent();
+            DBManager.DeleteAllData();
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.ShowDialog();
         }

@@ -25,4 +25,14 @@ public class Goal
     public virtual User User { get; set; }
 
     public virtual List<GoalHistory> GoalHistories { get; set; } = new List<GoalHistory>();
+
+    public Goal() { }
+
+    public Goal(string name, long target, long goalAmount, string? resources = null)
+    {
+        Name = name;
+        Target = target;
+        GoalAmount = goalAmount;
+        Resources = resources;
+    }
 }

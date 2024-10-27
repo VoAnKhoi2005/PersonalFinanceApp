@@ -17,6 +17,15 @@ public class RecurringDetail
     public DateOnly StarDate { get; set; }
 
     //Relationship
-    public virtual Expense Expense { get; set; }
 
+    public virtual Expense? Expense { get; set; }
+
+    public RecurringDetail() { }
+
+    public RecurringDetail(string frequency, int interval, DateOnly starDate)
+    {
+        Frequency = frequency;
+        Interval = interval;
+        StarDate = starDate;
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace PersonalFinanceApp.Model;
 
@@ -32,7 +33,7 @@ public class Expense
     //Relationship
     [Required]
     public int CategoryID { get; set; }
-    public virtual Category Category { get; set; }
+    public virtual Category? Category { get; set; }
 
     [Required]
     [Range(1,12)]
@@ -42,7 +43,39 @@ public class Expense
     public int ExBYear { get; set; }
     [Required]
     public int UserID { get; set; }
-    public virtual ExpensesBook ExpensesBook { get; set; }
+    public virtual ExpensesBook? ExpensesBook { get; set; }
 
     public virtual RecurringDetail RecurringDetail { get; set; }
+
+    public Expense() { }
+
+    public Expense(long amount, string name, DateOnly date, bool recurring, int categoryId, int exBMonth, int exBYear, int userId, string? description = null, string? resources = null)
+    {
+        Amount = amount;
+        Name = name;
+        Date = date;
+        Recurring = recurring;
+        CategoryID = categoryId;
+        ExBMonth = exBMonth;
+        ExBYear = exBYear;
+        UserID = userId;
+        Description = description;
+        TimeAdded = DateTime.Now;
+        Resources = resources;
+    }
+
+    public Expense(long amount, string name, DateOnly date, bool recurring, Category ca, ExpensesBook exB, string? description = null, string? resources = null)
+    {
+        Amount = amount;
+        Name = name;
+        Date = date;
+        Recurring = recurring;
+        CategoryID = ca.CategoryID;
+        ExBMonth = exB.Month;
+        ExBYear = exB.Year;
+        UserID = exB.UserID;
+        Description = description;
+        TimeAdded = DateTime.Now;
+        Resources = resources;
+    }
 }

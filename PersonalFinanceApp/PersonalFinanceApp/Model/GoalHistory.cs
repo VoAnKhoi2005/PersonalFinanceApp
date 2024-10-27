@@ -12,5 +12,14 @@ public class GoalHistory
     public long Amount { get; set; }
 
     //Relationship
-    public virtual Goal Goal { get; set; }
+    public virtual Goal? Goal { get; set; }
+
+    public GoalHistory() { }
+
+    public GoalHistory(Goal goal, long amount)
+    {
+        GoalID = goal.GoalID;
+        TimeAdded = DateTime.Now;
+        Amount = amount;
+    }
 }
