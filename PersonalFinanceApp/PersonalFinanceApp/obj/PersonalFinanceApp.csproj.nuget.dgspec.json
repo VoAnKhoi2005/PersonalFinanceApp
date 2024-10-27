@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj": {}
+    "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj": {
+    "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
+        "projectUniqueName": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
         "projectName": "PersonalFinanceApp",
-        "projectPath": "D:\\GitHub\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
+        "projectPath": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\obj\\",
+        "outputPath": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

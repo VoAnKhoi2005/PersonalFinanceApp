@@ -15,14 +15,16 @@ public class User
     [MinLength(8)]
     public string Password { get; set; }
 
+    [Required]
+    public string Email { get; set; }
+
+    public string? PhoneNumber { get; set; }
+
     [Range(0, 1000000000000000)]
     public long Saving { get; set; }
 
     [Range(0, 1000000000000000)]
-    public long Goal { get; set; }
-
-    [Range(0, 1000000000000000)]
-    public long MonthlyIncome { get; set; }
+    public long DefaultBudget { get; set; }
 
     [MaxLength(256)]
     public string? Resources { get; set; }

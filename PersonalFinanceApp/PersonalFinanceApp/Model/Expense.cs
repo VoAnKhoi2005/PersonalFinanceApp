@@ -5,7 +5,7 @@ namespace PersonalFinanceApp.Model;
 public class Expense
 {
     [Key]
-    public int ID { get; set; }
+    public int ExpenseID { get; set; }
 
     [Required]
     [Range(1,1000000000000)]
@@ -23,10 +23,11 @@ public class Expense
     [Required]
     public bool Recurring { get; set; }
 
-    public DateOnly? RecurringDate { get; set; }
-
     [MaxLength(256)]
     public string? Resources { get; set; }
+
+    [Required]
+    public DateTime TimeAdded { get; set; }
 
     //Relationship
     [Required]
