@@ -51,18 +51,22 @@
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <Button Background="#053B50"
+                                Width="auto"
+                                Height="80"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-                            ToolTip="MaterialDesignRaisedSecondaryButton with Round Top Corners" Height="101">
-                            <TextBlock Text="LOGIN" FontSize="25"/>
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            ToolTip="MaterialDesignRaisedSecondaryButton with Round Top Corners" BorderBrush="{x:Null}" VerticalAlignment="Top" >
+                            <TextBlock Text="LOGIN" FontSize="25" Foreground="#FFE8E6EB"/>
                         </Button>
                     </Grid>
                     <Grid Grid.Column="1">
                         <Button Background="#1C3039"
+                                Width="auto"
+                                Height="80"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                            Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
-                            ToolTip="MaterialDesignRaisedSecondaryButton with Round Top Corners" Height="102">
-                            <TextBlock Text="NEW ACCOUNT" FontSize="25"/>
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            ToolTip="MaterialDesignRaisedSecondaryButton with Round Top Corners" VerticalAlignment="Top">
+                            <TextBlock Text="NEW ACCOUNT" FontSize="25" Foreground="#FFDDD9E5"/>
                         </Button>
                     </Grid>
                 </Grid>
@@ -91,26 +95,14 @@
                 </Grid>
                 <Grid Grid.Row="2">
                     <Label Content="Password" FontSize="16"  Foreground="#E5CBBFBF" Margin="31,10,442,60"></Label>
-                    <PasswordBox 
-                        Background="#084563" 
-                        Width="400" 
+                    <Border Width="400" Height="40" Margin="123,10,37,50" Background="#084563" CornerRadius="15">
+                        <PasswordBox 
+                        Width="400" Height="40"
                         materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                        Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" 
-                        Margin="123,10,37,50">
-
-                        <PasswordBox.Template>
-                            <ControlTemplate TargetType="PasswordBox">
-                                <Border Background="{TemplateBinding Background}" 
-                    BorderThickness="0,0,0,1" 
-                    CornerRadius="15" 
-                    BorderBrush="Transparent">
-                                </Border>
-                            </ControlTemplate>
-                        </PasswordBox.Template>
-                    </PasswordBox>
-
+                        Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="-1,-3,1,3"/>
+                    </Border>
                     <!-- checkbox style same as toggle button -->
                     <CheckBox Margin="44,65,496,15" Height="20" Width="20" BorderBrush="White" Background="White" Foreground="White" RenderTransformOrigin="0.49,1.131"  
                         ></CheckBox>
