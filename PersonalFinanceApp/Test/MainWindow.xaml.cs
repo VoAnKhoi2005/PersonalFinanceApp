@@ -8,10 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PersonalFinanceApp.Database;
-using PersonalFinanceApp.Model;
 
-namespace PersonalFinanceApp
+namespace Test
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -21,8 +19,7 @@ namespace PersonalFinanceApp
         public MainWindow()
         {
             InitializeComponent();
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.ShowDialog();
+            AppDa
         }
     }
 }
