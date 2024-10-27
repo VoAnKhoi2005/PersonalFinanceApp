@@ -14,7 +14,7 @@ namespace PersonalFinanceApp.Model
         public int Year { get; set; }
 
         [Required]
-        public string UserID { get; set; }
+        public int UserID { get; set; }
 
         [Range(0, 1000000000000000)]
         public long Budget { get; set; }

@@ -1,6 +1,5 @@
-﻿using System.Data.Entity;
-using System.Linq.Expressions;
-using PersonalFinanceApp.Model;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 
 namespace PersonalFinanceApp.Database
 {

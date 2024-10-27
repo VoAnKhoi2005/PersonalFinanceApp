@@ -5,7 +5,7 @@ namespace PersonalFinanceApp.Model;
 public class User
 {
     [Key]
-    public string UserID { get; set; }
+    public int UserID { get; set; }
 
     [Required]
     [MaxLength(40)]
@@ -31,4 +31,5 @@ public class User
 
     //Relationship
     public virtual List<ExpensesBook> ExpensesBooks { get; set; } = new List<ExpensesBook>();
+    public virtual List<Goal> Goals { get; set; } = new List<Goal>();
 }

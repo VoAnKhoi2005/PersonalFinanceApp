@@ -12,5 +12,5 @@ public class GoalHistory
     public long Amount { get; set; }
 
     //Relationship
-    public Goal Goal { get; set; }
+    public virtual Goal Goal { get; set; }
 }

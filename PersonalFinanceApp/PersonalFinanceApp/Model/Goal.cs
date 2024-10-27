@@ -22,5 +22,7 @@ public class Goal
     //Relationship
     [Required]
     public int UserID { get; set; }
-    public User User { get; set; }
+    public virtual User User { get; set; }
+
+    public virtual List<GoalHistory> GoalHistories { get; set; } = new List<GoalHistory>();
 }

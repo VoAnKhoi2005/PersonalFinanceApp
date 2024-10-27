@@ -24,7 +24,7 @@ public class Category
     [Range(1,3000)]
     public int ExBYear { get; set; }
     [Required]
-    public string UserID { get; set; }
+    public int UserID { get; set; }
 
     public virtual ExpensesBook ExpensesBook { get; set; }
 }

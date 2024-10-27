@@ -9,12 +9,8 @@ namespace PersonalFinanceApp
         public MainWindow()
         {
             InitializeComponent();
-<<<<<<< Updated upstream
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.ShowDialog();
-=======
-            DBManager.GetCondition<Expense>(ex => ex.Amount > 10000000);
->>>>>>> Stashed changes
         }
     }
 }

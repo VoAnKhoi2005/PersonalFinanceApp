@@ -17,6 +17,6 @@ public class RecurringDetail
     public DateOnly StarDate { get; set; }
 
     //Relationship
-    public Expense Expense { get; set; }
+    public virtual Expense Expense { get; set; }
 
 }
