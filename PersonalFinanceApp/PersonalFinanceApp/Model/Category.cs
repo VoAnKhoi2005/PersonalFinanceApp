@@ -1,26 +1,30 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PersonalFinanceApp.Model
+namespace PersonalFinanceApp.Model;
+
+public class Category
 {
-    public class Category
-    {
-        [Key]
-        public int ID { get; set; }
+    [Key]
+    public int ID { get; set; }
 
-        [Required]
-        [MinLength(1)]
-        public string Name { get; set; }
+    [Required]
+    [MinLength(1)]
+    public string Name { get; set; }
 
-        //Relationship
-        public virtual List<Expense> Expenses { get; set; }
+    [MaxLength(256)]
+    public string? Resources { get; set; }
 
-        [Required]
-        [Range(1,12)]
-        public int ExBMonth { get; set; }
+    //Relationship
+    public virtual List<Expense> Expenses { get; set; }
 
-        [Required]
-        [Range(1,3000)]
-        public int ExBYear { get; set; }
-        public virtual ExpensesBook ExpensesBook { get; set; }
-    }
+    [Required]
+    [Range(1,12)]
+    public int ExBMonth { get; set; }
+    [Required]
+    [Range(1,3000)]
+    public int ExBYear { get; set; }
+    [Required]
+    public string UserID { get; set; }
+
+    public virtual ExpensesBook ExpensesBook { get; set; }
 }

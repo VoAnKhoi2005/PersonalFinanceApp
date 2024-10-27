@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj": {}
+    "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\Test\\Test.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj": {
+    "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\Test\\Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
-        "projectName": "PersonalFinanceApp",
-        "projectPath": "D:\\GitHub\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
+        "projectUniqueName": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\Test\\Test.csproj",
+        "projectName": "Test",
+        "projectPath": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\Test\\Test.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\obj\\",
+        "outputPath": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -48,30 +48,6 @@
       "frameworks": {
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
-          "dependencies": {
-            "MaterialDesignThemes": {
-              "target": "Package",
-              "version": "[5.1.0, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.8, )"
-            },
-            "Microsoft.EntityFrameworkCore.Sqlite": {
-              "target": "Package",
-              "version": "[8.0.8, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.8, )"
-            },
-            "System.Data.SQLite": {
-              "target": "Package",
-              "version": "[1.0.119, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -91,7 +67,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -24,6 +24,9 @@ public class User
     [Range(0, 1000000000000000)]
     public long MonthlyIncome { get; set; }
 
+    [MaxLength(256)]
+    public string? Resources { get; set; }
+
     //Relationship
     public virtual List<ExpensesBook> ExpensesBooks { get; set; } = new List<ExpensesBook>();
 }
