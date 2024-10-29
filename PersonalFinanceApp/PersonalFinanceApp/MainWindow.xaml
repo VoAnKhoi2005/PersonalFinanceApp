@@ -6,8 +6,76 @@
         xmlns:local="clr-namespace:PersonalFinanceApp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        Background="#0D2129"
+        ResizeMode="CanMinimize"
+        TextElement.Foreground="#E5CBBFBF"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="16"
+        TextElement.FontFamily="Sans Serif Collection"
+        TextOptions.TextFormattingMode="Ideal"
         Title="MainWindow" Height="720" Width="1152">
     <Grid>
-        
+        <Image Margin="0,25,479,25" Source="/Picture/PigBackground.png" Stretch="Fill"/>
+        <Image Margin="812,-23,0,395" Source="/Picture/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-200.58400000000003"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image Margin="740,270,7,37" Source="/Picture/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="294.99"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Center"
+              Width="1152" Height="67.2"
+              >
+
+            <materialDesign:PackIcon 
+                Kind="AccountBadge" 
+                Width="40" Height="40" 
+                Margin="1083,0,0,0" 
+                VerticalAlignment="Center"
+                Foreground="#E5CBBFBF"
+                />
+            <!--click here-->
+
+        </Grid>
+        <TabControl Width="1152" Height="632" VerticalAlignment="Top" 
+                    HorizontalAlignment="Center"
+                    TabStripPlacement="Left" Margin="0,72,0,0"
+                    >
+            <TabItem Width="200" Height="60">
+                <TabItem.Header>
+                    <Grid Height="38" Width="163" Margin="0,0,0,0">
+                        <materialDesign:PackIcon Foreground="#E5CBBFBF"
+                            Kind="Signal" Width="30" Height="30" Margin="-6,-2,0,0" />
+                        <Label Content="Dashboard" FontSize="18" Foreground="#E5CBBFBF" HorizontalAlignment="Left" Margin="29,-4,0,10"></Label>
+                    </Grid>
+                </TabItem.Header>
+            </TabItem>
+
+
+            <TabItem>
+                <TabItem.Header>
+                    <Grid>
+                        <Label Content="Expense book" FontSize="18" Foreground="#E5CBBFBF" HorizontalAlignment="Left" Margin="24,-5,0,-5" ></Label>
+                    </Grid>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem></TabItem>
+            <TabItem></TabItem>
+        </TabControl>
+
     </Grid>
 </Window>
+ 
