@@ -14,6 +14,7 @@ namespace PersonalFinanceApp
             {
                 context.EnsureDatabaseCreated();
             }
+            DBManager.AutoDelete();
         }
     }
 

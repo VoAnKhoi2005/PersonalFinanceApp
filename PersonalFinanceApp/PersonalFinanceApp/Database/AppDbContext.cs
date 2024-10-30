@@ -27,10 +27,19 @@ namespace PersonalFinanceApp.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Setup constraint
+            //User
+            modelBuilder.Entity<User>().HasIndex(u => u.Username).IsUnique();
+            modelBuilder.Entity<User>().ToTable(u => u.HasCheckConstraint("CK_DefaultBudget", "[DefaultBudget] >= 0"));
+            modelBuilder.Entity<User>().ToTable(u => u.HasCheckConstraint("CK_Saving", "[Saving] >= 0"));
             //Expense
-            modelBuilder.Entity<Expense>().ToTable(ex => ex.HasCheckConstraint("CK_Amount", "[Amount] >= 0"));
-            modelBuilder.Entity<Expense>().ToTable(ex => ex.HasCheckConstraint("CK_Recurring", "[Recurring] IN (0, 1)"));
+            modelBuilder.Entity<Expense>().HasIndex(ex => ex.Date);
+            modelBuilder.Entity<Expense>().HasIndex(ex => ex.TimeAdded).IsUnique();
             modelBuilder.Entity<Expense>().Property(ex => ex.Description).IsRequired(false);
+            modelBuilder.Entity<Expense>().Property(ex => ex.Resources).IsRequired(false);
+            modelBuilder.Entity<Expense>().Property(ex => ex.DeletedDate).IsRequired(false);
+            modelBuilder.Entity<Expense>().ToTable(ex => ex.HasCheckConstraint("CK_Amount", "[Amount] > 0"));
+            modelBuilder.Entity<Expense>().ToTable(ex => ex.HasCheckConstraint("CK_Recurring", "[Recurring] IN (0, 1)"));
+            modelBuilder.Entity<Expense>().ToTable(exB => exB.HasCheckConstraint("CK_Deleted", "[Deleted] IN (0, 1)"));
             //Expenses Book
             modelBuilder.Entity<ExpensesBook>().ToTable(exB => exB.HasCheckConstraint("CK_Month", "[Month] >= 1 AND [Month] <= 12"));
             modelBuilder.Entity<ExpensesBook>().ToTable(exB => exB.HasCheckConstraint("CK_Year", "[Year] >= 0"));
@@ -78,10 +87,6 @@ namespace PersonalFinanceApp.Database
                 .HasOne(ex => ex.RecurringDetail)
                 .WithOne(rd => rd.Expense)
                 .HasForeignKey<RecurringDetail>(rd => rd.ExpenseID);
-
-
-            //Setup index
-            modelBuilder.Entity<Expense>().HasIndex(ex => ex.Date);
         }
     }
 }

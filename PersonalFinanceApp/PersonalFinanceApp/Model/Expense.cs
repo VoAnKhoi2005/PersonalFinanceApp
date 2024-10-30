@@ -30,6 +30,10 @@ public class Expense
     [Required]
     public DateTime TimeAdded { get; set; }
 
+    [Required]
+    public bool Deleted { get; set; }
+    public DateTime? DeletedDate { get; set; }
+
     //Relationship
     [Required]
     public int CategoryID { get; set; }
@@ -62,6 +66,7 @@ public class Expense
         Description = description;
         TimeAdded = DateTime.Now;
         Resources = resources;
+        Deleted = false;
     }
 
     public Expense(long amount, string name, DateOnly date, bool recurring, Category ca, ExpensesBook exB, string? description = null, string? resources = null)
@@ -77,5 +82,6 @@ public class Expense
         Description = description;
         TimeAdded = DateTime.Now;
         Resources = resources;
+        Deleted = false;
     }
 }

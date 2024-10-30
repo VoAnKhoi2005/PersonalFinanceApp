@@ -33,4 +33,10 @@
     <Resource Include="Picture\PigBackground.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="PFA.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
