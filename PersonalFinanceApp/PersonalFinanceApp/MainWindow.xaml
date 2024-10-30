@@ -15,8 +15,8 @@
         TextOptions.TextFormattingMode="Ideal"
         Title="MainWindow" Height="720" Width="1152">
     <Grid>
-        <Image Margin="0,25,479,25" Source="/Picture/PigBackground.png" Stretch="Fill"/>
-        <Image Margin="812,-23,0,395" Source="/Picture/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+        <Image Margin="0,25,479,25" Source="/Resources/img/PigBackground.png" Stretch="Fill"/>
+        <Image Margin="812,-23,0,395" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -26,7 +26,7 @@
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
-        <Image Margin="740,270,7,37" Source="/Picture/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+        <Image Margin="740,270,7,37" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
             <Image.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="-1"/>
@@ -49,10 +49,92 @@
                 />
             <!--click here-->
 
+
+
         </Grid>
+        
+        <!-- User overall -->
+        <Border Width="300" 
+                Height="350" 
+                Background="#316C67" HorizontalAlignment="Right" 
+                VerticalAlignment="Top" 
+                Margin="0, 60, 60, 0"
+                CornerRadius="30"
+                Visibility="Collapsed"
+                >
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Height" Value="50"></Setter>
+                        <Setter Property="Background" Value="#316C67"></Setter>
+                        <Setter Property="BorderThickness" Value="0"></Setter>
+                        <Setter Property="FontSize" Value="16"></Setter>
+                        <Setter Property="Foreground" Value="#BDBDBD"></Setter>
+                        <Setter Property="FontFamily" Value="Sans Serif Collection"></Setter>
+                        <Setter Property="Width" Value="297"></Setter>
+
+                    </Style>
+                </Grid.Resources>
+                <!--User's avatar-->
+                <Border Width="150" Height="150" VerticalAlignment="Top" Margin="0,20,0,0" CornerRadius="90">
+                    <Border.Background>
+                        <ImageBrush ImageSource="/Resources/img/ac8257e1cfc4e63f5c63f3d4869eb7c4.jpg" />
+                    </Border.Background>
+                </Border>
+
+                <!--@Username-->
+                <TextBlock Text="@username" Foreground="#BDBDBD" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 15, 0 , 0"></TextBlock>
+
+
+                <!--User button-->
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="300" Height="150" >
+                    
+                    <!-- Account detail-->
+                    <Button>
+                        <Grid>
+                            <TextBlock Text="Account detail" Margin="0, 0, 0, 0"
+                                   ></TextBlock>
+                            <materialDesign:PackIcon Kind="AccountCog" Width="30" Height="30" Margin="-62,0,0,0" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+                    
+                    
+                    <!--sign out-->
+                    <Button>
+                        <Grid>
+
+                            <TextBlock Text="Sign out" Margin="-23,-2,23,2"
+                                   />
+                            <materialDesign:PackIcon Kind="AccountLockOpen" Width="30" Height="30" Margin="-86,3,0,0"/>
+                        </Grid>
+                    </Button>
+                    
+                    <!--exit button-->
+                    <Button>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="30">
+                                    <Grid>
+
+                                        <materialDesign:PackIcon Kind="Logout" Width="30" Height="30" Margin="33,0,0,3" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Exit" Margin="94,0,-94,0"></TextBlock>
+                                    </Grid>
+
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        
+        
+        <!--main menu-->
+        
         <TabControl Width="1152" Height="632" VerticalAlignment="Top" 
                     HorizontalAlignment="Center"
-                    TabStripPlacement="Left" Margin="0,72,0,0"
+                    TabStripPlacement="Left" Margin="0,72,0,0" SelectionChanged="TabControl_SelectionChanged" 
                     >
             <TabItem Width="200" Height="60">
                 <TabItem.Header>
@@ -75,7 +157,8 @@
             <TabItem></TabItem>
             <TabItem></TabItem>
         </TabControl>
-
+        <Image Margin="10,4,1082,640" Source="/Resources/img/Logo_UIT_updated.svg.png" Width="60" Height="60" RenderTransformOrigin="0.438,0.229"/>
+        <Label Content="PENNYWISE" ></Label>
     </Grid>
 </Window>
  

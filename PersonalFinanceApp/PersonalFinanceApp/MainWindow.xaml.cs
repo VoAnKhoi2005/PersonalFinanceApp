@@ -25,5 +25,9 @@ namespace PersonalFinanceApp
             loginwindow.ShowDialog();
         }
 
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
