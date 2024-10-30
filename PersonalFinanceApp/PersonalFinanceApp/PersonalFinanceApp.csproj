@@ -9,14 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ViewModel\**" />
-    <EmbeddedResource Remove="ViewModel\**" />
-    <None Remove="ViewModel\**" />
-    <Page Remove="ViewModel\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Picture\PigBackground.png" />
+    <None Remove="Resources\img\ac8257e1cfc4e63f5c63f3d4869eb7c4.jpg" />
+    <None Remove="Resources\img\Logo_UIT_updated.svg.png" />
+    <None Remove="Resources\PigBackground.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,9 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="PFA.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Resource Include="Resources\img\ac8257e1cfc4e63f5c63f3d4869eb7c4.jpg" />
+    <Resource Include="Resources\img\Logo_UIT_updated.svg.png" />
+    <Resource Include="Resources\img\PigBackground.png" />
   </ItemGroup>
 
 </Project>
