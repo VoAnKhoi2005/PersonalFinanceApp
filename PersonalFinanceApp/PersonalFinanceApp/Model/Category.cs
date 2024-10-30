@@ -15,7 +15,7 @@ public class Category
     public string? Resources { get; set; }
 
     //Relationship
-    public virtual List<Expense>? Expenses { get; set; }
+    public virtual List<Expense> Expenses { get; set; } = new List<Expense>();
 
     [Required]
     [Range(1,12)]
