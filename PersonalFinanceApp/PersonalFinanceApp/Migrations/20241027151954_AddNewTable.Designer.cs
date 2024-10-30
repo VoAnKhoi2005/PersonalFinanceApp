@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalFinanceApp.Database;
 
@@ -10,16 +11,18 @@ using PersonalFinanceApp.Database;
 namespace PersonalFinanceApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241027151954_AddNewTable")]
+    partial class AddNewTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
 
             modelBuilder.Entity("PersonalFinanceApp.Model.Category", b =>
                 {
-                    b.Property<int>("CategoryID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -40,7 +43,7 @@ namespace PersonalFinanceApp.Migrations
                     b.Property<int>("UserID")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("CategoryID");
+                    b.HasKey("ID");
 
                     b.HasIndex("ExBMonth", "ExBYear", "UserID");
 
@@ -60,12 +63,6 @@ namespace PersonalFinanceApp.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateOnly>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -100,16 +97,11 @@ namespace PersonalFinanceApp.Migrations
 
                     b.HasIndex("Date");
 
-                    b.HasIndex("TimeAdded")
-                        .IsUnique();
-
                     b.HasIndex("ExBMonth", "ExBYear", "UserID");
 
                     b.ToTable("EXPENSE", t =>
                         {
-                            t.HasCheckConstraint("CK_Amount", "[Amount] > 0");
-
-                            t.HasCheckConstraint("CK_Deleted", "[Deleted] IN (0, 1)");
+                            t.HasCheckConstraint("CK_Amount", "[Amount] >= 0");
 
                             t.HasCheckConstraint("CK_Recurring", "[Recurring] IN (0, 1)");
                         });
@@ -254,15 +246,7 @@ namespace PersonalFinanceApp.Migrations
 
                     b.HasKey("UserID");
 
-                    b.HasIndex("Username")
-                        .IsUnique();
-
-                    b.ToTable("USER", t =>
-                        {
-                            t.HasCheckConstraint("CK_DefaultBudget", "[DefaultBudget] >= 0");
-
-                            t.HasCheckConstraint("CK_Saving", "[Saving] >= 0");
-                        });
+                    b.ToTable("USER");
                 });
 
             modelBuilder.Entity("PersonalFinanceApp.Model.Category", b =>

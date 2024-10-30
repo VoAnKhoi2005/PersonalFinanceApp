@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace PersonalFinanceApp.Model;
 
 public class Expense
 {
     [Key]
-    public int ID { get; set; }
+    public int ExpenseID { get; set; }
 
     [Required]
     [Range(1,1000000000000)]
@@ -23,15 +24,20 @@ public class Expense
     [Required]
     public bool Recurring { get; set; }
 
-    public DateOnly? RecurringDate { get; set; }
-
     [MaxLength(256)]
     public string? Resources { get; set; }
+
+    [Required]
+    public DateTime TimeAdded { get; set; }
+
+    [Required]
+    public bool Deleted { get; set; }
+    public DateTime? DeletedDate { get; set; }
 
     //Relationship
     [Required]
     public int CategoryID { get; set; }
-    public virtual Category Category { get; set; }
+    public virtual Category? Category { get; set; }
 
     [Required]
     [Range(1,12)]
@@ -40,6 +46,42 @@ public class Expense
     [Range(1,3000)]
     public int ExBYear { get; set; }
     [Required]
-    public string UserID { get; set; }
-    public virtual ExpensesBook ExpensesBook { get; set; }
+    public int UserID { get; set; }
+    public virtual ExpensesBook ExpensesBook { get; set; } = new ExpensesBook();
+
+    public virtual RecurringDetail RecurringDetail { get; set; }
+
+    public Expense() { }
+
+    public Expense(long amount, string name, DateOnly date, bool recurring, int categoryId, int exBMonth, int exBYear, int userId, string? description = null, string? resources = null)
+    {
+        Amount = amount;
+        Name = name;
+        Date = date;
+        Recurring = recurring;
+        CategoryID = categoryId;
+        ExBMonth = exBMonth;
+        ExBYear = exBYear;
+        UserID = userId;
+        Description = description;
+        TimeAdded = DateTime.Now;
+        Resources = resources;
+        Deleted = false;
+    }
+
+    public Expense(long amount, string name, DateOnly date, bool recurring, Category ca, ExpensesBook exB, string? description = null, string? resources = null)
+    {
+        Amount = amount;
+        Name = name;
+        Date = date;
+        Recurring = recurring;
+        CategoryID = ca.CategoryID;
+        ExBMonth = exB.Month;
+        ExBYear = exB.Year;
+        UserID = exB.UserID;
+        Description = description;
+        TimeAdded = DateTime.Now;
+        Resources = resources;
+        Deleted = false;
+    }
 }

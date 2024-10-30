@@ -1,199 +1,306 @@
-﻿using System.Data.Entity;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using PersonalFinanceApp.Model;
+using PersonalFinanceApp.src;
 
-namespace PersonalFinanceApp.Database
+namespace PersonalFinanceApp.Database;
+
+public static class DBManager
 {
-    public static class DBManager
+    //CRUD
+    //Create, read, update, and delete function
+
+    #region Create
+
+    public static bool Insert<T>(T entity) where T : class
     {
-        //CRUD
-        //Create, read, update, and delete function
+        if (!CheckTypeDatabase(typeof(T)))
+            throw new InvalidOperationException("Data type not found in database.");
 
-        #region Create
-
-        public static void Insert<T>(T entity) where T : class
+        try
         {
-            if (!CheckTypeDatabase(typeof(T)))
-                throw new InvalidOperationException("Data type not found in database.");
-
             using var context = new AppDbContext();
             context.Set<T>().Add(entity);
             context.SaveChanges();
+            return true;
         }
-
-        public static void Insert<T>(IEnumerable<T> entities) where T : class
+        catch
         {
-            if (!CheckTypeDatabase(typeof(T)))
-                throw new InvalidOperationException("Data type not found in database.");
+            return false;
+        }
+    }
 
+    public static bool Insert<T>(IEnumerable<T> entities) where T : class
+    {
+        if (!CheckTypeDatabase(typeof(T)))
+            throw new InvalidOperationException("Data type not found in database.");
+
+        try
+        {
             using var context = new AppDbContext();
             context.Set<T>().AddRange(entities);
             context.SaveChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    #endregion Create
+
+    #region Read
+
+    public static T? GetFirst<T>(Expression<Func<T, bool>> condition, bool getDeleted = false, bool haveForeignKey = true) where T : class
+    {
+        if (!CheckTypeDatabase(typeof(T)))
+            throw new InvalidOperationException("Data type not found in database.");
+
+        Expression<Func<T, bool>> exCondition = arg => true;
+        if (typeof(T).GetProperty("Deleted") != null)
+        {
+            exCondition = e => EF.Property<bool>(e, "Deleted") == getDeleted;
         }
 
-        #endregion Create
+        var combineCondition = exCondition.And(condition);
 
-        #region Read
+        using var context = new AppDbContext();
+        IQueryable<T> query = context.Set<T>().Where(combineCondition);
+        if (haveForeignKey)
+            GetIncludes(query, context);
+        return query.FirstOrDefault();
+    }
 
-        public static T? GetFirst<T>(Func<T, bool> condition) where T : class
+    /// <summary>
+    /// Read from database with a condition.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="condition"></param>
+    /// <param name="getDeleted"></param>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>    
+    public static List<T> GetCondition<T>(Expression<Func<T, bool>> condition, bool getDeleted = false, bool haveForeignKey = true) where T : class
+    {
+        if (!CheckTypeDatabase(typeof(T)))
+            throw new InvalidOperationException("Data type not found in database.");
+
+        Expression<Func<T, bool>> exCondition = arg => true;
+        if (typeof(T).GetProperty("Deleted") != null)
         {
-            if (!CheckTypeDatabase(typeof(T)))
-                throw new InvalidOperationException("Data type not found in database.");
-
-            using var context = new AppDbContext();
-            return context.Set<T>().FirstOrDefault(condition);
+            exCondition = e => EF.Property<bool>(e, "Deleted") == getDeleted;
         }
 
-        /// <summary>
-        /// Read from database with a condition. Set haveForeignKey to true if you want to access foreign key.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="condition"></param>
-        /// <param name="haveForeignKey"></param>
-        /// <returns></returns>
-        /// <exception cref="InvalidOperationException"></exception>    
-        public static IEnumerable<T> GetCondition<T>(Expression<Func<T, bool>> condition, bool haveForeignKey = false) where T : class
-        {
-            if (!CheckTypeDatabase(typeof(T)))
-                throw new InvalidOperationException("Data type not found in database.");
+        var combineCondition = exCondition.And(condition);
 
-            using var context = new AppDbContext();
-            var query = context.Set<T>().Where(condition);
-            if (haveForeignKey)
-                query = GetInclude(query, context);
-            return query.ToList();
+        using var context = new AppDbContext();
+        IQueryable<T> query = context.Set<T>().Where(combineCondition);
+        if (haveForeignKey)
+            GetIncludes(query, context);
+        return query.ToList();
+    }
+
+    public static List<T> GetAll<T>(bool getDeleted = false, bool haveForeignKey = true) where T : class
+    {
+        if (!CheckTypeDatabase(typeof(T)))
+            throw new InvalidOperationException("Data type not found in database.");
+
+        Expression<Func<T, bool>> condition = arg => true;
+        var combineCondition = condition;
+
+        if (typeof(T).GetProperty("Deleted") != null)
+        {
+            Expression<Func<T, bool>> exCondition = e => EF.Property<bool>(e, "Deleted") == getDeleted;
+            combineCondition = combineCondition.And(exCondition);
         }
 
-        /// <summary>
-        /// Returned object will have references to the related entities.
-        /// Use this to get custom includes.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="condition"></param>
-        /// <param name="includes"></param>
-        /// <returns></returns>
-        /// <exception cref="InvalidOperationException"></exception>
-        public static IEnumerable<T> GetWithInclude<T>(
-            Expression<Func<T, bool>> condition,
-            params Expression<Func<T, object>>[] includes) where T : class
+        using var context = new AppDbContext();
+        IQueryable<T> query = context.Set<T>().Where(combineCondition);
+        if (haveForeignKey)
+            GetIncludes(query, context);
+        return query.ToList();
+    }
+
+    /// <summary>
+    /// Get navigation property (foreign related entities) for query.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="query"></param>
+    /// <param name="context"></param>
+    /// <returns></returns>
+    private static IQueryable<T> GetIncludes<T>(IQueryable<T> query, AppDbContext context) where T : class
+    {
+        IEnumerable<string>? navigationProperties = context.Model.FindEntityType(typeof(T))?.GetNavigations().Select(n => n.Name);
+        if (navigationProperties != null)
         {
-            if (!CheckTypeDatabase(typeof(T)))
-                throw new InvalidOperationException("Data type not found in database.");
-
-            using var context = new AppDbContext();
-            IQueryable<T> query = context.Set<T>().Where(condition);
-            foreach (var include in includes)
-            {
-                query = query.Include(include);
-            }
-
-            return query.ToList();
+            foreach (string navigationProperty in navigationProperties)
+                query = query.Include(navigationProperty);
         }
 
-        public static IQueryable<T> GetInclude<T>(IQueryable<T> query, AppDbContext? context = null) where T : class
+        return query;
+    }
+
+    #endregion Read
+
+    #region Update
+
+    public static bool Update<T>(T entity) where T : class
+    {
+        if (!CheckTypeDatabase(typeof(T)))
+            throw new InvalidOperationException("Data type not found in database.");
+        try
         {
-            if (context == null)
-                context = new AppDbContext();
-
-            var navigationProperties = context.Model.FindEntityType(typeof(T)).GetNavigations().Select(n => n.Name);
-            if (navigationProperties != null)
-            {
-                foreach (var navigationProperty in navigationProperties)
-                {
-                    query = query.Include(navigationProperty);
-                }
-            }
-
-            return query;
-        }
-
-        public static IEnumerable<T> GetAll<T>() where T : class
-        {
-            if (!CheckTypeDatabase(typeof(T)))
-                throw new InvalidOperationException("Data type not found in database.");
-
-            using var context = new AppDbContext();
-            return context.Set<T>();
-        }
-
-        #endregion Read
-
-        #region Update
-
-        public static void Update<T>(T entity) where T : class
-        {
-            if (!CheckTypeDatabase(typeof(T)))
-                throw new InvalidOperationException("Data type not found in database.");
-
             using var context = new AppDbContext();
             context.Set<T>().Update(entity);
             context.SaveChanges();
+            return true;
         }
-
-        public static void Update<T>(IEnumerable<T> entities) where T : class
+        catch
         {
-            if (!CheckTypeDatabase(typeof(T)))
-                throw new InvalidOperationException("Data type not found in database.");
+            return false;
+        }
+    }
 
+    public static bool Update<T>(IEnumerable<T> entities) where T : class
+    {
+        if (!CheckTypeDatabase(typeof(T)))
+            throw new InvalidOperationException("Data type not found in database.");
+        try
+        {
             using var context = new AppDbContext();
             context.Set<T>().UpdateRange(entities);
             context.SaveChanges();
+            return true;
         }
-
-        #endregion Update
-
-        #region Delete
-
-        public static void Remove<T>(T entity) where T : class
+        catch
         {
-            if (!CheckTypeDatabase(typeof(T)))
-                throw new InvalidOperationException("Data type not found in database.");
-
-            using var context = new AppDbContext();
-            context.Set<T>().Remove(entity);
-            context.SaveChanges();
+            return false;
         }
+    }
 
-        public static void Remove<T>(IEnumerable<T> entities) where T : class
+    #endregion Update
+
+    #region Delete
+
+    /// <summary>
+    /// Delete entity from table. Deletion is cascade.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <exception cref="InvalidOperationException"></exception>
+    public static void Remove<T>(T entity) where T : class
+    {
+        if (!CheckTypeDatabase(typeof(T)))
+            throw new InvalidOperationException("Data type not found in database.");
+
+        //Soft delete
+        PropertyInfo? deletedProperty = typeof(T).GetProperty("Deleted");
+        if (deletedProperty != null)
         {
-            if (!CheckTypeDatabase(typeof(T)))
-                throw new InvalidOperationException("Data type not found in database.");
-
-            using var context = new AppDbContext();
-            if (entities.Any())
-                context.RemoveRange(entities);
-            context.SaveChanges();
+            PropertyInfo? deletedDateProperty = typeof(T).GetProperty("DeletedDate");
+            if (deletedDateProperty != null)
+                deletedDateProperty.SetValue(entity, DateTime.Now);
+            deletedProperty.SetValue(entity, true);
+            Update(entity);
+            return;
         }
 
-        public static void Remove<T>(Func<T, bool> condition) where T : class
+        using var context = new AppDbContext();
+        context.Set<T>().Remove(entity);
+        context.SaveChanges();
+    }
+
+    public static void Remove<T>(IEnumerable<T> entities) where T : class
+    {
+        if (!CheckTypeDatabase(typeof(T)))
+            throw new InvalidOperationException("Data type not found in database.");
+
+        //Soft delete
+        PropertyInfo? deletedProperty = typeof(T).GetProperty("Deleted");
+        if (deletedProperty != null)
         {
-            if (!CheckTypeDatabase(typeof(T)))
-                throw new InvalidOperationException("Data type not found in database.");
+            foreach (T entity in entities)
+            {
+                PropertyInfo? deletedDateProperty = typeof(T).GetProperty("DeletedDate");
+                if (deletedDateProperty != null)
+                    deletedDateProperty.SetValue(entity, DateTime.Now);
+                deletedProperty.SetValue(entity, true);
+                Update(entity);
+            }
 
-            using var context = new AppDbContext();
-            var entityToRemove = context.Set<T>().Where(condition).ToList();
-            if (!entityToRemove.Any())
-                return;
-            context.Set<T>().RemoveRange(entityToRemove);
-            context.SaveChanges();
+            return;
         }
 
-        public static void DeleteDataTable(Type type)
+        using var context = new AppDbContext();
+        context.RemoveRange(entities);
+        context.SaveChanges();
+    }
+
+    public static void RemoveWithCondition<T>(Expression<Func<T, bool>> condition) where T : class
+    {
+        if (!CheckTypeDatabase(typeof(T)))
+            throw new InvalidOperationException("Data type not found in database.");
+
+        using var context = new AppDbContext();
+        var entitiesToRemove = context.Set<T>().Where(condition);
+        if (!entitiesToRemove.Any())
+            return;
+
+        //Soft delete
+        PropertyInfo? deletedProperty = typeof(T).GetProperty("Deleted");
+        if (deletedProperty != null)
         {
+            foreach (T entity in entitiesToRemove)
+            {
+                PropertyInfo? deletedDateProperty = typeof(T).GetProperty("DeletedDate");
+                if (deletedDateProperty != null)
+                    deletedDateProperty.SetValue(entity, DateTime.Now);
+                deletedProperty.SetValue(entity, true);
+                Update(entity);
+            }
 
+            return;
         }
 
-        public static void DeleteAllData()
+        context.Set<T>().RemoveRange(entitiesToRemove);
+        context.SaveChanges();
+    }
+
+    public static bool DeleteAllData()
+    {
+        RemoveWithCondition<User>(x => true);
+        List<User> users = GetCondition<User>(u => true).ToList();
+        if (!users.Any())
+            return false;
+        foreach (User user in users)
         {
-            using var context = new AppDbContext();
+            Remove(user);
         }
 
-        #endregion Delete
+        return true;
+    }
 
-        private static bool CheckTypeDatabase(Type type)
-        {
-            using var context = new AppDbContext();
-            return context.Model.FindEntityType(type) != null;
-        }
+    /// <summary>
+    /// Auto delete expense after 30 days from the time of deletion.
+    /// </summary>
+    public static void AutoDelete()
+    {
+        using var context = new AppDbContext();
+        List<Expense> expenses = GetAll<Expense>(true).ToList();
+        expenses = expenses.Where(ex => (DateTime.Now - (DateTime)ex.DeletedDate).TotalDays >= 30).ToList();
+
+        foreach (Expense expense in expenses)
+            context.Remove(expense);
+
+        context.SaveChanges();
+    }
+
+    #endregion Delete
+
+    public static bool CheckTypeDatabase(Type type)
+    {
+        using var context = new AppDbContext();
+        return context.Model.FindEntityType(type) != null;
     }
 }

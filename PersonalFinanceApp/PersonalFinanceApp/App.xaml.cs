@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using PersonalFinanceApp.Database;
+using PersonalFinanceApp.Model;
 
 namespace PersonalFinanceApp
 {
@@ -14,6 +15,7 @@ namespace PersonalFinanceApp
             {
                 context.EnsureDatabaseCreated();
             }
+            DBManager.AutoDelete();
         }
     }
 

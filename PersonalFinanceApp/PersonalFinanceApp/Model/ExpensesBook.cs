@@ -14,13 +14,13 @@ namespace PersonalFinanceApp.Model
         public int Year { get; set; }
 
         [Required]
-        public string UserID { get; set; }
+        public int UserID { get; set; }
 
         [Range(0, 1000000000000000)]
         public long Budget { get; set; }
 
-        [Range(0, 1000000000000000)]
-        public long Spending { get; set; }
+        [Range(0, 1000000000000000)] 
+        public long Spending => Expenses?.Sum(ex => ex.Amount) ?? 0;
 
         [MaxLength(256)]
         public string? Resources { get; set; }
@@ -29,5 +29,25 @@ namespace PersonalFinanceApp.Model
         public virtual User User { get; set; }
         public virtual List<Expense> Expenses { get; set; } = new List<Expense>();
         public virtual List<Category> Categories { get; set; } = new List<Category>();
+
+        public ExpensesBook() { }
+
+        public ExpensesBook(int month, int year, int userId, long budget, long spending = 0, string? resources = null)
+        {
+            Month = month;
+            Year = year;
+            UserID = userId;
+            Budget = budget;
+            Resources = resources;
+        }
+
+        public ExpensesBook(int month, int year, User user, long budget, long spending = 0, string? resources = null)
+        {
+            Month = month;
+            Year = year;
+            UserID = user.UserID;
+            Budget = budget;
+            Resources = resources;
+        }
     }
 }
