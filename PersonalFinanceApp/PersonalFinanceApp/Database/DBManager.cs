@@ -53,22 +53,24 @@ public static class DBManager
 
     #region Read
 
-    public static T? GetFirst<T>(Expression<Func<T, bool>> condition, bool getDeleted = false) where T : class
+    public static T? GetFirst<T>(Expression<Func<T, bool>> condition, bool getDeleted = false, bool haveForeignKey = true) where T : class
     {
         if (!CheckTypeDatabase(typeof(T)))
             throw new InvalidOperationException("Data type not found in database.");
 
-        Expression<Func<T, bool>> ExCondition = arg => true;
+        Expression<Func<T, bool>> exCondition = arg => true;
         if (typeof(T).GetProperty("Deleted") != null)
         {
-            ExCondition = e => EF.Property<bool>(e, "Deleted") == getDeleted;
+            exCondition = e => EF.Property<bool>(e, "Deleted") == getDeleted;
         }
 
-        var combineCondition = ExCondition;
-         combineCondition = combineCondition.And(condition);
+        var combineCondition = exCondition.And(condition);
 
         using var context = new AppDbContext();
-        return context.Set<T>().FirstOrDefault(combineCondition);
+        IQueryable<T> query = context.Set<T>().Where(combineCondition);
+        if (haveForeignKey)
+            GetIncludes(query, context);
+        return query.FirstOrDefault();
     }
 
     /// <summary>
@@ -79,43 +81,27 @@ public static class DBManager
     /// <param name="getDeleted"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>    
-    public static List<T> GetCondition<T>(Expression<Func<T, bool>> condition, bool getDeleted = false) where T : class
+    public static List<T> GetCondition<T>(Expression<Func<T, bool>> condition, bool getDeleted = false, bool haveForeignKey = true) where T : class
     {
         if (!CheckTypeDatabase(typeof(T)))
             throw new InvalidOperationException("Data type not found in database.");
 
-        Expression<Func<T, bool>> ExCondition = arg => true;
+        Expression<Func<T, bool>> exCondition = arg => true;
         if (typeof(T).GetProperty("Deleted") != null)
         {
-            ExCondition = e => EF.Property<bool>(e, "Deleted") == getDeleted;
+            exCondition = e => EF.Property<bool>(e, "Deleted") == getDeleted;
         }
 
-        var combineCondition = ExCondition;
-        combineCondition = combineCondition.And(condition);
+        var combineCondition = exCondition.And(condition);
 
         using var context = new AppDbContext();
-        return context.Set<T>().Where(combineCondition).ToList();
-    }
-
-    public static List<T> GetIncludes<T>(IEnumerable<T> entities, AppDbContext? context = null) where T : class
-    {
-        if (context == null)
-            context = new AppDbContext();
-
-        IQueryable<T> query = entities.AsQueryable();
-        var navigationProperties = context.Model.FindEntityType(typeof(T)).GetNavigations().Select(n => n.Name);
-        if (navigationProperties != null)
-        {
-            foreach (var navigationProperty in navigationProperties)
-            {
-                query = query.Include(navigationProperty);
-            }
-        }
-
+        IQueryable<T> query = context.Set<T>().Where(combineCondition);
+        if (haveForeignKey)
+            GetIncludes(query, context);
         return query.ToList();
     }
 
-    public static List<T> GetAll<T>(bool getDeleted = false) where T : class
+    public static List<T> GetAll<T>(bool getDeleted = false, bool haveForeignKey = true) where T : class
     {
         if (!CheckTypeDatabase(typeof(T)))
             throw new InvalidOperationException("Data type not found in database.");
@@ -130,7 +116,29 @@ public static class DBManager
         }
 
         using var context = new AppDbContext();
-        return context.Set<T>().Where(combineCondition).ToList();
+        IQueryable<T> query = context.Set<T>().Where(combineCondition);
+        if (haveForeignKey)
+            GetIncludes(query, context);
+        return query.ToList();
+    }
+
+    /// <summary>
+    /// Get navigation property (foreign related entities) for query.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="query"></param>
+    /// <param name="context"></param>
+    /// <returns></returns>
+    private static IQueryable<T> GetIncludes<T>(IQueryable<T> query, AppDbContext context) where T : class
+    {
+        IEnumerable<string>? navigationProperties = context.Model.FindEntityType(typeof(T))?.GetNavigations().Select(n => n.Name);
+        if (navigationProperties != null)
+        {
+            foreach (string navigationProperty in navigationProperties)
+                query = query.Include(navigationProperty);
+        }
+
+        return query;
     }
 
     #endregion Read
@@ -186,11 +194,11 @@ public static class DBManager
         if (!CheckTypeDatabase(typeof(T)))
             throw new InvalidOperationException("Data type not found in database.");
 
-
+        //Soft delete
         PropertyInfo? deletedProperty = typeof(T).GetProperty("Deleted");
         if (deletedProperty != null)
         {
-            PropertyInfo deletedDateProperty = typeof(T).GetProperty("DeletedDate");
+            PropertyInfo? deletedDateProperty = typeof(T).GetProperty("DeletedDate");
             if (deletedDateProperty != null)
                 deletedDateProperty.SetValue(entity, DateTime.Now);
             deletedProperty.SetValue(entity, true);
@@ -208,12 +216,13 @@ public static class DBManager
         if (!CheckTypeDatabase(typeof(T)))
             throw new InvalidOperationException("Data type not found in database.");
 
+        //Soft delete
         PropertyInfo? deletedProperty = typeof(T).GetProperty("Deleted");
         if (deletedProperty != null)
         {
             foreach (T entity in entities)
             {
-                PropertyInfo deletedDateProperty = typeof(T).GetProperty("DeletedDate");
+                PropertyInfo? deletedDateProperty = typeof(T).GetProperty("DeletedDate");
                 if (deletedDateProperty != null)
                     deletedDateProperty.SetValue(entity, DateTime.Now);
                 deletedProperty.SetValue(entity, true);
@@ -238,12 +247,13 @@ public static class DBManager
         if (!entitiesToRemove.Any())
             return;
 
+        //Soft delete
         PropertyInfo? deletedProperty = typeof(T).GetProperty("Deleted");
         if (deletedProperty != null)
         {
             foreach (T entity in entitiesToRemove)
             {
-                PropertyInfo deletedDateProperty = typeof(T).GetProperty("DeletedDate");
+                PropertyInfo? deletedDateProperty = typeof(T).GetProperty("DeletedDate");
                 if (deletedDateProperty != null)
                     deletedDateProperty.SetValue(entity, DateTime.Now);
                 deletedProperty.SetValue(entity, true);
@@ -279,12 +289,9 @@ public static class DBManager
         using var context = new AppDbContext();
         List<Expense> expenses = GetAll<Expense>(true).ToList();
         expenses = expenses.Where(ex => (DateTime.Now - (DateTime)ex.DeletedDate).TotalDays >= 30).ToList();
+
         foreach (Expense expense in expenses)
-        {
-            if (expense.Recurring)
-                RemoveWithCondition<RecurringDetail>(rd => rd.ExpenseID == expense.ExpenseID);
             context.Remove(expense);
-        }
 
         context.SaveChanges();
     }
