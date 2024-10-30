@@ -21,8 +21,13 @@ namespace PersonalFinanceApp
         public MainWindow()
         {
             InitializeComponent();
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.ShowDialog();
+            LoginWindow loginwindow = new LoginWindow();
+            loginwindow.ShowDialog();
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

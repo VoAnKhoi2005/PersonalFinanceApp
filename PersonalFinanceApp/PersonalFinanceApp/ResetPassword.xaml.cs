@@ -15,20 +15,13 @@ using System.Windows.Shapes;
 namespace PersonalFinanceApp
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for ResetPassword.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class ResetPassword : Window
     {
-        public LoginWindow()
+        public ResetPassword()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            CardResetPassword.Visibility = Visibility.Visible;
-            ResetPasswordGrid.Visibility = Visibility.Visible;
-
         }
     }
 }
