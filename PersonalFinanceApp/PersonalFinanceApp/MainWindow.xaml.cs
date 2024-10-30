@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 

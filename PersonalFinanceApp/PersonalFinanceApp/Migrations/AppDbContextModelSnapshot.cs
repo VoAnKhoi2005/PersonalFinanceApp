@@ -133,9 +133,6 @@ namespace PersonalFinanceApp.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.Property<long>("Spending")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Month", "Year", "UserID");
 
                     b.HasIndex("UserID");
@@ -145,8 +142,6 @@ namespace PersonalFinanceApp.Migrations
                             t.HasCheckConstraint("CK_Budget", "[Budget] >= 0");
 
                             t.HasCheckConstraint("CK_Month", "[Month] >= 1 AND [Month] <= 12");
-
-                            t.HasCheckConstraint("CK_Spending", "[Spending] >= 0");
 
                             t.HasCheckConstraint("CK_Year", "[Year] >= 0");
                         });

@@ -44,7 +44,6 @@ namespace PersonalFinanceApp.Database
             modelBuilder.Entity<ExpensesBook>().ToTable(exB => exB.HasCheckConstraint("CK_Month", "[Month] >= 1 AND [Month] <= 12"));
             modelBuilder.Entity<ExpensesBook>().ToTable(exB => exB.HasCheckConstraint("CK_Year", "[Year] >= 0"));
             modelBuilder.Entity<ExpensesBook>().ToTable(exB => exB.HasCheckConstraint("CK_Budget", "[Budget] >= 0"));
-            modelBuilder.Entity<ExpensesBook>().ToTable(exB => exB.HasCheckConstraint("CK_Spending", "[Spending] >= 0"));
             //RecurringExpense
             modelBuilder.Entity<RecurringDetail>().ToTable(rd => rd.HasCheckConstraint("CK_Frequency", "[Frequency] IN ('Daily', 'Weekly', 'Monthly', 'Yearly')"));
 

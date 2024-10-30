@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Picture\**" />
+    <EmbeddedResource Remove="Picture\**" />
+    <None Remove="Picture\**" />
+    <Page Remove="Picture\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\img\ac8257e1cfc4e63f5c63f3d4869eb7c4.jpg" />
     <None Remove="Resources\img\Logo_UIT_updated.svg.png" />
     <None Remove="Resources\PigBackground.png" />
@@ -22,10 +29,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Picture\PigBackground.png" />
   </ItemGroup>
 
   <ItemGroup>
