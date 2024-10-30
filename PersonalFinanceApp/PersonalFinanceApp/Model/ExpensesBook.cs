@@ -19,8 +19,8 @@ namespace PersonalFinanceApp.Model
         [Range(0, 1000000000000000)]
         public long Budget { get; set; }
 
-        [Range(0, 1000000000000000)]
-        public long Spending { get; set; }
+        [Range(0, 1000000000000000)] 
+        public long Spending => Expenses?.Sum(ex => ex.Amount) ?? 0;
 
         [MaxLength(256)]
         public string? Resources { get; set; }
@@ -38,7 +38,6 @@ namespace PersonalFinanceApp.Model
             Year = year;
             UserID = userId;
             Budget = budget;
-            Spending = spending;
             Resources = resources;
         }
 
@@ -48,7 +47,6 @@ namespace PersonalFinanceApp.Model
             Year = year;
             UserID = user.UserID;
             Budget = budget;
-            Spending = spending;
             Resources = resources;
         }
     }

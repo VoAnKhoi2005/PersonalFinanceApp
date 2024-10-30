@@ -63,8 +63,9 @@ public static class DBManager
         {
             ExCondition = e => EF.Property<bool>(e, "Deleted") == getDeleted;
         }
+
         var combineCondition = ExCondition;
-        combineCondition.And(condition);
+         combineCondition = combineCondition.And(condition);
 
         using var context = new AppDbContext();
         return context.Set<T>().FirstOrDefault(combineCondition);
@@ -78,7 +79,7 @@ public static class DBManager
     /// <param name="getDeleted"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>    
-    public static IEnumerable<T> GetCondition<T>(Expression<Func<T, bool>> condition, bool getDeleted = false) where T : class
+    public static List<T> GetCondition<T>(Expression<Func<T, bool>> condition, bool getDeleted = false) where T : class
     {
         if (!CheckTypeDatabase(typeof(T)))
             throw new InvalidOperationException("Data type not found in database.");
@@ -88,14 +89,15 @@ public static class DBManager
         {
             ExCondition = e => EF.Property<bool>(e, "Deleted") == getDeleted;
         }
+
         var combineCondition = ExCondition;
-        combineCondition.And(condition);
+        combineCondition = combineCondition.And(condition);
 
         using var context = new AppDbContext();
-        return context.Set<T>().Where(combineCondition);
+        return context.Set<T>().Where(combineCondition).ToList();
     }
 
-    public static IEnumerable<T> GetIncludes<T>(IEnumerable<T> entities, AppDbContext? context = null) where T : class
+    public static List<T> GetIncludes<T>(IEnumerable<T> entities, AppDbContext? context = null) where T : class
     {
         if (context == null)
             context = new AppDbContext();
@@ -110,10 +112,10 @@ public static class DBManager
             }
         }
 
-        return query;
+        return query.ToList();
     }
 
-    public static IEnumerable<T> GetAll<T>(bool getDeleted = false) where T : class
+    public static List<T> GetAll<T>(bool getDeleted = false) where T : class
     {
         if (!CheckTypeDatabase(typeof(T)))
             throw new InvalidOperationException("Data type not found in database.");
@@ -124,11 +126,11 @@ public static class DBManager
         if (typeof(T).GetProperty("Deleted") != null)
         {
             Expression<Func<T, bool>> exCondition = e => EF.Property<bool>(e, "Deleted") == getDeleted;
-            combineCondition.And(exCondition);
+            combineCondition = combineCondition.And(exCondition);
         }
 
         using var context = new AppDbContext();
-        return context.Set<T>().Where(combineCondition);
+        return context.Set<T>().Where(combineCondition).ToList();
     }
 
     #endregion Read
@@ -217,6 +219,7 @@ public static class DBManager
                 deletedProperty.SetValue(entity, true);
                 Update(entity);
             }
+
             return;
         }
 
@@ -246,6 +249,7 @@ public static class DBManager
                 deletedProperty.SetValue(entity, true);
                 Update(entity);
             }
+
             return;
         }
 
@@ -267,6 +271,9 @@ public static class DBManager
         return true;
     }
 
+    /// <summary>
+    /// Auto delete expense after 30 days from the time of deletion.
+    /// </summary>
     public static void AutoDelete()
     {
         using var context = new AppDbContext();
@@ -278,12 +285,13 @@ public static class DBManager
                 RemoveWithCondition<RecurringDetail>(rd => rd.ExpenseID == expense.ExpenseID);
             context.Remove(expense);
         }
+
         context.SaveChanges();
     }
 
     #endregion Delete
 
-    private static bool CheckTypeDatabase(Type type)
+    public static bool CheckTypeDatabase(Type type)
     {
         using var context = new AppDbContext();
         return context.Model.FindEntityType(type) != null;
