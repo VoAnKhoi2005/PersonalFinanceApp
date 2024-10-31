@@ -1,5 +1,8 @@
 # Personal Finance App
-**A group project to learn WPF using C# programming language**
+**A group project to learn WPF using C# programming language class IT008.P12**
+- 23520790 - Võ An Khôi
+- 23520802 - Nguyễn Trung Kiên
+- 23520869 - Hồ Nguyễn Tài Lợi
 ## Overview
 The application is designed to help users manage their daily expenses, create budgets, and track their savings goals. The app offers visual insights through charts and reports, allowing users to understand their spending patterns and make informed financial decisions.
 
