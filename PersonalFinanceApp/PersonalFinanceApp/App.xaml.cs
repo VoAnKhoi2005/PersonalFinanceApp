@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using PersonalFinanceApp.Database;
+using PersonalFinanceApp.Model;
 
 namespace PersonalFinanceApp
 {
@@ -9,7 +10,7 @@ namespace PersonalFinanceApp
         {
             base.OnStartup(e);
 
-            //Create database if not exist
+            //Create database
             using (var context = new AppDbContext())
             {
                 context.EnsureDatabaseCreated();
