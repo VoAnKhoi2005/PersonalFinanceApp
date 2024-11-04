@@ -13,32 +13,40 @@
         TextElement.FontSize="16"
         TextOptions.TextFormattingMode="Ideal"
         Title="LoginWindow" Height="720" Width="1152">
-    <Grid >
-        <Grid.Resources>
-        </Grid.Resources>
-        <Image Margin="0,25,479,25" Source="/Resources/img/PigBackground.png" Stretch="Fill"/>
-        <Image Margin="812,-23,0,395" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-200.58400000000003"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-        <Image Margin="740,270,7,37" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="294.99"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-
-        <materialDesign:Card HorizontalAlignment="Center" VerticalAlignment="Center" >
+    
+    
+    <Grid> 
+        <!-- background -->
+        <Grid>
+            <Image Margin="0,25,479,25" Source="/Resources/img/PigBackground.png" Stretch="Fill"/>
+            <Image Margin="812,-23,0,395" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-200.58400000000003"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image Margin="740,270,7,37" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="294.99"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Grid>
+        <!--Login + new account -->
+        <materialDesign:Card x:Name="LoginCard"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Visibility="Collapsed" 
+            UniformCornerRadius="40"
+            >
             <Grid Background="#053b50">
                 <TabControl Height="400" Width="560"  
                 materialDesign:ColorZoneAssist.Foreground="DeepSkyBlue"
@@ -57,21 +65,21 @@
                             <Label Content="Username" Foreground="#E5CBBFBF" FontSize="16" Margin="31,67,356,238"></Label>
                             <Border CornerRadius="15" Background="#084563" Margin="124,62,36,238" Width="400" Height="40" Grid.ColumnSpan="2">
                                 <TextBox 
-        VerticalAlignment="Top"
-        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-        Width="400" 
-        Height="40"
-        Background="Transparent" Margin="5,1,-5,0">
+                                    VerticalAlignment="Top"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                    Width="400" 
+                                    Height="40"
+                                    Background="Transparent" Margin="5,1,-5,0">
                                 </TextBox>
                             </Border>
                             <Label Content="Password" FontSize="16"  Foreground="#E5CBBFBF" Margin="31,134,366,174" RenderTransformOrigin="0.411,0.567"></Label>
                             <Border Width="400" Height="40" Margin="123,130,37,170" Background="#084563" CornerRadius="15" Grid.ColumnSpan="2">
                                 <PasswordBox 
-                    Width="400" Height="40"
-                    materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                    Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="0,-4,0,4"/>
+                                     Width="400" Height="40"
+                                     materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
+                                     materialDesign:TextFieldAssist.HasClearButton="True"
+                                     IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
+                                     Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="0,-4,0,4"/>
                             </Border>
 
                             <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="15" Height="15" Margin="121,182,0,0"  />
@@ -81,17 +89,17 @@
                     ></CheckBox>
                             <Label Content="Remember me" FontSize="15" Foreground="#E5CBBFBF" Margin="74,197,291,117" ></Label>
                             <Button 
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    Content="Forgot your password?" 
-                    FontWeight="Bold" FontStyle="Italic" Background="#053B50" Margin="338,194,36,114"  Foreground="#FFCDCAD2" Grid.ColumnSpan="2" Click="Button_Click" />
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Content="Forgot your password?" 
+                                FontWeight="Bold" FontStyle="Italic" Background="#053B50" Margin="338,194,36,114"  Foreground="#FFCDCAD2" Grid.ColumnSpan="2" Click="Button_Click" />
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            Content="Login Confirm" 
-                            FontSize="18"
-                            Width="300"
-                            Height="50"
-                            Background="#0d2129"
-                            Foreground="#E5FFFFFF" 
-                            Margin="130,245,43,45">
+                                    Content="Login Confirm" 
+                                    FontSize="18"
+                                    Width="300"
+                                    Height="50"
+                                    Background="#0d2129"
+                                    Foreground="#E5FFFFFF" 
+                                    Margin="130,245,43,45">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" 
@@ -99,7 +107,7 @@
                                         CornerRadius="30" 
                                         BorderThickness="1">
                                             <ContentPresenter HorizontalAlignment="Center" 
-                              VerticalAlignment="Center" />
+                                                 VerticalAlignment="Center" />
 
                                         </Border>
                                     </ControlTemplate>
@@ -173,11 +181,12 @@
             </Grid>
         </materialDesign:Card>
 
-
-
         <!-- Reset password-->
-
-        <materialDesign:Card x:Name="CardResetPassword" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <materialDesign:Card x:Name="ResetPasswordCard" 
+                             Visibility="Collapsed" 
+                             HorizontalAlignment="Center" 
+                             VerticalAlignment="Center" 
+                             UniformCornerRadius="40">
             <Grid Background="#053b50">
                 <Grid x:Name="ResetPasswordGrid"
                 Height="400" Width="560" Background="#053b50">
@@ -194,7 +203,6 @@
                         Height="40"
                         Background="Transparent" >
                         </TextBox>
-
                     </Border>
 
                     <Label Content="Gmail" FontSize="16" Foreground="#E5CBBFBF" Width="50" Margin="51,208,459,159" RenderTransformOrigin="0.482,1.273">
@@ -233,112 +241,88 @@
             </Grid>
         </materialDesign:Card>
 
-
-
         <!-- Code verification -->
+        <materialDesign:Card x:Name="CodeVerificationCard"
+            Visibility="Collapsed" 
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            UniformCornerRadius="40">
 
-
-        <materialDesign:Card Visibility="Collapsed">
-            <Grid Background="#0D2129" >
-                <Image Margin="0,25,479,25" Source="/Resources/img/PigBackground.png" Stretch="Fill"/>
-                <Image Margin="812,-23,0,395" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="-200.58400000000003"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <Image Margin="740,270,7,37" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="294.99"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <materialDesign:Card HorizontalAlignment="Center" VerticalAlignment="Center" >
-                    <Grid  Height="400" Width="560" Background="#053b50">
-                        <Label Content="Code Verification Required"  FontSize="30" FontFamily="Sans Serif Collection" 
+            <Grid  Height="400" Width="560" Background="#053b50">
+                <Label Content="Code Verification Required"  FontSize="30" FontFamily="Sans Serif Collection" 
                                 VerticalContentAlignment="Top"
                                 HorizontalAlignment="Center"
                                 Margin="0 20 0 0" FontWeight="Bold"></Label>
-                        <Label 
+                <Label 
                             Content="For added security, enter the code we have emailed to "
                             FontSize="18"
                             Foreground="#E5CBBFBF" Margin="65,84,44,271">
-                        </Label>
-                        <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
+                    </Label>
+                    <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                 HorizontalAlignment="Left"
                                 Margin="20, 50, 0 ,0">
-                            <TextBlock>
-                            </TextBlock>
-                        </Border>
-                        <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
+                        <TextBlock>
+                        </TextBlock>
+                    </Border>
+                    <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                  HorizontalAlignment="Left"
                                  Margin="110, 50, 0 ,0">
-                            <TextBlock>
-                            </TextBlock>
-                        </Border>
-                        <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
+                        <TextBlock>
+                        </TextBlock>
+                    </Border>
+                    <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                 HorizontalAlignment="Left"
                                 Margin="200, 50, 0 ,0">
-                            <TextBlock>
-                            </TextBlock>
-                        </Border>
-                        <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
+                    <TextBlock>
+                    </TextBlock>
+                    </Border>
+                    <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                  HorizontalAlignment="Left"
                                  Margin="290, 50, 0 ,0">
-                            <TextBlock>
-                            </TextBlock>
-                        </Border>
-                        <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
+                    <TextBlock>
+                    </TextBlock>
+                    </Border>
+                    <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                 HorizontalAlignment="Left"
                                 Margin="380, 50, 0 ,0">
-                            <TextBlock>
-                            </TextBlock>
-                        </Border>
-                        <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
+                        <TextBlock>
+                        </TextBlock>
+                    </Border>
+                    <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                 HorizontalAlignment="Left"
                                 Margin="468, 50, 0 ,0">
-                            <TextBlock>
-                            </TextBlock>
-                        </Border>
-                        <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="20" Height="20" Margin="22,282,0,0"  />
-                            <Label Content="Invalid code verification!" Foreground="Red" FontSize="16" Margin="42,276,328,88"></Label>
-                            <materialDesign:PackIcon Kind="ArrowUpCircle" Width="50" Height="50" Margin="0,306,0,0" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Foreground="#FFDFD1D1">
-                            <materialDesign:PackIcon.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="90"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </materialDesign:PackIcon.RenderTransform>
+                    <TextBlock>
+                    </TextBlock>
+                    </Border>
+                    <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="20" Height="20" Margin="22,282,0,0"  />
+                    <Label Content="Invalid code verification!" Foreground="Red" FontSize="16" Margin="42,276,328,88"></Label>
+                <materialDesign:PackIcon Kind="ArrowUpCircle" Width="50" Height="50" Margin="0,306,0,0" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Foreground="#FFDFD1D1">
+                    <materialDesign:PackIcon.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </materialDesign:PackIcon.RenderTransform>
 
 
 
-                            <!-- click here -->
+                    <!-- click here -->
 
 
-                        </materialDesign:PackIcon>
-
-                    </Grid>
-                </materialDesign:Card>
+                </materialDesign:PackIcon>
             </Grid>
         </materialDesign:Card>
 
-
-
         <!--  Reset new password-->
-        <materialDesign:Card x:Name="ResetConfirmCard" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <materialDesign:Card x:Name="ResetNewPasswordCard" 
+                             Visibility="Visible" HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             UniformCornerRadius="40">
             <Grid Background="#053b50">
-                <Grid x:Name="ResetConfirmGrid"
-                Height="400" Width="560" Background="#053b50">
+                <Grid
+                    Height="400" Width="560" Background="#053b50">
                     <Label Content="Reset Password" FontSize="30" FontFamily="Sans Serif Collection" 
                        VerticalContentAlignment="Top"
                        HorizontalAlignment="Center"
@@ -391,5 +375,6 @@
                 </Grid>
             </Grid>
         </materialDesign:Card>
+        
     </Grid>
 </Window>

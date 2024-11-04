@@ -8,60 +8,79 @@
         mc:Ignorable="d"
         Background="#0D2129"
         ResizeMode="CanMinimize"
-        TextElement.Foreground="#E5CBBFBF"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="16"
-        TextElement.FontFamily="Sans Serif Collection"
-        TextOptions.TextFormattingMode="Ideal"
-        Title="MainWindow" Height="720" Width="1152">
+        Title="MainWindow" Height="720" Width="1152"
+        >
+
+
     <Grid>
-        <Image Margin="0,25,479,25" Source="/Resources/img/PigBackground.png" Stretch="Fill"/>
-        <Image Margin="812,-23,0,395" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-200.58400000000003"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-        <Image Margin="740,270,7,37" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
-            <Image.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="294.99"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Image.RenderTransform>
-        </Image>
-        <Grid VerticalAlignment="Top" HorizontalAlignment="Center"
-              Width="1152" Height="67.2"
-              >
-
-            <materialDesign:PackIcon 
-                Kind="AccountBadge" 
-                Width="40" Height="40" 
-                Margin="1083,0,0,0" 
-                VerticalAlignment="Center"
-                Foreground="#E5CBBFBF"
-                />
-            <!--click here-->
-
-
-
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Sans Serif Collection"/>
+                <Setter Property="Foreground" Value="#E5CBBFBF"/>
+                <Setter Property="FontWeight" Value="Regular"/>
+            </Style>
+        </Grid.Resources>
+        <!-- background-->
+        <Grid>
+            <Image Margin="0,25,479,25" Source="/Resources/img/PigBackground.png" Stretch="Fill"/>
+            <Image Margin="812,-23,0,395" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-200.58400000000003"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image Margin="740,270,7,37" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="294.99"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
         </Grid>
-        
+
+
+        <!--icon app , user , functional name-->
+        <materialDesign:Card VerticalAlignment="Top" 
+                             HorizontalAlignment="Center"
+                             Width="1152" 
+                             Height="67.2"
+                             Background="#0D2129">
+            <Canvas>
+                <Image Canvas.Left="10" Canvas.Top="5"
+                       Source="/Resources/img/Logo_UIT_updated.svg.png" 
+                       Width="60" Height="60" />
+                <materialDesign:PackIcon 
+                    Canvas.Right="20"
+                    Canvas.Top="10"
+                    Kind="AccountBadge"  
+                    Width="40" Height="40" 
+                    VerticalAlignment="Center"
+                    Foreground="#E5CBBFBF"
+                />
+                <!--click here-->
+
+
+
+                <TextBlock Text="PENNYWISE" FontSize="28" Canvas.Left="80" Canvas.Bottom="-8"></TextBlock>
+            </Canvas>
+        </materialDesign:Card>
+
         <!-- User overall -->
-        <Border Width="300" 
-                Height="350" 
+        <materialDesign:Card x:Name="UserCard"
+                Width="300" 
+                Height="350"  
                 Background="#316C67" HorizontalAlignment="Right" 
                 VerticalAlignment="Top" 
-                Margin="0, 60, 60, 0"
-                CornerRadius="30"
-                Visibility="Collapsed"
-                >
+                Margin="0, 70, 60, 0"
+                UniformCornerRadius="30"
+                Visibility="Collapsed">
             <Grid>
                 <Grid.Resources>
                     <Style TargetType="Button">
@@ -88,7 +107,7 @@
 
                 <!--User button-->
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="300" Height="150" >
-                    
+
                     <!-- Account detail-->
                     <Button>
                         <Grid>
@@ -97,8 +116,8 @@
                             <materialDesign:PackIcon Kind="AccountCog" Width="30" Height="30" Margin="-62,0,0,0" VerticalAlignment="Center" />
                         </Grid>
                     </Button>
-                    
-                    
+
+
                     <!--sign out-->
                     <Button>
                         <Grid>
@@ -108,7 +127,7 @@
                             <materialDesign:PackIcon Kind="AccountLockOpen" Width="30" Height="30" Margin="-86,3,0,0"/>
                         </Grid>
                     </Button>
-                    
+
                     <!--exit button-->
                     <Button>
                         <Button.Template>
@@ -126,39 +145,113 @@
                     </Button>
                 </StackPanel>
             </Grid>
-        </Border>
-        
-        
-        
+        </materialDesign:Card>
         <!--main menu-->
-        
+
         <TabControl Width="1152" Height="632" VerticalAlignment="Top" 
                     HorizontalAlignment="Center"
-                    TabStripPlacement="Left" Margin="0,72,0,0" SelectionChanged="TabControl_SelectionChanged" 
+                    TabStripPlacement="Left" 
+                    Margin="0,72,0,0" 
+                    SelectionChanged="TabControl_SelectionChanged"  
                     >
+            <!-- dashboard-->
             <TabItem Width="200" Height="60">
                 <TabItem.Header>
-                    <Grid Height="38" Width="163" Margin="0,0,0,0">
+                    <Grid   VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Height="60" Width="200">
                         <materialDesign:PackIcon Foreground="#E5CBBFBF"
-                            Kind="Signal" Width="30" Height="30" Margin="-6,-2,0,0" />
-                        <Label Content="Dashboard" FontSize="18" Foreground="#E5CBBFBF" HorizontalAlignment="Left" Margin="29,-4,0,10"></Label>
+                                                 Kind="Signal" 
+                                                 Width="30" 
+                                                 Height="30" 
+                                                 HorizontalAlignment="Left" 
+                                                 VerticalAlignment="Center"
+                                                 Margin="10,0,0,0"/>
+                        <TextBlock Text="Dashboard" FontSize="18" 
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,40,0">
+
+                        </TextBlock>
                     </Grid>
                 </TabItem.Header>
             </TabItem>
 
-
-            <TabItem>
+            <!--Expense book-->
+            <TabItem Width="200" Height="60">
                 <TabItem.Header>
-                    <Grid>
-                        <Label Content="Expense book" FontSize="18" Foreground="#E5CBBFBF" HorizontalAlignment="Left" Margin="24,-5,0,-5" ></Label>
+                    <Grid   VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Height="60" Width="200">
+                        <TextBlock Text="Expense book"
+                                   FontSize="18" 
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"
+                                   Margin="0,0,18,0"></TextBlock>
+                        <materialDesign:PackIcon Kind="BookOpenPageVariant" Foreground="#E5CBBFBF"
+                                                 Width="30" 
+                                                 Height="30" 
+                                                 HorizontalAlignment="Left" 
+                                                 VerticalAlignment="Center"
+                                                 Margin="10,0,0,0"/>
+
                     </Grid>
                 </TabItem.Header>
             </TabItem>
-            <TabItem></TabItem>
-            <TabItem></TabItem>
+
+            <!--Goal plan-->
+            <TabItem Width="200" Height="60">
+                <TabItem.Header>
+                    <Grid   VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Height="60" Width="200">
+                        <materialDesign:PackIcon Kind="FlagCheckered" 
+                                            Foreground="#E5CBBFBF"
+                                                 Width="30" 
+                                                 Height="30" 
+                                                 HorizontalAlignment="Left" 
+                                                 VerticalAlignment="Center"
+                                                 Margin="10,0,0,0"/>
+                        <TextBlock Text="Goal  plan" FontSize="18" 
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,53  ,0">
+
+                        </TextBlock>
+                    </Grid>
+                </TabItem.Header>
+            </TabItem>
+
+            <!--Summary-->
+            <TabItem Width="200" Height="60">
+                <TabItem.Header>
+                    <Grid   VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Height="60" Width="200">
+                        <materialDesign:PackIcon Kind="DatabaseEye" 
+                                                Foreground="#E5CBBFBF"
+                                                 Width="30" 
+                                                 Height="30" 
+                                                 HorizontalAlignment="Left" 
+                                                 VerticalAlignment="Center"
+                                                 Margin="10,0,0,0"/>
+
+                        <TextBlock Text="Summary" FontSize="18" 
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,52,0">
+
+                        </TextBlock>
+                    </Grid>
+                </TabItem.Header>
+            </TabItem>
+
+
+
         </TabControl>
-        <Image Margin="10,4,1082,640" Source="/Resources/img/Logo_UIT_updated.svg.png" Width="60" Height="60" RenderTransformOrigin="0.438,0.229"/>
-        <Label Content="PENNYWISE" ></Label>
+
+
+        <!--setting-->
     </Grid>
 </Window>
  

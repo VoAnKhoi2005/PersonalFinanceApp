@@ -12,11 +12,15 @@ namespace PersonalFinanceApp
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        
+        private void showCard(FrameworkElement card)
         {
-            CardResetPassword.Visibility = Visibility.Visible;
-            ResetPasswordGrid.Visibility = Visibility.Visible;
+            LoginCard.Visibility = Visibility.Collapsed;
+            ResetPasswordCard.Visibility = Visibility.Collapsed;
+            ResetNewPasswordCard.Visibility = Visibility.Collapsed;
+            CodeVerificationCard.Visibility = Visibility.Collapsed;
 
+            card.Visibility = Visibility.Visible;
         }
     }
 }
