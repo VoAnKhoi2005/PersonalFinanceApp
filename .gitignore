@@ -37,14 +37,6 @@ Thumbs.db
 *.vspscc
 *.vssscc
 
-# NuGet packages
-*.nupkg
-*.snupkg
-.nuget/
-packages/
-*.nupkg
-*.snupkg
-
 # Node.js files
 node_modules/
 

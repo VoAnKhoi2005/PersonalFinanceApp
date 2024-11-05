@@ -2,7 +2,6 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using PersonalFinanceApp.Model;
-using PersonalFinanceApp.src;
 
 namespace PersonalFinanceApp.Database;
 
