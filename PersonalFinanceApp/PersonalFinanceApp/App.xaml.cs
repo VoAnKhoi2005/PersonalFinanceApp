@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using PersonalFinanceApp.Database;
-using PersonalFinanceApp.Model;
 
 namespace PersonalFinanceApp
 {
