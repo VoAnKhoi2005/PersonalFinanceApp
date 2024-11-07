@@ -8,8 +8,6 @@ namespace PersonalFinanceApp
         public MainWindow()
         {
             InitializeComponent();
-            LoginWindow loginwindow = new LoginWindow();
-            loginwindow.ShowDialog();
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)

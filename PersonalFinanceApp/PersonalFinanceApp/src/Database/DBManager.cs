@@ -286,7 +286,7 @@ public static class DBManager
     public static void AutoDelete()
     {
         using var context = new AppDbContext();
-        List<Expense> expenses = GetAll<Expense>(true).ToList();
+        List<Expense> expenses = GetAll<Expense>(true);
         expenses = expenses.Where(ex => (DateTime.Now - (DateTime)ex.DeletedDate).TotalDays >= 30).ToList();
 
         foreach (Expense expense in expenses)
