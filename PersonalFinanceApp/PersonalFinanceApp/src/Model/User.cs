@@ -56,8 +56,7 @@ public class User
         if (!VerifyPassword(oldPassword))
             return false;
         Password = HashPassword(newPassword);
-        DBManager.Update(this);
-        return true;
+        return DBManager.Update(this);
     }
 
     private string HashPassword(string password)
