@@ -26,7 +26,7 @@ public class Goal
 
     public virtual List<GoalHistory> GoalHistories { get; set; } = new List<GoalHistory>();
 
-    public Goal() { }
+    private Goal() { }
 
     public Goal(string name, long target, long goalAmount, string? resources = null)
     {

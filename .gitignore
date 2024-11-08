@@ -50,3 +50,15 @@ node_modules/
 project.lock.json
 project.fragment.lock.json
 artifacts/
+
+# NuGet Packages
+**/packages/*
+!**/packages/build/
+**/project.lock.json
+**/project.fragment.lock.json
+# Only include NuGet packages if not using NuGet's restore feature
+!packages/repositories.config
+# Avoid NuGet package folder conflicts
+# This will ignore any `packages` or `obj` subdirectory found within any directory in the repository.
+**/obj/
+**/packages/
