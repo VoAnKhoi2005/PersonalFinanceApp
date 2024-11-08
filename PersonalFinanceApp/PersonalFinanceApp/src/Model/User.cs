@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using PersonalFinanceApp.Database;
 
 namespace PersonalFinanceApp.Model;
 
@@ -12,8 +13,7 @@ public class User
     public string Username { get; set; }
 
     [Required]
-    [MinLength(8)]
-    public string Password { get; set; }
+    private string Password { get; set; }
 
     [Required]
     public string Email { get; set; }
@@ -38,11 +38,35 @@ public class User
     public User(string username, string password, string email, string? phoneNumber = null, long saving = 0, long defaultBudget = 0, string? resources = null)
     {
         Username = username;
-        Password = password;
+        Password = HashPassword(password);
         Email = email;
         PhoneNumber = phoneNumber;
         Saving = saving;
         DefaultBudget = defaultBudget;
         Resources = resources;
+    }
+
+    public void SetPassword(string password)
+    {
+        Password = HashPassword(password);
+    }
+
+    public bool ChangePassword(string oldPassword, string newPassword)
+    {
+        if (!VerifyPassword(oldPassword))
+            return false;
+        Password = HashPassword(newPassword);
+        DBManager.Update(this);
+        return true;
+    }
+
+    private string HashPassword(string password)
+    {
+        return BCrypt.Net.BCrypt.HashPassword(password);
+    }
+
+    public bool VerifyPassword(string enteredPassword)
+    {
+        return BCrypt.Net.BCrypt.Verify(enteredPassword, Password);
     }
 }
