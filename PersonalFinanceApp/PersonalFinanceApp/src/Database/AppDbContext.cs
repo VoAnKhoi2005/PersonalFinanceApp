@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Configuration;
+using Microsoft.EntityFrameworkCore;
 using PersonalFinanceApp.Model;
+using SQLitePCL;
 
 namespace PersonalFinanceApp.Database
 {
@@ -16,7 +18,10 @@ namespace PersonalFinanceApp.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=PFA.db");
+            string? connStr = ConfigurationManager.ConnectionStrings["MyDatabase"]?.ConnectionString;
+            if (connStr == null)
+                throw new InvalidOperationException("Connection string not found.");
+            optionsBuilder.UseSqlite(connStr);
         }
 
         public void EnsureDatabaseCreated()
