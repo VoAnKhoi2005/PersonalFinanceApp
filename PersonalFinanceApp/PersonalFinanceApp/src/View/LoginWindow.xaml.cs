@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using PersonalFinanceApp.Database;
+using PersonalFinanceApp.Model;
 
 namespace PersonalFinanceApp
 {
@@ -7,6 +9,8 @@ namespace PersonalFinanceApp
         public LoginWindow()
         {
             InitializeComponent();
+            User newUser = new User("khoi", "123456", "khoi@gmail.com");
+            DBManager.Insert(newUser);
         }
 
         
