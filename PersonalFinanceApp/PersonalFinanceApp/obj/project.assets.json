@@ -705,7 +705,7 @@
           "lib/netstandard2.0/SQLitePCLRaw.batteries_v2.dll": {}
         }
       },
-      "SQLitePCLRaw.core/2.1.6": {
+      "SQLitePCLRaw.core/2.1.10": {
         "type": "package",
         "dependencies": {
           "System.Memory": "4.5.3"
@@ -2347,18 +2347,14 @@
         "sqlitepclraw.bundle_e_sqlite3.nuspec"
       ]
     },
-    "SQLitePCLRaw.core/2.1.6": {
-      "sha512": "wO6v9GeMx9CUngAet8hbO7xdm+M42p1XeJq47ogyRoYSvNSp0NGLI+MgC0bhrMk9C17MTVFlLiN6ylyExLCc5w==",
     "SQLitePCLRaw.core/2.1.10": {
       "sha512": "Ii8JCbC7oiVclaE/mbDEK000EFIJ+ShRPwAvvV89GOZhQ+ZLtlnSWl6ksCNMKu/VGXA4Nfi2B7LhN/QFN9oBcw==",
       "type": "package",
-      "path": "sqlitepclraw.core/2.1.6",
       "path": "sqlitepclraw.core/2.1.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/SQLitePCLRaw.core.dll",
-        "sqlitepclraw.core.2.1.6.nupkg.sha512",
         "sqlitepclraw.core.2.1.10.nupkg.sha512",
         "sqlitepclraw.core.nuspec"
       ]
@@ -2838,29 +2834,28 @@
       "Microsoft.EntityFrameworkCore >= 8.0.10",
       "Microsoft.EntityFrameworkCore.Sqlite >= 8.0.10",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.10",
+      "SQLitePCLRaw.bundle_e_sqlcipher >= 2.1.10",
       "System.Windows.Interactivity.WPF >= 2.0.20525"
-      "SQLitePCLRaw.bundle_e_sqlcipher >= 2.1.10"
-
     ]
   },
   "packageFolders": {
-    "C:\\Users\\PC\\.nuget\\packages\\": {},
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Personal_Finance_App\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
+      "projectUniqueName": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
       "projectName": "PersonalFinanceApp",
-      "projectPath": "D:\\Personal_Finance_App\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
-      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "D:\\Personal_Finance_App\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\obj\\",
+      "projectPath": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2914,10 +2909,13 @@
             "target": "Package",
             "version": "[8.0.10, )"
           },
-
+          "SQLitePCLRaw.bundle_e_sqlcipher": {
             "target": "Package",
             "version": "[2.1.10, )"
-
+          },
+          "System.Windows.Interactivity.WPF": {
+            "target": "Package",
+            "version": "[2.0.20525, )"
           }
         },
         "imports": [
@@ -2939,7 +2937,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
