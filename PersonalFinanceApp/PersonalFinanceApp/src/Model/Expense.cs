@@ -50,7 +50,7 @@ public class Expense
 
     public virtual RecurringDetail RecurringDetail { get; set; }
 
-    public Expense() { }
+    private Expense() { }
 
     public Expense(long amount, string name, DateOnly date, bool recurring, int categoryId, int exBMonth, int exBYear, int userId, string? description = null, string? resources = null)
     {

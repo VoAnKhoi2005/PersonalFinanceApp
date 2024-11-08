@@ -33,7 +33,7 @@ public class User
     public virtual List<ExpensesBook> ExpensesBooks { get; set; } = new List<ExpensesBook>();
     public virtual List<Goal> Goals { get; set; } = new List<Goal>();
 
-    public User() { }
+    private User() { }
 
     public User(string username, string password, string email, string? phoneNumber = null, long saving = 0, long defaultBudget = 0, string? resources = null)
     {
@@ -46,18 +46,12 @@ public class User
         Resources = resources;
     }
 
-    public void SetPassword(string password)
-    {
-        Password = HashPassword(password);
-    }
-
     public bool ChangePassword(string oldPassword, string newPassword)
     {
         if (!VerifyPassword(oldPassword))
             return false;
         Password = HashPassword(newPassword);
-        DBManager.Update(this);
-        return true;
+        return DBManager.Update(this);
     }
 
     private string HashPassword(string password)

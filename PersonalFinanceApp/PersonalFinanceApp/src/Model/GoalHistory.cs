@@ -13,7 +13,7 @@ public class GoalHistory
     //Relationship
     public virtual Goal? Goal { get; set; }
 
-    public GoalHistory() { }
+    private GoalHistory() { }
 
     public GoalHistory(Goal goal, long amount)
     {
