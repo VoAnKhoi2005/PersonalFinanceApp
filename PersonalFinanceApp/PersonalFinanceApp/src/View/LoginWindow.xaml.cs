@@ -9,9 +9,8 @@ namespace PersonalFinanceApp
         public LoginWindow()
         {
             InitializeComponent();
-            User newUser = new User("admin", "1admin1", "2admin@123");
+            User newUser = new User("name", "pass", "admin@123");
             DBManager.Insert(newUser);
-            
         }
 
         

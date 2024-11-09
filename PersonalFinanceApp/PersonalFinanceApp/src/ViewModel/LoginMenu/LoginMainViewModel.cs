@@ -43,13 +43,11 @@ namespace PersonalFinanceApp.ViewModel.LoginMenu {
            
         }
         private bool BLogin(string Username, string Password) {
-            Model.User loginUser = DBManager.GetFirst<Model.User>(u => u.Username == Username);
+            var loginUser = DBManager.GetFirst<Model.User>(u => u.Username == UserName);
             if (loginUser == null)
                 return false;
             
             return loginUser.VerifyPassword(Password);
         }
-
     }
-
 }
