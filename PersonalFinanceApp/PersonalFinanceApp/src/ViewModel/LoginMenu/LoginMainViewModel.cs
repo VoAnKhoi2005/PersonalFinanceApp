@@ -1,16 +1,8 @@
 ﻿using PersonalFinanceApp.Database;
-using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel;
-using System.Data;
-using System.Data.SQLite;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using XAct.Users;
-using XSystem.Security.Cryptography;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace PersonalFinanceApp.ViewModel.LoginMenu {
     public class LoginMainViewModel : BaseViewModel
