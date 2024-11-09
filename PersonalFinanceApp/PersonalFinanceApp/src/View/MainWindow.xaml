@@ -3,16 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PersonalFinanceApp"
+        xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
+        xmlns:uc="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Background="#0D2129"
-        ResizeMode="CanMinimize"
+
+        
         
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         DataContext="{StaticResource MainVM}"
         x:Name="mainWindow"
-         Height="720" Width="1152"
+        
+
+        ResizeMode="CanMinimize" Height="720" Width="1152"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+
         >
 
     <i:Interaction.Triggers>
@@ -42,6 +49,8 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
+
+
             <Image Margin="740,270,7,37" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
@@ -52,44 +61,33 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
+            <Image HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="250,0,0,0"
+                Source="/Resources/img/PigBackground.png" 
+                   Width="250" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-98"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
         </Grid>
 
-
         <!--icon app , user , functional name-->
-        <materialDesign:Card VerticalAlignment="Top" 
-                             HorizontalAlignment="Center"
-                             Width="1152" 
-                             Height="67.2"
-                             Background="#0D2129">
-            <Canvas>
-                <Image Canvas.Left="10" Canvas.Top="5"
-                       Source="/Resources/img/Logo_UIT_updated.svg.png" 
-                       Width="60" Height="60" />
-                <materialDesign:PackIcon 
-                    Canvas.Right="20"
-                    Canvas.Top="10"
-                    Kind="AccountBadge"  
-                    Width="40" Height="40" 
-                    VerticalAlignment="Center"
-                    Foreground="#E5CBBFBF"
-                />
-                <!--click here-->
-
-
-
-                <TextBlock Text="PENNYWISE" FontSize="28" Canvas.Left="80" Canvas.Bottom="-8"></TextBlock>
-            </Canvas>
-        </materialDesign:Card>
 
         <!-- User overall -->
         <materialDesign:Card x:Name="UserCard"
-                Width="300" 
-                Height="350"  
-                Background="#316C67" HorizontalAlignment="Right" 
-                VerticalAlignment="Top" 
-                Margin="0, 70, 60, 0"
-                UniformCornerRadius="30"
-                Visibility="Collapsed">
+            Width="300" 
+            Height="350"  
+            Background="#316C67" HorizontalAlignment="Right" 
+            VerticalAlignment="Top" 
+            Margin="0,  70, 60, 0"
+            UniformCornerRadius="30" 
+            Visibility="Collapsed">
             <Grid>
                 <Grid.Resources>
                     <Style TargetType="Button">
@@ -104,12 +102,6 @@
                     </Style>
                 </Grid.Resources>
                 <!--User's avatar-->
-                <Border Width="150" Height="150" VerticalAlignment="Top" Margin="0,20,0,0" CornerRadius="90">
-                    <Border.Background>
-                        <ImageBrush ImageSource="/Resources/img/ac8257e1cfc4e63f5c63f3d4869eb7c4.jpg" />
-                    </Border.Background>
-                </Border>
-
                 <!--@Username-->
                 <TextBlock Text="@username" Foreground="#BDBDBD" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 15, 0 , 0"></TextBlock>
 
@@ -121,18 +113,17 @@
                     <Button>
                         <Grid>
                             <TextBlock Text="Account detail" Margin="0, 0, 0, 0"
-                                   ></TextBlock>
+                               ></TextBlock>
                             <materialDesign:PackIcon Kind="AccountCog" Width="30" Height="30" Margin="-62,0,0,0" VerticalAlignment="Center" />
                         </Grid>
                     </Button>
-
 
                     <!--sign out-->
                     <Button>
                         <Grid>
 
                             <TextBlock Text="Sign out" Margin="-23,-2,23,2"
-                                   />
+                               />
                             <materialDesign:PackIcon Kind="AccountLockOpen" Width="30" Height="30" Margin="-86,3,0,0"/>
                         </Grid>
                     </Button>
@@ -155,107 +146,168 @@
                 </StackPanel>
             </Grid>
         </materialDesign:Card>
+
+        <!--Tab background-->
+        <materialDesign:Card Width="210" 
+                         Height="720" 
+                         HorizontalAlignment="Left" 
+                         VerticalAlignment="Bottom"
+                         Background="#003E57"></materialDesign:Card>
+
+
+
+        <materialDesign:PackIcon Kind="ExitToApp" Width="50" Height="50" 
+                             Foreground="#E5CBBFBF"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Bottom" 
+                             />
+
+
+
         <!--main menu-->
 
-        <TabControl Width="1152" Height="632" VerticalAlignment="Top" 
-                    HorizontalAlignment="Center"
-                    TabStripPlacement="Left" 
-                    Margin="0,72,0,0" 
-                    
-                    >
+
+        <TabControl Width="1152" Height="720" VerticalAlignment="Center" 
+                HorizontalAlignment="Center"
+                TabStripPlacement="Left" 
+                >
+
             <!-- dashboard-->
-            <TabItem Width="200" Height="60">
+
+            <TabItem IsEnabled="False"></TabItem>
+            <TabItem Width="210" Height="60">
                 <TabItem.Header>
                     <Grid   VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Height="60" Width="200">
+                        HorizontalAlignment="Center"
+                        Height="60" Width="210">
                         <materialDesign:PackIcon Foreground="#E5CBBFBF"
-                                                 Kind="Signal" 
-                                                 Width="30" 
-                                                 Height="30" 
-                                                 HorizontalAlignment="Left" 
-                                                 VerticalAlignment="Center"
-                                                 Margin="10,0,0,0"/>
+                                             Kind="Signal" 
+                                             Width="30" 
+                                             Height="30" 
+                                             VerticalAlignment="Center" Margin="12,0,0,0"/>
                         <TextBlock Text="Dashboard" FontSize="18" 
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                   Margin="0,0,40,0">
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Margin="0,0,40,0">
 
                         </TextBlock>
                     </Grid>
                 </TabItem.Header>
+
+                <!--Usercontrol - Dashboard-->
+                <local:UC_Dashboard x:Name="UCDashboard"></local:UC_Dashboard>
+
             </TabItem>
+            <TabItem Width="210" Height="60">
+                <TabItem.Header>
+                    <Grid   VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Height="60" Width="200">
+                        <TextBlock Text="Expense book"
+                               FontSize="18" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="71,0,0,0"></TextBlock>
+                        <materialDesign:PackIcon Kind="BookOpenPageVariant" Foreground="#E5CBBFBF"
+                                             Width="30" 
+                                             Height="30" 
+                                             VerticalAlignment="Center"
+                                             Margin="8,0,0,0"/>
+
+                    </Grid>
+                </TabItem.Header>
+            </TabItem>
+
+
 
             <!--Expense book-->
-            <TabItem Width="200" Height="60">
-                <TabItem.Header>
-                    <Grid   VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Height="60" Width="200">
-                        <TextBlock Text="Expense book"
-                                   FontSize="18" 
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Right"
-                                   Margin="0,0,18,0"></TextBlock>
-                        <materialDesign:PackIcon Kind="BookOpenPageVariant" Foreground="#E5CBBFBF"
-                                                 Width="30" 
-                                                 Height="30" 
-                                                 HorizontalAlignment="Left" 
-                                                 VerticalAlignment="Center"
-                                                 Margin="10,0,0,0"/>
 
-                    </Grid>
-                </TabItem.Header>
-            </TabItem>
 
             <!--Goal plan-->
-            <TabItem Width="200" Height="60">
+            <TabItem Width="210" Height="60">
                 <TabItem.Header>
                     <Grid   VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Height="60" Width="200">
+                        HorizontalAlignment="Center"
+                        Height="60" Width="210">
                         <materialDesign:PackIcon Kind="FlagCheckered" 
-                                            Foreground="#E5CBBFBF"
-                                                 Width="30" 
-                                                 Height="30" 
-                                                 HorizontalAlignment="Left" 
-                                                 VerticalAlignment="Center"
-                                                 Margin="10,0,0,0"/>
+                                        Foreground="#E5CBBFBF"
+                                             Width="30" 
+                                             Height="30" 
+                                             VerticalAlignment="Center"
+                                             Margin="10,0,0,0"/>
                         <TextBlock Text="Goal  plan" FontSize="18" 
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                   Margin="0,0,53  ,0">
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Margin="75,0,0,0">
 
                         </TextBlock>
                     </Grid>
                 </TabItem.Header>
+
+                <local:UC_Goalplan x:Name="UCGoalplan"></local:UC_Goalplan>
             </TabItem>
 
             <!--Summary-->
-            <TabItem Width="200" Height="60">
+            <TabItem Width="210" Height="60">
                 <TabItem.Header>
                     <Grid   VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                            Height="60" Width="200">
+                        HorizontalAlignment="Center"
+                        Height="60" Width="210">
                         <materialDesign:PackIcon Kind="DatabaseEye" 
-                                                Foreground="#E5CBBFBF"
-                                                 Width="30" 
-                                                 Height="30" 
-                                                 HorizontalAlignment="Left" 
-                                                 VerticalAlignment="Center"
-                                                 Margin="10,0,0,0"/>
+                                            Foreground="#E5CBBFBF"
+                                             Width="30" 
+                                             Height="30" 
+                                             VerticalAlignment="Center"
+                                             Margin="11,0,0,0"/>
 
                         <TextBlock Text="Summary" FontSize="18" 
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                   Margin="0,0,52,0">
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Margin="76,0,0,0">
+
+                        </TextBlock>
+                    </Grid>
+                </TabItem.Header>
+
+
+                <!--uc_summary-->
+                <local:UC_Summary x:Name="UCSummary"></local:UC_Summary>
+
+
+            </TabItem>
+            <TabItem IsEnabled="False"></TabItem>
+            <TabItem IsEnabled="False"></TabItem>
+            <TabItem IsEnabled="False"></TabItem>
+            <TabItem IsEnabled="False"></TabItem>
+            <TabItem IsEnabled="False"></TabItem>
+
+            <!--Option-->
+            <TabItem Width="210" Height="60">
+                <TabItem.Header>
+                    <Grid   VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Height="60" Width="210">
+                        <materialDesign:PackIcon Kind="CogBox" 
+                                             Foreground="#E5CBBFBF"
+                                             Width="34" 
+                                             Height="34" 
+                                             VerticalAlignment="Center"
+                                             Margin="12,0,0,0"/>
+
+                        <TextBlock Text="Setting" FontSize="18" 
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Margin="0,0,73,0">
 
                         </TextBlock>
                     </Grid>
                 </TabItem.Header>
             </TabItem>
         </TabControl>
-        <!--setting-->
+        <TextBlock Text="PENNYWISE" FontWeight="Bold" Foreground="White" FontSize="26" Margin="50,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+        <Image Source="/Resources/img/Logo_UIT_updated.svg.png" 
+               Width="35" Height="35" Margin="11,17,1106,668"/>
+
     </Grid>
 </Window>
  

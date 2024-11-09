@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-
     "D:\\GitHub\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj": {}
   },
   "projects": {
@@ -13,13 +12,12 @@
         "projectPath": "D:\\GitHub\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
         "outputPath": "D:\\GitHub\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\obj\\",
-
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -73,21 +71,9 @@
               "target": "Package",
               "version": "[8.0.10, )"
             },
-            "Microsoft.Xaml.Behaviors.Wpf": {
-              "target": "Package",
-              "version": "[1.1.135, )"
-            },
             "SQLitePCLRaw.bundle_e_sqlcipher": {
               "target": "Package",
               "version": "[2.1.10, )"
-            },
-            "System.Data.SQLite": {
-              "target": "Package",
-              "version": "[1.0.119, )"
-            },
-            "XAct.Core.PCL": {
-              "target": "Package",
-              "version": "[0.0.5014, )"
             }
           },
           "imports": [

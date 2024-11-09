@@ -17,10 +17,13 @@ namespace PersonalFinanceApp
         private void showCard(FrameworkElement card)
         {
             //LoginCard.Visibility = Visibility.Collapsed;
-            ResetPasswordCard.Visibility = Visibility.Collapsed;
-            ResetNewPasswordCard.Visibility = Visibility.Collapsed;
-            CodeVerificationCard.Visibility = Visibility.Collapsed;
-            card.Visibility = Visibility.Visible;
+
+            //ResetPasswordCard.Visibility = Visibility.Collapsed;
+            //ResetNewPasswordCard.Visibility = Visibility.Collapsed;
+            //CodeVerificationCard.Visibility = Visibility.Collapsed;
+
+            //card.Visibility = Visibility.Visible;
+
         }
     }
 }
