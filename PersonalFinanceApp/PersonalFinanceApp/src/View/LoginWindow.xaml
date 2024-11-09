@@ -3,15 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PersonalFinanceApp"
+        xmlns:uc="clr-namespace:PersonalFinanceApp.Src.View"
+        xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Background="#0D2129"
         ResizeMode="CanMinimize"
-        TextElement.Foreground="#E5CBBFBF"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="16"
-        TextOptions.TextFormattingMode="Ideal"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
         Title="LoginWindow" Height="720" Width="1152">
 
 
@@ -29,6 +28,20 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
+            <Image HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="250,0,0,0"
+                Source="/Resources/img/PigBackground.png" 
+                   Width="250" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-98"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
             <Image Margin="740,270,7,37" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
@@ -41,362 +54,18 @@
             </Image>
         </Grid>
         <!--Login + new account -->
-        <materialDesign:Card x:Name="LoginCard"
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Center" 
-            Visibility="Collapsed" 
-            UniformCornerRadius="40"
-            >
-            <Grid Background="#053b50">
-                <TabControl Height="400" Width="560"  
-                materialDesign:ColorZoneAssist.Foreground="DeepSkyBlue"
-                materialDesign:ColorZoneAssist.Mode="Custom" >
-
-                    <TabItem Height="60" >
-                        <TabItem.Header>
-                            <Label Content="LOGIN" FontSize="22" FontFamily="Arial" ></Label>
-                        </TabItem.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="473*"/>
-                                <ColumnDefinition Width="87*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Label Content="Username" Foreground="#E5CBBFBF" FontSize="16" Margin="31,67,356,238"></Label>
-                            <Border CornerRadius="15" Background="#084563" Margin="124,62,36,238" Width="400" Height="40" Grid.ColumnSpan="2">
-                                <TextBox 
-                                    VerticalAlignment="Top"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                    Width="400" 
-                                    Height="40"
-                                    Background="Transparent" Margin="5,1,-5,0">
-                                </TextBox>
-                            </Border>
-                            <Label Content="Password" FontSize="16"  Foreground="#E5CBBFBF" Margin="31,134,366,174" RenderTransformOrigin="0.411,0.567"></Label>
-                            <Border Width="400" Height="40" Margin="123,130,37,170" Background="#084563" CornerRadius="15" Grid.ColumnSpan="2">
-                                <PasswordBox 
-                                     Width="400" Height="40"
-                                     materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
-                                     materialDesign:TextFieldAssist.HasClearButton="True"
-                                     IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                                     Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="0,-4,0,4"/>
-                            </Border>
-
-                            <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="15" Height="15" Margin="121,182,0,0"  />
-                            <Label Visibility="Visible" Content="Incorrect username or password!" Foreground="Red" Margin="134,177,145,141"></Label>
-
-                            <CheckBox Margin="49,201,404,119" Height="20" Width="20" BorderBrush="White" Background="White" Foreground="White" RenderTransformOrigin="0.49,1.131"  
-                    ></CheckBox>
-                            <Label Content="Remember me" FontSize="15" Foreground="#E5CBBFBF" Margin="74,197,291,117" ></Label>
-                            <Button 
-                                Style="{StaticResource MaterialDesignFlatButton}"
-                                Content="Forgot your password?" 
-                                FontWeight="Bold" FontStyle="Italic" Background="#053B50" Margin="338,194,36,114"  Foreground="#FFCDCAD2" Grid.ColumnSpan="2" />
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    Content="Login Confirm" 
-                                    FontSize="18"
-                                    Width="300"
-                                    Height="50"
-                                    Background="#0d2129"
-                                    Foreground="#E5FFFFFF" 
-                                    Margin="130,245,43,45">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" 
-                                        BorderBrush="Transparent" 
-                                        CornerRadius="30" 
-                                        BorderThickness="1">
-                                            <ContentPresenter HorizontalAlignment="Center" 
-                                                 VerticalAlignment="Center" />
-
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-                        </Grid>
-                    </TabItem>
-
-                    <TabItem  Height="60">
-                        <TabItem.Header>
-                            <Label Content="NEW ACCOUNT" FontSize="22"></Label>
-                        </TabItem.Header>
-                        <Grid>
-                            <Label Content="Username" Foreground="#E5CBBFBF" FontSize="16" Margin="32,41,442,264"></Label>
-                            <Border CornerRadius="15" Background="#084563" Width="400" Height="40" VerticalAlignment="Top" Margin="130,36,30,0">
-                                <TextBox 
-                                VerticalAlignment="Top"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                Width="400" 
-                                Height="40"
-                                Background="Transparent" Margin="0,2,0,0" >
-                                </TextBox>
-                            </Border>
-
-                            <Label Content="Gmail" Foreground="#E5CBBFBF" FontSize="16" VerticalAlignment="Top"
-                                   HorizontalAlignment="Left" Margin="32,100,0,0"></Label>
-                            <Border CornerRadius="15" Background="#084563" 
-                                    Width="400" Height="40" 
-                                    VerticalAlignment="Center" 
-                                    Margin="130,-105,30,0">
-                                <TextBox 
-                                VerticalAlignment="Top"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                Width="400" 
-                                Height="40"
-                                Background="Transparent" Margin="0,2,0,0" >
-                                </TextBox>
-                            </Border>
-
-                            <Label Content="Password" FontSize="16"  Foreground="#E5CBBFBF" Margin="32,163,441,145" RenderTransformOrigin="0.503,1.257"></Label>
-                            <Border Width="400" Height="40"
-                                    VerticalAlignment="Center"
-                                    Margin="130,100,30,80" 
-                                    Background="#084563" 
-                                    CornerRadius="15">
-                                <PasswordBox 
-                                Width="400" Height="40"
-                                materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
-                                materialDesign:TextFieldAssist.HasClearButton="True"
-                                IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                                Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="-1,-2,1,2"/>
-                            </Border>
-
-                            <Border Width="400" Height="40" Margin="130,171,30,80" Background="#084563" CornerRadius="15" VerticalAlignment="Bottom">
-                                <PasswordBox 
-                                 Width="400" Height="40"
-                                 materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
-                                 materialDesign:TextFieldAssist.HasClearButton="True"
-                                 IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                                 Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="-2,-1,2,1"/>
-                            </Border>
-                            <Label Content="Password&#xA;confirm" 
-                                   FontSize="16"  
-                                   Foreground="#E5CBBFBF"  
-                                   VerticalAlignment="Bottom"
-                                   RenderTransformOrigin="0.503,1.257" Margin="32,0,442,75" HorizontalAlignment="Left"/>
-                            <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="12" Height="12" Margin="130,265,0,0"  />
-
-                            <Label Content="Password not match. Try again!" Foreground="Red" FontSize="10" Margin="143,260,199,52"></Label>
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"        
-                                Content="Create Account" 
-                                FontSize="18"
-                                Width="300"
-                                Height="50"
-                                Background="#0d2129"
-                                Foreground="#E5FFFFFF" 
-                                Margin="130,280,130,10">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" 
-                                            BorderBrush="Transparent" 
-                                            CornerRadius="30" 
-                                            BorderThickness="1">
-                                            <ContentPresenter HorizontalAlignment="Center" 
-                                                VerticalAlignment="Center" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-                        </Grid>
-                    </TabItem>
-                </TabControl>
-            </Grid>
-        </materialDesign:Card>
-
+        <local:UC_Login_LoginNewAccountView x:Name="UC_Login_LoginNewAccountView"
+                                            Visibility="Visible"></local:UC_Login_LoginNewAccountView>
         <!-- Reset password-->
-        <materialDesign:Card x:Name="ResetPasswordCard" 
-                             Visibility="Collapsed" 
-                             HorizontalAlignment="Center" 
-                             VerticalAlignment="Center" 
-                             UniformCornerRadius="40">
-            <Grid Background="#053b50">
-                <Grid x:Name="ResetPasswordGrid"
-                Height="400" Width="560" Background="#053b50">
-                    <Label Content="Reset Password" FontSize="30" FontFamily="Sans Serif Collection" 
-                       VerticalContentAlignment="Top"
-                       HorizontalAlignment="Center"
-                       Margin="0 20 0 0"></Label>
-                    <Label Content="Username" Foreground="#E5CBBFBF" FontSize="16" Margin="33,130,441,223"></Label>
-                    <Border CornerRadius="15" Background="#084563" Margin="124,124,36,236" Width="400" Height="40">
-                        <TextBox 
-                        VerticalAlignment="Top"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                        Width="400" 
-                        Height="40"
-                        Background="Transparent" >
-                        </TextBox>
-                    </Border>
-
-                    <Label Content="Gmail" FontSize="16" Foreground="#E5CBBFBF" Width="50" Margin="51,208,459,159" RenderTransformOrigin="0.482,1.273">
-                    </Label>
-                    <Label Content="Invalid username or gmail!" Foreground="Red" Margin="124,246,288,130"></Label>
-                    <Border CornerRadius="15" Background="#084563" Margin="124,142,36,100" Width="400" Height="40">
-                        <TextBox 
-                        VerticalAlignment="Top"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                        Width="400" 
-                        Height="40"
-                        Background="Transparent" Margin="0,0,0,0" >
-                        </TextBox>
-                    </Border>
-                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            Content="Login Confirm" 
-                            FontSize="18"
-                            Width="300"
-                            Height="50"
-                            Background="#0d2129"
-                            Foreground="#E5FFFFFF" 
-                            Margin="130,305,130,45">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" 
-                                BorderBrush="Transparent" 
-                                CornerRadius="30" 
-                                BorderThickness="1">
-                                    <ContentPresenter HorizontalAlignment="Center" 
-                              VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </Grid>
-            </Grid>
-        </materialDesign:Card>
-
+        <uc:UC_Login_ResetPasswordView Visibility="Collapsed"
+            x:Name="UCResetPassword"></uc:UC_Login_ResetPasswordView>
         <!-- Code verification -->
-        <materialDesign:Card x:Name="CodeVerificationCard"
-            Visibility="Collapsed" 
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            UniformCornerRadius="40">
-
-            <Grid  Height="400" Width="560" Background="#053b50">
-                <Label Content="Code Verification Required"  FontSize="30" FontFamily="Sans Serif Collection" 
-                                VerticalContentAlignment="Top"
-                                HorizontalAlignment="Center"
-                                Margin="0 20 0 0" FontWeight="Bold"></Label>
-                <Label 
-                            Content="For added security, enter the code we have emailed to "
-                            FontSize="18"
-                            Foreground="#E5CBBFBF" Margin="65,84,44,271">
-                </Label>
-                <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
-                                HorizontalAlignment="Left"
-                                Margin="20, 50, 0 ,0">
-                    <TextBlock>
-                    </TextBlock>
-                </Border>
-                <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
-                                 HorizontalAlignment="Left"
-                                 Margin="110, 50, 0 ,0">
-                    <TextBlock>
-                    </TextBlock>
-                </Border>
-                <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
-                                HorizontalAlignment="Left"
-                                Margin="200, 50, 0 ,0">
-                    <TextBlock>
-                    </TextBlock>
-                </Border>
-                <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
-                                 HorizontalAlignment="Left"
-                                 Margin="290, 50, 0 ,0">
-                    <TextBlock>
-                    </TextBlock>
-                </Border>
-                <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
-                                HorizontalAlignment="Left"
-                                Margin="380, 50, 0 ,0">
-                    <TextBlock>
-                    </TextBlock>
-                </Border>
-                <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
-                                HorizontalAlignment="Left"
-                                Margin="468, 50, 0 ,0">
-                    <TextBlock>
-                    </TextBlock>
-                </Border>
-                <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="20" Height="20" Margin="22,282,0,0"  />
-                <Label Content="Invalid code verification!" Foreground="Red" FontSize="16" Margin="42,276,328,88"></Label>
-                <materialDesign:PackIcon Kind="ArrowUpCircle" Width="50" Height="50" Margin="0,306,0,0" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Foreground="#FFDFD1D1">
-                    <materialDesign:PackIcon.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </materialDesign:PackIcon.RenderTransform>
-
-
-
-                    <!-- click here -->
-
-
-                </materialDesign:PackIcon>
-            </Grid>
-        </materialDesign:Card>
+        <uc:UC_Login_CodeVerificationView x:Name="UCCodeVerification"
+                                Visibility="Visible"></uc:UC_Login_CodeVerificationView>
 
         <!--  Reset new password-->
-        <materialDesign:Card x:Name="ResetNewPasswordCard" 
-                             Visibility="Visible" HorizontalAlignment="Center"
-                             VerticalAlignment="Center"
-                             UniformCornerRadius="40">
-            <Grid Background="#053b50">
-                <Grid
-                    Height="400" Width="560" Background="#053b50">
-                    <Label Content="Reset Password" FontSize="30" FontFamily="Sans Serif Collection" 
-                       VerticalContentAlignment="Top"
-                       HorizontalAlignment="Center"
-                       Margin="0,20,0,314"></Label>
-                    <Label Content="New &#xD;&#xA;password" Foreground="#E5CBBFBF" FontSize="16" Margin="26,121,420,209"></Label>
-                    <Border CornerRadius="15" Background="#084563" Margin="124,124,36,236" Width="400" Height="40">
-                        <TextBox 
-                        VerticalAlignment="Top"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                        Width="400" 
-                        Height="40"
-                        Background="Transparent" Margin="0,2,0,0" />
-
-                    </Border>
-
-                    <Label Content="Password &#xD;&#xA;confirm" FontSize="16" Foreground="#E5CBBFBF" Margin="26,200,441,149" RenderTransformOrigin="0.482,1.273"/>
-
-                    <Border Width="400" Height="40" Margin="124,205,36,155" Background="#084563" CornerRadius="15">
-                        <PasswordBox 
-                            materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" 
-
-                        IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}" Margin="0,0,12,0"/>
-                    </Border>
-                    <Label Content="Password not match. Try again!" Foreground="Red" FontSize="14" Margin="140,254,212,120"></Label>
-                    <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="15" Height="15" Margin="126,261,0,0"  />
-
-
-                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            Content="Create new password" 
-                            FontSize="18"
-                            Width="300"
-                            Height="50"
-                            Background="#0d2129"
-                            Foreground="#E5FFFFFF" 
-                            Margin="130,305,130,45">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Background="{TemplateBinding Background}" 
-                                BorderBrush="Transparent" 
-                                CornerRadius="30" 
-                                BorderThickness="1">
-                                    <ContentPresenter HorizontalAlignment="Center" 
-                              VerticalAlignment="Center" />
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </Grid>
-            </Grid>
-        </materialDesign:Card>
+        <uc:UC_Login_ResetPasswordConfirmView x:Name="UCResetPasswordConfirm"
+                                    Visibility="Collapsed"></uc:UC_Login_ResetPasswordConfirmView>
 
     </Grid>
 </Window>

@@ -74,10 +74,6 @@
             "SQLitePCLRaw.bundle_e_sqlcipher": {
               "target": "Package",
               "version": "[2.1.10, )"
-            },
-            "System.Windows.Interactivity.WPF": {
-              "target": "Package",
-              "version": "[2.0.20525, )"
             }
           },
           "imports": [
