@@ -4,14 +4,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalFinanceApp"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Background="#0D2129"
         ResizeMode="CanMinimize"
         TextElement.Foreground="#E5CBBFBF"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="16"
         TextOptions.TextFormattingMode="Ideal"
+        
+        x:Name="loginWindow"
+        
         Title="LoginWindow" Height="720" Width="1152">
 
 
@@ -44,7 +49,7 @@
         <materialDesign:Card x:Name="LoginCard"
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
-            Visibility="Collapsed" 
+            Visibility="Visible" 
             UniformCornerRadius="40"
             >
             <Grid Background="#053b50">
@@ -67,6 +72,7 @@
                                 <TextBox 
                                     VerticalAlignment="Top"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                    Text="{Binding UserName}"
                                     Width="400" 
                                     Height="40"
                                     Background="Transparent" Margin="5,1,-5,0">
@@ -79,7 +85,15 @@
                                      materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                                      materialDesign:TextFieldAssist.HasClearButton="True"
                                      IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                                     Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="0,-4,0,4"/>
+                                     Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="0,-4,0,4">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="PasswordChanged">
+                                            <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" 
+                                            CommandParameter="{Binding ElementName=FloatingPasswordBox}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </PasswordBox>
+
                             </Border>
 
                             <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="15" Height="15" Margin="121,182,0,0"  />
@@ -91,7 +105,9 @@
                             <Button 
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Content="Forgot your password?" 
-                                FontWeight="Bold" FontStyle="Italic" Background="#053B50" Margin="338,194,36,114"  Foreground="#FFCDCAD2" Grid.ColumnSpan="2" />
+                                FontWeight="Bold" FontStyle="Italic" Background="#053B50" Margin="338,194,36,114"  Foreground="#FFCDCAD2" Grid.ColumnSpan="2"
+                                Command="{Binding ForgotCommand}"
+                                CommandParameter="{Binding ElementName=loginWindow}"/>
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     Content="Login Confirm" 
                                     FontSize="18"
@@ -99,7 +115,9 @@
                                     Height="50"
                                     Background="#0d2129"
                                     Foreground="#E5FFFFFF" 
-                                    Margin="130,245,43,45">
+                                    Margin="130,245,43,45"
+                                    Command="{Binding LoginCommand}"
+                                    CommandParameter="{Binding ElementName=loginWindow}">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" 
@@ -205,7 +223,7 @@
 
         <!-- Reset password-->
         <materialDesign:Card x:Name="ResetPasswordCard" 
-                             Visibility="Collapsed" 
+                             Visibility="Hidden" 
                              HorizontalAlignment="Center" 
                              VerticalAlignment="Center" 
                              UniformCornerRadius="40">
@@ -339,7 +357,7 @@
 
         <!--  Reset new password-->
         <materialDesign:Card x:Name="ResetNewPasswordCard" 
-                             Visibility="Visible" HorizontalAlignment="Center"
+                             Visibility="Collapsed" HorizontalAlignment="Center"
                              VerticalAlignment="Center"
                              UniformCornerRadius="40">
             <Grid Background="#053b50">

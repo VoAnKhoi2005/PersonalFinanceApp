@@ -20,7 +20,6 @@ namespace PersonalFinanceApp
             ResetPasswordCard.Visibility = Visibility.Collapsed;
             ResetNewPasswordCard.Visibility = Visibility.Collapsed;
             CodeVerificationCard.Visibility = Visibility.Collapsed;
-
             card.Visibility = Visibility.Visible;
         }
     }

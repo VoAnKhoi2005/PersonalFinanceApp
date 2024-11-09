@@ -8,6 +8,8 @@
         mc:Ignorable="d"
         Background="#0D2129"
         ResizeMode="CanMinimize"
+        
+        x:Name="mainWindow"
         Title="MainWindow" Height="720" Width="1152"
         >
 
