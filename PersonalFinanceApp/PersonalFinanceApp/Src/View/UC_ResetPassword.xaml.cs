@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PersonalFinanceApp
+namespace PersonalFinanceApp.Src.View
 {
     /// <summary>
-    /// Interaction logic for ResetPassword.xaml
+    /// Interaction logic for UC_ResetPassword.xaml
     /// </summary>
-    public partial class ResetPassword : Window
+    public partial class UC_ResetPassword : UserControl
     {
-        public ResetPassword()
+        public UC_ResetPassword()
         {
             InitializeComponent();
         }

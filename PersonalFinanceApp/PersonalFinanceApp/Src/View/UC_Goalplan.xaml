@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="PersonalFinanceApp.Src.View.UC_Goalplan"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="720" d:DesignWidth="942">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Sans Serif Collection"/>
+                <Setter Property="Foreground" Value="#E5CBBFBF"/>
+                <Setter Property="FontWeight" Value="Regular"/>
+            </Style>
+        </Grid.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="22*"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="189*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBlock Text="Goal plan" 
+                               FontSize="28" 
+                               FontWeight="Bold"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top" Margin="25,-10,0,0" Height="55"
+                               ></TextBlock>
+                <TextBlock Text="Create financial goals and manage your savings" 
+                               FontSize="14"
+                               VerticalAlignment="Bottom"
+                               HorizontalAlignment="Left" Margin="26,0,0,-7"
+                               ></TextBlock>
+                <materialDesign:PackIcon Kind="AccountBadge"
+                                         Width="30" Height="30"
+                                         Foreground="#E5CBBFBF"
+                                         HorizontalAlignment="Right"
+                                         VerticalAlignment="Center"
+                                         Margin="0,0,20,0"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.75*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--Total target amount-->
+                <Grid Grid.Column="0">
+                    <Border CornerRadius="20"
+                Margin="15,15,7.5,0"
+                Background="#053B50">
+                        <!--margin-->
+                        <Canvas>
+
+
+                            <materialDesign:PackIcon Kind="CashMultiple"
+                                                     Foreground="#E5CBBFBF"
+                                                     Height="30"
+                                                     Width="30"
+                                                     HorizontalAlignment="Left"
+                                                     VerticalAlignment="Center"
+                                                     Canvas.Top="10" Canvas.Left="10"/>
+                            <TextBlock Text="Total target amount"
+                                       FontSize="12"
+                                       Canvas.Top="35"
+                                       Canvas.Left="23"></TextBlock>
+                        </Canvas>
+                    </Border>
+                </Grid>
+
+                <!--INCOME-->
+                <Grid Grid.Column="1"/>
+
+                <!--EXPENSE-->
+                <Grid Grid.Column="2"/>
+
+                <!--TOTAL SAVING-->
+                <Grid Grid.Column="3"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
