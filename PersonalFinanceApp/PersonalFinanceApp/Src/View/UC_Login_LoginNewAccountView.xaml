@@ -1,12 +1,11 @@
-﻿<UserControl x:Class="PersonalFinanceApp.Src.View.UC_Login_NewAccount"
+﻿<UserControl x:Class="PersonalFinanceApp.Src.View.UC_Login_LoginNewAccountView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="560">
+             >
     <Grid>
         <materialDesign:Card x:Name="LoginCard"
             HorizontalAlignment="Center" 
@@ -49,7 +48,6 @@
                             </Border>
 
                             <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="15" Height="15" Margin="121,182,0,0"  />
-                            <Label Visibility="Visible" Content="Incorrect username or password!" Foreground="Red" Margin="134,177,145,141"></Label>
 
                             <CheckBox Margin="49,201,404,119" Height="20" Width="20" BorderBrush="White" Background="White" Foreground="White" RenderTransformOrigin="0.49,1.131"  
                     ></CheckBox>
@@ -79,6 +77,8 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
+                            <Label Visibility="Visible" Content="Incorrect username or password!" Foreground="Red" Margin="134,176,158,133"></Label>
+
                         </Grid>
                     </TabItem>
 

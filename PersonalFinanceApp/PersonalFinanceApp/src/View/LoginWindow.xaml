@@ -3,18 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:uc="clr-namespace:PersonalFinanceApp.Src.View"
+        xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Background="#0D2129"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        TextElement.Foreground="#E5CBBFBF"
-        TextElement.FontWeight="Regular"
-        TextElement.FontSize="16"
-        TextOptions.TextFormattingMode="Ideal"
         Title="LoginWindow" Height="720" Width="1152">
 
 
@@ -58,19 +54,18 @@
             </Image>
         </Grid>
         <!--Login + new account -->
-        <uc:UC_Login_NewAccount Visibility="Collapsed"
-            x:Name="UCLogin_NewAccount"
-            ></uc:UC_Login_NewAccount>
+        <local:UC_Login_LoginNewAccountView x:Name="UC_Login_LoginNewAccountView"
+                                            Visibility="Visible"></local:UC_Login_LoginNewAccountView>
         <!-- Reset password-->
-        <uc:UC_ResetPassword Visibility="Collapsed"
-            x:Name="UCResetPassword"></uc:UC_ResetPassword>
+        <uc:UC_Login_ResetPasswordView Visibility="Collapsed"
+            x:Name="UCResetPassword"></uc:UC_Login_ResetPasswordView>
         <!-- Code verification -->
-        <uc:UC_CodeVerification x:Name="UCCodeVerification"
-                                Visibility="Visible"></uc:UC_CodeVerification>
+        <uc:UC_Login_CodeVerificationView x:Name="UCCodeVerification"
+                                Visibility="Visible"></uc:UC_Login_CodeVerificationView>
 
         <!--  Reset new password-->
-        <uc:UC_ResetPasswordConfirm x:Name="UCResetPasswordConfirm"
-                                    Visibility="Visible"></uc:UC_ResetPasswordConfirm>
+        <uc:UC_Login_ResetPasswordConfirmView x:Name="UCResetPasswordConfirm"
+                                    Visibility="Collapsed"></uc:UC_Login_ResetPasswordConfirmView>
 
     </Grid>
 </Window>

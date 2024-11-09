@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace PersonalFinanceApp.Src.View
 {
     /// <summary>
-    /// Interaction logic for UC_Login_NewAccount.xaml
+    /// Interaction logic for UC_Login_ResetPasswordView.xaml
     /// </summary>
-    public partial class UC_Login_NewAccount : UserControl
+    public partial class UC_Login_ResetPasswordView : UserControl
     {
-        public UC_Login_NewAccount()
+        public UC_Login_ResetPasswordView()
         {
             InitializeComponent();
         }
