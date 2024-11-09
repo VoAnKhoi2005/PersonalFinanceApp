@@ -3,17 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
+        
+
         xmlns:uc="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
         mc:Ignorable="d"
+        
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         Background="#0D2129"
         ResizeMode="CanMinimize"
+
+        TextElement.Foreground="#E5CBBFBF"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="16"
+        TextOptions.TextFormattingMode="Ideal"
+        
+        x:Name="loginWindow"
+        DataContext="{StaticResource LoginVM}"
+
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
+
         Title="LoginWindow" Height="720" Width="1152">
-
-
     <Grid>
         <!-- background -->
         <Grid>
@@ -54,16 +70,19 @@
             </Image>
         </Grid>
         <!--Login + new account -->
+
         <local:UC_Login_LoginNewAccountView x:Name="UC_Login_LoginNewAccountView"
                                             Visibility="Visible"></local:UC_Login_LoginNewAccountView>
         <!-- Reset password-->
         <uc:UC_Login_ResetPasswordView Visibility="Collapsed"
             x:Name="UCResetPassword"></uc:UC_Login_ResetPasswordView>
+
         <!-- Code verification -->
         <uc:UC_Login_CodeVerificationView x:Name="UCCodeVerification"
                                 Visibility="Visible"></uc:UC_Login_CodeVerificationView>
 
         <!--  Reset new password-->
+
         <uc:UC_Login_ResetPasswordConfirmView x:Name="UCResetPasswordConfirm"
                                     Visibility="Collapsed"></uc:UC_Login_ResetPasswordConfirmView>
 

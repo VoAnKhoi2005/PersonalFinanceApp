@@ -8,12 +8,26 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Background="#0D2129"
+
+        
+        
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        DataContext="{StaticResource MainVM}"
+        x:Name="mainWindow"
+        
+
         ResizeMode="CanMinimize" Height="720" Width="1152"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
+
         >
 
-
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" 
+                                   CommandParameter="{Binding ElementName=mainWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -152,10 +166,12 @@
 
         <!--main menu-->
 
+
         <TabControl Width="1152" Height="720" VerticalAlignment="Center" 
                 HorizontalAlignment="Center"
                 TabStripPlacement="Left" 
                 >
+
             <!-- dashboard-->
 
             <TabItem IsEnabled="False"></TabItem>
@@ -252,6 +268,7 @@
                         </TextBlock>
                     </Grid>
                 </TabItem.Header>
+
 
                 <!--uc_summary-->
                 <local:UC_Summary x:Name="UCSummary"></local:UC_Summary>
