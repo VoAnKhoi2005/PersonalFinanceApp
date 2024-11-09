@@ -61,7 +61,7 @@
             x:Name="UCResetPassword"></uc:UC_Login_ResetPasswordView>
         <!-- Code verification -->
         <uc:UC_Login_CodeVerificationView x:Name="UCCodeVerification"
-                                Visibility="Visible"></uc:UC_Login_CodeVerificationView>
+                                Visibility="Collapsed"></uc:UC_Login_CodeVerificationView>
 
         <!--  Reset new password-->
         <uc:UC_Login_ResetPasswordConfirmView x:Name="UCResetPasswordConfirm"

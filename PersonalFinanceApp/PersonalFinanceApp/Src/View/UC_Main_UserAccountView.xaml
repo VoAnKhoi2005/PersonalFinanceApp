@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="PersonalFinanceApp.Src.View.UC_Main_UserAccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Grid>
+        <materialDesign:Card x:Name="UserCard"
+            Width="300" 
+            Height="350"  
+            Background="#316C67" 
+            UniformCornerRadius="30" >
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Height" Value="50"></Setter>
+                        <Setter Property="Background" Value="#316C67"></Setter>
+                        <Setter Property="BorderThickness" Value="0"></Setter>
+                        <Setter Property="FontSize" Value="16"></Setter>
+                        <Setter Property="Foreground" Value="#BDBDBD"></Setter>
+                        <Setter Property="FontFamily" Value="Sans Serif Collection"></Setter>
+                        <Setter Property="Width" Value="297"></Setter>
+
+                    </Style>
+                </Grid.Resources>
+                <!--User's avatar-->
+                <!--@Username-->
+                <TextBlock Text="@username" Foreground="#BDBDBD" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 15, 0 , 0"></TextBlock>
+
+
+                <!--User button-->
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="300" Height="150" >
+
+                    <!-- Account detail-->
+                    <Button>
+                        <Grid>
+                            <TextBlock Text="Account detail" Margin="0, 0, 0, 0"
+                               ></TextBlock>
+                            <materialDesign:PackIcon Kind="AccountCog" Width="30" Height="30" Margin="-62,0,0,0" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <!--sign out-->
+                    <Button>
+                        <Grid>
+
+                            <TextBlock Text="Sign out" Margin="-23,-2,23,2"
+                               />
+                            <materialDesign:PackIcon Kind="AccountLockOpen" Width="30" Height="30" Margin="-86,3,0,0"/>
+                        </Grid>
+                    </Button>
+
+                    <!--exit button-->
+                    <Button>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="30">
+                                    <Grid>
+
+                                        <materialDesign:PackIcon Kind="Logout" Width="30" Height="30" Margin="33,0,0,3" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Exit" Margin="94,0,-94,0"></TextBlock>
+                                    </Grid>
+
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>
