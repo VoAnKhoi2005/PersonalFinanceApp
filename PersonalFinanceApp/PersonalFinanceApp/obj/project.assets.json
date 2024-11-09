@@ -761,15 +761,15 @@
           }
         }
       },
-      "Microsoft.Xaml.Behaviors.Wpf/1.1.39": {
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.135": {
         "type": "package",
         "compile": {
-          "lib/net5.0-windows7.0/Microsoft.Xaml.Behaviors.dll": {
+          "lib/net6.0-windows7.0/Microsoft.Xaml.Behaviors.dll": {
             "related": ".pdb;.xml"
           }
         },
         "runtime": {
-          "lib/net5.0-windows7.0/Microsoft.Xaml.Behaviors.dll": {
+          "lib/net6.0-windows7.0/Microsoft.Xaml.Behaviors.dll": {
             "related": ".pdb;.xml"
           }
         },
@@ -1555,25 +1555,6 @@
           "runtimes/win/lib/netcoreapp3.0/System.Windows.Extensions.dll": {
             "assetType": "runtime",
             "rid": "win"
-          }
-        }
-      },
-      "System.Windows.Interactivity.WPF/2.0.20525": {
-        "type": "package",
-        "compile": {
-          "lib/net40/Microsoft.Expression.Interactions.dll": {
-            "related": ".xml"
-          },
-          "lib/net40/System.Windows.Interactivity.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net40/Microsoft.Expression.Interactions.dll": {
-            "related": ".xml"
-          },
-          "lib/net40/System.Windows.Interactivity.dll": {
-            "related": ".xml"
           }
         }
       },
@@ -2905,27 +2886,24 @@
         "version.txt"
       ]
     },
-    "Microsoft.Xaml.Behaviors.Wpf/1.1.39": {
-      "sha512": "8PZKqw9QOcu42xk8puY4P1+EXHL9YGOR9b7qhaYx5cILHul456H073tj99vyPcCt0W0781T9RwHqkx507ZyUpQ==",
+    "Microsoft.Xaml.Behaviors.Wpf/1.1.135": {
+      "sha512": "r8qBEXmQfORso2+MVHnt8PSH4761zJ0SIxgQTSEDVLU97EN2FZdG6/ZCYUPhQy+OrPKgnpYBCAs3PS6Bs7wRsg==",
       "type": "package",
-      "path": "microsoft.xaml.behaviors.wpf/1.1.39",
+      "path": "microsoft.xaml.behaviors.wpf/1.1.135",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/net45/Design/Microsoft.Xaml.Behaviors.Design.dll",
-        "lib/net45/Microsoft.Xaml.Behaviors.dll",
-        "lib/net45/Microsoft.Xaml.Behaviors.pdb",
-        "lib/net45/Microsoft.Xaml.Behaviors.xml",
-        "lib/net5.0-windows7.0/Design/Microsoft.Xaml.Behaviors.DesignTools.dll",
-        "lib/net5.0-windows7.0/Microsoft.Xaml.Behaviors.dll",
-        "lib/net5.0-windows7.0/Microsoft.Xaml.Behaviors.pdb",
-        "lib/net5.0-windows7.0/Microsoft.Xaml.Behaviors.xml",
-        "lib/netcoreapp3.1/Design/Microsoft.Xaml.Behaviors.DesignTools.dll",
-        "lib/netcoreapp3.1/Microsoft.Xaml.Behaviors.dll",
-        "lib/netcoreapp3.1/Microsoft.Xaml.Behaviors.pdb",
-        "lib/netcoreapp3.1/Microsoft.Xaml.Behaviors.xml",
-        "microsoft.xaml.behaviors.wpf.1.1.39.nupkg.sha512",
+        "lib/net462/Design/Microsoft.Xaml.Behaviors.Design.dll",
+        "lib/net462/Design/Microsoft.Xaml.Behaviors.DesignTools.dll",
+        "lib/net462/Microsoft.Xaml.Behaviors.dll",
+        "lib/net462/Microsoft.Xaml.Behaviors.pdb",
+        "lib/net462/Microsoft.Xaml.Behaviors.xml",
+        "lib/net6.0-windows7.0/Design/Microsoft.Xaml.Behaviors.DesignTools.dll",
+        "lib/net6.0-windows7.0/Microsoft.Xaml.Behaviors.dll",
+        "lib/net6.0-windows7.0/Microsoft.Xaml.Behaviors.pdb",
+        "lib/net6.0-windows7.0/Microsoft.Xaml.Behaviors.xml",
+        "microsoft.xaml.behaviors.wpf.1.1.135.nupkg.sha512",
         "microsoft.xaml.behaviors.wpf.nuspec",
         "tools/Install.ps1"
       ]
@@ -4021,21 +3999,6 @@
         "version.txt"
       ]
     },
-    "System.Windows.Interactivity.WPF/2.0.20525": {
-      "sha512": "0r+Le4E7hCm4zToUvBzjSUyTcuU3rFeoPa7JyTdWIzR/F7wH6+O/pWkjHIG40hIA0z1wvRdZayvoizA4wcK1dg==",
-      "type": "package",
-      "path": "system.windows.interactivity.wpf/2.0.20525",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net40/Microsoft.Expression.Interactions.dll",
-        "lib/net40/Microsoft.Expression.Interactions.xml",
-        "lib/net40/System.Windows.Interactivity.dll",
-        "lib/net40/System.Windows.Interactivity.xml",
-        "system.windows.interactivity.wpf.2.0.20525.nupkg.sha512",
-        "system.windows.interactivity.wpf.nuspec"
-      ]
-    },
     "XAct.Core.PCL/0.0.5014": {
       "sha512": "r0rX5Dzr0mfUp8FtVnxXlv5w+cXhz6tHfQ79lf6naLB92J+h2wkGw0q6CfOa2FiveN2ahSflf6LB2G1cOx43AQ==",
       "type": "package",
@@ -4056,34 +4019,30 @@
       "Microsoft.EntityFrameworkCore >= 8.0.10",
       "Microsoft.EntityFrameworkCore.Sqlite >= 8.0.10",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.10",
+      "Microsoft.Xaml.Behaviors.Wpf >= 1.1.135",
       "SQLitePCLRaw.bundle_e_sqlcipher >= 2.1.10",
-<<<<<<< Updated upstream
-      "System.Windows.Interactivity.WPF >= 2.0.20525"
-=======
       "System.Data.SQLite >= 1.0.119",
-      "System.Windows.Interactivity.WPF >= 2.0.20525",
       "XAct.Core.PCL >= 0.0.5014"
->>>>>>> Stashed changes
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADMIN\\.nuget\\packages\\": {},
+    "C:\\Users\\PC\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
+      "projectUniqueName": "D:\\Personal_Finance_App\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
       "projectName": "PersonalFinanceApp",
-      "projectPath": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
-      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\Github\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\obj\\",
+      "projectPath": "D:\\Personal_Finance_App\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "D:\\Personal_Finance_App\\PersonalFinanceApp\\PersonalFinanceApp\\PersonalFinanceApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4137,27 +4096,21 @@
             "target": "Package",
             "version": "[8.0.10, )"
           },
+          "Microsoft.Xaml.Behaviors.Wpf": {
+            "target": "Package",
+            "version": "[1.1.135, )"
+          },
           "SQLitePCLRaw.bundle_e_sqlcipher": {
             "target": "Package",
             "version": "[2.1.10, )"
           },
-<<<<<<< Updated upstream
-          "System.Windows.Interactivity.WPF": {
-            "target": "Package",
-            "version": "[2.0.20525, )"
-=======
           "System.Data.SQLite": {
             "target": "Package",
             "version": "[1.0.119, )"
           },
-          "System.Windows.Interactivity.WPF": {
-            "target": "Package",
-            "version": "[2.0.20525, )"
-          },
           "XAct.Core.PCL": {
             "target": "Package",
             "version": "[0.0.5014, )"
->>>>>>> Stashed changes
           }
         },
         "imports": [
@@ -4179,7 +4132,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   },
@@ -4190,16 +4143,6 @@
       "warningLevel": 1,
       "message": "Package 'CommonServiceLocator 1.3.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "CommonServiceLocator",
-      "targetGraphs": [
-        "net8.0-windows7.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'System.Windows.Interactivity.WPF 2.0.20525' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0-windows7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "System.Windows.Interactivity.WPF",
       "targetGraphs": [
         "net8.0-windows7.0"
       ]

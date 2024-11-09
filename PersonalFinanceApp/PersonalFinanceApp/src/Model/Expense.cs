@@ -46,11 +46,7 @@ public class Expense
     public int ExBYear { get; set; }
     [Required]
     public int UserID { get; set; }
-<<<<<<< Updated upstream
     public virtual ExpensesBook ExpensesBook { get; set; }
-=======
-    public virtual ExpensesBook ExpensesBook { get; set; } = new ExpensesBook(1,1,1,1);//<<<<<<<<<<<<<<<<<<<<<<<
->>>>>>> Stashed changes
 
     public virtual RecurringDetail RecurringDetail { get; set; }
 

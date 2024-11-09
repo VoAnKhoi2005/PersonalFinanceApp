@@ -9,14 +9,15 @@ namespace PersonalFinanceApp
         public LoginWindow()
         {
             InitializeComponent();
-            User newUser = new User("khoi", "123456", "khoi@gmail.com");
+            User newUser = new User("admin", "1admin1", "2admin@123");
             DBManager.Insert(newUser);
+            
         }
 
         
         private void showCard(FrameworkElement card)
         {
-            LoginCard.Visibility = Visibility.Collapsed;
+            //LoginCard.Visibility = Visibility.Collapsed;
             ResetPasswordCard.Visibility = Visibility.Collapsed;
             ResetNewPasswordCard.Visibility = Visibility.Collapsed;
             CodeVerificationCard.Visibility = Visibility.Collapsed;

@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:PersonalFinanceApp"
         mc:Ignorable="d"
         
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         Background="#0D2129"
         ResizeMode="CanMinimize"
         TextElement.Foreground="#E5CBBFBF"
@@ -16,10 +17,8 @@
         TextOptions.TextFormattingMode="Ideal"
         
         x:Name="loginWindow"
-        
+        DataContext="{StaticResource LoginVM}"
         Title="LoginWindow" Height="720" Width="1152">
-
-
     <Grid>
         <!-- background -->
         <Grid>
@@ -73,6 +72,7 @@
                                     VerticalAlignment="Top"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                     Text="{Binding UserName}"
+                                    x:Name="User"
                                     Width="400" 
                                     Height="40"
                                     Background="Transparent" Margin="5,1,-5,0">
@@ -81,6 +81,7 @@
                             <Label Content="Password" FontSize="16"  Foreground="#E5CBBFBF" Margin="31,134,366,174" RenderTransformOrigin="0.411,0.567"></Label>
                             <Border Width="400" Height="40" Margin="123,130,37,170" Background="#084563" CornerRadius="15" Grid.ColumnSpan="2">
                                 <PasswordBox 
+                                     x:Name="Pass"
                                      Width="400" Height="40"
                                      materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                                      materialDesign:TextFieldAssist.HasClearButton="True"
@@ -89,23 +90,29 @@
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="PasswordChanged">
                                             <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" 
-                                            CommandParameter="{Binding ElementName=FloatingPasswordBox}"/>
+                                            CommandParameter="{Binding ElementName=Pass}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </PasswordBox>
 
                             </Border>
 
-                            <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="15" Height="15" Margin="121,182,0,0"  />
-                            <Label Visibility="Visible" Content="Incorrect username or password!" Foreground="Red" Margin="134,177,145,141"></Label>
+                            <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Orientation="Horizontal" Margin="134,177,145,141" x:Name="incorrect" IsEnabled="{Binding IsCorrect}">
 
-                            <CheckBox Margin="49,201,404,119" Height="20" Width="20" BorderBrush="White" Background="White" Foreground="White" RenderTransformOrigin="0.49,1.131"  
-                    ></CheckBox>
-                            <Label Content="Remember me" FontSize="15" Foreground="#E5CBBFBF" Margin="74,197,291,117" ></Label>
+                                <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Center" Kind="CloseCircle" Foreground="Red" Width="15" Height="15" Margin="0,0,5,0" />
+
+
+                                <TextBlock Text="Incorrect username or password!" Foreground="Red" VerticalAlignment="Center" IsEnabled="False"/>
+                            </StackPanel>
+
+
+
+                            <CheckBox Content="Remember me" Margin="49,200,317,119" BorderBrush="White" Background="White" Foreground="White" RenderTransformOrigin="0.49,1.131" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
                             <Button 
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Content="Forgot your password?" 
-                                FontWeight="Bold" FontStyle="Italic" Background="#053B50" Margin="338,194,36,114"  Foreground="#FFCDCAD2" Grid.ColumnSpan="2"
+                                FontWeight="Bold" FontStyle="Italic" Background="#053B50" Margin="338,200,36,114"  Foreground="#FFCDCAD2" Grid.ColumnSpan="2"
                                 Command="{Binding ForgotCommand}"
                                 CommandParameter="{Binding ElementName=loginWindow}"/>
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
