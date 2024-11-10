@@ -11,7 +11,7 @@ namespace PersonalFinanceApp
         protected override void OnStartup(StartupEventArgs e)
         {
             LoginNavigationStore loginNavigationStore = new LoginNavigationStore();
-            loginNavigationStore.CurrentViewModel = new LoginNewAccountModelView();
+            loginNavigationStore.CurrentViewModel = new LoginNewAccountModelView(loginNavigationStore);
 
             MainWindow = new LoginWindow()
             {

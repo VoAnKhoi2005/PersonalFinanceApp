@@ -12,26 +12,26 @@ public class LoginNewAccountModelView : BaseViewModel
 
     public bool IsLogin { get; set; }
     public bool IsCorrect { get; set; }
-    private string _UserName;
+    private string _userName;
 
     public string UserName
     {
-        get => _UserName;
+        get => _userName;
         set
         {
-            _UserName = value;
+            _userName = value;
             OnPropertyChanged();
         }
     }
 
-    private string _Password;
+    private string _password;
 
     public string Password
     {
-        get => _Password;
+        get => _password;
         set
         {
-            _Password = value;
+            _password = value;
             OnPropertyChanged();
         }
     }
@@ -41,16 +41,13 @@ public class LoginNewAccountModelView : BaseViewModel
 
     #endregion
 
-    //public LoginNewAccountModelView(LoginNavigationStore navigationStore)
-    //{
-
-    //    IsLogin = false;
-    //    IsCorrect = false;
-    //    Password = "";
-    //    UserName = "";
-    //    LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p); });
-    //    PasswordChangedCommand = new RelayCommand<Theme.PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
-    //}
+    public LoginNewAccountModelView(LoginNavigationStore navigationStore)
+    {
+        IsLogin = false;
+        IsCorrect = false;
+        Password = "";
+        UserName = "";
+    }
 
     void Login(Window p)
     {
