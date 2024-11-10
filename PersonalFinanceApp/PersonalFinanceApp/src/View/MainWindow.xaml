@@ -160,6 +160,7 @@
                              Foreground="#E5CBBFBF"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Bottom" 
+                             x:Name="Exit"
                              />
 
 

@@ -10,6 +10,8 @@ public class LoginMainViewModel : BaseViewModel
 
     public LoginMainViewModel(LoginNavigationStore navigationStore)
     {
+
         _navigationStore = navigationStore;
+
     }
 }

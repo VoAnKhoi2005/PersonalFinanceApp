@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             >
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
+
     <Grid>
+
         <materialDesign:Card x:Name="LoginCard"
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
@@ -30,8 +32,10 @@
                             <Label Content="Username" Foreground="#E5CBBFBF" FontSize="16" Margin="31,67,356,238"></Label>
                             <Border CornerRadius="15" Background="#084563" Margin="124,62,36,238" Width="400" Height="40" Grid.ColumnSpan="2">
                                 <TextBox 
+                                    Foreground="#E5CBBFBF"
                                     VerticalAlignment="Top"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+
                                     Width="400" 
                                     Height="40"
                                     Background="Transparent" Margin="5,1,-5,0">
@@ -44,10 +48,12 @@
                                      materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                                      materialDesign:TextFieldAssist.HasClearButton="True"
                                      IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
+
                                      Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="0,-4,0,4"/>
                             </Border>
 
                             <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="15" Height="15" Margin="121,182,0,0"  />
+
 
                             <CheckBox Margin="49,201,404,119" Height="20" Width="20" BorderBrush="White" Background="White" Foreground="White" RenderTransformOrigin="0.49,1.131"  
                     ></CheckBox>
@@ -94,7 +100,8 @@
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                 Width="400" 
                                 Height="40"
-                                Background="Transparent" Margin="0,2,0,0" >
+                                Background="Transparent" Margin="0,2,0,0"
+                                Text="{Binding UserNameNA}">
                                 </TextBox>
                             </Border>
 
@@ -109,7 +116,8 @@
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                 Width="400" 
                                 Height="40"
-                                Background="Transparent" Margin="0,2,0,0" >
+                                Background="Transparent" Margin="0,2,0,0" 
+                                Text="{Binding GmailNA}">
                                 </TextBox>
                             </Border>
 
@@ -120,20 +128,36 @@
                                     Background="#084563" 
                                     CornerRadius="15">
                                 <PasswordBox 
+                                x:Name="PassNA"
                                 Width="400" Height="40"
                                 materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                 IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                                Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="-1,-2,1,2"/>
+                                Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="-1,-2,1,2">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="PasswordChanged">
+                                            <i:InvokeCommandAction Command="{Binding PasswordNAChangedCommand}"
+                                                                   CommandParameter="{Binding ElementName=PassNA}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </PasswordBox>
                             </Border>
 
                             <Border Width="400" Height="40" Margin="130,171,30,80" Background="#084563" CornerRadius="15" VerticalAlignment="Bottom">
                                 <PasswordBox 
+                                 x:Name="PassNAC"
                                  Width="400" Height="40"
                                  materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                                  materialDesign:TextFieldAssist.HasClearButton="True"
                                  IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                                 Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="-2,-1,2,1"/>
+                                 Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="-2,-1,2,1">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="PasswordChanged">
+                                            <i:InvokeCommandAction Command="{Binding PasswordNAConfirmChangedCommand}"
+                                                                   CommandParameter="{Binding ElementName=PassNAC}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </PasswordBox>
                             </Border>
                             <Label Content="Password&#xA;confirm" 
                                    FontSize="16"  
@@ -150,13 +174,17 @@
                                 Height="50"
                                 Background="#0d2129"
                                 Foreground="#E5FFFFFF" 
-                                Margin="130,280,130,10">
+                                Margin="130,280,130,10"
+                                Command="{Binding NewAccountCommand}"
+                                CommandParameter="{Binding ElementName=loginWindow}">
                                 <Button.Template>
-                                    <ControlTemplate TargetType="Button">
+                                    <ControlTemplate TargetType="Button"
+                                                     >
                                         <Border Background="{TemplateBinding Background}" 
                                             BorderBrush="Transparent" 
                                             CornerRadius="30" 
-                                            BorderThickness="1">
+                                            BorderThickness="1"
+                                                >
                                             <ContentPresenter HorizontalAlignment="Center" 
                                                 VerticalAlignment="Center" />
                                         </Border>
