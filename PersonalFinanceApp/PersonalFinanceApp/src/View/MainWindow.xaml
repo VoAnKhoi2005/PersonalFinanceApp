@@ -12,7 +12,7 @@
         
         
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        DataContext="{StaticResource MainVM}"
+        DataContext="{StaticResource MainVm}"
         x:Name="mainWindow"
         
 

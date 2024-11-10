@@ -1,53 +1,15 @@
-﻿using PersonalFinanceApp.Database;
-using PersonalFinanceApp.Src.ViewModel;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
+﻿using PersonalFinanceApp.ViewModel.Stores;
 
-namespace PersonalFinanceApp.ViewModel.LoginMenu {
-    public class LoginMainViewModel : BaseViewModel
+namespace PersonalFinanceApp.ViewModel.LoginMenu;
+
+public class LoginMainViewModel : BaseViewModel
+{
+    public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
+
+    private readonly LoginNavigationStore _navigationStore;
+
+    public LoginMainViewModel(LoginNavigationStore navigationStore)
     {
-        #region Properties
-    
-        public bool IsLogin { get; set; }
-        public bool IsCorrect { get; set; }
-        private string _UserName;
-        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
-        private string _Password;
-        public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
-
-        public ICommand LoginCommand { get; set; }
-        public ICommand PasswordChangedCommand { get; set; }
-        #endregion
-        public LoginMainViewModel() {
-            IsLogin = false;
-            IsCorrect = false;
-            Password = "";
-            UserName = "";
-            LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p); });
-            PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
-        }
-        void Login(Window p) {
-            if (p == null)
-                return;
-
-            
-            if(BLogin(UserName, Password)) {
-                IsLogin = true;
-                p.Close();
-            }
-            else {
-                IsLogin = false;
-                IsCorrect = true;
-            }
-           
-        }
-        private bool BLogin(string Username, string Password) {
-            var loginUser = DBManager.GetFirst<Model.User>(u => u.Username == UserName);
-            if (loginUser == null)
-                return false;
-            
-            return loginUser.VerifyPassword(Password);
-        }
+        _navigationStore = navigationStore;
     }
 }
