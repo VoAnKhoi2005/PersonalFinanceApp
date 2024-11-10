@@ -24,17 +24,22 @@ namespace PersonalFinanceApp.ViewModel.LoginMenu {
             IsCorrect = false;
             Password = "";
             UserName = "";
-            LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p); });
+            LoginCommand = new RelayCommand<UserControl>((p) => { return true; }, (p) => { Login(p); });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
         }
-        void Login(Window p) {
+        void Login(UserControl p) {
             if (p == null)
                 return;
 
             
             if(BLogin(UserName, Password)) {
                 IsLogin = true;
-                p.Close();
+                FrameworkElement wd = getParent(p);
+                var w = wd as Window;
+                if (w != null)
+                {
+                    w.Close();
+                }
             }
             else {
                 IsLogin = false;
@@ -46,8 +51,14 @@ namespace PersonalFinanceApp.ViewModel.LoginMenu {
             var loginUser = DBManager.GetFirst<Model.User>(u => u.Username == UserName);
             if (loginUser == null)
                 return false;
-            
             return loginUser.VerifyPassword(Password);
+        }
+        FrameworkElement getParent(UserControl p) {
+            FrameworkElement parent = p;
+            while (parent.Parent != null){
+                parent = parent.Parent as FrameworkElement;
+            }
+            return parent;
         }
     }
 }
