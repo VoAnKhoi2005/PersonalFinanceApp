@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace PersonalFinanceApp.Src.View
 {
     /// <summary>
-    /// Interaction logic for UC_Main_Goalplan_Adding.xaml
+    /// Interaction logic for UC_Main_ExpenseBook_AddNew.xaml
     /// </summary>
-    public partial class UC_Main_Goalplan_Adding : UserControl
+    public partial class UC_Main_ExpenseBook_AddNew : UserControl
     {
-        public UC_Main_Goalplan_Adding()
+        public UC_Main_ExpenseBook_AddNew()
         {
             InitializeComponent();
         }

@@ -65,7 +65,7 @@
 
         <!--  Reset new password-->
         <uc:UC_Login_ResetPasswordConfirmView x:Name="UCResetPasswordConfirm"
-                                    Visibility="Collapsed"></uc:UC_Login_ResetPasswordConfirmView>
+                                     Visibility="Collapsed"></uc:UC_Login_ResetPasswordConfirmView>
 
     </Grid>
 </Window>

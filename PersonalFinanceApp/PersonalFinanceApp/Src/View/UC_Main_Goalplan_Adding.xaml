@@ -116,7 +116,7 @@
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" CornerRadius="25" Height="50"
                         Width="150"
-                        Margin="0,0,0,10" Background="#CC1010" >
+                        Margin="0,0,0,10" Background="#FFC8386C" >
                     <Grid>
                         <TextBlock Text="Cancel" Foreground="White"
                                    VerticalAlignment="Center"
@@ -128,7 +128,7 @@
                 </Border>
                 <Border Grid.Column="1" CornerRadius="25" Height="50"
                         Width="150"
-                        Margin="0,0,0,10" Background="#3DD232" >
+                        Margin="0,0,0,10" Background="#FF61D2BE" >
                     <Grid>
                         <TextBlock Text="Confirm" Foreground="White"
                                    VerticalAlignment="Center"
