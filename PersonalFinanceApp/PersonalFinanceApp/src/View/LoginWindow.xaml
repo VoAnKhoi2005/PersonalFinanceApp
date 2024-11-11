@@ -68,8 +68,12 @@
                         <view:UC_Login_ResetPasswordView />
                     </DataTemplate>
 
-                    <DataTemplate DataType="{x:Type loginViewModels:ResetPasswordConfirmModelView}">
-                        <view:UC_Login_ResetPasswordConfirmView />
+                    <DataTemplate DataType="{x:Type loginViewModels:CreateNewPasswordModelView}">
+                        <view:UC_Login_CreateNewPasswordView/>
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type loginViewModels:CodeVerificationModelView}">
+                        <view:UC_Login_CodeVerificationView />
                     </DataTemplate>
 
                 </ContentControl.Resources>

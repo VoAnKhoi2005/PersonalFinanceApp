@@ -1,9 +1,11 @@
 ﻿<Application x:Class="PersonalFinanceApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:PersonalFinanceApp">
+             xmlns:local="clr-namespace:PersonalFinanceApp"
+             xmlns:command="clr-namespace:PersonalFinanceApp.ViewModel.Command">
     <Application.Resources>
         <ResourceDictionary>
+            <x:Static x:Key="TestCommandInstance" Member="command:TestCommand.Instance"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />

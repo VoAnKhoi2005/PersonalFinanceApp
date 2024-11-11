@@ -70,12 +70,6 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </materialDesign:PackIcon.RenderTransform>
-
-
-
-                    <!-- click here -->
-
-
                 </materialDesign:PackIcon>
             </Grid>
         </materialDesign:Card>

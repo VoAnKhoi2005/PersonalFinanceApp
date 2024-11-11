@@ -61,6 +61,7 @@
                             <Button 
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Content="Forgot your password?" 
+                                Command="{Binding ForgotPasswordCommand}"
                                 FontWeight="Bold" FontStyle="Italic" Background="#053B50" Margin="338,194,36,114"  Foreground="#FFCDCAD2" Grid.ColumnSpan="2" />
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     Content="Login Confirm" 

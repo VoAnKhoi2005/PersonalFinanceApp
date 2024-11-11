@@ -1,5 +1,15 @@
-﻿namespace PersonalFinanceApp.ViewModel.LoginMenu;
+﻿using System.Windows.Input;
+using PersonalFinanceApp.ViewModel.Command;
+using PersonalFinanceApp.ViewModel.Stores;
 
-public class ResetPasswordModelView
+namespace PersonalFinanceApp.ViewModel.LoginMenu;
+
+public class ResetPasswordModelView : BaseViewModel
 {
+    public ICommand NavigateConfirmCommand { get; set; }
+
+    public ResetPasswordModelView(LoginNavigationStore navigationStore)
+    {
+        NavigateConfirmCommand = new ConfirmCommand(navigationStore);
+    }
 }

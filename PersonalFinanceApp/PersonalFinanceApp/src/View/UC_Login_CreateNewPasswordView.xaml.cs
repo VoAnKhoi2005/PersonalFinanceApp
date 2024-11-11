@@ -2,9 +2,9 @@
 
 namespace PersonalFinanceApp.Src.View
 {
-    public partial class UC_Login_LoginNewAccountView : UserControl
+    public partial class UC_Login_CreateNewPasswordView : UserControl
     {
-        public UC_Login_LoginNewAccountView()
+        public UC_Login_CreateNewPasswordView()
         {
             InitializeComponent();
         }

@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using MaterialDesignThemes.Wpf;
 using PersonalFinanceApp.Database;
+using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
@@ -35,9 +35,8 @@ public class LoginNewAccountModelView : BaseViewModel
             OnPropertyChanged();
         }
     }
-
     public ICommand LoginCommand { get; set; }
-    public ICommand PasswordChangedCommand { get; set; }
+    public ICommand ForgotPasswordCommand { get; set; }
 
     #endregion
 
@@ -47,6 +46,7 @@ public class LoginNewAccountModelView : BaseViewModel
         IsCorrect = false;
         Password = "";
         UserName = "";
+        ForgotPasswordCommand = new ForgotPasswordCommand(navigationStore);
     }
 
     void Login(Window p)

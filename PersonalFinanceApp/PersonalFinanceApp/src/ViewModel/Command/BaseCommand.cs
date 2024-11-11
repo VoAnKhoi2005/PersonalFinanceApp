@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
-namespace PersonalFinanceApp.ViewModel.Commands;
+namespace PersonalFinanceApp.ViewModel.Command;
 
-public abstract class CommandBase : ICommand
+public abstract class BaseCommand : ICommand
 {
     public event EventHandler CanExecuteChanged;
 
@@ -11,6 +11,6 @@ public abstract class CommandBase : ICommand
 
     protected void OnCanExecuteChanged()
     {
-        CanExecuteChanged?.Invoke(this, new EventArgs());
+        CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }
 }

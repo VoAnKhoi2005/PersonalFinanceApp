@@ -12,18 +12,5 @@ namespace PersonalFinanceApp.View
             User newUser = new User("admin", "pass", "admin@123");
             DBManager.Insert(newUser);
         }
-
-        
-        private void showCard(FrameworkElement card)
-        {
-            //LoginCard.Visibility = Visibility.Collapsed;
-
-            //ResetPasswordCard.Visibility = Visibility.Collapsed;
-            //ResetNewPasswordCard.Visibility = Visibility.Collapsed;
-            //CodeVerificationCard.Visibility = Visibility.Collapsed;
-
-            //card.Visibility = Visibility.Visible;
-
-        }
     }
 }
