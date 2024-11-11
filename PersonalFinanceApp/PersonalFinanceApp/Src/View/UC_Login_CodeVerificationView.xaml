@@ -17,7 +17,7 @@
                 <Label Content="Code Verification Required"  FontSize="30" FontFamily="Sans Serif Collection" 
                                 VerticalContentAlignment="Top"
                                 HorizontalAlignment="Center"
-                                Margin="0 20 0 0" FontWeight="Bold"></Label>
+                                Margin="0,20,0,296" FontWeight="Bold"></Label>
                 <Label 
                             Content="For added security, enter the code we have emailed to "
                             FontSize="18"
@@ -61,16 +61,23 @@
                 </Border>
                 <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="20" Height="20" Margin="22,282,0,0"  />
                 <Label Content="Invalid code verification!" Foreground="Red" FontSize="16" Margin="42,276,328,88"></Label>
-                <materialDesign:PackIcon Kind="ArrowUpCircle" Width="50" Height="50" Margin="0,306,0,0" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Foreground="#FFDFD1D1">
-                    <materialDesign:PackIcon.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </materialDesign:PackIcon.RenderTransform>
-                </materialDesign:PackIcon>
+                <Button Width="50" Height="50" Margin="0,306,0,0" Click="Button_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <materialDesign:PackIcon Kind="ArrowUpCircle" Width="50" Height="50"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Foreground="#FFDFD1D1">
+                                <materialDesign:PackIcon.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="90"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </materialDesign:PackIcon.RenderTransform>
+                            </materialDesign:PackIcon>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
             </Grid>
         </materialDesign:Card>
     </Grid>

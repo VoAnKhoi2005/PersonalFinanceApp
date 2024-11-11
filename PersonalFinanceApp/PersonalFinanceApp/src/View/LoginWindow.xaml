@@ -16,7 +16,6 @@
         TextOptions.TextFormattingMode="Ideal"
 
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
 
         Title="LoginWindow" Height="720" Width="1152">
 

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using XAct.Messages;
 
 namespace PersonalFinanceApp.Src.View
 {
@@ -10,6 +11,10 @@ namespace PersonalFinanceApp.Src.View
         public UC_Login_CodeVerificationView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
         }
     }
 }
