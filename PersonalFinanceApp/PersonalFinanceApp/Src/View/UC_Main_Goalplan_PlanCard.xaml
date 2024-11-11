@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="PersonalFinanceApp.Src.View.UC_Main_Goalplan_PlanCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             
+             d:DesignHeight="400" d:DesignWidth="650">
+    <Border Background="#053B50" CornerRadius="30">
+        <Grid >
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Sans Serif Collection"/>
+                    <Setter Property="Foreground" Value="#E5CBBFBF"/>
+                    <Setter Property="FontWeight" Value="Regular"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*"></RowDefinition>
+                <RowDefinition Height="0.8*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBlock Text="GoalPlanName"
+                       FontSize="35"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                           Margin="15,15,0,0"></TextBlock>
+
+                <!--Click here to adjust Goalplan-->
+                <Button Height="40"
+                        Width="40"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="0,5,20,0">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <materialDesign:PackIcon Kind="Information" 
+                                         Height="40"
+                                         Width="40"
+                                         Foreground="#E5CBBFBF"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1">
+
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="34*"></ColumnDefinition>
+                    <ColumnDefinition Width="31*"></ColumnDefinition>
+                    <ColumnDefinition Width="31*"></ColumnDefinition>
+                    <ColumnDefinition Width="34*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--Start date-->
+                <Border Grid.Column="0"
+                      Background="#E5CBBFBF"
+                      Margin="15,35,2,15" CornerRadius="30">
+                    <Grid>
+                        <TextBlock Text="Start date"
+                                    FontSize="20"
+                                   Foreground="Black"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Bottom">
+                        </TextBlock>
+
+                        <TextBlock Foreground="Black"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   >
+                            <!--binding here-->
+                        </TextBlock>
+                    </Grid>
+                </Border>
+
+                <!--end date-->
+                <Border Grid.Column="1"
+                      Background="#E5CBBFBF"
+                      Margin="2,35,2,15" CornerRadius="30">
+                    <Grid>
+                        <TextBlock Text="End date"
+                                    FontSize="20"
+                                   Foreground="Black"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Bottom">
+                        </TextBlock>
+
+                        <TextBlock Foreground="Black"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   >
+                            <!--binding here-->
+                        </TextBlock>
+                    </Grid>
+                </Border>
+                
+                <!--left to save-->
+                <Border Grid.Column="2"
+                      Background="#E5CBBFBF"
+                      Margin="2,35,2,15" CornerRadius="30">
+                    <Grid>
+                        <TextBlock Text="Left to save"
+                                    FontSize="20"
+                                   Foreground="Black"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Bottom">
+                        </TextBlock>
+
+                        <TextBlock Foreground="Black"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   >
+                            <!--binding here-->
+                        </TextBlock>
+                    </Grid>
+                    
+                    <!--Monthly target-->
+                </Border>
+                <Border Grid.Column="3"
+                      Background="#E5CBBFBF"
+                      Margin="2,35,15,15" CornerRadius="30">
+                    <Grid>
+                        <TextBlock Text="Monthly target"
+                                    FontSize="20"
+                                   Foreground="Black"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Bottom">
+                        </TextBlock>
+
+                        <TextBlock Foreground="Black"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   >
+                            <!--binding here-->
+                        </TextBlock>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
