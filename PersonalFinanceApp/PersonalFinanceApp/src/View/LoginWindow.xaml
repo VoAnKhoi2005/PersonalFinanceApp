@@ -3,69 +3,70 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
         xmlns:uc="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Background="#0D2129"
         ResizeMode="CanMinimize"
+        
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Title="LoginWindow" Height="720" Width="1152">
-
-
+        Title="LoginWindow" Height="720" Width="1152"
+ 
+        >
     <Grid>
-        <!-- background -->
-        <Grid>
-            <Image Margin="0,25,479,25" Source="/Resources/img/PigBackground.png" Stretch="Fill"/>
-            <Image Margin="812,-23,0,395" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-200.58400000000003"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Image HorizontalAlignment="Center"
+            <!-- background -->
+            <Grid>
+                <Image Margin="0,25,479,25" Source="/Resources/img/PigBackground.png" Stretch="Fill"/>
+                <Image Margin="812,-23,0,395" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-200.58400000000003"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image HorizontalAlignment="Center"
                    VerticalAlignment="Top"
                    Margin="250,0,0,0"
                 Source="/Resources/img/PigBackground.png" 
                    Width="250" RenderTransformOrigin="0.5,0.5">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-98"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Image Margin="740,270,7,37" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="294.99"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-        </Grid>
-        <!--Login + new account -->
-        <local:UC_Login_LoginNewAccountView x:Name="UC_Login_LoginNewAccountView"
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-98"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image Margin="740,270,7,37" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="294.99"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </Grid>
+            <!--Login + new account -->
+            <local:UC_Login_LoginNewAccountView x:Name="UC_Login_LoginNewAccountView"
                                             Visibility="Visible"></local:UC_Login_LoginNewAccountView>
-        <!-- Reset password-->
-        <uc:UC_Login_ResetPasswordView Visibility="Collapsed"
+            <!-- Reset password-->
+            <uc:UC_Login_ResetPasswordView Visibility="Collapsed"
             x:Name="UCResetPassword"></uc:UC_Login_ResetPasswordView>
-        <!-- Code verification -->
-        <uc:UC_Login_CodeVerificationView x:Name="UCCodeVerification"
+            <!-- Code verification -->
+            <uc:UC_Login_CodeVerificationView x:Name="UCCodeVerification"
                                 Visibility="Collapsed"></uc:UC_Login_CodeVerificationView>
 
-        <!--  Reset new password-->
-        <uc:UC_Login_ResetPasswordConfirmView x:Name="UCResetPasswordConfirm"
-                                     Visibility="Collapsed"></uc:UC_Login_ResetPasswordConfirmView>
-
-    </Grid>
+            <!--  Reset new password-->
+             <uc:UC_Login_ResetPasswordConfirmView x:Name="UCResetPasswordConfirm"
+                                    Visibility="Collapsed"></uc:UC_Login_ResetPasswordConfirmView>
+        </Grid>
 </Window>

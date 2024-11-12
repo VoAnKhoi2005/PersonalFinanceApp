@@ -9,7 +9,7 @@ namespace PersonalFinanceApp
         public LoginWindow()
         {
             InitializeComponent();
-            User newUser = new User("khoi", "123456", "khoi@gmail.com");
+            User newUser = new User("name", "pass", "admin@123");
             DBManager.Insert(newUser);
         }
 
@@ -20,7 +20,6 @@ namespace PersonalFinanceApp
             //ResetPasswordCard.Visibility = Visibility.Collapsed;
             //ResetNewPasswordCard.Visibility = Visibility.Collapsed;
             //CodeVerificationCard.Visibility = Visibility.Collapsed;
-
             //card.Visibility = Visibility.Visible;
         }
     }

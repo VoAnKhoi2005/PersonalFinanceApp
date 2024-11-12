@@ -302,4 +302,8 @@ public static class DBManager
         using var context = new AppDbContext();
         return context.Model.FindEntityType(type) != null;
     }
+
+    internal static Expression<Func<object, bool>> where(bool v) {
+        throw new NotImplementedException();
+    }
 }

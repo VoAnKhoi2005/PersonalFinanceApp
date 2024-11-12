@@ -4,16 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
+        mc:Ignorable="d"
+
         xmlns:uc="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        DataContext="{StaticResource MainVM}"
+        
+        x:Name="mainWindow"
         Background="#0D2129"
         ResizeMode="CanMinimize" Height="720" Width="1152"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         >
 
-
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" 
+                                   CommandParameter="{Binding ElementName=mainWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -85,10 +95,12 @@
 
         <!--main menu-->
 
+
         <TabControl Width="1152" Height="720" VerticalAlignment="Center" 
                 HorizontalAlignment="Center"
                 TabStripPlacement="Left" 
                 >
+
             <!-- dashboard-->
 
             <TabItem IsEnabled="False"></TabItem>
@@ -185,6 +197,7 @@
                         </TextBlock>
                     </Grid>
                 </TabItem.Header>
+
 
                 <!--uc_summary-->
                 <local:UC_Summary x:Name="UCSummary"></local:UC_Summary>

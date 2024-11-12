@@ -20,7 +20,7 @@ public class RecurringDetail
 
     public virtual Expense? Expense { get; set; }
 
-    public RecurringDetail() { }
+    private RecurringDetail() { }
 
     public RecurringDetail(string frequency, int interval, DateOnly starDate)
     {
