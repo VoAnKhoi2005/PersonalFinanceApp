@@ -232,7 +232,7 @@
                                        HorizontalAlignment="Left"
                                        Margin="15,0,0,0"
                                        FontWeight="Bold"
-                                       FontSize="15"
+                                       FontSize="18"
                                        VerticalAlignment="Top"></TextBlock>
 
                                 <!-- element of circle chart shown here-->
@@ -250,6 +250,7 @@
                                     <TextBlock DockPanel.Dock="Top" Text="element5"></TextBlock>
                                     <TextBlock DockPanel.Dock="Top" Text="element6"></TextBlock>
                                     <TextBlock DockPanel.Dock="Top" Text="element7"></TextBlock>
+                                    <TextBlock DockPanel.Dock="Top" Text="element8"></TextBlock>
                                     <TextBlock DockPanel.Dock="Top" Text="element8"></TextBlock>
                                 </WrapPanel>
                             </Grid>
@@ -276,7 +277,7 @@
                                     <RowDefinition Height="113*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="GOAL PLAN" 
-                                           FontSize="15"
+                                           FontSize="18"
                                            FontWeight="Bold"
                                            Margin="15,0,0,0"></TextBlock>
                                 
