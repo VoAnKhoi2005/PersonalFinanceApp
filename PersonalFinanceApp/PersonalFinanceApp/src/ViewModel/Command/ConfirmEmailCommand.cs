@@ -6,12 +6,12 @@ namespace PersonalFinanceApp.ViewModel.Command;
 public class ConfirmEmailCommand : BaseCommand
 {
     private readonly LoginNavigationStore _navigationStore;
-    private readonly ResetPasswordModelView resetPasswordVM;
+    private readonly ResetPasswordModelView _resetPasswordVm;
 
     public ConfirmEmailCommand(LoginNavigationStore navigationStore, ResetPasswordModelView resetPasswordModelView)
     {
         _navigationStore = navigationStore;
-        resetPasswordVM = resetPasswordModelView;
+        _resetPasswordVm = resetPasswordModelView;
     }
 
     public override void Execute(object parameter)
@@ -19,5 +19,5 @@ public class ConfirmEmailCommand : BaseCommand
         _navigationStore.CurrentViewModel = new CodeVerificationModelView(_navigationStore);
     }
 
-    public override bool CanExecute(object parameter) => resetPasswordVM.VerifyEmail();
+    public override bool CanExecute(object parameter) => _resetPasswordVm.VerifyEmail();
 }

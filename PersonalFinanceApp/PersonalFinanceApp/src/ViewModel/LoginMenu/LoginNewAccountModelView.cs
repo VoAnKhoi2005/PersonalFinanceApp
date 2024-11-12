@@ -10,10 +10,9 @@ public class LoginNewAccountModelView : BaseViewModel
 {
     #region Properties
 
-    public bool IsLogin { get; set; }
-    public bool IsCorrect { get; set; }
-    private string _userName;
+    public bool IsLogin { get; set; } = false;
 
+    private string _userName;
     public string UserName
     {
         get => _userName;
@@ -25,7 +24,6 @@ public class LoginNewAccountModelView : BaseViewModel
     }
 
     private string _password;
-
     public string Password
     {
         get => _password;
@@ -35,39 +33,30 @@ public class LoginNewAccountModelView : BaseViewModel
             OnPropertyChanged();
         }
     }
+
     public ICommand LoginCommand { get; set; }
     public ICommand ForgotPasswordCommand { get; set; }
+    private readonly LoginNavigationStore _navigationStore;
 
     #endregion
 
     public LoginNewAccountModelView(LoginNavigationStore navigationStore)
     {
-        IsLogin = false;
-        IsCorrect = false;
-        Password = "";
-        UserName = "";
+        _navigationStore = navigationStore;
         ForgotPasswordCommand = new ForgotPasswordCommand(navigationStore);
     }
 
-    void Login(Window p)
+    private void LoginSuccess(object parameter)
     {
-        if (p == null)
-            return;
-
-
-        if (BLogin(UserName, Password))
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.Show();
+        if (parameter is Window currentWindow)
         {
-            IsLogin = true;
-            p.Close();
-        }
-        else
-        {
-            IsLogin = false;
-            IsCorrect = true;
+            currentWindow.Close();
         }
     }
 
-    private bool BLogin(string Username, string Password)
+    private bool VerifyLogin(object parameter)
     {
         var loginUser = DBManager.GetFirst<Model.User>(u => u.Username == UserName);
         if (loginUser == null)
