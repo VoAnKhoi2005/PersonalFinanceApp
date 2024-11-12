@@ -1,5 +1,8 @@
 ﻿using System.Windows;
 using PersonalFinanceApp.Database;
+using PersonalFinanceApp.View;
+using PersonalFinanceApp.ViewModel.LoginMenu;
+using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp
 {
@@ -7,7 +10,14 @@ namespace PersonalFinanceApp
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
+            LoginNavigationStore loginNavigationStore = new LoginNavigationStore();
+            loginNavigationStore.CurrentViewModel = new LoginNewAccountModelView(loginNavigationStore);
+
+            MainWindow = new LoginWindow()
+            {
+                DataContext = new LoginMainViewModel(loginNavigationStore)
+            };
+            MainWindow.Show();
 
             //Create database
             using (var context = new AppDbContext())

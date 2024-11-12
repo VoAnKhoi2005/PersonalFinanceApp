@@ -9,7 +9,8 @@
         xmlns:uc="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        DataContext="{StaticResource MainVM}"
+        DataContext="{StaticResource MainVm}"
+        x:Name="mainWindow"
         
         x:Name="mainWindow"
         Background="#0D2129"
@@ -89,6 +90,7 @@
                              Foreground="#E5CBBFBF"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Bottom" 
+                             x:Name="Exit"
                              />
 
 

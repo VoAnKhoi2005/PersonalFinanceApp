@@ -1,10 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModel="clr-namespace:PersonalFinanceApp.ViewModel.LoginMenu"
+                    xmlns:local="clr-namespace:PersonalFinanceApp"
+                    xmlns:viewModel1="clr-namespace:PersonalFinanceApp.ViewModel"
+                    xmlns:mainMenu="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu">
                     xmlns:mviewmodel="clr-namespace:PersonalFinanceApp.Src.ViewModel"
                     xmlns:lviewmodel="clr-namespace:PersonalFinanceApp.ViewModel.LoginMenu"
-                    xmlns:local="clr-namespace:PersonalFinanceApp"
                     >
     <mviewmodel:MainViewModel x:Key="MainVM"></mviewmodel:MainViewModel>
     <lviewmodel:LoginMainViewModel x:Key="LoginVM"></lviewmodel:LoginMainViewModel>
-    
 </ResourceDictionary>
