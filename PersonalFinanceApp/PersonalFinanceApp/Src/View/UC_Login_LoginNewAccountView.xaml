@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" >
+        <UserControl.Resources>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        </UserControl.Resources>
     <Grid>
+        
         <materialDesign:Card x:Name="LoginCard"
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
@@ -48,33 +52,35 @@
                             <Label Content="Password" FontSize="16"  Foreground="#E5CBBFBF" Margin="31,134,366,174" RenderTransformOrigin="0.411,0.567"></Label>
                             <Border Width="400" Height="40" Margin="123,130,37,170" Background="#084563" CornerRadius="15" Grid.ColumnSpan="2">
                                 <PasswordBox 
-                                     Width="400" Height="40" x:Name="PasswordLogin"
+                                     Width="400" Height="40" x:Name="Password"
                                      materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                                      materialDesign:TextFieldAssist.HasClearButton="True"
                                      IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                                     Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="0,-4,0,4"/>
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="PasswordChanged">
-                                        <i:InvokeCommandAction Command="{Binding PasswordLoginChangedCommand}"
-                                                                   CommandParameter="{Binding ElementName=PasswordLogin}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
+                                     Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="0,-4,0,4">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="PasswordChanged">
+                                            <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}"
+                                                                   CommandParameter="{Binding ElementName=Password}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </PasswordBox>
                             </Border>
 
 
 
                             <!--Remember me -->
-                            <CheckBox Margin="49,201,404,119" Height="20" Width="20" 
-                                      BorderBrush="White"
-                                      Background="White" 
-                                      Foreground="White" 
-                                      RenderTransformOrigin="0.49,1.131"/>
-                            <Label Content="Remember me" FontSize="15" Foreground="#E5CBBFBF" Margin="74,197,291,117" ></Label>
+                            <CheckBox Content="Remember me"
+                                      Foreground="#E5CBBFBF"
+                                      Background="White" Margin="50 200 200 100" FontSize="15"/>
+                          
+                                      
                             <Button 
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Content="Forgot your password?" 
                                 Command="{Binding ForgotPasswordCommand}"
-                                FontWeight="Bold" FontStyle="Italic" Background="#053B50" Margin="338,194,36,114"  Foreground="#FFCDCAD2" Grid.ColumnSpan="2" />
+                                FontSize="15"
+                                Width="200"
+                                FontWeight="Bold" FontStyle="Italic" Background="#053B50" Margin="200 200 -100 100"  Foreground="#FFCDCAD2" Grid.ColumnSpan="2" />
                             
                             <!--button Login confirm-->
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
@@ -98,12 +104,14 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-                            <!--invalid username or password-->
-                            <Grid Visibility="Visible">
-                                
-                            <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="15" Height="15" Margin="121,182,0,0"  />
-                            <Label  Content="Incorrect username or password!" Foreground="Red" Margin="134,176,158,133"></Label>
-                            </Grid>
+
+
+                            <StackPanel Visibility="{Binding IsIncorrect, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <WrapPanel Margin="130 175 100 50">
+                                    <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
+                                    <Label Content="Incorrect username or password!" Foreground="Red" ></Label>
+                                </WrapPanel>
+                            </StackPanel>
                         </Grid>
                     </TabItem>
 
@@ -122,7 +130,7 @@
                                 Width="400" 
                                 Height="40"
                                 Background="Transparent" Margin="0,2,0,0"
-                                Text="{Binding UserNameCreateAccount}">
+                                Text="{Binding UserName}">
                                 </TextBox>
                             </Border>
 
@@ -138,7 +146,7 @@
                                 Width="400" 
                                 Height="40"
                                 Background="Transparent" Margin="0,2,0,0" 
-                                Text="{Binding GmailCreateAccount}">
+                                Text="{Binding Gmail}">
                                 </TextBox>
                             </Border>
 
@@ -157,7 +165,7 @@
                                 Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="-1,-2,1,2">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="PasswordChanged">
-                                            <i:InvokeCommandAction Command="{Binding PasswordCreateAccountChangedCommand}"
+                                            <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}"
                                                                    CommandParameter="{Binding ElementName=PasswordCreateAccount}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
@@ -173,7 +181,7 @@
                                  Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="-2,-1,2,1">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="PasswordChanged">
-                                            <i:InvokeCommandAction Command="{Binding PasswordCreateAccountConfirmChangedCommand}"
+                                            <i:InvokeCommandAction Command="{Binding PasswordConfirmChangedCommand}"
                                                                    CommandParameter="{Binding ElementName=PasswordConfirmCreateAccount}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
@@ -187,10 +195,36 @@
                             
                             
                             <!--invalid something-->
-                            <Grid Visibility="Visible">
-                                <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="12" Height="12" Margin="130,265,0,0"  />
-                                <Label Content="Password not match. Try again!" Foreground="Red" FontSize="10" Margin="143,260,199,52"></Label>
-                            </Grid>
+                            
+                            <!--Worst Username-->
+                            <StackPanel Visibility="{Binding IsCorrectName, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <WrapPanel Margin="130 75 100 50">
+                                    <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
+                                    <Label Content="Worst Username!" Foreground="Red" ></Label>
+                                </WrapPanel>
+                            </StackPanel>
+                            <!--Wrong Format Gmail-->
+                            <StackPanel Visibility="{Binding IsCorrectGmail, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <WrapPanel Margin="130 137 100 50">
+                                    <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
+                                    <Label Content="Wrong Format Gmail!" Foreground="Red" ></Label>
+                                </WrapPanel>
+                            </StackPanel>
+                            <!--Worst Password-->
+                            <StackPanel Visibility="{Binding IsCorrectPassword, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <WrapPanel Margin="130 197 100 50">
+                                    <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
+                                    <Label Content="Worst Password!" Foreground="Red" ></Label>
+                                </WrapPanel>
+                            </StackPanel>
+                            <!--Password not match-->
+                            <StackPanel Visibility="{Binding IsCorrectPasswordConfirm, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <WrapPanel Margin="130 260 100 50">
+                                    <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
+                                    <Label Content="Password not match. Try again!" Foreground="Red" ></Label>
+                                </WrapPanel>
+                            </StackPanel>
+                            
                             <Button Style="{StaticResource MaterialDesignFlatButton}"        
                                 Content="Create Account" 
                                 FontSize="18"

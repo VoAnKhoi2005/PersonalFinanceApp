@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.ViewModel.Command;
@@ -11,6 +12,11 @@ public class LoginNewAccountModelView : BaseViewModel
     #region Properties
 
     public bool IsLogin { get; set; } = false;
+    public bool IsIncorrect { get; set; } = false;
+    public bool IsCorrectName { get; set; } = false;
+    public bool IsCorrectGmail { get; set; } = false;
+    public bool IsCorrectPassword { get; set; } = false;
+    public bool IsCorrectPasswordConfirm { get; set; } = false;
 
     private string _userName;
     public string UserName
@@ -33,9 +39,28 @@ public class LoginNewAccountModelView : BaseViewModel
             OnPropertyChanged();
         }
     }
+    private string _passwordConirm;
+    public string PasswordConfirm {
+        get => _passwordConirm;
+        set {
+            _passwordConirm = value;
+            OnPropertyChanged();
+        }
+    }
+    private string _gmail;
+    public string Gmail {
+        get => _gmail;
+        set {
+            _gmail = value;
+            OnPropertyChanged();
+        }
+    }
 
-    public ICommand LoginCommand { get; set; }
+    //public ICommand LoginCommand { get; set; }
     public ICommand ForgotPasswordCommand { get; set; }
+    public ICommand PasswordChangedCommand { get; set; }
+    public ICommand PasswordConfirmChangedCommand { get; set; }
+
     private readonly LoginNavigationStore _navigationStore;
 
     #endregion
@@ -44,6 +69,8 @@ public class LoginNewAccountModelView : BaseViewModel
     {
         _navigationStore = navigationStore;
         ForgotPasswordCommand = new ForgotPasswordCommand(navigationStore);
+        PasswordChangedCommand = new RelayCommand<PasswordBox>((p)  => {return true;}, (p) => { Password = p.Password; });
+        PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p)  => {return true;}, (p) => { PasswordConfirm = p.Password; });
     }
 
     private void LoginSuccess(object parameter)
@@ -59,9 +86,10 @@ public class LoginNewAccountModelView : BaseViewModel
     private bool VerifyLogin(object parameter)
     {
         var loginUser = DBManager.GetFirst<Model.User>(u => u.Username == UserName);
-        if (loginUser == null)
+        if (loginUser == null) {
+            IsIncorrect = true;
             return false;
-
+        }
         return loginUser.VerifyPassword(Password);
     }
 }
