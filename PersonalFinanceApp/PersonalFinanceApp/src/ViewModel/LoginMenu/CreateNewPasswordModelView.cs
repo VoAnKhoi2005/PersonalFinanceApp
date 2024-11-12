@@ -10,6 +10,11 @@ public class CreateNewPasswordModelView : BaseViewModel
 
     public CreateNewPasswordModelView(LoginNavigationStore navigationStore)
     {
-        NavigationConfirmNewPassword = new CreateNewPasswordCommand(navigationStore);
+        NavigationConfirmNewPassword = new ConfirmNewPasswordCommand(navigationStore, this);
+    }
+
+    public bool VerifyNewPassword()
+    {
+        return true;
     }
 }
