@@ -40,8 +40,7 @@
                                     x:Name="User"
                                     Width="400" 
                                     Height="40"
-                                    Background="Transparent" Margin="5,1,-5,0"
-                                    Text="{Binding UserNameLoginCommand}">
+                                    Background="Transparent" Margin="5,1,-5,0">
                                 </TextBox>
                             </Border>
                             

@@ -9,9 +9,6 @@
         xmlns:uc="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        DataContext="{StaticResource MainVm}"
-        x:Name="mainWindow"
-        
         x:Name="mainWindow"
         Background="#0D2129"
         ResizeMode="CanMinimize" Height="720" Width="1152"
@@ -244,7 +241,7 @@
         <local:UC_Main_UserAccountView x:Name="UCUserAccountView"
                                        HorizontalAlignment="Right"
                                        VerticalAlignment="Top"
-                                       Margin="50,"></local:UC_Main_UserAccountView>
+                                       Margin="50"></local:UC_Main_UserAccountView>
     </Grid>
 </Window>
  
