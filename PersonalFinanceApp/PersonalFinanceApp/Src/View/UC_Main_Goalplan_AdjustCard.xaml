@@ -1,0 +1,167 @@
+﻿<UserControl x:Class="PersonalFinanceApp.Src.View.UC_Main_Goalplan_AdjustCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="240" d:DesignWidth="200">
+    <Border Background="#124458" CornerRadius="30">
+        <Grid>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Sans Serif Collection"/>
+                    <Setter Property="Foreground" Value="#E5CBBFBF"/>
+                    <Setter Property="FontWeight" Value="Regular"/>
+                    <Setter Property="FontSize" Value="18"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                </Style>
+                <Style TargetType="materialDesign:PackIcon">
+                    <Setter Property="Width" Value="30"></Setter>
+                    <Setter Property="Height" Value="30"></Setter>
+                    <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                </Style>
+                
+                <Style TargetType="Button">
+                    <Setter Property="Width" Value="Auto"/>
+                    <Setter Property="Height" Value="Auto"/>
+                </Style>
+
+            </Grid.Resources>
+            <!--
+
+            -->
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--Edit -> name, date-->
+            <Button Grid.Row="0"
+                Background="{x:Null}" 
+                    BorderBrush="{x:Null}" 
+                    Foreground="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                                <ColumnDefinition Width="18*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Rename"  Grid.Column="1"></TextBlock>
+                            <materialDesign:PackIcon Kind="Rename" Grid.Column="0"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!--contribute-->
+            <Button  Grid.Row="1"
+                Background="{x:Null}" 
+                    BorderBrush="{x:Null}" 
+                    Foreground="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                                <ColumnDefinition Width="18*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="Plus" Grid.Column="0"/>
+                            <TextBlock Text="Contribute" Grid.Column="1"></TextBlock>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!--withdraw-->
+            <Button
+                Grid.Row="2"
+                Background="{x:Null}" 
+                    BorderBrush="{x:Null}" 
+                    Foreground="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                                <ColumnDefinition Width="18*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Withdraw" Grid.Column="1"></TextBlock>
+                            <materialDesign:PackIcon Kind="Minus" Grid.Column="0"/>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!--adjust start date-->
+            <Button  Grid.Row="3"
+                Background="{x:Null}" 
+                    BorderBrush="{x:Null}" 
+                    Foreground="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                                <ColumnDefinition Width="18*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Adjust  start  date" Grid.Column="1"></TextBlock>
+                            <materialDesign:PackIcon Kind="CalendarStart"  Grid.Column="0"/>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!--adjust end date-->
+            <Button  Grid.Row="4"
+                Background="{x:Null}" 
+                    BorderBrush="{x:Null}" 
+                    Foreground="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                                <ColumnDefinition Width="18*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Adjust  end  date" Grid.Column="1"></TextBlock>
+                            <materialDesign:PackIcon Kind="CalendarEnd"  Grid.Column="0"/>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+
+            <!--Delete goal-->
+            <Button  Grid.Row="5">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"></ColumnDefinition>
+                                <ColumnDefinition Width="18*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Delete goal"  Grid.Column="1"
+                                            Foreground="red"></TextBlock>
+
+                            <materialDesign:PackIcon Kind="Delete"  Grid.Column="0"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

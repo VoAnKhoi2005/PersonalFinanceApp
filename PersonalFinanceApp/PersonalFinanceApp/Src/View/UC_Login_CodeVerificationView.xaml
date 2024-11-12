@@ -77,7 +77,6 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-
             </Grid>
         </materialDesign:Card>
     </Grid>

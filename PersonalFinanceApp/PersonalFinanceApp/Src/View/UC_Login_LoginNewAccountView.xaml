@@ -6,12 +6,11 @@
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
-
     <Grid>
-
         <materialDesign:Card x:Name="LoginCard"
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
+            Visibility="Visible" 
             UniformCornerRadius="40"
             >
             <Grid Background="#053b50">
@@ -37,6 +36,8 @@
                                     Foreground="#E5CBBFBF"
                                     VerticalAlignment="Top"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                    Text="{Binding UserName}"
+                                    x:Name="User"
                                     Width="400" 
                                     Height="40"
                                     Background="Transparent" Margin="5,1,-5,0"
@@ -98,14 +99,12 @@
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-
                             <!--invalid username or password-->
                             <Grid Visibility="Visible">
                                 
                             <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="15" Height="15" Margin="121,182,0,0"  />
                             <Label  Content="Incorrect username or password!" Foreground="Red" Margin="134,176,158,133"></Label>
                             </Grid>
-
                         </Grid>
                     </TabItem>
 
@@ -165,7 +164,6 @@
                                     </i:Interaction.Triggers>
                                 </PasswordBox>
                             </Border>
-
                             <Border Width="400" Height="40" Margin="130,171,30,80" Background="#084563" CornerRadius="15" VerticalAlignment="Bottom">
                                 <PasswordBox 
                                  x:Name="PasswordConfirmCreateAccount"
@@ -221,6 +219,125 @@
                         </Grid>
                     </TabItem>
                 </TabControl>
+            </Grid>
+        </materialDesign:Card>
+
+        <!-- Reset password-->
+        <materialDesign:Card x:Name="ResetPasswordCard" 
+                             Visibility="Hidden" 
+                             HorizontalAlignment="Center" 
+                             VerticalAlignment="Center"
+                             UniformCornerRadius="40">
+            <Grid Background="#053b50">
+                <Grid x:Name="ResetPasswordGrid"
+                Height="400" Width="560" Background="#053b50">
+                    <Label Content="Reset Password" FontSize="30" FontFamily="Sans Serif Collection" 
+                       VerticalContentAlignment="Top"
+                       HorizontalAlignment="Center"
+                       Margin="0 20 0 0"></Label>
+                    <Label Content="Username" Foreground="#E5CBBFBF" FontSize="16" Margin="33,130,441,223"></Label>
+                    <Border CornerRadius="15" Background="#084563" Margin="124,124,36,236" Width="400" Height="40">
+                        <TextBox 
+                        VerticalAlignment="Top"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                        Width="400" 
+                        Height="40"
+                        Background="Transparent" >
+                        </TextBox>
+                    </Border>
+
+                    <Label Content="Gmail" FontSize="16" Foreground="#E5CBBFBF" Width="50" Margin="51,208,459,159" RenderTransformOrigin="0.482,1.273">
+                    </Label>
+                    <Label Content="Invalid username or gmail!" Foreground="Red" Margin="124,246,288,130"></Label>
+                    <Border CornerRadius="15" Background="#084563" Margin="124,142,36,100" Width="400" Height="40">
+                        <TextBox 
+                        VerticalAlignment="Top"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                        Width="400" 
+                        Height="40"
+                        Background="Transparent" Margin="0,0,0,0" >
+                        </TextBox>
+                    </Border>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="Login Confirm" 
+                            FontSize="18"
+                            Width="300"
+                            Height="50"
+                            Background="#0d2129"
+                            Foreground="#E5FFFFFF" 
+                            Margin="130,305,130,45">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="Transparent" 
+                                CornerRadius="30" 
+                                BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" 
+                              VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:Card x:Name="ResetNewPasswordCard" 
+                             Visibility="Collapsed" HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             UniformCornerRadius="40">
+            <Grid Background="#053b50">
+                <Grid
+                    Height="400" Width="560" Background="#053b50">
+                    <Label Content="Reset Password" FontSize="30" FontFamily="Sans Serif Collection" 
+                       VerticalContentAlignment="Top"
+                       HorizontalAlignment="Center"
+                       Margin="0,20,0,314"></Label>
+                    <Label Content="New &#xD;&#xA;password" Foreground="#E5CBBFBF" FontSize="16" Margin="26,121,420,209"></Label>
+                    <Border CornerRadius="15" Background="#084563" Margin="124,124,36,236" Width="400" Height="40">
+                        <TextBox 
+                        VerticalAlignment="Top"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                        Width="400" 
+                        Height="40"
+                        Background="Transparent" Margin="0,2,0,0" />
+
+                    </Border>
+
+                    <Label Content="Password &#xD;&#xA;confirm" FontSize="16" Foreground="#E5CBBFBF" Margin="26,200,441,149" RenderTransformOrigin="0.482,1.273"/>
+
+                    <Border Width="400" Height="40" Margin="124,205,36,155" Background="#084563" CornerRadius="15">
+                        <PasswordBox 
+                            materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                    Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" 
+
+                        IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}" Margin="0,0,12,0"/>
+                    </Border>
+                    <Label Content="Password not match. Try again!" Foreground="Red" FontSize="14" Margin="140,254,212,120"></Label>
+                    <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="15" Height="15" Margin="126,261,0,0"  />
+
+
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="Create new password" 
+                            FontSize="18"
+                            Width="300"
+                            Height="50"
+                            Background="#0d2129"
+                            Foreground="#E5FFFFFF" 
+                            Margin="130,305,130,45">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="Transparent" 
+                                CornerRadius="30"
+                                        BorderThickness="1">
+                                    <ContentPresenter HorizontalAlignment="Center" 
+                              VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
             </Grid>
         </materialDesign:Card>
     </Grid>
