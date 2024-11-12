@@ -26,38 +26,38 @@
                 <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                 HorizontalAlignment="Left"
                                 Margin="20, 50, 0 ,0">
-                    <TextBlock>
-                    </TextBlock>
+                    <TextBox Width="60" Height="70">
+                    </TextBox>
                 </Border>
                 <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                  HorizontalAlignment="Left"
                                  Margin="110, 50, 0 ,0">
-                    <TextBlock>
-                    </TextBlock>
+                    <TextBox Width="60" Height="70">
+                    </TextBox>
                 </Border>
                 <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                 HorizontalAlignment="Left"
                                 Margin="200, 50, 0 ,0">
-                    <TextBlock>
-                    </TextBlock>
+                    <TextBox Width="60" Height="70">
+                    </TextBox>
                 </Border>
                 <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                  HorizontalAlignment="Left"
                                  Margin="290, 50, 0 ,0">
-                    <TextBlock>
-                    </TextBlock>
+                    <TextBox Width="60" Height="70">
+                    </TextBox>
                 </Border>
                 <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                 HorizontalAlignment="Left"
                                 Margin="380, 50, 0 ,0">
-                    <TextBlock>
-                    </TextBlock>
+                    <TextBox Width="60" Height="70">
+                    </TextBox>
                 </Border>
                 <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                 HorizontalAlignment="Left"
                                 Margin="468, 50, 0 ,0">
-                    <TextBlock>
-                    </TextBlock>
+                    <TextBox Width="60" Height="70">
+                    </TextBox>
                 </Border>
                 <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="20" Height="20" Margin="22,282,0,0"  />
                 <Label Content="Invalid code verification!" Foreground="Red" FontSize="16" Margin="42,276,328,88"></Label>
