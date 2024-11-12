@@ -6,10 +6,15 @@ namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
 public class ResetPasswordModelView : BaseViewModel
 {
-    public ICommand NavigateConfirmCommand { get; set; }
+    public ICommand NavigateConfirmEmailCommand { get; set; }
 
     public ResetPasswordModelView(LoginNavigationStore navigationStore)
     {
-        NavigateConfirmCommand = new ConfirmCommand(navigationStore);
+        NavigateConfirmEmailCommand = new ConfirmEmailCommand(navigationStore, this);
+    }
+
+    public bool VerifyEmail()
+    {
+        return true;
     }
 }

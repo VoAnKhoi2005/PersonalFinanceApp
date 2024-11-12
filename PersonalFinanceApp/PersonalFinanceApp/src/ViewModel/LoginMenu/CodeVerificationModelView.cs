@@ -6,10 +6,15 @@ namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
 public class CodeVerificationModelView : BaseViewModel
 {
-    public ICommand NavigationCreateNewPasswordCommand { get; set; }
+    public ICommand NavigationConfirmCodeCommand { get; set; }
 
     public CodeVerificationModelView(LoginNavigationStore navigationStore)
     {
-        NavigationCreateNewPasswordCommand = new CreateNewPasswordCommand(navigationStore);
+        NavigationConfirmCodeCommand = new ConfirmCodeCommand(navigationStore, this);
+    }
+
+    public bool VerifyCode()
+    {
+        return true;
     }
 }
