@@ -101,7 +101,7 @@ public class LoginNewAccountViewModel : BaseViewModel
             execute: LoginSuccess
             );
 
-        PasswordChangedCommand = new RelayCommand<PasswordBox>((p)  => true, (p) => { Password = p.Password; });
+        PasswordLoginChangedCommand = new RelayCommand<PasswordBox>((p)  => true, (p) => { PasswordLogin = p.Password; });
         PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p)  => true, (p) => { PasswordConfirm = p.Password; });
         FocusLoginCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
         FocusNewAccountCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
@@ -112,7 +112,7 @@ public class LoginNewAccountViewModel : BaseViewModel
 
     private void LoginSuccess(User loginUser)
     {
-        loginUser = DBManager.GetFirst<User>(u => u.Username == UserName);
+        loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
         MainWindow mainWindow = new MainWindow(loginUser);
         if (Application.Current.MainWindow != null) 
             Application.Current.MainWindow.Close();
@@ -122,7 +122,7 @@ public class LoginNewAccountViewModel : BaseViewModel
 
     private bool VerifyLogin(User? loginUser)
     {
-        loginUser = DBManager.GetFirst<User>(u => u.Username == UserName);
+        loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
         if (loginUser == null) {
             IncorrectPasswordUserName = true;
             return false;
