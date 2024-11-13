@@ -91,7 +91,7 @@
                                     Background="#0d2129"
                                     Foreground="#E5FFFFFF" 
                                     Margin="130,245,43,45"
-                                    Command="{Binding LoginConfirmCommand}">
+                                    Command="{Binding LoginCommand}">
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" 

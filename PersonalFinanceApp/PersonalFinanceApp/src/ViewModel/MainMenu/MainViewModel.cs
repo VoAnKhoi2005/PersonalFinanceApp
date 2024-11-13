@@ -1,30 +1,17 @@
-﻿namespace PersonalFinanceApp.ViewModel.MainMenu;
+﻿using System.Windows.Controls;
+
+namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class MainViewModel : BaseViewModel
 {
-    //public bool Isloaded = false;
-    //public ICommand LoadedWindowCommand { get; set; }
+    public DashboardViewModel DashboardViewModel { get; set; }
+    public GoalplanViewModel GoalplanViewModel { get; set; }
+    public SummaryViewModel SummaryViewModel { get; set; }
 
-    //public MainViewModel() {
-    //    LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
-    //        Isloaded = true;
-    //        if (p == null)
-    //            return;
-    //        p.Hide();
-    //        LoginWindow loginWindow = new LoginWindow();
-    //        loginWindow.ShowDialog();
-    //        p.Show();
-    //        if (loginWindow.DataContext == null)
-    //            return;
-
-    //        var loginVM = loginWindow.DataContext as LoginMainViewModel;
-
-    //        if (loginVM.IsLogin) {
-    //            p.Show();
-    //        }
-    //        else {
-    //            p.Close();
-    //        }
-    //    }
-    //      );
+    public MainViewModel()
+    {
+        DashboardViewModel = new DashboardViewModel();
+        GoalplanViewModel = new GoalplanViewModel();
+        SummaryViewModel = new SummaryViewModel();
+    }
 }

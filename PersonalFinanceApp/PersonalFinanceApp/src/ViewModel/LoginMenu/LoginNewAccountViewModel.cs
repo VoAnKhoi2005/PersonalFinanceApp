@@ -2,12 +2,13 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using PersonalFinanceApp.Database;
+using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
-public class LoginNewAccountModelView : BaseViewModel
+public class LoginNewAccountViewModel : BaseViewModel
 {
     #region Properties
 
@@ -18,7 +19,7 @@ public class LoginNewAccountModelView : BaseViewModel
     public bool IsCorrectPassword { get; set; } = false;
     public bool IsCorrectPasswordConfirm { get; set; } = false;
 
-    private string _userName;
+    private string _userName = string.Empty;
     public string UserName
     {
         get => _userName;
@@ -29,7 +30,7 @@ public class LoginNewAccountModelView : BaseViewModel
         }
     }
 
-    private string _password;
+    private string _password = string.Empty;
     public string Password
     {
         get => _password;
@@ -39,11 +40,11 @@ public class LoginNewAccountModelView : BaseViewModel
             OnPropertyChanged();
         }
     }
-    private string _passwordConirm;
+    private string _passwordConfirm;
     public string PasswordConfirm {
-        get => _passwordConirm;
+        get => _passwordConfirm;
         set {
-            _passwordConirm = value;
+            _passwordConfirm = value;
             OnPropertyChanged();
         }
     }
@@ -56,36 +57,42 @@ public class LoginNewAccountModelView : BaseViewModel
         }
     }
 
-    //public ICommand LoginCommand { get; set; }
+    public ICommand LoginCommand { get; set; }
     public ICommand ForgotPasswordCommand { get; set; }
     public ICommand PasswordChangedCommand { get; set; }
     public ICommand PasswordConfirmChangedCommand { get; set; }
 
-    private readonly LoginNavigationStore _navigationStore;
-
     #endregion
 
-    public LoginNewAccountModelView(LoginNavigationStore navigationStore)
+    public LoginNewAccountViewModel(NavigationStore navigationStore)
     {
-        _navigationStore = navigationStore;
-        ForgotPasswordCommand = new ForgotPasswordCommand(navigationStore);
-        PasswordChangedCommand = new RelayCommand<PasswordBox>((p)  => {return true;}, (p) => { Password = p.Password; });
-        PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p)  => {return true;}, (p) => { PasswordConfirm = p.Password; });
+        ForgotPasswordCommand = new NavigateCommand<ResetPasswordViewModel>(
+            navigationStore,
+            () => new ResetPasswordViewModel(navigationStore)
+        );
+
+        LoginCommand = new RelayCommand<User>(
+            canExecute: VerifyLogin,
+            execute: LoginSuccess
+            );
+
+        PasswordChangedCommand = new RelayCommand<PasswordBox>((p)  => true, (p) => { Password = p.Password; });
+        PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p)  => true, (p) => { PasswordConfirm = p.Password; });
     }
 
-    private void LoginSuccess(object parameter)
+    private void LoginSuccess(User loginUser)
     {
-        MainWindow mainWindow = new MainWindow();
+        loginUser = DBManager.GetFirst<User>(u => u.Username == UserName);
+        MainWindow mainWindow = new MainWindow(loginUser);
+        if (Application.Current.MainWindow != null) 
+            Application.Current.MainWindow.Close();
+        Application.Current.MainWindow = mainWindow;
         mainWindow.Show();
-        if (parameter is Window currentWindow)
-        {
-            currentWindow.Close();
-        }
     }
 
-    private bool VerifyLogin(object parameter)
+    private bool VerifyLogin(User? loginUser)
     {
-        var loginUser = DBManager.GetFirst<Model.User>(u => u.Username == UserName);
+        loginUser = DBManager.GetFirst<User>(u => u.Username == UserName);
         if (loginUser == null) {
             IsIncorrect = true;
             return false;

@@ -12,22 +12,9 @@ public class RelayCommand<T> : ICommand
         _execute = execute ?? throw new ArgumentNullException(nameof(execute));
     }
 
-    public bool CanExecute(object parameter)
-    {
-        try
-        {
-            return _canExecute((T)parameter);
-        }
-        catch
-        {
-            return true;
-        }
-    }
+    public bool CanExecute(object parameter) => _canExecute((T)parameter);
 
-    public void Execute(object parameter)
-    {
-        _execute((T)parameter);
-    }
+    public void Execute(object parameter) => _execute((T)parameter);
 
     public event EventHandler? CanExecuteChanged
     {

@@ -1,6 +1,6 @@
 ﻿namespace PersonalFinanceApp.ViewModel.Stores;
 
-public class LoginNavigationStore
+public class NavigationStore
 {
     public event Action CurrentViewModelChanged;
 

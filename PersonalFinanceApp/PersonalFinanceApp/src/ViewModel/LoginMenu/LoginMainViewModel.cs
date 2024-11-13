@@ -6,9 +6,9 @@ public class LoginMainViewModel : BaseViewModel
 {
     public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
 
-    private readonly LoginNavigationStore _navigationStore;
+    private readonly NavigationStore _navigationStore;
 
-    public LoginMainViewModel(LoginNavigationStore navigationStore)
+    public LoginMainViewModel(NavigationStore navigationStore)
     {
         _navigationStore = navigationStore;
         _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
