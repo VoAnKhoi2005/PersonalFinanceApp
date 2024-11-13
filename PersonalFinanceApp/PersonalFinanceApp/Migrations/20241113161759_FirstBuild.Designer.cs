@@ -11,8 +11,8 @@ using PersonalFinanceApp.Database;
 namespace PersonalFinanceApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241108021710_AddPassword")]
-    partial class AddPassword
+    [Migration("20241113161759_FirstBuild")]
+    partial class FirstBuild
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

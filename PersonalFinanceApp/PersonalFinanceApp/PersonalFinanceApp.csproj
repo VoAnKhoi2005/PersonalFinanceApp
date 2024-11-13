@@ -24,22 +24,15 @@
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlcipher" Version="2.1.10" />
-    <PackageReference Include="System.Data.SQLite" Version="1.0.119" />
     <PackageReference Include="XAct.Core.PCL" Version="0.0.5014" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.Data.SQLite">
-      <HintPath>..\..\..\..\database\SQLite Package\SQLite Package\System.Data.SQLite.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +44,9 @@
   <ItemGroup>
     <None Update="msvcr100.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="PFA.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

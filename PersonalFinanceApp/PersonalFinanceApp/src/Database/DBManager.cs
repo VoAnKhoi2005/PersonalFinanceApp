@@ -1,5 +1,7 @@
-﻿using System.Linq.Expressions;
+﻿using System.Configuration;
+using System.Linq.Expressions;
 using System.Reflection;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using PersonalFinanceApp.Model;
 
@@ -54,6 +56,23 @@ public static class DBManager
 
     public static T? GetFirst<T>(Expression<Func<T, bool>> condition, bool getDeleted = false, bool haveForeignKey = true) where T : class
     {
+        using (var connection = new SqliteConnection(ConfigurationManager.ConnectionStrings["MyDatabase"]?.ConnectionString))
+        {
+            connection.Open();
+            var command = connection.CreateCommand();
+            command.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name='USER';";
+            var result = command.ExecuteScalar();
+            if (result == null)
+            {
+                Console.WriteLine("Table does not exist.");
+            }
+            else
+            {
+                Console.WriteLine("Table exists.");
+            }
+        }
+
+
         if (!CheckTypeDatabase(typeof(T)))
             throw new InvalidOperationException("Data type not found in database.");
 
