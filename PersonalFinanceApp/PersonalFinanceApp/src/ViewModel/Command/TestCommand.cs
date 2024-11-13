@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using PersonalFinanceApp.View;
 
 namespace PersonalFinanceApp.ViewModel.Command;
@@ -7,7 +8,7 @@ public class TestCommand : BaseCommand
 {
     public static TestCommand Instance { get; } = new TestCommand();
 
-    private TestCommand() { }
+    public TestCommand() { }
 
     public override void Execute(object parameter)
     {
@@ -16,15 +17,23 @@ public class TestCommand : BaseCommand
 
     private void AccessDataContext()
     {
-        var window = Application.Current.Windows.OfType<LoginWindow>().FirstOrDefault();
-
+        var window = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+        var window2 = Application.Current.MainWindow;
         if (window != null)
         {
             var dataContext = window.DataContext;
-        }
-        else
-        {
-            Console.WriteLine("MainWindow not found in Application.Current.Windows.");
+
+            foreach (var item in window.TabControl1.Items)
+            {
+                if (item is TabItem tabItem)
+                {
+                    var dataContext1 = tabItem.DataContext;
+                }
+                else
+                {
+                    Console.WriteLine("MainWindow not found in Application.Current.Windows.");
+                }
+            }
         }
     }
 }

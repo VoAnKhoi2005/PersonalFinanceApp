@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:command="clr-namespace:PersonalFinanceApp.ViewModel.Command"
              d:DesignHeight="720" d:DesignWidth="942">
     <Grid>
         <Grid.Resources>
@@ -193,6 +194,7 @@
             </Grid>
                 <!--goal plan main looking-->
             <WrapPanel Grid.Row="2">
+                <Button Content="Test" Command="{x:Static command:TestCommand.Instance}"/>
             </WrapPanel>
         </Grid>
     </Grid>

@@ -4,12 +4,13 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using PersonalFinanceApp.Database;
+using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
-public class LoginNewAccountModelView : BaseViewModel
+public class LoginNewAccountViewModel : BaseViewModel
 {
     #region Properties
 
@@ -19,7 +20,7 @@ public class LoginNewAccountModelView : BaseViewModel
     public bool InCorrectPassword { get; set; } = false;
     public bool InCorrectPasswordConfirm { get; set; } = false;
 
-    private string _userNameLogin;
+    private string _userNameLogin= string.Empty;
     public string UserNameLogin
     {
         get => _userNameLogin;
@@ -30,7 +31,7 @@ public class LoginNewAccountModelView : BaseViewModel
         }
     }
 
-    private string _passwordLogin;
+    private string _passwordLogin = string.Empty;
     public string PasswordLogin
     {
         get => _passwordLogin;
@@ -56,11 +57,11 @@ public class LoginNewAccountModelView : BaseViewModel
             OnPropertyChanged();
         }
     }
-    private string _passwordConirm;
+    private string _passwordConfirm;
     public string PasswordConfirm {
-        get => _passwordConirm;
+        get => _passwordConfirm;
         set {
-            _passwordConirm = value;
+            _passwordConfirm = value;
             OnPropertyChanged();
         }
     }
@@ -73,9 +74,8 @@ public class LoginNewAccountModelView : BaseViewModel
         }
     }
 
-    #endregion
 
-    #region Command
+    public ICommand LoginCommand { get; set; }
     public ICommand ForgotPasswordCommand { get; set; }
     public ICommand PasswordLoginChangedCommand { get; set; }
     public ICommand PasswordNewAccountChangedCommand { get; set; }
@@ -86,17 +86,23 @@ public class LoginNewAccountModelView : BaseViewModel
     public ICommand ClearPasswordNewAccountConfirmCommand { get; set; }
     public ICommand ClearPasswordLoginCommand { get; set; }
 
-    private readonly LoginNavigationStore _navigationStore;
-
     #endregion
 
-    public LoginNewAccountModelView(LoginNavigationStore navigationStore)
+    public LoginNewAccountViewModel(NavigationStore navigationStore)
     {
-        _navigationStore = navigationStore;
-        ForgotPasswordCommand = new ForgotPasswordCommand(navigationStore);
-        PasswordLoginChangedCommand = new RelayCommand<PasswordBox>((p)  => {return true;}, (p) => { PasswordLogin = p.Password; });
-        PasswordNewAccountChangedCommand = new RelayCommand<PasswordBox>((p)  => {return true;}, (p) => { PasswordNewAccount = p.Password; });
-        PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p)  => {return true;}, (p) => { PasswordConfirm = p.Password; });
+
+        ForgotPasswordCommand = new NavigateCommand<ResetPasswordViewModel>(
+            navigationStore,
+            () => new ResetPasswordViewModel(navigationStore)
+        );
+
+        LoginCommand = new RelayCommand<User>(
+            canExecute: VerifyLogin,
+            execute: LoginSuccess
+            );
+
+        PasswordChangedCommand = new RelayCommand<PasswordBox>((p)  => true, (p) => { Password = p.Password; });
+        PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p)  => true, (p) => { PasswordConfirm = p.Password; });
         FocusLoginCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
         FocusNewAccountCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
         ClearPasswordLoginCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
@@ -104,19 +110,19 @@ public class LoginNewAccountModelView : BaseViewModel
         ClearPasswordNewAccountConfirmCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
     }
 
-    private void LoginSuccess(object parameter)
+    private void LoginSuccess(User loginUser)
     {
-        MainWindow mainWindow = new MainWindow();
+        loginUser = DBManager.GetFirst<User>(u => u.Username == UserName);
+        MainWindow mainWindow = new MainWindow(loginUser);
+        if (Application.Current.MainWindow != null) 
+            Application.Current.MainWindow.Close();
+        Application.Current.MainWindow = mainWindow;
         mainWindow.Show();
-        if (parameter is Window currentWindow)
-        {
-            currentWindow.Close();
-        }
     }
 
-    private bool VerifyLogin(object parameter)
+    private bool VerifyLogin(User? loginUser)
     {
-        var loginUser = DBManager.GetFirst<Model.User>(u => u.Username == UserNameLogin);
+        loginUser = DBManager.GetFirst<User>(u => u.Username == UserName);
         if (loginUser == null) {
             IncorrectPasswordUserName = true;
             return false;

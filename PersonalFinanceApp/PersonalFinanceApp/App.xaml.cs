@@ -10,12 +10,12 @@ namespace PersonalFinanceApp
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            LoginNavigationStore loginNavigationStore = new LoginNavigationStore();
-            loginNavigationStore.CurrentViewModel = new LoginNewAccountModelView(loginNavigationStore);
+            NavigationStore navigationStore = new NavigationStore();
+            navigationStore.CurrentViewModel = new LoginNewAccountViewModel(navigationStore);
 
-            MainWindow = new LoginWindow()
+            MainWindow = new LoginWindow
             {
-                DataContext = new LoginMainViewModel(loginNavigationStore)
+                DataContext = new LoginMainViewModel(navigationStore)
             };
             MainWindow.Show();
 

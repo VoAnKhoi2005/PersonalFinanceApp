@@ -26,7 +26,7 @@
                     <TransformGroup>
                         <ScaleTransform/>
                         <SkewTransform/>
-                        <RotateTransform Angle="-200.58400000000003"/>
+                        <RotateTransform Angle="-200.584"/>
                         <TranslateTransform/>
                     </TransformGroup>
                 </Image.RenderTransform>
@@ -59,19 +59,19 @@
             <ContentControl Content="{Binding CurrentViewModel}">
                 <ContentControl.Resources>
 
-                    <DataTemplate DataType="{x:Type loginViewModels:LoginNewAccountModelView}">
+                    <DataTemplate DataType="{x:Type loginViewModels:LoginNewAccountViewModel}">
                         <view:UC_Login_LoginNewAccountView />
                     </DataTemplate>
 
-                    <DataTemplate DataType="{x:Type loginViewModels:ResetPasswordModelView}">
+                    <DataTemplate DataType="{x:Type loginViewModels:ResetPasswordViewModel}">
                         <view:UC_Login_ResetPasswordView />
                     </DataTemplate>
 
-                    <DataTemplate DataType="{x:Type loginViewModels:CreateNewPasswordModelView}">
+                    <DataTemplate DataType="{x:Type loginViewModels:CreateNewPasswordViewModel}">
                         <view:UC_Login_CreateNewPasswordView/>
                     </DataTemplate>
 
-                    <DataTemplate DataType="{x:Type loginViewModels:CodeVerificationModelView}">
+                    <DataTemplate DataType="{x:Type loginViewModels:CodeVerificationViewModel}">
                         <view:UC_Login_CodeVerificationView />
                     </DataTemplate>
 

@@ -1,65 +1,74 @@
 ﻿<Window x:Class="PersonalFinanceApp.MainWindow"
+
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
+        xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
+        xmlns:viewModels="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu"
         mc:Ignorable="d"
 
-        xmlns:uc="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        x:Name="mainWindow"
         Background="#0D2129"
         ResizeMode="CanMinimize" Height="720" Width="1152"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        >
+        WindowStyle="None">
+
+    <Window.DataContext>
+        <viewModels:MainViewModel />
+    </Window.DataContext>
 
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Sans Serif Collection"/>
-                <Setter Property="Foreground" Value="#E5CBBFBF"/>
-                <Setter Property="FontWeight" Value="Regular"/>
+                <Setter Property="FontFamily" Value="Sans Serif Collection" />
+                <Setter Property="Foreground" Value="#E5CBBFBF" />
+                <Setter Property="FontWeight" Value="Regular" />
             </Style>
         </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
         <!-- background-->
-        <Grid>
-            <Image Margin="0,25,479,25" Source="/Resources/img/PigBackground.png" Stretch="Fill"/>
-            <Image Margin="812,-23,0,395" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+        <Grid Grid.RowSpan="2">
+            <Image Margin="0,25,479,25" Source="/Resources/img/PigBackground.png" Stretch="Fill" />
+            <Image Margin="812,-23,0,395" Source="/Resources/img/PigBackground.png" Stretch="Fill"
+                   RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-200.58400000000003"/>
-                        <TranslateTransform/>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform Angle="-200.58400000000003" />
+                        <TranslateTransform />
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
 
 
-            <Image Margin="740,270,7,37" Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
+            <Image Margin="740,270,7,37" Source="/Resources/img/PigBackground.png" Stretch="Fill"
+                   RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="294.99"/>
-                        <TranslateTransform/>
+                        <ScaleTransform ScaleY="-1" />
+                        <SkewTransform />
+                        <RotateTransform Angle="294.99" />
+                        <TranslateTransform />
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
             <Image HorizontalAlignment="Center"
                    VerticalAlignment="Top"
                    Margin="250,0,0,0"
-                Source="/Resources/img/PigBackground.png" 
+                   Source="/Resources/img/PigBackground.png"
                    Width="250" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-98"/>
-                        <TranslateTransform/>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform Angle="-98" />
+                        <TranslateTransform />
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
@@ -69,78 +78,74 @@
         <!-- User overall -->
 
         <!--Tab background-->
-        <materialDesign:Card Width="210" 
-                         Height="720" 
-                         HorizontalAlignment="Left" 
-                         VerticalAlignment="Bottom"
-                         Background="#003E57"></materialDesign:Card>
-
-
-
-        <materialDesign:PackIcon Kind="ExitToApp" Width="50" Height="50" 
-                             Foreground="#E5CBBFBF"
+        <materialDesign:Card Width="210"
+                             Height="720"
                              HorizontalAlignment="Left"
-                             VerticalAlignment="Bottom" 
-                             x:Name="Exit"
-                             />
+                             VerticalAlignment="Center"
+                             Background="#003E57" Grid.Row="1" />
 
+
+        <materialDesign:PackIcon Kind="ExitToApp" Width="50" Height="50"
+                                 Foreground="#E5CBBFBF"
+                                 VerticalAlignment="Bottom"
+                                 x:Name="Exit" Grid.Row="1" />
 
 
         <!--main menu-->
-
-
-        <TabControl Width="1152" Height="720" VerticalAlignment="Center" 
-                HorizontalAlignment="Center"
-                TabStripPlacement="Left" 
-                >
-
+        <TabControl Name="TabControl1"
+            Width="1152" Height="720" VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    TabStripPlacement="Left" Grid.Row="1">
             <!-- dashboard-->
 
-            <TabItem IsEnabled="False"></TabItem>
-            <TabItem Width="210" Height="60">
+            <TabItem Name="Title" IsEnabled="False"></TabItem>
+            <TabItem Name="Dashboard" Width="210" Height="60" DataContext="{Binding DashboardViewModel}">
                 <TabItem.Header>
-                    <Grid   VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Height="60" Width="210">
+                    <Grid VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          Height="60" Width="210">
                         <materialDesign:PackIcon Foreground="#E5CBBFBF"
-                                             Kind="Signal" 
-                                             Width="30" 
-                                             Height="30" 
-                                             VerticalAlignment="Center" Margin="12,0,0,0"/>
-                        <TextBlock Text="Dashboard" FontSize="18" 
-                               HorizontalAlignment="Right"
-                               VerticalAlignment="Center"
-                               Margin="0,0,40,0">
+                                                 Kind="Signal"
+                                                 Width="30"
+                                                 Height="30"
+                                                 VerticalAlignment="Center" Margin="12,0,0,0" />
+                        <TextBlock Text="Dashboard" FontSize="18"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,40,0">
 
                         </TextBlock>
                     </Grid>
                 </TabItem.Header>
 
-                <!--Usercontrol - Dashboard-->
-                <local:UC_Dashboard x:Name="UCDashboard"></local:UC_Dashboard>
+                <TabItem.ContentTemplate>
+                    <DataTemplate>
+                        <views:UC_Dashboard />
+                    </DataTemplate>
+                </TabItem.ContentTemplate>
 
             </TabItem>
+
             <TabItem Width="210" Height="60">
                 <TabItem.Header>
-                    <Grid   VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Height="60" Width="200">
+                    <Grid VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          Height="60" Width="200">
                         <TextBlock Text="Expense book"
-                               FontSize="18" 
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Left"
-                               Margin="71,0,0,0"></TextBlock>
+                                   FontSize="18"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Margin="71,0,0,0">
+                        </TextBlock>
                         <materialDesign:PackIcon Kind="BookOpenPageVariant" Foreground="#E5CBBFBF"
-                                             Width="30" 
-                                             Height="30" 
-                                             VerticalAlignment="Center"
-                                             Margin="8,0,0,0"/>
+                                                 Width="30"
+                                                 Height="30"
+                                                 VerticalAlignment="Center"
+                                                 Margin="8,0,0,0" />
 
                     </Grid>
                 </TabItem.Header>
             </TabItem>
-
-
 
             <!--Expense book-->
 
@@ -148,55 +153,69 @@
             <!--Goal plan-->
             <TabItem Width="210" Height="60">
                 <TabItem.Header>
-                    <Grid   VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Height="60" Width="210">
-                        <materialDesign:PackIcon Kind="FlagCheckered" 
-                                        Foreground="#E5CBBFBF"
-                                             Width="30" 
-                                             Height="30" 
-                                             VerticalAlignment="Center"
-                                             Margin="10,0,0,0"/>
-                        <TextBlock Text="Goal  plan" FontSize="18" 
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Margin="75,0,0,0">
+                    <Grid VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          Height="60" Width="210">
+                        <materialDesign:PackIcon Kind="FlagCheckered"
+                                                 Foreground="#E5CBBFBF"
+                                                 Width="30"
+                                                 Height="30"
+                                                 VerticalAlignment="Center"
+                                                 Margin="10,0,0,0" />
+                        <TextBlock Text="Goal  plan" FontSize="18"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Margin="75,0,0,0">
 
                         </TextBlock>
                     </Grid>
                 </TabItem.Header>
 
-                <local:UC_Goalplan x:Name="UCGoalplan"></local:UC_Goalplan>
+                <TabItem.ContentTemplate>
+                    <DataTemplate>
+                        <views:UC_Goalplan />
+                    </DataTemplate>
+                </TabItem.ContentTemplate>
+
+                <TabItem.DataContext>
+                    <viewModels:GoalplanViewModel />
+                </TabItem.DataContext>
+
             </TabItem>
 
             <!--Summary-->
             <TabItem Width="210" Height="60">
                 <TabItem.Header>
-                    <Grid   VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Height="60" Width="210">
-                        <materialDesign:PackIcon Kind="DatabaseEye" 
-                                            Foreground="#E5CBBFBF"
-                                             Width="30" 
-                                             Height="30" 
-                                             VerticalAlignment="Center"
-                                             Margin="11,0,0,0"/>
+                    <Grid VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          Height="60" Width="210">
+                        <materialDesign:PackIcon Kind="DatabaseEye"
+                                                 Foreground="#E5CBBFBF"
+                                                 Width="30"
+                                                 Height="30"
+                                                 VerticalAlignment="Center"
+                                                 Margin="11,0,0,0" />
 
-                        <TextBlock Text="Summary" FontSize="18" 
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Margin="76,0,0,0">
+                        <TextBlock Text="Summary" FontSize="18"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Margin="76,0,0,0">
 
                         </TextBlock>
                     </Grid>
                 </TabItem.Header>
 
+                <TabItem.ContentTemplate>
+                    <DataTemplate>
+                        <views:UC_Summary />
+                    </DataTemplate>
+                </TabItem.ContentTemplate>
 
-                <!--uc_summary-->
-                <local:UC_Summary x:Name="UCSummary"></local:UC_Summary>
-
-
+                <TabItem.DataContext>
+                    <viewModels:SummaryViewModel />
+                </TabItem.DataContext>
             </TabItem>
+
             <TabItem IsEnabled="False"></TabItem>
             <TabItem IsEnabled="False"></TabItem>
             <TabItem IsEnabled="False"></TabItem>
@@ -206,36 +225,37 @@
             <!--Option-->
             <TabItem Width="210" Height="60">
                 <TabItem.Header>
-                    <Grid   VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Height="60" Width="210">
-                        <materialDesign:PackIcon Kind="CogBox" 
-                                             Foreground="#E5CBBFBF"
-                                             Width="34" 
-                                             Height="34" 
-                                             VerticalAlignment="Center"
-                                             Margin="12,0,0,0"/>
+                    <Grid VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          Height="60" Width="210">
+                        <materialDesign:PackIcon Kind="CogBox"
+                                                 Foreground="#E5CBBFBF"
+                                                 Width="34"
+                                                 Height="34"
+                                                 VerticalAlignment="Center"
+                                                 Margin="12,0,0,0" />
 
-                        <TextBlock Text="Setting" FontSize="18" 
-                               HorizontalAlignment="Right"
-                               VerticalAlignment="Center"
-                               Margin="0,0,73,0">
+                        <TextBlock Text="Setting" FontSize="18"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,73,0">
 
                         </TextBlock>
                     </Grid>
                 </TabItem.Header>
             </TabItem>
         </TabControl>
-        <TextBlock Text="PENNYWISE" FontWeight="Bold" Foreground="White" FontSize="26" Margin="50,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-        <Image Source="/Resources/img/Logo_UIT_updated.svg.png" 
-               Width="35" Height="35" Margin="11,17,1106,668"/>
+        <TextBlock Text="PFA" TextAlignment="Center" FontWeight="Bold" Foreground="White" FontSize="26"
+                   Margin="50,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Height="64"
+                   Grid.RowSpan="2">
+        </TextBlock>
+        <Image Source="/Resources/img/Logo_UIT_updated.svg.png" Margin="11,1,1106,703" Grid.Row="1" />
 
-        
+
         <!--User Account-->
-        <local:UC_Main_UserAccountView x:Name="UCUserAccountView"
+        <!--<views:UC_Main_UserAccountView x:Name="UCUserAccountView"
                                        HorizontalAlignment="Right"
                                        VerticalAlignment="Top"
-                                       Margin="50"></local:UC_Main_UserAccountView>
+                                       Margin="0,18,50,0" Height="350" Grid.Row="1" Width="300" />-->
     </Grid>
 </Window>
- 
