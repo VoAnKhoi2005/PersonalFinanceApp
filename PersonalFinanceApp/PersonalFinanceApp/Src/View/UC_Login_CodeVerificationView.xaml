@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              >
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid>
         <materialDesign:Card x:Name="CodeVerificationCard"
             HorizontalAlignment="Center"
@@ -23,44 +26,51 @@
                             FontSize="18"
                             Foreground="#E5CBBFBF" Margin="65,84,44,271">
                 </Label>
+                <!--1-->
                 <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                 HorizontalAlignment="Left"
                                 Margin="20, 50, 0 ,0">
-                    <TextBox Width="60" Height="70">
-                    </TextBox>
+                        <TextBox Text="{Binding Number1}" Width="60" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
                 </Border>
+                <!--2-->
                 <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                  HorizontalAlignment="Left"
                                  Margin="110, 50, 0 ,0">
-                    <TextBox Width="60" Height="70">
-                    </TextBox>
+                    <TextBox Text="{Binding Number2}" Width="60" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
                 </Border>
+                <!--3-->
                 <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                 HorizontalAlignment="Left"
                                 Margin="200, 50, 0 ,0">
-                    <TextBox Width="60" Height="70">
-                    </TextBox>
+                    <TextBox Text="{Binding Number3}" Width="60" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
                 </Border>
+                <!--4-->
                 <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                  HorizontalAlignment="Left"
                                  Margin="290, 50, 0 ,0">
-                    <TextBox Width="60" Height="70">
-                    </TextBox>
+                    <TextBox Text="{Binding Number4}" Width="60" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
                 </Border>
+                <!--5-->
                 <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                 HorizontalAlignment="Left"
                                 Margin="380, 50, 0 ,0">
-                    <TextBox Width="60" Height="70">
-                    </TextBox>
+                    <TextBox Text="{Binding Number5}" Width="60" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
                 </Border>
+                <!--6-->
                 <Border  Width="80" Height="90" CornerRadius="30" Background="#D9D9D9"
                                 HorizontalAlignment="Left"
                                 Margin="468, 50, 0 ,0">
-                    <TextBox Width="60" Height="70">
-                    </TextBox>
+                    <TextBox Text="{Binding Number6}" Width="60" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"/>
                 </Border>
-                <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" Width="20" Height="20" Margin="22,282,0,0"  />
-                <Label Content="Invalid code verification!" Foreground="Red" FontSize="16" Margin="42,276,328,88"></Label>
+                
+                <!--Invalid code verification!-->
+                <StackPanel HorizontalAlignment="Center" Margin="0 275 0 90" Visibility="{Binding IncorrectVerify, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <WrapPanel  >
+                        <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
+                        <Label Content="Invalid code verification!" Foreground="Red" FontSize="16" ></Label>
+                    </WrapPanel>
+                </StackPanel>
+                
                 <Button Command="{Binding NavigationConfirmCodeCommand}" Width="50" Height="50" Margin="0,306,0,0">
                     <Button.Template>
                         <ControlTemplate>

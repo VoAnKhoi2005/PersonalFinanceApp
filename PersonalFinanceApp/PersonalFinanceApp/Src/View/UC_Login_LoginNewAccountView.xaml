@@ -23,7 +23,8 @@
                 materialDesign:ColorZoneAssist.Mode="Custom" >
 
                     <!--Login tab-->
-                    <TabItem Height="60" >
+                    <TabItem Height="60" x:Name="LoginTab">
+                        
                         <TabItem.Header>
                             <Label Content="LOGIN" FontSize="22" FontFamily="Arial" ></Label>
                         </TabItem.Header>
@@ -40,8 +41,8 @@
                                     Foreground="#E5CBBFBF"
                                     VerticalAlignment="Top"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                    Text="{Binding UserName}"
-                                    x:Name="User"
+                                    Text="{Binding UserNameLogin}"
+                                    x:Name="UserLogin"
                                     Width="400" 
                                     Height="40"
                                     Background="Transparent" Margin="5,1,-5,0">
@@ -52,22 +53,19 @@
                             <Label Content="Password" FontSize="16"  Foreground="#E5CBBFBF" Margin="31,134,366,174" RenderTransformOrigin="0.411,0.567"></Label>
                             <Border Width="400" Height="40" Margin="123,130,37,170" Background="#084563" CornerRadius="15" Grid.ColumnSpan="2">
                                 <PasswordBox 
-                                     Width="400" Height="40" x:Name="Password"
+                                     Width="400" Height="40" x:Name="passwordlogin"
                                      materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                                      materialDesign:TextFieldAssist.HasClearButton="True"
                                      IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
                                      Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="0,-4,0,4">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="PasswordChanged">
-                                            <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}"
-                                                                   CommandParameter="{Binding ElementName=Password}"/>
+                                            <i:InvokeCommandAction Command="{Binding PasswordLoginChangedCommand}"
+                                                                   CommandParameter="{Binding ElementName=passwordlogin}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </PasswordBox>
                             </Border>
-
-
-
                             <!--Remember me -->
                             <CheckBox Content="Remember me"
                                       Foreground="#E5CBBFBF"
@@ -106,18 +104,32 @@
                             </Button>
 
 
-                            <StackPanel Visibility="{Binding IsIncorrect, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <StackPanel Visibility="{Binding IncorrectPasswordUserName, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <WrapPanel Margin="130 175 100 50">
                                     <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
                                     <Label Content="Incorrect username or password!" Foreground="Red" ></Label>
                                 </WrapPanel>
                             </StackPanel>
                         </Grid>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding FocusLoginCommand}" 
+                                                       CommandParameter="{Binding ElementName=LoginTab}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding ClearPasswordNewAccountCommand}" 
+                                                       CommandParameter="{Binding ElementName=PasswordCreateAccount}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding ClearPasswordNewAccountConfirmCommand}" 
+                                                       CommandParameter="{Binding ElementName=PasswordConfirmCreateAccount}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </TabItem>
 
                     
                     <!--New account -->
-                    <TabItem  Height="60">
+                    <TabItem  Height="60" x:Name="NewAccountTab">
                         <TabItem.Header>
                             <Label Content="NEW ACCOUNT" FontSize="22"></Label>
                         </TabItem.Header>
@@ -130,7 +142,7 @@
                                 Width="400" 
                                 Height="40"
                                 Background="Transparent" Margin="0,2,0,0"
-                                Text="{Binding UserName}">
+                                Text="{Binding UserNameNewAccount}">
                                 </TextBox>
                             </Border>
 
@@ -165,7 +177,7 @@
                                 Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="-1,-2,1,2">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="PasswordChanged">
-                                            <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}"
+                                            <i:InvokeCommandAction Command="{Binding PasswordNewAccountChangedCommand}"
                                                                    CommandParameter="{Binding ElementName=PasswordCreateAccount}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
@@ -184,7 +196,9 @@
                                             <i:InvokeCommandAction Command="{Binding PasswordConfirmChangedCommand}"
                                                                    CommandParameter="{Binding ElementName=PasswordConfirmCreateAccount}"/>
                                         </i:EventTrigger>
+                                        
                                     </i:Interaction.Triggers>
+                                    
                                 </PasswordBox>
                             </Border>
                             <Label Content="Password&#xA;confirm" 
@@ -197,28 +211,28 @@
                             <!--invalid something-->
                             
                             <!--Worst Username-->
-                            <StackPanel Visibility="{Binding IsCorrectName, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <StackPanel Visibility="{Binding InCorrectName, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <WrapPanel Margin="130 75 100 50">
                                     <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
                                     <Label Content="Worst Username!" Foreground="Red" ></Label>
                                 </WrapPanel>
                             </StackPanel>
                             <!--Wrong Format Gmail-->
-                            <StackPanel Visibility="{Binding IsCorrectGmail, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <StackPanel Visibility="{Binding InCorrectGmail, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <WrapPanel Margin="130 137 100 50">
                                     <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
                                     <Label Content="Wrong Format Gmail!" Foreground="Red" ></Label>
                                 </WrapPanel>
                             </StackPanel>
                             <!--Worst Password-->
-                            <StackPanel Visibility="{Binding IsCorrectPassword, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <StackPanel Visibility="{Binding InCorrectPassword, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <WrapPanel Margin="130 197 100 50">
                                     <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
                                     <Label Content="Worst Password!" Foreground="Red" ></Label>
                                 </WrapPanel>
                             </StackPanel>
                             <!--Password not match-->
-                            <StackPanel Visibility="{Binding IsCorrectPasswordConfirm, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <StackPanel Visibility="{Binding InCorrectPasswordConfirm, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <WrapPanel Margin="130 260 100 50">
                                     <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
                                     <Label Content="Password not match. Try again!" Foreground="Red" ></Label>
@@ -250,6 +264,17 @@
                                 </Button.Template>
                             </Button>
                         </Grid>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding FocusNewAccountCommand}" 
+                                                       CommandParameter="{Binding ElementName=NewAccountTab}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding ClearPasswordLoginCommand}" 
+                                                       CommandParameter="{Binding ElementName=passwordlogin}" />
+                            </i:EventTrigger>
+                            
+                        </i:Interaction.Triggers>
                     </TabItem>
                 </TabControl>
             </Grid>

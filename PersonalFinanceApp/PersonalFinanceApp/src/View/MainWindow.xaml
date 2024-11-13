@@ -16,12 +16,6 @@
         WindowStyle="None"
         >
 
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" 
-                                   CommandParameter="{Binding ElementName=mainWindow}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
