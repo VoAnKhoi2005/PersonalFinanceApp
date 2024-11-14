@@ -7,7 +7,14 @@ namespace PersonalFinanceApp.ViewModel.LoginMenu;
 public class ResetPasswordViewModel : BaseViewModel
 {
     #region Properties
-    public bool IncorrectUserGmail { get; set; } = false;
+    private bool _incorrectUserGmail = false;
+    public bool IncorrectUserGmail {
+        get => _incorrectUserGmail;
+        set {
+            _incorrectUserGmail = value;
+            OnPropertyChanged();
+        }
+    }
     private string _userNameReset;
     public string UserNameReset {
         get => _userNameReset;
