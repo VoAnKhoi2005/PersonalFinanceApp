@@ -98,20 +98,29 @@
                         <Label Content="Invalid code verification!" Foreground="Red" FontSize="16" ></Label>
                     </WrapPanel>
                 </StackPanel>
-                
-                <Button Command="{Binding NavigationConfirmCodeCommand}" Width="50" Height="50" Margin="0,306,0,0">
+
+                <Button Command="{Binding NavigationConfirmCodeCommand}" 
+                        Width="50" 
+                        Height="50" 
+                        Margin="0,306,0,0">
                     <Button.Template>
                         <ControlTemplate>
-                            <materialDesign:PackIcon Kind="ArrowUpCircle" Width="50" Height="50"  HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5" Foreground="#FFDFD1D1">
-                                <materialDesign:PackIcon.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform Angle="90"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </materialDesign:PackIcon.RenderTransform>
-                            </materialDesign:PackIcon>
+                            <Grid Width="50" Height="50">
+                                <materialDesign:PackIcon Kind="ArrowUpCircle" 
+                                                     Width="50" 
+                                                     Height="50"  
+                                                     HorizontalAlignment="Center" 
+                                                         RenderTransformOrigin="0.5,0.5" Foreground="#FFDFD1D1" Background="#FF053B50">
+                                    <materialDesign:PackIcon.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="90"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </materialDesign:PackIcon.RenderTransform>
+                                </materialDesign:PackIcon>
+                            </Grid>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>

@@ -24,6 +24,16 @@
                 <Setter Property="Foreground" Value="#E5CBBFBF" />
                 <Setter Property="FontWeight" Value="Regular" />
             </Style>
+            <Style TargetType="Button">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="Cursor" Value="Hand"></Setter>
+                    </Trigger>
+                    <Trigger Property="IsFocused" Value="true">
+                        <Setter Property="Background" Value="#0D2129"></Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </Grid.Resources>
         <!-- background-->
 
@@ -91,18 +101,23 @@
                                HorizontalAlignment="Center"
                                Margin="50,0,0,0"
                                FontWeight="Bold"></TextBlock>
+                    <TextBlock ></TextBlock>
+
                 </Grid>
             </Border>
             
             <!--Dashboard-->
-            <Button Height="60" VerticalAlignment="top"
-                    Background="Transparent"
-                    DockPanel.Dock="Top">
+            <Button Height="60" VerticalAlignment="top" 
+                    DockPanel.Dock="Top"
+                    IsHitTestVisible="True">
                 <Button.Template>
                     <ControlTemplate>
                         <Grid VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
-                                Height="60" Width="210">
+                            Height="60" Width="210"
+                              Background="Transparent">
+                            <TextBlock ></TextBlock>
+
                             <materialDesign:PackIcon Foreground="#E5CBBFBF"
                              Kind="Signal"
                              Width="30"
@@ -113,14 +128,28 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         Margin="0,0,41,0" FontWeight="Normal"/>
-                        </Grid> 
+
+                        </Grid>
                     </ControlTemplate>
                 </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="true">
+                                <Setter Property="Foreground" Value="#0D2129"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
             </Button>
             <!--Expense book-->
             <Button Height="60" VerticalAlignment="top"
                     Background="Transparent"
-                    DockPanel.Dock="Top">
+                    DockPanel.Dock="Top"
+                    IsHitTestVisible="True">
                 <Button.Template>
                     <ControlTemplate>
                         <Grid VerticalAlignment="Center"
@@ -138,6 +167,7 @@
                                                  Height="30"
                                                  VerticalAlignment="Center"
                                                  Margin="8,0,0,0" />
+                            <TextBlock ></TextBlock>
 
                         </Grid>
                     </ControlTemplate>
@@ -146,7 +176,8 @@
             <!--Goal plan-->
             <Button Height="60" VerticalAlignment="top"
                     Background="Transparent"
-                    DockPanel.Dock="Top">
+                    DockPanel.Dock="Top"
+                    IsHitTestVisible="True">
                 <Button.Template>
                     <ControlTemplate>
                         <Grid VerticalAlignment="Center"
@@ -163,7 +194,8 @@
                                        Foreground="#E5CBBFBF"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
-                                        Margin="0,0,53,0" FontWeight="Normal"/>
+                                        Margin="0,0,53,0" FontWeight="Normal"></TextBlock>
+                            <TextBlock ></TextBlock>
                         </Grid>
                     </ControlTemplate>
                 </Button.Template>
@@ -171,7 +203,8 @@
             <!--Summary-->
             <Button Height="60" VerticalAlignment="top"
                     Background="Transparent"
-                    DockPanel.Dock="Top">
+                    DockPanel.Dock="Top"
+                    IsHitTestVisible="True">
                 <Button.Template>
                     <ControlTemplate>
                         <Grid VerticalAlignment="Center"
@@ -189,10 +222,8 @@
                                    VerticalAlignment="Center"
                                        FontWeight="Normal"
                                         Foreground="#E5CBBFBF"
-                                       
                                    Margin="27,0,0,0"/>
-
-
+                            <TextBlock ></TextBlock>
                         </Grid>
                     </ControlTemplate>
                 </Button.Template>
@@ -219,7 +250,6 @@
                                        FontWeight="Normal"
                                         Foreground="#E5CBBFBF"
                                    Margin="0,0,73,0"/>
-
                         </Grid>
                     </ControlTemplate>
                 </Button.Template>
@@ -242,8 +272,6 @@
 
             </ContentControl.Resources>
         </ContentControl>
-
-        <!--<views:UC_Summary Grid.Column="1"></views:UC_Summary>-->
         <!--User Account-->
         <!--<views:UC_Main_UserAccountView x:Name="UCUserAccountView"
                                        HorizontalAlignment="Right"

@@ -26,6 +26,7 @@
                     </Style>
                 </Grid.Resources>
                 <!--User's avatar-->
+                
                 <!--@Username-->
                 <TextBlock Text="@username" Foreground="#BDBDBD" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 15, 0 , 0"></TextBlock>
 
