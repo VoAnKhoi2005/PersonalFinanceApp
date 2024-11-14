@@ -5,8 +5,11 @@ using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
+using PersonalFinanceApp.etc;
 using PersonalFinanceApp.Model;
+using PersonalFinanceApp.View;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
@@ -53,6 +56,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
 
     private string _userNameLogin = string.Empty;
     public string UserNameLogin {
+
         get => _userNameLogin;
         set {
             _userNameLogin = value;
@@ -61,47 +65,67 @@ public class LoginNewAccountViewModel : BaseViewModel {
     }
 
     private string _passwordLogin = string.Empty;
-    public string PasswordLogin {
+
+
+    public string PasswordLogin
+    {
         get => _passwordLogin;
         set {
             _passwordLogin = value;
             OnPropertyChanged();
         }
     }
+
     private string _userNameNewAccount;
-    public string UserNameNewAccount {
+
+    public string UserNameNewAccount
+    {
         get => _userNameNewAccount;
-        set {
+        set
+        {
             _userNameNewAccount = value;
             OnPropertyChanged();
         }
     }
+
     private string _passwordNewAccount;
-    public string PasswordNewAccount {
+
+    public string PasswordNewAccount
+    {
         get => _passwordNewAccount;
-        set {
+        set
+        {
             _passwordNewAccount = value;
             OnPropertyChanged();
         }
     }
+
     private string _passwordConfirm;
-    public string PasswordConfirm {
+
+    public string PasswordConfirm
+    {
         get => _passwordConfirm;
-        set {
+        set
+        {
             _passwordConfirm = value;
             OnPropertyChanged();
         }
     }
+
     private string _gmail;
-    public string Gmail {
+
+    public string Gmail
+    {
         get => _gmail;
-        set {
+        set
+        {
             _gmail = value;
             OnPropertyChanged();
         }
     }
     #endregion
 
+    private readonly IServiceProvider _serviceProvider;
     #region Command
     public ICommand LoginCommand { get; set; }
     public ICommand ForgotPasswordCommand { get; set; }
@@ -120,11 +144,13 @@ public class LoginNewAccountViewModel : BaseViewModel {
 
     #endregion
 
-    public LoginNewAccountViewModel(NavigationStore navigationStore) {
 
+    public LoginNewAccountViewModel(IServiceProvider serviceProvider)
+    {
+        _serviceProvider = serviceProvider;
         ForgotPasswordCommand = new NavigateCommand<ResetPasswordViewModel>(
-            navigationStore,
-            () => new ResetPasswordViewModel(navigationStore)
+            serviceProvider.GetRequiredService<NavigationStore>(),
+            () => serviceProvider.GetRequiredService<ResetPasswordViewModel>()
         );
 
         LoginCommand = new RelayCommand<User>(
@@ -137,6 +163,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
         PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p) => true, (p) => { PasswordConfirm = p.Password; });
         //Clear text
         FocusLoginCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
+
         FocusNewAccountCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
         ClearPasswordLoginCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
         ClearPasswordNewAccountCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
@@ -150,24 +177,35 @@ public class LoginNewAccountViewModel : BaseViewModel {
 
     private void LoginSuccess(User loginUser) {
         loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
-        MainWindow mainWindow = new MainWindow(loginUser);
+
+
+        var factory = _serviceProvider.GetRequiredService<IMainWindowFactory>();
+        MainWindow mainWindow = factory.CreateMainWindow(loginUser);
+
         if (Application.Current.MainWindow != null)
             Application.Current.MainWindow.Close();
+
         Application.Current.MainWindow = mainWindow;
         mainWindow.Show();
     }
 
     private bool VerifyLogin(User? loginUser) {
         loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
-        if (loginUser == null) {
+        if (loginUser == null)
+        {
             return false;
         }
+
         return loginUser.VerifyPassword(PasswordLogin);
     }
-    private void ClearText(object parameter) {
+
+    private void ClearText(object parameter)
+    {
         TabItem tab = parameter as TabItem;
-        if (tab != null) {
-            switch (tab.Name) {
+        if (tab != null)
+        {
+            switch (tab.Name)
+            {
                 case "LoginTab":
                     UserNameNewAccount = string.Empty;
                     Gmail = string.Empty;
@@ -179,14 +217,15 @@ public class LoginNewAccountViewModel : BaseViewModel {
                 case "NewAccountTab":
                     UserNameLogin = string.Empty;
                     break;
-                default:
-                    break;
             }
         }
     }
-    private void ClearPassword(object parameter) {
+
+    private void ClearPassword(object parameter)
+    {
         PasswordBox p = parameter as PasswordBox;
-        if (p != null) {
+        if (p != null)
+        {
             p.Password = "";
         }
     }

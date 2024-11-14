@@ -1,18 +1,20 @@
-﻿using System.Windows.Controls;
+﻿using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class MainViewModel : BaseViewModel
 {
+    private readonly NavigationStore _navigationStore;
+    public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
 
-    public DashboardViewModel DashboardViewModel { get; set; }
-    public GoalplanViewModel GoalplanViewModel { get; set; }
-    public SummaryViewModel SummaryViewModel { get; set; }
-
-    public MainViewModel()
+    public MainViewModel(NavigationStore navigationStore)
     {
-        DashboardViewModel = new DashboardViewModel();
-        GoalplanViewModel = new GoalplanViewModel();
-        SummaryViewModel = new SummaryViewModel();
+        _navigationStore = navigationStore;
+        _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+    }
+
+    private void OnCurrentViewModelChanged()
+    {
+        OnPropertyChanged(nameof(CurrentViewModel));
     }
 }

@@ -1,19 +1,20 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using PersonalFinanceApp.Model;
+using PersonalFinanceApp.ViewModel;
+using PersonalFinanceApp.ViewModel.MainMenu;
 
-namespace PersonalFinanceApp
+namespace PersonalFinanceApp.View;
+
+public partial class MainWindow : Window
 {
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        public MainWindow(User curUser)
-        {
-            InitializeComponent();
-        }
+    public MainWindow(BaseViewModel datacontext, User curUser)
+    {
+        DataContext = datacontext;
+        InitializeComponent();
     }
 }

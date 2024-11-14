@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
@@ -34,11 +35,11 @@ public class ResetPasswordViewModel : BaseViewModel
     #endregion
     public ICommand NavigateConfirmEmailCommand { get; set; }
 
-    public ResetPasswordViewModel(NavigationStore navigationStore)
+    public ResetPasswordViewModel(IServiceProvider serviceProvider)
     {
         NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(
-            navigationStore,
-            () => new CodeVerificationViewModel(navigationStore),
+            serviceProvider.GetRequiredService<NavigationStore>(),
+            () => serviceProvider.GetRequiredService<CodeVerificationViewModel>(),
             VerifyEmail
         );
     }

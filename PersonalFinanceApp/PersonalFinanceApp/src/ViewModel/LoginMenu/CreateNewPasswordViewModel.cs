@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
@@ -43,15 +44,14 @@ public class CreateNewPasswordViewModel : BaseViewModel {
     }
     #endregion
     public ICommand NavigationConfirmNewPassword { get; set; }
-
     public ICommand PasswordResetConfirmChangedCommand { get; set; }
     public ICommand CheckMathConfirmPasswordNewCommand { get; set; }
     public ICommand CheckFormatPassowrdNewCommand { get; set; }
-
     public CreateNewPasswordViewModel(NavigationStore navigationStore) {
+
         NavigationConfirmNewPassword = new NavigateCommand<LoginNewAccountViewModel>(
-            navigationStore,
-            () => new LoginNewAccountViewModel(navigationStore),
+            serviceProvider.GetRequiredService<NavigationStore>(),
+            () => serviceProvider.GetRequiredService<LoginNewAccountViewModel>(),
             VerifyNewPassword
             );
         PasswordResetConfirmChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { PasswordResetConfirm = p.Password; });

@@ -7,7 +7,7 @@ public class GoalplanViewModel : BaseViewModel
 {
     public ICommand testCommand { get; set; }
 
-    public GoalplanViewModel()
+    public GoalplanViewModel(IServiceProvider serviceProvider)
     {
         testCommand = new TestCommand();
     }
