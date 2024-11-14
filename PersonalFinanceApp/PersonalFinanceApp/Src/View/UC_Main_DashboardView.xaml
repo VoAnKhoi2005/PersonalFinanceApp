@@ -17,30 +17,44 @@
         </Grid.Resources>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30*"></RowDefinition>
-                <RowDefinition Height="175"></RowDefinition>
-                <RowDefinition Height="217*"></RowDefinition>
+                <RowDefinition Height="0.125*"></RowDefinition>
+                <RowDefinition Height="0.35*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <!--Dashboad - user icon-->
             <Grid Grid.Row="0">
-                <TextBlock Text="Dashboard" 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="421*"></ColumnDefinition>
+                    <ColumnDefinition Width="50*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="43*"></RowDefinition>
+                        <RowDefinition Height="23*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                    Text="Dashboard" 
                                FontSize="28" 
                                FontWeight="Bold"
                                HorizontalAlignment="Left"
-                               VerticalAlignment="Top" Margin="25,-10,0,0" Height="55"
+                               VerticalAlignment="Center" Margin="25,-10,0,0" Height="55" Width="150"
                                ></TextBlock>
-                <TextBlock Text="easy way to get a comprehensive overview of important data" 
+                    <TextBlock Grid.Row="1"
+                    Text="easy way to get a comprehensive overview of important data" 
                                FontSize="14"
-                               VerticalAlignment="Bottom"
-                               HorizontalAlignment="Left" Margin="26,0,0,-7"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left" Margin="26,0,0,-7" Height="37" Width="383"
                                ></TextBlock>
-                <materialDesign:PackIcon Kind="AccountBadge"
+                </Grid>
+                <materialDesign:PackIcon Grid.Column="1"
+                    Kind="AccountBadge"
                                          Width="30" Height="30"
                                          Foreground="#E5CBBFBF"
-                                         HorizontalAlignment="Right"
+                                         HorizontalAlignment="Center"
                                          VerticalAlignment="Center"
-                                         Margin="0,0,20,0"/>
+                                         Margin="10,0,0,0"
+                                         />
             </Grid>
 
             <!--total balance  - income - expense - total saving -->
@@ -280,20 +294,20 @@
                                            FontSize="18"
                                            FontWeight="Bold"
                                            Margin="15,0,0,0"></TextBlock>
-                                
+
                                 <!--goal list here-->
                                 <WrapPanel Grid.Row="1">
-                                    
+
                                 </WrapPanel>
                             </Grid>
 
                         </Border>
                     </Grid>
                 </Grid>
-                
+
                 <!--activity-->
                 <Grid Grid.Row="0">
-                   <Border                                 
+                    <Border                                 
                     Background="#053B50" 
                         CornerRadius="30"
                         Margin="15, 7.5, 7.5, 15">

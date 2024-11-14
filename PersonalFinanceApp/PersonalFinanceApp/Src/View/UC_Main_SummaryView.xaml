@@ -21,24 +21,37 @@
             <RowDefinition Height="217*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-
-            <TextBlock Text="Summary" 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <materialDesign:PackIcon Kind="AccountBadge"
+                                         Width="30" Height="30"
+                                         Foreground="#E5CBBFBF"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                     Grid.Column="1"/>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48*"></RowDefinition>
+                    <RowDefinition Height="19*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Summary" 
                                FontSize="28" 
                                FontWeight="Bold"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top" Margin="25,-10,0,0" Height="55"
+                           Grid.Row="0"
                                ></TextBlock>
-            <TextBlock Text="Detailed overview of your finacial situation" 
+                <TextBlock Text="Detailed overview of your finacial situation" 
                                FontSize="14"
-                               VerticalAlignment="Bottom"
-                               HorizontalAlignment="Left" Margin="26,0,0,-13"
+                               VerticalAlignment="Center" Margin="26,0,0,0" 
+                               HorizontalAlignment="Left"
+                           Grid.Row="1"
                                ></TextBlock>
-            <materialDesign:PackIcon Kind="AccountBadge"
-                                         Width="30" Height="30"
-                                         Foreground="#E5CBBFBF"
-                                         HorizontalAlignment="Right"
-                                         VerticalAlignment="Center"
-                                         Margin="0,0,20,0"/>
+            </Grid>
+
+
 
         </Grid>
         <Grid Grid.Row="1">

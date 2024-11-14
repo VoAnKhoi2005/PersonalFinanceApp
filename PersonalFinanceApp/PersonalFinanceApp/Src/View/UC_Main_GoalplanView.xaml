@@ -18,28 +18,43 @@
         </Grid.Resources>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="22*"></RowDefinition>
-                <RowDefinition Height="80"></RowDefinition>
-                <RowDefinition Height="189*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
+                <RowDefinition Height="65*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <TextBlock Text="Goal plan" 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="421*"></ColumnDefinition>
+                    <ColumnDefinition Width="50*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="48*"></RowDefinition>
+                        <RowDefinition Height="19*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Goal plan" 
                                FontSize="28" 
                                FontWeight="Bold"
                                HorizontalAlignment="Left"
-                               VerticalAlignment="Top" Margin="25,-10,0,0" Height="55"
+                               VerticalAlignment="Top" Margin="25,-10,0,0" 
+                               Height="55" Width="126"
+                               Grid.Row="0"
                                ></TextBlock>
-                <TextBlock Text="Create financial goals and manage your savings" 
+                    <TextBlock Text="Create financial goals and manage your savings" 
                                FontSize="14"
-                               VerticalAlignment="Bottom"
-                               HorizontalAlignment="Left" Margin="26,0,0,-7"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left" Margin="26,0,0,0" 
+                               Height="37" Width="303"
+                               Grid.Row="1"
                                ></TextBlock>
+                </Grid>
+
                 <materialDesign:PackIcon Kind="AccountBadge"
                                          Width="30" Height="30"
                                          Foreground="#E5CBBFBF"
-                                         HorizontalAlignment="Right"
+                                         HorizontalAlignment="Center"
                                          VerticalAlignment="Center"
-                                         Margin="0,0,20,0"/>
+                                         Grid.Column="1"/>
             </Grid>
 
             <Grid Grid.Row="1">
@@ -55,147 +70,212 @@
                 <!--Total target amount-->
                 <Grid Grid.Column="0">
                     <Border CornerRadius="20"
-                Margin="15,15,7.5,0"
-                Background="#053B50">
-                        <!--margin-->
-                        <Canvas>
-
-
-                            <materialDesign:PackIcon Kind="CashMultiple"
+                            Margin="15,15,7.5,0"
+                            Background="#053B50">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.65*"></RowDefinition>
+                                <RowDefinition  Height="0.35*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon Kind="CashMultiple"
                                                      Foreground="#E5CBBFBF"
-                                                     Height="30"
-                                                     Width="30"
-                                                     HorizontalAlignment="Left"
+                                                     Height="28"
+                                                     Width="28"
+                                                     HorizontalAlignment="Right"
                                                      VerticalAlignment="Center"
-                                                     Canvas.Top="10" Canvas.Left="10"/>
+                                                     Grid.Column="0"/>
+
+                                <!--Binding money here-->
+                                <TextBlock Text="xxx"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                    ></TextBlock>
+                            </Grid>
+
                             <TextBlock Text="Total target amount"
                                        FontSize="12"
-                                       Canvas.Top="35"
-                                       Canvas.Left="18"></TextBlock>
-
-                            <!--Binding money here-->
-                            <TextBlock></TextBlock>
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Bottom"
+                                       Grid.Row="1"></TextBlock>
 
 
-                        </Canvas>
+
+                        </Grid>
                     </Border>
                 </Grid>
 
                 <!--Left to save-->
+
                 <Grid Grid.Column="1">
                     <Border CornerRadius="20"
-                        Margin="15,15,7.5,0"
-                        Background="#053B50">
-                        <Canvas>
-
-
-                            <materialDesign:PackIcon Kind="HandCoin" 
-                                                    Foreground="#E5CBBFBF"
-                                                     Height="30"
-                                                     Width="30"
-                                                     HorizontalAlignment="Left"
+                            Margin="15,15,7.5,0"
+                            Background="#053B50">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.65*"></RowDefinition>
+                                <RowDefinition  Height="0.35*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon Kind="HandCoin" 
+                                                     Foreground="#E5CBBFBF"
+                                                     Height="28"
+                                                     Width="28"
+                                                     HorizontalAlignment="Right"
                                                      VerticalAlignment="Center"
-                                                     Canvas.Top="10" Canvas.Left="10"/>
+                                                     Grid.Column="0"/>
+
+                                <!--Binding money here-->
+                                <TextBlock Text="xxx"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                    ></TextBlock>
+                            </Grid>
+
                             <TextBlock Text="Left to save"
                                        FontSize="12"
-                                       Canvas.Top="35"
-                                       Canvas.Left="50"></TextBlock>
-
-                            <!--Binding money here-->
-                            <TextBlock></TextBlock>
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Bottom"
+                                       Grid.Row="1"></TextBlock>
 
 
-                        </Canvas>
+
+                        </Grid>
                     </Border>
                 </Grid>
-
-
+                
                 <!--Monthly savings target-->
                 <Grid Grid.Column="2">
                     <Border CornerRadius="20"
-                        Margin="15,15,7.5,0"    
-                        Background="#053B50">
-                        <Canvas>
-
-
-                            <materialDesign:PackIcon Kind="BullseyeArrow" 
+                            Margin="15,15,7.5,0"
+                            Background="#053B50">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.65*"></RowDefinition>
+                                <RowDefinition  Height="0.35*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon Kind="BullseyeArrow" 
                                                      Foreground="#E5CBBFBF"
-                                                     Height="30"
-                                                     Width="30"
-                                                     HorizontalAlignment="Left"
+                                                     Height="28"
+                                                     Width="28"
+                                                     HorizontalAlignment="Right"
                                                      VerticalAlignment="Center"
-                                                     Canvas.Top="10" Canvas.Left="10"/>
-                            <TextBlock Text="monthly savings target"
-                                       FontSize="12"
-                                       Canvas.Top="35"
-                                       Canvas.Left="8"></TextBlock>
+                                                     Grid.Column="0"/>
 
-                            <!--Binding money here-->
-                            <TextBlock></TextBlock>
-                        </Canvas>
+                                <!--Binding money here-->
+                                <TextBlock Text="xxx"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                    ></TextBlock>
+                            </Grid>
+
+                            <TextBlock Text="Monthly savings target"
+                                       FontSize="12"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Bottom"
+                                       Grid.Row="1"></TextBlock>
+
+
+
+                        </Grid>
                     </Border>
                 </Grid>
 
                 <!--Save so far-->
                 <Grid Grid.Column="3">
                     <Border CornerRadius="20"
-                        Margin="15,15,7.5,0"
-                        Background="#053B50">
-                        <Canvas>
-                            <materialDesign:PackIcon Kind="CreditCardFast"
-                                                    Foreground="#E5CBBFBF"
-                                                     Height="30"
-                                                     Width="30"
-                                                     HorizontalAlignment="Left"
+                            Margin="15,15,7.5,0"
+                            Background="#053B50">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.65*"></RowDefinition>
+                                <RowDefinition  Height="0.35*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon Kind="CreditCardFast"
+                                                     Foreground="#E5CBBFBF"
+                                                     Height="28"
+                                                     Width="28"
+                                                     HorizontalAlignment="Right"
                                                      VerticalAlignment="Center"
-                                                     Canvas.Top="10" Canvas.Left="10"/>
-                            <TextBlock Text="save so far"
-                                       FontSize="12"
-                                       Canvas.Top="35"
-                                       Canvas.Left="50"></TextBlock>
+                                                     Grid.Column="0"/>
 
-                            <!--Binding money here-->
-                            <TextBlock></TextBlock>
-                        </Canvas>
+                                <!--Binding money here-->
+                                <TextBlock Text="xxx"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                    ></TextBlock>
+                            </Grid>
+
+                            <TextBlock Text="Save so far"
+                                       FontSize="12"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Bottom"
+                                       Grid.Row="1"
+                                       ></TextBlock>
+
+
+
+                        </Grid>
                     </Border>
                 </Grid>
-                <Grid Grid.Column="5">
-                    <Button Height="50"
+
+                <!--add new-->
+                <Button Height="50"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Bottom"
-                            Margin="0,0,15,10">
+                            Margin="0,0,15,10"
+                            Grid.Column="5">
 
-                        <Button.Template>
-                            <ControlTemplate>
-                                <Border CornerRadius="20"
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Border CornerRadius="20"
                                         Width="100"
                                         Height="50"
                                         Background="#053B50">
-                                    <Grid>
-                                        <TextBlock Text="new goal"
+                                <Grid>
+                                    <TextBlock Text="new goal"
                                                FontSize="12"
                                                Margin="0,0,10,0"
                                                VerticalAlignment="Center"
-                                               HorizontalAlignment="Right"></TextBlock>
-                                        <materialDesign:PackIcon Kind="PlusCircle" 
-                                                                    Foreground="#E5CBBFBF"
+                                               HorizontalAlignment="Right"
+                                               FontWeight="Normal"
+                                               Foreground="#E5CBBFBF"></TextBlock>
+                                    <materialDesign:PackIcon Kind="PlusCircle" 
+                                                                     Foreground="#E5CBBFBF"
                                                                     Height="25"
                                                                     Width="25"
                                                                     HorizontalAlignment="Left"
                                                                     VerticalAlignment="Center"
                                                                  Margin="5,0,0,0"/>
-                                    </Grid>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </Grid>
-
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </Grid>
-                <!--goal plan main looking-->
-            <WrapPanel Grid.Row="2">
-                <Button Content="Test" Command="{x:Static command:TestCommand.Instance}"/>
-            </WrapPanel>
+            <!--goal plan main looking-->
         </Grid>
     </Grid>
 </UserControl>

@@ -23,17 +23,17 @@ public class TestCommand : BaseCommand
         {
             var dataContext = window.DataContext;
 
-            foreach (var item in window.TabControl1.Items)
-            {
-                if (item is TabItem tabItem)
-                {
-                    var dataContext1 = tabItem.DataContext;
-                }
-                else
-                {
-                    Console.WriteLine("MainWindow not found in Application.Current.Windows.");
-                }
-            }
+            //foreach (var item in window.TabControl1.Items)
+            //{
+            //    if (item is TabItem tabItem)
+            //    {
+            //        var dataContext1 = tabItem.DataContext;
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine("MainWindow not found in Application.Current.Windows.");
+            //    }
+            //}
         }
     }
 }

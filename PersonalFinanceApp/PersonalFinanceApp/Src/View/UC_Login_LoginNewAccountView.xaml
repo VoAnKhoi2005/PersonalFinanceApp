@@ -43,9 +43,9 @@
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                     Text="{Binding UserNameLogin}"
                                     x:Name="UserLogin"
-                                    Width="400" 
+                                    Width="380" 
                                     Height="40"
-                                    Background="Transparent" Margin="5,1,-5,0">
+                                    Background="Transparent" >
                                 </TextBox>
                             </Border>
                             
@@ -53,7 +53,7 @@
                             <Label Content="Password" FontSize="16"  Foreground="#E5CBBFBF" Margin="31,134,366,174" RenderTransformOrigin="0.411,0.567"></Label>
                             <Border Width="400" Height="40" Margin="123,130,37,170" Background="#084563" CornerRadius="15" Grid.ColumnSpan="2">
                                 <PasswordBox 
-                                     Width="400" Height="40" x:Name="passwordlogin"
+                                     Width="380" Height="40" x:Name="passwordlogin"
                                      materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                                      materialDesign:TextFieldAssist.HasClearButton="True"
                                      IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
@@ -104,7 +104,9 @@
                             </Button>
 
 
-                            <StackPanel Visibility="{Binding IncorrectPasswordUserName, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <StackPanel Visibility="{Binding IncorrectPasswordUserName, 
+                                Converter={StaticResource BoolToVisibilityConverter}}"
+                                        Orientation="Horizontal">
                                 <WrapPanel Margin="130 175 100 50">
                                     <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
                                     <Label Content="Incorrect username or password!" Foreground="Red" ></Label>
@@ -139,9 +141,9 @@
                                 <TextBox 
                                 VerticalAlignment="Top"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                Width="400" 
+                                Width="380" 
                                 Height="40"
-                                Background="Transparent" Margin="0,2,0,0"
+                                Background="Transparent" 
                                 Text="{Binding UserNameNewAccount}">
                                 </TextBox>
                             </Border>
@@ -155,9 +157,9 @@
                                 <TextBox 
                                 VerticalAlignment="Top"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                Width="400" 
+                                Width="380" 
                                 Height="40"
-                                Background="Transparent" Margin="0,2,0,0" 
+                                Background="Transparent"
                                 Text="{Binding Gmail}">
                                 </TextBox>
                             </Border>
@@ -170,11 +172,11 @@
                                     CornerRadius="15">
                                 <PasswordBox 
                                 x:Name="PasswordCreateAccount"
-                                Width="400" Height="40"
+                                Width="380" Height="40"
                                 materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                 IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                                Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="-1,-2,1,2">
+                                Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="PasswordChanged">
                                             <i:InvokeCommandAction Command="{Binding PasswordNewAccountChangedCommand}"
@@ -186,11 +188,11 @@
                             <Border Width="400" Height="40" Margin="130,171,30,80" Background="#084563" CornerRadius="15" VerticalAlignment="Bottom">
                                 <PasswordBox 
                                  x:Name="PasswordConfirmCreateAccount"
-                                 Width="400" Height="40"
+                                 Width="380" Height="40"
                                  materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                                  materialDesign:TextFieldAssist.HasClearButton="True"
                                  IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                                 Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="-2,-1,2,1">
+                                 Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="PasswordChanged">
                                             <i:InvokeCommandAction Command="{Binding PasswordConfirmChangedCommand}"
