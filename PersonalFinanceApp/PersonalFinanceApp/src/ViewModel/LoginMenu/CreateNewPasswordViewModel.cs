@@ -47,7 +47,7 @@ public class CreateNewPasswordViewModel : BaseViewModel {
     public ICommand PasswordResetConfirmChangedCommand { get; set; }
     public ICommand CheckMathConfirmPasswordNewCommand { get; set; }
     public ICommand CheckFormatPassowrdNewCommand { get; set; }
-    public CreateNewPasswordViewModel(NavigationStore navigationStore) {
+    public CreateNewPasswordViewModel(IServiceProvider serviceProvider) {
 
         NavigationConfirmNewPassword = new NavigateCommand<LoginNewAccountViewModel>(
             serviceProvider.GetRequiredService<NavigationStore>(),
