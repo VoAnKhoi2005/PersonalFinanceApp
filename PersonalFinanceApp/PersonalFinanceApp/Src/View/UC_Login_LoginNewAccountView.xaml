@@ -83,26 +83,25 @@
                             <!--button Login confirm-->
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     Content="Login Confirm" 
+                                    Cursor="Arrow"
                                     FontSize="18"
-                                    Width="300"
-                                    Height="50"
+                                    Width="300" Height="50"
                                     Background="#0d2129"
                                     Foreground="#E5FFFFFF" 
                                     Margin="130,245,43,45"
                                     Command="{Binding LoginCommand}">
+
                                 <Button.Template>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" 
-                                        BorderBrush="Transparent" 
-                                        CornerRadius="30" 
-                                        BorderThickness="1">
-                                            <ContentPresenter HorizontalAlignment="Center" 
-                                                 VerticalAlignment="Center" />
+                                                BorderBrush="Transparent" 
+                                                CornerRadius="30" 
+                                                BorderThickness="1">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                         </Border>
                                     </ControlTemplate>
                                 </Button.Template>
                             </Button>
-
 
                             <StackPanel Visibility="{Binding IncorrectPasswordUserName, 
                                 Converter={StaticResource BoolToVisibilityConverter}}"

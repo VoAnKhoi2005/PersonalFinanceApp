@@ -17,10 +17,6 @@
         WindowStartupLocation="CenterScreen"
         >
 
-    <Window.DataContext>
-        <viewModels:MainViewModel />
-    </Window.DataContext>
-
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -229,7 +225,25 @@
                 </Button.Template>
             </Button>
         </DockPanel>
-        <views:UC_Summary Grid.Column="1"></views:UC_Summary>
+        <ContentControl Content="{Binding CurrentViewModel}">
+            <ContentControl.Resources>
+
+                <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
+                    <views:UC_Dashboard />
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type viewModels:GoalplanViewModel}">
+                    <views:UC_Goalplan />
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type viewModels:SummaryViewModel}">
+                    <views:UC_Summary />
+                </DataTemplate>
+
+            </ContentControl.Resources>
+        </ContentControl>
+
+        <!--<views:UC_Summary Grid.Column="1"></views:UC_Summary>-->
         <!--User Account-->
         <!--<views:UC_Main_UserAccountView x:Name="UCUserAccountView"
                                        HorizontalAlignment="Right"

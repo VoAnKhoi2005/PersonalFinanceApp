@@ -20,7 +20,8 @@ public class LoginNewAccountViewModel : BaseViewModel
     public bool InCorrectPassword { get; set; } = false;
     public bool InCorrectPasswordConfirm { get; set; } = false;
 
-    private string _userNameLogin= string.Empty;
+    private string _userNameLogin = string.Empty;
+
     public string UserNameLogin
     {
         get => _userNameLogin;
@@ -32,6 +33,7 @@ public class LoginNewAccountViewModel : BaseViewModel
     }
 
     private string _passwordLogin = string.Empty;
+
     public string PasswordLogin
     {
         get => _passwordLogin;
@@ -41,34 +43,50 @@ public class LoginNewAccountViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
+
     private string _userNameNewAccount;
-    public string UserNameNewAccount {
+
+    public string UserNameNewAccount
+    {
         get => _userNameNewAccount;
-        set {
+        set
+        {
             _userNameNewAccount = value;
             OnPropertyChanged();
         }
     }
+
     private string _passwordNewAccount;
-    public string PasswordNewAccount {
+
+    public string PasswordNewAccount
+    {
         get => _passwordNewAccount;
-        set {
+        set
+        {
             _passwordNewAccount = value;
             OnPropertyChanged();
         }
     }
+
     private string _passwordConfirm;
-    public string PasswordConfirm {
+
+    public string PasswordConfirm
+    {
         get => _passwordConfirm;
-        set {
+        set
+        {
             _passwordConfirm = value;
             OnPropertyChanged();
         }
     }
+
     private string _gmail;
-    public string Gmail {
+
+    public string Gmail
+    {
         get => _gmail;
-        set {
+        set
+        {
             _gmail = value;
             OnPropertyChanged();
         }
@@ -81,7 +99,7 @@ public class LoginNewAccountViewModel : BaseViewModel
     public ICommand PasswordNewAccountChangedCommand { get; set; }
     public ICommand PasswordConfirmChangedCommand { get; set; }
     public ICommand FocusLoginCommand { get; set; }
-    public ICommand FocusNewAccountCommand {  get; set; }
+    public ICommand FocusNewAccountCommand { get; set; }
     public ICommand ClearPasswordNewAccountCommand { get; set; }
     public ICommand ClearPasswordNewAccountConfirmCommand { get; set; }
     public ICommand ClearPasswordLoginCommand { get; set; }
@@ -90,7 +108,6 @@ public class LoginNewAccountViewModel : BaseViewModel
 
     public LoginNewAccountViewModel(NavigationStore navigationStore)
     {
-
         ForgotPasswordCommand = new NavigateCommand<ResetPasswordViewModel>(
             navigationStore,
             () => new ResetPasswordViewModel(navigationStore)
@@ -99,11 +116,11 @@ public class LoginNewAccountViewModel : BaseViewModel
         LoginCommand = new RelayCommand<User>(
             canExecute: VerifyLogin,
             execute: LoginSuccess
-            );
+        );
 
-        PasswordLoginChangedCommand = new RelayCommand<PasswordBox>((p)  => true, (p) => { PasswordLogin = p.Password; });
-        PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p)  => true, (p) => { PasswordConfirm = p.Password; });
-        FocusLoginCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
+        PasswordLoginChangedCommand = new RelayCommand<PasswordBox>((p) => true, (p) => { PasswordLogin = p.Password; });
+        PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p) => true, (p) => { PasswordConfirm = p.Password; });
+        FocusLoginCommand = new RelayCommand<TabItem>((p) => true, (p) => { ClearText(p); });
         FocusNewAccountCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
         ClearPasswordLoginCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
         ClearPasswordNewAccountCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
@@ -114,7 +131,7 @@ public class LoginNewAccountViewModel : BaseViewModel
     {
         loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
         MainWindow mainWindow = new MainWindow(loginUser);
-        if (Application.Current.MainWindow != null) 
+        if (Application.Current.MainWindow != null)
             Application.Current.MainWindow.Close();
         Application.Current.MainWindow = mainWindow;
         mainWindow.Show();
@@ -123,16 +140,22 @@ public class LoginNewAccountViewModel : BaseViewModel
     private bool VerifyLogin(User? loginUser)
     {
         loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
-        if (loginUser == null) {
+        if (loginUser == null)
+        {
             IncorrectPasswordUserName = true;
             return false;
         }
+
         return loginUser.VerifyPassword(PasswordLogin);
     }
-    private void ClearText(object parameter) {
+
+    private void ClearText(object parameter)
+    {
         TabItem tab = parameter as TabItem;
-        if (tab != null) {
-            switch (tab.Name) {
+        if (tab != null)
+        {
+            switch (tab.Name)
+            {
                 case "LoginTab":
                     UserNameNewAccount = string.Empty;
                     Gmail = string.Empty;
@@ -140,14 +163,15 @@ public class LoginNewAccountViewModel : BaseViewModel
                 case "NewAccountTab":
                     UserNameLogin = string.Empty;
                     break;
-                default:
-                    break;
             }
         }
     }
-    private void ClearPassword(object parameter) {
+
+    private void ClearPassword(object parameter)
+    {
         PasswordBox p = parameter as PasswordBox;
-        if (p != null) {
+        if (p != null)
+        {
             p.Password = "";
         }
     }
