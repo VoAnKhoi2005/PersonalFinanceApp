@@ -3,8 +3,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
+using PersonalFinanceApp.etc;
 using PersonalFinanceApp.Model;
+using PersonalFinanceApp.View;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
@@ -92,7 +95,7 @@ public class LoginNewAccountViewModel : BaseViewModel
         }
     }
 
-
+    private readonly IServiceProvider _serviceProvider;
     public ICommand LoginCommand { get; set; }
     public ICommand ForgotPasswordCommand { get; set; }
     public ICommand PasswordLoginChangedCommand { get; set; }
@@ -106,11 +109,12 @@ public class LoginNewAccountViewModel : BaseViewModel
 
     #endregion
 
-    public LoginNewAccountViewModel(NavigationStore navigationStore)
+    public LoginNewAccountViewModel(IServiceProvider serviceProvider)
     {
+        _serviceProvider = serviceProvider;
         ForgotPasswordCommand = new NavigateCommand<ResetPasswordViewModel>(
-            navigationStore,
-            () => new ResetPasswordViewModel(navigationStore)
+            serviceProvider.GetRequiredService<NavigationStore>(),
+            () => serviceProvider.GetRequiredService<ResetPasswordViewModel>()
         );
 
         LoginCommand = new RelayCommand<User>(
@@ -130,9 +134,13 @@ public class LoginNewAccountViewModel : BaseViewModel
     private void LoginSuccess(User loginUser)
     {
         loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
-        MainWindow mainWindow = new MainWindow(loginUser);
+
+        var factory = _serviceProvider.GetRequiredService<IMainWindowFactory>();
+        MainWindow mainWindow = factory.CreateMainWindow(loginUser);
+
         if (Application.Current.MainWindow != null)
             Application.Current.MainWindow.Close();
+
         Application.Current.MainWindow = mainWindow;
         mainWindow.Show();
     }
