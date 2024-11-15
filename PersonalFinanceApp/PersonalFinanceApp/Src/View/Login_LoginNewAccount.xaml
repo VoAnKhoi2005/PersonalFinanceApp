@@ -10,7 +10,34 @@
             <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </UserControl.Resources>
     <Grid>
-        
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#0d2129"></Setter>
+                <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="30" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"></ContentPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#265B70"></Setter>
+                    </Trigger>
+                    <Trigger Property="IsFocused" Value="True">
+                        <Setter Property="Background" Value="#265B70" ></Setter>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="Cursor" Value="Hand"></Setter>
+                        <Setter Property="Background" Value="#265B70" ></Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <materialDesign:Card x:Name="LoginCard"
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
@@ -81,26 +108,14 @@
                                 FontWeight="Bold" FontStyle="Italic" Background="#053B50" Margin="200 200 -100 100"  Foreground="#FFCDCAD2" Grid.ColumnSpan="2" />
                             
                             <!--button Login confirm-->
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            <Button 
                                     Content="Login Confirm" 
                                     FontSize="18"
                                     Width="300"
                                     Height="50"
-                                    Background="#0d2129"
                                     Foreground="#E5FFFFFF" 
                                     Margin="130,245,43,45"
                                     Command="{Binding LoginCommand}">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" 
-                                        BorderBrush="Transparent" 
-                                        CornerRadius="30" 
-                                        BorderThickness="1">
-                                            <ContentPresenter HorizontalAlignment="Center" 
-                                                 VerticalAlignment="Center" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
                             </Button>
 
 
@@ -240,30 +255,16 @@
                                     <Label Content="Password not match. Try again!" Foreground="Red" ></Label>
                                 </WrapPanel>
                             </StackPanel>
-                            
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"        
+
+                            <Button 
                                 Content="Create Account" 
                                 FontSize="18"
                                 Width="300"
                                 Height="50" x:Name="CreateAccount"
-                                Background="#0d2129"
                                 Foreground="#E5FFFFFF" 
                                 Margin="130,280,130,10"
                                 Command="{Binding CreateAccountCommand}"
                                 CommandParameter="{Binding ElementName=CreateAccount}">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button"
-                                                     >
-                                        <Border Background="{TemplateBinding Background}" 
-                                            BorderBrush="Transparent" 
-                                            CornerRadius="30" 
-                                            BorderThickness="1"
-                                                >
-                                            <ContentPresenter HorizontalAlignment="Center" 
-                                                VerticalAlignment="Center" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Button.Template>
                             </Button>
                         </Grid>
                         <i:Interaction.Triggers>
@@ -382,7 +383,6 @@
                             FontSize="18"
                             Width="300"
                             Height="50"
-                            Background="#0d2129"
                             Foreground="#E5FFFFFF" 
                             Margin="130,305,130,45">
                         <Button.Template>

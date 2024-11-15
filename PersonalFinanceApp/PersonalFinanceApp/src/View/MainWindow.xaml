@@ -29,12 +29,25 @@
                 <Setter Property="FontWeight" Value="Regular" />
             </Style>
             <Style TargetType="Button">
+                <Setter Property="Background" Value="Transparent"></Setter>
+                <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"></ContentPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
                 <Style.Triggers>
+                    <Trigger Property="IsFocused" Value="True">
+                        <Setter Property="Background" Value="#0D2129" ></Setter>
+                    </Trigger>
                     <Trigger Property="IsMouseOver" Value="true">
                         <Setter Property="Cursor" Value="Hand"></Setter>
-                    </Trigger>
-                    <Trigger Property="IsFocused" Value="true">
-                        <Setter Property="Background" Value="#0D2129"></Setter>
+                        <Setter Property="Background" Value="#265B70" ></Setter>
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -114,149 +127,124 @@
             <Button Height="60" VerticalAlignment="top" 
                     DockPanel.Dock="Top"
                     IsHitTestVisible="True">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Grid VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                            Height="60" Width="210"
-                              Background="Transparent">
-                            <TextBlock ></TextBlock>
+                <Grid VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Height="60" Width="210"
+                        Background="Transparent">
+                    <TextBlock ></TextBlock>
 
-                            <materialDesign:PackIcon Foreground="#E5CBBFBF"
-                             Kind="Signal"
-                             Width="30"
-                             Height="30"
-                             VerticalAlignment="Center" Margin="12,0,0,0" />
-                            <TextBlock Text="Dashboard" FontSize="18"
-                                       Foreground="#E5CBBFBF"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Center"
-                                        Margin="0,0,41,0" FontWeight="Normal"/>
+                    <materialDesign:PackIcon Foreground="#E5CBBFBF"
+                                                Kind="Signal"
+                                                Width="30"
+                                                Height="30"
+                                                VerticalAlignment="Center" Margin="12,0,0,0" />
+                    <TextBlock Text="Dashboard" FontSize="18"
+                                 Foreground="#E5CBBFBF"
+                                  HorizontalAlignment="Right"
+                                  VerticalAlignment="Center"
+                                  Margin="0,0,41,0" FontWeight="Normal"/>
 
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Cursor" Value="Hand"></Setter>
-                            </Trigger>
-                            <Trigger Property="IsFocused" Value="true">
-                                <Setter Property="Foreground" Value="#0D2129"></Setter>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+                </Grid>
             </Button>
             <!--Expense book-->
             <Button Height="60" VerticalAlignment="top"
-                    Background="Transparent"
                     DockPanel.Dock="Top"
                     IsHitTestVisible="True">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Grid VerticalAlignment="Center"
-                          HorizontalAlignment="Center"
-                          Height="60" Width="200">
-                            <TextBlock Text="Expense book"
+                <Grid VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Height="60" Width="210"
+                        Background="Transparent">
+                    <TextBlock ></TextBlock>
+
+                    <TextBlock Text="Expense book"
                                        FontSize="18"
                                        Foreground="#E5CBBFBF"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
-                                        Margin="0,0,13,0" FontWeight="Normal"/>
+                                        Margin="0,0,20,0" FontWeight="Normal"/>
 
-                            <materialDesign:PackIcon Kind="BookOpenPageVariant" Foreground="#E5CBBFBF"
+                    <materialDesign:PackIcon Kind="BookOpenPageVariant" Foreground="#E5CBBFBF"
                                                  Width="30"
                                                  Height="30"
                                                  VerticalAlignment="Center"
-                                                 Margin="8,0,0,0" />
-                            <TextBlock ></TextBlock>
+                                                 Margin="13,0,0,0" />
 
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
+                </Grid>
             </Button>
             <!--Goal plan-->
             <Button Height="60" VerticalAlignment="top"
-                    Background="Transparent"
                     DockPanel.Dock="Top"
                     IsHitTestVisible="True">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Grid VerticalAlignment="Center"
-                          HorizontalAlignment="Center"
-                          Height="60" Width="210">
-                            <materialDesign:PackIcon Kind="FlagCheckered"
-                                                 Foreground="#E5CBBFBF"
-                                                 Width="30"
-                                                 Height="30"
-                                                 VerticalAlignment="Center"
-                                                 Margin="10,0,0,0" />
-                            <TextBlock Text="Goal plan" 
-                                       FontSize="18"
-                                       Foreground="#E5CBBFBF"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Center"
-                                        Margin="0,0,53,0" FontWeight="Normal"></TextBlock>
-                            <TextBlock ></TextBlock>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
+                <Grid VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Height="60" Width="210"
+                        Background="Transparent">
+                    <TextBlock ></TextBlock>
+
+                    <materialDesign:PackIcon Kind="FlagCheckered"
+                     Foreground="#E5CBBFBF"
+                     Width="30"
+                     Height="30"
+                     VerticalAlignment="Center"
+                     Margin="10,0,0,0" />
+                    <TextBlock Text="Goal plan" 
+                                FontSize="18"
+                                Foreground="#E5CBBFBF"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Margin="15,0,0,0" FontWeight="Normal"></TextBlock>
+
+                </Grid>
             </Button>
             <!--Summary-->
             <Button Height="60" VerticalAlignment="top"
-                    Background="Transparent"
                     DockPanel.Dock="Top"
                     IsHitTestVisible="True">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Grid VerticalAlignment="Center"
-                          HorizontalAlignment="Center"
-                          Height="60" Width="210">
-                            <materialDesign:PackIcon Kind="DatabaseEye"
-                                                 Foreground="#E5CBBFBF"
-                                                 Width="30"
-                                                 Height="30"
-                                                 VerticalAlignment="Center"
-                                                 Margin="11,0,0,0" />
+                <Grid VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Height="60" Width="210"
+                        Background="Transparent">
+                    <TextBlock ></TextBlock>
+                    <materialDesign:PackIcon Kind="DatabaseEye"
+                     Foreground="#E5CBBFBF"
+                     Width="30"
+                     Height="30"
+                     VerticalAlignment="Center"
+                     Margin="11,0,0,0" />
 
-                            <TextBlock Text="Summary" FontSize="18"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                       FontWeight="Normal"
-                                        Foreground="#E5CBBFBF"
-                                   Margin="27,0,0,0"/>
-                            <TextBlock ></TextBlock>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
+                    <TextBlock Text="Summary" FontSize="18"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                    FontWeight="Normal"
+                                     Foreground="#E5CBBFBF"
+                                Margin="18,0,0,0"/>
+
+                </Grid>
             </Button>
             <!--Option-->
             <Button Height="60" VerticalAlignment="Bottom"
-                    Background="Transparent"
                     DockPanel.Dock="Bottom">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Grid VerticalAlignment="Center"
-                          HorizontalAlignment="Center"
-                          Height="60" Width="210">
-                            <materialDesign:PackIcon Kind="CogBox"
-                                                 Foreground="#E5CBBFBF"
-                                                 Width="34"
-                                                 Height="34"
-                                                 VerticalAlignment="Center"
-                                                 Margin="12,0,0,0" />
+                <Grid VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Height="60" Width="210"
+                        Background="Transparent">
+                    <TextBlock ></TextBlock>
 
-                            <TextBlock Text="Setting" FontSize="18"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                       FontWeight="Normal"
-                                        Foreground="#E5CBBFBF"
-                                   Margin="0,0,73,0"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
+                    <materialDesign:PackIcon Kind="CogBox"
+                     Foreground="#E5CBBFBF"
+                     Width="34"
+                     Height="34"
+                     VerticalAlignment="Center"
+                     Margin="12,0,0,0" />
+
+                    <TextBlock Text="Setting" FontSize="18"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                                   FontWeight="Normal"
+                                    Foreground="#E5CBBFBF"
+                               Margin="0,0,73,0"/>
+
+                </Grid>
             </Button>
         </DockPanel>
         
