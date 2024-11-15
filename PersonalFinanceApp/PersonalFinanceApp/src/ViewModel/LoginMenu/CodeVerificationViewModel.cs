@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
@@ -59,11 +60,11 @@ public class CodeVerificationViewModel : BaseViewModel
     #endregion
     public ICommand NavigationConfirmCodeCommand { get; set; }
 
-    public CodeVerificationViewModel(NavigationStore navigationStore)
+    public CodeVerificationViewModel(IServiceProvider serviceProvider)
     {
         NavigationConfirmCodeCommand = new NavigateCommand<CreateNewPasswordViewModel>(
-            navigationStore,
-            () => new CreateNewPasswordViewModel(navigationStore),
+            serviceProvider.GetRequiredService<NavigationStore>(),
+            () => serviceProvider.GetRequiredService<CreateNewPasswordViewModel>(),
             VerifyCode
             );
     }

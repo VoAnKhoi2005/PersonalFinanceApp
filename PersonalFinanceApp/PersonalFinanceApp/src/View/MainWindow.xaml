@@ -1,4 +1,4 @@
-﻿<Window x:Class="PersonalFinanceApp.MainWindow"
+﻿<Window x:Class="PersonalFinanceApp.View.MainWindow"
 
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -16,10 +16,6 @@
         Height="720" Width="1152"
         WindowStartupLocation="CenterScreen"
         >
-
-    <Window.DataContext>
-        <viewModels:MainViewModel />
-    </Window.DataContext>
 
     <Grid>
         <Grid.Resources>
@@ -59,51 +55,6 @@
             <ColumnDefinition Width="210"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <!--<Grid>
-            <Image Width="650"
-                   Height="674"
-                   HorizontalAlignment="Left"
-                   Source="/Resources/img/PigBackground.png" Stretch="Fill"/>
-            <Image Width="340" Height="340" HorizontalAlignment="Right" VerticalAlignment="Top"
-                Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-200.584"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Image HorizontalAlignment="Center"
-                   VerticalAlignment="Top" Margin="100,0,0,0"
-                   Source="/Resources/img/PigBackground.png" 
-                   Width="250" 
-                   Height="250" RenderTransformOrigin="0.5,0.5">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-98"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-            <Image Width="400" Height="400"
-                   VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                   Margin="0,0,10,30"
-                   Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
-                <Image.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="294.99"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Image.RenderTransform>
-            </Image>
-        </Grid>-->
-
         <DockPanel Grid.Column="0" Background="#003E57">
             <Border Height="60" VerticalAlignment="Top"
                     DockPanel.Dock="Top">
@@ -247,14 +198,23 @@
                 </Grid>
             </Button>
         </DockPanel>
-        
-        
-        
-        <!--test-->
-        
-        
-        
-        
+        <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}">
+            <ContentControl.Resources>
+
+                <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
+                    <views:UC_Dashboard />
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type viewModels:GoalplanViewModel}">
+                    <views:UC_Goalplan />
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type viewModels:SummaryViewModel}">
+                    <views:UC_Summary />
+                </DataTemplate>
+
+            </ContentControl.Resources>
+        </ContentControl>
         <!--User Account-->
         <!--<views:UC_Main_UserAccountView x:Name="UCUserAccountView"
                                        HorizontalAlignment="Right"

@@ -4,9 +4,8 @@ namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
 public class LoginMainViewModel : BaseViewModel
 {
-    public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
-
     private readonly NavigationStore _navigationStore;
+    public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
 
     public LoginMainViewModel(NavigationStore navigationStore)
     {

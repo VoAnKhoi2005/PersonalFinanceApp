@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
@@ -7,7 +8,14 @@ namespace PersonalFinanceApp.ViewModel.LoginMenu;
 public class ResetPasswordViewModel : BaseViewModel
 {
     #region Properties
-    public bool IncorrectUserGmail { get; set; } = false;
+    private bool _incorrectUserGmail = false;
+    public bool IncorrectUserGmail {
+        get => _incorrectUserGmail;
+        set {
+            _incorrectUserGmail = value;
+            OnPropertyChanged();
+        }
+    }
     private string _userNameReset;
     public string UserNameReset {
         get => _userNameReset;
@@ -27,11 +35,11 @@ public class ResetPasswordViewModel : BaseViewModel
     #endregion
     public ICommand NavigateConfirmEmailCommand { get; set; }
 
-    public ResetPasswordViewModel(NavigationStore navigationStore)
+    public ResetPasswordViewModel(IServiceProvider serviceProvider)
     {
         NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(
-            navigationStore,
-            () => new CodeVerificationViewModel(navigationStore),
+            serviceProvider.GetRequiredService<NavigationStore>(),
+            () => serviceProvider.GetRequiredService<CodeVerificationViewModel>(),
             VerifyEmail
         );
     }
