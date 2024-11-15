@@ -163,7 +163,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
         PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p) => true, (p) => { PasswordConfirm = p.Password; });
         //Clear text
         FocusLoginCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
-
         FocusNewAccountCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
         ClearPasswordLoginCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
         ClearPasswordNewAccountCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
@@ -226,7 +225,8 @@ public class LoginNewAccountViewModel : BaseViewModel {
         PasswordBox p = parameter as PasswordBox;
         if (p != null)
         {
-            p.Password = "";
+            p.Password = string.Empty;
+            //if(p.Name.CompareTo("PasswordCreateAccount") == 0) InCorrectPassword = false;
         }
     }
 
@@ -250,7 +250,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
         } else if (parameter is PasswordBox) {
             PasswordBox pb = parameter as PasswordBox;
             pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
-            if (Regex.IsMatch(pb.Password, pattern)) {
+            if (Regex.IsMatch(pb.Password, pattern) ) {
                 InCorrectPassword = false;
             }   
             else InCorrectPassword = true;
