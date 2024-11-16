@@ -30,8 +30,7 @@ namespace PersonalFinanceApp
             //Default main window
             NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
             navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
-            MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-
+            MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
 
             MainWindow.Show();
 
@@ -49,7 +48,7 @@ namespace PersonalFinanceApp
             services.AddSingleton<NavigationStore>();
 
             //Login window
-            services.AddSingleton<LoginMainViewModel>();
+            services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));
             services.AddSingleton<LoginWindow>(s => new LoginWindow
             {
                 DataContext = s.GetRequiredService<LoginMainViewModel>()
@@ -60,16 +59,17 @@ namespace PersonalFinanceApp
             services.AddTransient<CreateNewPasswordViewModel>(s => new CreateNewPasswordViewModel(s));
 
             //Main window
-            services.AddSingleton<MainViewModel>();
-            //services.AddSingleton<IMainWindowFactory>(s => 
-            //{
-            //    var dataContext = s.GetRequiredService<MainViewModel>();
-            //    return new MainWindowFactory(dataContext, s);
-            //});
-            services.AddSingleton<MainWindow>(s => new MainWindow
+            services.AddSingleton<MainViewModel>(s => new MainViewModel(s));
+            services.AddSingleton<IWindowFactory>(s =>
             {
-                DataContext = s.GetRequiredService<MainViewModel>()
+                var dataContext = s.GetRequiredService<MainViewModel>();
+                return new MainWindowFactory(dataContext, s);
             });
+            //services.AddSingleton<MainWindow>(s => new MainWindow
+            //{
+            //    DataContext = s.GetRequiredService<MainViewModel>()
+            //});
+
             services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
             services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
             services.AddTransient<SummaryViewModel>(s => new SummaryViewModel(s));

@@ -42,7 +42,9 @@
             <ColumnDefinition Width="210"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+
         <DockPanel Grid.Column="0" Background="#003E57">
+            <!--Title-->
             <Border Height="60" VerticalAlignment="Top"
                     DockPanel.Dock="Top">
                 <Grid>
@@ -60,11 +62,11 @@
 
                 </Grid>
             </Border>
-            
             <!--Dashboard-->
             <Button Height="60" VerticalAlignment="top" 
                     DockPanel.Dock="Top"
-                    IsHitTestVisible="True">
+                    IsHitTestVisible="True"
+                    Command="{Binding DashBoardNavigateCommand}">
                 <Button.Template>
                     <ControlTemplate>
                         <Grid VerticalAlignment="Center"
@@ -132,7 +134,8 @@
             <Button Height="60" VerticalAlignment="top"
                     Background="Transparent"
                     DockPanel.Dock="Top"
-                    IsHitTestVisible="True">
+                    IsHitTestVisible="True"
+                    Command="{Binding GoalplanNavigateCommand}">
                 <Button.Template>
                     <ControlTemplate>
                         <Grid VerticalAlignment="Center"
@@ -159,7 +162,8 @@
             <Button Height="60" VerticalAlignment="top"
                     Background="Transparent"
                     DockPanel.Dock="Top"
-                    IsHitTestVisible="True">
+                    IsHitTestVisible="True"
+                    Command="{Binding SummaryNavigateCommand}">
                 <Button.Template>
                     <ControlTemplate>
                         <Grid VerticalAlignment="Center"
@@ -210,6 +214,7 @@
                 </Button.Template>
             </Button>
         </DockPanel>
+
         <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}">
             <ContentControl.Resources>
 
@@ -227,7 +232,7 @@
 
             </ContentControl.Resources>
         </ContentControl>
-        <!--User Account-->
+
         <!--<views:UC_Main_UserAccountView x:Name="UCUserAccountView"
                                        HorizontalAlignment="Right"
                                        VerticalAlignment="Top"

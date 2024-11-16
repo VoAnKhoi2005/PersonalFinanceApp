@@ -37,11 +37,7 @@ public class ResetPasswordViewModel : BaseViewModel
 
     public ResetPasswordViewModel(IServiceProvider serviceProvider)
     {
-        NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(
-            serviceProvider.GetRequiredService<NavigationStore>(),
-            () => serviceProvider.GetRequiredService<CodeVerificationViewModel>(),
-            VerifyEmail
-        );
+        NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(serviceProvider, VerifyEmail);
     }
 
     public bool VerifyEmail()
