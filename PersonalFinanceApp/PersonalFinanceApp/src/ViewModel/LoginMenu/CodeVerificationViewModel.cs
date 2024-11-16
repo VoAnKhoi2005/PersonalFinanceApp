@@ -1,19 +1,26 @@
-﻿using System.Windows;
+﻿using System.Data.Common;
+using System.Globalization;
+using System.Reflection.Metadata;
+using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Xaml.Behaviors;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
+using XAct;
 using static MaterialDesignThemes.Wpf.Theme;
 
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
-public class CodeVerificationViewModel : BaseViewModel
-{
+public class CodeVerificationViewModel : BaseViewModel {
     #region Properties
+    public bool flag = false;
     public bool IncorrectVerify { get; set; } = false;
-    private string _verify1;
+    private string _verify1 ;
     public string Verify1 {
         get => _verify1;
         set {
@@ -64,27 +71,62 @@ public class CodeVerificationViewModel : BaseViewModel
     #endregion
     public ICommand NavigationConfirmCodeCommand { get; set; }
     public ICommand FocusNextCommand { get; set; }
-    public ICommand FocusPreviousCommand { get; set; }
-
+    public ICommand FocusPreviousCommand {  get; set; }
+    public ICommand LoadedCommand { get; set; }
+    public ICommand CheckNumbericCommand { get; set; }
+    public ICommand NumberCommand { get; }
     public CodeVerificationViewModel(IServiceProvider serviceProvider) {
         NavigationConfirmCodeCommand = new NavigateCommand<CreateNewPasswordViewModel>(
             serviceProvider.GetRequiredService<NavigationStore>(),
             () => serviceProvider.GetRequiredService<CreateNewPasswordViewModel>(),
             VerifyCode
             );
-
-        FocusNextCommand = new RelayCommand<System.Windows.Controls.TextBox>(p => { return true; }, p => { FocusTextBox(p); });
+        FocusNextCommand = new RelayCommand<System.Windows.Controls.TextBox>(
+            p => { return true; },
+            p => {
+                FocusNext(p);
+                }
+            );
+        FocusPreviousCommand = new RelayCommand<System.Windows.Controls.TextBox>(
+            p => { return true; },
+            (p) => {
+                FocusPrevious(p);
+                }
+            );
+        LoadedCommand = new RelayCommand<System.Windows.Controls.TextBox>(
+            p => { return true; },
+            p => {
+                FocusFirst(p);
+                }
+            );
     }
 
     public bool VerifyCode()
     {
         return true;
     }
-    private void FocusTextBox(object parameter) {
+    private void FocusNext(object parameter) {
         System.Windows.Controls.TextBox tb = parameter as System.Windows.Controls.TextBox;
         if (tb != null) {
-            tb?.Focus();
+            if (!flag) tb?.Focus();
         }
     }
-
+    private void FocusPrevious(object parameter) {
+        System.Windows.Controls.TextBox tb = parameter as System.Windows.Controls.TextBox;
+        if (tb != null) {
+            if (tb.Name.CompareTo("verify5") == 0) Verify6 = string.Empty;
+            if (tb.Name.CompareTo("verify4") == 0) Verify5 = string.Empty;
+            if (tb.Name.CompareTo("verify3") == 0) Verify4 = string.Empty;
+            if (tb.Name.CompareTo("verify2") == 0) Verify3 = string.Empty;
+            if (tb.Name.CompareTo("verify1") == 0) Verify2 = string.Empty;
+            if (tb.Name.CompareTo("temporary") == 0) { flag = true; Verify1 = string.Empty; }
+            tb?.Focus();
+            flag = false;
+        }
+    }
+    private void FocusFirst(object parameter) {
+        System.Windows.Controls.TextBox tb = parameter as System.Windows.Controls.TextBox;
+        if (tb != null) { tb.Focus(); }
+    }
 }
+
