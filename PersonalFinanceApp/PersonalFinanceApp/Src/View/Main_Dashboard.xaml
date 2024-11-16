@@ -14,6 +14,27 @@
                 <Setter Property="Foreground" Value="#E5CBBFBF"/>
                 <Setter Property="FontWeight" Value="Regular"/>
             </Style>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="Transparent"></Setter>
+                <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="30"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch"></ContentPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="Cursor" Value="Hand"></Setter>
+                        <Setter Property="Background" Value="#265B70" ></Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </Grid.Resources>
         <Grid>
             <Grid.RowDefinitions>
@@ -47,14 +68,39 @@
                                HorizontalAlignment="Left" Margin="26,0,0,-7" Height="37" Width="383"
                                ></TextBlock>
                 </Grid>
-                <materialDesign:PackIcon Grid.Column="1"
-                    Kind="AccountBadge"
-                                         Width="30" Height="30"
-                                         Foreground="#E5CBBFBF"
-                                         HorizontalAlignment="Center"
-                                         VerticalAlignment="Center"
-                                         Margin="10,0,0,0"
+                <Button Width="35" Height="35" Grid.Column="1">
+                    <Border>
+                        <materialDesign:PackIcon 
+                                                    Kind="AccountBadge"
+                                                    Width="30" Height="30"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
                                          />
+                    </Border>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border CornerRadius="30"
+                                            Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch" ></ContentPresenter>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Cursor" Value="Hand"></Setter>
+                                    <Setter Property="Foreground"  Value="#265B70" ></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
 
             <!--total balance  - income - expense - total saving -->
@@ -67,146 +113,264 @@
                 </Grid.ColumnDefinitions>
 
                 <!--TOTAL BALANCE-->
-                <Grid Grid.Column="0">
-                    <Border CornerRadius="30"
-                            Margin="15,15,7.5,7.5"
-                            Background="#053B50">
-                        <!--margin-->
-                        <Canvas>
-
-                            <TextBlock Text="TOTAL BALANCE" FontSize="15" FontWeight="Bold" Canvas.Left="11" Canvas.Top="5" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                            CornerRadius="30"
+                          Background="#053B50"
+                            Margin="15,15,7.5,7.5">
+                    <Button >
+                        <Grid Visibility="Visible">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"></RowDefinition>
+                                <RowDefinition Height="50*"></RowDefinition>
+                                <RowDefinition Height="63*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                     Text="TOTAL BALANCE" 
+                                 FontSize="15" 
+                                 FontWeight="Bold" 
+                                 Margin="15,0,0,0"
+                                 HorizontalAlignment="Left" 
+                                 VerticalAlignment="Top" Height="40" Width="116"/>
 
                             <!--Binding here-->
-                            <TextBlock Text="xxx.xxx.xxx VNĐ" FontSize="20" Canvas.Left="12" Canvas.Top="29" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+                            <TextBlock Grid.Row="1"
+                            Text="xxx.xxx.xxx VNĐ" 
+                                   FontSize="20"
+                                   HorizontalAlignment="Left" 
+                                   VerticalAlignment="Center" 
+                                     Margin="15,0,0,0"   
+                                   Height="53" Width="150"/>
 
                             <!--Binding here-->
-                            <Border Background="#25FFAE" CornerRadius="20"
-                            Width="70" Height="35" Canvas.Left="13" Canvas.Top="82" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <Grid>
-                                    <materialDesign:PackIcon 
+                            <Grid  Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="41*" ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Border
+                            Background="#25FFAE" CornerRadius="20"
+                            Width="66" Height="35" 
+                                    Margin="15,0,0,0"
+                                    HorizontalAlignment="Left" 
+                                    VerticalAlignment="Center">
+                                    <Grid>
+                                        <materialDesign:PackIcon 
                             Width="20" Height="20"
                             VerticalAlignment="Center" HorizontalAlignment="Left"
                             Margin="5,0,0,0"
                             Kind="ArrowTopRightThin" />
-                                    <TextBlock Text="x.x%" 
+                                        <TextBlock Text="x.x%" 
                                    FontSize="14" 
                                    VerticalAlignment="Center" 
                                    HorizontalAlignment="Right" 
                                    Margin="0,0,10,0"
                                    Foreground="Black"></TextBlock>
-                                </Grid>
-                            </Border>
-
-                            <!--Binding here-->
-                        </Canvas>
-                    </Border>
-                </Grid>
+                                    </Grid>
+                                </Border>
+                                <TextBlock Text=".vs last month" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"  Height="31" Width="78"></TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Button>
+                </Border>
 
                 <!--INCOME-->
-                <Grid Grid.Column="1">
-                    <Border CornerRadius="30"
-                            Margin="7.5,15,7.5,7.5"
-                            Background="#053B50">
-                        <Canvas>
 
-                            <TextBlock Text="INCOME" FontSize="15" FontWeight="Bold" Canvas.Left="11" Canvas.Top="5" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        CornerRadius="30"
+                        Background="#053B50"
+                         Margin="15,15,7.5,7.5"
+                        Grid.Column="1">
+                    <Button >
+                        <Grid Visibility="Visible">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"></RowDefinition>
+                                <RowDefinition Height="50*"></RowDefinition>
+                                <RowDefinition Height="63*"></RowDefinition>
+                            </Grid.RowDefinitions>
 
-                            <!--Binding here-->
-                            <TextBlock Text="xxx.xxx.xxx VNĐ" FontSize="20" Canvas.Left="12" Canvas.Top="29" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-
-                            <!--Binding here-->
-                            <Border Background="#25FFAE" CornerRadius="20"
-                            Width="70" Height="35" Canvas.Left="13" Canvas.Top="82" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <Grid>
-                                    <materialDesign:PackIcon 
-                            Width="20" Height="20"
-                            VerticalAlignment="Center" HorizontalAlignment="Left"
-                            Margin="5,0,0,0"
-                            Kind="ArrowTopRightThin" />
-                                    <TextBlock Text="x.x%" 
-                                   FontSize="14" 
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Right" 
-                                   Margin="0,0,10,0"
-                                   Foreground="Black"></TextBlock>
-                                </Grid>
-                            </Border>
+                            <TextBlock Grid.Row="0"
+                                       Text="INCOME" 
+                                       FontSize="15" 
+                                       Margin="15,0,0,0"
+                                        FontWeight="Bold" 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top"></TextBlock>
 
                             <!--Binding here-->
-                        </Canvas>
-                    </Border>
-                </Grid>
+                            <TextBlock Grid.Row="1"
+                                Text="xxx.xxx.xxx VNĐ" 
+                                       FontSize="20" 
+                                       Margin="15,0,0,0"
+                                       HorizontalAlignment="Left" 
+                                       VerticalAlignment="Top"></TextBlock>
 
+                            <!--Binding here-->
+                            <Grid  Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="41*" ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Background="#25FFAE" CornerRadius="20"
+                                    Width="66" Height="35" 
+                                    Margin="15,0,0,0"
+                                    HorizontalAlignment="Left" 
+                                    VerticalAlignment="Center">
+                                    <Grid>
+                                        <materialDesign:PackIcon 
+                                         Width="20" Height="20"
+                                         VerticalAlignment="Center" HorizontalAlignment="Left"
+                                         Margin="5,0,0,0"
+                                         Kind="ArrowTopRightThin" />
+                                        <TextBlock Text="x.x%" 
+                                                     FontSize="14" 
+                                                     VerticalAlignment="Center" 
+                                                     HorizontalAlignment="Right" 
+                                                     Margin="0,0,10,0"
+                                                     Foreground="Black"></TextBlock>
+                                    </Grid>
+                                </Border>
+                                <TextBlock Text=".vs last month" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"  Height="31" Width="78"></TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Button>
+                </Border>
+                
                 <!--EXPENSE-->
-                <Grid Grid.Column="2">
-                    <Border CornerRadius="30"
-                            Margin="7.5,15,7.5,7.5"
-                            Background="#053B50">
-                        <!--margin-->
-                        <Canvas>
+                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        CornerRadius="30"
+                        Background="#053B50"
+                         Margin="15,15,7.5,7.5"
+                        Grid.Column="2">
+                    <Button >
+                        <Grid Visibility="Visible">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"></RowDefinition>
+                                <RowDefinition Height="50*"></RowDefinition>
+                                <RowDefinition Height="63*"></RowDefinition>
+                            </Grid.RowDefinitions>
 
-                            <TextBlock Text="EXPENSE" FontSize="15" FontWeight="Bold" Canvas.Left="11" Canvas.Top="5" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-
-                            <!--Binding here-->
-                            <TextBlock Text="xxx.xxx.xxx VNĐ" FontSize="20" Canvas.Left="12" Canvas.Top="29" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-
-                            <!--Binding here-->
-                            <Border Background="#25FFAE" CornerRadius="20"
-                            Width="70" Height="35" Canvas.Left="13" Canvas.Top="82" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <Grid>
-                                    <materialDesign:PackIcon 
-                            Width="20" Height="20"
-                            VerticalAlignment="Center" HorizontalAlignment="Left"
-                            Margin="5,0,0,0"
-                            Kind="ArrowTopRightThin" />
-                                    <TextBlock Text="x.x%" 
-                                   FontSize="14" 
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Right" 
-                                   Margin="0,0,10,0"
-                                   Foreground="Black"></TextBlock>
-                                </Grid>
-                            </Border>
+                            <TextBlock Grid.Row="0"
+                                       Text="EXPENSE" 
+                                       FontSize="15" 
+                                       Margin="15,0,0,0"
+                                        FontWeight="Bold" 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top"></TextBlock>
 
                             <!--Binding here-->
-                        </Canvas>
-                    </Border>
-                </Grid>
+                            <TextBlock Grid.Row="1"
+                                Text="xxx.xxx.xxx VNĐ" 
+                                       FontSize="20" 
+                                       Margin="15,0,0,0"
+                                       HorizontalAlignment="Left" 
+                                       VerticalAlignment="Top"></TextBlock>
+
+                            <!--Binding here-->
+                            <Grid  Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="41*" ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Background="#25FFAE" CornerRadius="20"
+                                    Width="66" Height="35" 
+                                    Margin="15,0,0,0"
+                                    HorizontalAlignment="Left" 
+                                    VerticalAlignment="Center">
+                                    <Grid>
+                                        <materialDesign:PackIcon 
+                                         Width="20" Height="20"
+                                         VerticalAlignment="Center" HorizontalAlignment="Left"
+                                         Margin="5,0,0,0"
+                                         Kind="ArrowTopRightThin" />
+                                        <TextBlock Text="x.x%" 
+                                                     FontSize="14" 
+                                                     VerticalAlignment="Center" 
+                                                     HorizontalAlignment="Right" 
+                                                     Margin="0,0,10,0"
+                                                     Foreground="Black"></TextBlock>
+                                    </Grid>
+                                </Border>
+                                <TextBlock Text=".vs last month" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"  Height="31" Width="78"></TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Button>
+                </Border>
 
                 <!--TOTAL SAVING-->
-                <Grid Grid.Column="3">
-                    <Border CornerRadius="30"
-                            Margin="7.5,15,15,7.5"
-                            Background="#053B50">
-                        <Canvas>
+                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        CornerRadius="30"
+                        Background="#053B50"
+                         Margin="15,15,7.5,7.5"
+                        Grid.Column="3">
+                    <Button >
+                        <Grid Visibility="Visible">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35*"></RowDefinition>
+                                <RowDefinition Height="50*"></RowDefinition>
+                                <RowDefinition Height="63*"></RowDefinition>
+                            </Grid.RowDefinitions>
 
-                            <TextBlock Text="TOTAL SAVING" FontSize="15" FontWeight="Bold" Canvas.Left="11" Canvas.Top="5" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-
-                            <!--Binding here-->
-                            <TextBlock Text="xxx.xxx.xxx VNĐ" FontSize="20" Canvas.Left="12" Canvas.Top="29" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-
-                            <!--Binding here-->
-                            <Border Background="#25FFAE" CornerRadius="20"
-                            Width="70" Height="35" Canvas.Left="13" Canvas.Top="82" HorizontalAlignment="Left" VerticalAlignment="Center">
-                                <Grid>
-                                    <materialDesign:PackIcon 
-                            Width="20" Height="20"
-                            VerticalAlignment="Center" HorizontalAlignment="Left"
-                            Margin="5,0,0,0"
-                            Kind="ArrowTopRightThin" />
-                                    <TextBlock Text="x.x%" 
-                                   FontSize="14" 
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Right" 
-                                   Margin="0,0,10,0"
-                                   Foreground="Black"></TextBlock>
-                                </Grid>
-                            </Border>
+                            <TextBlock Grid.Row="0"
+                                       Text="TOTAL SAVING" 
+                                       FontSize="15" 
+                                       Margin="15,0,0,0"
+                                        FontWeight="Bold" 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top"></TextBlock>
 
                             <!--Binding here-->
-                        </Canvas>
-                    </Border>
-                </Grid>
+                            <TextBlock Grid.Row="1"
+                                Text="xxx.xxx.xxx VNĐ" 
+                                       FontSize="20" 
+                                       Margin="15,0,0,0"
+                                       HorizontalAlignment="Left" 
+                                       VerticalAlignment="Top"></TextBlock>
+
+                            <!--Binding here-->
+                            <Grid  Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="41*" ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Background="#25FFAE" CornerRadius="20"
+                                    Width="66" Height="35" 
+                                    Margin="15,0,0,0"
+                                    HorizontalAlignment="Left" 
+                                    VerticalAlignment="Center">
+                                    <Grid>
+                                        <materialDesign:PackIcon 
+                                         Width="20" Height="20"
+                                         VerticalAlignment="Center" HorizontalAlignment="Left"
+                                         Margin="5,0,0,0"
+                                         Kind="ArrowTopRightThin" />
+                                        <TextBlock Text="x.x%" 
+                                                     FontSize="14" 
+                                                     VerticalAlignment="Center" 
+                                                     HorizontalAlignment="Right" 
+                                                     Margin="0,0,10,0"
+                                                     Foreground="Black"></TextBlock>
+                                    </Grid>
+                                </Border>
+                                <TextBlock Text=".vs last month" 
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"  Height="31" Width="78"></TextBlock>
+                            </Grid>
+                        </Grid>
+                    </Button>
+                </Border>
             </Grid>
 
 
@@ -247,7 +411,7 @@
                                        Margin="15,0,0,0"
                                        FontWeight="Bold"
                                        FontSize="18"
-                                       VerticalAlignment="Top"></TextBlock>
+                                       VerticalAlignment="Top" Height="39" Grid.RowSpan="2"></TextBlock>
 
                                 <!-- element of circle chart shown here-->
                                 <WrapPanel Orientation="Vertical" 

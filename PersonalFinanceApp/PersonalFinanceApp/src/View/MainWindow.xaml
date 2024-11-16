@@ -48,8 +48,6 @@
                 </Style.Triggers>
             </Style>
         </Grid.Resources>
-        <!-- background-->
-
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="210"></ColumnDefinition>

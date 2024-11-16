@@ -49,12 +49,40 @@
                                ></TextBlock>
                 </Grid>
 
-                <materialDesign:PackIcon Kind="AccountBadge"
-                                         Width="30" Height="30"
-                                         Foreground="#E5CBBFBF"
-                                         HorizontalAlignment="Center"
-                                         VerticalAlignment="Center"
-                                         Grid.Column="1"/>
+                <!--user-->
+                <Button Width="35" Height="35" Grid.Column="1">
+                    <Border>
+                        <materialDesign:PackIcon 
+                                                    Kind="AccountBadge"
+                                                    Width="30" Height="30"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                                         />
+                    </Border>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border CornerRadius="30"
+                                            Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch" ></ContentPresenter>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Cursor" Value="Hand"></Setter>
+                                    <Setter Property="Foreground"  Value="#265B70" ></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
 
             <Grid Grid.Row="1">
