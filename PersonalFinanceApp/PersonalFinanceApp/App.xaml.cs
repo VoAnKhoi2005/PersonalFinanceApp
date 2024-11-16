@@ -59,6 +59,7 @@ namespace PersonalFinanceApp
             services.AddTransient<CreateNewPasswordViewModel>(s => new CreateNewPasswordViewModel(s));
 
             //Main window
+            services.AddSingleton<ModalNavigationStore>();
             services.AddSingleton<MainViewModel>(s => new MainViewModel(s));
             services.AddSingleton<IWindowFactory>(s =>
             {

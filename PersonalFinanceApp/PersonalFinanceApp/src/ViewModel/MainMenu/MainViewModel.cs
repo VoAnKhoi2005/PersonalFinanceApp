@@ -8,7 +8,10 @@ namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class MainViewModel : BaseViewModel
 {
     private readonly NavigationStore _navigationStore;
+    private readonly ModalNavigationStore _modalNavigationStore;
     public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
+    public BaseViewModel? CurrentModalViewModel => _modalNavigationStore.CurrentViewModel;
+    public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
     public ICommand DashBoardNavigateCommand { get; set; }
     public ICommand GoalplanNavigateCommand { get; set; }
@@ -17,11 +20,19 @@ public class MainViewModel : BaseViewModel
     public MainViewModel(IServiceProvider serviceProvider)
     {
         _navigationStore = serviceProvider.GetRequiredService<NavigationStore>();
-        _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+        _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
+        _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+        _modalNavigationStore.CurrentModalViewModelChanged += OnCurrentModalViewModelChanged;
+        
         DashBoardNavigateCommand = new NavigateCommand<DashboardViewModel>(serviceProvider);
         GoalplanNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
         SummaryNavigateCommand = new NavigateCommand<SummaryViewModel>(serviceProvider);
+    }
+
+    private void OnCurrentModalViewModelChanged()
+    {
+        OnPropertyChanged(nameof(CurrentModalViewModel));
     }
 
     private void OnCurrentViewModelChanged()
@@ -33,5 +44,6 @@ public class MainViewModel : BaseViewModel
     {
         base.Dispose();
         _navigationStore.CurrentViewModelChanged -= OnCurrentViewModelChanged;
+        _modalNavigationStore.CurrentModalViewModelChanged -= OnCurrentModalViewModelChanged;
     }
 }
