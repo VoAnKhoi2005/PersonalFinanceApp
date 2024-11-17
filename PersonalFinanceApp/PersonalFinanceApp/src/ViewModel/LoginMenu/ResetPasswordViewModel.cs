@@ -64,10 +64,6 @@ public class ResetPasswordViewModel : BaseViewModel
 
     private void Verify(object parameter) {
         if (VerifyEmail()) {
-            NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(
-                _serviceProvider.GetRequiredService<NavigationStore>(),
-                () => _serviceProvider.GetRequiredService<CodeVerificationViewModel>()
-            );
             RandomCode();
         }
     }

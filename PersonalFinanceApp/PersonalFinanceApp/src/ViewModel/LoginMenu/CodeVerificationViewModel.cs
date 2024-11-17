@@ -79,24 +79,9 @@ public class CodeVerificationViewModel : BaseViewModel {
     public CodeVerificationViewModel(IServiceProvider serviceProvider) {
         NavigationConfirmCodeCommand = new NavigateCommand<CreateNewPasswordViewModel>(serviceProvider, null, VerifyCode);
      
-        FocusNextCommand = new RelayCommand<System.Windows.Controls.TextBox>(
-            p => { return true; },
-            p => {
-                FocusNext(p);
-                }
-            );
-        FocusPreviousCommand = new RelayCommand<System.Windows.Controls.TextBox>(
-            p => { return true; },
-            (p) => {
-                FocusPrevious(p);
-                }
-            );
-        LoadedCommand = new RelayCommand<System.Windows.Controls.TextBox>(
-            p => { return true; },
-            p => {
-                FocusFirst(p);
-                }
-            );
+        FocusNextCommand = new RelayCommand<System.Windows.Controls.TextBox>( p => FocusNext(p));
+        FocusPreviousCommand = new RelayCommand<System.Windows.Controls.TextBox>(p => FocusPrevious(p));
+        LoadedCommand = new RelayCommand<System.Windows.Controls.TextBox>(p => FocusFirst(p));
     }
 
     public bool VerifyCode()
