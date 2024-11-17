@@ -16,8 +16,9 @@ using PersonalFinanceApp.ViewModel.Stores;
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
 public class LoginNewAccountViewModel : BaseViewModel {
-    #region Properties
+    private readonly IServiceProvider _serviceProvider;
 
+    #region Properties
     public bool IncorrectPasswordUserName { get; set; } = false;
 
     private bool _incorrectName = false;
@@ -125,7 +126,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
     }
     #endregion
 
-    private readonly IServiceProvider _serviceProvider;
     #region Command
     public ICommand LoginCommand { get; set; }
     public ICommand ForgotPasswordCommand { get; set; }
@@ -144,7 +144,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
 
     #endregion
 
-
     public LoginNewAccountViewModel(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
@@ -158,20 +157,58 @@ public class LoginNewAccountViewModel : BaseViewModel {
             execute: LoginSuccess
             );
         //Set up Password
-        PasswordLoginChangedCommand = new RelayCommand<PasswordBox>((p) => true, (p) => { PasswordLogin = p.Password; });
-        PasswordNewAccountChangedCommand = new RelayCommand<PasswordBox>((p) => true, (p) => { PasswordNewAccount = p.Password; });
-        PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p) => true, (p) => { PasswordConfirm = p.Password; });
+        PasswordLoginChangedCommand = new RelayCommand<PasswordBox>(
+            (p) => true, 
+            (p) => { PasswordLogin = p.Password; }
+            );
+        PasswordNewAccountChangedCommand = new RelayCommand<PasswordBox>(
+            (p) => true, 
+            (p) => { PasswordNewAccount = p.Password; }
+            );
+        PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>(
+            (p) => true, 
+            (p) => { PasswordConfirm = p.Password; }
+            );
+
         //Clear text
-        FocusLoginCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
-        FocusNewAccountCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
-        ClearPasswordLoginCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
-        ClearPasswordNewAccountCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
-        ClearPasswordNewAccountConfirmCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
+        FocusLoginCommand = new RelayCommand<TabItem>(
+            (p) => { return true; }, 
+            (p) => { ClearText(p); }
+            );
+        FocusNewAccountCommand = new RelayCommand<TabItem>(
+            (p) => { return true; }, 
+            (p) => { ClearText(p); }
+            );
+        ClearPasswordLoginCommand = new RelayCommand<PasswordBox>(
+            p => { return true; }, 
+            (p) => { ClearPassword(p); }
+            );
+        ClearPasswordNewAccountCommand = new RelayCommand<PasswordBox>(
+            p => { return true; }, 
+            (p) => { ClearPassword(p); }
+            );
+        ClearPasswordNewAccountConfirmCommand = new RelayCommand<PasswordBox>(
+            p => { return true; }, 
+            (p) => { ClearPassword(p); }
+            );
+
         //Format
-        CheckFormatUserNameNewAccountCommand = new RelayCommand<TextBox>(p => { return true; }, (p) => { Format(p); });
-        CheckFormatGmailCommand = new RelayCommand<TextBox>(p => { return true; }, (p) => { Format(p); });
-        CheckFormatPasswordNewAccountCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { Format(p); });
-        CheckMathConfirmPasswordCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { MatchPassword(p); });
+        CheckFormatUserNameNewAccountCommand = new RelayCommand<TextBox>(
+            p => { return true; }, 
+            (p) => { Format(p); }
+            );
+        CheckFormatGmailCommand = new RelayCommand<TextBox>(
+            p => { return true; }, 
+            (p) => { Format(p); }
+            );
+        CheckFormatPasswordNewAccountCommand = new RelayCommand<PasswordBox>(
+            p => { return true; }, 
+            (p) => { Format(p); }
+            );
+        CheckMathConfirmPasswordCommand = new RelayCommand<PasswordBox>(
+            p => { return true; }, 
+            (p) => { MatchPassword(p); }
+            );
     }
 
     private void LoginSuccess(User loginUser) {
