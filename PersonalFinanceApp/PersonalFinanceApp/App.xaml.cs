@@ -23,14 +23,14 @@ namespace PersonalFinanceApp
         protected override void OnStartup(StartupEventArgs e)
         {
             //Default login window
-            //NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-            //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<LoginNewAccountViewModel>();
-            //MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
+            NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
+            navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<LoginNewAccountViewModel>();
+            MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
 
             //Default main window
-            NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-            navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
-            MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            //NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
+            //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
+            //MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
 
 
             MainWindow.Show();
@@ -61,15 +61,15 @@ namespace PersonalFinanceApp
 
             //Main window
             services.AddSingleton<MainViewModel>();
-            //services.AddSingleton<IMainWindowFactory>(s => 
-            //{
-            //    var dataContext = s.GetRequiredService<MainViewModel>();
-            //    return new MainWindowFactory(dataContext, s);
-            //});
-            services.AddSingleton<MainWindow>(s => new MainWindow
+            services.AddSingleton<IMainWindowFactory>(s =>
             {
-                DataContext = s.GetRequiredService<MainViewModel>()
+                var dataContext = s.GetRequiredService<MainViewModel>();
+                return new MainWindowFactory(dataContext, s);
             });
+            //services.AddSingleton<MainWindow>(s => new MainWindow
+            //{
+            //    DataContext = s.GetRequiredService<MainViewModel>()
+            //});
             services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
             services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
             services.AddTransient<SummaryViewModel>(s => new SummaryViewModel(s));
