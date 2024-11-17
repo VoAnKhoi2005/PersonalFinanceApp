@@ -1,10 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace PersonalFinanceApp.ViewModel.Stores;
 
 public class SharedDataService : INotifyPropertyChanged
 {
+    public ObservableCollection<string> SharedList { get; } = new ObservableCollection<string>();
+
     private string _message;
     public string Message
     {
