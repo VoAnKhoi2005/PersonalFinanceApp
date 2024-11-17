@@ -18,8 +18,7 @@
         WindowStartupLocation="CenterScreen"
 
         Title="LoginWindow" Height="720" Width="1152">
-
-        <Grid>
+    <Grid>
             <Image Width="650"
                    Height="674"
                    HorizontalAlignment="Left"

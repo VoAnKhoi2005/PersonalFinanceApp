@@ -13,8 +13,9 @@ using PersonalFinanceApp.ViewModel.Stores;
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
 public class LoginNewAccountViewModel : BaseViewModel {
-    #region Properties
+    private readonly IServiceProvider _serviceProvider;
 
+    #region Properties
     public bool IncorrectPasswordUserName { get; set; } = false;
 
     private bool _incorrectName = false;
@@ -122,7 +123,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
     }
     #endregion
 
-    private readonly IServiceProvider _serviceProvider;
     #region Command
     public ICommand LoginCommand { get; set; }
     public ICommand ForgotPasswordCommand { get; set; }
@@ -141,7 +141,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
 
     #endregion
 
-
     public LoginNewAccountViewModel(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
@@ -155,7 +154,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
         PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>( (p) => { PasswordConfirm = p.Password; });
         //Clear text
         FocusLoginCommand = new RelayCommand<TabItem>( (p) => { ClearText(p); });
-
         FocusNewAccountCommand = new RelayCommand<TabItem>( (p) => { ClearText(p); });
         ClearPasswordLoginCommand = new RelayCommand<PasswordBox>( (p) => { ClearPassword(p); });
         ClearPasswordNewAccountCommand = new RelayCommand<PasswordBox>( (p) => { ClearPassword(p); });
@@ -217,7 +215,8 @@ public class LoginNewAccountViewModel : BaseViewModel {
         PasswordBox p = parameter as PasswordBox;
         if (p != null)
         {
-            p.Password = "";
+            p.Password = string.Empty;
+            //if(p.Name.CompareTo("PasswordCreateAccount") == 0) InCorrectPassword = false;
         }
     }
 
@@ -241,7 +240,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
         } else if (parameter is PasswordBox) {
             PasswordBox pb = parameter as PasswordBox;
             pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
-            if (Regex.IsMatch(pb.Password, pattern)) {
+            if (Regex.IsMatch(pb.Password, pattern) ) {
                 InCorrectPassword = false;
             }   
             else InCorrectPassword = true;

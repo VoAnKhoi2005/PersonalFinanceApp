@@ -43,12 +43,14 @@ public class CreateNewPasswordViewModel : BaseViewModel {
         }
     }
     #endregion
+
+    #region Command
     public ICommand NavigationConfirmNewPassword { get; set; }
     public ICommand PasswordResetConfirmChangedCommand { get; set; }
     public ICommand CheckMathConfirmPasswordNewCommand { get; set; }
     public ICommand CheckFormatPassowrdNewCommand { get; set; }
+    #endregion
     public CreateNewPasswordViewModel(IServiceProvider serviceProvider) {
-
         NavigationConfirmNewPassword = new NavigateCommand<LoginNewAccountViewModel>(serviceProvider, null, VerifyNewPassword);
         PasswordResetConfirmChangedCommand = new RelayCommand<PasswordBox>( p => PasswordResetConfirm = p.Password);
         CheckMathConfirmPasswordNewCommand = new RelayCommand<PasswordBox>( p => CheckFormat(p));
@@ -56,6 +58,7 @@ public class CreateNewPasswordViewModel : BaseViewModel {
     }
 
     public bool VerifyNewPassword() {
+
         return true;
     }
     private void CheckFormat(object parameter) {
