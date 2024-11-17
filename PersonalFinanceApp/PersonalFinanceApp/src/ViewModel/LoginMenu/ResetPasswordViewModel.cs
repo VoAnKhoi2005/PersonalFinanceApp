@@ -1,14 +1,9 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Reflection.Emit;
-using System.Windows.Controls;
 using System.Windows.Input;
-using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
-using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
@@ -52,7 +47,7 @@ public class ResetPasswordViewModel : BaseViewModel
 
     public ResetPasswordViewModel(IServiceProvider serviceProvider)
     {
-        NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(serviceProvider, null, VerifyEmail);
+        NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(serviceProvider, VerifyEmail);
     }
 
     public bool VerifyEmail()
