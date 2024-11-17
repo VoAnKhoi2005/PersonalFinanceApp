@@ -193,10 +193,15 @@
                     </WrapPanel>
                 </StackPanel>
 
-                <Button Command="{Binding NavigationConfirmCodeCommand}" IsDefault="True" x:Name="verifybutton"
+                <Button IsDefault="True" x:Name="verifybutton"
                         Width="50" 
                         Height="50" 
                         Margin="0,306,0,0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding NavigationConfirmCodeCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <Button.Template>
                         <ControlTemplate>
                             <Grid Width="50" Height="50">

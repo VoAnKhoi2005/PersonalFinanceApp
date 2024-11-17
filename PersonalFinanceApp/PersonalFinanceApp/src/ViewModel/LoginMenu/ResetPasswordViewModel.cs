@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Mail;
 using System.Reflection.Emit;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ namespace PersonalFinanceApp.ViewModel.LoginMenu;
 public class ResetPasswordViewModel : BaseViewModel
 {
     private readonly IServiceProvider _serviceProvider;
+
     #region Properties
     public static string _to;
     public string _randomcode;
@@ -47,42 +49,38 @@ public class ResetPasswordViewModel : BaseViewModel
 
     #region Command
     public ICommand NavigateConfirmEmailCommand { get; set; }
-    public ICommand ConfirmResetEmailCommand { get; set; }
+
     #endregion
 
     public ResetPasswordViewModel(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
-        ConfirmResetEmailCommand = new RelayCommand<Object>(
-            p => { return true; },
-            p => { Verify(p); }
+        NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(
+            serviceProvider.GetRequiredService<NavigationStore>(),
+            () => serviceProvider.GetRequiredService<CodeVerificationViewModel>(),
+            VerifyEmail
             );
     }
 
     public bool VerifyEmail()
     {
-        var usr = DBManager.GetFirst<User>(u => u.Username == UserNameReset && u.Email == GmailReset);
-        if (usr == null) { return false; }
-        return true;
-    }
-
-    private void Verify(object parameter) {
-        if (VerifyEmail()) {
-            NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(
-                _serviceProvider.GetRequiredService<NavigationStore>(),
-                () => _serviceProvider.GetRequiredService<CodeVerificationViewModel>()
-            );
+        var usr = DBManager.GetFirst<User>(u => u.Username == UserNameReset);
+        if (usr.Email.CompareTo(GmailReset) == 0) {
             RandomCode();
+            _incorrectUserGmail = false;
+            return true; 
         }
+        _incorrectUserGmail = true;
+        return false;
     }
     private void RandomCode() {
         string from, pass, messagebody;
         Random rd = new Random();
-        _randomcode = rd.Next(100000, 10000000).ToString();
+        _randomcode = rd.Next(100000, 1000000).ToString();
         MailMessage message = new MailMessage();
         _to = GmailReset;
         from = "personalfinanceapplicationuit@gmail.com";
-        pass = "khoiloikien2005";
+        pass = "knfm aeqy bjhs xhpx";
         messagebody = $"Your reset Code is {_randomcode}";
         message.To.Add(_to);
         message.From = new MailAddress(from);
@@ -95,8 +93,9 @@ public class ResetPasswordViewModel : BaseViewModel
         smtp.Credentials = new NetworkCredential(from, pass);
         try {
             smtp.Send(message);
+            MessageBox.Show("Correct!");
         }catch(Exception ex) {
-             
+            MessageBox.Show(ex.Message);
         }
     }
 }

@@ -2,6 +2,8 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalFinanceApp.Database;
+using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
@@ -9,6 +11,8 @@ namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
 public class CreateNewPasswordViewModel : BaseViewModel {
     #region Properties
+    public string nametemp;//singleton
+    public bool correct = false;
     private bool _incorrectPasswordReset = false;
     public bool IncorrectPasswordReset {
         get => _incorrectPasswordReset;
@@ -69,26 +73,38 @@ public class CreateNewPasswordViewModel : BaseViewModel {
             p => { return true; }, 
             (p) => { CheckFormat(p); }
             );
+
     }
 
     public bool VerifyNewPassword() {
-
-        return true;
+        if (correct) {
+            var usr = DBManager.GetFirst<User>(u => u.Username == nametemp);
+            if(usr.ChangePassword(PasswordReset)) return true;
+        }
+        return false;
     }
     private void CheckFormat(object parameter) {
         string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
         if (parameter is TextBox) {
             TextBox p = parameter as TextBox;
             if (Regex.IsMatch(p.Text, pattern)) {
+                correct = true;
                 IncorrectPasswordReset = false;
             }
-            else IncorrectPasswordReset = true;
+            else {
+                correct = false;
+                IncorrectPasswordReset = true;
+            }
         }
         else {
             if (PasswordReset == PasswordResetConfirm) {
+                correct = true;
                 IncorrectConfirmReset = false;
             }
-            else IncorrectConfirmReset = true;
+            else {
+                correct = false;
+                IncorrectConfirmReset = true;
+            }
         }
     }
 }

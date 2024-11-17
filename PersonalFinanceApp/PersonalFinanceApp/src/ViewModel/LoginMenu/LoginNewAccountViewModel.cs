@@ -19,7 +19,14 @@ public class LoginNewAccountViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
 
     #region Properties
-    public bool IncorrectPasswordUserName { get; set; } = false;
+    private bool _incorrectPasswordUserName = false;
+    public bool IncorrectPasswordUserName {
+        get => _incorrectPasswordUserName;
+        set {
+            _incorrectPasswordUserName = value;
+            OnPropertyChanged();
+        }
+    }
 
     private bool _incorrectName = false;
     public bool InCorrectName {
@@ -46,7 +53,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
             OnPropertyChanged();
         }
     }
-    public bool _inCorrectPasswordConfirm = false;
+    private bool _inCorrectPasswordConfirm = false;
     public bool InCorrectPasswordConfirm {
         get => _inCorrectPasswordConfirm;
         set {
@@ -66,7 +73,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
     }
 
     private string _passwordLogin = string.Empty;
-
 
     public string PasswordLogin
     {
@@ -114,7 +120,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
     }
 
     private string _gmail;
-
     public string Gmail
     {
         get => _gmail;
@@ -128,6 +133,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
 
     #region Command
     public ICommand LoginCommand { get; set; }
+    public ICommand CreateAccountCommand {  get; set; }
     public ICommand ForgotPasswordCommand { get; set; }
     public ICommand PasswordLoginChangedCommand { get; set; }
     public ICommand PasswordNewAccountChangedCommand { get; set; }
@@ -153,9 +159,11 @@ public class LoginNewAccountViewModel : BaseViewModel {
         );
 
         LoginCommand = new RelayCommand<User>(
-            canExecute: VerifyLogin,
-            execute: LoginSuccess
+            p => { return true; },
+            p => { LoginSuccess(p); }
             );
+
+
         //Set up Password
         PasswordLoginChangedCommand = new RelayCommand<PasswordBox>(
             (p) => true, 
@@ -212,23 +220,34 @@ public class LoginNewAccountViewModel : BaseViewModel {
     }
 
     private void LoginSuccess(User loginUser) {
-        loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
+
+        if (VerifyLogin(loginUser)) {
+
+            IncorrectPasswordUserName = false;
+
+            loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
 
 
-        var factory = _serviceProvider.GetRequiredService<IMainWindowFactory>();
-        MainWindow mainWindow = factory.CreateMainWindow(loginUser);
+            var factory = _serviceProvider.GetRequiredService<IMainWindowFactory>();
+            MainWindow mainWindow = factory.CreateMainWindow(loginUser);
 
-        if (Application.Current.MainWindow != null)
-            Application.Current.MainWindow.Close();
+            if (Application.Current.MainWindow != null)
+                Application.Current.MainWindow.Close();
 
-        Application.Current.MainWindow = mainWindow;
-        mainWindow.Show();
+            Application.Current.MainWindow = mainWindow;
+            mainWindow.Show();
+        }
+        else {
+            IncorrectPasswordUserName = true;
+        }
+
     }
 
     private bool VerifyLogin(User? loginUser) {
+
         loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
-        if (loginUser == null)
-        {
+        if (loginUser == null) {
+            IncorrectPasswordUserName = true;
             return false;
         }
 
@@ -263,7 +282,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
         if (p != null)
         {
             p.Password = string.Empty;
-            //if(p.Name.CompareTo("PasswordCreateAccount") == 0) InCorrectPassword = false;
         }
     }
 

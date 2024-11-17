@@ -19,7 +19,15 @@ namespace PersonalFinanceApp.ViewModel.LoginMenu;
 public class CodeVerificationViewModel : BaseViewModel {
     #region Properties
     public bool flag = false;
-    public bool IncorrectVerify { get; set; } = false;
+    private bool _incorrectVerify = false;
+    public bool IncorrectVerify {
+        get => _incorrectVerify;
+        set {
+            _incorrectVerify = value;
+            OnPropertyChanged();
+        }
+    }
+
     private string _verify1 ;
     public string Verify1 {
         get => _verify1;

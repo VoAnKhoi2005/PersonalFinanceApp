@@ -9,7 +9,7 @@ namespace PersonalFinanceApp.View
         public LoginWindow()
         {
             InitializeComponent();
-            User newUser = new User("admin", "pass", "admin@gmail.com");
+            User newUser = new User("admin", "pass", "honguyentailoi05@gmail.com");
             DBManager.Insert(newUser);
         }
     }
