@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.View;
 using PersonalFinanceApp.ViewModel;
@@ -7,12 +8,12 @@ using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp.etc;
 
-public interface IMainWindowFactory
+public interface IWindowFactory
 {
     MainWindow CreateMainWindow(User user);
 }
 
-public class MainWindowFactory : IMainWindowFactory
+public class MainWindowFactory : IWindowFactory
 {
     private readonly IServiceProvider _serviceProvider;
     public BaseViewModel DataContext { get; set; }

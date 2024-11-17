@@ -1,18 +1,5 @@
-﻿using System.Data.Common;
-using System.Globalization;
-using System.Reflection.Metadata;
-using System.Text.RegularExpressions;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
-using System.Xml.Linq;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Xaml.Behaviors;
+﻿using System.Windows.Input;
 using PersonalFinanceApp.ViewModel.Command;
-using PersonalFinanceApp.ViewModel.Stores;
-using XAct;
-using static MaterialDesignThemes.Wpf.Theme;
 
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
@@ -77,7 +64,7 @@ public class CodeVerificationViewModel : BaseViewModel {
         }
     }
     #endregion
-
+      
     #region Command
     public ICommand NavigationConfirmCodeCommand { get; set; }
     public ICommand FocusNextCommand { get; set; }
@@ -85,29 +72,11 @@ public class CodeVerificationViewModel : BaseViewModel {
     public ICommand LoadedCommand { get; set; }
     #endregion
     public CodeVerificationViewModel(IServiceProvider serviceProvider) {
-        NavigationConfirmCodeCommand = new NavigateCommand<CreateNewPasswordViewModel>(
-            serviceProvider.GetRequiredService<NavigationStore>(),
-            () => serviceProvider.GetRequiredService<CreateNewPasswordViewModel>(),
-            VerifyCode
-            );
-        FocusNextCommand = new RelayCommand<System.Windows.Controls.TextBox>(
-            p => { return true; },
-            p => {
-                FocusNext(p);
-                }
-            );
-        FocusPreviousCommand = new RelayCommand<System.Windows.Controls.TextBox>(
-            p => { return true; },
-            (p) => {
-                FocusPrevious(p);
-                }
-            );
-        LoadedCommand = new RelayCommand<System.Windows.Controls.TextBox>(
-            p => { return true; },
-            p => {
-                FocusFirst(p);
-                }
-            );
+        NavigationConfirmCodeCommand = new NavigateCommand<CreateNewPasswordViewModel>(serviceProvider, VerifyCode);
+     
+        FocusNextCommand = new RelayCommand<System.Windows.Controls.TextBox>( p => FocusNext(p));
+        FocusPreviousCommand = new RelayCommand<System.Windows.Controls.TextBox>(p => FocusPrevious(p));
+        LoadedCommand = new RelayCommand<System.Windows.Controls.TextBox>(p => FocusFirst(p));
     }
 
     public bool VerifyCode()

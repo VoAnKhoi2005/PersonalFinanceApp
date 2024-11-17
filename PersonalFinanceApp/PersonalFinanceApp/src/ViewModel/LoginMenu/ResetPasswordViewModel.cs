@@ -1,15 +1,9 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using System.Reflection.Emit;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
-using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
@@ -54,18 +48,18 @@ public class ResetPasswordViewModel : BaseViewModel
 
     public ResetPasswordViewModel(IServiceProvider serviceProvider)
     {
-        _serviceProvider = serviceProvider;
-        NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(
-            serviceProvider.GetRequiredService<NavigationStore>(),
-            () => serviceProvider.GetRequiredService<CodeVerificationViewModel>(),
-            VerifyEmail
-            );
+        NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(serviceProvider, VerifyEmail);
     }
 
     public bool VerifyEmail()
     {
-        var usr = DBManager.GetFirst<User>(u => u.Username == UserNameReset);
-        if (usr.Email.CompareTo(GmailReset) == 0) {
+        var usr = DBManager.GetFirst<User>(u => u.Username == UserNameReset && u.Email == GmailReset);
+        if (usr == null) { return false; }
+        return true;
+    }
+
+    private void Verify(object parameter) {
+        if (VerifyEmail()) {
             RandomCode();
             _incorrectUserGmail = false;
             return true; 
