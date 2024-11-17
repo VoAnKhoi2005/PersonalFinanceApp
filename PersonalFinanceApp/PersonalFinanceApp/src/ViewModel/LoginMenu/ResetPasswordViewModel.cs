@@ -52,11 +52,7 @@ public class ResetPasswordViewModel : BaseViewModel
 
     public ResetPasswordViewModel(IServiceProvider serviceProvider)
     {
-        _serviceProvider = serviceProvider;
-        ConfirmResetEmailCommand = new RelayCommand<Object>(
-            p => { return true; },
-            p => { Verify(p); }
-            );
+        NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(serviceProvider, null, VerifyEmail);
     }
 
     public bool VerifyEmail()

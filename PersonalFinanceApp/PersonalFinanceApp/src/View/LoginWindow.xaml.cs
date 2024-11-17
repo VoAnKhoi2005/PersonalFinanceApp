@@ -1,16 +1,25 @@
 ﻿using System.Windows;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
+using PersonalFinanceApp.ViewModel;
 
-namespace PersonalFinanceApp.View
+namespace PersonalFinanceApp.View;
+
+public partial class LoginWindow : Window
 {
-    public partial class LoginWindow : Window
+    public LoginWindow()
     {
-        public LoginWindow()
+        InitializeComponent();
+        Closed += OnWindowClosed;
+        User newUser = new User("admin", "pass", "admin@123");
+        DBManager.Insert(newUser);
+    }
+
+    private void OnWindowClosed(object? sender, EventArgs e)
+    {
+        if (DataContext is BaseViewModel disposableViewModel)
         {
-            InitializeComponent();
-            User newUser = new User("admin", "pass", "admin@gmail.com");
-            DBManager.Insert(newUser);
+            disposableViewModel.Dispose();
         }
     }
 }

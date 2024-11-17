@@ -69,7 +69,7 @@ public class CodeVerificationViewModel : BaseViewModel {
         }
     }
     #endregion
-
+      
     #region Command
     public ICommand NavigationConfirmCodeCommand { get; set; }
     public ICommand FocusNextCommand { get; set; }
@@ -77,11 +77,8 @@ public class CodeVerificationViewModel : BaseViewModel {
     public ICommand LoadedCommand { get; set; }
     #endregion
     public CodeVerificationViewModel(IServiceProvider serviceProvider) {
-        NavigationConfirmCodeCommand = new NavigateCommand<CreateNewPasswordViewModel>(
-            serviceProvider.GetRequiredService<NavigationStore>(),
-            () => serviceProvider.GetRequiredService<CreateNewPasswordViewModel>(),
-            VerifyCode
-            );
+        NavigationConfirmCodeCommand = new NavigateCommand<CreateNewPasswordViewModel>(serviceProvider, null, VerifyCode);
+     
         FocusNextCommand = new RelayCommand<System.Windows.Controls.TextBox>(
             p => { return true; },
             p => {
