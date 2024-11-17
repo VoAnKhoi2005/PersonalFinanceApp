@@ -10,7 +10,7 @@ public class MainViewModel : BaseViewModel
     private readonly NavigationStore _navigationStore;
     private readonly ModalNavigationStore _modalNavigationStore;
     public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
-    public BaseViewModel? CurrentModalViewModel => _modalNavigationStore.CurrentViewModel;
+    public BaseViewModel? CurrentModalViewModel => _modalNavigationStore.CurrentModalViewModel;
     public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
     public ICommand DashBoardNavigateCommand { get; set; }
@@ -33,6 +33,7 @@ public class MainViewModel : BaseViewModel
     private void OnCurrentModalViewModelChanged()
     {
         OnPropertyChanged(nameof(CurrentModalViewModel));
+        OnPropertyChanged(nameof(IsModalOpen));
     }
 
     private void OnCurrentViewModelChanged()

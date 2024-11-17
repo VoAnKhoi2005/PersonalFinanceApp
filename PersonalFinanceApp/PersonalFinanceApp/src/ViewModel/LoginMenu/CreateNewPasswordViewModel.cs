@@ -49,7 +49,7 @@ public class CreateNewPasswordViewModel : BaseViewModel {
     public ICommand CheckFormatPassowrdNewCommand { get; set; }
     public CreateNewPasswordViewModel(IServiceProvider serviceProvider) {
 
-        NavigationConfirmNewPassword = new NavigateCommand<LoginNewAccountViewModel>(serviceProvider, VerifyNewPassword);
+        NavigationConfirmNewPassword = new NavigateCommand<LoginNewAccountViewModel>(serviceProvider, null, VerifyNewPassword);
         PasswordResetConfirmChangedCommand = new RelayCommand<PasswordBox>( p => PasswordResetConfirm = p.Password);
         CheckMathConfirmPasswordNewCommand = new RelayCommand<PasswordBox>( p => CheckFormat(p));
         CheckFormatPassowrdNewCommand = new RelayCommand<TextBox>( p => CheckFormat(p));

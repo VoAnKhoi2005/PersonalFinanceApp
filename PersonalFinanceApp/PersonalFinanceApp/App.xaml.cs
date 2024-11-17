@@ -46,6 +46,7 @@ namespace PersonalFinanceApp
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<NavigationStore>();
+            services.AddSingleton<ModalNavigationStore>();
 
             //Login window
             services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));
@@ -59,21 +60,18 @@ namespace PersonalFinanceApp
             services.AddTransient<CreateNewPasswordViewModel>(s => new CreateNewPasswordViewModel(s));
 
             //Main window
-            services.AddSingleton<ModalNavigationStore>();
             services.AddSingleton<MainViewModel>(s => new MainViewModel(s));
             services.AddSingleton<IWindowFactory>(s =>
             {
                 var dataContext = s.GetRequiredService<MainViewModel>();
                 return new MainWindowFactory(dataContext, s);
             });
-            //services.AddSingleton<MainWindow>(s => new MainWindow
-            //{
-            //    DataContext = s.GetRequiredService<MainViewModel>()
-            //});
-
             services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
             services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
             services.AddTransient<SummaryViewModel>(s => new SummaryViewModel(s));
+
+            //Modal-Popup
+            services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));
         }
     }
 }

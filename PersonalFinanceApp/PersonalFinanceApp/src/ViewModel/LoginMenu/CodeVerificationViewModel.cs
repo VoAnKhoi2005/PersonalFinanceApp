@@ -62,7 +62,7 @@ public class CodeVerificationViewModel : BaseViewModel
 
     public CodeVerificationViewModel(IServiceProvider serviceProvider)
     {
-        NavigationConfirmCodeCommand = new NavigateCommand<CreateNewPasswordViewModel>(serviceProvider, VerifyCode);
+        NavigationConfirmCodeCommand = new NavigateCommand<CreateNewPasswordViewModel>(serviceProvider, null, VerifyCode);
     }
 
     public bool VerifyCode()

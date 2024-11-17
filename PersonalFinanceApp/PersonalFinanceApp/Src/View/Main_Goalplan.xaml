@@ -243,10 +243,11 @@
 
                 <!--add new-->
                 <Button Height="50"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Bottom"
-                            Margin="0,0,15,10"
-                            Grid.Column="5">
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Margin="0,0,15,10"
+                        Grid.Column="5"
+                        Command="{Binding AddNewGoalCommand}">
 
                     <Button.Template>
                         <ControlTemplate>

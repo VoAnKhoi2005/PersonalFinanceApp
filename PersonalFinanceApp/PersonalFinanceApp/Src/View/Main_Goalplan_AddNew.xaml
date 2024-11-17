@@ -129,6 +129,7 @@
                                    HorizontalAlignment="Center"
                                    FontSize="16"></TextBlock>
                         <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" VerticalAlignment="Center"
+                                Command="{StaticResource TestCommandInstance}"
                             />
                     </Grid>
                 </Border>

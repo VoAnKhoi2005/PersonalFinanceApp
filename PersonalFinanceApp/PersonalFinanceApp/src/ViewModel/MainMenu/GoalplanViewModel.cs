@@ -5,10 +5,10 @@ namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class GoalplanViewModel : BaseViewModel
 {
-    public ICommand testCommand { get; set; }
+    public ICommand AddNewGoalCommand { get; set; }
 
     public GoalplanViewModel(IServiceProvider serviceProvider)
     {
-        testCommand = new TestCommand();
+        AddNewGoalCommand = new NavigateModalCommand<GoalplanAddNewViewModel>(serviceProvider);
     }
 }

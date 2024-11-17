@@ -5,7 +5,7 @@ public class ModalNavigationStore
     public event Action? CurrentModalViewModelChanged;
 
     private BaseViewModel? _currentModalViewModel;
-    public BaseViewModel? CurrentViewModel
+    public BaseViewModel? CurrentModalViewModel
     {
         get => _currentModalViewModel;
         set
@@ -16,6 +16,11 @@ public class ModalNavigationStore
     }
 
     public bool IsOpen => _currentModalViewModel != null;
+
+    public void Close()
+    {
+        CurrentModalViewModel = null;
+    }
 
     private void OnCurrentModalViewModelChanged()
     {
