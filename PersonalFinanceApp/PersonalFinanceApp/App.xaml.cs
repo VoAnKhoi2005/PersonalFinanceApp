@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.etc;
+using PersonalFinanceApp.Src.View;
 using PersonalFinanceApp.View;
 using PersonalFinanceApp.ViewModel.LoginMenu;
 using PersonalFinanceApp.ViewModel.MainMenu;
@@ -28,10 +29,12 @@ namespace PersonalFinanceApp
             //MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
 
             //Default main window
-            NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-            navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
-            MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            //NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
+            //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
+            //MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
 
+            //testwindow
+            MainWindow = new TestWindow();
 
             MainWindow.Show();
 

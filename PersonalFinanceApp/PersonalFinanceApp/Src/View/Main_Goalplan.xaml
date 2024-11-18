@@ -15,6 +15,28 @@
                 <Setter Property="Foreground" Value="#E5CBBFBF"/>
                 <Setter Property="FontWeight" Value="Regular"/>
             </Style>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="Transparent"></Setter>
+                <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="30"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch"></ContentPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="Cursor" Value="Hand"></Setter>
+                        <Setter Property="Background" Value="#265B70" ></Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </Grid.Resources>
         <Grid>
             <Grid.RowDefinitions>
@@ -36,7 +58,7 @@
                                FontSize="28" 
                                FontWeight="Bold"
                                HorizontalAlignment="Left"
-                               VerticalAlignment="Top" Margin="25,-10,0,0" 
+                               VerticalAlignment="Bottom" Margin="25,-10,0,0" 
                                Height="55" Width="126"
                                Grid.Row="0"
                                ></TextBlock>
@@ -97,7 +119,7 @@
 
                 <!--Total target amount-->
                 <Grid Grid.Column="0">
-                    <Border CornerRadius="20"
+                    <Border CornerRadius="30"
                             Margin="15,15,7.5,0"
                             Background="#053B50">
                         <Grid>
@@ -141,7 +163,7 @@
                 <!--Left to save-->
 
                 <Grid Grid.Column="1">
-                    <Border CornerRadius="20"
+                    <Border CornerRadius="30"
                             Margin="15,15,7.5,0"
                             Background="#053B50">
                         <Grid>
@@ -181,10 +203,10 @@
                         </Grid>
                     </Border>
                 </Grid>
-                
+
                 <!--Monthly savings target-->
                 <Grid Grid.Column="2">
-                    <Border CornerRadius="20"
+                    <Border CornerRadius="30"
                             Margin="15,15,7.5,0"
                             Background="#053B50">
                         <Grid>
@@ -227,7 +249,7 @@
 
                 <!--Save so far-->
                 <Grid Grid.Column="3">
-                    <Border CornerRadius="20"
+                    <Border CornerRadius="30"
                             Margin="15,15,7.5,0"
                             Background="#053B50">
                         <Grid>
@@ -270,38 +292,30 @@
                 </Grid>
 
                 <!--add new-->
-                <Button Height="50"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Bottom"
-                            Margin="0,0,15,10"
-                            Grid.Column="5">
-
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Border CornerRadius="20"
-                                        Width="100"
-                                        Height="50"
-                                        Background="#053B50">
-                                <Grid>
-                                    <TextBlock Text="new goal"
+                <Border CornerRadius="25"
+                        Width="100"
+                        Height="60"
+                                        Background="#053B50"
+                                                    Grid.Column="5">
+                    <Button>
+                        <Grid>
+                            <TextBlock Text="new goal"
                                                FontSize="12"
                                                Margin="0,0,10,0"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Right"
                                                FontWeight="Normal"
                                                Foreground="#E5CBBFBF"></TextBlock>
-                                    <materialDesign:PackIcon Kind="PlusCircle" 
+                            <materialDesign:PackIcon Kind="PlusCircle" 
                                                                      Foreground="#E5CBBFBF"
                                                                     Height="25"
                                                                     Width="25"
                                                                     HorizontalAlignment="Left"
                                                                     VerticalAlignment="Center"
                                                                  Margin="5,0,0,0"/>
-                                </Grid>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                        </Grid>
+                    </Button>
+                </Border>
             </Grid>
             <!--goal plan main looking-->
         </Grid>

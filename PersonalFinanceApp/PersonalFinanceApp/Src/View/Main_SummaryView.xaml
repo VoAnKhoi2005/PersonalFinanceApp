@@ -62,43 +62,76 @@
             </Grid.ColumnDefinitions>
 
             <!--TOTAL BALANCE-->
-            <Border CornerRadius="30" Grid.Column="0" Margin="15, 15, 7.5, 7.5" Background="#053B50">
-                <Canvas>
+            <Border CornerRadius="30" 
+                    Grid.Column="0" 
+                    Margin="15, 15, 7.5, 7.5" 
+                    Background="#053B50">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="85*"></ColumnDefinition>
+                        <ColumnDefinition Width="61*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="50.875"></RowDefinition>
+                    </Grid.RowDefinitions>
 
-                    <TextBlock Text="TOTAL BALANCE" FontSize="18" FontWeight="Bold" Canvas.Left="11" Canvas.Top="5" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+                    <!--title-->
+                    <TextBlock Text="TOTAL BALANCE" 
+                               FontSize="18" 
+                               FontWeight="Bold" 
+                               Grid.Row="0"
+                               Grid.Column="0" 
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"></TextBlock>
+                    
+                    <!--Money--> <!--binding here-->
+                    <TextBlock Text="Money VND" 
+                               FontSize="18" 
+                               FontWeight="Bold" 
+                               Grid.Column="0"
+                               Grid.Row="1"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               TextAlignment="Center"></TextBlock>
+                </Grid>
+            </Border>
+            <Canvas Visibility="Collapsed">
 
-                    <!--Binding here-->
-                    <TextBlock Text="xxx.xxx.xxx VNĐ" FontSize="20" Canvas.Left="12" Canvas.Top="29" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+               
 
-                    <!--Binding here-->
-                    <Border Background="#25FFAE" CornerRadius="20"
+                <!--Binding here-->
+                <TextBlock Text="xxx.xxx.xxx VNĐ" FontSize="20" Canvas.Left="12" Canvas.Top="29" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+
+                <!--Binding here-->
+                <Border Background="#25FFAE" CornerRadius="20"
                             Width="70" Height="35" Canvas.Left="13" Canvas.Top="82" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Grid>
-                            <materialDesign:PackIcon 
+                    <Grid>
+                        <materialDesign:PackIcon 
                             Width="20" Height="20"
                             VerticalAlignment="Center" HorizontalAlignment="Left"
                             Margin="5,0,0,0"
                             Kind="ArrowTopRightThin" />
-                            <TextBlock Text="x.x%" 
+                        <TextBlock Text="x.x%" 
                                    FontSize="14" 
                                    VerticalAlignment="Center" 
                                    HorizontalAlignment="Right" 
                                    Margin="0,0,10,0"
                                    Foreground="Black"></TextBlock>
-                        </Grid>
-                    </Border>
+                    </Grid>
+                </Border>
 
 
-                    <TextBlock Text="you have extra" FontSize="12" Canvas.Bottom="50" Canvas.Left="13" Canvas.Top="124" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-                    <TextBlock Text="compared to last month" FontSize="12" Canvas.Bottom="50" Canvas.Left="12" Canvas.Top="136" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                <TextBlock Text="you have extra" FontSize="12" Canvas.Bottom="50" Canvas.Left="13" Canvas.Top="124" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="compared to last month" FontSize="12" Canvas.Bottom="50" Canvas.Left="12" Canvas.Top="136" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
 
-                    <!--Binding here-->
-                    <TextBlock Text="xxxxxxxxxxxxxxxxxxx" 
+                <!--Binding here-->
+                <TextBlock Text="xxxxxxxxxxxxxxxxxxx" 
                                FontWeight="Bold"
                                FontSize="12" Canvas.Bottom="50" Canvas.Left="98" Canvas.Top="124" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-                </Canvas>
-            </Border>
-
+            </Canvas>
             <!--INCOME-->
             <Border CornerRadius="30" Grid.Column="1" Margin=" 7.5, 15, 7.5, 7.5" Background="#053B50">
                 <Canvas>
