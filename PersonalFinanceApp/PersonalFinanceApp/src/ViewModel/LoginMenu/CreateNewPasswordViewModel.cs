@@ -10,8 +10,10 @@ using PersonalFinanceApp.ViewModel.Stores;
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
 public class CreateNewPasswordViewModel : BaseViewModel {
+    private readonly IServiceProvider _serviceProvider;
+    private readonly SharedDataService _sharedDataService;
     #region Properties
-    public string nametemp;//singleton
+    public string name;
     public bool correct = false;
     private bool _incorrectPasswordReset = false;
     public bool IncorrectPasswordReset {
@@ -55,34 +57,20 @@ public class CreateNewPasswordViewModel : BaseViewModel {
     public ICommand CheckFormatPassowrdNewCommand { get; set; }
     #endregion
     public CreateNewPasswordViewModel(IServiceProvider serviceProvider) {
-
-        // NavigationConfirmNewPassword = new NavigateCommand<LoginNewAccountViewModel>(
-        //     serviceProvider.GetRequiredService<NavigationStore>(),
-        //     () => serviceProvider.GetRequiredService<LoginNewAccountViewModel>(),
-        //     VerifyNewPassword
-        //     );
-        // PasswordResetConfirmChangedCommand = new RelayCommand<PasswordBox>(
-        //     (p) => { return true; }, 
-        //     (p) => { PasswordResetConfirm = p.Password; }
-        //     );
-        // CheckMathConfirmPasswordNewCommand = new RelayCommand<PasswordBox>(
-        //     p => { return true; }, 
-        //     (p) => { CheckFormat(p); }
-        //     );
-        // CheckFormatPassowrdNewCommand = new RelayCommand<TextBox>(
-        //     p => { return true; }, 
-        //     (p) => { CheckFormat(p); }
-        //     );
-
-        NavigationConfirmNewPassword = new NavigateCommand<LoginNewAccountViewModel>(serviceProvider, null, VerifyNewPassword);
+        _serviceProvider = serviceProvider;
+        _sharedDataService = serviceProvider.GetRequiredService<SharedDataService>();
+        NavigationConfirmNewPassword = new NavigateCommand<LoginNewAccountViewModel>(serviceProvider, VerifyNewPassword);
+        //Password Binding
         PasswordResetConfirmChangedCommand = new RelayCommand<PasswordBox>( p => PasswordResetConfirm = p.Password);
+        //Format
         CheckMathConfirmPasswordNewCommand = new RelayCommand<PasswordBox>( p => CheckFormat(p));
         CheckFormatPassowrdNewCommand = new RelayCommand<TextBox>( p => CheckFormat(p));
     }
 
     public bool VerifyNewPassword() {
+        name = _sharedDataService.SharedList[0];
         if (correct) {
-            var usr = DBManager.GetFirst<User>(u => u.Username == nametemp);
+            var usr = DBManager.GetFirst<User>(u => u.Username == name);
             if(usr.ChangePassword(PasswordReset)) return true;
         }
         return false;

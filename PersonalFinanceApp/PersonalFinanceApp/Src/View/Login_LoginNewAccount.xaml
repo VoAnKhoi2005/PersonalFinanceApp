@@ -111,7 +111,6 @@
                             <!--button Login confirm-->
                             <Button IsDefault="True"
                                     Content="Login Confirm" 
-                                    Cursor="Arrow"
                                     FontSize="18"
                                     Width="300"
                                     Height="50"
@@ -287,7 +286,7 @@
                                 Margin="130,285,130,10">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="GotFocus">
-                                        <i:InvokeCommandAction Command="{Binding CreateAccountCommand}"/>
+                                        <i:InvokeCommandAction Command="{Binding CreateAccountCommand}" CommandParameter="{Binding ElementName=LoginTab}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </Button>

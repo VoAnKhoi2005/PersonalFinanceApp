@@ -1,15 +1,19 @@
 ﻿using System.Net;
 using System.Net.Mail;
+using System.Windows;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
+using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
 public class ResetPasswordViewModel : BaseViewModel
 {
     private readonly IServiceProvider _serviceProvider;
+    private readonly SharedDataService _sharedDataService;
 
     #region Properties
     public static string _to;
@@ -48,25 +52,25 @@ public class ResetPasswordViewModel : BaseViewModel
 
     public ResetPasswordViewModel(IServiceProvider serviceProvider)
     {
+        _serviceProvider = serviceProvider;
+        _sharedDataService = serviceProvider.GetRequiredService<SharedDataService>();
         NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(serviceProvider, VerifyEmail);
     }
 
     public bool VerifyEmail()
     {
         var usr = DBManager.GetFirst<User>(u => u.Username == UserNameReset && u.Email == GmailReset);
-        if (usr == null) { return false; }
-        return true;
-    }
-
-    private void Verify(object parameter) {
-        if (VerifyEmail()) {
+        if (usr != null) {
+            _sharedDataService.SharedList.Add(UserNameReset.ToString());
             RandomCode();
-            _incorrectUserGmail = false;
-            return true; 
+            IncorrectUserGmail = false;
+            _sharedDataService.SharedList.Add(_randomcode.ToString());
+            return true;
         }
-        _incorrectUserGmail = true;
+        IncorrectUserGmail = true;
         return false;
     }
+
     private void RandomCode() {
         string from, pass, messagebody;
         Random rd = new Random();
@@ -87,7 +91,6 @@ public class ResetPasswordViewModel : BaseViewModel
         smtp.Credentials = new NetworkCredential(from, pass);
         try {
             smtp.Send(message);
-            MessageBox.Show("Correct!");
         }catch(Exception ex) {
             MessageBox.Show(ex.Message);
         }

@@ -1,10 +1,15 @@
 ﻿using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.ViewModel.Command;
+using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
 public class CodeVerificationViewModel : BaseViewModel {
+    private readonly IServiceProvider _serviceProvider;
+    private readonly SharedDataService _sharedDataService;
     #region Properties
+    public string code;
     public bool flag = false;
     private bool _incorrectVerify = false;
     public bool IncorrectVerify {
@@ -72,8 +77,10 @@ public class CodeVerificationViewModel : BaseViewModel {
     public ICommand LoadedCommand { get; set; }
     #endregion
     public CodeVerificationViewModel(IServiceProvider serviceProvider) {
+        _serviceProvider = serviceProvider;
+        _sharedDataService = serviceProvider.GetRequiredService<SharedDataService>();
         NavigationConfirmCodeCommand = new NavigateCommand<CreateNewPasswordViewModel>(serviceProvider, VerifyCode);
-     
+        //Focus
         FocusNextCommand = new RelayCommand<System.Windows.Controls.TextBox>( p => FocusNext(p));
         FocusPreviousCommand = new RelayCommand<System.Windows.Controls.TextBox>(p => FocusPrevious(p));
         LoadedCommand = new RelayCommand<System.Windows.Controls.TextBox>(p => FocusFirst(p));
@@ -81,8 +88,20 @@ public class CodeVerificationViewModel : BaseViewModel {
 
     public bool VerifyCode()
     {
-
-        return true;
+        code = _sharedDataService.SharedList[1];
+        if (Verify1.Length < 1 || Verify2.Length < 1 || Verify3.Length < 1 || Verify4.Length < 1 || Verify5.Length < 1 || Verify6.Length < 1) {
+            IncorrectVerify = true;
+            return false;
+        }
+        else {
+            string verifycode = Verify1 + Verify2 + Verify3 + Verify4 + Verify5 + Verify6;
+            if (verifycode.CompareTo(code) == 0) {
+                IncorrectVerify = false;
+                return true;
+            }
+            IncorrectVerify = true;
+            return false;
+        }
     }
     private void FocusNext(object parameter) {
         System.Windows.Controls.TextBox tb = parameter as System.Windows.Controls.TextBox;

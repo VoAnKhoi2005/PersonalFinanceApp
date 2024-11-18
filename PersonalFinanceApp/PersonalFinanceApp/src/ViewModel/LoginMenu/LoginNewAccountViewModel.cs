@@ -151,12 +151,10 @@ public class LoginNewAccountViewModel : BaseViewModel {
     {
         _serviceProvider = serviceProvider;
         ForgotPasswordCommand = new NavigateCommand<ResetPasswordViewModel>(serviceProvider);
-
+        //Login
         LoginCommand = new RelayCommand<User>(LoginSuccess, VerifyLogin);
-        // LoginCommand = new RelayCommand<User>(
-        //     p => { return true; },
-        //     p => { LoginSuccess(p); }
-        //     );
+        //Create Account
+        CreateAccountCommand = new RelayCommand<TabItem>(p => { CreateAccount(p); });
         //Set up Password
         PasswordLoginChangedCommand = new RelayCommand<PasswordBox>( (p) => { PasswordLogin = p.Password; });
         PasswordNewAccountChangedCommand = new RelayCommand<PasswordBox>( (p) => { PasswordNewAccount = p.Password; });
@@ -206,6 +204,15 @@ public class LoginNewAccountViewModel : BaseViewModel {
         }
 
         return loginUser.VerifyPassword(PasswordLogin);
+    }
+    private void CreateAccount(object parameter) {
+        TabItem ti = parameter as TabItem;
+        var user = DBManager.GetFirst<User>(u => u.Username == UserNameNewAccount);
+        if (ti != null && user == null) {
+            User usr = new User(UserNameNewAccount, PasswordNewAccount, Gmail);
+            DBManager.Insert(usr);
+            ti.Focus();
+        }
     }
 
     private void ClearText(object parameter)
