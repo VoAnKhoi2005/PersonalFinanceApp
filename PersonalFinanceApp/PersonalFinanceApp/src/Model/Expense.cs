@@ -46,9 +46,9 @@ public class Expense
     public int ExBYear { get; set; }
     [Required]
     public int UserID { get; set; }
-    public virtual ExpensesBook ExpensesBook { get; set; }
+    public virtual ExpensesBook? ExpensesBook { get; set; }
 
-    public virtual RecurringDetail RecurringDetail { get; set; }
+    public virtual RecurringDetail? RecurringDetail { get; set; }
 
     private Expense() { }
 

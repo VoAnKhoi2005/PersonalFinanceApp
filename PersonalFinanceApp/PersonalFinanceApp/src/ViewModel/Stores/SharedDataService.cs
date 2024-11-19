@@ -8,8 +8,8 @@ public class SharedDataService : INotifyPropertyChanged
 {
     public ObservableCollection<string> SharedList { get; } = new ObservableCollection<string>();
 
-    private string _message;
-    public string Message
+    private string? _message;
+    public string? Message
     {
         get => _message;
         set

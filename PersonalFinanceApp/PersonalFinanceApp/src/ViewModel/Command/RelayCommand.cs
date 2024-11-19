@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Data;
+using System.Windows.Input;
 namespace PersonalFinanceApp.ViewModel.Command;
 
 public class RelayCommand<T> : ICommand
@@ -13,12 +14,12 @@ public class RelayCommand<T> : ICommand
         else
             _canExecute = canExecute;
 
-        _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+        _execute = execute ?? throw new InvalidExpressionException();
     }
 
-    public bool CanExecute(object parameter) => _canExecute((T)parameter);
+    public bool CanExecute(object? parameter) => _canExecute((T?)parameter);
 
-    public void Execute(object parameter) => _execute((T)parameter);
+    public void Execute(object? parameter) => _execute((T?)parameter);
 
     public event EventHandler? CanExecuteChanged
     {

@@ -24,14 +24,14 @@ namespace PersonalFinanceApp
         protected override void OnStartup(StartupEventArgs e)
         {
             //Default login window
-            NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-            navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<LoginNewAccountViewModel>();
-            MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
+            //NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
+            //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<LoginNewAccountViewModel>();
+            //MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
 
             //Default main window
-            //NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-            //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
-            //MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
+            NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
+            navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
+            MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
 
             MainWindow.Show();
 
@@ -68,10 +68,6 @@ namespace PersonalFinanceApp
                 var dataContext = s.GetRequiredService<MainViewModel>();
                 return new MainWindowFactory(dataContext, s);
             });
-            //services.AddSingleton<MainWindow>(s => new MainWindow
-            //{
-            //    DataContext = s.GetRequiredService<MainViewModel>()
-            //});
             services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
             services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
             services.AddTransient<SummaryViewModel>(s => new SummaryViewModel(s));
