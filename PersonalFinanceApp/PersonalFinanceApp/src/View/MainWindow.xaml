@@ -78,7 +78,8 @@
             <!--Dashboard-->
             <Button Height="60" VerticalAlignment="top"
                     DockPanel.Dock="Top"
-                    IsHitTestVisible="True">
+                    IsHitTestVisible="True"
+                    Command="{Binding DashBoardNavigateCommand}">
                 <Grid VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Height="60" Width="210"
@@ -125,7 +126,8 @@
             <!--Goal plan-->
             <Button Height="60" VerticalAlignment="top"
                     DockPanel.Dock="Top"
-                    IsHitTestVisible="True">
+                    IsHitTestVisible="True"
+                    Command="{Binding GoalplanNavigateCommand}">
                 <Grid VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Height="60" Width="210"
@@ -150,7 +152,8 @@
             <!--Summary-->
             <Button Height="60" VerticalAlignment="top"
                     DockPanel.Dock="Top"
-                    IsHitTestVisible="True">
+                    IsHitTestVisible="True"
+                    Command="{Binding SummaryNavigateCommand}">
                 <Grid VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Height="60" Width="210"
