@@ -46,10 +46,14 @@ public class User
         Resources = resources;
     }
 
-    public bool ChangePassword(string oldPassword, string newPassword)
-    {
-        if (!VerifyPassword(oldPassword))
-            return false;
+    //public bool ChangePassword(string oldPassword, string newPassword)
+    //{
+    //    if (!VerifyPassword(oldPassword))
+    //        return false;
+    //    Password = HashPassword(newPassword);
+    //    return DBManager.Update(this);
+    //}
+    public bool ChangePassword(string newPassword) {
         Password = HashPassword(newPassword);
         return DBManager.Update(this);
     }

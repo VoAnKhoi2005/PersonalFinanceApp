@@ -17,7 +17,7 @@
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.9*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -27,15 +27,21 @@
 
             <!--title-->
             <Grid Grid.Row="0">
-                <TextBlock Text="Adding   a   new   goal"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Adding a new goal"
+                           Grid.Row="0"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Top"
                            FontSize="25"
                            Foreground="#EFE4E4"
                            FontWeight="Bold"
-                           
                            Margin="0,-5,0,0" TextAlignment="Center"></TextBlock>
-                <TextBlock Text="please  fill  in  the  form  below"
+
+                <TextBlock Text="Please fill in the form below"
+                           Grid.Row="1"
                            VerticalAlignment="Bottom"
                            HorizontalAlignment="Center"
                            Margin="0,0,0,5"></TextBlock>
@@ -123,6 +129,7 @@
                                    HorizontalAlignment="Center"
                                    FontSize="16"></TextBlock>
                         <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" VerticalAlignment="Center"
+                                Command="{StaticResource TestCommandInstance}"
                             />
                     </Grid>
                 </Border>

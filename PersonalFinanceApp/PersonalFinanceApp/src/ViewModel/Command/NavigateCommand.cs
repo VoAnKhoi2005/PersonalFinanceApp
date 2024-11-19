@@ -1,22 +1,19 @@
-﻿using PersonalFinanceApp.ViewModel.Stores;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp.ViewModel.Command;
 
-public class NavigateCommand<TargetViewModel> : BaseCommand where TargetViewModel : BaseViewModel
+public class NavigateCommand<TViewModel> : BaseCommand where TViewModel : BaseViewModel
 {
     private readonly NavigationStore _navigationStore;
-    private readonly Func<TargetViewModel> _createViewModel;
+    private readonly Func<TViewModel> _createViewModel;
     private readonly Func<bool> _canExecuteViewModel;
 
-    public NavigateCommand(NavigationStore navigationStore, Func<TargetViewModel> createViewModel, Func<bool>? canExecuteViewModel = null)
+    public NavigateCommand(IServiceProvider serviceProvider, Func<bool>? canExecuteViewModel = null)
     {
-        _navigationStore = navigationStore;
-        _createViewModel = createViewModel;
-
-        if (canExecuteViewModel == null)
-            _canExecuteViewModel = () => true;
-        else
-            _canExecuteViewModel = canExecuteViewModel;
+        _navigationStore = serviceProvider.GetRequiredService<NavigationStore>();
+        _createViewModel = () => serviceProvider.GetRequiredService<TViewModel>();
+        _canExecuteViewModel = canExecuteViewModel ?? (() => true);
     }
 
     public override void Execute(object parameter)

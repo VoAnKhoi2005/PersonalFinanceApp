@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors" >
-        <UserControl.Resources>
-            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        </UserControl.Resources>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button">
@@ -51,7 +51,7 @@
 
                     <!--Login tab-->
                     <TabItem Height="60" x:Name="LoginTab">
-                        
+
                         <TabItem.Header>
                             <Label Content="LOGIN" FontSize="22" FontFamily="Arial" ></Label>
                         </TabItem.Header>
@@ -64,7 +64,7 @@
                             <!--Username textbox-->
                             <Label Content="Username" Foreground="#E5CBBFBF" FontSize="16" Margin="31,67,356,238"></Label>
                             <Border CornerRadius="15" Background="#084563" Margin="124,62,36,238" Width="400" Height="40" Grid.ColumnSpan="2">
-                                    <!--x:Name="UserLogin"-->
+                                <!--x:Name="UserLogin"-->
                                 <TextBox x:Name="UserNameLogin"
                                     Foreground="#E5CBBFBF"
                                     VerticalAlignment="Top"
@@ -73,10 +73,10 @@
                                     Width="380" 
                                     Height="40"
                                     Background="Transparent" BorderBrush="{x:Null}">
-                                    
+
                                 </TextBox>
                             </Border>
-                            
+
                             <!--password passwordbox-->
                             <Label Content="Password" FontSize="16"  Foreground="#E5CBBFBF" Margin="31,134,366,174" RenderTransformOrigin="0.411,0.567"></Label>
                             <Border Width="400" Height="40" Margin="123,130,37,170" Background="#084563" CornerRadius="15" Grid.ColumnSpan="2">
@@ -98,8 +98,8 @@
                             <CheckBox Content="Remember me"
                                       Foreground="#E5CBBFBF"
                                       Background="White" Margin="50 200 200 100" FontSize="15"/>
-                          
-                                      
+
+
                             <Button 
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Content="Forgot your password?" 
@@ -107,25 +107,27 @@
                                 FontSize="15"
                                 Width="200"
                                 FontWeight="Bold" FontStyle="Italic" Background="#053B50" Margin="200 200 -100 100"  Foreground="#FFCDCAD2" Grid.ColumnSpan="2" />
-                            
+
                             <!--button Login confirm-->
-                            <Button 
+                            <Button IsDefault="True"
                                     Content="Login Confirm" 
-                                    Cursor="Arrow"
                                     FontSize="18"
                                     Width="300"
                                     Height="50"
                                     Foreground="#E5FFFFFF" 
-                                    Margin="130,245,43,45"
-                                    Command="{Binding LoginCommand}">
+                                    Margin="130,245,43,45">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding LoginCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </Button>
 
                             <StackPanel Visibility="{Binding IncorrectPasswordUserName, Converter={StaticResource BoolToVisibilityConverter}}"
-                                        Orientation="Horizontal" Margin="130 175 100 140">
+                                        Margin="130 175 0 130">
                                 <WrapPanel >
-
                                     <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
-                                    <Label Content="Incorrect username or password!" Foreground="Red" ></Label>
+                                    <Label Content="Incorrect username or password!" Foreground="Red" />
                                 </WrapPanel>
                             </StackPanel>
                         </Grid>
@@ -145,7 +147,7 @@
                         </i:Interaction.Triggers>
                     </TabItem>
 
-                    
+
                     <!--New account -->
                     <TabItem  Height="60" x:Name="NewAccountTab">
                         <TabItem.Header>
@@ -242,10 +244,10 @@
                                    Foreground="#E5CBBFBF"  
                                    VerticalAlignment="Bottom"
                                    RenderTransformOrigin="0.503,1.257" Margin="32,0,442,75" HorizontalAlignment="Left"/>
-                            
-                            
+
+
                             <!--invalid something-->
-                            
+
                             <!--Worst Username-->
                             <StackPanel Visibility="{Binding InCorrectName, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <WrapPanel Margin="130 75 100 50">
@@ -281,9 +283,12 @@
                                 Width="300"
                                 Height="50" x:Name="CreateAccount"
                                 Foreground="#E5FFFFFF" 
-                                Margin="130,285,130,10"
-                                Command="{Binding CreateAccountCommand}"
-                                CommandParameter="{Binding ElementName=CreateAccount}">
+                                Margin="130,285,130,10">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="GotFocus">
+                                        <i:InvokeCommandAction Command="{Binding CreateAccountCommand}" CommandParameter="{Binding ElementName=LoginTab}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </Button>
                         </Grid>
                         <i:Interaction.Triggers>
@@ -295,7 +300,6 @@
                                 <i:InvokeCommandAction Command="{Binding ClearPasswordLoginCommand}" 
                                                        CommandParameter="{Binding ElementName=passwordlogin}" />
                             </i:EventTrigger>
-                            
                         </i:Interaction.Triggers>
                     </TabItem>
                 </TabControl>

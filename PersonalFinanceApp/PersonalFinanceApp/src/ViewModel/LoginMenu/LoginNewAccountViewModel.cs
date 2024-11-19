@@ -1,10 +1,7 @@
-﻿using System.Linq.Expressions;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Navigation;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.etc;
@@ -16,9 +13,17 @@ using PersonalFinanceApp.ViewModel.Stores;
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
 public class LoginNewAccountViewModel : BaseViewModel {
-    #region Properties
+    private readonly IServiceProvider _serviceProvider;
 
-    public bool IncorrectPasswordUserName { get; set; } = false;
+    #region Properties
+    private bool _incorrectPasswordUserName = false;
+    public bool IncorrectPasswordUserName {
+        get => _incorrectPasswordUserName;
+        set {
+            _incorrectPasswordUserName = value;
+            OnPropertyChanged();
+        }
+    }
 
     private bool _incorrectName = false;
     public bool InCorrectName {
@@ -45,7 +50,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
             OnPropertyChanged();
         }
     }
-    public bool _inCorrectPasswordConfirm = false;
+    private bool _inCorrectPasswordConfirm = false;
     public bool InCorrectPasswordConfirm {
         get => _inCorrectPasswordConfirm;
         set {
@@ -65,7 +70,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
     }
 
     private string _passwordLogin = string.Empty;
-
 
     public string PasswordLogin
     {
@@ -113,7 +117,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
     }
 
     private string _gmail;
-
     public string Gmail
     {
         get => _gmail;
@@ -125,9 +128,9 @@ public class LoginNewAccountViewModel : BaseViewModel {
     }
     #endregion
 
-    private readonly IServiceProvider _serviceProvider;
     #region Command
     public ICommand LoginCommand { get; set; }
+    public ICommand CreateAccountCommand {  get; set; }
     public ICommand ForgotPasswordCommand { get; set; }
     public ICommand PasswordLoginChangedCommand { get; set; }
     public ICommand PasswordNewAccountChangedCommand { get; set; }
@@ -144,59 +147,72 @@ public class LoginNewAccountViewModel : BaseViewModel {
 
     #endregion
 
-
     public LoginNewAccountViewModel(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
-        ForgotPasswordCommand = new NavigateCommand<ResetPasswordViewModel>(
-            serviceProvider.GetRequiredService<NavigationStore>(),
-            () => serviceProvider.GetRequiredService<ResetPasswordViewModel>()
-        );
-
-        LoginCommand = new RelayCommand<User>(
-            canExecute: VerifyLogin,
-            execute: LoginSuccess
-            );
+        ForgotPasswordCommand = new NavigateCommand<ResetPasswordViewModel>(serviceProvider);
+        //Login
+        LoginCommand = new RelayCommand<User>(LoginSuccess, VerifyLogin);
+        //Create Account
+        CreateAccountCommand = new RelayCommand<TabItem>(p => { CreateAccount(p); });
         //Set up Password
-        PasswordLoginChangedCommand = new RelayCommand<PasswordBox>((p) => true, (p) => { PasswordLogin = p.Password; });
-        PasswordNewAccountChangedCommand = new RelayCommand<PasswordBox>((p) => true, (p) => { PasswordNewAccount = p.Password; });
-        PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>((p) => true, (p) => { PasswordConfirm = p.Password; });
+        PasswordLoginChangedCommand = new RelayCommand<PasswordBox>( (p) => { PasswordLogin = p.Password; });
+        PasswordNewAccountChangedCommand = new RelayCommand<PasswordBox>( (p) => { PasswordNewAccount = p.Password; });
+        PasswordConfirmChangedCommand = new RelayCommand<PasswordBox>( (p) => { PasswordConfirm = p.Password; });
         //Clear text
-        FocusLoginCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
-
-        FocusNewAccountCommand = new RelayCommand<TabItem>((p) => { return true; }, (p) => { ClearText(p); });
-        ClearPasswordLoginCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
-        ClearPasswordNewAccountCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
-        ClearPasswordNewAccountConfirmCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { ClearPassword(p); });
+        FocusLoginCommand = new RelayCommand<TabItem>( (p) => { ClearText(p); });
+        FocusNewAccountCommand = new RelayCommand<TabItem>( (p) => { ClearText(p); });
+        ClearPasswordLoginCommand = new RelayCommand<PasswordBox>( (p) => { ClearPassword(p); });
+        ClearPasswordNewAccountCommand = new RelayCommand<PasswordBox>( (p) => { ClearPassword(p); });
+        ClearPasswordNewAccountConfirmCommand = new RelayCommand<PasswordBox>( (p) => { ClearPassword(p); });
         //Format
-        CheckFormatUserNameNewAccountCommand = new RelayCommand<TextBox>(p => { return true; }, (p) => { Format(p); });
-        CheckFormatGmailCommand = new RelayCommand<TextBox>(p => { return true; }, (p) => { Format(p); });
-        CheckFormatPasswordNewAccountCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { Format(p); });
-        CheckMathConfirmPasswordCommand = new RelayCommand<PasswordBox>(p => { return true; }, (p) => { MatchPassword(p); });
+        CheckFormatUserNameNewAccountCommand = new RelayCommand<TextBox>((p) => { Format(p); });
+        CheckFormatGmailCommand = new RelayCommand<TextBox>((p) => { Format(p); });
+        CheckFormatPasswordNewAccountCommand = new RelayCommand<PasswordBox>((p) => { Format(p); });
+        CheckMathConfirmPasswordCommand = new RelayCommand<PasswordBox>((p) => { MatchPassword(p); });
     }
 
     private void LoginSuccess(User loginUser) {
-        loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
 
+        if (VerifyLogin(loginUser)) {
 
-        var factory = _serviceProvider.GetRequiredService<IMainWindowFactory>();
-        MainWindow mainWindow = factory.CreateMainWindow(loginUser);
+            IncorrectPasswordUserName = false;
 
-        if (Application.Current.MainWindow != null)
-            Application.Current.MainWindow.Close();
+            loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
 
-        Application.Current.MainWindow = mainWindow;
-        mainWindow.Show();
+            var factory = _serviceProvider.GetRequiredService<IWindowFactory>();
+            MainWindow mainWindow = factory.CreateMainWindow(loginUser);
+
+            if (Application.Current.MainWindow != null)
+                Application.Current.MainWindow.Close();
+
+            Application.Current.MainWindow = mainWindow;
+            mainWindow.Show();
+        }
+        else {
+            IncorrectPasswordUserName = true;
+        }
+
     }
 
     private bool VerifyLogin(User? loginUser) {
+
         loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
-        if (loginUser == null)
-        {
+        if (loginUser == null) {
+            IncorrectPasswordUserName = true;
             return false;
         }
 
         return loginUser.VerifyPassword(PasswordLogin);
+    }
+    private void CreateAccount(object parameter) {
+        TabItem ti = parameter as TabItem;
+        var user = DBManager.GetFirst<User>(u => u.Username == UserNameNewAccount);
+        if (ti != null && user == null) {
+            User usr = new User(UserNameNewAccount, PasswordNewAccount, Gmail);
+            DBManager.Insert(usr);
+            ti.Focus();
+        }
     }
 
     private void ClearText(object parameter)
@@ -226,7 +242,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
         PasswordBox p = parameter as PasswordBox;
         if (p != null)
         {
-            p.Password = "";
+            p.Password = string.Empty;
         }
     }
 
@@ -250,7 +266,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
         } else if (parameter is PasswordBox) {
             PasswordBox pb = parameter as PasswordBox;
             pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
-            if (Regex.IsMatch(pb.Password, pattern)) {
+            if (Regex.IsMatch(pb.Password, pattern) ) {
                 InCorrectPassword = false;
             }   
             else InCorrectPassword = true;

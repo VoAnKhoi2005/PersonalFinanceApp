@@ -292,6 +292,7 @@
                 </Grid>
 
                 <!--add new-->
+
                 <Border CornerRadius="25"
                         Width="100"
                         Height="60"
@@ -300,6 +301,7 @@
                     <Button>
                         <Grid>
                             <TextBlock Text="new goal"
+
                                                FontSize="12"
                                                Margin="0,0,10,0"
                                                VerticalAlignment="Center"
