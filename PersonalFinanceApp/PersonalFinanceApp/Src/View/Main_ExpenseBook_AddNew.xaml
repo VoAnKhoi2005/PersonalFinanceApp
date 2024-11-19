@@ -270,35 +270,70 @@
 
                 <!--cancel button-->
                 <Border Grid.Column="0" CornerRadius="30" Height="60"
-                        Width="200" Background="#FFC8386C" >
-                    <Grid>
+                        Width="200"
+                        Background="#FFC8386C" >
+                    <Button>
                         <TextBlock Text="Cancel" Foreground="White"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    FontSize="16"></TextBlock>
-
-                        <Border CornerRadius="30">
-                            <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" VerticalAlignment="Center"
-                            />
-                        </Border>
-                    </Grid>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="30"
+                                                Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                              VerticalAlignment="Stretch"></ContentPresenter>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand"></Setter>
+                                        <Setter Property="Background" Value="Red"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </Border>
 
                 <!-- confirm button -->
                 <Border Grid.Column="1" CornerRadius="30" Height="60"
                         Width="200"
-                         Background="#FF61D2BE" >
-                    <Grid>
+                        Background="#FF61D2BE" >
+                    <Button>
                         <TextBlock Text="Confirm" Foreground="White"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    FontSize="16"></TextBlock>
-                        <Border CornerRadius="30">
-
-                            <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" VerticalAlignment="Center"
-                            />
-                        </Border>
-                    </Grid>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="30"
+                                                Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                              VerticalAlignment="Stretch"></ContentPresenter>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand"></Setter>
+                                        <Setter Property="Background" Value="#FF6DF06D"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </Border>
             </Grid>
         </Grid>
