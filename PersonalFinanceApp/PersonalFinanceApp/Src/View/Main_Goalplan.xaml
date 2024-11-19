@@ -298,7 +298,7 @@
                         Height="60"
                                         Background="#053B50"
                                                     Grid.Column="5">
-                    <Button>
+                    <Button Command="{Binding AddNewGoalCommand}">
                         <Grid>
                             <TextBlock Text="new goal"
 
