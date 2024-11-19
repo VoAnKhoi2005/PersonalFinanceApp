@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.etc;
+using PersonalFinanceApp.Src.View;
 using PersonalFinanceApp.View;
 using PersonalFinanceApp.ViewModel.LoginMenu;
 using PersonalFinanceApp.ViewModel.MainMenu;

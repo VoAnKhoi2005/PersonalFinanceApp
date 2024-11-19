@@ -50,40 +50,62 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
 
+
+                    <!--type-->
                     <TextBlock Text="Type" 
                                FontWeight="Bold"
                                VerticalAlignment="Top"
                                HorizontalAlignment="Left"
                                Margin="16,0,0,0"
                                ></TextBlock>
-                    <ComboBox Width="150" Height="50"
-                              Margin="0,20,0,0"
-                    materialDesign:HintAssist.Hint="Select a type" Foreground="#E5CBBFBF">
-                        <ComboBoxItem
-                    Content="Android" />
-                        <ComboBoxItem
-                    Content="iOS" />
-                        <ComboBoxItem
-                    Content="Linux" />
-                        <ComboBoxItem
-                    Content="Windows" />
-                    </ComboBox>
                     <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
                              Background="#FFD9D9D9" Opacity="0.2"></Border>
+
+                    <ComboBox Width="156" Height="40"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="15"
+                              Foreground="#FFD9D9D9"
+                                MinWidth="128"
+                                materialDesign:HintAssist.Hint="pick a type" 
+                              materialDesign:HintAssist.HintOpacity="0.3"
+                                materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0">
+                        <ComboBoxItem
+    Content="Android" />
+                        <ComboBoxItem
+    Content="iOS" />
+                        <ComboBoxItem
+    Content="Linux" />
+                        <ComboBoxItem
+    Content="Windows" />
+                    </ComboBox>
+
                 </Grid>
 
+                <!--amount-->
+
                 <Grid Grid.Column="1">
+                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
+                             Background="#FFD9D9D9" Opacity="0.2"></Border>
                     <TextBlock Text="Amount" 
                                FontWeight="Bold"
                                VerticalAlignment="Top"
                                HorizontalAlignment="Left"
                                Margin="16,0,0,0"
                                ></TextBlock>
-                    <TextBlock Text="VNĐ xxx.xxx.xxx" Opacity="0.6" HorizontalAlignment="Left" Margin="47,44,0,0" VerticalAlignment="Top"></TextBlock>
-                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
-                             Background="#FFD9D9D9" Opacity="0.2"></Border>
+                    <TextBox Text="VNĐ xxx.xxx.xxx" FontSize="18"
+                             VerticalAlignment="Bottom"
+                             Margin="0,0,0,15"
+                             HorizontalAlignment="Center"
+                             Opacity="0.6" Foreground="#FFD9D9D9" CaretBrush="#FFD9D9D9" SelectionBrush="#FFD9D9D9"  ></TextBox>
+
                 </Grid>
             </Grid>
+
+            <!--name transaction-->
             <Grid Grid.Row="2">
                 <TextBlock Text="Name " 
                                FontWeight="Bold"
@@ -96,15 +118,21 @@
                              Background="#FFD9D9D9" Opacity="0.2"/>
                 <TextBox
                     VerticalAlignment="Top"
+                    FontSize="14"
                     materialDesign:HintAssist.Hint="Name of transaction or short description"
+                    materialDesign:HintAssist.Foreground="#FFD9D9D9"
                     Width="400"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="33,52,37,0" Foreground="#E5CBBFBF" />
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="33,52,37,0" Foreground="#E5CBBFBF" CaretBrush="#FFD9D9D9" SelectionBrush="#FFD9D9D9" />
             </Grid>
+
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+
+                <!--method-->
+
                 <Grid Grid.Column="0">
                     <TextBlock Text="Method " 
                                FontWeight="Bold"
@@ -112,21 +140,33 @@
                                HorizontalAlignment="Left"
                                Margin="16,0,0,0"
                                ></TextBlock>
-                    <ComboBox Width="150" Height="50"
-                              Margin="0,20,0,0"
-                    materialDesign:HintAssist.Hint="Select a method" Foreground="#E5CBBFBF">
-                        <ComboBoxItem
-                    Content="Android" />
-                        <ComboBoxItem
-                    Content="iOS" />
-                        <ComboBoxItem
-                    Content="Linux" />
-                        <ComboBoxItem
-                    Content="Windows" />
-                    </ComboBox>
                     <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
                              Background="#FFD9D9D9" Opacity="0.2"></Border>
+
+                    <ComboBox Width="156" Height="40"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="15"
+                              Foreground="#FFD9D9D9"
+                                MinWidth="128"
+                                materialDesign:HintAssist.Hint="pick a method" 
+                                materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0">
+                        <ComboBoxItem
+    Content="Android" />
+                        <ComboBoxItem
+    Content="iOS" />
+                        <ComboBoxItem
+    Content="Linux" />
+                        <ComboBoxItem
+    Content="Windows" />
+                    </ComboBox>
                 </Grid>
+
+                <!--category-->
+
                 <Grid Grid.Column="1">
                     <TextBlock Text="Category " 
                                FontWeight="Bold"
@@ -134,20 +174,29 @@
                                HorizontalAlignment="Left"
                                Margin="16,0,0,0"
                                ></TextBlock>
-                    <ComboBox Width="150" Height="50"
-                              Margin="0,20,0,0"
-                    materialDesign:HintAssist.Hint="Select a category" Foreground="#E5CBBFBF">
-                        <ComboBoxItem
-                    Content="Android" />
-                        <ComboBoxItem
-                    Content="iOS" />
-                        <ComboBoxItem
-                    Content="Linux" />
-                        <ComboBoxItem
-                    Content="Windows" />
-                    </ComboBox>
                     <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
                              Background="#FFD9D9D9" Opacity="0.2"></Border>
+
+                    <ComboBox Width="156" Height="40"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="15"
+                              Foreground="#FFD9D9D9"
+                                MinWidth="128"
+                                materialDesign:HintAssist.Hint="pick a category" 
+                                materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0">
+                        <ComboBoxItem
+    Content="Android" />
+                        <ComboBoxItem
+    Content="iOS" />
+                        <ComboBoxItem
+    Content="Linux" />
+                        <ComboBoxItem
+    Content="Windows" />
+                    </ComboBox>
                 </Grid>
             </Grid>
             <Grid Grid.Row="4">
@@ -162,17 +211,25 @@
                                HorizontalAlignment="Left"
                                Margin="16,0,0,0"
                                ></TextBlock>
-                    <DatePicker
-                        Width="150" Height="50"
-                        materialDesign:HintAssist.Hint="Pick Date"
-                        materialDesign:TextFieldAssist.HasClearButton="True"
-                        VerticalAlignment="Bottom"
-                        HorizontalAlignment="Center"
-                        Margin="0,0,0,16"
-                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Foreground="#E5CBBFBF" />
                     <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
                              Background="#E5CBBFBF" Opacity="0.2"></Border>
+
+                    <!--date -->
+
+                    <DatePicker
+    Width="156" Height="40"
+                        Foreground="#FFD9D9D9"
+                        FontSize="15"
+  materialDesign:HintAssist.Hint="Pick Date"
+                        materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Margin="0,0,0,15"
+  materialDesign:TextFieldAssist.HasClearButton="True"
+  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                 </Grid>
+
+                <!--status -->
                 <Grid Grid.Column="1">
                     <TextBlock Text="Status " 
                                FontWeight="Bold"
@@ -180,20 +237,29 @@
                                HorizontalAlignment="Left"
                                Margin="16,0,0,0"
                                ></TextBlock>
-                    <ComboBox Width="150" Height="50"
-                              Margin="0,20,0,0"
-                    materialDesign:HintAssist.Hint="Select a status" Foreground="#E5CBBFBF">
-                        <ComboBoxItem
-                    Content="Android" />
-                        <ComboBoxItem
-                    Content="iOS" />
-                        <ComboBoxItem
-                    Content="Linux" />
-                        <ComboBoxItem
-                    Content="Windows" />
-                    </ComboBox>
                     <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
                              Background="#FFD9D9D9" Opacity="0.2"></Border>
+
+                    <ComboBox Width="156" Height="40"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="15"
+                              Foreground="#FFD9D9D9"
+                                MinWidth="128"
+                                materialDesign:HintAssist.Hint="pick a status" 
+                                materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0">
+                        <ComboBoxItem
+    Content="Android" />
+                        <ComboBoxItem
+    Content="iOS" />
+                        <ComboBoxItem
+    Content="Linux" />
+                        <ComboBoxItem
+    Content="Windows" />
+                    </ComboBox>
                 </Grid>
             </Grid>
             <Grid Grid.Row="5">
@@ -201,6 +267,8 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+
+                <!--cancel button-->
                 <Border Grid.Column="0" CornerRadius="30" Height="60"
                         Width="200" Background="#FFC8386C" >
                     <Grid>
@@ -208,10 +276,15 @@
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    FontSize="16"></TextBlock>
-                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" VerticalAlignment="Center"
+
+                        <Border CornerRadius="30">
+                            <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" VerticalAlignment="Center"
                             />
+                        </Border>
                     </Grid>
                 </Border>
+
+                <!-- confirm button -->
                 <Border Grid.Column="1" CornerRadius="30" Height="60"
                         Width="200"
                          Background="#FF61D2BE" >
@@ -220,8 +293,11 @@
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    FontSize="16"></TextBlock>
-                        <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" VerticalAlignment="Center"
+                        <Border CornerRadius="30">
+
+                            <Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" VerticalAlignment="Center"
                             />
+                        </Border>
                     </Grid>
                 </Border>
             </Grid>
