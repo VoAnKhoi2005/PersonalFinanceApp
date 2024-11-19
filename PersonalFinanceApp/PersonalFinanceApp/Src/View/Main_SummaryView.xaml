@@ -25,12 +25,39 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="0.1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <materialDesign:PackIcon Kind="AccountBadge"
-                                         Width="30" Height="30"
-                                         Foreground="#E5CBBFBF"
-                                         HorizontalAlignment="Center"
-                                         VerticalAlignment="Center"
-                                     Grid.Column="1"/>
+            <Button Width="35" Height="35" Grid.Column="1">
+                <Border>
+                    <materialDesign:PackIcon 
+                                                    Kind="AccountBadge"
+                                                    Width="30" Height="30"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                                         />
+                </Border>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"></Setter>
+                        <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="30"
+                                            Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch" ></ContentPresenter>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"></Setter>
+                                <Setter Property="Foreground"  Value="#265B70" ></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="48*"></RowDefinition>
@@ -71,140 +98,581 @@
                         <ColumnDefinition Width="85*"></ColumnDefinition>
                         <ColumnDefinition Width="61*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="50.875"></RowDefinition>
-                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <!--title-->
 
-                    <!--title-->
-                    <TextBlock Text="TOTAL BALANCE" 
+                        <TextBlock Text="TOTAL BALANCE" 
                                FontSize="18" 
                                FontWeight="Bold" 
                                Grid.Row="0"
-                               Grid.Column="0" 
+                               Margin="15,0,0,0"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Center"></TextBlock>
-                    
-                    <!--Money--> <!--binding here-->
-                    <TextBlock Text="Money VND" 
-                               FontSize="18" 
+                                   HorizontalAlignment="Left" 
+                               />
+
+
+
+                        <!--Money-->
+                        <!--binding here-->
+                        <TextBlock Text="........VND" 
+                                   TextWrapping="WrapWithOverflow"
+                               FontSize="20" 
+                                   Height="50"
                                FontWeight="Bold" 
-                               Grid.Column="0"
-                               Grid.Row="1"
-                               HorizontalAlignment="Center" 
-                               VerticalAlignment="Center"
-                               TextAlignment="Center"></TextBlock>
+                               Grid.Row="1"         
+                                   Margin="15,0,0,0"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   ></TextBlock>
+
+                        <!--binding here-->
+                        <Border Background="#25FFAE" CornerRadius="20"
+                            Grid.Row="2"
+                            Width="70" Height="35"
+                            Margin="15,0,0,0"
+                            HorizontalAlignment="Left"
+                            >
+                            <Grid>
+                                <materialDesign:PackIcon 
+                            Width="20" Height="20"
+                            VerticalAlignment="Center" HorizontalAlignment="Left"
+                            Margin="5,0,0,0"
+                            Kind="ArrowTopRightThin" />
+                                <TextBlock Text="x.x%" 
+                                   FontSize="14" 
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Right" 
+                                   Margin="0,0,10,0"
+                                   Foreground="Black"></TextBlock>
+                            </Grid>
+                        </Border>
+
+                        <TextBlock Grid.Row="3" Text="xxxxxxxxxxxxxxxxx"
+                                   VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Left"
+                                   FontWeight="Bold"
+                                   Margin="15,0,0,0"></TextBlock>
+                        <TextBlock Grid.Row="4"
+                                   Text="extra amount compared to last month"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   LineStackingStrategy="BlockLineHeight" LineHeight="15"
+                                   Margin="15,0,0,0"></TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55*"></RowDefinition>
+                            <RowDefinition Height="81*"></RowDefinition>
+                            <RowDefinition Height="68*"></RowDefinition>
+
+                        </Grid.RowDefinitions>
+
+                        <ToggleButton Grid.Row="0"
+                                        Content="{materialDesign:PackIcon Kind=Heart,Size=21}"
+                                        IsChecked="True"
+                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+                                        ToolTip="MaterialDesignFlatPrimaryToggleButton"
+                                      VerticalAlignment="Top"
+                                      HorizontalAlignment="Right"
+                                      Margin="0,5,5,0" Height="40" Width="40" Foreground="#FFD75F5B" Background="#FFC3C2C5"/>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"></ColumnDefinition>
+                                <ColumnDefinition Width="63*"></ColumnDefinition>
+                                <ColumnDefinition Width="19*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Border CornerRadius="80" Width="30" Height="30"
+                                     Background="#E55090A1"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                                <Grid>
+                                    <materialDesign:PackIcon Kind="ArrowRight" 
+                                                     Foreground="#053B50"
+                                                     Width="25"
+                                                     Height="25"
+                                                             VerticalAlignment="Bottom"
+                                                             HorizontalAlignment="Right"
+                                                             />
+                                    <materialDesign:PackIcon Kind="ArrowLeft"                                                     
+                                                     Width="25"
+                                                     Height="25"
+                                                             VerticalAlignment="Top"
+                                                             HorizontalAlignment="Left" 
+                                                             Foreground="#FF88CDD9"/>
+                                </Grid>
+                            </Border>
+                            <TextBlock Text="Transactions" FontSize="10"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                        />
+                            <!--binding here-->
+
+                            <TextBlock Text="xxx" 
+                                       FontSize="10"
+                                       Grid.Column="2"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"/>
+
+
+                            <Border CornerRadius="80" Width="30" Height="30"
+                                     Background="#E55090A1"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Grid.Row="1">
+                                <Grid>
+                                    <Grid.Resources>
+                                        <Style TargetType="materialDesign:PackIcon">
+                                            <Setter Property="Foreground" Value="#FF88CDD9">
+                                            </Setter>
+                                            <Setter Property="Width" Value="12"></Setter>
+                                            <Setter Property="Height" Value="12"></Setter>
+                                        </Style>
+                                    </Grid.Resources>
+                                    <materialDesign:PackIcon Kind="SquareRounded" 
+                                                             VerticalAlignment="Top"
+                                                             HorizontalAlignment="Left"
+                                                             Margin="3.5"/>
+                                    <materialDesign:PackIcon Kind="SquareRounded" 
+                                                             VerticalAlignment="Top"
+                                                             HorizontalAlignment="Right"
+                                                             Margin="3.5" Foreground="#FF40C1D7"/>
+                                    <materialDesign:PackIcon Kind="SquareRounded" 
+                                                             VerticalAlignment="Bottom"
+                                                             HorizontalAlignment="Left"
+                                                             Margin="3.5" Foreground="#FF82A7ED"/>
+                                    <materialDesign:PackIcon Kind="SquareRounded" 
+                                                             VerticalAlignment="Bottom"
+                                                             HorizontalAlignment="Right"
+                                                             Margin="3.5"
+                                                             Foreground="#FF2B43B8"/>
+                                </Grid>
+                            </Border>
+
+                            <TextBlock Text="Categories " FontSize="10"
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"  />
+
+                            <!--binding here-->
+                            <TextBlock Text="xxx" 
+                                       FontSize="10"
+                                       Grid.Column="2"
+                                       Grid.Row="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"/>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Border>
-            <Canvas Visibility="Collapsed">
-
-               
-
-                <!--Binding here-->
-                <TextBlock Text="xxx.xxx.xxx VNĐ" FontSize="20" Canvas.Left="12" Canvas.Top="29" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-
-                <!--Binding here-->
-                <Border Background="#25FFAE" CornerRadius="20"
-                            Width="70" Height="35" Canvas.Left="13" Canvas.Top="82" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Grid>
-                        <materialDesign:PackIcon 
-                            Width="20" Height="20"
-                            VerticalAlignment="Center" HorizontalAlignment="Left"
-                            Margin="5,0,0,0"
-                            Kind="ArrowTopRightThin" />
-                        <TextBlock Text="x.x%" 
-                                   FontSize="14" 
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Right" 
-                                   Margin="0,0,10,0"
-                                   Foreground="Black"></TextBlock>
-                    </Grid>
-                </Border>
-
-
-                <TextBlock Text="you have extra" FontSize="12" Canvas.Bottom="50" Canvas.Left="13" Canvas.Top="124" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-                <TextBlock Text="compared to last month" FontSize="12" Canvas.Bottom="50" Canvas.Left="12" Canvas.Top="136" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
-
-                <!--Binding here-->
-                <TextBlock Text="xxxxxxxxxxxxxxxxxxx" 
-                               FontWeight="Bold"
-                               FontSize="12" Canvas.Bottom="50" Canvas.Left="98" Canvas.Top="124" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-            </Canvas>
             <!--INCOME-->
-            <Border CornerRadius="30" Grid.Column="1" Margin=" 7.5, 15, 7.5, 7.5" Background="#053B50">
-                <Canvas>
-                    <TextBlock Text="INCOME" FontSize="18" FontWeight="Bold" Canvas.Left="11" Canvas.Top="5" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
+            <Border CornerRadius="30" 
+                    Grid.Column="1" 
+                    Margin="15, 15, 7.5, 7.5" 
+                    Background="#053B50">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="85*"></ColumnDefinition>
+                        <ColumnDefinition Width="61*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <!--title-->
 
-                    <!--Binding here-->
-                    <TextBlock Text="xxx.xxx.xxx VNĐ" FontSize="20" Canvas.Left="12" Canvas.Top="29" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                        <TextBlock Text="INCOME" 
+                               FontSize="18" 
+                               FontWeight="Bold" 
+                               Grid.Row="0"
+                               Margin="15,0,0,0"
+                               VerticalAlignment="Center"
+                                   HorizontalAlignment="Left" 
+                               />
 
-                    <!--Binding here-->
-                    <Border Background="#25FFAE" CornerRadius="20"
-                            Width="70" Height="35" Canvas.Left="13" Canvas.Top="82" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Grid>
-                            <materialDesign:PackIcon 
+
+
+                        <!--Money-->
+                        <!--binding here-->
+                        <TextBlock Text="........VND" 
+                                   TextWrapping="WrapWithOverflow"
+                               FontSize="20" 
+                                   Height="50"
+                               FontWeight="Bold" 
+                               Grid.Row="1"         
+                                   Margin="15,0,0,0"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   ></TextBlock>
+
+                        <!--binding here-->
+                        <Border Background="#25FFAE" CornerRadius="20"
+                            Grid.Row="2"
+                            Width="70" Height="35"
+                            Margin="15,0,0,0"
+                            HorizontalAlignment="Left"
+                            >
+                            <Grid>
+                                <materialDesign:PackIcon 
                             Width="20" Height="20"
                             VerticalAlignment="Center" HorizontalAlignment="Left"
                             Margin="5,0,0,0"
                             Kind="ArrowTopRightThin" />
-                            <TextBlock Text="x.x%" 
+                                <TextBlock Text="x.x%" 
                                    FontSize="14" 
                                    VerticalAlignment="Center" 
                                    HorizontalAlignment="Right" 
                                    Margin="0,0,10,0"
                                    Foreground="Black"></TextBlock>
-                        </Grid>
-                    </Border>
-                    <TextBlock Text="you earn extra" FontSize="12" Canvas.Bottom="50" Canvas.Left="13" Canvas.Top="124" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-                    <TextBlock Text="compared to last month" FontSize="12" Canvas.Bottom="50" Canvas.Left="12" Canvas.Top="137" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                            </Grid>
+                        </Border>
 
-                    <!--Binding here-->
-                    <TextBlock Text="xxxxxxxxxxxxxxxxxxx" 
-                                FontWeight="Bold"
-                                FontSize="12" Canvas.Bottom="50" Canvas.Left="98" Canvas.Top="124" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-                </Canvas>
+                        <TextBlock Grid.Row="3" Text="xxxxxxxxxxxxxxxxx"
+                                   VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Left"
+                                   FontWeight="Bold"
+                                   Margin="15,0,0,0"></TextBlock>
+                        <TextBlock Grid.Row="4"
+                                   Text="extra  earned amount compared to last month"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   LineStackingStrategy="BlockLineHeight" LineHeight="15"
+                                   Margin="15,0,0,0"></TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55*"></RowDefinition>
+                            <RowDefinition Height="81*"></RowDefinition>
+                            <RowDefinition Height="68*"></RowDefinition>
+
+                        </Grid.RowDefinitions>
+
+                        <ToggleButton Grid.Row="0"
+                                        Content="{materialDesign:PackIcon Kind=Heart,Size=21}"
+                                        IsChecked="True"
+                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+                                        ToolTip="MaterialDesignFlatPrimaryToggleButton"
+                                      VerticalAlignment="Top"
+                                      HorizontalAlignment="Right"
+                                      Margin="0,5,5,0" Height="40" Width="40" Foreground="#FFD75F5B" Background="#FFC3C2C5"/>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"></ColumnDefinition>
+                                <ColumnDefinition Width="63*"></ColumnDefinition>
+                                <ColumnDefinition Width="19*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Border CornerRadius="80" Width="30" Height="30"
+                                     Background="#E55090A1"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                                <Grid>
+                                    <materialDesign:PackIcon Kind="ArrowRight" 
+                                                     Foreground="#053B50"
+                                                     Width="25"
+                                                     Height="25"
+                                                             VerticalAlignment="Bottom"
+                                                             HorizontalAlignment="Right"
+                                                             />
+                                    <materialDesign:PackIcon Kind="ArrowLeft"                                                     
+                                                     Width="25"
+                                                     Height="25"
+                                                             VerticalAlignment="Top"
+                                                             HorizontalAlignment="Left" 
+                                                             Foreground="#FF88CDD9"/>
+                                </Grid>
+                            </Border>
+                            <TextBlock Text="Transactions" FontSize="10"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                        />
+                            <!--binding here-->
+
+                            <TextBlock Text="xxx" 
+                                       FontSize="10"
+                                       Grid.Column="2"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"/>
+
+
+                            <Border CornerRadius="80" Width="30" Height="30"
+                                     Background="#E55090A1"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Grid.Row="1">
+                                <Grid>
+                                    <Grid.Resources>
+                                        <Style TargetType="materialDesign:PackIcon">
+                                            <Setter Property="Foreground" Value="#FF88CDD9">
+                                            </Setter>
+                                            <Setter Property="Width" Value="12"></Setter>
+                                            <Setter Property="Height" Value="12"></Setter>
+                                        </Style>
+                                    </Grid.Resources>
+                                    <materialDesign:PackIcon Kind="SquareRounded" 
+                                                             VerticalAlignment="Top"
+                                                             HorizontalAlignment="Left"
+                                                             Margin="3.5"/>
+                                    <materialDesign:PackIcon Kind="SquareRounded" 
+                                                             VerticalAlignment="Top"
+                                                             HorizontalAlignment="Right"
+                                                             Margin="3.5" Foreground="#FF40C1D7"/>
+                                    <materialDesign:PackIcon Kind="SquareRounded" 
+                                                             VerticalAlignment="Bottom"
+                                                             HorizontalAlignment="Left"
+                                                             Margin="3.5" Foreground="#FF82A7ED"/>
+                                    <materialDesign:PackIcon Kind="SquareRounded" 
+                                                             VerticalAlignment="Bottom"
+                                                             HorizontalAlignment="Right"
+                                                             Margin="3.5"
+                                                             Foreground="#FF2B43B8"/>
+                                </Grid>
+                            </Border>
+
+                            <TextBlock Text="Categories " FontSize="10"
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"  />
+
+                            <!--binding here-->
+                            <TextBlock Text="xxx" 
+                                       FontSize="10"
+                                       Grid.Column="2"
+                                       Grid.Row="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Border>
 
             <!--EXPENSE-->
-            <Border CornerRadius="30" Grid.Column="2" Margin="7.5, 15, 15, 7.5" Background="#053B50">
-                <Canvas>
-                    <TextBlock Text="EXPENSE" FontSize="18" FontWeight="Bold" Canvas.Left="11" Canvas.Top="5" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-                    <TextBlock Text="xxx.xxx.xxx VNĐ" FontSize="20" Canvas.Left="12" Canvas.Top="29" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-                    <Border Background="#F23232" CornerRadius="20"
-                            Width="70" Height="35" Canvas.Left="13" Canvas.Top="82" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <Grid>
-                            <materialDesign:PackIcon 
+            <Border CornerRadius="30" 
+                    Grid.Column="2" 
+                    Margin="15, 15, 7.5, 7.5" 
+                    Background="#053B50">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="85*"></ColumnDefinition>
+                        <ColumnDefinition Width="61*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <!--title-->
+
+                        <TextBlock Text="EXPENSE" 
+                               FontSize="18" 
+                               FontWeight="Bold" 
+                               Grid.Row="0"
+                               Margin="15,0,0,0"
+                               VerticalAlignment="Center"
+                                   HorizontalAlignment="Left" 
+                               />
+
+
+
+                        <!--Money-->
+                        <!--binding here-->
+                        <TextBlock Text="........VND" 
+                                   TextWrapping="WrapWithOverflow"
+                               FontSize="20" 
+                                   Height="50"
+                               FontWeight="Bold" 
+                               Grid.Row="1"         
+                                   Margin="15,0,0,0"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   ></TextBlock>
+
+                        <!--binding here-->
+                        <Border Background="#FFFD4020" CornerRadius="20"
+                            Grid.Row="2"
+                            Width="70" Height="35"
+                            Margin="15,0,0,0"
+                            HorizontalAlignment="Left"
+                            >
+                            <Grid>
+                                <materialDesign:PackIcon 
                             Width="20" Height="20"
                             VerticalAlignment="Center" HorizontalAlignment="Left"
                             Margin="5,0,0,0"
                             Kind="ArrowTopRightThin" RenderTransformOrigin="0.5,0.5" >
-                                <materialDesign:PackIcon.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform Angle="90"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </materialDesign:PackIcon.RenderTransform>
-                            </materialDesign:PackIcon>
-                            <TextBlock Text="x.x%" 
+                                    <materialDesign:PackIcon.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="90"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </materialDesign:PackIcon.RenderTransform>
+                                </materialDesign:PackIcon>
+                                <TextBlock Text="x.x%" 
                                    FontSize="14" 
                                    VerticalAlignment="Center" 
                                    HorizontalAlignment="Right" 
                                    Margin="0,0,10,0"
                                    Foreground="Black"></TextBlock>
-                        </Grid>
-                    </Border>
-                    <TextBlock Text="you earn extra" FontSize="12" Canvas.Bottom="50" Canvas.Left="13" Canvas.Top="124" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-                    <TextBlock Text="compared to last month" FontSize="12" Canvas.Bottom="50" Canvas.Left="12" Canvas.Top="137" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                            </Grid>
+                        </Border>
 
-                    <!--Binding here-->
-                    <TextBlock Text="xxxxxxxxxxxxxxxxxxx" 
-                                FontWeight="Bold"
-                                FontSize="12" Canvas.Bottom="50" Canvas.Left="98" Canvas.Top="124" HorizontalAlignment="Left" VerticalAlignment="Top"></TextBlock>
-                </Canvas>
+                        <TextBlock Grid.Row="3" Text="xxxxxxxxxxxxxxxxx"
+                                   VerticalAlignment="Bottom"
+                                   HorizontalAlignment="Left"
+                                   FontWeight="Bold"
+                                   Margin="15,0,0,0"></TextBlock>
+                        <TextBlock Grid.Row="4"
+                                   Text="extra  earned amount compared to last month"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   LineStackingStrategy="BlockLineHeight" LineHeight="15"
+                                   Margin="15,0,0,0"></TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55*"></RowDefinition>
+                            <RowDefinition Height="81*"></RowDefinition>
+                            <RowDefinition Height="68*"></RowDefinition>
+
+                        </Grid.RowDefinitions>
+
+                        <ToggleButton Grid.Row="0"
+                                        Content="{materialDesign:PackIcon Kind=Heart,Size=21}"
+                                        IsChecked="True"
+                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+                                        ToolTip="MaterialDesignFlatPrimaryToggleButton"
+                                      VerticalAlignment="Top"
+                                      HorizontalAlignment="Right"
+                                      Margin="0,5,5,0" Height="40" Width="40" Foreground="#FFD75F5B" Background="#FFC3C2C5"/>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40*"></ColumnDefinition>
+                                <ColumnDefinition Width="63*"></ColumnDefinition>
+                                <ColumnDefinition Width="19*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Border CornerRadius="80" Width="30" Height="30"
+                                     Background="#E55090A1"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center">
+                                <Grid>
+                                    <materialDesign:PackIcon Kind="ArrowRight" 
+                                                     Foreground="#053B50"
+                                                     Width="25"
+                                                     Height="25"
+                                                             VerticalAlignment="Bottom"
+                                                             HorizontalAlignment="Right"
+                                                             />
+                                    <materialDesign:PackIcon Kind="ArrowLeft"                                                     
+                                                     Width="25"
+                                                     Height="25"
+                                                             VerticalAlignment="Top"
+                                                             HorizontalAlignment="Left" 
+                                                             Foreground="#FF88CDD9"/>
+                                </Grid>
+                            </Border>
+                            <TextBlock Text="Transactions" FontSize="10"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                        />
+                            <!--binding here-->
+
+                            <TextBlock Text="xxx" 
+                                       FontSize="10"
+                                       Grid.Column="2"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"/>
+
+
+                            <Border CornerRadius="80" Width="30" Height="30"
+                                     Background="#E55090A1"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Grid.Row="1">
+                                <Grid>
+                                    <Grid.Resources>
+                                        <Style TargetType="materialDesign:PackIcon">
+                                            <Setter Property="Foreground" Value="#FF88CDD9">
+                                            </Setter>
+                                            <Setter Property="Width" Value="12"></Setter>
+                                            <Setter Property="Height" Value="12"></Setter>
+                                        </Style>
+                                    </Grid.Resources>
+                                    <materialDesign:PackIcon Kind="SquareRounded" 
+                                                             VerticalAlignment="Top"
+                                                             HorizontalAlignment="Left"
+                                                             Margin="3.5"/>
+                                    <materialDesign:PackIcon Kind="SquareRounded" 
+                                                             VerticalAlignment="Top"
+                                                             HorizontalAlignment="Right"
+                                                             Margin="3.5" Foreground="#FF40C1D7"/>
+                                    <materialDesign:PackIcon Kind="SquareRounded" 
+                                                             VerticalAlignment="Bottom"
+                                                             HorizontalAlignment="Left"
+                                                             Margin="3.5" Foreground="#FF82A7ED"/>
+                                    <materialDesign:PackIcon Kind="SquareRounded" 
+                                                             VerticalAlignment="Bottom"
+                                                             HorizontalAlignment="Right"
+                                                             Margin="3.5"
+                                                             Foreground="#FF2B43B8"/>
+                                </Grid>
+                            </Border>
+
+                            <TextBlock Text="Categories " FontSize="10"
+                                       Grid.Column="1"
+                                       Grid.Row="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"  />
+
+                            <!--binding here-->
+                            <TextBlock Text="xxx" 
+                                       FontSize="10"
+                                       Grid.Column="2"
+                                       Grid.Row="1"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Border>
         </Grid>
         <Grid Grid.Row="2">

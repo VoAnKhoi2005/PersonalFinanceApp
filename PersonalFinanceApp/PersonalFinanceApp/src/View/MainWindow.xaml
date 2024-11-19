@@ -21,8 +21,11 @@
         <Grid.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Sans Serif Collection" />
-                <Setter Property="Foreground" Value="#E5CBBFBF" />
+                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
                 <Setter Property="FontWeight" Value="Regular" />
+            </Style>
+            <Style TargetType="materialDesign:PackIcon">
+                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
             </Style>
             <Style TargetType="Button">
                 <Setter Property="Background" Value="Transparent"></Setter>
@@ -39,11 +42,11 @@
                 </Setter>
                 <Style.Triggers>
                     <Trigger Property="IsFocused" Value="True">
-                        <Setter Property="Background" Value="#0D2129" ></Setter>
+                        <Setter Property="Background" Value="{DynamicResource onClicked}" ></Setter>
                     </Trigger>
                     <Trigger Property="IsMouseOver" Value="true">
                         <Setter Property="Cursor" Value="Hand"></Setter>
-                        <Setter Property="Background" Value="#265B70" ></Setter>
+                        <Setter Property="Background" Value="{DynamicResource onHovered}" ></Setter>
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -53,7 +56,8 @@
             <ColumnDefinition Width="210"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0" Background="#003E57">
+        
+        <DockPanel Grid.Column="0" Background="{DynamicResource DockpanelBackGround}">
             <Border Height="60" VerticalAlignment="Top"
                     DockPanel.Dock="Top">
                 <Grid>
@@ -82,13 +86,12 @@
                         Background="Transparent">
                     <TextBlock ></TextBlock>
 
-                    <materialDesign:PackIcon Foreground="#E5CBBFBF"
+                    <materialDesign:PackIcon 
                                                 Kind="Signal"
                                                 Width="30"
                                                 Height="30"
                                                 VerticalAlignment="Center" Margin="12,0,0,0" />
                     <TextBlock Text="Dashboard" FontSize="18"
-                                 Foreground="#E5CBBFBF"
                                   HorizontalAlignment="Right"
                                   VerticalAlignment="Center"
                                   Margin="0,0,41,0" FontWeight="Normal"/>
@@ -107,12 +110,11 @@
 
                     <TextBlock Text="Expense book"
                                        FontSize="18"
-                                       Foreground="#E5CBBFBF"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         Margin="0,0,20,0" FontWeight="Normal"/>
 
-                    <materialDesign:PackIcon Kind="BookOpenPageVariant" Foreground="#E5CBBFBF"
+                    <materialDesign:PackIcon Kind="BookOpenPageVariant"
                                                  Width="30"
                                                  Height="30"
                                                  VerticalAlignment="Center"
@@ -131,14 +133,13 @@
                     <TextBlock ></TextBlock>
 
                     <materialDesign:PackIcon Kind="FlagCheckered"
-                     Foreground="#E5CBBFBF"
+
                      Width="30"
                      Height="30"
                      VerticalAlignment="Center"
                      Margin="10,0,0,0" />
                     <TextBlock Text="Goal plan" 
                                 FontSize="18"
-                                Foreground="#E5CBBFBF"
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Center"
                                  Margin="15,0,0,0" FontWeight="Normal"></TextBlock>
@@ -155,7 +156,6 @@
                         Background="Transparent">
                     <TextBlock ></TextBlock>
                     <materialDesign:PackIcon Kind="DatabaseEye"
-                     Foreground="#E5CBBFBF"
                      Width="30"
                      Height="30"
                      VerticalAlignment="Center"
@@ -165,11 +165,50 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                     FontWeight="Normal"
-                                     Foreground="#E5CBBFBF"
                                 Margin="18,0,0,0"/>
 
                 </Grid>
             </Button>
+
+
+            <Grid Height="60" DockPanel.Dock="Bottom"
+                  VerticalAlignment="Bottom"
+                  >
+                <Border CornerRadius="20,0,0,20" Width="40" 
+                        Height="40"
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Margin="0,0,40,0"
+                        Background="Black">
+                    <Button>
+                        <materialDesign:PackIcon Kind="WhiteBalanceSunny" 
+                                                 Width="35"
+                                                 Height="35"
+                                                 />
+                    </Button>
+                </Border>
+                <Border CornerRadius="0,20,20,0" Width="40" 
+                        Height="40"
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Margin="40,0,0,0"
+                        Background="Black">
+                    <Button>
+                        <materialDesign:PackIcon Kind="MoonWaningCrescent" 
+                                                 Width="35"
+                                                 Height="35" RenderTransformOrigin="0.5,0.5"
+                                                 >
+                            <materialDesign:PackIcon.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="-46.975"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </materialDesign:PackIcon.RenderTransform>
+                        </materialDesign:PackIcon>
+                    </Button>
+                </Border>
+            </Grid>
+           
             <!--Option-->
             <Button Height="60" VerticalAlignment="Bottom"
                     DockPanel.Dock="Bottom">
@@ -180,7 +219,6 @@
                     <TextBlock ></TextBlock>
 
                     <materialDesign:PackIcon Kind="CogBox"
-                     Foreground="#E5CBBFBF"
                      Width="34"
                      Height="34"
                      VerticalAlignment="Center"
@@ -190,7 +228,6 @@
                                HorizontalAlignment="Right"
                                VerticalAlignment="Center"
                                    FontWeight="Normal"
-                                    Foreground="#E5CBBFBF"
                                Margin="0,0,73,0"/>
 
                 </Grid>
