@@ -320,6 +320,12 @@
                 </Border>
             </Grid>
             <!--goal plan main looking-->
+
+            <ScrollViewer Grid.Row="2">
+                <ListView >
+
+                </ListView>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </UserControl>

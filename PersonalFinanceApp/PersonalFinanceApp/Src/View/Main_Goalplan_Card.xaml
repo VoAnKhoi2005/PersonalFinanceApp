@@ -7,139 +7,326 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              
-             d:DesignHeight="400" d:DesignWidth="650">
-    <Border Background="#053B50" CornerRadius="30">
-        <Grid >
-            <Grid.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="FontFamily" Value="Sans Serif Collection"/>
-                    <Setter Property="Foreground" Value="#E5CBBFBF"/>
-                    <Setter Property="FontWeight" Value="Regular"/>
-                </Style>
-            </Grid.Resources>
+             d:DesignHeight="600" d:DesignWidth="500">
+    <Border Background="#053B50" CornerRadius="30"
+            Width="450" Height="600 ">
+        <Border.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Sans Serif Collection"/>
+                <Setter Property="Foreground" Value="#E5CBBFBF"/>
+                <Setter Property="FontWeight" Value="Regular"/>
+                <Setter Property="FontSize" Value="16"></Setter>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="Transparent"></Setter>
+                <Setter Property="Foreground" Value="Transparent"></Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="Foreground" Value="Black"></Setter>
+                        <Setter Property="Cursor" Value="Hand"></Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Resources>
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.25*"></RowDefinition>
-                <RowDefinition Height="0.8*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
+            <!--overall-->
             <Grid Grid.Row="0">
-                <TextBlock Text="GoalPlanName"
-                       FontSize="35"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                           Margin="15,15,0,0"></TextBlock>
-
-                <!--Click here to adjust Goalplan-->
-                <Button Height="40"
-                        Width="40"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Margin="0,5,20,0">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <materialDesign:PackIcon Kind="Information" 
-                                         Height="40"
-                                         Width="40"
-                                         Foreground="#E5CBBFBF"/>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-            </Grid>
-            <Grid Grid.Row="1">
-
-            </Grid>
-
-            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="34*"></ColumnDefinition>
-                    <ColumnDefinition Width="31*"></ColumnDefinition>
-                    <ColumnDefinition Width="31*"></ColumnDefinition>
-                    <ColumnDefinition Width="34*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <!--Start date-->
-                <Border Grid.Column="0"
-                      Background="#E5CBBFBF"
-                      Margin="15,35,2,15" CornerRadius="30">
-                    <Grid>
-                        <TextBlock Text="Start date"
-                                    FontSize="20"
-                                   Foreground="Black"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Bottom">
-                        </TextBlock>
+                <!--chart-->
+                <Grid Grid.Column="0">
+                    <TextBlock Text=" chart here" VerticalAlignment="Center"
+                               HorizontalAlignment="Center"></TextBlock>
+                </Grid>
 
-                        <TextBlock Foreground="Black"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   >
-                            <!--binding here-->
-                        </TextBlock>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!--icon-->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <ToggleButton Grid.Column="0"
+                                      Width="35"
+                                      Height="35"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                        Content="{materialDesign:PackIcon Kind=Heart,                                                         Size=21}"
+                                        IsEnabled="True"
+                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+                                        ToolTip="MaterialDesignFlatPrimaryToggleButton" Background="#FFE5A78E" Foreground="#FFF14242" />
+                        <!--Notification-->
+                        <Button Grid.Column="1">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Border>
+                                                    <materialDesign:PackIcon Kind="Bell"
+                                                                             Width="30"
+                                                                             Height="30"
+                                                                             VerticalAlignment="Center"
+                                                                             HorizontalAlignment="Left"></materialDesign:PackIcon>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Cursor" Value="Hand"></Setter>
+                                            <Setter Property="Foreground" Value="#FFF6E8A1"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <!--Add money to goal-->
+                        <Button Grid.Column="2">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Border>
+                                                    <materialDesign:PackIcon Kind="PlusMinusVariant"
+                                             Width="30"
+                                             Height="30"
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Left"
+                                             />
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Cursor" Value="Hand"></Setter>
+                                            <Setter Property="Foreground" Value="#FFF6E8A1"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <!--adjust goal-->
+                        <Button Grid.Column="3">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Border>
+                                                    <materialDesign:PackIcon Kind="Pencil"
+                                             Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left"></materialDesign:PackIcon>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Cursor" Value="Hand"></Setter>
+                                            <Setter Property="Foreground" Value="#FFF6E8A1"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <!--history-->
+                        <Button Grid.Column="4">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Border>
+                                                    <materialDesign:PackIcon Kind="ClipboardTextClock"  
+                                             Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left"></materialDesign:PackIcon>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Cursor" Value="Hand"></Setter>
+                                            <Setter Property="Foreground" Value="#FFF6E8A1"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <!--delete-->
+                        <Button Grid.Column="5">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="Foreground" Value="#FFE35D5D"></Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Border>
+                                                    <materialDesign:PackIcon Kind="Delete"                                             Width="30"
+                                            Height="30"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left"></materialDesign:PackIcon>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Cursor" Value="Hand"></Setter>
+                                            <Setter Property="Foreground" Value="#FFF42B2B"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
                     </Grid>
-                </Border>
 
-                <!--end date-->
-                <Border Grid.Column="1"
-                      Background="#E5CBBFBF"
-                      Margin="2,35,2,15" CornerRadius="30">
-                    <Grid>
-                        <TextBlock Text="End date"
-                                    FontSize="20"
-                                   Foreground="Black"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Bottom">
-                        </TextBlock>
-
-                        <TextBlock Foreground="Black"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   >
-                            <!--binding here-->
-                        </TextBlock>
+                    <Grid Grid.Row="1">
+                        <TextBlock Text="Category :" VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   FontWeight="DemiBold"
+                                   FontSize="16"></TextBlock>
+                        <!--binding here-->
+                        <TextBlock Text="something here" VerticalAlignment="Center"
+                                   HorizontalAlignment="Right"
+                                   Margin="0,0,5,0"
+                                   FontSize="14"></TextBlock>
                     </Grid>
-                </Border>
-                
-                <!--left to save-->
-                <Border Grid.Column="2"
-                      Background="#E5CBBFBF"
-                      Margin="2,35,2,15" CornerRadius="30">
-                    <Grid>
-                        <TextBlock Text="Left to save"
-                                    FontSize="20"
-                                   Foreground="Black"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Bottom">
-                        </TextBlock>
 
-                        <TextBlock Foreground="Black"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   >
-                            <!--binding here-->
-                        </TextBlock>
-                    </Grid>
-                    
-                    <!--Monthly target-->
-                </Border>
-                <Border Grid.Column="3"
-                      Background="#E5CBBFBF"
-                      Margin="2,35,15,15" CornerRadius="30">
-                    <Grid>
-                        <TextBlock Text="Monthly target"
-                                    FontSize="20"
-                                   Foreground="Black"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Bottom">
-                        </TextBlock>
+                    <!--name-->
+                    <!--binding name here-->
+                    <TextBlock Grid.Row="2" FontWeight="Bold"
+                        Text="Kiem tien an tet 3" VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               FontSize="20">
+                    </TextBlock>
 
-                        <TextBlock Foreground="Black"
-                                   HorizontalAlignment="Center"
+
+                    <!--progress money-->
+
+                    <Grid Grid.Row="3">
+                        <TextBlock Text="VND" HorizontalAlignment="Left" Margin="2,0,0,0"
+                                   FontSize="14" Opacity="0.4"
+                                   ></TextBlock>
+
+                        <!--binding here-->
+                        <TextBlock Text="123456789 / 987654321" HorizontalAlignment="Right"
+                                   Margin="0,0,5,0"
                                    VerticalAlignment="Center"
-                                   >
-                            <!--binding here-->
-                        </TextBlock>
+                                   FontSize="14" Opacity="0.6"></TextBlock>
                     </Grid>
-                </Border>
+                    <Grid Grid.Row="4">
+                        <TextBlock Text="Status :" VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   FontWeight="DemiBold"
+                                   FontSize="16"></TextBlock>
+                        <!--binding here-->
+                        <TextBlock Text="not finished yet" Foreground="Red"
+                                   FontWeight="DemiBold"
+                                   FontSize="14"
+                                   HorizontalAlignment="Right" Margin="0,0,5,0"></TextBlock>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!--Detail section-->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock Text="Amount (VND)  : " VerticalAlignment="Center"
+                               HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+
+                    <!--binding here-->
+                    <TextBlock Text="123456789" VerticalAlignment="Center"
+                               HorizontalAlignment="Right" Margin="0,0,30,0"
+                               FontWeight="Bold"></TextBlock>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <TextBlock Text="Start date  : " VerticalAlignment="Center"
+                               HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+
+                    <!--binding here-->
+                    <TextBlock Text="1/1/1999" VerticalAlignment="Center"
+                               HorizontalAlignment="Right" Margin="0,0,30,0"
+                               FontWeight="Bold"></TextBlock>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <TextBlock Text="End date  : " VerticalAlignment="Center"
+                               HorizontalAlignment="Left" Margin="50,0,0,0"
+                               ></TextBlock>
+
+                    <!--binding here-->
+                    <TextBlock Text="9/9/2000" VerticalAlignment="Center"
+                               HorizontalAlignment="Right" Margin="0,0,30,0"
+                               FontWeight="Bold"></TextBlock>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <TextBlock Text="Time to reach your goal  : " VerticalAlignment="Center"
+                               HorizontalAlignment="Left" Margin="50,0,0,0"
+                               ></TextBlock>
+
+                    <!--binding here-->
+                    <TextBlock Text="end - start (days)" VerticalAlignment="Center"
+                               HorizontalAlignment="Right" Margin="0,0,30,0"
+                               FontWeight="Bold"></TextBlock>
+                </Grid>
+            </Grid>
+
+            <!--decription-->
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="21*"></RowDefinition>
+                    <RowDefinition Height="79*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Description  :" VerticalAlignment="Center"
+                           Grid.Row="0"
+                           HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+
+                <!--binding here-->
+                <TextBlock Grid.Row="1"
+                           HorizontalAlignment="Left" Margin="50,0,0,0"
+                    TextWrapping="Wrap"></TextBlock>
             </Grid>
         </Grid>
     </Border>

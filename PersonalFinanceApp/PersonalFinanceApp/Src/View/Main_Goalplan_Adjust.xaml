@@ -6,37 +6,18 @@
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="240" d:DesignWidth="200">
-    <Border Background="#124458" CornerRadius="30">
-        <Grid>
+             d:DesignHeight="800" d:DesignWidth="800">
+    <Border Background="#053B50" Height="500" Width="400" CornerRadius="30">
+        <Grid >
             <Grid.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="FontFamily" Value="Sans Serif Collection"/>
                     <Setter Property="Foreground" Value="#E5CBBFBF"/>
                     <Setter Property="FontWeight" Value="Regular"/>
-                    <Setter Property="FontSize" Value="18"></Setter>
-                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
                 </Style>
-                <Style TargetType="materialDesign:PackIcon">
-                    <Setter Property="Width" Value="30"></Setter>
-                    <Setter Property="Height" Value="30"></Setter>
-                    <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
-                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                </Style>
-                
-                <Style TargetType="Button">
-                    <Setter Property="Width" Value="Auto"/>
-                    <Setter Property="Height" Value="Auto"/>
-                </Style>
-
             </Grid.Resources>
-            <!--
-
-            -->
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -44,124 +25,161 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <!--Edit -> name, date-->
-            <Button Grid.Row="0"
-                Background="{x:Null}" 
-                    BorderBrush="{x:Null}" 
-                    Foreground="{x:Null}">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*"></ColumnDefinition>
-                                <ColumnDefinition Width="18*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Rename"  Grid.Column="1"></TextBlock>
-                            <materialDesign:PackIcon Kind="Rename" Grid.Column="0"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+            <!--title-->
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Edit goal"
+                           Grid.Row="0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom"
+                           FontSize="25"
+                           Foreground="#EFE4E4"
+                           FontWeight="Bold"
+                           TextAlignment="Center"></TextBlock>
+            </Grid>
 
-            <!--contribute-->
-            <Button  Grid.Row="1"
-                Background="{x:Null}" 
-                    BorderBrush="{x:Null}" 
-                    Foreground="{x:Null}">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*"></ColumnDefinition>
-                                <ColumnDefinition Width="18*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <materialDesign:PackIcon Kind="Plus" Grid.Column="0"/>
-                            <TextBlock Text="Contribute" Grid.Column="1"></TextBlock>
+            <!--Goal name-->
+            <Grid Grid.Row="1">
+                <TextBox
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="10,0,0,0"
+                    materialDesign:HintAssist.Hint="Goal name"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
+                    Width="380" Foreground="#E5CBBFBF"/>
+            </Grid>
 
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+            <!--Target amount-->
+            <Grid Grid.Row="2">
+                <TextBox
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="10,0,0,0"
+                    materialDesign:HintAssist.Hint="Target amount"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
+                    Width="380" Foreground="#E5CBBFBF"/>
+            </Grid>
 
-            <!--withdraw-->
-            <Button
-                Grid.Row="2"
-                Background="{x:Null}" 
-                    BorderBrush="{x:Null}" 
-                    Foreground="{x:Null}">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*"></ColumnDefinition>
-                                <ColumnDefinition Width="18*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Withdraw" Grid.Column="1"></TextBlock>
-                            <materialDesign:PackIcon Kind="Minus" Grid.Column="0"/>
+            <!--Monthly Target amount-->
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="13*"/>
+                </Grid.RowDefinitions>
+                <TextBox
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    Margin="0,16,0,0"
+                    materialDesign:HintAssist.Hint="Monthly target amount"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
+                    Width="380" Foreground="#E5CBBFBF" Grid.RowSpan="2"/>
+            </Grid>
 
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+            <!--Start date - end date-->
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <DatePicker
+                    Width="175"
+                    Height="40" 
+                    materialDesign:HintAssist.Hint="Start date"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Foreground="#E5CBBFBF"
+                    HorizontalAlignment="Left"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <DatePicker
+                    Width="178"
+                    Height="40" 
+                    materialDesign:HintAssist.Hint="End date"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Foreground="#E5CBBFBF"
+                    HorizontalAlignment="Left"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
 
-            <!--adjust start date-->
-            <Button  Grid.Row="3"
-                Background="{x:Null}" 
-                    BorderBrush="{x:Null}" 
-                    Foreground="{x:Null}">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*"></ColumnDefinition>
-                                <ColumnDefinition Width="18*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Adjust  start  date" Grid.Column="1"></TextBlock>
-                            <materialDesign:PackIcon Kind="CalendarStart"  Grid.Column="0"/>
+            <!--cancel - confirm -->
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" CornerRadius="30" Height="50"
+                        Width="150"
+                        Background="#FFC8386C" >
+                    <Button>
+                        <TextBlock Text="Cancel" Foreground="White"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="16"></TextBlock>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="30"
+                                                Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                              VerticalAlignment="Stretch"></ContentPresenter>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand"></Setter>
+                                        <Setter Property="Background" Value="#FFF72D2D"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Border>
 
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-
-            <!--adjust end date-->
-            <Button  Grid.Row="4"
-                Background="{x:Null}" 
-                    BorderBrush="{x:Null}" 
-                    Foreground="{x:Null}">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*"></ColumnDefinition>
-                                <ColumnDefinition Width="18*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Adjust  end  date" Grid.Column="1"></TextBlock>
-                            <materialDesign:PackIcon Kind="CalendarEnd"  Grid.Column="0"/>
-
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-
-
-            <!--Delete goal-->
-            <Button  Grid.Row="5">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*"></ColumnDefinition>
-                                <ColumnDefinition Width="18*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Delete goal"  Grid.Column="1"
-                                            Foreground="red"></TextBlock>
-
-                            <materialDesign:PackIcon Kind="Delete"  Grid.Column="0"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                <Border Grid.Column="1" CornerRadius="30" Height="50"
+                        Width="150"
+                        Background="#FF61D2BE" >
+                    <Button>
+                        <TextBlock Text="Confirm" Foreground="White"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="16"></TextBlock>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="30"
+                                                Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                              VerticalAlignment="Stretch"></ContentPresenter>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand"></Setter>
+                                        <Setter Property="Background" Value="#FF6DF06D"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Border>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>
