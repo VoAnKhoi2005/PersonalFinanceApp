@@ -11,14 +11,14 @@ using PersonalFinanceApp.Database;
 namespace PersonalFinanceApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241113161759_FirstBuild")]
-    partial class FirstBuild
+    [Migration("20241119023434_Database")]
+    partial class Database
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
             modelBuilder.Entity("PersonalFinanceApp.Model.Category", b =>
                 {
@@ -111,10 +111,6 @@ namespace PersonalFinanceApp.Migrations
                     b.ToTable("EXPENSE", t =>
                         {
                             t.HasCheckConstraint("CK_Amount", "[Amount] > 0");
-
-                            t.HasCheckConstraint("CK_Deleted", "[Deleted] IN (0, 1)");
-
-                            t.HasCheckConstraint("CK_Recurring", "[Recurring] IN (0, 1)");
                         });
                 });
 
@@ -156,14 +152,29 @@ namespace PersonalFinanceApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<long>("GoalAmount")
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("CurrentAmount")
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("Deadline")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Reminder")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Resources")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<long>("Target")
@@ -174,9 +185,29 @@ namespace PersonalFinanceApp.Migrations
 
                     b.HasKey("GoalID");
 
+                    b.HasIndex("CategoryName");
+
                     b.HasIndex("UserID");
 
-                    b.ToTable("GOAL");
+                    b.ToTable("GOAL", t =>
+                        {
+                            t.HasCheckConstraint("CK_Reminder", "[Reminder] IN ('Daily', 'Weekly', 'Monthly', 'Yearly')");
+
+                            t.HasCheckConstraint("CK_Status", "[Status] IN ('Completed', 'Active', 'Canceled')");
+                        });
+                });
+
+            modelBuilder.Entity("PersonalFinanceApp.Model.GoalCategory", b =>
+                {
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Name");
+
+                    b.ToTable("GOALCATEGORY");
                 });
 
             modelBuilder.Entity("PersonalFinanceApp.Model.GoalHistory", b =>
@@ -306,11 +337,19 @@ namespace PersonalFinanceApp.Migrations
 
             modelBuilder.Entity("PersonalFinanceApp.Model.Goal", b =>
                 {
+                    b.HasOne("PersonalFinanceApp.Model.GoalCategory", "GoalCategory")
+                        .WithMany("Goals")
+                        .HasForeignKey("CategoryName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PersonalFinanceApp.Model.User", "User")
                         .WithMany("Goals")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("GoalCategory");
 
                     b.Navigation("User");
                 });
@@ -344,8 +383,7 @@ namespace PersonalFinanceApp.Migrations
 
             modelBuilder.Entity("PersonalFinanceApp.Model.Expense", b =>
                 {
-                    b.Navigation("RecurringDetail")
-                        .IsRequired();
+                    b.Navigation("RecurringDetail");
                 });
 
             modelBuilder.Entity("PersonalFinanceApp.Model.ExpensesBook", b =>
@@ -358,6 +396,11 @@ namespace PersonalFinanceApp.Migrations
             modelBuilder.Entity("PersonalFinanceApp.Model.Goal", b =>
                 {
                     b.Navigation("GoalHistories");
+                });
+
+            modelBuilder.Entity("PersonalFinanceApp.Model.GoalCategory", b =>
+                {
+                    b.Navigation("Goals");
                 });
 
             modelBuilder.Entity("PersonalFinanceApp.Model.User", b =>

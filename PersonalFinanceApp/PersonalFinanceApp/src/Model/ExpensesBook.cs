@@ -19,14 +19,11 @@ namespace PersonalFinanceApp.Model
         [Range(0, 1000000000000000)]
         public long Budget { get; set; }
 
-        [Range(0, 1000000000000000)] 
-        public long Spending => Expenses?.Sum(ex => ex.Amount) ?? 0;
-
         [MaxLength(256)]
         public string? Resources { get; set; }
         
         //Relationship
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
         public virtual List<Expense> Expenses { get; set; } = new List<Expense>();
         public virtual List<Category> Categories { get; set; } = new List<Category>();
 

@@ -54,7 +54,7 @@ public static class DBManager
 
     #region Read
 
-    public static T? GetFirst<T>(Expression<Func<T, bool>> condition, bool getDeleted = false, bool haveForeignKey = true) where T : class
+    public static T? GetFirst<T>(Expression<Func<T, bool>> condition, bool haveForeignKey = true, bool getDeleted = false) where T : class
     {
         using (var connection = new SqliteConnection(ConfigurationManager.ConnectionStrings["MyDatabase"]?.ConnectionString))
         {
@@ -96,10 +96,11 @@ public static class DBManager
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="condition"></param>
+    /// <param name="haveForeignKey"></param>
     /// <param name="getDeleted"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>    
-    public static List<T> GetCondition<T>(Expression<Func<T, bool>> condition, bool getDeleted = false, bool haveForeignKey = true) where T : class
+    public static List<T> GetCondition<T>(Expression<Func<T, bool>> condition, bool haveForeignKey = true, bool getDeleted = false) where T : class
     {
         if (!CheckTypeDatabase(typeof(T)))
             throw new InvalidOperationException("Data type not found in database.");
@@ -119,7 +120,7 @@ public static class DBManager
         return query.ToList();
     }
 
-    public static List<T> GetAll<T>(bool getDeleted = false, bool haveForeignKey = true) where T : class
+    public static List<T> GetAll<T>(bool haveForeignKey = true, bool getDeleted = false) where T : class
     {
         if (!CheckTypeDatabase(typeof(T)))
             throw new InvalidOperationException("Data type not found in database.");

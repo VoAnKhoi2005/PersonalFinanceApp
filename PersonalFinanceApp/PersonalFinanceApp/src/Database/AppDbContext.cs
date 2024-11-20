@@ -14,6 +14,7 @@ namespace PersonalFinanceApp.Database
         public DbSet<Expense> EXPENSE { get; set; }
         public DbSet<RecurringDetail> RECURRINGDETAIL { get; set; }
         public DbSet<Goal> GOAL { get; set; }
+        public DbSet<GoalCategory> GOALCATEGORY { get; set; }
         public DbSet<GoalHistory> GOALHISTORY { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -44,18 +45,21 @@ namespace PersonalFinanceApp.Database
             modelBuilder.Entity<Expense>().Property(ex => ex.Resources).IsRequired(false);
             modelBuilder.Entity<Expense>().Property(ex => ex.DeletedDate).IsRequired(false);
             modelBuilder.Entity<Expense>().ToTable(ex => ex.HasCheckConstraint("CK_Amount", "[Amount] > 0"));
-            modelBuilder.Entity<Expense>().ToTable(ex => ex.HasCheckConstraint("CK_Recurring", "[Recurring] IN (0, 1)"));
-            modelBuilder.Entity<Expense>().ToTable(exB => exB.HasCheckConstraint("CK_Deleted", "[Deleted] IN (0, 1)"));
             //Expenses Book
             modelBuilder.Entity<ExpensesBook>().ToTable(exB => exB.HasCheckConstraint("CK_Month", "[Month] >= 1 AND [Month] <= 12"));
             modelBuilder.Entity<ExpensesBook>().ToTable(exB => exB.HasCheckConstraint("CK_Year", "[Year] >= 0"));
             modelBuilder.Entity<ExpensesBook>().ToTable(exB => exB.HasCheckConstraint("CK_Budget", "[Budget] >= 0"));
             //RecurringExpense
             modelBuilder.Entity<RecurringDetail>().ToTable(rd => rd.HasCheckConstraint("CK_Frequency", "[Frequency] IN ('Daily', 'Weekly', 'Monthly', 'Yearly')"));
+            //Goal
+            modelBuilder.Entity<Goal>().Property(g => g.Deadline).IsRequired(false);
+            modelBuilder.Entity<Goal>().ToTable(g => g.HasCheckConstraint("CK_Reminder", "[Reminder] IN ('Daily', 'Weekly', 'Monthly', 'Yearly')"));
+            modelBuilder.Entity<Goal>().ToTable(g => g.HasCheckConstraint("CK_Status", "[Status] IN ('Completed', 'Active', 'Canceled')"));
 
             //Setup composite key for ExpensesBook and GoalHistory
             modelBuilder.Entity<ExpensesBook>().HasKey(exB => new { exB.Month, exB.Year, exB.UserID });
             modelBuilder.Entity<GoalHistory>().HasKey(gh => new { gh.GoalID, gh.TimeAdded });
+
             //Setup relationship between table
             //ExpensesBooks and Expense
             modelBuilder.Entity<ExpensesBook>()
@@ -87,6 +91,11 @@ namespace PersonalFinanceApp.Database
                 .HasMany(g => g.GoalHistories)
                 .WithOne(gh => gh.Goal)
                 .HasForeignKey(gh => gh.GoalID);
+            //Goal and GoalCategory
+            modelBuilder.Entity<GoalCategory>()
+                .HasMany(gc => gc.Goals)
+                .WithOne(g => g.GoalCategory)
+                .HasForeignKey(g => g.CategoryName);
             //Expense and RecurringDetail
             modelBuilder.Entity<Expense>()
                 .HasOne(ex => ex.RecurringDetail)

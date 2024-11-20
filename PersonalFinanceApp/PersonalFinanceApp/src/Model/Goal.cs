@@ -15,16 +15,26 @@ public class Goal
     public long Target { get; set; }
 
     [DefaultValue(0)]
-    public long GoalAmount { get; set; }
+    public long CurrentAmount { get; set; }
+
+    public string Reminder { get; set; }
+
+    public DateTime? Deadline { get; set; }
+
+    public string Status { get; set; }
 
     public string? Resources { get; set; }
 
-    //Relationship
     [Required]
     public int UserID { get; set; }
-    public virtual User User { get; set; }
 
+    [Required]
+    public string CategoryName { get; set; }
+
+    //Relationship
+    public virtual User? User { get; set; }
     public virtual List<GoalHistory> GoalHistories { get; set; } = new List<GoalHistory>();
+    public virtual GoalCategory? GoalCategory { get; set; }
 
     private Goal() { }
 
@@ -32,7 +42,7 @@ public class Goal
     {
         Name = name;
         Target = target;
-        GoalAmount = goalAmount;
+        CurrentAmount = goalAmount;
         Resources = resources;
     }
 }

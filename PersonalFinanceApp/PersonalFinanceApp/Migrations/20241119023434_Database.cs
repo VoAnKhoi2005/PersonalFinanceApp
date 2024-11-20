@@ -6,11 +6,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PersonalFinanceApp.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstBuild : Migration
+    public partial class Database : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "GOALCATEGORY",
+                columns: table => new
+                {
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GOALCATEGORY", x => x.Name);
+                });
+
             migrationBuilder.CreateTable(
                 name: "USER",
                 columns: table => new
@@ -64,13 +76,25 @@ namespace PersonalFinanceApp.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Target = table.Column<long>(type: "INTEGER", nullable: false),
-                    GoalAmount = table.Column<long>(type: "INTEGER", nullable: false),
+                    CurrentAmount = table.Column<long>(type: "INTEGER", nullable: false),
+                    Reminder = table.Column<string>(type: "TEXT", nullable: false),
+                    Deadline = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Status = table.Column<string>(type: "TEXT", nullable: false),
                     Resources = table.Column<string>(type: "TEXT", nullable: true),
-                    UserID = table.Column<int>(type: "INTEGER", nullable: false)
+                    UserID = table.Column<int>(type: "INTEGER", nullable: false),
+                    CategoryName = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GOAL", x => x.GoalID);
+                    table.CheckConstraint("CK_Reminder", "[Reminder] IN ('Daily', 'Weekly', 'Monthly', 'Yearly')");
+                    table.CheckConstraint("CK_Status", "[Status] IN ('Completed', 'Active', 'Canceled')");
+                    table.ForeignKey(
+                        name: "FK_GOAL_GOALCATEGORY_CategoryName",
+                        column: x => x.CategoryName,
+                        principalTable: "GOALCATEGORY",
+                        principalColumn: "Name",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_GOAL_USER_UserID",
                         column: x => x.UserID,
@@ -145,8 +169,6 @@ namespace PersonalFinanceApp.Migrations
                 {
                     table.PrimaryKey("PK_EXPENSE", x => x.ExpenseID);
                     table.CheckConstraint("CK_Amount", "[Amount] > 0");
-                    table.CheckConstraint("CK_Deleted", "[Deleted] IN (0, 1)");
-                    table.CheckConstraint("CK_Recurring", "[Recurring] IN (0, 1)");
                     table.ForeignKey(
                         name: "FK_EXPENSE_CATEGORY_CategoryID",
                         column: x => x.CategoryID,
@@ -214,6 +236,11 @@ namespace PersonalFinanceApp.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_GOAL_CategoryName",
+                table: "GOAL",
+                column: "CategoryName");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_GOAL_UserID",
                 table: "GOAL",
                 column: "UserID");
@@ -239,6 +266,9 @@ namespace PersonalFinanceApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "EXPENSE");
+
+            migrationBuilder.DropTable(
+                name: "GOALCATEGORY");
 
             migrationBuilder.DropTable(
                 name: "CATEGORY");

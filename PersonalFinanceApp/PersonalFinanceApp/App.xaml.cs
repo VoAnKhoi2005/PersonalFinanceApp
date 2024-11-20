@@ -68,10 +68,6 @@ namespace PersonalFinanceApp
                 var dataContext = s.GetRequiredService<MainViewModel>();
                 return new MainWindowFactory(dataContext, s);
             });
-            //services.AddSingleton<MainWindow>(s => new MainWindow
-            //{
-            //    DataContext = s.GetRequiredService<MainViewModel>()
-            //});
             services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
             services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
             services.AddTransient<SummaryViewModel>(s => new SummaryViewModel(s));
