@@ -5,9 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
              mc:Ignorable="d" 
-            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             
-              d:DesignHeight="720" d:DesignWidth="942">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converter="clr-namespace:PersonalFinanceApp.Src.etc"
+             d:DesignHeight="720" d:DesignWidth="942">
+    <Control.Resources>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converter:InvertBooleanConverter x:Key="InvertBooleanConverter" />
+    </Control.Resources>
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -222,7 +226,7 @@
                   Margin="0,5,0,0"
                     Grid.Column="6"
                         >
-                <Button Command="{Binding AddNewGoalCommand}">
+                <Button Command="{Binding AddNewExpenseBookCommand}">
                     <Grid>
                         <TextBlock Text="add new"
 
@@ -245,8 +249,62 @@
             </Border>
         </Grid>
 
-        <!--???-->
-        <ListView Grid.Row="2">
-        </ListView>
+        <!--DataGrid expensebook-->
+
+        <Grid Grid.Row="2">
+            <DataGrid 
+                Name="ListExpenseBook"
+                Grid.Row="1"
+                HorizontalAlignment="Stretch"
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                ItemsSource="{Binding ExpenseBooks}">
+                <DataGrid.InputBindings>
+                    <!--  Double click on any row  -->
+                    <MouseBinding
+                        Command="{Binding EditExpenseBookCommand}"
+                        CommandParameter="{Binding ElementName=ListExpenseBook, Path=SelectedItem}"
+                        Gesture="LeftDoubleClick" />
+                </DataGrid.InputBindings>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="ID" />
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                    <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
+                    <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
+                    <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                    <DataGridTextColumn Binding="{Binding Recurring}" Header="Recurring" />
+                    <DataGridTextColumn Binding="{Binding Resources}" Header="Resources" />
+                    <DataGridTextColumn Binding="{Binding CategoryID}" Header="CategoryID" />
+                    <DataGridTextColumn Binding="{Binding ExBMonth}" Header="ExBMonth" />
+                    <DataGridTextColumn Binding="{Binding ExBYear}" Header="ExBYear" />
+                    <DataGridTextColumn Binding="{Binding UserID}" Header="UserID" />
+                    <DataGridTextColumn Binding="{Binding TimeAdded}" Header="TimeAdded" />
+                    <DataGridTemplateColumn CanUserResize="False" Header="Commands">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button
+                                        Margin="5"
+                                        Background="DarkBlue"
+                                        BorderThickness="0"
+                                        Command="{Binding EditExpenseBookCommand}"
+                                        CommandParameter="{Binding}">
+                                        <materialDesign:PackIcon Kind="pencil" />
+                                    </Button>
+                                    <Button
+                                        Background="IndianRed"
+                                        BorderThickness="0"
+                                        Command="{Binding RemoveExpenseBookCommand}"
+                                        CommandParameter="{Binding}">
+                                        <materialDesign:PackIcon Kind="TrashCanOutline" />
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </UserControl>

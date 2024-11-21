@@ -23,4 +23,5 @@ internal class ExpenseBookViewModel : BaseViewModel {
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         AddNewExpenseBookCommand = new NavigateModalCommand<ExpenseBookAddNewViewModel>(serviceProvider);
     }
+
 }
