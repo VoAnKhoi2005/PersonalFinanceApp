@@ -1,5 +1,7 @@
 ﻿using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalFinanceApp.Model;
+using PersonalFinanceApp.Src.ViewModel.MainMenu;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
@@ -14,6 +16,7 @@ public class MainViewModel : BaseViewModel
     public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
     public ICommand DashBoardNavigateCommand { get; set; }
+    public ICommand ExpenseBookNavigateCommand { get; set; }
     public ICommand GoalplanNavigateCommand { get; set; }
     public ICommand SummaryNavigateCommand { get; set; }
 
@@ -26,6 +29,7 @@ public class MainViewModel : BaseViewModel
         _modalNavigationStore.CurrentModalViewModelChanged += OnCurrentModalViewModelChanged;
         
         DashBoardNavigateCommand = new NavigateCommand<DashboardViewModel>(serviceProvider);
+        ExpenseBookNavigateCommand = new NavigateCommand<ExpenseBookViewModel>(serviceProvider);
         GoalplanNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
         SummaryNavigateCommand = new NavigateCommand<SummaryViewModel>(serviceProvider);
     }
