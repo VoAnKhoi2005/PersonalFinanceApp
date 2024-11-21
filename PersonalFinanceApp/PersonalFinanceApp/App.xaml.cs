@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.etc;
@@ -7,6 +8,9 @@ using PersonalFinanceApp.View;
 using PersonalFinanceApp.ViewModel.LoginMenu;
 using PersonalFinanceApp.ViewModel.MainMenu;
 using PersonalFinanceApp.ViewModel.Stores;
+using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel;
+using Windows.UI.WebUI;
 
 namespace PersonalFinanceApp
 {
@@ -29,9 +33,11 @@ namespace PersonalFinanceApp
             //MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
 
             //Default main window
-            NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-            navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
-            MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
+            //NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
+            //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
+            //MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
+
+            MainWindow = new TestWindow();
 
             MainWindow.Show();
 
@@ -75,5 +81,6 @@ namespace PersonalFinanceApp
             //Modal-Popup
             services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));
         }
+        
     }
 }
