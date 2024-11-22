@@ -7,18 +7,20 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="800" d:DesignWidth="800">
-    <Border Background="#053B50" Height="500" Width="400" CornerRadius="30">
+    <!--color done-->
+    <Border Background="{DynamicResource CommonGridBackground}" 
+            Height="360" 
+            Width="320" CornerRadius="30">
         <Grid >
             <Grid.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="FontFamily" Value="Sans Serif Collection"/>
-                    <Setter Property="Foreground" Value="#E5CBBFBF"/>
+                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"/>
                     <Setter Property="FontWeight" Value="Regular"/>
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -31,12 +33,12 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Edit goal"
+                <TextBlock Text="Edit  goal"
                            Grid.Row="0"
+                           Opacity="0.9"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Bottom"
                            FontSize="25"
-                           Foreground="#EFE4E4"
                            FontWeight="Bold"
                            TextAlignment="Center"></TextBlock>
             </Grid>
@@ -48,8 +50,14 @@
                     HorizontalAlignment="Left"
                     Margin="10,0,0,0"
                     materialDesign:HintAssist.Hint="Goal name"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
-                    Width="380" Foreground="#E5CBBFBF"/>
+                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                    CaretBrush="{DynamicResource CommonText}"
+                    SelectionBrush="{DynamicResource CommonText}"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                    Foreground="{DynamicResource CommonText}"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                    Height="40" 
+                    Width="300" />
             </Grid>
 
             <!--Target amount-->
@@ -59,49 +67,47 @@
                     HorizontalAlignment="Left"
                     Margin="10,0,0,0"
                     materialDesign:HintAssist.Hint="Target amount"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
-                    Width="380" Foreground="#E5CBBFBF"/>
+                                        materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                    CaretBrush="{DynamicResource CommonText}"
+                    SelectionBrush="{DynamicResource CommonText}"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                    Foreground="{DynamicResource CommonText}"
+                    Width="300" />
             </Grid>
 
             <!--Monthly Target amount-->
-            <Grid Grid.Row="3">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="13*"/>
-                </Grid.RowDefinitions>
-                <TextBox
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Center"
-                    Margin="0,16,0,0"
-                    materialDesign:HintAssist.Hint="Monthly target amount"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
-                    Width="380" Foreground="#E5CBBFBF" Grid.RowSpan="2"/>
-            </Grid>
 
             <!--Start date - end date-->
-            <Grid Grid.Row="4">
+            <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <DatePicker
-                    Width="175"
+                    Width="140"
                     Height="40" 
                     materialDesign:HintAssist.Hint="Start date"
                     materialDesign:TextFieldAssist.HasClearButton="True"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Foreground="#E5CBBFBF"
+                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
+                    Foreground="{DynamicResource CommonText}"
                     HorizontalAlignment="Left"
                         Margin="10,0,0,0"
                         VerticalAlignment="Center"/>
                 </Grid>
                 <Grid Grid.Column="1">
                     <DatePicker
-                    Width="178"
+                    Width="140"
                     Height="40" 
                     materialDesign:HintAssist.Hint="End date"
                     materialDesign:TextFieldAssist.HasClearButton="True"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Foreground="#E5CBBFBF"
+                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
+                    Foreground="{DynamicResource CommonText}"
                     HorizontalAlignment="Left"
                         Margin="10,0,0,0"
                         VerticalAlignment="Center"/>
@@ -115,11 +121,12 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" CornerRadius="30" Height="50"
-                        Width="150"
+                        Width="140"
                         Background="#FFC8386C" >
-                    <Button>
+                    <Button Command="{Binding ExpenseBookCancelCommand}">
                         <TextBlock Text="Cancel" Foreground="White"
                                    VerticalAlignment="Center"
+                                   Opacity="1"
                                    HorizontalAlignment="Center"
                                    FontSize="16"></TextBlock>
                         <Button.Resources>
@@ -139,7 +146,7 @@
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="true">
                                         <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Background" Value="#FFF72D2D"></Setter>
+                                        <Setter Property="Background" Value="Red"></Setter>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -147,11 +154,13 @@
                     </Button>
                 </Border>
 
+                <!-- confirm button -->
                 <Border Grid.Column="1" CornerRadius="30" Height="50"
-                        Width="150"
+                        Width="140"
                         Background="#FF61D2BE" >
-                    <Button>
-                        <TextBlock Text="Confirm" Foreground="White"
+                    <Button Command="{Binding ExpenseBookConfirmCommand}">
+                        <TextBlock Text="Confirm" Foreground="Black"
+                                   Opacity="0.8"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    FontSize="16"></TextBlock>
@@ -172,7 +181,7 @@
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="true">
                                         <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Background" Value="#FF6DF06D"></Setter>
+                                        <Setter Property="Background" Value="#FF6DF096"></Setter>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -182,4 +191,5 @@
             </Grid>
         </Grid>
     </Border>
+
 </UserControl>

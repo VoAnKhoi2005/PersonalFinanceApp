@@ -15,12 +15,12 @@
         <Grid.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Sans Serif Collection" />
-                <Setter Property="Foreground" Value="#E5CBBFBF" />
+                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
                 <Setter Property="FontWeight" Value="Regular" />
             </Style>
             <Style TargetType="Button">
                 <Setter Property="Background" Value="Transparent"></Setter>
-                <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
+                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -36,23 +36,23 @@
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="true">
                         <Setter Property="Cursor" Value="Hand"></Setter>
-                        <Setter Property="Background" Value="#265B70"></Setter>
+                        <Setter Property="Background" Value="{DynamicResource onHovered}"></Setter>
                     </Trigger>
                 </Style.Triggers>
             </Style>
         </Grid.Resources>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="421*"></ColumnDefinition>
-                    <ColumnDefinition Width="50*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+                <Grid Grid.Column="0" Height="60">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="48*"></RowDefinition>
                         <RowDefinition Height="19*"></RowDefinition>
@@ -76,33 +76,27 @@
 
                 <!--user-->
                 <Button Width="35" Height="35" Grid.Column="1">
-                    <Border>
-                        <materialDesign:PackIcon
-                            Kind="AccountBadge"
-                            Width="30" Height="30"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center" />
-                    </Border>
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="Transparent"></Setter>
-                            <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
-                                        <Border CornerRadius="30"
-                                                Background="{TemplateBinding Background}">
-                                            <ContentPresenter HorizontalAlignment="Stretch"
-                                                              VerticalAlignment="Stretch">
-                                            </ContentPresenter>
-                                        </Border>
+                                        <materialDesign:PackIcon 
+                                                Foreground="{TemplateBinding Foreground}"
+                                                    Kind="AccountBadge"
+                                                    Width="30" Height="30"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                         />
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="true">
                                     <Setter Property="Cursor" Value="Hand"></Setter>
-                                    <Setter Property="Foreground" Value="#265B70"></Setter>
+                                    <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -295,10 +289,10 @@
 
                 <!--add new-->
 
-                <Border CornerRadius="25"
+                <Border CornerRadius="30"
                         Width="100"
                         Height="60"
-                        Background="#053B50"
+                        Background="{DynamicResource CommonGridBackground}"
                         Grid.Column="5">
                     <Button Command="{Binding AddNewGoalCommand}">
                         <Grid>
@@ -309,10 +303,10 @@
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Right"
                                        FontWeight="Normal"
-                                       Foreground="#E5CBBFBF">
+                                       Foreground="{DynamicResource CommonText}">
                             </TextBlock>
                             <materialDesign:PackIcon Kind="PlusCircle"
-                                                     Foreground="#E5CBBFBF"
+                                                     Foreground="{DynamicResource CommonText}"
                                                      Height="25"
                                                      Width="25"
                                                      HorizontalAlignment="Left"

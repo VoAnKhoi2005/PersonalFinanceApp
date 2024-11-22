@@ -7,12 +7,15 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="500" d:DesignWidth="400">
-    <Border Background="#053B50" Height="500" Width="400" CornerRadius="30">
+    <!--color done-->
+    <Border Background="{DynamicResource CommonGridBackground}" Height="500" 
+            Width="400" 
+            CornerRadius="30">
         <Grid >
             <Grid.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="FontFamily" Value="Sans Serif Collection"/>
-                    <Setter Property="Foreground" Value="#E5CBBFBF"/>
+                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"/>
                     <Setter Property="FontWeight" Value="Regular"/>
                 </Style>
             </Grid.Resources>
@@ -36,14 +39,15 @@
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            FontSize="25"
-                           Foreground="#EFE4E4"
+                           Foreground="{DynamicResource CommonText}"
                            FontWeight="Bold"
-                           Margin="0,5,0,0" TextAlignment="Center" Height="66" Width="214"></TextBlock>
+                           Margin="0,5,0,0" TextAlignment="Center"></TextBlock>
 
                 <TextBlock Text="Please fill in the form below"
                            Grid.Row="1"
+                           Opacity="0.6"
                            VerticalAlignment="Top"
-                           HorizontalAlignment="Center" Height="32" Width="148"/>
+                           HorizontalAlignment="Center"/>
             </Grid>
 
             <!--Goal name-->
@@ -52,10 +56,17 @@
                     Text="{Binding NameGoal}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
-                    Margin="10,0,0,0"
+                    Margin="10,0,0,0"       
+                    FontSize="14"
                     materialDesign:HintAssist.Hint="Goal name"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
-                    Width="380" Foreground="#E5CBBFBF"/>
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                    CaretBrush="{DynamicResource CommonText}"
+                    SelectionBrush="{DynamicResource CommonText}"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                    Foreground="{DynamicResource CommonText}"
+                    Height="40" 
+                    Width="380" />
             </Grid>
 
             <!--Target amount-->
@@ -67,18 +78,26 @@
                 <TextBox Grid.Column="1"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
+                         FontSize="14"
                     materialDesign:HintAssist.Hint="Target amount (VND)"
+                    CaretBrush="{DynamicResource CommonText}"
+                    SelectionBrush="{DynamicResource CommonText}"
+                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
-                    Width="180" Foreground="#E5CBBFBF"
-                    Text="{Binding TargetGoal}"/>
+                    Width="180" Foreground="{DynamicResource CommonText}"/>
 
                 <TextBox Grid.Column="0"
                     VerticalAlignment="Center"
+                         FontSize="14"
                     HorizontalAlignment="Center"
                     materialDesign:HintAssist.Hint="Category"
+                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                         CaretBrush="{DynamicResource CommonText}"
+                    SelectionBrush="{DynamicResource CommonText}"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
-                    Width="180" Foreground="#E5CBBFBF"
-                    />
+                    Width="180" Foreground="{DynamicResource CommonText}"/>
             </Grid>
 
             <!--Monthly Target amount-->
@@ -92,10 +111,15 @@
                     AcceptsReturn="True"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Center"
+                    FontSize="14"
                     materialDesign:HintAssist.Hint="Description"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Margin="0,10,0,10"
-                    Width="380" Foreground="#E5CBBFBF" Grid.RowSpan="2"/>
+                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                    CaretBrush="{DynamicResource CommonText}"
+                    SelectionBrush="{DynamicResource CommonText}"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                    Width="380" Foreground="{DynamicResource CommonText}" Grid.RowSpan="2"/>
             </Grid>
 
             <!--Start date - end date-->
@@ -105,23 +129,29 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <DatePicker
-                    Width="175"
-                    Height="40" 
-                    materialDesign:HintAssist.Hint="Start date"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Foreground="#E5CBBFBF"
-                    HorizontalAlignment="Left"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"/>
+                    <DatePicker FontSize="14"
+                                Width="175"
+                                Height="40" 
+                                materialDesign:HintAssist.Hint="Start date"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
+                                materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                                Foreground="{DynamicResource CommonText}"
+                                HorizontalAlignment="Left"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"/>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <DatePicker
+                    <DatePicker FontSize="14"
                     Width="178"
                     Height="40" 
                     materialDesign:HintAssist.Hint="End date"
                     materialDesign:TextFieldAssist.HasClearButton="True"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Foreground="#E5CBBFBF"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
+                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                        Foreground="{DynamicResource CommonText}"
                     HorizontalAlignment="Left"
                         Margin="10,0,0,0"
                         VerticalAlignment="Center"/>
@@ -140,6 +170,7 @@
                     <Button Command="{Binding CancelNewGoalCommand}">
                         <TextBlock Text="Cancel" Foreground="White"
                                    VerticalAlignment="Center"
+                                   Opacity="1"
                                    HorizontalAlignment="Center"
                                    FontSize="16"></TextBlock>
                         <Button.Resources>
@@ -159,7 +190,7 @@
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="true">
                                         <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Background" Value="#FFF72D2D"></Setter>
+                                        <Setter Property="Background" Value="Red"></Setter>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -167,11 +198,13 @@
                     </Button>
                 </Border>
 
+                <!-- confirm button -->
                 <Border Grid.Column="1" CornerRadius="30" Height="50"
                         Width="150"
                         Background="#FF61D2BE" >
                     <Button Command="{Binding ConfirmNewGoalCommand}">
-                        <TextBlock Text="Confirm" Foreground="White"
+                        <TextBlock Text="Confirm" Foreground="Black"
+                                   Opacity="0.8"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    FontSize="16"></TextBlock>
@@ -192,7 +225,7 @@
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="true">
                                         <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Background" Value="#FF6DF06D"></Setter>
+                                        <Setter Property="Background" Value="#FF6DF096"></Setter>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
