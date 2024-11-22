@@ -29,10 +29,10 @@ namespace PersonalFinanceApp
             //MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
 
             //Default main window
-            NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-            navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
-            MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
-
+            //NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
+            //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
+            //MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
+            MainWindow = new TestWindow();
             MainWindow.Show();
 
             //Create database
