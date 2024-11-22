@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
-                xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="942">
@@ -699,36 +698,6 @@
                                VerticalAlignment="Center" Height="47" Width="86"/>
 
                     <Grid Grid.Row="1">
-                        <lvc:PieChart 
-                                   LegendLocation="Bottom" 
-                                  Margin="15,0,15,20"
-                                  InnerRadius="90"
-                        Foreground="#E5CBBFBF">
-                            <lvc:PieChart.Series>
-                                <!--something binding here-->
-
-                                <lvc:PieSeries Values="1" Title="haha"
-                                            ></lvc:PieSeries>
-                                <lvc:PieSeries Values="2" Title="hahha"></lvc:PieSeries>
-                                <lvc:PieSeries Values="3" Title="hahvza"></lvc:PieSeries>
-                                <lvc:PieSeries Values="4" Title="haasdfha"></lvc:PieSeries>
-                                <lvc:PieSeries Values="5" Title="hahasdfa"></lvc:PieSeries>
-                            </lvc:PieChart.Series>
-                        </lvc:PieChart>
-
-                        <TextBlock Text="TOTAL"
-                            HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Margin="0,0,0,70"
-                                   FontSize="20"
-                                   FontWeight="Bold"></TextBlock>
-                        <!--binding here-->
-                        <TextBlock Text="1999"
-                            HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Margin="0,0,0,20"
-                                   FontSize="20"
-                                   FontWeight="Bold"></TextBlock>
                     </Grid>
                 </Grid>
             </Border>
@@ -751,10 +720,6 @@
                        FontWeight="Bold" ></TextBlock>
 
                     <Grid Grid.Row="1">
-                        <lvc:CartesianChart LegendLocation="Top"
-                                            Margin="10">
-
-                        </lvc:CartesianChart>
                     </Grid>
                 </Grid>
             </Border>
