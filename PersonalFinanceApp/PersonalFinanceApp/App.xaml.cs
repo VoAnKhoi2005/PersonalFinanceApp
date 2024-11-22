@@ -11,7 +11,6 @@ using PersonalFinanceApp.ViewModel.Stores;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel;
 using Windows.UI.WebUI;
-using PersonalFinanceApp.Src.ViewModel.MainMenu;
 
 namespace PersonalFinanceApp
 {
