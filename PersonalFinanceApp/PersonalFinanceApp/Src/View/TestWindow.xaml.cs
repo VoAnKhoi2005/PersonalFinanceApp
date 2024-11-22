@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalFinanceApp.Src.etc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,13 @@ namespace PersonalFinanceApp.Src.View
         public TestWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            LocalToastNotification notify = new LocalToastNotification();
+            notify.Tile = "Test";
+            notify.Content = "Hello app";
+            notify.ShowNotification();
         }
     }
 }

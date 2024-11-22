@@ -66,13 +66,14 @@
                               VerticalAlignment="Top"
                               FontSize="15"
                               Foreground="#FFD9D9D9"
-                                MinWidth="128"
-                                materialDesign:HintAssist.Hint="pick a type" 
+                              MinWidth="128"
+                              materialDesign:HintAssist.Hint="pick a type" 
                               materialDesign:HintAssist.HintOpacity="0.3"
-                                materialDesign:HintAssist.Foreground="#FFD9D9D9"
-                                materialDesign:TextFieldAssist.HasClearButton="True"
-                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
-                                Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0">
+                              materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                              materialDesign:TextFieldAssist.HasClearButton="True"
+                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0"
+                              Text="{Binding TypeExpenseBook}">
                         <ComboBoxItem
     Content="Android" />
                         <ComboBoxItem
@@ -98,7 +99,7 @@
                                ></TextBlock>
 
 
-                    <TextBox VerticalAlignment="Center"
+                    <TextBox VerticalAlignment="Center" Text="{Binding AmountExpenseBook}"
                              Margin="0,30,0,0"
                              Width="170" Height="40"
                              TextAlignment="Center"
@@ -107,6 +108,7 @@
                                  HorizontalAlignment="Center"
                                  Opacity="0.6"
                                  ></TextBox>
+
 
                 </Grid>
             </Grid>
@@ -122,7 +124,7 @@
 
                 <Border Height="50" Margin="18,43,18,10" CornerRadius="30"
                              Background="#FFD9D9D9" Opacity="0.2"/>
-                <TextBox
+                <TextBox Text="{Binding NameExpenseBook}"
                     VerticalAlignment="Top"
                     FontSize="14"
                     materialDesign:HintAssist.Hint="Name of transaction or short description"
@@ -154,12 +156,13 @@
                               VerticalAlignment="Top"
                               FontSize="15"
                               Foreground="#FFD9D9D9"
-                                MinWidth="128"
-                                materialDesign:HintAssist.Hint="pick a method" 
-                                materialDesign:HintAssist.Foreground="#FFD9D9D9"
-                                materialDesign:TextFieldAssist.HasClearButton="True"
-                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
-                                Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0">
+                              MinWidth="128"
+                              materialDesign:HintAssist.Hint="pick a method" 
+                              materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                              materialDesign:TextFieldAssist.HasClearButton="True"
+                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0"
+                              Text="{Binding MethodExpenseBook}">
                         <ComboBoxItem
     Content="Android" />
                         <ComboBoxItem
@@ -188,12 +191,13 @@
                               VerticalAlignment="Top"
                               FontSize="15"
                               Foreground="#FFD9D9D9"
-                                MinWidth="128"
-                                materialDesign:HintAssist.Hint="pick a category" 
-                                materialDesign:HintAssist.Foreground="#FFD9D9D9"
-                                materialDesign:TextFieldAssist.HasClearButton="True"
-                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
-                                Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0">
+                              MinWidth="128"
+                              materialDesign:HintAssist.Hint="pick a category" 
+                              materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                              materialDesign:TextFieldAssist.HasClearButton="True"
+                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0"
+                              Text="{Binding CategoryExpenseBook}">
                         <ComboBoxItem
     Content="Android" />
                         <ComboBoxItem
@@ -223,16 +227,17 @@
                     <!--date -->
 
                     <DatePicker
-    Width="156" Height="40"
+                        Width="156" Height="40"
                         Foreground="#FFD9D9D9"
                         FontSize="15"
-  materialDesign:HintAssist.Hint="Pick Date"
+                        materialDesign:HintAssist.Hint="Pick Date"
                         materialDesign:HintAssist.Foreground="#FFD9D9D9"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Bottom"
                         Margin="0,0,0,15"
-  materialDesign:TextFieldAssist.HasClearButton="True"
-  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
+                        Text="{Binding DateTimeExpenseBook}"/>
                 </Grid>
 
                 <!--status -->
@@ -251,12 +256,13 @@
                               VerticalAlignment="Top"
                               FontSize="15"
                               Foreground="#FFD9D9D9"
-                                MinWidth="128"
-                                materialDesign:HintAssist.Hint="pick a status" 
-                                materialDesign:HintAssist.Foreground="#FFD9D9D9"
-                                materialDesign:TextFieldAssist.HasClearButton="True"
-                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
-                                Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0">
+                              MinWidth="128"
+                              materialDesign:HintAssist.Hint="pick a status" 
+                              materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                              materialDesign:TextFieldAssist.HasClearButton="True"
+                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0"
+                              Text="{Binding StatusExpenseBook}">
                         <ComboBoxItem
     Content="Android" />
                         <ComboBoxItem
@@ -278,7 +284,7 @@
                 <Border Grid.Column="0" CornerRadius="30" Height="60"
                         Width="200"
                         Background="#FFC8386C" >
-                    <Button>
+                    <Button Command="{Binding ExpenseBookCancelCommand}">
                         <TextBlock Text="Cancel" Foreground="White"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
@@ -312,7 +318,7 @@
                 <Border Grid.Column="1" CornerRadius="30" Height="60"
                         Width="200"
                         Background="#FF61D2BE" >
-                    <Button>
+                    <Button Command="{Binding ExpenseBookConfirmCommand}">
                         <TextBlock Text="Confirm" Foreground="White"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"

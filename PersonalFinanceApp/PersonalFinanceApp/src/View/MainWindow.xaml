@@ -4,10 +4,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
-        xmlns:viewModels="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu"
         mc:Ignorable="d"
-
+        
+        xmlns:viewModels="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu"
+        xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:custom="clr-namespace:PersonalFinanceApp.ViewModel.Modal"
         Background="#0D2129"
@@ -99,7 +99,8 @@
                 </Grid>
             </Button>
             <!--Expense book-->
-            <Button Height="60" VerticalAlignment="top"
+            <Button Command="{Binding ExpenseBookNavigateCommand}"
+                Height="60" VerticalAlignment="top"
                     DockPanel.Dock="Top"
                     IsHitTestVisible="True">
                 <Grid VerticalAlignment="Center"
@@ -211,7 +212,8 @@
             </Grid>
            
             <!--Option-->
-            <Button Height="60" VerticalAlignment="Bottom"
+            <Button Command="{Binding SettingNavigateCommand}"
+                    Height="60" VerticalAlignment="Bottom"
                     DockPanel.Dock="Bottom">
                 <Grid VerticalAlignment="Center"
                         HorizontalAlignment="Center"
@@ -239,7 +241,11 @@
             <ContentControl.Resources>
 
                 <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
-                    <views:UC_Dashboard />
+                    <views:UC_Dashboard/>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type viewModels:ExpenseBookViewModel}">
+                    <views:Main_ExpenseBook/>
                 </DataTemplate>
 
                 <DataTemplate DataType="{x:Type viewModels:GoalplanViewModel}">
@@ -262,6 +268,9 @@
 
                 <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">
                     <views:UC_Main_Goalplan_Adding />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:ExpenseBookAddNewViewModel}">
+                    <views:UC_Main_ExpenseBook_AddNew/>
                 </DataTemplate>
 
             </ContentControl.Resources>

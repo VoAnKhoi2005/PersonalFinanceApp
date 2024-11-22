@@ -330,7 +330,7 @@
                                Text="No goal found!" FontSize="30" Opacity="0.5"
                                TextAlignment="Center"
                                Visibility="{Binding HasNoGoal, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="10" Margin="0,30,0,0">
                         <ItemsControl ItemsSource="{Binding GoalplanCardViewModels}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -339,11 +339,16 @@
                             </ItemsControl.ItemTemplate>
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel ItemWidth="400" ItemHeight="200"
-                                               HorizontalAlignment="Center" VerticalAlignment="Top"
-                                               IsItemsHost="True" />
+                                    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Top"
+                                               IsItemsHost="True" 
+                                               ItemHeight="600" ItemWidth="420"/>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
+                            <!--<ItemsControl.ItemContainerStyle>
+                                <Style TargetType="ContentPresenter">
+                                    <Setter Property="HorizontalAlignment" Value="600" />
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>-->
                         </ItemsControl>
                     </ScrollViewer>
                 </Grid>

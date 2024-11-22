@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.etc;
@@ -7,6 +8,9 @@ using PersonalFinanceApp.View;
 using PersonalFinanceApp.ViewModel.LoginMenu;
 using PersonalFinanceApp.ViewModel.MainMenu;
 using PersonalFinanceApp.ViewModel.Stores;
+using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel;
+using Windows.UI.WebUI;
 
 namespace PersonalFinanceApp
 {
@@ -29,10 +33,13 @@ namespace PersonalFinanceApp
             //MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
 
             //Default main window
-            //NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-            //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
-            //MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
-            MainWindow = new TestWindow();
+
+            NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
+            navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
+            MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
+
+            //MainWindow = new TestWindow();
+
             MainWindow.Show();
 
             //Create database
@@ -69,11 +76,14 @@ namespace PersonalFinanceApp
                 return new MainWindowFactory(dataContext, s);
             });
             services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
+            services.AddTransient<ExpenseBookViewModel>(s => new ExpenseBookViewModel(s));
             services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
             services.AddTransient<SummaryViewModel>(s => new SummaryViewModel(s));
 
             //Modal-Popup
             services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));
+            services.AddTransient<ExpenseBookAddNewViewModel>(s => new ExpenseBookAddNewViewModel(s));
         }
+        
     }
 }
