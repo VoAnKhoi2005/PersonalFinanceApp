@@ -8,7 +8,6 @@
         
         xmlns:viewModels="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu"
         xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
-        xmlns:expenseBook="clr-namespace:PersonalFinanceApp.Src.ViewModel.MainMenu"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:custom="clr-namespace:PersonalFinanceApp.ViewModel.Modal"
         Background="#0D2129"
@@ -245,7 +244,7 @@
                     <views:UC_Dashboard/>
                 </DataTemplate>
 
-                <DataTemplate DataType="{x:Type expenseBook:ExpenseBookViewModel}">
+                <DataTemplate DataType="{x:Type viewModels:ExpenseBookViewModel}">
                     <views:Main_ExpenseBook/>
                 </DataTemplate>
 
@@ -270,7 +269,7 @@
                 <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">
                     <views:UC_Main_Goalplan_Adding />
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type expenseBook:ExpenseBookAddNewViewModel}">
+                <DataTemplate DataType="{x:Type viewModels:ExpenseBookAddNewViewModel}">
                     <views:UC_Main_ExpenseBook_AddNew/>
                 </DataTemplate>
 

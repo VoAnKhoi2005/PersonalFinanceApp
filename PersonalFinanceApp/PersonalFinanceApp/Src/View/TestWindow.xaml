@@ -6,324 +6,341 @@
         xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        Background="Black"
         Title="TestWindow" Height="720" Width="942">
-    <Border Background="#053B50" CornerRadius="30"
-            Width="450" Height="600 ">
-        <Border.Resources>
-            <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Sans Serif Collection"/>
-                <Setter Property="Foreground" Value="#E5CBBFBF"/>
-                <Setter Property="FontWeight" Value="Regular"/>
-                <Setter Property="FontSize" Value="16"></Setter>
-            </Style>
-            <Style TargetType="Button">
-                <Setter Property="Background" Value="Transparent"></Setter>
-                <Setter Property="Foreground" Value="Transparent"></Setter>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="true">
-                        <Setter Property="Foreground" Value="Black"></Setter>
-                        <Setter Property="Cursor" Value="Hand"></Setter>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-        </Border.Resources>
+    <Border CornerRadius="30" Background="#053B50"
+            Width="470" Height="600">
         <Grid>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Sans Serif Collection"/>
+                    <Setter Property="Foreground" Value="#E5CBBFBF"/>
+                    <Setter Property="FontWeight" Value="Regular"/>
+                    <Setter Property="FontSize" Value="18"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                </Style>
+            </Grid.Resources>
+
             <Grid.RowDefinitions>
+                <RowDefinition Height="0.85*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <!--overall-->
+
             <Grid Grid.Row="0">
+                <TextBlock Text="Adding  a  new  transaction" 
+                           FontSize="26"
+                           FontWeight="Bold"
+                           VerticalAlignment="top"
+                           Foreground="#EFE4E4"
+                           ></TextBlock>
+                <TextBlock Text="please fill in the form below"
+                           FontSize="18"
+                           VerticalAlignment="Bottom"></TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                
-                <!--chart-->
                 <Grid Grid.Column="0">
-                    <TextBlock Text=" chart here" VerticalAlignment="Center"
-                               HorizontalAlignment="Center"></TextBlock>
-                </Grid>
-                
-                
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <!--icon-->
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <ToggleButton Grid.Column="0"
-                                      Width="35"
-                                      Height="35"
-                                      VerticalAlignment="Center"
-                                      HorizontalAlignment="Left"
-                                        Content="{materialDesign:PackIcon Kind=Heart,                                                         Size=21}"
-                                        IsEnabled="True"
-                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                                        ToolTip="MaterialDesignFlatPrimaryToggleButton" Background="#FFE5A78E" Foreground="#FFF14242" />
-                        <!--Notification-->
-                        <Button Grid.Column="1">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Transparent"></Setter>
-                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <Border>
-                                                    <materialDesign:PackIcon Kind="Bell"
-                                                                             Width="30"
-                                                                             Height="30"
-                                                                             VerticalAlignment="Center"
-                                                                             HorizontalAlignment="Left"></materialDesign:PackIcon>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="Foreground" Value="#FFF6E8A1"></Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                        <!--Add money to goal-->
-                        <Button Grid.Column="2">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Transparent"></Setter>
-                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <Border>
-                                                    <materialDesign:PackIcon Kind="PlusMinusVariant"
-                                             Width="30"
-                                             Height="30"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Left"
-                                             />
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="Foreground" Value="#FFF6E8A1"></Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                        <!--adjust goal-->
-                        <Button Grid.Column="3">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Transparent"></Setter>
-                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <Border>
-                                                    <materialDesign:PackIcon Kind="Pencil"
-                                             Width="30"
-                                            Height="30"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Left"></materialDesign:PackIcon>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="Foreground" Value="#FFF6E8A1"></Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                        <!--history-->
-                        <Button Grid.Column="4">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Transparent"></Setter>
-                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <Border>
-                                                    <materialDesign:PackIcon Kind="ClipboardTextClock"  
-                                             Width="30"
-                                            Height="30"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Left"></materialDesign:PackIcon>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="Foreground" Value="#FFF6E8A1"></Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                        <!--delete-->
-                        <Button Grid.Column="5">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Transparent"></Setter>
-                                    <Setter Property="Foreground" Value="#FFE35D5D"></Setter>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <Border>
-                                                    <materialDesign:PackIcon Kind="Delete"                                             Width="30"
-                                            Height="30"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Left"></materialDesign:PackIcon>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="Foreground" Value="#FFF42B2B"></Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                    </Grid>
 
-                    <Grid Grid.Row="1">
-                        <TextBlock Text="Category :" VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   FontWeight="DemiBold"
-                                   FontSize="16"></TextBlock>
-                        <!--binding here-->
-                        <TextBlock Text="something here" VerticalAlignment="Center"
-                                   HorizontalAlignment="Right"
-                                   Margin="0,0,5,0"
-                                   FontSize="14"></TextBlock>
-                    </Grid>
 
-                    <!--name-->
-                    <!--binding name here-->
-                    <TextBlock Grid.Row="2" FontWeight="Bold"
-                        Text="Kiem tien an tet 3" VerticalAlignment="Center"
+                    <!--type-->
+                    <TextBlock Text="Type" 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
                                HorizontalAlignment="Left"
-                               FontSize="20">
-                    </TextBlock>
+                               Margin="16,0,0,0"
+                               ></TextBlock>
+                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
+                             Background="#FFD9D9D9" Opacity="0.2"></Border>
 
+                    <ComboBox Width="156" Height="40"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="15"
+                              Foreground="#FFD9D9D9"
+                                MinWidth="128"
+                                materialDesign:HintAssist.Hint="pick a type" 
+                              materialDesign:HintAssist.HintOpacity="0.3"
+                                materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0">
+                        <ComboBoxItem
+    Content="Android" />
+                        <ComboBoxItem
+    Content="iOS" />
+                        <ComboBoxItem
+    Content="Linux" />
+                        <ComboBoxItem
+    Content="Windows" />
+                    </ComboBox>
 
-                    <!--progress money-->
-
-                    <Grid Grid.Row="3">
-                        <TextBlock Text="VND" HorizontalAlignment="Left" Margin="2,0,0,0"
-                                   FontSize="14" Opacity="0.4"
-                                   ></TextBlock>
-
-                        <!--binding here-->
-                        <TextBlock Text="123456789 / 987654321" HorizontalAlignment="Right"
-                                   Margin="0,0,5,0"
-                                   VerticalAlignment="Center"
-                                   FontSize="14" Opacity="0.6"></TextBlock>
-                    </Grid>
-                    <Grid Grid.Row="4">
-                        <TextBlock Text="Status :" VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   FontWeight="DemiBold"
-                                   FontSize="16"></TextBlock>
-                        <!--binding here-->
-                        <TextBlock Text="not finished yet" Foreground="Red"
-                                   FontWeight="DemiBold"
-                                   FontSize="14"
-                                   HorizontalAlignment="Right" Margin="0,0,5,0"></TextBlock>
-                    </Grid>
                 </Grid>
-            </Grid>
-            
-            <!--Detail section-->
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <TextBlock Text="Amount (VND)  : " VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
 
-                    <!--binding here-->
-                    <TextBlock Text="123456789" VerticalAlignment="Center"
-                               HorizontalAlignment="Right" Margin="0,0,30,0"
-                               FontWeight="Bold"></TextBlock>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <TextBlock Text="Start date  : " VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+                <!--amount-->
 
-                    <!--binding here-->
-                    <TextBlock Text="1/1/1999" VerticalAlignment="Center"
-                               HorizontalAlignment="Right" Margin="0,0,30,0"
-                               FontWeight="Bold"></TextBlock>
-                </Grid>
-                <Grid Grid.Row="2">
-                    <TextBlock Text="End date  : " VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="50,0,0,0"
+                <Grid Grid.Column="1">
+                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
+                             Background="#FFD9D9D9" Opacity="0.2"/>
+                    <TextBlock Text="Amount" 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="16,0,0,0"
                                ></TextBlock>
 
-                    <!--binding here-->
-                    <TextBlock Text="9/9/2000" VerticalAlignment="Center"
-                               HorizontalAlignment="Right" Margin="0,0,30,0"
-                               FontWeight="Bold"></TextBlock>
-                </Grid>
-                <Grid Grid.Row="3">
-                    <TextBlock Text="Time to reach your goal  : " VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="50,0,0,0"
-                               ></TextBlock>
 
-                    <!--binding here-->
-                    <TextBlock Text="end - start (days)" VerticalAlignment="Center"
-                               HorizontalAlignment="Right" Margin="0,0,30,0"
-                               FontWeight="Bold"></TextBlock>
+                    <TextBox VerticalAlignment="Center"
+                             Margin="0,30,0,0"
+                             Width="170" Height="40"
+                             TextAlignment="Center"
+                             Foreground="#FFD9D9D9"
+                             FontSize="14"
+                                 HorizontalAlignment="Center"
+                                 Opacity="0.6"
+                                 ></TextBox>
+
                 </Grid>
             </Grid>
-            
-            <!--decription-->
+
+            <!--name transaction-->
             <Grid Grid.Row="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="21*"></RowDefinition>
-                    <RowDefinition Height="79*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Description  :" VerticalAlignment="Center"
-                           Grid.Row="0"
-                           HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+                <TextBlock Text="Name " 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="16,0,0,0"
+                               ></TextBlock>
 
-                <!--binding here-->
-                <TextBlock TextWrapping="Wrap"></TextBlock>
+                <Border Height="50" Margin="18,43,18,10" CornerRadius="30"
+                             Background="#FFD9D9D9" Opacity="0.2"/>
+                <TextBox
+                    VerticalAlignment="Top"
+                    FontSize="14"
+                    materialDesign:HintAssist.Hint="Name of transaction or short description"
+                    materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                    Width="400"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="33,52,37,0" Foreground="#E5CBBFBF" CaretBrush="#FFD9D9D9" SelectionBrush="#FFD9D9D9" />
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--method-->
+
+                <Grid Grid.Column="0">
+                    <TextBlock Text="Method " 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="16,0,0,0"
+                               ></TextBlock>
+                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
+                             Background="#FFD9D9D9" Opacity="0.2"></Border>
+
+                    <ComboBox Width="156" Height="40"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="15"
+                              Foreground="#FFD9D9D9"
+                                MinWidth="128"
+                                materialDesign:HintAssist.Hint="pick a method" 
+                                materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0">
+                        <ComboBoxItem
+    Content="Android" />
+                        <ComboBoxItem
+    Content="iOS" />
+                        <ComboBoxItem
+    Content="Linux" />
+                        <ComboBoxItem
+    Content="Windows" />
+                    </ComboBox>
+                </Grid>
+
+                <!--category-->
+
+                <Grid Grid.Column="1">
+                    <TextBlock Text="Category " 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="16,0,0,0"
+                               ></TextBlock>
+                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
+                             Background="#FFD9D9D9" Opacity="0.2"></Border>
+
+                    <ComboBox Width="156" Height="40"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="15"
+                              Foreground="#FFD9D9D9"
+                                MinWidth="128"
+                                materialDesign:HintAssist.Hint="pick a category" 
+                                materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0">
+                        <ComboBoxItem
+    Content="Android" />
+                        <ComboBoxItem
+    Content="iOS" />
+                        <ComboBoxItem
+    Content="Linux" />
+                        <ComboBoxItem
+    Content="Windows" />
+                    </ComboBox>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <TextBlock Text="Date " 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="16,0,0,0"
+                               ></TextBlock>
+                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
+                             Background="#E5CBBFBF" Opacity="0.2"></Border>
+
+                    <!--date -->
+
+                    <DatePicker
+    Width="156" Height="40"
+                        Foreground="#FFD9D9D9"
+                        FontSize="15"
+  materialDesign:HintAssist.Hint="Pick Date"
+                        materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Margin="0,0,0,15"
+  materialDesign:TextFieldAssist.HasClearButton="True"
+  Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                </Grid>
+
+                <!--status -->
+                <Grid Grid.Column="1">
+                    <TextBlock Text="Status " 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="16,0,0,0"
+                               ></TextBlock>
+                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
+                             Background="#FFD9D9D9" Opacity="0.2"></Border>
+
+                    <ComboBox Width="156" Height="40"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="15"
+                              Foreground="#FFD9D9D9"
+                                MinWidth="128"
+                                materialDesign:HintAssist.Hint="pick a status" 
+                                materialDesign:HintAssist.Foreground="#FFD9D9D9"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource SecondaryHueMidBrush}"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0">
+                        <ComboBoxItem
+    Content="Android" />
+                        <ComboBoxItem
+    Content="iOS" />
+                        <ComboBoxItem
+    Content="Linux" />
+                        <ComboBoxItem
+    Content="Windows" />
+                    </ComboBox>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--cancel button-->
+                <Border Grid.Column="0" CornerRadius="30" Height="60"
+                        Width="200"
+                        Background="#FFC8386C" >
+                    <Button>
+                        <TextBlock Text="Cancel" Foreground="White"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="16"></TextBlock>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="30"
+                                                Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                              VerticalAlignment="Stretch"></ContentPresenter>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand"></Setter>
+                                        <Setter Property="Background" Value="Red"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Border>
+
+                <!-- confirm button -->
+                <Border Grid.Column="1" CornerRadius="30" Height="60"
+                        Width="200"
+                        Background="#FF61D2BE" >
+                    <Button>
+                        <TextBlock Text="Confirm" Foreground="White"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="16"></TextBlock>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="30"
+                                                Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                              VerticalAlignment="Stretch"></ContentPresenter>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand"></Setter>
+                                        <Setter Property="Background" Value="#FF6DF06D"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Border>
             </Grid>
         </Grid>
     </Border>

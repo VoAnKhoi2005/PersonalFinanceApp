@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              
-             d:DesignHeight="600" d:DesignWidth="500">
+             d:DesignHeight="600" d:DesignWidth="450">
     <Border Background="#053B50" CornerRadius="30"
-            Width="450" Height="600 ">
+            Width="Auto" Height="Auto ">
         <Border.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Sans Serif Collection"/>

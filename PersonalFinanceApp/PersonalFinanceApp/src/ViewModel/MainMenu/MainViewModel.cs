@@ -1,7 +1,6 @@
 ﻿using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Model;
-using PersonalFinanceApp.Src.ViewModel.MainMenu;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 

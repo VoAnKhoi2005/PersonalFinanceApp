@@ -1,21 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using PersonalFinanceApp.Database;
-using PersonalFinanceApp.Model;
-using PersonalFinanceApp.ViewModel;
+
+﻿using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Xml.Linq;
-using XAct;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace PersonalFinanceApp.Src.ViewModel.MainMenu; 
+namespace PersonalFinanceApp.ViewModel.MainMenu; 
 internal class ExpenseBookAddNewViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;

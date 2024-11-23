@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
+             
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="942">
     <Grid>
@@ -680,15 +681,25 @@
                 <ColumnDefinition Width="209*"></ColumnDefinition>
                 <ColumnDefinition Width="105*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+
             <Border Grid.Column="1" 
             Margin="7,8,15,15" 
             Background="#053B50" 
             CornerRadius="30">
-                <Canvas>
-                    <TextBlock Text="STATISTIC" 
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50*"></RowDefinition>
+                        <RowDefinition Height="347*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="STATISTIC"
                    FontSize="18" 
-                   FontWeight="Bold" HorizontalAlignment="Left" Canvas.Left="14" VerticalAlignment="Center"></TextBlock>
-                </Canvas>
+                   FontWeight="Bold" HorizontalAlignment="Left" 
+                               Margin="15,0,0,0"
+                               VerticalAlignment="Center" Height="47" Width="86"/>
+
+                    <Grid Grid.Row="1">
+                    </Grid>
+                </Grid>
             </Border>
 
 
@@ -696,15 +707,21 @@
             Background="#053B50" 
             CornerRadius="30"
             Margin="15,8,7,15">
-                <Canvas>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="46*"></RowDefinition>
+                        <RowDefinition Height="351*"></RowDefinition>
+                    </Grid.RowDefinitions>
                     <TextBlock Text="ACTIVITIY" 
                        FontSize="18" 
-                       Canvas.Left="17" 
-                       Canvas.Top="-2" 
                        HorizontalAlignment="Left" 
                        VerticalAlignment="Center"
-                       FontWeight="Bold"></TextBlock>
-                </Canvas>
+                               Margin="15,0,0,0"
+                       FontWeight="Bold" ></TextBlock>
+
+                    <Grid Grid.Row="1">
+                    </Grid>
+                </Grid>
             </Border>
         </Grid>
     </Grid>

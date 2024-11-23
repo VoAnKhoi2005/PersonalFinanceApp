@@ -11,7 +11,6 @@ using PersonalFinanceApp.ViewModel.Stores;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel;
 using Windows.UI.WebUI;
-using PersonalFinanceApp.Src.ViewModel.MainMenu;
 
 namespace PersonalFinanceApp
 {
@@ -34,6 +33,7 @@ namespace PersonalFinanceApp
             //MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
 
             //Default main window
+
             NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
             navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
             MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
