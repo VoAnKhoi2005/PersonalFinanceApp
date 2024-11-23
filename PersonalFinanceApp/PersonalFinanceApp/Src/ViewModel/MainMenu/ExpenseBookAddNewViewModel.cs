@@ -95,8 +95,6 @@ internal class ExpenseBookAddNewViewModel : BaseViewModel {
     }
     private void Confirm(object sender) {
         //add data to database
-        var exp = new Expense(5, "honguyentailoi");
-        DBManager.Insert(exp);
         _modalNavigationStore.Close();
     }
 }

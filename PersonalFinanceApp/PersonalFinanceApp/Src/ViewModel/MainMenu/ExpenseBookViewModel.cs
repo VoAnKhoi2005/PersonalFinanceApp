@@ -1,5 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
@@ -20,18 +22,14 @@ internal class ExpenseBookViewModel : BaseViewModel {
         AddNewExpenseBookCommand = new NavigateModalCommand<ExpenseBookAddNewViewModel>(serviceProvider);
 
         Expenses = new ObservableCollection<Expense>();
-        RefreshCommand = new RelayCommand(AddExpense);
+        RefreshCommand = new RelayCommand<Object>(p => AddExpense(p));
     }
 
 
-    public void AddExpense() {
+    public void AddExpense(object p) {
 
-        var items = DBManager.GetAll<Expense>();
-        var c = DBManager.GetAll<Expense>().Count();
         //Expenses = new(items);
-        foreach(var item in items) {
-            Expenses.Add(item);
-        }
+
 
     }
 
