@@ -243,7 +243,6 @@
                 </Button>
             </Border>
         </Grid>
-        <Button Command="{Binding RefreshCommand}"> Click di</Button>
         <!--DataGrid expensebook-->
 
         <Grid Grid.Row="2">

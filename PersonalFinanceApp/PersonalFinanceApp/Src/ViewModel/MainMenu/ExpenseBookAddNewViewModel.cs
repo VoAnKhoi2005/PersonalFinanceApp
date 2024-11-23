@@ -1,6 +1,8 @@
 
 ﻿using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalFinanceApp.Database;
+using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
@@ -9,76 +11,52 @@ internal class ExpenseBookAddNewViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly SharedDataService _sharedDataService;
-    private string _typeExpenseBook;
-    public string TypeExpenseBook {
-        get => _typeExpenseBook;
+    #region Properties
+    //month
+    public string MonthExpenseBook {
+        get => _monthExpenseBook;
         set {
-            if (_typeExpenseBook != value) {
-                _typeExpenseBook = value;
+            if (_monthExpenseBook != value) {
+                _monthExpenseBook = value;
                 OnPropertyChanged();
             }
         }
     }
-    private string _amountExpenseBook;
-    public string AmountExpenseBook {
-        get => _amountExpenseBook;
+    private string _monthExpenseBook;
+    //year
+    public string YearExpenseBook {
+        get => _yearExpenseBook;
         set {
-            if (_amountExpenseBook != value) {
-                _amountExpenseBook = value;
+            if (_yearExpenseBook != value) {
+                _yearExpenseBook = value;
                 OnPropertyChanged();
             }
         }
     }
-    private string _nameExpenseBook;
-    public string NameExpenseBook {
-        get => _nameExpenseBook;
+    private string _yearExpenseBook;
+    //budget
+    public string BudgetExpenseBook {
+        get => _budgetExpenseBook;
         set {
-            if (_nameExpenseBook != value) {
-                _nameExpenseBook = value;
+            if (_budgetExpenseBook != value) {
+                _budgetExpenseBook = value;
                 OnPropertyChanged();
             }
         }
     }
-    private string _methodExpenseBook;
-    public string MethodExpenseBook {
-        get => _methodExpenseBook;
+    private string _budgetExpenseBook;
+    //resource
+    public string ResourceExpenseBook {
+        get => _resourceExpenseBook;
         set {
-            if (_methodExpenseBook != value) {
-                _methodExpenseBook = value;
+            if (_resourceExpenseBook != value) {
+                _resourceExpenseBook = value;
                 OnPropertyChanged();
             }
         }
     }
-    private string _categoryExpenseBook;
-    public string CategoryExpenseBook {
-        get => _categoryExpenseBook;
-        set {
-            if (_categoryExpenseBook != value) {
-                _categoryExpenseBook = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _dateTimeExpenseBook;
-    public string DateTimeExpenseBook {
-        get => _dateTimeExpenseBook;
-        set {
-            if (_dateTimeExpenseBook != value) {
-                _dateTimeExpenseBook = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _statusExpenseBook;
-    public string StatusExpenseBook {
-        get => _statusExpenseBook;
-        set {
-            if (_statusExpenseBook != value) {
-                _statusExpenseBook = value;
-                OnPropertyChanged();
-            }
-        }
-    }
+    private string _resourceExpenseBook;
+    #endregion
     public ICommand ExpenseBookCancelCommand { get; set; }
     public ICommand ExpenseBookConfirmCommand { get; set; }
 
@@ -86,6 +64,7 @@ internal class ExpenseBookAddNewViewModel : BaseViewModel {
         _serviceProvider = serviceProvider;
         _sharedDataService = serviceProvider.GetRequiredService<SharedDataService>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
+
         ExpenseBookCancelCommand = new RelayCommand<object>(CloseModal);
         ExpenseBookConfirmCommand = new RelayCommand<object>(Confirm);
     }
@@ -95,6 +74,14 @@ internal class ExpenseBookAddNewViewModel : BaseViewModel {
     }
     private void Confirm(object sender) {
         //add data to database
+        var expenseBook = new ExpensesBook() {
+            Month = int.Parse(MonthExpenseBook),
+            Year = int.Parse(YearExpenseBook),
+            //UserID = userId;
+            Budget = long.Parse(BudgetExpenseBook),
+            Resources = ResourceExpenseBook,
+        };
+        DBManager.Insert(expenseBook);
         _modalNavigationStore.Close();
     }
 }

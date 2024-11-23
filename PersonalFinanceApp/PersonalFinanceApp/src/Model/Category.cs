@@ -28,7 +28,7 @@ public class Category
 
     public virtual ExpensesBook? ExpensesBook { get; set; }
 
-    private Category() { }
+    public Category() { }
 
     public Category(string name, int exBMonth, int exBYear, int userId, string? resources = null)
     {

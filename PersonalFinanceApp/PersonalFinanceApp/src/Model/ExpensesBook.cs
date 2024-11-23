@@ -27,7 +27,7 @@ namespace PersonalFinanceApp.Model
         public virtual List<Expense> Expenses { get; set; } = new List<Expense>();
         public virtual List<Category> Categories { get; set; } = new List<Category>();
 
-        private ExpensesBook() { }
+        public ExpensesBook() { }
 
         public ExpensesBook(int month, int year, int userId, long budget, long spending = 0, string? resources = null)
         {
