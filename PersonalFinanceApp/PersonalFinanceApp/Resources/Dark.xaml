@@ -6,8 +6,15 @@
     <SolidColorBrush Color="#003E57" x:Key="DockpanelBackGround"></SolidColorBrush>
     <SolidColorBrush Color="#053B50" x:Key="onClicked"></SolidColorBrush>
     <SolidColorBrush Color="#265B70" x:Key="onHovered"></SolidColorBrush>
-    <SolidColorBrush Color="#FF6DF096" x:Key="Underline"></SolidColorBrush>
+    <SolidColorBrush Color="DeepSkyBlue" x:Key="Underline"></SolidColorBrush>
+    <SolidColorBrush Color="#0d2129" x:Key="Login_button"></SolidColorBrush>
+    <SolidColorBrush Color="#084563" x:Key="Login_border"></SolidColorBrush>
+    <SolidColorBrush Color="White" x:Key="Login_buttonText"></SolidColorBrush>
 
+    <SolidColorBrush Color="#FF61D2BE" x:Key="Confirm_button"></SolidColorBrush>
+    <SolidColorBrush Color="#FF6DF096" x:Key="Confirm_buttonHover"></SolidColorBrush>
+    <SolidColorBrush Color="#FFC8386C" x:Key="Cancel_button"></SolidColorBrush>
+    <SolidColorBrush Color="Red" x:Key="Cancel_buttonHover"></SolidColorBrush>
     <!--dashboard-->
     <SolidColorBrush Color="Black" x:Key="Dashboard_percent"></SolidColorBrush>
     <SolidColorBrush Color="#25FFAE" x:Key="Dashboard_trueColor"></SolidColorBrush>

@@ -23,7 +23,7 @@
                    Height="674"
                    HorizontalAlignment="Left"
                    Source="/Resources/img/PigBackground.png" Stretch="Fill"/>
-            <Image Width="340" Height="340" HorizontalAlignment="Right" VerticalAlignment="Top"
+        <Image Width="340" Height="340" HorizontalAlignment="Right" VerticalAlignment="Top"
                 Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>

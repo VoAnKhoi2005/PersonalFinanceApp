@@ -112,6 +112,7 @@
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Center"
                     FontSize="14"
+                    TextAlignment="Center"
                     materialDesign:HintAssist.Hint="Description"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Margin="0,10,0,10"

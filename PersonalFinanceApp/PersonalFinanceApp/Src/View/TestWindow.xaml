@@ -10,754 +10,354 @@
         Title="TestWindow" Height="720" Width="942">
 
     <!--color done-->
-    <Grid>
-        <Grid.Resources>
-            <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Sans Serif Collection"/>
-                <Setter Property="Foreground" Value="{DynamicResource CommonText}"/>
-                <Setter Property="FontWeight" Value="Regular"/>
-            </Style>
-        </Grid.Resources>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="59*"></RowDefinition>
-            <RowDefinition Height="195*"></RowDefinition>
-            <RowDefinition Height="450*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="0.1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button Width="35" Height="35" Grid.Column="1">
-                <Border>
-                    <materialDesign:PackIcon 
-                                                    Kind="AccountBadge"
-                                                    Width="30" Height="30"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                                         />
-                </Border>
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="Transparent"></Setter>
-                        <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border CornerRadius="30"
-                                            Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Stretch"
-                                                  VerticalAlignment="Stretch" ></ContentPresenter>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Cursor" Value="Hand"></Setter>
-                                <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="48*"></RowDefinition>
-                    <RowDefinition Height="19*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Summary" 
-                               FontSize="28" 
-                               FontWeight="Bold"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top" Margin="25,-10,0,0" Height="55"
-                           Grid.Row="0"
-                               ></TextBlock>
-                <TextBlock Text="Detailed overview of your finacial situation" 
-                               FontSize="14"
-                               VerticalAlignment="Center" Margin="26,0,0,0" 
-                               HorizontalAlignment="Left"
-                           Grid.Row="1"
-                               ></TextBlock>
+
+    <Border CornerRadius="30" Background="{DynamicResource CommonGridBackground}"
+            Width="470" Height="600">
+        <Grid>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Opacity" Value="0.6"></Setter>
+                    <Setter Property="FontFamily" Value="Sans Serif Collection"/>
+                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"/>
+                    <Setter Property="FontWeight" Value="Regular"/>
+                    <Setter Property="FontSize" Value="18"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                </Style>
+
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.85*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <TextBlock Text="Adding  a  new  expense" 
+                           FontSize="26"
+                           FontWeight="Bold"
+                           VerticalAlignment="top"
+                           Opacity="1"
+                           ></TextBlock>
+                <TextBlock Text="please fill in the form below"
+                           FontSize="18"
+                           VerticalAlignment="Bottom"></TextBlock>
             </Grid>
 
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
 
 
+                    <!--type-->
+                    <TextBlock Text="Name" 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="16,0,0,0"
+                               ></TextBlock>
+                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
+                             Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
+
+                    <TextBox VerticalAlignment="Center" Text="{Binding AmountExpenseBook}"
+                             Margin="0,30,0,0"
+                             Width="160" Height="40"
+                             TextAlignment="Center"
+                             Foreground="{DynamicResource CommonText}"
+                             FontSize="14"
+                                 HorizontalAlignment="Center"
+                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                             CaretBrush="{DynamicResource CommonText}"
+                             SelectionBrush="{DynamicResource CommonText}"
+                             BorderBrush="{x:Null}"
+                                 ></TextBox>
+
+                </Grid>
+
+                <!--amount-->
+
+                <Grid Grid.Column="1">
+                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
+                             Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"/>
+                    <TextBlock Text="Category" 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="16,0,0,0"
+                               ></TextBlock>
+
+
+                    <ComboBox Width="160" Height="40"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              FontSize="14"
+                              Foreground="{DynamicResource CommonText}"
+                              MinWidth="128"
+                              materialDesign:HintAssist.Hint="select a category" 
+                              materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                              materialDesign:TextFieldAssist.HasClearButton="True"
+                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                                BorderBrush="{x:Null}"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0"
+                              Text="{Binding CategoryExpenseBook}">
+
+                        <!--not done here-->
+                        <ComboBoxItem
+    Content="Android" />
+                        <ComboBoxItem
+    Content="iOS" />
+                        <ComboBoxItem
+    Content="Linux" />
+                        <ComboBoxItem
+    Content="Windows" />
+                    </ComboBox>
+
+
+                </Grid>
+            </Grid>
+
+            <!--name transaction-->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <TextBlock Text="Date " 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="16,0,0,0"
+                               ></TextBlock>
+                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
+                             Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
+
+                    <!--date -->
+
+
+                    <DatePicker
+                                Width="160"
+                                Height="40"
+                                Foreground="{DynamicResource CommonText}"
+                                FontSize="14"
+                                materialDesign:HintAssist.Hint="Pick date"
+                                materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Margin="0,0,0,15"
+                        BorderBrush="{x:Null}"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                                Text="{Binding DateTimeExpenseBook}" 
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        >
+                    </DatePicker>
+
+                </Grid>
+
+                <!--status -->
+                <Grid Grid.Column="1">
+                    <TextBlock Text="Amount (VND) " 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="16,0,0,0"
+                               ></TextBlock>
+                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
+                             Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
+
+                    <TextBox VerticalAlignment="Center" Text="{Binding AmountExpenseBook}"
+                             Margin="0,30,0,0"
+                             Width="160" Height="40"
+                             TextAlignment="Center"
+                             Foreground="{DynamicResource CommonText}"
+                             FontSize="14"
+                             BorderBrush="{x:Null}"
+                                 HorizontalAlignment="Center"
+                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                             CaretBrush="{DynamicResource CommonText}"
+                             SelectionBrush="{DynamicResource CommonText}"
+                                 ></TextBox>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--method-->
+
+                <Grid Grid.Column="0">
+                    <TextBlock Text="Resource " 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="16,0,0,0"
+                               ></TextBlock>
+                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
+                             Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
+                    <TextBox VerticalAlignment="Center" Text="{Binding AmountExpenseBook}"
+                             Margin="0,30,0,0"
+                             Width="160" Height="40"
+                             BorderBrush="{x:Null}"
+                             TextAlignment="Center"
+                             Foreground="{DynamicResource CommonText}"
+                             FontSize="14"
+                                 HorizontalAlignment="Center"
+                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                             CaretBrush="{DynamicResource CommonText}"
+                             SelectionBrush="{DynamicResource CommonText}"
+                                 ></TextBox>
+                </Grid>
+
+                <!--category-->
+
+                <Grid Grid.Column="1">
+
+                    <TextBlock Text="Recurring " 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="16,0,0,0"
+                               ></TextBlock>
+                    <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
+                             Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
+                    <ComboBox Width="160" Height="40"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              BorderBrush="{x:Null}"
+                              FontSize="14"
+                              Foreground="{DynamicResource CommonText}"
+                              MinWidth="128"
+                              materialDesign:HintAssist.Hint="is recurring?" 
+                              materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                              materialDesign:TextFieldAssist.HasClearButton="True"
+                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0"
+                              Text="{Binding CategoryExpenseBook}">
+
+                        <!--not done here-->
+                        <ComboBoxItem
+    Content="YES" />
+                        <ComboBoxItem
+    Content="NO" />
+
+                    </ComboBox>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--cancel button-->
+                <Border Grid.Column="0" CornerRadius="30" Height="60"
+                        Width="200"
+                        Background="#FFC8386C" >
+                    <Button Command="{Binding ExpenseBookCancelCommand}">
+                        <TextBlock Text="Cancel" Foreground="White"
+                                   VerticalAlignment="Center"
+                                   Opacity="1"
+                                   HorizontalAlignment="Center"
+                                   FontSize="16"></TextBlock>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="30"
+                                                Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                              VerticalAlignment="Stretch"></ContentPresenter>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand"></Setter>
+                                        <Setter Property="Background" Value="Red"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Border>
+
+                <!-- confirm button -->
+                <Border Grid.Column="1" CornerRadius="30" Height="60"
+                        Width="200"
+                        Background="#FF61D2BE" >
+                    <Button Command="{Binding ExpenseBookConfirmCommand}">
+                        <TextBlock Text="Confirm" Foreground="Black"
+                                   Opacity="0.8"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="16"></TextBlock>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="30"
+                                                Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                              VerticalAlignment="Stretch"></ContentPresenter>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand"></Setter>
+                                        <Setter Property="Background" Value="#FF6DF096"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Border>
+            </Grid>
+            <Grid Grid.Row="4" >
+                <TextBlock Text="Description " 
+                               FontWeight="Bold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="16,0,0,0"
+                               ></TextBlock>
+
+                <Border Height="50" Margin="18,43,18,10" CornerRadius="30"
+                             Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"/>
+                <TextBox Text="{Binding NameExpenseBook}"
+                    VerticalAlignment="Top"
+                    FontSize="14"
+                    materialDesign:HintAssist.Hint="Short description"
+                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                         materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                    Width="400"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Margin="33,51,37,0" Foreground="#E5CBBFBF" 
+                         CaretBrush="{DynamicResource CommonText}" 
+                         BorderBrush="{x:Null}"
+                         SelectionBrush="{DynamicResource CommonText}" />
+            </Grid>
         </Grid>
-        <Grid Margin="0,60,0,0" Grid.RowSpan="2">
-            <Grid.ColumnDefinitions >
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
 
-            <!--TOTAL BALANCE-->
-            <Border CornerRadius="30" 
-                    Grid.Column="0" 
-                    Margin="15, 15, 7.5, 7.5" 
-                    Background="{DynamicResource CommonGridBackground}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="85*"></ColumnDefinition>
-                        <ColumnDefinition Width="61*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <!--title-->
-
-                        <TextBlock Text="TOTAL BALANCE" 
-                               FontSize="18" 
-                               FontWeight="Bold" 
-                               Grid.Row="0"
-                               Margin="15,0,0,0"
-                               VerticalAlignment="Center"
-                                   HorizontalAlignment="Left" 
-                               />
+    </Border>
 
 
-
-                        <!--Money-->
-                        <!--binding here-->
-                        <TextBlock Text="........VND" 
-                                   TextWrapping="WrapWithOverflow"
-                               FontSize="20" 
-                                   Height="50"
-                               FontWeight="Bold" 
-                               Grid.Row="1"         
-                                   Margin="15,0,0,0"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   ></TextBlock>
-
-                        <!--binding here-->
-                        <Border Background="{DynamicResource Summary_trueColor}" CornerRadius="20"
-                            Grid.Row="2"
-                            Width="70" Height="35"
-                            Margin="15,0,0,0"
-                            HorizontalAlignment="Left"
-                            >
-                            <Grid>
-                                <materialDesign:PackIcon 
-                            Width="20" Height="20"
-                            VerticalAlignment="Center" HorizontalAlignment="Left"
-                            Margin="5,0,0,0"
-                            Kind="ArrowTopRightThin" 
-                                    Foreground="{DynamicResource Summary_percent}"/>
-                                <TextBlock Text="x.x%" 
-                                   FontSize="14" 
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Right" 
-                                   Margin="0,0,10,0"
-                                   Foreground="{DynamicResource Summary_percent}"></TextBlock>
-                            </Grid>
-                        </Border>
-
-                        <TextBlock Grid.Row="3" Text="xxxxxxxxxxxxxxxxx"
-                                   VerticalAlignment="Bottom"
-                                   HorizontalAlignment="Left"
-                                   FontWeight="Bold"
-                                   Margin="15,0,0,0"></TextBlock>
-                        <TextBlock Grid.Row="4"
-                                   Text="extra amount compared to last month"
-                                   TextWrapping="Wrap"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"
-                                   LineStackingStrategy="BlockLineHeight" LineHeight="15"
-                                   Margin="15,0,0,0"></TextBlock>
-                    </Grid>
-
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="55*"></RowDefinition>
-                            <RowDefinition Height="81*"></RowDefinition>
-                            <RowDefinition Height="68*"></RowDefinition>
-
-                        </Grid.RowDefinitions>
-
-                        <ToggleButton Grid.Row="0"
-                                        Content="{materialDesign:PackIcon Kind=Heart,Size=21}"
-                                        IsChecked="True"
-                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                                        ToolTip="MaterialDesignFlatPrimaryToggleButton"
-                                      VerticalAlignment="Top"
-                                      HorizontalAlignment="Right"
-                                      Margin="0,5,5,0" Height="40" Width="40" Foreground="#FFD75F5B" Background="#FFC3C2C5"/>
-
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40*"></ColumnDefinition>
-                                <ColumnDefinition Width="63*"></ColumnDefinition>
-                                <ColumnDefinition Width="19*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Border CornerRadius="80" Width="30" Height="30"
-                                     Background="{DynamicResource Summary_TransactionAndCategoryBackground}"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
-                                <Grid>
-
-                                    <materialDesign:PackIcon Kind="ArrowRight" 
-                                                     Foreground="{DynamicResource Summary_RightArrow}"
-                                                     Width="25"
-                                                     Height="25"
-                                                             VerticalAlignment="Bottom"
-                                                             HorizontalAlignment="Right"
-                                                             />
-                                    <materialDesign:PackIcon Kind="ArrowLeft"                                                     
-                                                     Width="25"
-                                                     Height="25"
-                                                             VerticalAlignment="Top"
-                                                             HorizontalAlignment="Left" 
-                                                             Foreground="{DynamicResource Summary_LeftArrow }"/>
-                                </Grid>
-                            </Border>
-                            <TextBlock Text="Transactions" FontSize="10"
-                                       Grid.Column="1"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                        />
-                            <!--binding here-->
-
-                            <TextBlock Text="xxx" 
-                                       FontSize="10"
-                                       Grid.Column="2"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"/>
-
-
-                            <Border CornerRadius="80" Width="30" Height="30"
-                                     Background="{DynamicResource Summary_TransactionAndCategoryBackground}"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="1">
-                                <Grid>
-                                    <Grid.Resources>
-                                        <Style TargetType="materialDesign:PackIcon">
-                                            <Setter Property="Foreground" Value="#FF88CDD9">
-                                            </Setter>
-                                            <Setter Property="Width" Value="12"></Setter>
-                                            <Setter Property="Height" Value="12"></Setter>
-                                        </Style>
-                                    </Grid.Resources>
-                                    <materialDesign:PackIcon Kind="SquareRounded" 
-                                                             VerticalAlignment="Top"
-                                                             HorizontalAlignment="Left"
-                                                             Margin="3.5" 
-                                                             Foreground="{DynamicResource Summary_firstBlock}"
-                                                             />
-                                    <materialDesign:PackIcon Kind="SquareRounded" 
-                                                             VerticalAlignment="Top"
-                                                             HorizontalAlignment="Right"
-                                                             Margin="3.5" Foreground="{DynamicResource Summary_secondBlock}"/>
-                                    <materialDesign:PackIcon Kind="SquareRounded" 
-                                                             VerticalAlignment="Bottom"
-                                                             HorizontalAlignment="Left"
-                                                             Margin="3.5" Foreground="{DynamicResource Summary_thirdBlock}"/>
-                                    <materialDesign:PackIcon Kind="SquareRounded" 
-                                                             VerticalAlignment="Bottom"
-                                                             HorizontalAlignment="Right"
-                                                             Margin="3.5"
-                                                             Foreground="{DynamicResource Summary_fourthBlock}"/>
-                                </Grid>
-                            </Border>
-
-                            <TextBlock Text="Categories " FontSize="10"
-                                       Grid.Column="1"
-                                       Grid.Row="1"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"  />
-
-                            <!--binding here-->
-                            <TextBlock Text="xxx" 
-                                       FontSize="10"
-                                       Grid.Column="2"
-                                       Grid.Row="1"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"/>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Border>
-            <!--INCOME-->
-            <Border CornerRadius="30" 
-                    Grid.Column="1" 
-                    Margin="15, 15, 7.5, 7.5" 
-                    Background="{DynamicResource CommonGridBackground}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="85*"></ColumnDefinition>
-                        <ColumnDefinition Width="61*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <!--title-->
-
-                        <TextBlock Text="INCOME" 
-                               FontSize="18" 
-                               FontWeight="Bold" 
-                               Grid.Row="0"
-                               Margin="15,0,0,0"
-                               VerticalAlignment="Center"
-                                   HorizontalAlignment="Left" 
-                               />
-
-
-
-                        <!--Money-->
-                        <!--binding here-->
-                        <TextBlock Text="........VND" 
-                                   TextWrapping="WrapWithOverflow"
-                               FontSize="20" 
-                                   Height="50"
-                               FontWeight="Bold" 
-                               Grid.Row="1"         
-                                   Margin="15,0,0,0"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   ></TextBlock>
-
-                        <!--binding here-->
-                        <Border Background="{DynamicResource Summary_trueColor}" CornerRadius="20"
-                            Grid.Row="2"
-                            Width="70" Height="35"
-                            Margin="15,0,0,0"
-                            HorizontalAlignment="Left"
-                            >
-                            <Grid>
-                                <materialDesign:PackIcon 
-                            Width="20" Height="20"
-                            VerticalAlignment="Center" HorizontalAlignment="Left"
-                            Margin="5,0,0,0"
-                            Kind="ArrowTopRightThin" 
-                                    Foreground="{DynamicResource Summary_percent}"
-                                    />
-                                <TextBlock Text="x.x%" 
-                                   FontSize="14" 
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Right" 
-                                   Margin="0,0,10,0"
-                            Foreground="{DynamicResource Summary_percent}"
-                                           ></TextBlock>
-                            </Grid>
-                        </Border>
-
-                        <TextBlock Grid.Row="3" Text="xxxxxxxxxxxxxxxxx"
-                                   VerticalAlignment="Bottom"
-                                   HorizontalAlignment="Left"
-                                   FontWeight="Bold"
-                                   Margin="15,0,0,0"></TextBlock>
-                        <TextBlock Grid.Row="4"
-                                   Text="extra  earned amount compared to last month"
-                                   TextWrapping="Wrap"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"
-                                   LineStackingStrategy="BlockLineHeight" LineHeight="15"
-                                   Margin="15,0,0,0"></TextBlock>
-                    </Grid>
-
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="55*"></RowDefinition>
-                            <RowDefinition Height="81*"></RowDefinition>
-                            <RowDefinition Height="68*"></RowDefinition>
-
-                        </Grid.RowDefinitions>
-
-                        <ToggleButton Grid.Row="0"
-                                        Content="{materialDesign:PackIcon Kind=Heart,Size=21}"
-                                        IsChecked="True"
-                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                                        ToolTip="MaterialDesignFlatPrimaryToggleButton"
-                                      VerticalAlignment="Top"
-                                      HorizontalAlignment="Right"
-                                      Margin="0,5,5,0" Height="40" Width="40" Foreground="#FFD75F5B" Background="#FFC3C2C5"/>
-
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40*"></ColumnDefinition>
-                                <ColumnDefinition Width="63*"></ColumnDefinition>
-                                <ColumnDefinition Width="19*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Border CornerRadius="80" Width="30" Height="30"
-                                     Background="{DynamicResource Summary_TransactionAndCategoryBackground}"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
-                                <Grid>
-
-                                    <materialDesign:PackIcon Kind="ArrowRight" 
-                                                     Foreground="{DynamicResource Summary_RightArrow}"
-                                                     Width="25"
-                                                     Height="25"
-                                                             VerticalAlignment="Bottom"
-                                                             HorizontalAlignment="Right"
-                                                             />
-                                    <materialDesign:PackIcon Kind="ArrowLeft"                                                     
-                                                     Width="25"
-                                                     Height="25"
-                                                             VerticalAlignment="Top"
-                                                             HorizontalAlignment="Left" 
-                                                             Foreground="{DynamicResource Summary_LeftArrow }"/>
-                                </Grid>
-                            </Border>
-
-                            <TextBlock Text="Transactions" FontSize="10"
-                                       Grid.Column="1"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                        />
-                            <!--binding here-->
-
-                            <TextBlock Text="xxx" 
-                                       FontSize="10"
-                                       Grid.Column="2"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"/>
-
-
-                            <Border CornerRadius="80" Width="30" Height="30"
-                                     Background="{DynamicResource Summary_TransactionAndCategoryBackground}"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="1">
-                                <Grid>
-                                    <Grid.Resources>
-                                        <Style TargetType="materialDesign:PackIcon">
-                                            <Setter Property="Foreground" Value="#FF88CDD9">
-                                            </Setter>
-                                            <Setter Property="Width" Value="12"></Setter>
-                                            <Setter Property="Height" Value="12"></Setter>
-                                        </Style>
-                                    </Grid.Resources>
-                                    <materialDesign:PackIcon Kind="SquareRounded" 
-                                                             VerticalAlignment="Top"
-                                                             HorizontalAlignment="Left"
-                                                             Margin="3.5" 
-                                                             Foreground="{DynamicResource Summary_firstBlock}"
-                                                             />
-                                    <materialDesign:PackIcon Kind="SquareRounded" 
-                                                             VerticalAlignment="Top"
-                                                             HorizontalAlignment="Right"
-                                                             Margin="3.5" Foreground="{DynamicResource Summary_secondBlock}"/>
-                                    <materialDesign:PackIcon Kind="SquareRounded" 
-                                                             VerticalAlignment="Bottom"
-                                                             HorizontalAlignment="Left"
-                                                             Margin="3.5" Foreground="{DynamicResource Summary_thirdBlock}"/>
-                                    <materialDesign:PackIcon Kind="SquareRounded" 
-                                                             VerticalAlignment="Bottom"
-                                                             HorizontalAlignment="Right"
-                                                             Margin="3.5"
-                                                             Foreground="{DynamicResource Summary_fourthBlock}"/>
-                                </Grid>
-                            </Border>
-
-                            <TextBlock Text="Categories " FontSize="10"
-                                       Grid.Column="1"
-                                       Grid.Row="1"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"  />
-
-                            <!--binding here-->
-                            <TextBlock Text="xxx" 
-                                       FontSize="10"
-                                       Grid.Column="2"
-                                       Grid.Row="1"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"/>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Border>
-
-            <!--EXPENSE-->
-            <Border CornerRadius="30" 
-                    Grid.Column="2" 
-                    Margin="15, 15, 7.5, 7.5" 
-                    Background="{DynamicResource CommonGridBackground}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="85*"></ColumnDefinition>
-                        <ColumnDefinition Width="61*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <!--title-->
-
-                        <TextBlock Text="EXPENSE" 
-                               FontSize="18" 
-                               FontWeight="Bold" 
-                               Grid.Row="0"
-                               Margin="15,0,0,0"
-                               VerticalAlignment="Center"
-                                   HorizontalAlignment="Left" 
-                               />
-
-
-
-                        <!--Money-->
-                        <!--binding here-->
-                        <TextBlock Text="........VND" 
-                                   TextWrapping="WrapWithOverflow"
-                               FontSize="20" 
-                                   Height="50"
-                               FontWeight="Bold" 
-                               Grid.Row="1"         
-                                   Margin="15,0,0,0"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   ></TextBlock>
-
-                        <!--binding here-->
-                        <Border Background="{DynamicResource Summary_falseColor}" CornerRadius="20"
-                            Grid.Row="2"
-                            Width="70" Height="35"
-                            Margin="15,0,0,0"
-                            HorizontalAlignment="Left"
-                            >
-                            <Grid>
-                                <materialDesign:PackIcon 
-                            Width="20" Height="20"
-                            VerticalAlignment="Center" HorizontalAlignment="Left"
-                            Margin="5,0,0,0"
-                            Kind="ArrowTopRightThin" 
-                                    RenderTransformOrigin="0.5,0.5" 
-                                    Foreground="{DynamicResource Summary_percent}"
-                                    >
-                                    <materialDesign:PackIcon.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform/>
-                                            <SkewTransform/>
-                                            <RotateTransform Angle="90"/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </materialDesign:PackIcon.RenderTransform>
-                                </materialDesign:PackIcon>
-                                <TextBlock Text="x.x%" 
-                                   FontSize="14" 
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Right" 
-                                   Margin="0,0,10,0"
-                                   Foreground="{DynamicResource Summary_percent}"
-                                           ></TextBlock>
-                            </Grid>
-                        </Border>
-
-                        <TextBlock Grid.Row="3" Text="xxxxxxxxxxxxxxxxx"
-                                   VerticalAlignment="Bottom"
-                                   HorizontalAlignment="Left"
-                                   FontWeight="Bold"
-                                   Margin="15,0,0,0"></TextBlock>
-                        <TextBlock Grid.Row="4"
-                                   Text="extra  earned amount compared to last month"
-                                   TextWrapping="Wrap"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"
-                                   LineStackingStrategy="BlockLineHeight" LineHeight="15"
-                                   Margin="15,0,0,0"></TextBlock>
-                    </Grid>
-
-                    <Grid Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="55*"></RowDefinition>
-                            <RowDefinition Height="81*"></RowDefinition>
-                            <RowDefinition Height="68*"></RowDefinition>
-
-                        </Grid.RowDefinitions>
-
-                        <ToggleButton Grid.Row="0"
-                                        Content="{materialDesign:PackIcon Kind=Heart,Size=21}"
-                                        IsChecked="True"
-                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                                        ToolTip="MaterialDesignFlatPrimaryToggleButton"
-                                      VerticalAlignment="Top"
-                                      HorizontalAlignment="Right"
-                                      Margin="0,5,5,0" Height="40" Width="40" Foreground="#FFD75F5B" Background="#FFC3C2C5"/>
-
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40*"></ColumnDefinition>
-                                <ColumnDefinition Width="63*"></ColumnDefinition>
-                                <ColumnDefinition Width="19*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Border CornerRadius="80" Width="30" Height="30"
-                                     Background="{DynamicResource Summary_TransactionAndCategoryBackground}"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center">
-                                <Grid>
-
-                                    <materialDesign:PackIcon Kind="ArrowRight" 
-                                                     Foreground="{DynamicResource Summary_RightArrow}"
-                                                     Width="25"
-                                                     Height="25"
-                                                             VerticalAlignment="Bottom"
-                                                             HorizontalAlignment="Right"
-                                                             />
-                                    <materialDesign:PackIcon Kind="ArrowLeft"                                                     
-                                                     Width="25"
-                                                     Height="25"
-                                                             VerticalAlignment="Top"
-                                                             HorizontalAlignment="Left" 
-                                                             Foreground="{DynamicResource Summary_LeftArrow }"/>
-                                </Grid>
-                            </Border>
-
-                            <TextBlock Text="Transactions" FontSize="10"
-                                       Grid.Column="1"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                        />
-                            <!--binding here-->
-
-                            <TextBlock Text="xxx" 
-                                       FontSize="10"
-                                       Grid.Column="2"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"/>
-
-
-                            <Border CornerRadius="80" Width="30" Height="30"
-                                     Background="{DynamicResource Summary_TransactionAndCategoryBackground}"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Grid.Row="1">
-                                <Grid>
-                                    <Grid.Resources>
-                                        <Style TargetType="materialDesign:PackIcon">
-                                            <Setter Property="Foreground" Value="#FF88CDD9">
-                                            </Setter>
-                                            <Setter Property="Width" Value="12"></Setter>
-                                            <Setter Property="Height" Value="12"></Setter>
-                                        </Style>
-                                    </Grid.Resources>
-                                    <materialDesign:PackIcon Kind="SquareRounded" 
-                                                             VerticalAlignment="Top"
-                                                             HorizontalAlignment="Left"
-                                                             Margin="3.5" 
-                                                             Foreground="{DynamicResource Summary_firstBlock}"
-                                                             />
-                                    <materialDesign:PackIcon Kind="SquareRounded" 
-                                                             VerticalAlignment="Top"
-                                                             HorizontalAlignment="Right"
-                                                             Margin="3.5" Foreground="{DynamicResource Summary_secondBlock}"/>
-                                    <materialDesign:PackIcon Kind="SquareRounded" 
-                                                             VerticalAlignment="Bottom"
-                                                             HorizontalAlignment="Left"
-                                                             Margin="3.5" Foreground="{DynamicResource Summary_thirdBlock}"/>
-                                    <materialDesign:PackIcon Kind="SquareRounded" 
-                                                             VerticalAlignment="Bottom"
-                                                             HorizontalAlignment="Right"
-                                                             Margin="3.5"
-                                                             Foreground="{DynamicResource Summary_fourthBlock}"/>
-                                </Grid>
-                            </Border>
-
-                            <TextBlock Text="Categories " FontSize="10"
-                                       Grid.Column="1"
-                                       Grid.Row="1"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"  />
-
-                            <!--binding here-->
-                            <TextBlock Text="xxx" 
-                                       FontSize="10"
-                                       Grid.Column="2"
-                                       Grid.Row="1"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"/>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Border>
-        </Grid>
-        <Grid Grid.Row="2" Margin="0,28,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="209*"></ColumnDefinition>
-                <ColumnDefinition Width="105*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-
-            <Border Grid.Column="1" 
-            Margin="7,8,15,15" 
-            Background="{DynamicResource CommonGridBackground}" 
-            CornerRadius="30">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50*"></RowDefinition>
-                        <RowDefinition Height="347*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="STATISTIC"
-                   FontSize="18" 
-                   FontWeight="Bold" HorizontalAlignment="Left" 
-                               Margin="15,0,0,0"
-                               VerticalAlignment="Center" />
-
-                    <Grid Grid.Row="1">
-
-                        <TextBlock Text="TOTAL"
-                            HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Margin="0,0,0,70"
-                                   FontSize="20"
-                                   FontWeight="Bold"></TextBlock>
-                        <!--binding here-->
-                        <TextBlock Text="1999"
-                            HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Margin="0,0,0,20"
-                                   FontSize="20"
-                                   FontWeight="Bold"></TextBlock>
-                    </Grid>
-                </Grid>
-            </Border>
-
-
-            <Border Grid.Column="0"                                 
-            Background="{DynamicResource CommonGridBackground}" 
-            CornerRadius="30"
-            Margin="15,8,7,15">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="46*"></RowDefinition>
-                        <RowDefinition Height="351*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="ACTIVITIY" 
-                       FontSize="18" 
-                       HorizontalAlignment="Left" 
-                       VerticalAlignment="Center"
-                               Margin="15,0,0,0"
-                       FontWeight="Bold" ></TextBlock>
-
-                    <Grid Grid.Row="1">
-                    </Grid>
-                </Grid>
-            </Border>
-        </Grid>
-    </Grid>
 </Window>
