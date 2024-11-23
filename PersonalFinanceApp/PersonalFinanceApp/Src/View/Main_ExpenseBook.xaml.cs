@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using PersonalFinanceApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +15,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PersonalFinanceApp.Src.View
+namespace PersonalFinanceApp.Src.View;
+
+/// <summary>
+/// Interaction logic for Main_ExpenseBook.xaml
+/// </summary>
+public partial class Main_ExpenseBook : UserControl
 {
-    /// <summary>
-    /// Interaction logic for Main_ExpenseBook.xaml
-    /// </summary>
-    public partial class Main_ExpenseBook : UserControl
+    public Main_ExpenseBook()
     {
-        public Main_ExpenseBook()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

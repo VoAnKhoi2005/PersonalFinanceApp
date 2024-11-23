@@ -37,9 +37,12 @@ public class MainViewModel : BaseViewModel
     private void OnCurrentModalViewModelChanged()
     {
         OnPropertyChanged(nameof(CurrentModalViewModel));
+        //CurrentModalViewModel.StartUp();
         OnPropertyChanged(nameof(IsModalOpen));
     }
-
+    public override void StartUp() {
+        base.StartUp();
+    }
     private void OnCurrentViewModelChanged()
     {
         OnPropertyChanged(nameof(CurrentViewModel));

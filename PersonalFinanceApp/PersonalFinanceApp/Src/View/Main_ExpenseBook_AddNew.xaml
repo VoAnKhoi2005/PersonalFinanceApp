@@ -230,7 +230,7 @@
                         Margin="0,0,0,15"
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
-                        Text="{Binding DateTimeExpenseBook}"/>
+                        SelectedDate="{Binding DateTimeExpenseBook}"/>
                 </Grid>
 
                 <!--status -->

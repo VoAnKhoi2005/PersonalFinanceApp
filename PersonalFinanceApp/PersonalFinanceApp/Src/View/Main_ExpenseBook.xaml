@@ -248,7 +248,7 @@
                 </Button>
             </Border>
         </Grid>
-
+        <Button Command="{Binding RefreshCommand}"> Click di</Button>
         <!--DataGrid expensebook-->
 
         <Grid Grid.Row="2">
@@ -258,7 +258,7 @@
                 HorizontalAlignment="Stretch"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
-                ItemsSource="{Binding ExpenseBooks}">
+                ItemsSource="{Binding Expenses}">
                 <DataGrid.InputBindings>
                     <!--  Double click on any row  -->
                     <MouseBinding
@@ -268,18 +268,11 @@
                 </DataGrid.InputBindings>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Id}" Header="ID" />
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
-                    <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
-                    <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
                     <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
-                    <DataGridTextColumn Binding="{Binding Recurring}" Header="Recurring" />
-                    <DataGridTextColumn Binding="{Binding Resources}" Header="Resources" />
-                    <DataGridTextColumn Binding="{Binding CategoryID}" Header="CategoryID" />
-                    <DataGridTextColumn Binding="{Binding ExBMonth}" Header="ExBMonth" />
-                    <DataGridTextColumn Binding="{Binding ExBYear}" Header="ExBYear" />
-                    <DataGridTextColumn Binding="{Binding UserID}" Header="UserID" />
-                    <DataGridTextColumn Binding="{Binding TimeAdded}" Header="TimeAdded" />
+                    <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                    <DataGridTextColumn Binding="{Binding Category}" Header="Category" />
+                    <DataGridTextColumn Binding="{Binding Status}" Header="Status" />
                     <DataGridTemplateColumn CanUserResize="False" Header="Commands">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
