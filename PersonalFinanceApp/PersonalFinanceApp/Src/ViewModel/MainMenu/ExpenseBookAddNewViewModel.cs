@@ -3,6 +3,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
+using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
@@ -10,7 +11,7 @@ namespace PersonalFinanceApp.ViewModel.MainMenu;
 internal class ExpenseBookAddNewViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
-    private readonly SharedDataService _sharedDataService;
+    private readonly AccountStore _accountStore;
     #region Properties
     //month
     public string MonthExpenseBook {
@@ -62,7 +63,7 @@ internal class ExpenseBookAddNewViewModel : BaseViewModel {
 
     public ExpenseBookAddNewViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
-        _sharedDataService = serviceProvider.GetRequiredService<SharedDataService>();
+        _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
         ExpenseBookCancelCommand = new RelayCommand<object>(CloseModal);
@@ -75,11 +76,15 @@ internal class ExpenseBookAddNewViewModel : BaseViewModel {
     private void Confirm(object sender) {
         //add data to database
         var expenseBook = new ExpensesBook() {
-            Month = int.Parse(MonthExpenseBook),
-            Year = int.Parse(YearExpenseBook),
-            //UserID = userId;
-            Budget = long.Parse(BudgetExpenseBook),
-            Resources = ResourceExpenseBook,
+            //Month = int.Parse(MonthExpenseBook),
+            Month = 2,
+            Year = 2,
+            //Year = int.Parse(YearExpenseBook),
+            UserID = int.Parse(_accountStore.SharedUser[0]),
+            //Budget = long.Parse(BudgetExpenseBook),
+            Budget = 19,
+            //Resources = ResourceExpenseBook,
+            Resources = "hello",
         };
         DBManager.Insert(expenseBook);
         _modalNavigationStore.Close();

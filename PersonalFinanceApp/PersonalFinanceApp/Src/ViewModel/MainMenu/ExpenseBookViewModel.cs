@@ -10,7 +10,16 @@ using PersonalFinanceApp.ViewModel.Stores;
 namespace PersonalFinanceApp.ViewModel.MainMenu; 
 internal class ExpenseBookViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
-    public ObservableCollection<ExpensesBook> ExpenseBooks {get; set;}
+    private ObservableCollection<ExpensesBook> _expenseBooks = new();
+    public ObservableCollection<ExpensesBook> ExpenseBooks {
+        get => _expenseBooks;
+        set {
+            if (_expenseBooks != value) {
+                _expenseBooks = value;
+                OnPropertyChanged();
+            }
+        }
+    }
     public ICommand AddNewExpenseBookCommand { get; set; }
     public ICommand RefreshExpenseBookCommand { get; set; }
     public bool HasNoExpenseBook { get; set; } = true;

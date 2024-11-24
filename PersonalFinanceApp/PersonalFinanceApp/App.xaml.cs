@@ -11,6 +11,8 @@ using PersonalFinanceApp.ViewModel.Stores;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel;
 using Windows.UI.WebUI;
+using PersonalFinanceApp.Src.ViewModel.Stores;
+using PersonalFinanceApp.Src.ViewModel.MainMenu;
 
 namespace PersonalFinanceApp
 {
@@ -28,15 +30,15 @@ namespace PersonalFinanceApp
         protected override void OnStartup(StartupEventArgs e)
         {
             //Default login window
-            //NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-            //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<LoginNewAccountViewModel>();
-            //MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
+            NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
+            navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<LoginNewAccountViewModel>();
+            MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
 
             //Default main window
 
-            NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-            navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
-            MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
+            //NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
+            //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
+            //MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
 
             //MainWindow = new TestWindow();
 
@@ -56,6 +58,7 @@ namespace PersonalFinanceApp
             services.AddSingleton<NavigationStore>();
             services.AddSingleton<ModalNavigationStore>();
             services.AddSingleton<SharedDataService>();
+            services.AddSingleton<AccountStore>();
 
             //Login window
             services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));
@@ -83,7 +86,11 @@ namespace PersonalFinanceApp
             //Modal-Popup
             services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));
             services.AddTransient<ExpenseBookAddNewViewModel>(s => new ExpenseBookAddNewViewModel(s));
+
+            services.AddTransient<ExpenseViewModel>(s => new ExpenseViewModel(s));
+            services.AddTransient<ExpenseAddNewViewModel>(s => new ExpenseAddNewViewModel(s));
+
         }
-        
+
     }
 }

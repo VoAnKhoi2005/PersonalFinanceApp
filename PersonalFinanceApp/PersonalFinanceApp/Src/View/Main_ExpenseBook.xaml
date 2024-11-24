@@ -6,12 +6,19 @@
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
              mc:Ignorable="d"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:converter="clr-namespace:PersonalFinanceApp.Src.etc"
+             xmlns:converter="clr-namespace:PersonalFinanceApp.Src.etc" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             x:Name="ExpenseBook"
              d:DesignHeight="720" d:DesignWidth="942">
     <Control.Resources>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <converter:InvertBooleanConverter x:Key="InvertBooleanConverter" />
     </Control.Resources>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding RefreshExpenseBookCommand}" CommandParameter="{Binding ElementName=ExpenseBook}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -214,6 +221,7 @@
                     </Grid>
                 </Button>
             </Border>
+            <Button Command="{Binding RefreshExpenseBookCommand}">click</Button>
             <!--add new-->
             <Border CornerRadius="25"
                     Width="120"
@@ -252,7 +260,7 @@
                 HorizontalAlignment="Stretch"
                 AutoGenerateColumns="False"
                 IsReadOnly="True"
-                ItemsSource="{Binding Expenses}">
+                ItemsSource="{Binding ExpenseBooks}">
                 <DataGrid.InputBindings>
                     <!--  Double click on any row  -->
                     <MouseBinding
@@ -262,18 +270,18 @@
                 </DataGrid.InputBindings>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
-                    <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
-                    <DataGridTextColumn Binding="{Binding Category}" Header="Category" />
-                    <DataGridTextColumn Binding="{Binding Status}" Header="Status" />
+                    <DataGridTextColumn Binding="{Binding Month}" Header="Month" />
+                    <DataGridTextColumn Binding="{Binding Year}" Header="Year" />
+                    <DataGridTextColumn Binding="{Binding UserID}" Header="UserID" />
+                    <DataGridTextColumn Binding="{Binding Budget}" Header="Budget" />
+                    <DataGridTextColumn Binding="{Binding Resources}" Header="Resources" />
                     <DataGridTemplateColumn CanUserResize="False" Header="Commands">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Button
                                         Margin="5"
-                                        Background="DarkBlue"
+                                        Background="ForestGreen"
                                         BorderThickness="0"
                                         Command="{Binding EditExpenseBookCommand}"
                                         CommandParameter="{Binding}">

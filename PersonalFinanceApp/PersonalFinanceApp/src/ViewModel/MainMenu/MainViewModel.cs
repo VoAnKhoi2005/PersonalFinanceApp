@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
+using XAct;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -38,6 +39,7 @@ public class MainViewModel : BaseViewModel
         OnPropertyChanged(nameof(CurrentModalViewModel));
         //CurrentModalViewModel.StartUp();
         OnPropertyChanged(nameof(IsModalOpen));
+        
     }
     public override void StartUp() {
         base.StartUp();
