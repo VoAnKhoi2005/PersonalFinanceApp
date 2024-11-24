@@ -31,7 +31,7 @@
                     <RowDefinition/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock Text="Adding a new goal"
+                <TextBlock Text="Adding new goal"
                            Grid.Row="0"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
@@ -49,6 +49,7 @@
             <!--Goal name-->
             <Grid Grid.Row="1">
                 <TextBox
+                    Text="{Binding NameGoal}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Margin="10,0,0,0"
@@ -68,14 +69,16 @@
                     HorizontalAlignment="Center"
                     materialDesign:HintAssist.Hint="Target amount (VND)"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
-                    Width="180" Foreground="#E5CBBFBF"/>
+                    Width="180" Foreground="#E5CBBFBF"
+                    Text="{Binding TargetGoal}"/>
 
                 <TextBox Grid.Column="0"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     materialDesign:HintAssist.Hint="Category"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
-                    Width="180" Foreground="#E5CBBFBF"/>
+                    Width="180" Foreground="#E5CBBFBF"
+                    />
             </Grid>
 
             <!--Monthly Target amount-->
@@ -85,6 +88,7 @@
                     <RowDefinition Height="13*"/>
                 </Grid.RowDefinitions>
                 <TextBox
+                    Text="{Binding ResourceGoal}"
                     AcceptsReturn="True"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Center"
@@ -133,7 +137,7 @@
                 <Border Grid.Column="0" CornerRadius="30" Height="50"
                         Width="150"
                         Background="#FFC8386C" >
-                    <Button>
+                    <Button Command="{Binding CancelNewGoalCommand}">
                         <TextBlock Text="Cancel" Foreground="White"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
@@ -166,7 +170,7 @@
                 <Border Grid.Column="1" CornerRadius="30" Height="50"
                         Width="150"
                         Background="#FF61D2BE" >
-                    <Button>
+                    <Button Command="{Binding ConfirmNewGoalCommand}">
                         <TextBlock Text="Confirm" Foreground="White"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"

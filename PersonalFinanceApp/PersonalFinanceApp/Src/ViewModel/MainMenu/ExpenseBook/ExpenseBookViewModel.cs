@@ -8,7 +8,7 @@ using PersonalFinanceApp.ViewModel.Stores;
 
 
 namespace PersonalFinanceApp.ViewModel.MainMenu; 
-internal class ExpenseBookViewModel : BaseViewModel {
+public class ExpenseBookViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private ObservableCollection<ExpensesBook> _expenseBooks = new();
     public ObservableCollection<ExpensesBook> ExpenseBooks {
@@ -26,8 +26,8 @@ internal class ExpenseBookViewModel : BaseViewModel {
 
     public ExpenseBookViewModel(IServiceProvider serviceProvider) {
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
-        AddNewExpenseBookCommand = new NavigateModalCommand<ExpenseBookAddNewViewModel>(serviceProvider);
 
+        AddNewExpenseBookCommand = new NavigateModalCommand<ExpenseBookAddNewViewModel>(serviceProvider);
         RefreshExpenseBookCommand = new RelayCommand<Object>(p => LoadExpenseBooks(p));
     }
     public void LoadExpenseBooks(object p) {

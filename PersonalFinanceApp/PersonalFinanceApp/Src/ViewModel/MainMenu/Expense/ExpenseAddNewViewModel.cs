@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace PersonalFinanceApp.Src.ViewModel.MainMenu;
 
-internal class ExpenseAddNewViewModel : BaseViewModel {
+public class ExpenseAddNewViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly SharedDataService _sharedDataService;

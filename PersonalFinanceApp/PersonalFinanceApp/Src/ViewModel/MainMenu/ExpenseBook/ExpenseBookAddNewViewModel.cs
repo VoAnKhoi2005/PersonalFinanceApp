@@ -8,7 +8,7 @@ using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu; 
-internal class ExpenseBookAddNewViewModel : BaseViewModel {
+public class ExpenseBookAddNewViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly AccountStore _accountStore;
@@ -58,33 +58,28 @@ internal class ExpenseBookAddNewViewModel : BaseViewModel {
     }
     private string _resourceExpenseBook;
     #endregion
-    public ICommand ExpenseBookCancelCommand { get; set; }
-    public ICommand ExpenseBookConfirmCommand { get; set; }
+    public ICommand CancelExpenseBookCommand { get; set; }
+    public ICommand ConfirmExpenseBookCommand { get; set; }
 
     public ExpenseBookAddNewViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
-        ExpenseBookCancelCommand = new RelayCommand<object>(CloseModal);
-        ExpenseBookConfirmCommand = new RelayCommand<object>(Confirm);
+        CancelExpenseBookCommand = new RelayCommand<object>(CloseModal);
+        ConfirmExpenseBookCommand = new RelayCommand<object>(ConfirmExpenseBook);
     }
 
     private void CloseModal(object sender) {
         _modalNavigationStore.Close();
     }
-    private void Confirm(object sender) {
+    private void ConfirmExpenseBook(object sender) {
         //add data to database
         var expenseBook = new ExpensesBook() {
             //Month = int.Parse(MonthExpenseBook),
-            Month = 2,
-            Year = 2,
             //Year = int.Parse(YearExpenseBook),
-            UserID = int.Parse(_accountStore.SharedUser[0]),
             //Budget = long.Parse(BudgetExpenseBook),
-            Budget = 19,
             //Resources = ResourceExpenseBook,
-            Resources = "hello",
         };
         DBManager.Insert(expenseBook);
         _modalNavigationStore.Close();

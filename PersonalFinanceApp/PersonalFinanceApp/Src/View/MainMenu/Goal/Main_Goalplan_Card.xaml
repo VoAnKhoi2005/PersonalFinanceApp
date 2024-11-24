@@ -278,7 +278,7 @@
                                HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
 
                     <!--binding here-->
-                    <TextBlock Text="123456789" VerticalAlignment="Center"
+                    <TextBlock Text="{Binding AmountGoal}" VerticalAlignment="Center"
                                HorizontalAlignment="Right" Margin="0,0,30,0"
                                FontWeight="Bold"></TextBlock>
                 </Grid>

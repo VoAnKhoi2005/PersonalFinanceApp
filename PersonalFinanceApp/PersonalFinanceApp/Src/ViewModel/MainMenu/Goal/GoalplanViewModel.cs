@@ -10,6 +10,7 @@ namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class GoalplanViewModel : BaseViewModel
 {
     public ICommand AddNewGoalCommand { get; set; }
+    public ICommand RefreshGoalCommand { get; set; }
 
     private ObservableCollection<GoalplanCardViewModel> _goalplanCardViewModels = new ObservableCollection<GoalplanCardViewModel>();
     public ObservableCollection<GoalplanCardViewModel> GoalplanCardViewModels
@@ -38,6 +39,7 @@ public class GoalplanViewModel : BaseViewModel
     public GoalplanViewModel(IServiceProvider serviceProvider)
     {
         AddNewGoalCommand = new NavigateModalCommand<GoalplanAddNewViewModel>(serviceProvider);
+        RefreshGoalCommand = new RelayCommand<object>(LoadedGoal);
 
         GoalplanCardViewModels = new ObservableCollection<GoalplanCardViewModel>();
         List<Goal> goals = DBManager.GetAll<Goal>();
@@ -45,5 +47,9 @@ public class GoalplanViewModel : BaseViewModel
         {
             GoalplanCardViewModels.Add(new GoalplanCardViewModel(goal));
         }
+    }
+    private void LoadedGoal(object parameter) {
+        //reload data to listview
+
     }
 }

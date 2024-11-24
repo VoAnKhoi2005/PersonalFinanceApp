@@ -32,7 +32,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <TextBlock Text="Adding  a  new  transaction" 
+                <TextBlock Text="  Adding new transaction" 
                            FontSize="26"
                            FontWeight="Bold"
                            VerticalAlignment="top"

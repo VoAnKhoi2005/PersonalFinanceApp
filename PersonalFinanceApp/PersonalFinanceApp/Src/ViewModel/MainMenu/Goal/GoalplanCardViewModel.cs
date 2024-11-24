@@ -4,7 +4,9 @@ namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class GoalplanCardViewModel
 {
-    private GoalplanCardViewModel() { }
+    private GoalplanCardViewModel() { 
+    
+    }
 
     public GoalplanCardViewModel(Goal goal)
     {

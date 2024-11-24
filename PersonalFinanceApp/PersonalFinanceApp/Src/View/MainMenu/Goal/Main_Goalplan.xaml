@@ -11,7 +11,6 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
     </UserControl.Resources>
-
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
