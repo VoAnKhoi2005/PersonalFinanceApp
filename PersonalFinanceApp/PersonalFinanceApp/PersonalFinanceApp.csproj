@@ -55,8 +55,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Src\View\MainMenu\Expense\" />
-  </ItemGroup>
-
 </Project>
