@@ -31,7 +31,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <TextBlock Text="Adding  a  new  expense book" 
+                <TextBlock Text="Adding a new expense book" 
                            FontSize="26"
                            FontWeight="Bold"
                            VerticalAlignment="top"
