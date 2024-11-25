@@ -29,15 +29,15 @@
         </Border.Resources>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <!--overall-->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width="5*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
                 <!--chart-->
@@ -66,9 +66,9 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <ToggleButton Grid.Column="0" Command="{Binding FavoritesGoalCommand}"
-                                      Width="35"
-                                      Height="35"
-                                      VerticalAlignment="Center"
+                                      Width="30"
+                                      Height="30"
+                                      VerticalAlignment="Bottom"
                                       HorizontalAlignment="Left"
                                         Content="{materialDesign:PackIcon Kind=Heart,                                                         Size=21}"
                                         IsEnabled="True"
@@ -76,7 +76,10 @@
                                         ToolTip="MaterialDesignFlatPrimaryToggleButton" 
                                       Background="#FFE5A78E" Foreground="#FFF14242" />
                         <!--Notification-->
-                        <Button Grid.Column="1" Command="{Binding NotifyGoalCommand}">
+                        <Button Grid.Column="1" Command="{Binding NotifyGoalCommand}"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Left">
+
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -104,7 +107,9 @@
                             </Button.Style>
                         </Button>
                         <!--Add money to goal-->
-                        <Button Grid.Column="2" Command="{Binding AddNewAmountGoalCommand}">
+                        <Button Grid.Column="2" Command="{Binding AddNewAmountGoalCommand}"
+                                                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Left">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -134,7 +139,9 @@
                             </Button.Style>
                         </Button>
                         <!--adjust goal-->
-                        <Button Grid.Column="3" Command="{Binding EditGoalCommand}">
+                        <Button Grid.Column="3" Command="{Binding EditGoalCommand}"
+                                                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Left">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -163,7 +170,9 @@
                             </Button.Style>
                         </Button>
                         <!--history-->
-                        <Button Grid.Column="4" Command="{Binding HistoryGoalCommand}">
+                        <Button Grid.Column="4" Command="{Binding HistoryGoalCommand}"
+                                                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Left">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -192,7 +201,9 @@
                             </Button.Style>
                         </Button>
                         <!--delete-->
-                        <Button Grid.Column="5" Command="{Binding DeleteGoalCommand}">
+                        <Button Grid.Column="5" Command="{Binding DeleteGoalCommand}"
+                                                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Left">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -228,7 +239,7 @@
                         <!--binding here-->
                         <TextBlock Text="something here" VerticalAlignment="Center"
                                    HorizontalAlignment="Right"
-                                   Margin="0,0,5,0"
+                                   Margin="0,0,30,0"
                                    FontSize="14"></TextBlock>
                     </Grid>
 
@@ -250,7 +261,7 @@
 
                         <!--binding here-->
                         <TextBlock Text="123456789 / 987654321" HorizontalAlignment="Right"
-                                   Margin="0,0,5,0"
+                                   Margin="0,0,30,0"
                                    VerticalAlignment="Center"
                                    FontSize="14" Opacity="0.6"></TextBlock>
                     </Grid>
@@ -264,7 +275,7 @@
                                    Foreground="{DynamicResource Dashboard_falseColor}"
                                    FontWeight="DemiBold"
                                    FontSize="14"
-                                   HorizontalAlignment="Right" Margin="0,0,5,0"></TextBlock>
+                                   HorizontalAlignment="Right" Margin="0,0,30,0"></TextBlock>
                     </Grid>
                 </Grid>
             </Grid>
