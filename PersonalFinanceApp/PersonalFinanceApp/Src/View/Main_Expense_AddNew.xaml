@@ -91,7 +91,7 @@
                                ></TextBlock>
 
 
-                    <ComboBox Width="160" Height="40"
+                    <ComboBox Width="160" Height="40" Visibility="Visible"
                               HorizontalAlignment="Left"
                               VerticalAlignment="Top"
                               FontSize="14"
@@ -114,7 +114,24 @@
     Content="Linux" />
                         <ComboBoxItem
     Content="Windows" />
+                        <ComboBoxItem Content="Your custom category"></ComboBoxItem>
                     </ComboBox>
+                    
+                    <!--when choose Your custom Category : this shown-->
+                    <TextBox Visibility="Collapsed"
+                        VerticalAlignment="Center" Text="{Binding AmountExpenseBook}"
+                             
+                             Margin="0,30,0,0"
+                             Width="160" Height="40"
+                             TextAlignment="Center"
+                             Foreground="{DynamicResource CommonText}"
+                             FontSize="14"
+                             BorderBrush="{x:Null}"
+                                 HorizontalAlignment="Center"
+                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                             CaretBrush="{DynamicResource CommonText}"
+                             SelectionBrush="{DynamicResource CommonText}"
+                                 ></TextBox>
 
 
                 </Grid>
