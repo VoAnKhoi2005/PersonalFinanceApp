@@ -90,7 +90,7 @@ namespace PersonalFinanceApp.Database
             modelBuilder.Entity<Goal>()
                 .HasMany(g => g.GoalHistories)
                 .WithOne(gh => gh.Goal)
-                .HasForeignKey(gh => gh.GoalID);
+                .HasForeignKey(gh => new { gh.GoalID, gh.TimeAdded });
             //Goal and GoalCategory
             modelBuilder.Entity<GoalCategory>()
                 .HasMany(gc => gc.Goals)
