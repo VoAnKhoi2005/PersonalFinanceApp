@@ -26,6 +26,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
             <!--title-->
@@ -126,20 +127,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-
-                <TextBox Grid.Column="0"
-                    VerticalAlignment="Center"
-                         FontSize="14"
-                    HorizontalAlignment="Center"
-                    materialDesign:HintAssist.Hint="Resource"
-                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                         CaretBrush="{DynamicResource CommonText}"
-                    SelectionBrush="{DynamicResource CommonText}"
-                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
-                    Width="180" Foreground="{DynamicResource CommonText}"/>
-
-                <Grid Grid.Column="1">
+                <Grid Grid.Column="0">
                     <!--change visibility here-->
                     <ComboBox Width="180" Height="40" Visibility="Visible" IsEditable="True"
                               HorizontalAlignment="Left"
@@ -165,49 +153,52 @@
                         <ComboBoxItem Content="Your custom category"></ComboBoxItem>
                     </ComboBox>
                 </Grid>
-
-
-
-            </Grid>
-
-            <!--Start date - end date-->
-            <Grid Grid.Row="4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+                <Grid Grid.Column="1">
                     <DatePicker FontSize="14"
-                                Width="175"
+                                Width="180"
                                 Height="40" 
-                                materialDesign:HintAssist.Hint="Start date"
+                                materialDesign:HintAssist.Hint="End date"
                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
                                 materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                                 Foreground="{DynamicResource CommonText}"
-                                HorizontalAlignment="Left"
-                                Margin="10,0,0,0"
+                                HorizontalAlignment="Center"
                                 VerticalAlignment="Center"/>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <DatePicker FontSize="14"
-                    Width="178"
-                    Height="40" 
-                    materialDesign:HintAssist.Hint="End date"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
-                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
-                        Foreground="{DynamicResource CommonText}"
-                    HorizontalAlignment="Left"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"/>
                 </Grid>
             </Grid>
 
-            <!--cancel - confirm -->
+            <!--Start date - end date-->
             <Grid Grid.Row="5">
+                <TextBox
+                    AcceptsReturn="True" TextWrapping="Wrap"
+                     FontSize="14"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Center"
+                    materialDesign:HintAssist.Hint="Decription"
+                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                         CaretBrush="{DynamicResource CommonText}"
+                    SelectionBrush="{DynamicResource CommonText}"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     Height="48" 
+                    Width="380" Foreground="{DynamicResource CommonText}" Margin="0,10,0,0"/>
+            </Grid>
+
+            <TextBox Grid.Row="4"
+                     FontSize="14"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    materialDesign:HintAssist.Hint="Resource"
+                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                         CaretBrush="{DynamicResource CommonText}"
+                    SelectionBrush="{DynamicResource CommonText}"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     Height="40" 
+                    Width="380" Foreground="{DynamicResource CommonText}"/>
+            <!--cancel - confirm -->
+            <Grid Grid.Row="6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
