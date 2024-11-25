@@ -31,7 +31,8 @@ public class MainWindowFactory : IWindowFactory
 
     public MainWindow CreateMainWindow(User user)
     {
-        //_accountStore.SharedUser.Add(user.UserID.ToString());
+        _accountStore.SharedUser.Add(user.UserID.ToString());
+        _accountStore.Users = user;
         NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
         navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
         return new MainWindow(DataContext, user);

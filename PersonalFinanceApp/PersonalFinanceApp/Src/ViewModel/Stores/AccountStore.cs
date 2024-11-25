@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalFinanceApp.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,13 +11,13 @@ namespace PersonalFinanceApp.Src.ViewModel.Stores;
 public class AccountStore : INotifyPropertyChanged {
     public ObservableCollection<string> SharedUser { get; } = new ObservableCollection<string>();
 
-    private string? _userId;
-    public string? UserId {
-        get => _userId;
+    private User? _users;
+    public User? Users {
+        get => _users;
         set {
-            if (_userId != value) {
-                _userId = value;
-                OnPropertyChanged(nameof(_userId));
+            if (_users != value) {
+                _users = value;
+                OnPropertyChanged(nameof(_users));
             }
         }
     }

@@ -246,7 +246,7 @@
                     <!--name-->
                     <!--binding name here-->
                     <TextBlock Grid.Row="2" FontWeight="Bold"
-                        Text="Kiem tien an tet 3" VerticalAlignment="Center"
+                        Text="{Binding NameGoalCard}" VerticalAlignment="Center"
                                HorizontalAlignment="Left"
                                FontSize="20">
                     </TextBlock>
@@ -255,12 +255,12 @@
                     <!--progress money-->
 
                     <Grid Grid.Row="3">
-                        <TextBlock Text="VND" HorizontalAlignment="Left" Margin="2,0,0,0"
+                        <TextBlock Text="Amount: " HorizontalAlignment="Left" Margin="2,0,0,0"
                                    FontSize="14" Opacity="0.4"
                                    ></TextBlock>
 
                         <!--binding here-->
-                        <TextBlock Text="123456789 / 987654321" HorizontalAlignment="Right"
+                        <TextBlock Text="{Binding CurrentAmoutGoalCard}" HorizontalAlignment="Right"
                                    Margin="0,0,30,0"
                                    VerticalAlignment="Center"
                                    FontSize="14" Opacity="0.6"></TextBlock>
@@ -289,11 +289,11 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock Text="Amount (VND)  : " VerticalAlignment="Center"
+                    <TextBlock Text="Target (VND)  : " VerticalAlignment="Center"
                                HorizontalAlignment="Left" Margin="30,0,0,0"></TextBlock>
 
                     <!--binding here-->
-                    <TextBlock Text="{Binding TargetGoal}" VerticalAlignment="Center"
+                    <TextBlock Text="{Binding TargetGoalCard}" VerticalAlignment="Center"
                                HorizontalAlignment="Right" Margin="0,0,30,0"
                                FontWeight="Bold"></TextBlock>
                 </Grid>
@@ -302,7 +302,7 @@
                                HorizontalAlignment="Left" Margin="30,0,0,0"></TextBlock>
 
                     <!--binding here-->
-                    <TextBlock Text="1/1/1999" VerticalAlignment="Center"
+                    <TextBlock Text="{Binding StartDateGoalCard}" VerticalAlignment="Center"
                                HorizontalAlignment="Right" Margin="0,0,30,0"
                                FontWeight="Bold"></TextBlock>
                 </Grid>
@@ -312,7 +312,7 @@
                                ></TextBlock>
 
                     <!--binding here-->
-                    <TextBlock Text="9/9/2000" VerticalAlignment="Center"
+                    <TextBlock Text="{Binding DeadlineGoalCard}" VerticalAlignment="Center"
                                HorizontalAlignment="Right" Margin="0,0,30,0"
                                FontWeight="Bold"></TextBlock>
                 </Grid>
@@ -341,7 +341,8 @@
                 <!--binding here-->
                 <TextBlock Grid.Row="1"
                            HorizontalAlignment="Left" Margin="30,0,0,0"
-                    TextWrapping="Wrap"></TextBlock>
+                    Text="{Binding DecriptionGoalCard}"
+                           TextWrapping="Wrap"></TextBlock>
             </Grid>
         </Grid>
     </Border>

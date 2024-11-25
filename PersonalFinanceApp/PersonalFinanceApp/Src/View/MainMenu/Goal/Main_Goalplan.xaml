@@ -121,7 +121,7 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
                     Grid.Column="5">
-                        <Button Command="{Binding AddNewExpenseBookCommand}">
+                        <Button Command="{Binding RefreshGoalCommand}">
                             <materialDesign:PackIcon Kind="Refresh" 
                     Foreground="{DynamicResource CommonText}"
                                                  Height="25"
@@ -164,7 +164,6 @@
                     </Button>
                 </Border>
             </Grid>
-            <Button Command="{Binding RefreshGoalCommand}">Click</Button>
             <!--goal plan main looking-->
             <Border Grid.Row="2">
                 <Grid>

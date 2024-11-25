@@ -2,16 +2,23 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml.Linq;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalFinanceApp.Database;
+using PersonalFinanceApp.Model;
+using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
+using Windows.Globalization;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class GoalplanAddNewViewModel : BaseViewModel
 {
     private readonly ModalNavigationStore _modalNavigationStore;
+    private readonly IServiceProvider _serviceProvider;
+    private readonly AccountStore _accountStore;
     #region Properties
     //name
     public string NameGoal {
@@ -90,6 +97,17 @@ public class GoalplanAddNewViewModel : BaseViewModel
         }
     }
     private string _statusGoal;
+    //Decription
+    public string DecriptionGoal {
+        get => _decriptionGoal;
+        set {
+            if (_decriptionGoal != value) {
+                _decriptionGoal = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _decriptionGoal;
     //category
     public string CategoryGoal {
         get => _categoryGoal;
@@ -132,6 +150,8 @@ public class GoalplanAddNewViewModel : BaseViewModel
 
     public GoalplanAddNewViewModel(IServiceProvider serviceProvider)
     {
+        _serviceProvider = serviceProvider;
+        _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
         CancelNewGoalCommand = new RelayCommand<object>(CloseModal);
@@ -144,6 +164,36 @@ public class GoalplanAddNewViewModel : BaseViewModel
     }
     private void ConfirmNewGoal(object sender) {
         //add data to database
+        //Goal Category 
+        GoalCategory goalcategory = new GoalCategory() {
+            Name = CategoryGoal,
+            Description = DecriptionGoal,
+        };
+        DBManager.Insert(goalcategory);
+        //Goal
+        Goal goal = new Goal() {
+            Name = NameGoal,
+            Target = long.Parse(TargetGoal),
+            CurrentAmount = long.Parse(CurrentAmountGoal),
+            Resources = ResourceGoal,
+            UserID = int.Parse(_accountStore.SharedUser[0]),
+            CategoryName = goalcategory.Name,
+            //User = _accountStore.Users,
+            //GoalCategory = goalcategory,
+            //Deadline = DeadlineGoal
+        };
+        //Goal History
+        GoalHistory goalhistory = new GoalHistory() {
+            //Goal = (Goal)goal,
+            GoalID = goal.GoalID,
+            TimeAdded = DateTime.Now,
+            Amount = long.Parse(CurrentAmountGoal),
+        };
+        //goal.GoalHistories.Add(goalhistory);
+
+        DBManager.Insert(goalhistory);
+
+        DBManager.Insert(goal);
 
         _modalNavigationStore.Close();
     }
