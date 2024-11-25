@@ -92,6 +92,17 @@ public class GoalEditViewModel : BaseViewModel
         }
     }
     private string _statusGoal;
+    //Decription
+    public string DecriptionEditGoal {
+        get => _decriptionEditGoal;
+        set {
+            if (_decriptionEditGoal != value) {
+                _decriptionEditGoal = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _decriptionEditGoal;
     //category
     public string CategoryEditGoal {
         get => _categoryGoal;

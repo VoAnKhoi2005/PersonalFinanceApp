@@ -57,6 +57,9 @@ public class GoalplanViewModel : BaseViewModel
     private void LoadedGoal(object parameter) {
         //reload data to listview
         //GoalplanCardViewModels.Add(new GoalplanCardViewModel(new Goal("goal", 50, 60)));
-
+        List<Goal> goals = DBManager.GetAll<Goal>();
+        foreach (var goal in goals) {
+            GoalplanCardViewModels.Add(new GoalplanCardViewModel(goal));
+        }
     }
 }

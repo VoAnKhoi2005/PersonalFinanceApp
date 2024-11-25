@@ -15,7 +15,7 @@ using System.Windows.Input;
 
 namespace PersonalFinanceApp.Src.ViewModel.MainMenu;
 
-class GoalHistoryViewModel : BaseViewModel {
+public class GoalHistoryViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private ObservableCollection<GoalHistory> _goalHistories = new();
     public ObservableCollection<GoalHistory> GoalHistories {

@@ -30,9 +30,9 @@ namespace PersonalFinanceApp
         protected override void OnStartup(StartupEventArgs e)
         {
             //Default login window
-            //NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-            //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<LoginNewAccountViewModel>();
-            //MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
+            NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
+            navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<LoginNewAccountViewModel>();
+            MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
 
             //Default main window
 
@@ -40,7 +40,7 @@ namespace PersonalFinanceApp
             //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
             //MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
 
-            MainWindow = new TestWindow();
+            //MainWindow = new TestWindow();
 
             MainWindow.Show();
 
