@@ -322,6 +322,7 @@
                     </Button>
                 </Border>
             </Grid>
+            <Button Command="{Binding RefreshGoalCommand}">Click</Button>
             <!--goal plan main looking-->
             <Border Grid.Row="2">
                 <Grid>

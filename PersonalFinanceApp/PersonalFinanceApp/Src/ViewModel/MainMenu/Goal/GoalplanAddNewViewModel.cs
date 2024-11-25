@@ -1,4 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Input;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
@@ -97,6 +101,31 @@ public class GoalplanAddNewViewModel : BaseViewModel
         }
     }
     private string _categoryGoal;
+    //category
+    public ObservableCollection<string> _itemsGoal = new ObservableCollection<string> {
+        #region Category of Goal
+        "New vehicle",
+        "New home",
+        "Hoiliday trip",
+        "Education",
+        "Emergency fund",
+        "Health care",
+        "Party",
+        "Kids spoiling",
+        "Charity",
+        "<New>",
+        #endregion
+    };
+    public ObservableCollection<string> ItemsGoal {
+        get => _itemsGoal;
+        set {
+            if (_itemsGoal != value) {
+                _itemsGoal = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    public string SelectedItemGoal { get; set; }
     #endregion
     public ICommand CancelNewGoalCommand { get; set; }
     public ICommand ConfirmNewGoalCommand { get; set; }

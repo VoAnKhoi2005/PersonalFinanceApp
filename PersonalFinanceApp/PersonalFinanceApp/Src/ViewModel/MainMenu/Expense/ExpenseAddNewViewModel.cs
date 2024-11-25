@@ -7,6 +7,7 @@ using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Database;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Xml.Linq;
+using System.Collections.ObjectModel;
 
 namespace PersonalFinanceApp.Src.ViewModel.MainMenu;
 
@@ -89,6 +90,69 @@ public class ExpenseAddNewViewModel : BaseViewModel {
     }
     private string _resourceExpense;
     #endregion
+    //Category
+    public ObservableCollection<string> _itemsExpense = new ObservableCollection<string> {
+        #region Category of expense
+        "Ăn sáng", 
+        "Ăn tiệm", 
+        "Ăn tối", 
+        "Ăn trưa", 
+        "Cafe", 
+        "Đi chợ / siêu thị", 
+        "cho vay", 
+        "Đồ chơi", 
+        "Học phí", 
+        "Sách vở", 
+        "Sữa", 
+        "Tiền tiêu vặt", 
+        "Điện", 
+        "Điện thoại cố định", 
+        "Điện thoại di động", 
+        "Gas", "Internet", 
+        "Nước", 
+        "Thuê người giúp việc", 
+        "Truyền hình", 
+        "Bảo hiểm xe", 
+        "Gửi xe", 
+        "Rửa xe", 
+        "sửa chữa, bảo dưỡng xe", 
+        "Taxi/ thuê xe", 
+        "Xăng xe", 
+        "Biếu tặng", 
+        "Cưới xin", 
+        "Ma chay", 
+        "Thăm hỏi", 
+        "Du lịch", 
+        "Làm đẹp", 
+        "Mỹ phẩm", 
+        "Phim ảnh ca nhạc", 
+        "Vui chơi giải trí", 
+        "Phí chuyển khoản",
+        "Mua sắm đồ đạc", 
+        "Sửa chữa nhà cửa", 
+        "Thuê nhà", 
+        "Giao lưu, quan hệ", 
+        "Học hành", 
+        "Khám chữa bệnh", 
+        "Thể thao", 
+        "Thuốc men", 
+        "Trả nợ", 
+        "Giày dép", 
+        "Phụ kiện khác", 
+        "Quần áo", 
+        "<New>"
+        #endregion
+    };
+    public ObservableCollection<string> ItemsExpense {
+        get => _itemsExpense;
+        set {
+            if (_itemsExpense != value) {
+                _itemsExpense = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    public string SelectedItemExpense { get; set; }
     public ICommand ExpenseCancelCommand { get; set; }
     public ICommand ExpenseConfirmCommand { get; set; }
 
@@ -98,7 +162,7 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
         ExpenseCancelCommand = new RelayCommand<object>(CloseModal);
-        ExpenseConfirmCommand = new RelayCommand<object>(Confirm);
+        ExpenseConfirmCommand = new RelayCommand<object>(ConfirmAddNewExpense);
     }
     private void CloseModal(object sender) {
         _modalNavigationStore.Close();
@@ -111,7 +175,7 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         ExpensesBook exBook = new ExpensesBook();
         return exBook;
     }
-    private void Confirm(object sender) {
+    private void ConfirmAddNewExpense(object sender) {
         //add data to database
         var expense = new Expense() {
             Amount = int.Parse(AmountExpense),

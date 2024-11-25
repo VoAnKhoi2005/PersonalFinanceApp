@@ -6,11 +6,18 @@ using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
-
 public class GoalplanViewModel : BaseViewModel
 {
+    #region Command
     public ICommand AddNewGoalCommand { get; set; }
+    public ICommand EditGoalCommand { get; set; }
+    public ICommand DeleteGoalCommand { get; set; }
+    public ICommand HistoryGoalCommand { get; set; }
+    public ICommand AddNewAmountGoalCommand { get; set; }
+    public ICommand NotifyGoalCommand { get; set; }
+    public ICommand FavoritesGoalCommand { get; set; }
     public ICommand RefreshGoalCommand { get; set; }
+    #endregion
 
     private ObservableCollection<GoalplanCardViewModel> _goalplanCardViewModels = new ObservableCollection<GoalplanCardViewModel>();
     public ObservableCollection<GoalplanCardViewModel> GoalplanCardViewModels
@@ -43,13 +50,13 @@ public class GoalplanViewModel : BaseViewModel
 
         GoalplanCardViewModels = new ObservableCollection<GoalplanCardViewModel>();
         List<Goal> goals = DBManager.GetAll<Goal>();
-        foreach (var goal in goals)
-        {
+        foreach (var goal in goals) {
             GoalplanCardViewModels.Add(new GoalplanCardViewModel(goal));
         }
     }
     private void LoadedGoal(object parameter) {
         //reload data to listview
+        //GoalplanCardViewModels.Add(new GoalplanCardViewModel(new Goal("goal", 50, 60)));
 
     }
 }

@@ -21,6 +21,8 @@ public class ExpenseBookViewModel : BaseViewModel {
         }
     }
     public ICommand AddNewExpenseBookCommand { get; set; }
+    public ICommand EditExpenseBookCommand { get; set; }
+    public ICommand DeleteExpenseBookCommand { get; set; }
     public ICommand RefreshExpenseBookCommand { get; set; }
     public bool HasNoExpenseBook { get; set; } = true;
 

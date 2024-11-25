@@ -66,7 +66,7 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <ToggleButton Grid.Column="0"
+                        <ToggleButton Grid.Column="0" Command="{Binding FavoritesGoalCommand}"
                                       Width="35"
                                       Height="35"
                                       VerticalAlignment="Center"
@@ -76,7 +76,7 @@
                                         Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
                                         ToolTip="MaterialDesignFlatPrimaryToggleButton" Background="#FFE5A78E" Foreground="#FFF14242" />
                         <!--Notification-->
-                        <Button Grid.Column="1">
+                        <Button Grid.Column="1" Command="{Binding NotifyGoalCommand}">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -104,7 +104,7 @@
                             </Button.Style>
                         </Button>
                         <!--Add money to goal-->
-                        <Button Grid.Column="2">
+                        <Button Grid.Column="2" Command="{Binding AddNewAmountGoalCommand}">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -133,7 +133,7 @@
                             </Button.Style>
                         </Button>
                         <!--adjust goal-->
-                        <Button Grid.Column="3">
+                        <Button Grid.Column="3" Command="{Binding EditGoalCommand}">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -161,7 +161,7 @@
                             </Button.Style>
                         </Button>
                         <!--history-->
-                        <Button Grid.Column="4">
+                        <Button Grid.Column="4" Command="{Binding HistoryGoalCommand}">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -189,7 +189,7 @@
                             </Button.Style>
                         </Button>
                         <!--delete-->
-                        <Button Grid.Column="5">
+                        <Button Grid.Column="5" Command="{Binding DeleteGoalCommand}">
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -274,11 +274,11 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock Text="Amount (VND)  : " VerticalAlignment="Center"
+                    <TextBlock Text="Target (VND)  : " VerticalAlignment="Center"
                                HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
 
                     <!--binding here-->
-                    <TextBlock Text="{Binding AmountGoal}" VerticalAlignment="Center"
+                    <TextBlock Text="{Binding TargetGoal}" VerticalAlignment="Center"
                                HorizontalAlignment="Right" Margin="0,0,30,0"
                                FontWeight="Bold"></TextBlock>
                 </Grid>

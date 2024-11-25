@@ -15,29 +15,28 @@ using System.Windows.Input;
 
 namespace PersonalFinanceApp.Src.ViewModel.MainMenu;
 
-class GoalHistoryViewModel : BaseViewModel
-{
-        private readonly ModalNavigationStore _modalNavigationStore;
-        private ObservableCollection<GoalHistory> _goalHistories = new();
-        public ObservableCollection<GoalHistory> GoalHistories {
-            get => _goalHistories;
-            set {
-                if (_goalHistories != value) {
-                    _goalHistories = value;
-                    OnPropertyChanged();
-                }
+class GoalHistoryViewModel : BaseViewModel {
+    private readonly ModalNavigationStore _modalNavigationStore;
+    private ObservableCollection<GoalHistory> _goalHistories = new();
+    public ObservableCollection<GoalHistory> GoalHistories {
+        get => _goalHistories;
+        set {
+            if (_goalHistories != value) {
+                _goalHistories = value;
+                OnPropertyChanged();
             }
         }
-        public ICommand RefreshHistoryGoalCommand { get; set; }
-        public bool HasNoHistoryGoal { get; set; } = true;
+    }
+    public ICommand RefreshHistoryGoalCommand { get; set; }
+    public bool HasNoHistoryGoal { get; set; } = true;
 
-        public GoalHistoryViewModel(IServiceProvider serviceProvider) {
-            _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
+    public GoalHistoryViewModel(IServiceProvider serviceProvider) {
+        _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
-            RefreshHistoryGoalCommand = new RelayCommand<Object>(LoadHistoryGoal);
-        }
-        public void LoadHistoryGoal(object p) {
-            //load data to datagrid
+        RefreshHistoryGoalCommand = new RelayCommand<Object>(LoadHistoryGoal);
+    }
+    public void LoadHistoryGoal(object p) {
+        //load data to datagrid
 
-        }
+    }
 }

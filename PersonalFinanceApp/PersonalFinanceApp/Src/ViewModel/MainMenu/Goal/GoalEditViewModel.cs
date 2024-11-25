@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace PersonalFinanceApp.Src.ViewModel.MainMenu;
 
-class GoalEditViewModel : BaseViewModel
+public class GoalEditViewModel : BaseViewModel
 {
     private readonly ModalNavigationStore _modalNavigationStore;
     #region Properties
@@ -111,13 +111,13 @@ class GoalEditViewModel : BaseViewModel
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
         CancelEditGoalCommand = new RelayCommand<object>(CloseModal);
-        ConfirmEditGoalCommand = new RelayCommand<object>(ConfirmEdit);
+        ConfirmEditGoalCommand = new RelayCommand<object>(ConfirmEditGoal);
     }
 
     private void CloseModal(object sender) {
         _modalNavigationStore.Close();
     }
-    private void ConfirmEdit(object sender) {
+    private void ConfirmEditGoal(object sender) {
         //add data to database
 
         _modalNavigationStore.Close();
