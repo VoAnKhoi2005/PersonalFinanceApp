@@ -134,12 +134,14 @@
                 </Grid>
                     <!--add new-->
 
-                <Border CornerRadius="30"
+                <Border CornerRadius="20"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
                         Width="100"
-                        Height="60"
+                        Height="40"
+                        Margin="5,0,15,0"
                         Background="{DynamicResource CommonGridBackground}"
-                        Grid.Column="8"
-                        Margin="0,0,15,0">
+                        Grid.Column="8">
                     <Button Command="{Binding AddNewGoalCommand}">
                         <Grid>
                             <TextBlock Text="new goal"

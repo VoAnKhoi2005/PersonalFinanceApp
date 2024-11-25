@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="PersonalFinanceApp.Src.View.MainMenu.Goal.Main_Goalplan_History"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Goal"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="700">
+    <DataGrid 
+                Name="ListExpenseBook"
+                Grid.Row="1"
+                HorizontalAlignment="Stretch"
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                ItemsSource="{Binding ExpenseBooks}">
+        <DataGrid.InputBindings>
+            <!--  Double click on any row  -->
+            <MouseBinding
+                        Command="{Binding EditExpenseBookCommand}"
+                        CommandParameter="{Binding ElementName=ListExpenseBook, Path=SelectedItem}"
+                        Gesture="LeftDoubleClick" />
+        </DataGrid.InputBindings>
+
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Month}" Header="Month"/>
+            <DataGridTextColumn Binding="{Binding Year}" Header="Year" />
+            <DataGridTextColumn Binding="{Binding UserID}" Header="UserID" />
+            <DataGridTextColumn Binding="{Binding Budget}" Header="Budget" />
+            <DataGridTextColumn Binding="{Binding Resources}" Header="Resources" />
+            <DataGridTemplateColumn CanUserResize="False" Header="Commands">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Button
+                                        Margin="0 0 5 0"
+                                        Width="50"
+                                        Content="+"
+                                        FontSize="15"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        ToolTip="Resource name: MaterialDesignRaisedButton"
+                                        BorderBrush="#FF514D4D"
+                                        Foreground="White"
+                                        Command="{Binding RemoveExpenseBookCommand}"
+                                        CommandParameter="{Binding}">
+                            </Button>
+                            <Button
+                                        Margin="0 0 5 0"
+                                        Width="50"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        ToolTip="Resource name: MaterialDesignRaisedButton"
+                                        Background="#31B720"
+                                        BorderBrush="#FF514D4D"
+                                        Command="{Binding EditExpenseBookCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                        CommandParameter="{Binding}" >
+                                <materialDesign:PackIcon Kind="pencil" Foreground="White"/>
+                            </Button>
+                            <Button
+                                        Width="50"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        ToolTip="Resource name: MaterialDesignRaisedButton"
+                                        Background="IndianRed"
+                                        BorderBrush="#FF514D4D"
+                                        Command="{Binding RemoveExpenseBookCommand}"
+                                        CommandParameter="{Binding}">
+                                <materialDesign:PackIcon Kind="TrashCanOutline" Foreground="White"/>
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+</UserControl>

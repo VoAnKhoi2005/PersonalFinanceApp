@@ -1,16 +1,12 @@
-﻿<Window x:Class="PersonalFinanceApp.Src.View.TestWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d"
-        Background="Black"
-        Title="TestWindow" Height="720" Width="942">
-
-    <!--color done-->
-
+﻿<UserControl x:Class="PersonalFinanceApp.Src.View.MainMenu.Goal.Main_Goalplan_plusMinus"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Goal"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="450">
     <Border CornerRadius="30" Background="{DynamicResource CommonGridBackground}"
             Width="400" Height="400">
         <Grid>
@@ -180,5 +176,4 @@
             </Grid>
         </Grid>
     </Border>
-
-</Window>
+</UserControl>

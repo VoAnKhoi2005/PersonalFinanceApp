@@ -141,7 +141,7 @@
 
                 <Grid Grid.Column="1">
                     <!--change visibility here-->
-                    <ComboBox Width="180" Height="40" Visibility="Visible"
+                    <ComboBox Width="180" Height="40" Visibility="Visible" IsEditable="True"
                               HorizontalAlignment="Left"
                               FontSize="14"
                               Foreground="{DynamicResource CommonText}"
@@ -150,7 +150,6 @@
                               materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                                BorderBrush="{x:Null}"
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                               Text="{Binding CategoryExpenseBook}" Margin="10,0,0,0">
 
@@ -165,17 +164,6 @@
     Content="Windows" />
                         <ComboBoxItem Content="Your custom category"></ComboBoxItem>
                     </ComboBox>
-                    <TextBox Grid.Column="1" Visibility="Collapsed"
-                    VerticalAlignment="Center"
-                         FontSize="14"
-                    HorizontalAlignment="Center"
-                    materialDesign:HintAssist.Hint="Category"
-                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                         CaretBrush="{DynamicResource CommonText}"
-                    SelectionBrush="{DynamicResource CommonText}"
-                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
-                    Width="180" Foreground="{DynamicResource CommonText}"/>
                 </Grid>
 
 
