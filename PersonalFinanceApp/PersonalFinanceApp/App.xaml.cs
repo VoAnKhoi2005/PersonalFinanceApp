@@ -40,7 +40,7 @@ namespace PersonalFinanceApp
             //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
             //MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
 
-            //MainWindow = new TestWindow();
+            MainWindow = new TestWindow();
 
             MainWindow.Show();
 

@@ -31,5 +31,10 @@ namespace PersonalFinanceApp.Src.View
             notify.Content = "Hello app";
             notify.ShowNotification();
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

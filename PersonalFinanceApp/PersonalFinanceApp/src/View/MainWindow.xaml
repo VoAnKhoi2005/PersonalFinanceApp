@@ -16,6 +16,7 @@
         Height="720" Width="1152"
         WindowStartupLocation="CenterScreen">
 
+    <!--almost done color-->
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -28,7 +29,7 @@
             </Style>
             <Style TargetType="Button">
                 <Setter Property="Background" Value="Transparent"></Setter>
-                <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
+                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -90,7 +91,8 @@
                                                 Kind="Signal"
                                                 Width="30"
                                                 Height="30"
-                                                VerticalAlignment="Center" Margin="12,0,0,0" />
+                                                VerticalAlignment="Center" 
+                        Margin="12,0,0,0" />
                     <TextBlock Text="Dashboard" FontSize="18"
                                   HorizontalAlignment="Right"
                                   VerticalAlignment="Center"
@@ -176,6 +178,8 @@
             <Grid Height="60" DockPanel.Dock="Bottom"
                   VerticalAlignment="Bottom"
                   >
+                
+                <!-- color here -->
                 <Border CornerRadius="20,0,0,20" Width="40" 
                         Height="40"
                         VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -188,6 +192,8 @@
                                                  />
                     </Button>
                 </Border>
+                
+                <!-- color here -->
                 <Border CornerRadius="0,20,20,0" Width="40" 
                         Height="40"
                         VerticalAlignment="Center" HorizontalAlignment="Center"

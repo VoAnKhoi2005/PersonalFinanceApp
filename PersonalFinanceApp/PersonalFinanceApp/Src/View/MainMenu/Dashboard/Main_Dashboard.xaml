@@ -7,16 +7,17 @@
              mc:Ignorable="d" 
                 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="720" d:DesignWidth="942">
+    <!--color done-->
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Sans Serif Collection"/>
-                <Setter Property="Foreground" Value="#E5CBBFBF"/>
+                <Setter Property="Foreground" Value="{DynamicResource CommonText}"/>
                 <Setter Property="FontWeight" Value="Regular"/>
             </Style>
             <Style TargetType="Button">
                 <Setter Property="Background" Value="Transparent"></Setter>
-                <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
+                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -31,74 +32,70 @@
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="true">
                         <Setter Property="Cursor" Value="Hand"></Setter>
-                        <Setter Property="Background" Value="#265B70" ></Setter>
+                        <Setter Property="Background" Value="{DynamicResource onHovered}" ></Setter>
                     </Trigger>
                 </Style.Triggers>
             </Style>
         </Grid.Resources>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.125*"></RowDefinition>
-                <RowDefinition Height="0.35*"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="17*"></RowDefinition>
+                <RowDefinition Height="49*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <!--Dashboad - user icon-->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="421*"></ColumnDefinition>
-                    <ColumnDefinition Width="50*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="43*"></RowDefinition>
-                        <RowDefinition Height="23*"></RowDefinition>
+                        <RowDefinition Height="48*"></RowDefinition>
+                        <RowDefinition Height="19*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0"
                     Text="Dashboard" 
                                FontSize="28" 
                                FontWeight="Bold"
                                HorizontalAlignment="Left"
-                               VerticalAlignment="Center" Margin="25,-10,0,0" Height="55" Width="150"
+                               VerticalAlignment="Center" Margin="25,-10,0,0" 
+                               Height="55" Width="150"
                                ></TextBlock>
                     <TextBlock Grid.Row="1"
                     Text="easy way to get a comprehensive overview of important data" 
                                FontSize="14"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="26,0,0,-7" Height="37" Width="383"
+                               HorizontalAlignment="Left" Margin="26,0,0,-7" 
+                               Height="37" Width="383"
                                ></TextBlock>
                 </Grid>
-                
-                
+
+
                 <!--user-->
                 <Button Width="35" Height="35" Grid.Column="1">
-                    <Border>
-                        <materialDesign:PackIcon 
-                                                    Kind="AccountBadge"
-                                                    Width="30" Height="30"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Center"
-                                         />
-                    </Border>
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="Transparent"></Setter>
-                            <Setter Property="Foreground" Value="#E5CBBFBF"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
-                                        <Border CornerRadius="30"
-                                            Background="{TemplateBinding Background}">
-                                            <ContentPresenter HorizontalAlignment="Stretch"
-                                                  VerticalAlignment="Stretch" ></ContentPresenter>
-                                        </Border>
+                                        <materialDesign:PackIcon 
+                                                Foreground="{TemplateBinding Foreground}"
+                                                    Kind="AccountBadge"
+                                                    Width="30" Height="30"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                         />
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="true">
                                     <Setter Property="Cursor" Value="Hand"></Setter>
-                                    <Setter Property="Foreground"  Value="#265B70" ></Setter>
+                                    <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -118,8 +115,8 @@
                 <!--TOTAL BALANCE-->
                 <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                             CornerRadius="30"
-                          Background="#053B50"
-                            Margin="15,15,7.5,7.5">
+                          Background="{DynamicResource CommonGridBackground}"
+                            Margin="15, 15,7.5,7.5">
                     <Button >
                         <Grid Visibility="Visible">
                             <Grid.RowDefinitions>
@@ -151,7 +148,7 @@
                                     <ColumnDefinition Width="41*" ></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Border
-                            Background="#25FFAE" CornerRadius="20"
+                            Background="{DynamicResource Dashboard_trueColor}" CornerRadius="20"
                             Width="66" Height="35" 
                                     Margin="15,0,0,0"
                                     HorizontalAlignment="Left" 
@@ -159,7 +156,9 @@
                                     <Grid>
                                         <materialDesign:PackIcon 
                             Width="20" Height="20"
-                            VerticalAlignment="Center" HorizontalAlignment="Left"
+                            VerticalAlignment="Center" 
+                                            Foreground="{DynamicResource Dashboard_percent}"
+                                            HorizontalAlignment="Left"
                             Margin="5,0,0,0"
                             Kind="ArrowTopRightThin" />
                                         <TextBlock Text="x.x%" 
@@ -167,7 +166,7 @@
                                    VerticalAlignment="Center" 
                                    HorizontalAlignment="Right" 
                                    Margin="0,0,10,0"
-                                   Foreground="Black"></TextBlock>
+                                   Foreground="{DynamicResource Dashboard_percent}"></TextBlock>
                                     </Grid>
                                 </Border>
                                 <TextBlock Text=".vs last month" 
@@ -183,8 +182,8 @@
 
                 <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         CornerRadius="30"
-                        Background="#053B50"
-                         Margin="15,15,7.5,7.5"
+                        Background="{DynamicResource CommonGridBackground}"
+                         Margin="7.5,15,7.5,7.5"
                         Grid.Column="1">
                     <Button >
                         <Grid Visibility="Visible">
@@ -227,13 +226,14 @@
                                          Width="20" Height="20"
                                          VerticalAlignment="Center" HorizontalAlignment="Left"
                                          Margin="5,0,0,0"
+                                            Foreground="{DynamicResource Dashboard_percent}"
                                          Kind="ArrowTopRightThin" />
                                         <TextBlock Text="x.x%" 
                                                      FontSize="14" 
                                                      VerticalAlignment="Center" 
                                                      HorizontalAlignment="Right" 
                                                      Margin="0,0,10,0"
-                                                     Foreground="Black"></TextBlock>
+                                                     Foreground="{DynamicResource Dashboard_percent}"></TextBlock>
                                     </Grid>
                                 </Border>
                                 <TextBlock Text=".vs last month" 
@@ -248,8 +248,8 @@
                 <!--EXPENSE-->
                 <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         CornerRadius="30"
-                        Background="#053B50"
-                         Margin="15,15,7.5,7.5"
+                        Background="{DynamicResource CommonGridBackground}"
+                         Margin="7.5,15,7.5,7.5"
                         Grid.Column="2">
                     <Button >
                         <Grid Visibility="Visible">
@@ -290,6 +290,7 @@
                                     <Grid>
                                         <materialDesign:PackIcon 
                                          Width="20" Height="20"
+                                            Foreground="{DynamicResource Dashboard_percent}"
                                          VerticalAlignment="Center" HorizontalAlignment="Left"
                                          Margin="5,0,0,0"
                                          Kind="ArrowTopRightThin" />
@@ -298,7 +299,7 @@
                                                      VerticalAlignment="Center" 
                                                      HorizontalAlignment="Right" 
                                                      Margin="0,0,10,0"
-                                                     Foreground="Black"></TextBlock>
+                                                     Foreground="{DynamicResource Dashboard_percent}"></TextBlock>
                                     </Grid>
                                 </Border>
                                 <TextBlock Text=".vs last month" 
@@ -313,8 +314,8 @@
                 <!--TOTAL SAVING-->
                 <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         CornerRadius="30"
-                        Background="#053B50"
-                         Margin="15,15,7.5,7.5"
+                        Background="{DynamicResource CommonGridBackground}"
+                         Margin="7.5,15,15,7.5"
                         Grid.Column="3">
                     <Button >
                         <Grid Visibility="Visible">
@@ -351,7 +352,7 @@
                                     <ColumnDefinition Width="41*" ></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Border
-                                    Background="#25FFAE" CornerRadius="20"
+                                    Background="{DynamicResource Dashboard_falseColor}" CornerRadius="20"
                                     Width="66" Height="35" 
                                     Margin="15,0,0,0"
                                     HorizontalAlignment="Left" 
@@ -360,6 +361,7 @@
                                         <materialDesign:PackIcon 
                                          Width="20" Height="20"
                                          VerticalAlignment="Center" HorizontalAlignment="Left"
+                                            Foreground="{DynamicResource Dashboard_percent}"
                                          Margin="5,0,0,0"
                                          Kind="ArrowTopRightThin" />
                                         <TextBlock Text="x.x%" 
@@ -367,7 +369,7 @@
                                                      VerticalAlignment="Center" 
                                                      HorizontalAlignment="Right" 
                                                      Margin="0,0,10,0"
-                                                     Foreground="Black"></TextBlock>
+                                                     Foreground="{DynamicResource Dashboard_percent}"></TextBlock>
                                     </Grid>
                                 </Border>
                                 <TextBlock Text=".vs last month" 
@@ -400,7 +402,7 @@
                     <!--chart -->
                     <Border CornerRadius="30"
                         Grid.Row="0" 
-                            Background="#053B50" 
+                            Background="{DynamicResource CommonGridBackground}" 
                             Margin="7.5,7.5,15,7.5" >
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -454,7 +456,7 @@
                     <Grid Grid.Row="1">
                         <Border CornerRadius="30"
                             Grid.Row="0" 
-                            Background="#053B50" 
+                            Background="{DynamicResource CommonGridBackground}" 
                             Margin="7.5,7.5,15,15">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -479,7 +481,7 @@
                 <!--activity-->
                 <Grid Grid.Row="0">
                     <Border                                 
-                    Background="#053B50" 
+                    Background="{DynamicResource CommonGridBackground}" 
                         CornerRadius="30"
                         Margin="15, 7.5, 7.5, 15">
                         <Canvas>

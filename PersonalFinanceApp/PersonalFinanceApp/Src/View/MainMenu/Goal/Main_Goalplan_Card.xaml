@@ -13,7 +13,7 @@
         <Border.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Sans Serif Collection"/>
-                <Setter Property="Foreground" Value="#E5CBBFBF"/>
+                <Setter Property="Foreground" Value="{DynamicResource CommonText}"/>
                 <Setter Property="FontWeight" Value="Regular"/>
                 <Setter Property="FontSize" Value="16"></Setter>
             </Style>
@@ -22,7 +22,6 @@
                 <Setter Property="Foreground" Value="Transparent"></Setter>
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="true">
-                        <Setter Property="Foreground" Value="Black"></Setter>
                         <Setter Property="Cursor" Value="Hand"></Setter>
                     </Trigger>
                 </Style.Triggers>
@@ -74,7 +73,8 @@
                                         Content="{materialDesign:PackIcon Kind=Heart,                                                         Size=21}"
                                         IsEnabled="True"
                                         Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                                        ToolTip="MaterialDesignFlatPrimaryToggleButton" Background="#FFE5A78E" Foreground="#FFF14242" />
+                                        ToolTip="MaterialDesignFlatPrimaryToggleButton" 
+                                      Background="#FFE5A78E" Foreground="#FFF14242" />
                         <!--Notification-->
                         <Button Grid.Column="1" Command="{Binding NotifyGoalCommand}">
                             <Button.Style>
@@ -97,7 +97,7 @@
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="true">
                                             <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="Foreground" Value="#FFF6E8A1"></Setter>
+                                            <Setter Property="Foreground" Value="{DynamicResource Goalplan_Hover}"></Setter>
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -126,7 +126,8 @@
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="true">
                                             <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="Foreground" Value="#FFF6E8A1"></Setter>
+                                            <Setter Property="Foreground" Value="{DynamicResource Goalplan_Hover}"></Setter>
+
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -154,7 +155,8 @@
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="true">
                                             <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="Foreground" Value="#FFF6E8A1"></Setter>
+                                            <Setter Property="Foreground" Value="{DynamicResource Goalplan_Hover}"></Setter>
+
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -182,7 +184,8 @@
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="true">
                                             <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="Foreground" Value="#FFF6E8A1"></Setter>
+                                            <Setter Property="Foreground" Value="{DynamicResource Goalplan_Hover}"></Setter>
+
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -257,7 +260,8 @@
                                    FontWeight="DemiBold"
                                    FontSize="16"></TextBlock>
                         <!--binding here-->
-                        <TextBlock Text="not finished yet" Foreground="Red"
+                        <TextBlock Text="not finished yet" 
+                                   Foreground="{DynamicResource Dashboard_falseColor}"
                                    FontWeight="DemiBold"
                                    FontSize="14"
                                    HorizontalAlignment="Right" Margin="0,0,5,0"></TextBlock>
@@ -274,8 +278,8 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TextBlock Text="Target (VND)  : " VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+                    <TextBlock Text="Amount (VND)  : " VerticalAlignment="Center"
+                               HorizontalAlignment="Left" Margin="30,0,0,0"></TextBlock>
 
                     <!--binding here-->
                     <TextBlock Text="{Binding TargetGoal}" VerticalAlignment="Center"
@@ -284,7 +288,7 @@
                 </Grid>
                 <Grid Grid.Row="1">
                     <TextBlock Text="Start date  : " VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+                               HorizontalAlignment="Left" Margin="30,0,0,0"></TextBlock>
 
                     <!--binding here-->
                     <TextBlock Text="1/1/1999" VerticalAlignment="Center"
@@ -293,7 +297,7 @@
                 </Grid>
                 <Grid Grid.Row="2">
                     <TextBlock Text="End date  : " VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="50,0,0,0"
+                               HorizontalAlignment="Left" Margin="30,0,0,0"
                                ></TextBlock>
 
                     <!--binding here-->
@@ -302,8 +306,8 @@
                                FontWeight="Bold"></TextBlock>
                 </Grid>
                 <Grid Grid.Row="3">
-                    <TextBlock Text="Time to reach your goal  : " VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="50,0,0,0"
+                    <TextBlock Text="Time to reach your goal  (days)  : " VerticalAlignment="Center"
+                               HorizontalAlignment="Left" Margin="30,0,0,0"
                                ></TextBlock>
 
                     <!--binding here-->
@@ -321,11 +325,11 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="Description  :" VerticalAlignment="Center"
                            Grid.Row="0"
-                           HorizontalAlignment="Left" Margin="50,0,0,0"></TextBlock>
+                           HorizontalAlignment="Left" Margin="30,0,0,0"></TextBlock>
 
                 <!--binding here-->
                 <TextBlock Grid.Row="1"
-                           HorizontalAlignment="Left" Margin="50,0,0,0"
+                           HorizontalAlignment="Left" Margin="30,0,0,0"
                     TextWrapping="Wrap"></TextBlock>
             </Grid>
         </Grid>
