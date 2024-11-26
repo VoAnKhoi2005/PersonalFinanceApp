@@ -1,10 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows.Input;
-using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
-using PersonalFinanceApp.Src.ViewModel.MainMenu;
 using PersonalFinanceApp.ViewModel.Command;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
