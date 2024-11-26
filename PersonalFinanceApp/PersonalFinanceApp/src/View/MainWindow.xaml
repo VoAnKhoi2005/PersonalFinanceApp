@@ -262,7 +262,7 @@
                 <DataTemplate DataType="{x:Type viewModels:SummaryViewModel}">
                     <views:UC_Summary />
                 </DataTemplate>
-                
+
             </ContentControl.Resources>
         </ContentControl>
 

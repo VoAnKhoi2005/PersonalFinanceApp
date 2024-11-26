@@ -21,12 +21,18 @@ public class GoalHistoryViewModel : BaseViewModel {
         }
     }
     public ICommand RefreshHistoryGoalCommand { get; set; }
+    public ICommand BackHistoryGoalCommand { get; set; }
     public bool HasNoHistoryGoal { get; set; } = true;
 
     public GoalHistoryViewModel(IServiceProvider serviceProvider) {
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
         RefreshHistoryGoalCommand = new RelayCommand<Object>(LoadHistoryGoal);
+        BackHistoryGoalCommand = new RelayCommand<object>(CloseModal);
+
+    }
+    public void CloseModal(object sender) {
+        _modalNavigationStore.Close();
     }
     public void LoadHistoryGoal(object p) {
         //load data to datagrid

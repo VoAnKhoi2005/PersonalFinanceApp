@@ -121,6 +121,17 @@ public class GoalplanCardViewModel:BaseViewModel
         }
     }
     private string _resourceGoalCard;
+    //resourceGoalCard
+    public string DescriptionGoalCard {
+        get => _descriptionGoalCard;
+        set {
+            if (_descriptionGoalCard != value) {
+                _descriptionGoalCard = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _descriptionGoalCard;
     #endregion
     public ICommand EditGoalCommand { get; set; }
     public ICommand DeleteGoalCommand { get; set; }
@@ -148,6 +159,7 @@ public class GoalplanCardViewModel:BaseViewModel
         StatusGoalCard = goal.Status;
         ResourceGoalCard = goal.Resources;
         CategoryGoalCard = goal.CategoryName;
+        DescriptionGoalCard = goal.Description;
 
         //if (goal == null) return;
         //if (goal.Target >= goal.CurrentAmount && goal.Deadline <= DateTime.Now) StatusGoalCard = "Successful!";

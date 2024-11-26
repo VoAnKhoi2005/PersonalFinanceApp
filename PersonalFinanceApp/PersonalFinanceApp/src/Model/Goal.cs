@@ -25,6 +25,8 @@ public class Goal
 
     public string? Resources { get; set; }
 
+    public string? Description { get; set; }
+
     [Required]
     public int UserID { get; set; }
 

@@ -181,7 +181,7 @@
             <!--Start date - end date-->
             <Grid Grid.Row="5">
                 <TextBox
-                    Text="{Binding DecriptionGoal}"
+                    Text="{Binding DescriptionGoal}"
                         AcceptsReturn="True" TextWrapping="Wrap"
                      FontSize="14"
                     VerticalAlignment="Top"

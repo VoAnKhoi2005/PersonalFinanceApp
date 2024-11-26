@@ -99,16 +99,16 @@ public class GoalplanAddNewViewModel : BaseViewModel
     }
     private string _statusGoal;
     //Decription
-    public string DecriptionGoal {
-        get => _decriptionGoal;
+    public string DescriptionGoal {
+        get => _descriptionGoal;
         set {
-            if (_decriptionGoal != value) {
-                _decriptionGoal = value;
+            if (_descriptionGoal != value) {
+                _descriptionGoal = value;
                 OnPropertyChanged();
             }
         }
     }
-    private string _decriptionGoal;
+    private string _descriptionGoal;
     //category
     public string CategoryGoal {
         get => _categoryGoal;
@@ -169,11 +169,12 @@ public class GoalplanAddNewViewModel : BaseViewModel
             Deadline = DeadlineGoal,
             Status = "Active",
             Resources = ResourceGoal,
+            Description = DescriptionGoal,
             UserID = int.Parse(_accountStore.SharedUser[0]),
             CategoryName = CategoryGoal,
 
         };
-        //goal.GoalCategory.Description = DecriptionGoal;
+        //goal.GoalCategory.Description = DescriptionGoal;
         var item = DBManager.GetFirst<GoalCategory>(goalcategory => goalcategory.Name == CategoryGoal);
 
         DBManager.Insert(goal);
