@@ -1,10 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows.Input;
-using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
-using PersonalFinanceApp.Src.ViewModel.MainMenu;
 using PersonalFinanceApp.ViewModel.Command;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
@@ -66,11 +64,6 @@ public class GoalplanViewModel : BaseViewModel
         List<Goal> goals = DBManager.GetAll<Goal>();
         foreach (var goal in goals) {
             GoalplanCardViewModels.Add(new GoalplanCardViewModel(_serviceProvider, goal));
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            GoalplanCardViewModels.Add(new GoalplanCardViewModel(_serviceProvider, null));
         }
     }
 }

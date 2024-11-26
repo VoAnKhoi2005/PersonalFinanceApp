@@ -18,7 +18,8 @@ public class NavigateModalCommand<TViewModel> : BaseCommand where TViewModel : B
 
     public override void Execute(object parameter)
     {
-        _modalNavigationStore.CurrentModalViewModel = _createViewModel();
+        //_modalNavigationStore.CurrentModalViewModel = _createViewModel()
+        _modalNavigationStore.Navigate(_createViewModel());
     }
 
     public override bool CanExecute(object parameter) => _canExecuteViewModel();
