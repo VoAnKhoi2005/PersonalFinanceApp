@@ -1,11 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Model;
-using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Windows.Input;
-using System.Xml.Linq;
-using Windows.Globalization;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -126,16 +123,15 @@ public class GoalplanCardViewModel:BaseViewModel
     }
     private string _resourceGoalCard;
     #endregion
-    private GoalplanCardViewModel() { 
-        
-    }
-    public GoalplanCardViewModel(IServiceProvider serviceProvider) {
-        _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
-
-        EditGoalCommand = new NavigateCommand<GoalEditViewModel>(serviceProvider);
-    }
-    public GoalplanCardViewModel(Goal goal)
+    private GoalplanCardViewModel() { }
+    public GoalplanCardViewModel(IServiceProvider serviceProvider, Goal goal)
     {
+        _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
+        EditGoalCommand = new NavigateModalCommand<GoalEditViewModel>(serviceProvider);
+
+        if (goal == null)
+            return;
+
         NameGoalCard = goal.Name;
         TargetGoalCard = goal.Target.ToString();
         CurrentAmoutGoalCard = goal.CurrentAmount.ToString();

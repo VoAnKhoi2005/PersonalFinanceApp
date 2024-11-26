@@ -141,12 +141,13 @@
                         <!--Command="{Binding EditGoalCommand}"-->
                         <Button Grid.Column="3" 
                                 VerticalAlignment="Bottom"
-                                HorizontalAlignment="Left">
-                            <i:Interaction.Triggers>
+                                HorizontalAlignment="Left" 
+                                Command="{Binding EditGoalCommand}">
+                            <!--<i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
                                     <i:InvokeCommandAction Command="{Binding EditGoalCommand}"/>
                                 </i:EventTrigger>
-                            </i:Interaction.Triggers>
+                            </i:Interaction.Triggers>-->
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
