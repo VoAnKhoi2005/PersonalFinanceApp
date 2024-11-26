@@ -2,14 +2,9 @@
 using PersonalFinanceApp.ViewModel;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace PersonalFinanceApp.Src.ViewModel.MainMenu;
+namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class GoalEditViewModel : BaseViewModel
 {

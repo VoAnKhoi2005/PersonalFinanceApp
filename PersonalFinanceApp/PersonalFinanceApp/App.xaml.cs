@@ -82,13 +82,23 @@ namespace PersonalFinanceApp
             services.AddTransient<ExpenseBookViewModel>(s => new ExpenseBookViewModel(s));
             services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
             services.AddTransient<SummaryViewModel>(s => new SummaryViewModel(s));
+            services.AddTransient<ExpenseViewModel>(s => new ExpenseViewModel(s));
 
             //Modal-Popup
-            services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));
+            //expense book
             services.AddTransient<ExpenseBookAddNewViewModel>(s => new ExpenseBookAddNewViewModel(s));
+            services.AddTransient<ExpenseBookEditViewModel>(s => new ExpenseBookEditViewModel(s));
 
-            services.AddTransient<ExpenseViewModel>(s => new ExpenseViewModel(s));
+            //expense
             services.AddTransient<ExpenseAddNewViewModel>(s => new ExpenseAddNewViewModel(s));
+            services.AddTransient<ExpenseEditViewModel>(s => new ExpenseEditViewModel(s));
+            services.AddTransient<ExpenseDeleteViewModel>(s => new ExpenseDeleteViewModel(s));
+
+            //goal
+            services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));
+            services.AddTransient<GoalEditViewModel>(s => new GoalEditViewModel(s));
+            services.AddTransient<GoalHistoryViewModel>(s => new GoalHistoryViewModel(s));
+            services.AddTransient<GoalplanCardViewModel>(s => new GoalplanCardViewModel(s));
 
         }
 

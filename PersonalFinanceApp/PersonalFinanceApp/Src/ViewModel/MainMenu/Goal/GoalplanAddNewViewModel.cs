@@ -76,7 +76,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
     }
     private string _reminderGoal;
     //deadline
-    public string DeadlineGoal {
+    public DateTime DeadlineGoal {
         get => _deadlineGoal;
         set {
             if (_deadlineGoal != value) {
@@ -85,7 +85,8 @@ public class GoalplanAddNewViewModel : BaseViewModel
             }
         }
     }
-    private string _deadlineGoal;
+    private DateTime _deadlineGoal;
+
     //status
     public string StatusGoal {
         get => _statusGoal;
@@ -116,24 +117,14 @@ public class GoalplanAddNewViewModel : BaseViewModel
                 _categoryGoal = value;
                 OnPropertyChanged();
             }
+            if(value.CompareTo("<New>") == 0) {
+                NewGoalCategory();
+            }
         }
     }
     private string _categoryGoal;
-    //category
-    public ObservableCollection<string> _itemsGoal = new ObservableCollection<string> {
-        #region Category of Goal
-        "New vehicle",
-        "New home",
-        "Hoiliday trip",
-        "Education",
-        "Emergency fund",
-        "Health care",
-        "Party",
-        "Kids spoiling",
-        "Charity",
-        "<New>",
-        #endregion
-    };
+    //category item source
+    public ObservableCollection<string> _itemsGoal = new ObservableCollection<string> {};
     public ObservableCollection<string> ItemsGoal {
         get => _itemsGoal;
         set {
@@ -154,6 +145,11 @@ public class GoalplanAddNewViewModel : BaseViewModel
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
+        var item = DBManager.GetAll<GoalCategory>();
+        foreach(var it in item) {
+            ItemsGoal.Add(it.Name);
+        }
+
         CancelNewGoalCommand = new RelayCommand<object>(CloseModal);
         ConfirmNewGoalCommand = new RelayCommand<object>(ConfirmNewGoal);
     }
@@ -164,37 +160,27 @@ public class GoalplanAddNewViewModel : BaseViewModel
     }
     private void ConfirmNewGoal(object sender) {
         //add data to database
-        //Goal Category 
-        GoalCategory goalcategory = new GoalCategory() {
-            Name = CategoryGoal,
-            Description = DecriptionGoal,
-        };
-        DBManager.Insert(goalcategory);
         //Goal
         Goal goal = new Goal() {
             Name = NameGoal,
             Target = long.Parse(TargetGoal),
             CurrentAmount = long.Parse(CurrentAmountGoal),
+            Reminder = "Daily",
+            Deadline = DeadlineGoal,
+            Status = "Active",
             Resources = ResourceGoal,
             UserID = int.Parse(_accountStore.SharedUser[0]),
-            CategoryName = goalcategory.Name,
-            //User = _accountStore.Users,
-            //GoalCategory = goalcategory,
-            //Deadline = DeadlineGoal
-        };
-        //Goal History
-        GoalHistory goalhistory = new GoalHistory() {
-            //Goal = (Goal)goal,
-            GoalID = goal.GoalID,
-            TimeAdded = DateTime.Now,
-            Amount = long.Parse(CurrentAmountGoal),
-        };
-        //goal.GoalHistories.Add(goalhistory);
+            CategoryName = CategoryGoal,
 
-        DBManager.Insert(goalhistory);
+        };
+        //goal.GoalCategory.Description = DecriptionGoal;
+        var item = DBManager.GetFirst<GoalCategory>(goalcategory => goalcategory.Name == CategoryGoal);
 
         DBManager.Insert(goal);
 
         _modalNavigationStore.Close();
+    }
+    public void NewGoalCategory() {
+        //
     }
 }

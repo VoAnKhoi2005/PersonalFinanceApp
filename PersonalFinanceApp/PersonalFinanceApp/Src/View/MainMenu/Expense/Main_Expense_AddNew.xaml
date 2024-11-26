@@ -34,7 +34,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <TextBlock Text="Adding  a  new  expense" 
+                <TextBlock Text="Adding new expense" 
                            FontSize="26"
                            FontWeight="Bold"
                            VerticalAlignment="top"
@@ -66,7 +66,8 @@
                     <TextBox VerticalAlignment="Center" Text="{Binding AmountExpenseBook}"
                              Margin="0,30,0,0"
                              Width="160" Height="40"
-                             TextAlignment="Center"
+                             TextAlignment="Left"
+                             materialDesign:HintAssist.Hint="Your expense name"
                              Foreground="{DynamicResource CommonText}"
                              FontSize="14"
                                  HorizontalAlignment="Center"
@@ -95,25 +96,67 @@
                               HorizontalAlignment="Left"
                               VerticalAlignment="Top"
                               FontSize="14"
+                              IsEditable="True"
                               Foreground="{DynamicResource CommonText}"
                               MinWidth="128"
-                              materialDesign:HintAssist.Hint="select a category" 
+                              materialDesign:HintAssist.Hint="Select a category" 
                               materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                                BorderBrush="{x:Null}"
+                              BorderBrush="{x:Null}"
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0"
                               Text="{Binding CategoryExpenseBook}">
 
                         <!--not done here-->
-                        <ComboBoxItem
-    Content="Android" />
-                        <ComboBoxItem
-    Content="iOS" />
-                        <ComboBoxItem
-    Content="Linux" />
-                        <ComboBoxItem
-    Content="Windows" />
+                        <ComboBoxItem Content="Ăn sáng" />
+                        <ComboBoxItem Content="Ăn tiệm" />
+                        <ComboBoxItem Content="Ăn tối" />
+                        <ComboBoxItem Content="Ăn trưa" />
+                        <ComboBoxItem Content="Cafe" />
+                        <ComboBoxItem Content="Đi chợ / siêu thị" />
+                        <ComboBoxItem Content="Cho vay" />
+                        <ComboBoxItem Content="Đồ chơi" />
+                        <ComboBoxItem Content="Học phí" />
+                        <ComboBoxItem Content="Sách vở" />
+                        <ComboBoxItem Content="Sữa" />
+                        <ComboBoxItem Content="Tiền tiêu vặt" />
+                        <ComboBoxItem Content="Điện" />
+                        <ComboBoxItem Content="Điện thoại cố định" />
+                        <ComboBoxItem Content="Điện thoại di động" />
+                        <ComboBoxItem Content="Gas" />
+                        <ComboBoxItem Content="Internet" />
+                        <ComboBoxItem Content="Thuê người giúp việc" />
+                        <ComboBoxItem Content="Nước" />
+                        <ComboBoxItem Content="Truyền hình" />
+                        <ComboBoxItem Content="Bảo hiểm xe" />
+                        <ComboBoxItem Content="Gửi xe" />
+                        <ComboBoxItem Content="Rửa xe" />
+                        <ComboBoxItem Content="Sửa chữa, bảo dưỡng xe" />
+                        <ComboBoxItem Content="Taxi/ thuê xe" />
+                        <ComboBoxItem Content="Xăng xe" />
+                        <ComboBoxItem Content="Biếu tặng" />
+                        <ComboBoxItem Content="Cưới xin" />
+                        <ComboBoxItem Content="Ma chay" />
+                        <ComboBoxItem Content="Thăm hỏi" />
+                        <ComboBoxItem Content="Du lịch" />
+                        <ComboBoxItem Content="Làm đẹp" />
+                        <ComboBoxItem Content="Mỹ phẩm" />
+                        <ComboBoxItem Content="Phim ảnh ca nhạc" />
+                        <ComboBoxItem Content="Vui chơi giải trí" />
+                        <ComboBoxItem Content="Phí chuyển khoản" />
+                        <ComboBoxItem Content="Mua sắm đồ đạc" />
+                        <ComboBoxItem Content="Sửa chữa nhà cửa" />
+                        <ComboBoxItem Content="Thuê nhà" />
+                        <ComboBoxItem Content="Giao lưu, quan hệ" />
+                        <ComboBoxItem Content="Học hành" />
+                        <ComboBoxItem Content="Khám chữa bệnh" />
+                        <ComboBoxItem Content="Thể thao" />
+                        <ComboBoxItem Content="Thuốc men" />
+                        <ComboBoxItem Content="Trả nợ" />
+                        <ComboBoxItem Content="Giày dép" />
+                        <ComboBoxItem Content="Phụ kiện khác" />
+                        <ComboBoxItem Content="Quần áo" />
+
                         <ComboBoxItem Content="Your custom category"></ComboBoxItem>
                     </ComboBox>
                     
@@ -190,7 +233,8 @@
                     <TextBox VerticalAlignment="Center" Text="{Binding AmountExpenseBook}"
                              Margin="0,30,0,0"
                              Width="160" Height="40"
-                             TextAlignment="Center"
+                             TextAlignment="Left"
+                             materialDesign:HintAssist.Hint="Amount"
                              Foreground="{DynamicResource CommonText}"
                              FontSize="14"
                              BorderBrush="{x:Null}"
@@ -223,7 +267,8 @@
                              Margin="0,30,0,0"
                              Width="160" Height="40"
                              BorderBrush="{x:Null}"
-                             TextAlignment="Center"
+                             TextAlignment="Left"
+                             materialDesign:HintAssist.Hint="Your resource"
                              Foreground="{DynamicResource CommonText}"
                              FontSize="14"
                                  HorizontalAlignment="Center"
@@ -252,7 +297,7 @@
                               FontSize="14"
                               Foreground="{DynamicResource CommonText}"
                               MinWidth="128"
-                              materialDesign:HintAssist.Hint="is recurring?" 
+                              materialDesign:HintAssist.Hint="Is recurring?" 
                               materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
@@ -364,7 +409,7 @@
                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                     Width="400"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         Margin="33,51,37,0" Foreground="#E5CBBFBF" 
+                         Margin="40,46,37,0" Foreground="#E5CBBFBF" 
                          CaretBrush="{DynamicResource CommonText}" 
                          BorderBrush="{x:Null}"
                          SelectionBrush="{DynamicResource CommonText}" />

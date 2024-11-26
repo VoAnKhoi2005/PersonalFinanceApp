@@ -1,21 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
-using PersonalFinanceApp.ViewModel.MainMenu;
 using PersonalFinanceApp.ViewModel.Stores;
-using PersonalFinanceApp.ViewModel;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace PersonalFinanceApp.Src.ViewModel.MainMenu;
+namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class GoalHistoryViewModel : BaseViewModel {
+
     private readonly ModalNavigationStore _modalNavigationStore;
     private ObservableCollection<GoalHistory> _goalHistories = new();
     public ObservableCollection<GoalHistory> GoalHistories {

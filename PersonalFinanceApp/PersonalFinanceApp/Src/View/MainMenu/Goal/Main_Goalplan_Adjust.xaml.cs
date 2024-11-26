@@ -18,9 +18,9 @@ namespace PersonalFinanceApp.Src.View
     /// <summary>
     /// Interaction logic for UC_Main_Goalplan_AdjustCard.xaml
     /// </summary>
-    public partial class UC_Main_Goalplan_AdjustCard : UserControl
+    public partial class UC_Main_Goalplan_Adjust : UserControl
     {
-        public UC_Main_Goalplan_AdjustCard()
+        public UC_Main_Goalplan_Adjust()
         {
             InitializeComponent();
         }
