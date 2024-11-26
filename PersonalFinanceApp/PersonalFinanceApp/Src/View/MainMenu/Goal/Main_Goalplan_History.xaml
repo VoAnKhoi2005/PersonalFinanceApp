@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="700">
+             d:DesignHeight="450" d:DesignWidth="500">
     <DataGrid 
                 Name="ListExpenseBook"
                 Grid.Row="1"

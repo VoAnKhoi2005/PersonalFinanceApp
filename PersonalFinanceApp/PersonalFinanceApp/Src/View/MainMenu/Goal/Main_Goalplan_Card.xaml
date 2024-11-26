@@ -64,7 +64,8 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <ToggleButton Grid.Column="0" Command="{Binding FavoritesGoalCommand}"
+                        <ToggleButton Grid.Column="0" 
+                                      Command="{Binding FavoritesGoalCommand}"
                                       Width="30"
                                       Height="30"
                                       VerticalAlignment="Bottom"
@@ -75,7 +76,8 @@
                                         ToolTip="MaterialDesignFlatPrimaryToggleButton" 
                                       Background="#FFE5A78E" Foreground="#FFF14242" />
                         <!--Notification-->
-                        <Button Grid.Column="1" Command="{Binding NotifyGoalCommand}"
+                        <Button Grid.Column="1" 
+                                Command="{Binding NotifyGoalCommand}"
                                 VerticalAlignment="Bottom"
                                 HorizontalAlignment="Left">
 
@@ -106,8 +108,9 @@
                             </Button.Style>
                         </Button>
                         <!--Add money to goal-->
-                        <Button Grid.Column="2" Command="{Binding AddNewAmountGoalCommand}"
-                                                                VerticalAlignment="Bottom"
+                        <Button Grid.Column="2" 
+                                Command="{Binding AddNewAmountGoalCommand}"
+                                VerticalAlignment="Bottom"
                                 HorizontalAlignment="Left">
                             <Button.Style>
                                 <Style TargetType="Button">
@@ -143,11 +146,6 @@
                                 VerticalAlignment="Bottom"
                                 HorizontalAlignment="Left" 
                                 Command="{Binding EditGoalCommand}">
-                            <!--<i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Click">
-                                    <i:InvokeCommandAction Command="{Binding EditGoalCommand}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>-->
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -177,7 +175,7 @@
                         </Button>
                         <!--history-->
                         <Button Grid.Column="4" Command="{Binding HistoryGoalCommand}"
-                                                                VerticalAlignment="Bottom"
+                                VerticalAlignment="Bottom"
                                 HorizontalAlignment="Left">
                             <Button.Style>
                                 <Style TargetType="Button">

@@ -98,6 +98,7 @@ namespace PersonalFinanceApp
             services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));
             services.AddTransient<GoalEditViewModel>(s => new GoalEditViewModel(s));
             services.AddTransient<GoalHistoryViewModel>(s => new GoalHistoryViewModel(s));
+            services.AddTransient<GoalAddSavedAmountViewModel>(s => new GoalAddSavedAmountViewModel(s));
         }
 
     }

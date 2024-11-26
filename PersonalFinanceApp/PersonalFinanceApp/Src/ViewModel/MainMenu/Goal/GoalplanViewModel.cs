@@ -12,12 +12,7 @@ public class GoalplanViewModel : BaseViewModel
 {
     #region Command
     public ICommand AddNewGoalCommand { get; set; }
-    public ICommand EditGoalCommand { get; set; }
-    public ICommand DeleteGoalCommand { get; set; }
-    public ICommand HistoryGoalCommand { get; set; }
-    public ICommand AddNewAmountGoalCommand { get; set; }
-    public ICommand NotifyGoalCommand { get; set; }
-    public ICommand FavoritesGoalCommand { get; set; }
+
     public ICommand RefreshGoalCommand { get; set; }
     #endregion
 
@@ -54,8 +49,6 @@ public class GoalplanViewModel : BaseViewModel
 
         AddNewGoalCommand = new NavigateModalCommand<GoalplanAddNewViewModel>(serviceProvider);
 
-        EditGoalCommand = new NavigateCommand<GoalEditViewModel>(serviceProvider);
-
         RefreshGoalCommand = new RelayCommand<object>(LoadedGoal);
 
         LoadedGoal();
@@ -66,11 +59,6 @@ public class GoalplanViewModel : BaseViewModel
         List<Goal> goals = DBManager.GetAll<Goal>();
         foreach (var goal in goals) {
             GoalplanCardViewModels.Add(new GoalplanCardViewModel(_serviceProvider, goal));
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            GoalplanCardViewModels.Add(new GoalplanCardViewModel(_serviceProvider, null));
         }
     }
 }

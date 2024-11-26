@@ -9,7 +9,6 @@ namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class GoalplanCardViewModel:BaseViewModel
 {
     private readonly ModalNavigationStore _modalNavigationStore;
-    public ICommand EditGoalCommand { get; set; }
 
     #region Properties
     //status
@@ -123,11 +122,20 @@ public class GoalplanCardViewModel:BaseViewModel
     }
     private string _resourceGoalCard;
     #endregion
+    public ICommand EditGoalCommand { get; set; }
+    public ICommand DeleteGoalCommand { get; set; }
+    public ICommand HistoryGoalCommand { get; set; }
+    public ICommand AddNewAmountGoalCommand { get; set; }
+    public ICommand NotifyGoalCommand { get; set; }
+    public ICommand FavoritesGoalCommand { get; set; }
     private GoalplanCardViewModel() { }
     public GoalplanCardViewModel(IServiceProvider serviceProvider, Goal goal)
     {
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
+
         EditGoalCommand = new NavigateModalCommand<GoalEditViewModel>(serviceProvider);
+        HistoryGoalCommand = new NavigateModalCommand<GoalHistoryViewModel>(serviceProvider);
+        AddNewAmountGoalCommand = new NavigateModalCommand<GoalAddSavedAmountViewModel>(serviceProvider);
 
         if (goal == null)
             return;

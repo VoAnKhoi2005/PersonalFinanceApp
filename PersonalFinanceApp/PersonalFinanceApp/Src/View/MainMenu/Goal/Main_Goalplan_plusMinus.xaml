@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="PersonalFinanceApp.Src.View.MainMenu.Goal.Main_Goalplan_plusMinus"
+﻿<UserControl x:Class="PersonalFinanceApp.Src.View.Main_Goalplan_plusMinus"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Goal"
+             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="450">
@@ -31,7 +31,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <TextBlock Text="Withdraw / Deposit money" 
+                <TextBlock Text="Add Saved Amount" 
                            FontSize="26"
                            FontWeight="Bold"
                            VerticalAlignment="top"
@@ -82,7 +82,7 @@
                              Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
 
 
-                    <TextBox VerticalAlignment="Center" Text="{Binding AmountExpenseBook}"
+                    <TextBox VerticalAlignment="Center" Text="{Binding AmountAddSaved}"
                              Margin="0,30,0,0"
                              Width="310" Height="40"
                              TextAlignment="Center"
@@ -108,7 +108,7 @@
                 <Border Grid.Column="0" CornerRadius="30" Height="60"
                         Width="145"
                         Background="#FFC8386C" >
-                    <Button Command="{Binding ExpenseBookCancelCommand}">
+                    <Button Command="{Binding CancelAddSavedGoalCommand}">
                         <TextBlock Text="Cancel" Foreground="White"
                                    VerticalAlignment="Center"
                                    Opacity="1"
@@ -143,7 +143,7 @@
                 <Border Grid.Column="1" CornerRadius="30" Height="60"
                         Width="145"
                         Background="#FF61D2BE" >
-                    <Button Command="{Binding ExpenseBookConfirmCommand}">
+                    <Button Command="{Binding ConfirmAddSavedGoalCommand}">
                         <TextBlock Text="Confirm" Foreground="Black"
                                    Opacity="0.8"
                                    VerticalAlignment="Center"

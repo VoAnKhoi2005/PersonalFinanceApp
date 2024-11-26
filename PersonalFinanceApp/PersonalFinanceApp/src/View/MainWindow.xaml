@@ -262,7 +262,7 @@
                 <DataTemplate DataType="{x:Type viewModels:SummaryViewModel}">
                     <views:UC_Summary />
                 </DataTemplate>
-
+                
             </ContentControl.Resources>
         </ContentControl>
 
@@ -272,7 +272,6 @@
                       Content="{Binding CurrentModalViewModel}">
             
             <ContentControl.Resources>
-
                 <DataTemplate DataType="{x:Type viewModels:ExpenseBookAddNewViewModel}">
                     <views:UC_Main_ExpenseBook_AddNew/>
                 </DataTemplate>
@@ -282,15 +281,15 @@
                 <DataTemplate DataType="{x:Type viewModels:GoalEditViewModel}">
                     <views:UC_Main_Goalplan_Adjust/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:GoalAddSavedAmountViewModel}">
+                    <views:Main_Goalplan_plusMinus/>
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type viewModels:GoalHistoryViewModel}">
                     <views:Main_Goalplan_History/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:GoalplanCardViewModel}">
-                    <views:UC_Main_Goalplan_PlanCard/>
-                </DataTemplate>
-
             </ContentControl.Resources>
         </custom:Modal>
+
 
     </Grid>
 </Window>
