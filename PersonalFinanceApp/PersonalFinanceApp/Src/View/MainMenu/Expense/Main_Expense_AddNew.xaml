@@ -63,8 +63,8 @@
                     <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
                              Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
 
-                    <TextBox VerticalAlignment="Center" Text="{Binding AmountExpenseBook}"
-                             Margin="0,30,0,0"
+                    <TextBox VerticalAlignment="Top" Text="{Binding AmountExpenseBook}"
+                             Margin="0,47,0,0"
                              Width="160" Height="40"
                              TextAlignment="Left"
                              materialDesign:HintAssist.Hint="Your expense name"
@@ -159,7 +159,7 @@
 
                         <ComboBoxItem Content="Your custom category"></ComboBoxItem>
                     </ComboBox>
-                    
+
                     <!--when choose Your custom Category : this shown-->
                     <TextBox Visibility="Collapsed"
                         VerticalAlignment="Center" Text="{Binding AmountExpenseBook}"
@@ -209,7 +209,7 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Bottom"
                                 Margin="0,0,0,15"
-                        BorderBrush="{x:Null}"
+                                BorderBrush="{x:Null}"
                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                                 Text="{Binding DateTimeExpenseBook}" 
@@ -409,7 +409,7 @@
                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                     Width="400"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         Margin="40,46,37,0" Foreground="#E5CBBFBF" 
+                         Margin="40,48,30,0" Foreground="#E5CBBFBF" 
                          CaretBrush="{DynamicResource CommonText}" 
                          BorderBrush="{x:Null}"
                          SelectionBrush="{DynamicResource CommonText}" />

@@ -64,17 +64,6 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <ToggleButton Grid.Column="0" 
-                                      Command="{Binding FavoritesGoalCommand}"
-                                      Width="30"
-                                      Height="30"
-                                      VerticalAlignment="Bottom"
-                                      HorizontalAlignment="Left"
-                                        Content="{materialDesign:PackIcon Kind=Heart,                                                         Size=21}"
-                                        IsEnabled="True"
-                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                                        ToolTip="MaterialDesignFlatPrimaryToggleButton" 
-                                      Background="#FFE5A78E" Foreground="#FFF14242" />
                         <!--Notification-->
                         <Button Grid.Column="1" 
                                 Command="{Binding NotifyGoalCommand}"
@@ -279,14 +268,14 @@
 
                     <Grid Grid.Row="3">
                         <TextBlock Text="Amount: " HorizontalAlignment="Left" Margin="2,0,0,0"
-                                   FontSize="14" Opacity="0.4" FontWeight="DemiBold"
+                                   FontSize="14" FontWeight="DemiBold"
                                    ></TextBlock>
 
                         <!--binding here-->
                         <TextBlock Text="{Binding CurrentAmoutGoalCard}" HorizontalAlignment="Right"
                                    Margin="0,0,30,0"
                                    VerticalAlignment="Center"
-                                   FontSize="16" Opacity="0.6"></TextBlock>
+                                   FontSize="16"></TextBlock>
                     </Grid>
                     <Grid Grid.Row="4">
                         <TextBlock Text="Status :" VerticalAlignment="Center"
@@ -295,7 +284,6 @@
                                    FontSize="16"></TextBlock>
                         <!--binding here-->
                         <TextBlock Text="{Binding StatusGoalCard}" 
-                                   Foreground="{DynamicResource Dashboard_falseColor}"
                                    FontWeight="DemiBold"
                                    FontSize="16"
                                    HorizontalAlignment="Right" Margin="0,0,75,0"></TextBlock>

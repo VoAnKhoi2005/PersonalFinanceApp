@@ -38,16 +38,16 @@
                     <RowDefinition/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock Text="Adding a new goal"
+                <TextBlock Text="Edit your goal"
                            Grid.Row="0"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            FontSize="25"
                            Foreground="{DynamicResource CommonText}"
                            FontWeight="Bold"
-                           Margin="0,5,0,0" TextAlignment="Center"></TextBlock>
+                           Margin="0,8,0,0" TextAlignment="Center"></TextBlock>
 
-                <TextBlock Text="Please fill in the form below"
+                <TextBlock Text="adjust your current goal's details"
                            Grid.Row="1"
                            Opacity="0.6"
                            VerticalAlignment="Top"
@@ -61,6 +61,7 @@
                     <ColumnDefinition Width="139*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBox
+                    Text="{Binding NameEditGoal}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Margin="10,0,0,0"       
@@ -99,7 +100,9 @@
                 </Grid.ColumnDefinitions>
 
 
-                <TextBox Grid.Column="0"
+                <TextBox 
+                    Text="{Binding TargetEditGoal}"
+                    Grid.Column="0"
                     VerticalAlignment="Center"
                          FontSize="14"
                     HorizontalAlignment="Center"
@@ -110,7 +113,9 @@
                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="40" 
                     Width="180" Foreground="{DynamicResource CommonText}"/>
-                <TextBox Grid.Column="1"
+                <TextBox 
+                    Text="{Binding CurrentAmountEditGoal}"
+                    Grid.Column="1"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                          FontSize="14"
@@ -137,30 +142,25 @@
                               FontSize="14"
                               Foreground="{DynamicResource CommonText}"
                               MinWidth="128"
+                              ItemsSource="{Binding ItemsGoalEdit}"
                               materialDesign:HintAssist.Hint="Category" 
                               materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                              Text="{Binding CategoryExpenseBook}" Margin="10,0,0,0">
+                              Text="{Binding CategoryEditGoal}" Margin="10,0,0,0">
 
                         <!--not done here-->
-                        <ComboBoxItem
-    Content="Android" />
-                        <ComboBoxItem
-    Content="iOS" />
-                        <ComboBoxItem
-    Content="Linux" />
-                        <ComboBoxItem
-    Content="Windows" />
-                        <ComboBoxItem Content="Your custom category"></ComboBoxItem>
+
                     </ComboBox>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <DatePicker FontSize="14"
+                    <DatePicker 
+                        SelectedDate="{Binding DeadlineEditGoal}"
+                        FontSize="14"
                                 Width="180"
                                 Height="40" 
-                                materialDesign:HintAssist.Hint="End date"
+                                materialDesign:HintAssist.Hint="Deadline"
                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
                                 materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
@@ -173,22 +173,25 @@
 
             <!--Start date - end date-->
             <Grid Grid.Row="5">
-                <TextBox
-                    AcceptsReturn="True" TextWrapping="Wrap"
+                <TextBox 
+                Text="{Binding DescriptionEditGoal}"
+                Grid.Row="4"
                      FontSize="14"
-                    VerticalAlignment="Top"
+                    VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    materialDesign:HintAssist.Hint="Decription"
+                    materialDesign:HintAssist.Hint="Description"
                     materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                          CaretBrush="{DynamicResource CommonText}"
                     SelectionBrush="{DynamicResource CommonText}"
                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                     Height="48" 
-                    Width="380" Foreground="{DynamicResource CommonText}" Margin="0,10,0,0"/>
+                     Height="40" 
+                    Width="380" Foreground="{DynamicResource CommonText}"/>
             </Grid>
 
-            <TextBox Grid.Row="4"
+            <TextBox 
+                Text="{Binding ResourceEditGoal}"
+                Grid.Row="4"
                      FontSize="14"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
@@ -209,7 +212,7 @@
                 <Border Grid.Column="0" CornerRadius="30" Height="50"
                         Width="150"
                         Background="#FFC8386C" >
-                    <Button Command="{Binding ExpenseBookCancelCommand}">
+                    <Button Command="{Binding CancelEditGoalCommand}">
                         <TextBlock Text="Cancel" Foreground="White"
                                    VerticalAlignment="Center"
                                    Opacity="1"
@@ -244,7 +247,7 @@
                 <Border Grid.Column="1" CornerRadius="30" Height="50"
                         Width="150"
                         Background="#FF61D2BE" >
-                    <Button Command="{Binding ExpenseBookConfirmCommand}">
+                    <Button Command="{Binding ConfirmEditGoalCommand}">
                         <TextBlock Text="Confirm" Foreground="Black"
                                    Opacity="0.8"
                                    VerticalAlignment="Center"
@@ -277,5 +280,6 @@
             </Grid>
         </Grid>
     </Border>
+
 
 </Window>

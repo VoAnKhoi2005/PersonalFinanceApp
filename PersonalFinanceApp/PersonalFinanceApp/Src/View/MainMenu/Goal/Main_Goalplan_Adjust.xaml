@@ -44,7 +44,7 @@
                            FontSize="25"
                            Foreground="{DynamicResource CommonText}"
                            FontWeight="Bold"
-                           Margin="0,5,0,0" TextAlignment="Center"></TextBlock>
+                           Margin="0,8,0,0" TextAlignment="Center"></TextBlock>
 
                 <TextBlock Text="adjust your current goal's details"
                            Grid.Row="1"
@@ -159,7 +159,7 @@
                               Text="{Binding CategoryEditGoal}" Margin="10,0,0,0">
 
                         <!--not done here-->
-                        
+
                     </ComboBox>
                 </Grid>
                 <Grid Grid.Column="1">
@@ -181,20 +181,20 @@
 
             <!--Start date - end date-->
             <Grid Grid.Row="5">
-                <TextBox
-                    Text="{Binding DescriptionEditGoal}"
-                    AcceptsReturn="True" TextWrapping="Wrap"
+                <TextBox 
+                Text="{Binding DescriptionEditGoal}"
+                Grid.Row="4"
                      FontSize="14"
-                    VerticalAlignment="Top"
+                    VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    materialDesign:HintAssist.Hint="Decription"
+                    materialDesign:HintAssist.Hint="Description"
                     materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                          CaretBrush="{DynamicResource CommonText}"
                     SelectionBrush="{DynamicResource CommonText}"
                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                     Height="48" 
-                    Width="380" Foreground="{DynamicResource CommonText}" Margin="0,10,0,0"/>
+                     Height="40" 
+                    Width="380" Foreground="{DynamicResource CommonText}"/>
             </Grid>
 
             <TextBox 
