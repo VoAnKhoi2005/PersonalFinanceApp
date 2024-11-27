@@ -59,18 +59,17 @@
                             <Label Content="Username" Foreground="{DynamicResource CommonText}" FontSize="16" Margin="31,67,356,238"></Label>
                             <Border CornerRadius="15" Background="{DynamicResource Login_border}" Margin="124,62,36,238" Width="400" Height="40" Grid.ColumnSpan="2">
                                 <!--x:Name="UserLogin"-->
-                                <TextBox x:Name="UserNameLogin"
+                                <TextBox 
+                                    x:Name="UserNameLogin"
                                     Foreground="{DynamicResource CommonText}"
                                     VerticalAlignment="Top"
-                                         CaretBrush="{DynamicResource CommonText}"
-                                         SelectionBrush="{DynamicResource CommonText}"
+                                    CaretBrush="{DynamicResource CommonText}"
+                                    SelectionBrush="{DynamicResource CommonText}"
                                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"  
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                     Text="{Binding UserNameLogin}"
-                                    Width="380" 
-                                    Height="40"
+                                    Width="380" Height="40"
                                     Background="Transparent" BorderBrush="{x:Null}">
-
                                 </TextBox>
                             </Border>
 

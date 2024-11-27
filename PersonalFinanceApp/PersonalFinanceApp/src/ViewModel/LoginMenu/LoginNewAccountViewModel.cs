@@ -16,7 +16,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
 
     #region Properties
-    private bool _incorrectPasswordUserName = false;
     public bool IncorrectPasswordUserName {
         get => _incorrectPasswordUserName;
         set {
@@ -24,8 +23,8 @@ public class LoginNewAccountViewModel : BaseViewModel {
             OnPropertyChanged();
         }
     }
+    private bool _incorrectPasswordUserName = false;
 
-    private bool _incorrectName = false;
     public bool InCorrectName {
         get => _incorrectName;
         set {
@@ -33,8 +32,8 @@ public class LoginNewAccountViewModel : BaseViewModel {
             OnPropertyChanged();
         }
     }
+    private bool _incorrectName = false;
 
-    private bool _incorrectEmail = false;
     public bool InCorrectGmail {
         get => _incorrectEmail;
         set {
@@ -42,7 +41,8 @@ public class LoginNewAccountViewModel : BaseViewModel {
             OnPropertyChanged();
         }
     }
-    private bool _inCorrectPassword = false;
+    private bool _incorrectEmail = false;
+
     public bool InCorrectPassword {
         get => _inCorrectPassword;
         set {
@@ -50,7 +50,8 @@ public class LoginNewAccountViewModel : BaseViewModel {
             OnPropertyChanged();
         }
     }
-    private bool _inCorrectPasswordConfirm = false;
+    private bool _inCorrectPassword = false;
+
     public bool InCorrectPasswordConfirm {
         get => _inCorrectPasswordConfirm;
         set {
@@ -58,8 +59,8 @@ public class LoginNewAccountViewModel : BaseViewModel {
             OnPropertyChanged();
         }
     }
+    private bool _inCorrectPasswordConfirm = false;
 
-    private string _userNameLogin = string.Empty;
     public string UserNameLogin {
 
         get => _userNameLogin;
@@ -68,8 +69,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
             OnPropertyChanged();
         }
     }
-
-    private string _passwordLogin = string.Empty;
+    private string _userNameLogin = string.Empty;
 
     public string PasswordLogin
     {
@@ -79,8 +79,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
             OnPropertyChanged();
         }
     }
-
-    private string _userNameNewAccount;
+    private string _passwordLogin = string.Empty;
 
     public string UserNameNewAccount
     {
@@ -91,8 +90,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
             OnPropertyChanged();
         }
     }
-
-    private string _passwordNewAccount;
+    private string _userNameNewAccount;
 
     public string PasswordNewAccount
     {
@@ -103,8 +101,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
             OnPropertyChanged();
         }
     }
-
-    private string _passwordConfirm;
+    private string _passwordNewAccount;
 
     public string PasswordConfirm
     {
@@ -115,8 +112,8 @@ public class LoginNewAccountViewModel : BaseViewModel {
             OnPropertyChanged();
         }
     }
+    private string _passwordConfirm;
 
-    private string _gmail;
     public string Gmail
     {
         get => _gmail;
@@ -126,6 +123,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
             OnPropertyChanged();
         }
     }
+    private string _gmail;
     #endregion
 
     #region Command
@@ -214,7 +212,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
             ti.Focus();
         }
     }
-
     private void ClearText(object parameter)
     {
         TabItem tab = parameter as TabItem;
@@ -245,7 +242,6 @@ public class LoginNewAccountViewModel : BaseViewModel {
             p.Password = string.Empty;
         }
     }
-
     private void Format(object parameter) {
         TextBox p = parameter as TextBox;
         string pattern;

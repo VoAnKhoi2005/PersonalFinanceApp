@@ -22,7 +22,6 @@ public partial class MainWindow : Window
         InitializeComponent();
         GoalCategory goalCategory = new GoalCategory();
         List<string> items = new List<string>() {
-            "<New>",
             "New vehicle",
             "New home",
             "Hoiliday trip",

@@ -54,7 +54,8 @@ public class GoalAddSavedAmountViewModel : BaseViewModel {
     }
     private void ConfirmSavedGoal(object sender) {
         //add data to database
-        var item = DBManager.GetFirst<Goal>(g => g.GoalID == int.Parse(_goalStore.GoalID));
+        var idgoal = _goalStore.GoalID;
+        var item = DBManager.GetFirst<Goal>(g => g.GoalID == int.Parse(idgoal));
         if(!IsDeposit) {
             item.CurrentAmount += long.Parse(AmountAddSaved);
         }
@@ -62,7 +63,17 @@ public class GoalAddSavedAmountViewModel : BaseViewModel {
             if (item.CurrentAmount - long.Parse(AmountAddSaved) < 0) item.CurrentAmount = 0;
             else item.CurrentAmount -= long.Parse(AmountAddSaved);
         }
-         bool checkUpdate = DBManager.Update<Goal>(item);
+        GoalHistory goalhistory = new GoalHistory() {
+            GoalID = int.Parse(idgoal),
+            TimeAdded = DateTime.Now,
+            Amount = (IsDeposit) ? '-' + AmountAddSaved : '+' + AmountAddSaved,
+            Current = item.CurrentAmount.ToString(),
+        };
+        //status
+        if (item.Target <= item.CurrentAmount) item.Status = "Completed";
+        else { item.Status = "Active"; }
+        DBManager.Insert(goalhistory);
+        bool checkUpdate = DBManager.Update<Goal>(item);
         _modalNavigationStore.Close();
     }
 }

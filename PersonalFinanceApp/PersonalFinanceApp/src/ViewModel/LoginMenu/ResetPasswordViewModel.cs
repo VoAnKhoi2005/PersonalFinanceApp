@@ -47,6 +47,7 @@ public class ResetPasswordViewModel : BaseViewModel
 
     #region Command
     public ICommand NavigateConfirmEmailCommand { get; set; }
+    public ICommand CancelEmailCommand { get; set; }
 
     #endregion
 
@@ -55,6 +56,7 @@ public class ResetPasswordViewModel : BaseViewModel
         _serviceProvider = serviceProvider;
         _sharedDataService = serviceProvider.GetRequiredService<SharedDataService>();
         NavigateConfirmEmailCommand = new NavigateCommand<CodeVerificationViewModel>(serviceProvider, VerifyEmail);
+        CancelEmailCommand = new NavigateCommand<LoginNewAccountViewModel>(serviceProvider);
     }
 
     public bool VerifyEmail()
