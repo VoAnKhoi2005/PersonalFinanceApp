@@ -8,14 +8,15 @@ public class GoalHistory
     public DateTime TimeAdded { get; set; }
 
     [Required]
-    public long Amount { get; set; }
+    public string Amount { get; set; }
+    public string Current { get; set; }
 
     //Relationship
     public virtual Goal? Goal { get; set; }
 
     public GoalHistory() { }
 
-    public GoalHistory(Goal goal, long amount)
+    public GoalHistory(Goal goal, string amount)
     {
         GoalID = goal.GoalID;
         TimeAdded = DateTime.Now;

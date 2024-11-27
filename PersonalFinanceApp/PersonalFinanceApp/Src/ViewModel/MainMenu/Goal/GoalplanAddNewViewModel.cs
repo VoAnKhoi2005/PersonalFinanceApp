@@ -109,11 +109,14 @@ public class GoalplanAddNewViewModel : BaseViewModel
         get => _categoryGoal;
         set {
             if (_categoryGoal != value) {
-                _categoryGoal = value;
-                OnPropertyChanged();
-            }
-            if(value.CompareTo("<New>") == 0) {
-                NewGoalCategory();
+                if(value.CompareTo("<New>") == 0) {
+                    NewGoalCategory();
+                    OnPropertyChanged();
+                }
+                else {
+                    _categoryGoal = value;
+                    OnPropertyChanged();
+                }
             }
         }
     }
@@ -140,15 +143,20 @@ public class GoalplanAddNewViewModel : BaseViewModel
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
-        var item = DBManager.GetAll<GoalCategory>();
-        foreach(var it in item) {
-            ItemsGoal.Add(it.Name);
-        }
-
+        LoadItemSourceCategoryGoal();
+        
         CancelNewGoalCommand = new RelayCommand<object>(CloseModal);
         ConfirmNewGoalCommand = new RelayCommand<object>(ConfirmNewGoal);
     }
+    public void LoadItemSourceCategoryGoal() {
+        ItemsGoal.Clear();
+        var item = DBManager.GetAll<GoalCategory>();
+        ItemsGoal.Add("<New>");
+        foreach (var it in item) {
+            ItemsGoal.Add(it.Name);
+        }
 
+    }
     private void CloseModal(object sender)
     {
         _modalNavigationStore.Close();
@@ -162,7 +170,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
             CurrentAmount = long.Parse(CurrentAmountGoal),
             Reminder = "Daily",
             Deadline = DeadlineGoal,
-            Status = "Active",
+            Status = (long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal)) ? "Completed" : "Active",
             Resources = ResourceGoal,
             Description = DescriptionGoal,
             UserID = int.Parse(_accountStore.SharedUser[0]),

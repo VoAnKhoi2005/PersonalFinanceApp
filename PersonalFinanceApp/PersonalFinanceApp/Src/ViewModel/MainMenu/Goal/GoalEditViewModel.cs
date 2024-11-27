@@ -133,13 +133,19 @@ public class GoalEditViewModel : BaseViewModel
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _goalStore = serviceProvider.GetRequiredService<GoalStore>();
 
-        var item = DBManager.GetAll<GoalCategory>();
-        foreach (var it in item) {
-            ItemsGoalEdit.Add(it.Name);
-        }
+        
+        LoadItemSourceCategoryGoal();
         loadItem();
         CancelEditGoalCommand = new RelayCommand<object>(CloseModal);
         ConfirmEditGoalCommand = new RelayCommand<object>(ConfirmEditGoal);
+    }
+    public void LoadItemSourceCategoryGoal() {
+        ItemsGoalEdit.Clear();
+        var item = DBManager.GetAll<GoalCategory>();
+        ItemsGoalEdit.Add("<New>");
+        foreach (var it in item) {
+            ItemsGoalEdit.Add(it.Name);
+        }
     }
     public void loadItem() {
         var item = DBManager.GetFirst<Goal>(g => int.Parse(_goalStore.GoalID) == g.GoalID);
@@ -149,7 +155,6 @@ public class GoalEditViewModel : BaseViewModel
         CurrentAmountEditGoal = item.CurrentAmount.ToString();
         //goalEdit.Reminder = "Daily";
         DeadlineEditGoal = item.Deadline;
-        //goalEdit.Status = "Active";
         ResourceEditGoal = item.Resources;
         DescriptionEditGoal = item.Description;
         CategoryEditGoal = item.CategoryName;
@@ -168,7 +173,7 @@ public class GoalEditViewModel : BaseViewModel
             goalEdit.CurrentAmount = long.Parse(CurrentAmountEditGoal);
             goalEdit.Reminder = "Daily";
             goalEdit.Deadline = DeadlineEditGoal;
-            goalEdit.Status = "Active";
+            goalEdit.Status = (long.Parse(TargetEditGoal) <= long.Parse(CurrentAmountEditGoal)) ? "Completed" : "Active";
             goalEdit.Resources = ResourceEditGoal;
             goalEdit.Description = DescriptionEditGoal;
             goalEdit.CategoryName = CategoryEditGoal;
