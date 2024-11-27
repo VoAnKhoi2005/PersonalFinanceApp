@@ -59,6 +59,7 @@ namespace PersonalFinanceApp
             services.AddSingleton<ModalNavigationStore>();
             services.AddSingleton<SharedDataService>();
             services.AddSingleton<AccountStore>();
+            services.AddSingleton<GoalStore>();
 
             //Login window
             services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));

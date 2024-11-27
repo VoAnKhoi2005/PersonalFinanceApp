@@ -175,7 +175,7 @@
                         <ItemsControl ItemsSource="{Binding GoalplanCardViewModels}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <views:UC_Main_Goalplan_PlanCard Margin="10" />
+                                    <views:UC_Main_Goalplan_PlanCard Margin="10"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                             <ItemsControl.ItemsPanel>

@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Model;
+using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
+using System.Security.Policy;
 using System.Windows.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
@@ -9,8 +11,21 @@ namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class GoalplanCardViewModel:BaseViewModel
 {
     private readonly ModalNavigationStore _modalNavigationStore;
+    private readonly IServiceProvider _serviceProvider;
+    private readonly GoalStore _goalStore;
 
     #region Properties
+    //id
+    public string ID {
+        get => _iD;
+        set {
+            if (_iD != value) {
+                _iD = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _iD;
     //status
     public string StatusGoalCard {
         get => _statusGoalCard;
@@ -139,10 +154,15 @@ public class GoalplanCardViewModel:BaseViewModel
     public ICommand AddNewAmountGoalCommand { get; set; }
     public ICommand NotifyGoalCommand { get; set; }
     public ICommand FavoritesGoalCommand { get; set; }
+    public ICommand SaveIDEditGoalCard {  get; set; }
     private GoalplanCardViewModel() { }
     public GoalplanCardViewModel(IServiceProvider serviceProvider, Goal goal)
     {
+        _serviceProvider = serviceProvider;
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
+        _goalStore = serviceProvider.GetRequiredService<GoalStore>();
+
+        SaveIDEditGoalCard = new RelayCommand<object>(SaveIDEdit);
 
         EditGoalCommand = new NavigateModalCommand<GoalEditViewModel>(serviceProvider);
         HistoryGoalCommand = new NavigateModalCommand<GoalHistoryViewModel>(serviceProvider);
@@ -163,5 +183,8 @@ public class GoalplanCardViewModel:BaseViewModel
 
         //if (goal == null) return;
         //if (goal.Target >= goal.CurrentAmount && goal.Deadline <= DateTime.Now) StatusGoalCard = "Successful!";
+    }
+    public void SaveIDEdit(object sender) {
+        _goalStore.GoalID = ID;
     }
 }

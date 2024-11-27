@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
+using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
@@ -37,11 +39,13 @@ public class GoalplanViewModel : BaseViewModel
 
     public bool HasNoGoal => !GoalplanCardViewModels.Any();
     private readonly IServiceProvider _serviceProvider;
+    private readonly GoalStore _goalStore;
 
 
     public GoalplanViewModel(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
+        _goalStore = serviceProvider.GetRequiredService<GoalStore>();
 
         GoalplanCardViewModels = new ObservableCollection<GoalplanCardViewModel>();
 
@@ -56,7 +60,7 @@ public class GoalplanViewModel : BaseViewModel
         GoalplanCardViewModels.Clear();
         List<Goal> goals = DBManager.GetAll<Goal>();
         foreach (var goal in goals) {
-            GoalplanCardViewModels.Add(new GoalplanCardViewModel(_serviceProvider, goal));
+            GoalplanCardViewModels.Add(new GoalplanCardViewModel(_serviceProvider, goal) { ID = goal.GoalID.ToString()});
         }
     }
 }

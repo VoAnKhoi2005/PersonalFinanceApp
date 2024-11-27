@@ -141,11 +141,15 @@
                             </Button.Style>
                         </Button>
                         <!--adjust goal-->
-                        <!--Command="{Binding EditGoalCommand}"-->
                         <Button Grid.Column="3" 
                                 VerticalAlignment="Bottom"
                                 HorizontalAlignment="Left" 
-                                Command="{Binding EditGoalCommand}">
+                                Command="{Binding EditGoalCommand}" CommandParameter="{Binding}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding SaveIDEditGoalCard}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>

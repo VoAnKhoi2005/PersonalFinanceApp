@@ -1,14 +1,22 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PersonalFinanceApp.Database;
+using PersonalFinanceApp.Model;
+using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Xml.Linq;
+using Windows.Globalization;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class GoalEditViewModel : BaseViewModel
 {
     private readonly ModalNavigationStore _modalNavigationStore;
+    private readonly IServiceProvider _serviceProvider;
+    private readonly GoalStore _goalStore;
     #region Properties
     //name
     public string NameEditGoal {
@@ -66,7 +74,7 @@ public class GoalEditViewModel : BaseViewModel
     }
     private string _reminderGoal;
     //deadline
-    public string DeadlineEditGoal {
+    public DateTime DeadlineEditGoal {
         get => _deadlineGoal;
         set {
             if (_deadlineGoal != value) {
@@ -75,7 +83,7 @@ public class GoalEditViewModel : BaseViewModel
             }
         }
     }
-    private string _deadlineGoal;
+    private DateTime _deadlineGoal;
     //status
     public string StatusEditGoal {
         get => _statusGoal;
@@ -109,12 +117,29 @@ public class GoalEditViewModel : BaseViewModel
         }
     }
     private string _categoryGoal;
+    public ObservableCollection<string> _itemsGoalEdit = new ObservableCollection<string> { };
+    public ObservableCollection<string> ItemsGoalEdit {
+        get => _itemsGoalEdit;
+        set {
+            if (_itemsGoalEdit != value) {
+                _itemsGoalEdit = value;
+                OnPropertyChanged();
+            }
+        }
+    }
     #endregion
     public ICommand CancelEditGoalCommand { get; set; }
     public ICommand ConfirmEditGoalCommand { get; set; }
 
     public GoalEditViewModel(IServiceProvider serviceProvider) {
+        _serviceProvider = serviceProvider;
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
+        _goalStore = serviceProvider.GetRequiredService<GoalStore>();
+
+        var item = DBManager.GetAll<GoalCategory>();
+        foreach (var it in item) {
+            ItemsGoalEdit.Add(it.Name);
+        }
 
         CancelEditGoalCommand = new RelayCommand<object>(CloseModal);
         ConfirmEditGoalCommand = new RelayCommand<object>(ConfirmEditGoal);
@@ -125,7 +150,21 @@ public class GoalEditViewModel : BaseViewModel
     }
     private void ConfirmEditGoal(object sender) {
         //add data to database
-
+        var goalID = _goalStore.GoalID;
+        Goal goalEdit = new();
+        if(goalID != null) goalEdit = DBManager.GetFirst<Goal>(g => g.GoalID == int.Parse(goalID));
+        if (goalEdit != null) {
+            goalEdit.Name = NameEditGoal;
+            goalEdit.Target = long.Parse(TargetEditGoal);
+            goalEdit.CurrentAmount = long.Parse(CurrentAmountEditGoal);
+            goalEdit.Reminder = "Daily";
+            goalEdit.Deadline = DeadlineEditGoal;
+            goalEdit.Status = "Active";
+            goalEdit.Resources = ResourceEditGoal;
+            goalEdit.Description = DescriptionEditGoal;
+            goalEdit.CategoryName = CategoryEditGoal;
+        }
+        bool update = DBManager.Update<Goal>(goalEdit);
         _modalNavigationStore.Close();
     }
 }

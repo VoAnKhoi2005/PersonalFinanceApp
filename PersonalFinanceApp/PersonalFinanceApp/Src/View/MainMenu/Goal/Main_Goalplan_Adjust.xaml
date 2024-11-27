@@ -139,28 +139,21 @@
                               FontSize="14"
                               Foreground="{DynamicResource CommonText}"
                               MinWidth="128"
+                              ItemsSource="{Binding ItemsGoalEdit}"
                               materialDesign:HintAssist.Hint="Category" 
                               materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                              Text="{Binding CategoryExpenseBook}" Margin="10,0,0,0">
+                              Text="{Binding CategoryEditGoal}" Margin="10,0,0,0">
 
                         <!--not done here-->
-                        <ComboBoxItem
-    Content="Android" />
-                        <ComboBoxItem
-    Content="iOS" />
-                        <ComboBoxItem
-    Content="Linux" />
-                        <ComboBoxItem
-    Content="Windows" />
-                        <ComboBoxItem Content="Your custom category"></ComboBoxItem>
+                        
                     </ComboBox>
                 </Grid>
                 <Grid Grid.Column="1">
                     <DatePicker 
-                        Text="{Binding DeadlineEditGoal}"
+                        SelectedDate="{Binding DeadlineEditGoal}"
                         FontSize="14"
                                 Width="180"
                                 Height="40" 
