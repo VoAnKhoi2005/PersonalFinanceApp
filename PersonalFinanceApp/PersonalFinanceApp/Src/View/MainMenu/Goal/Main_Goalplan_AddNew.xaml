@@ -180,20 +180,19 @@
 
             <!--Start date - end date-->
             <Grid Grid.Row="5">
-                <TextBox
-                    Text="{Binding DescriptionGoal}"
-                        AcceptsReturn="True" TextWrapping="Wrap"
+                <TextBox 
+                Text="{Binding DescriptionGoal}"
                      FontSize="14"
-                    VerticalAlignment="Top"
-                        HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
                     materialDesign:HintAssist.Hint="Decription"
                     materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                          CaretBrush="{DynamicResource CommonText}"
-                                    SelectionBrush="{DynamicResource CommonText}"
+                    SelectionBrush="{DynamicResource CommonText}"
                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                     Height="48" 
-                    Width="380" Foreground="{DynamicResource CommonText}" Margin="0,10,0,0"/>
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     Height="40" 
+                    Width="380" Foreground="{DynamicResource CommonText}"/>
             </Grid>
 
             <TextBox 
