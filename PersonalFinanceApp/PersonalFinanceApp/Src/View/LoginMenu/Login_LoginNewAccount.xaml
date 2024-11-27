@@ -80,11 +80,11 @@
                                         Width="380" Height="40" x:Name="passwordlogin"
                                         CaretBrush="{DynamicResource CommonText}"
                                         SelectionBrush="{DynamicResource CommonText}"
-                                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"  
+                                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                                         materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                                         materialDesign:TextFieldAssist.HasClearButton="True"
                                         IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                                        Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}" Margin="0,0,0,4">
+                                        Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="PasswordChanged">
                                             <i:InvokeCommandAction Command="{Binding PasswordLoginChangedCommand}"
@@ -214,9 +214,9 @@
                                 <PasswordBox 
                                 x:Name="PasswordCreateAccount"
                                 Width="380" Height="40"
-                                    CaretBrush="{DynamicResource CommonText}"
-                                         SelectionBrush="{DynamicResource CommonText}"
-                                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"  
+                                CaretBrush="{DynamicResource CommonText}"
+                                SelectionBrush="{DynamicResource CommonText}"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"  
                                 materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                 IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"

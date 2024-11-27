@@ -80,7 +80,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
             }
         }
     }
-    private DateTime _deadlineGoal;
+    private DateTime _deadlineGoal = DateTime.Now;
 
     //status
     public string StatusGoal {
@@ -111,7 +111,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
             if (_categoryGoal != value) {
                 if(value.CompareTo("<New>") == 0) {
                     NewGoalCategory();
-                    OnPropertyChanged();
+                    //OnPropertyChanged();
                 }
                 else {
                     _categoryGoal = value;
@@ -184,6 +184,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
         _modalNavigationStore.Close();
     }
     public void NewGoalCategory() {
-        //
+        //add new category 
+
     }
 }
