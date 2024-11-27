@@ -13,6 +13,7 @@ using Windows.ApplicationModel;
 using Windows.UI.WebUI;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.Src.ViewModel.MainMenu;
+using PersonalFinanceApp.Src.ViewModel;
 
 namespace PersonalFinanceApp
 {
@@ -100,6 +101,7 @@ namespace PersonalFinanceApp
             services.AddTransient<GoalEditViewModel>(s => new GoalEditViewModel(s));
             services.AddTransient<GoalHistoryViewModel>(s => new GoalHistoryViewModel(s));
             services.AddTransient<GoalAddSavedAmountViewModel>(s => new GoalAddSavedAmountViewModel(s));
+            services.AddTransient<GoalDeleteViewModel>(s => new GoalDeleteViewModel(s));
         }
 
     }

@@ -2,13 +2,10 @@
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
-using PersonalFinanceApp.ViewModel;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using System.Xml.Linq;
-using Windows.Globalization;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -74,7 +71,7 @@ public class GoalEditViewModel : BaseViewModel
     }
     private string _reminderGoal;
     //deadline
-    public DateTime DeadlineEditGoal {
+    public DateTime? DeadlineEditGoal {
         get => _deadlineGoal;
         set {
             if (_deadlineGoal != value) {
@@ -83,7 +80,7 @@ public class GoalEditViewModel : BaseViewModel
             }
         }
     }
-    private DateTime _deadlineGoal;
+    private DateTime? _deadlineGoal;
     //status
     public string StatusEditGoal {
         get => _statusGoal;
@@ -140,11 +137,23 @@ public class GoalEditViewModel : BaseViewModel
         foreach (var it in item) {
             ItemsGoalEdit.Add(it.Name);
         }
-
+        loadItem();
         CancelEditGoalCommand = new RelayCommand<object>(CloseModal);
         ConfirmEditGoalCommand = new RelayCommand<object>(ConfirmEditGoal);
     }
-
+    public void loadItem() {
+        var item = DBManager.GetFirst<Goal>(g => int.Parse(_goalStore.GoalID) == g.GoalID);
+        
+        NameEditGoal = item.Name;
+        TargetEditGoal = item.Target.ToString();
+        CurrentAmountEditGoal = item.CurrentAmount.ToString();
+        //goalEdit.Reminder = "Daily";
+        DeadlineEditGoal = item.Deadline;
+        //goalEdit.Status = "Active";
+        ResourceEditGoal = item.Resources;
+        DescriptionEditGoal = item.Description;
+        CategoryEditGoal = item.CategoryName;
+    }
     private void CloseModal(object sender) {
         _modalNavigationStore.Close();
     }

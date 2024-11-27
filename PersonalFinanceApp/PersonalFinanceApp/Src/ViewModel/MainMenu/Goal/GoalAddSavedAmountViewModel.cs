@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PersonalFinanceApp.Database;
+using PersonalFinanceApp.Model;
+using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Windows.Input;
@@ -7,18 +10,20 @@ namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class GoalAddSavedAmountViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
+    private readonly IServiceProvider _serviceProvider;
+    private readonly GoalStore _goalStore;
     #region Properties
     //Plus
-    public bool IsPlus {
-        get => _isPlus;
+    public bool IsDeposit {
+        get => _isDeposit;
         set {
-            if (_isPlus != value) {
-                _isPlus = value;
+            if (_isDeposit != value) {
+                _isDeposit = value;
                 OnPropertyChanged();
             }
         }
     }
-    private bool _isPlus;
+    private bool _isDeposit = false;
     //Amount
     public string AmountAddSaved {
         get => _amountAddSaved;
@@ -36,6 +41,8 @@ public class GoalAddSavedAmountViewModel : BaseViewModel {
     public ICommand ConfirmAddSavedGoalCommand { get; set; }
 
     public GoalAddSavedAmountViewModel(IServiceProvider serviceProvider) {
+        _serviceProvider = serviceProvider;
+        _goalStore = _serviceProvider.GetRequiredService<GoalStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
         CancelAddSavedGoalCommand = new RelayCommand<object>(CloseModal);
@@ -47,7 +54,15 @@ public class GoalAddSavedAmountViewModel : BaseViewModel {
     }
     private void ConfirmSavedGoal(object sender) {
         //add data to database
-
+        var item = DBManager.GetFirst<Goal>(g => g.GoalID == int.Parse(_goalStore.GoalID));
+        if(!IsDeposit) {
+            item.CurrentAmount += long.Parse(AmountAddSaved);
+        }
+        else {
+            if (item.CurrentAmount - long.Parse(AmountAddSaved) < 0) item.CurrentAmount = 0;
+            else item.CurrentAmount -= long.Parse(AmountAddSaved);
+        }
+         bool checkUpdate = DBManager.Update<Goal>(item);
         _modalNavigationStore.Close();
     }
 }

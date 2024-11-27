@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using System.Xml.Linq;
-using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
-using Windows.Globalization;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -174,7 +169,6 @@ public class GoalplanAddNewViewModel : BaseViewModel
             CategoryName = CategoryGoal,
 
         };
-        //goal.GoalCategory.Description = DescriptionGoal;
         var item = DBManager.GetFirst<GoalCategory>(goalcategory => goalcategory.Name == CategoryGoal);
 
         DBManager.Insert(goal);

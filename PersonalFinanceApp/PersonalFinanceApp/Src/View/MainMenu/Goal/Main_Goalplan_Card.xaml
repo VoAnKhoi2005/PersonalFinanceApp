@@ -112,6 +112,11 @@
                                 Command="{Binding AddNewAmountGoalCommand}"
                                 VerticalAlignment="Bottom"
                                 HorizontalAlignment="Left">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding SaveIDGoalCard}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -147,7 +152,7 @@
                                 Command="{Binding EditGoalCommand}" CommandParameter="{Binding}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Click">
-                                    <i:InvokeCommandAction Command="{Binding SaveIDEditGoalCard}"/>
+                                    <i:InvokeCommandAction Command="{Binding SaveIDGoalCard}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <Button.Style>
@@ -181,6 +186,11 @@
                         <Button Grid.Column="4" Command="{Binding HistoryGoalCommand}"
                                 VerticalAlignment="Bottom"
                                 HorizontalAlignment="Left">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding SaveIDGoalCard}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -210,8 +220,13 @@
                         </Button>
                         <!--delete-->
                         <Button Grid.Column="5" Command="{Binding DeleteGoalCommand}"
-                                                                VerticalAlignment="Bottom"
+                                VerticalAlignment="Bottom"
                                 HorizontalAlignment="Left">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding SaveIDGoalCard}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                             <Button.Style>
                                 <Style TargetType="Button">
                                     <Setter Property="Background" Value="Transparent"></Setter>
@@ -349,7 +364,7 @@
                 <!--binding here-->
                 <TextBlock Grid.Row="1"
                            HorizontalAlignment="Left" Margin="30,0,0,0"
-                    Text="{Binding DecriptionGoalCard}"
+                           Text="{Binding DescriptionGoalCard}"
                            TextWrapping="Wrap"></TextBlock>
             </Grid>
         </Grid>

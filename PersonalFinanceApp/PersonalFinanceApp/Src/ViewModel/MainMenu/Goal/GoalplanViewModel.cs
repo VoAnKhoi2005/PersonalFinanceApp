@@ -56,7 +56,7 @@ public class GoalplanViewModel : BaseViewModel
         LoadedGoal();
     }
     private void LoadedGoal(object? parameter = null) {
-        //reload data to listview
+        //reload data to itemcontrol
         GoalplanCardViewModels.Clear();
         List<Goal> goals = DBManager.GetAll<Goal>();
         foreach (var goal in goals) {

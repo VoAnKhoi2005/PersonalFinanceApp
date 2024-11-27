@@ -272,9 +272,11 @@
                       Content="{Binding CurrentModalViewModel}">
             
             <ContentControl.Resources>
+                <!--expensebook-->
                 <DataTemplate DataType="{x:Type viewModels:ExpenseBookAddNewViewModel}">
                     <views:UC_Main_ExpenseBook_AddNew/>
                 </DataTemplate>
+                <!--Goal-->
                 <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">
                     <views:UC_Main_Goalplan_Adding />
                 </DataTemplate>
@@ -287,6 +289,7 @@
                 <DataTemplate DataType="{x:Type viewModels:GoalHistoryViewModel}">
                     <views:Main_Goalplan_History/>
                 </DataTemplate>
+                
             </ContentControl.Resources>
         </custom:Modal>
 

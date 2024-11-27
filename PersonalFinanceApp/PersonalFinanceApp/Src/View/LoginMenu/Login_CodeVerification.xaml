@@ -42,14 +42,14 @@
                                 Margin="20, 50, 0 ,0">
                     <TextBox Text="{Binding Verify1}" x:Name="verify1" MaxLength="1"
                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                                materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
-                                 Width="60" Height="70" 
-                                 VerticalAlignment="Center" 
-                                 HorizontalAlignment="Center"
-                                 TextAlignment="Center"
-                                 FontSize="35"
+                             materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"
+                             Width="60" Height="70" 
+                             VerticalAlignment="Center" 
+                             HorizontalAlignment="Center"
+                             TextAlignment="Center"
+                             FontSize="35"
                              BorderBrush="{x:Null}"
-                                 Foreground="#1B4855">
+                             Foreground="#1B4855">
                         <i:Interaction.Behaviors>
                             <nib:NumericInputBehavior/>
                         </i:Interaction.Behaviors>
