@@ -160,17 +160,14 @@
                 <Grid Grid.Column="1">
                     <DatePicker 
                         SelectedDate="{Binding DeadlineGoal}"
-                        FontSize="14"
-                                Width="180"
-                                Height="40" 
-                                materialDesign:HintAssist.Hint="Deadline"
-                                materialDesign:TextFieldAssist.HasClearButton="True"
-                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
-                                materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
-                                Foreground="{DynamicResource CommonText}"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"/>
+                        FontSize="14" Width="180" Height="40" 
+                        materialDesign:HintAssist.Hint="Deadline"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
+                        materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                        Foreground="{DynamicResource CommonText}"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </Grid>
 

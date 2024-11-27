@@ -69,9 +69,11 @@ public class GoalAddSavedAmountViewModel : BaseViewModel {
             Amount = (IsDeposit) ? '-' + AmountAddSaved : '+' + AmountAddSaved,
             Current = item.CurrentAmount.ToString(),
         };
+
         //status
         if (item.Target <= item.CurrentAmount) item.Status = "Completed";
         else { item.Status = "Active"; }
+
         DBManager.Insert(goalhistory);
         bool checkUpdate = DBManager.Update<Goal>(item);
         _modalNavigationStore.Close();

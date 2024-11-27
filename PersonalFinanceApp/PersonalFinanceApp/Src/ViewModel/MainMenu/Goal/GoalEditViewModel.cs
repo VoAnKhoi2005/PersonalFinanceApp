@@ -80,7 +80,7 @@ public class GoalEditViewModel : BaseViewModel
             }
         }
     }
-    private DateTime? _deadlineGoal;
+    private DateTime? _deadlineGoal = DateTime.Now;
     //status
     public string StatusEditGoal {
         get => _statusGoal;
