@@ -15,6 +15,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
     private readonly IServiceProvider _serviceProvider;
     private readonly AccountStore _accountStore;
     private readonly GoalStore _goalStore;
+
     #region Properties
     //name
     public string NameGoal {
@@ -135,6 +136,10 @@ public class GoalplanAddNewViewModel : BaseViewModel
                 _selectedItemGoal = value;
                 OnPropertyChanged();
             }
+            else {
+                _selectedItemGoal = value;
+                OnPropertyChanged();
+            }
         }
     }
     private string _selectedItemGoal;
@@ -183,12 +188,11 @@ public class GoalplanAddNewViewModel : BaseViewModel
             Status = (long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal)) ? "Completed" : "Active",
             Resources = ResourceGoal,
             Description = DescriptionGoal,
-            UserID = int.Parse(_accountStore.SharedUser[0]),
+            UserID = int.Parse(_accountStore.UsersID),
             CategoryName = CategoryGoal,
 
         };
 
-        var item = DBManager.GetFirst<GoalCategory>(goalcategory => goalcategory.Name == CategoryGoal);
 
         DBManager.Insert(goal);
 

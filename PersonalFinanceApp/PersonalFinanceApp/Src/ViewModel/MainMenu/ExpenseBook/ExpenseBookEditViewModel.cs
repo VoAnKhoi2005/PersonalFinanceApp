@@ -2,17 +2,11 @@
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
-using PersonalFinanceApp.ViewModel;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace PersonalFinanceApp.Src.ViewModel.MainMenu;
+namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class ExpenseBookEditViewModel : BaseViewModel
 {
@@ -82,13 +76,13 @@ public class ExpenseBookEditViewModel : BaseViewModel
     }
     private void ConfirmEditExpenseBook(object sender) {
         //add data to database
-        var expenseBook = new ExpensesBook() {
-            //Month = int.Parse(MonthEditExpenseBook),
-            //Year = int.Parse(YearEditExpenseBook),
-            //Budget = long.Parse(BudgetEditExpenseBook),
-            //Resources = ResourceEditExpenseBook,
-        };
-        DBManager.Insert(expenseBook);
+        //var expenseBook = new ExpensesBook() {
+        //    Month = int.Parse(MonthEditExpenseBook),
+        //    Year = int.Parse(YearEditExpenseBook),
+        //    Budget = long.Parse(BudgetEditExpenseBook),
+        //    Resources = ResourceEditExpenseBook,
+        //};
+        //bool check = DBManager.Update(expenseBook);
         _modalNavigationStore.Close();
     }
 }

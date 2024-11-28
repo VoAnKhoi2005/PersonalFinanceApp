@@ -278,6 +278,9 @@
                 <DataTemplate DataType="{x:Type viewModels:ExpenseBookAddNewViewModel}">
                     <views:UC_Main_ExpenseBook_AddNew/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:ExpenseBookEditViewModel}">
+                    <views:Main_ExpenseBook_Edit/>
+                </DataTemplate>
                 <!--Goal-->
                 <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">
                     <views:UC_Main_Goalplan_Adding />

@@ -9,6 +9,11 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:nib="clr-namespace:PersonalFinanceApp.Src.etc"
              d:DesignHeight="800" d:DesignWidth="800">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadDataAddNewGoalCommand}" CommandParameter="{Binding ElementName=ExpenseBook}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <!--color done-->
     <Border Background="{DynamicResource CommonGridBackground}" Height="500" 
             Width="400" 
@@ -151,6 +156,7 @@
                               Foreground="{DynamicResource CommonText}"
                               MinWidth="128"
                               ItemsSource="{Binding ItemsGoalEdit}"
+                              SelectedItem="{Binding SelectedItemEdit}"
                               materialDesign:HintAssist.Hint="Category" 
                               materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                               materialDesign:TextFieldAssist.HasClearButton="True"

@@ -16,7 +16,7 @@
     </Control.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding RefreshExpenseBookCommand}" CommandParameter="{Binding ElementName=ExpenseBook}"/>
+            <i:InvokeCommandAction Command="{Binding LoadExpenseBookCommand}" CommandParameter="{Binding ElementName=ExpenseBook}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
@@ -117,8 +117,8 @@
             <!--date sort-->
             <Border CornerRadius="25"
                    Background="{DynamicResource CommonGridBackground}"
-                   Width="150"
-                   Height="45"
+                   Width="200"
+                   Height="40"
                    Margin="15,0,0,0"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
@@ -148,8 +148,7 @@
                    Margin="0,0,15,0">
                 <Button Command="{Binding AddNewExpenseBookCommand}">
                     <Grid>
-                        <TextBlock Text="add new"
-
+                        <TextBlock Text="Add new"
                                   FontSize="12"
                                   Margin="0,0,10,0"
                                   VerticalAlignment="Center"
@@ -174,7 +173,7 @@
                    HorizontalAlignment="Right"
                    Margin="0,0,5,0"
                    DockPanel.Dock="Right">
-                <Button Command="{Binding AddNewExpenseBookCommand}">
+                <Button Command="{Binding RefreshExpenseBookCommand}">
                     <materialDesign:PackIcon Kind="Refresh" 
                    Foreground="{DynamicResource CommonText}"
                                                 Height="25"
@@ -206,7 +205,6 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Month}" Header="Month"/>
                     <DataGridTextColumn Binding="{Binding Year}" Header="Year" />
-                    <DataGridTextColumn Binding="{Binding UserID}" Header="UserID" />
                     <DataGridTextColumn Binding="{Binding Budget}" Header="Budget" />
                     <DataGridTextColumn Binding="{Binding Resources}" Header="Resources" />
                     <DataGridTemplateColumn CanUserResize="False" Header="Commands">
@@ -223,19 +221,18 @@
                                        ToolTip="Resource name: MaterialDesignRaisedButton"
                                        BorderBrush="#FF514D4D"
                                        Foreground="White"
-                                       Command="{Binding RemoveExpenseBookCommand}"
+                                       Command="{Binding AddExpenseCommand}"
                                        CommandParameter="{Binding}">
                                     </Button>
                                     <Button
                                        Margin="0 0 5 0"
                                        Width="50"
-                                       IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                       IsEnabled="True"
                                        Style="{StaticResource MaterialDesignRaisedButton}"
                                        ToolTip="Resource name: MaterialDesignRaisedButton"
                                        Background="#31B720"
                                        BorderBrush="#FF514D4D"
-                                       Command="{Binding EditExpenseBookCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                       CommandParameter="{Binding}" >
+                                       Command="{Binding EditExpenseBookCommand}">
                                         <materialDesign:PackIcon Kind="pencil" Foreground="White"/>
                                     </Button>
                                     <Button
@@ -245,7 +242,7 @@
                                        ToolTip="Resource name: MaterialDesignRaisedButton"
                                        Background="IndianRed"
                                        BorderBrush="#FF514D4D"
-                                       Command="{Binding RemoveExpenseBookCommand}"
+                                       Command="{Binding DeleteExpenseBookCommand}"
                                        CommandParameter="{Binding}">
                                         <materialDesign:PackIcon Kind="TrashCanOutline" Foreground="White"/>
                                     </Button>
