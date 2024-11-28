@@ -1,15 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
-using PersonalFinanceApp.ViewModel;
 using System.Windows.Input;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Database;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Xml.Linq;
 using System.Collections.ObjectModel;
 
-namespace PersonalFinanceApp.Src.ViewModel.MainMenu;
+namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class ExpenseAddNewViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;

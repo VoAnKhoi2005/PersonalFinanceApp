@@ -27,7 +27,16 @@ public class GoalStore : INotifyPropertyChanged {
             }
         }
     }
-
+    private string? _newCategory;
+    public string? NewCategory {
+        get => _newCategory;
+        set {
+            if (_newCategory != value) {
+                _newCategory = value;
+                OnPropertyChanged(nameof(_newCategory));
+            }
+        }
+    }
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged(string? propertyName = null) {

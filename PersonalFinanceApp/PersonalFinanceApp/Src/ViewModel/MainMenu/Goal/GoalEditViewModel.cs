@@ -124,20 +124,48 @@ public class GoalEditViewModel : BaseViewModel
             }
         }
     }
+    public string SelectedItemEdit {
+        get => _selectedItemEdit;
+        set {
+            if (value != null && value.CompareTo("<New>") == 0) {
+                CreateCategoryCommand.Execute(this);
+                _selectedItemEdit = value;
+                OnPropertyChanged();
+            }
+            else {
+                _selectedItemEdit = value;
+                OnPropertyChanged();
+            }
+
+        }
+    }
+    private string _selectedItemEdit;
     #endregion
     public ICommand CancelEditGoalCommand { get; set; }
     public ICommand ConfirmEditGoalCommand { get; set; }
+    public ICommand CreateCategoryCommand {  get; set; }
+    public ICommand LoadDataAddNewGoalCommand { get; set; }
 
     public GoalEditViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _goalStore = serviceProvider.GetRequiredService<GoalStore>();
 
+        CreateCategoryCommand = new NavigateModalCommand<GoalAddNewCategoryViewModel>(serviceProvider);
+
+        LoadDataAddNewGoalCommand = new RelayCommand<object>(LoadData);
         
-        LoadItemSourceCategoryGoal();
-        loadItem();
+
         CancelEditGoalCommand = new RelayCommand<object>(CloseModal);
         ConfirmEditGoalCommand = new RelayCommand<object>(ConfirmEditGoal);
+    }
+    public void LoadData(object parameter) {
+        LoadItemSourceCategoryGoal();
+        loadItem();
+        if (_goalStore.NewCategory != null) {
+            CategoryEditGoal = _goalStore.NewCategory;
+            _goalStore.NewCategory = null;
+        }
     }
     public void LoadItemSourceCategoryGoal() {
         ItemsGoalEdit.Clear();
@@ -149,7 +177,6 @@ public class GoalEditViewModel : BaseViewModel
     }
     public void loadItem() {
         var item = DBManager.GetFirst<Goal>(g => int.Parse(_goalStore.GoalID) == g.GoalID);
-        
         NameEditGoal = item.Name;
         TargetEditGoal = item.Target.ToString();
         CurrentAmountEditGoal = item.CurrentAmount.ToString();

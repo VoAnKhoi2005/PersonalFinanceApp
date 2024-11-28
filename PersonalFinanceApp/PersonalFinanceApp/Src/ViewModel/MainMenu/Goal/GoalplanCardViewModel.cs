@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Model;
-using PersonalFinanceApp.Src.ViewModel;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
@@ -186,9 +185,6 @@ public class GoalplanCardViewModel:BaseViewModel
         ResourceGoalCard = goal.Resources;
         CategoryGoalCard = goal.CategoryName;
         DescriptionGoalCard = goal.Description;
-
-        //if (goal == null) return;
-        //if (goal.Target >= goal.CurrentAmount && goal.Deadline <= DateTime.Now) StatusGoalCard = "Successful!";
     }
     public void SaveID(object sender) {
         _goalStore.GoalID = ID;

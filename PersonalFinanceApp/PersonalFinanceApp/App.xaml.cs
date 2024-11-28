@@ -61,6 +61,7 @@ namespace PersonalFinanceApp
             services.AddSingleton<SharedDataService>();
             services.AddSingleton<AccountStore>();
             services.AddSingleton<GoalStore>();
+            services.AddSingleton<ExpenseBookStore>();
 
             //Login window
             services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));
@@ -84,17 +85,20 @@ namespace PersonalFinanceApp
             services.AddTransient<ExpenseBookViewModel>(s => new ExpenseBookViewModel(s));
             services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
             services.AddTransient<SummaryViewModel>(s => new SummaryViewModel(s));
+
             services.AddTransient<ExpenseViewModel>(s => new ExpenseViewModel(s));
 
             //Modal-Popup
             //expense book
             services.AddTransient<ExpenseBookAddNewViewModel>(s => new ExpenseBookAddNewViewModel(s));
             services.AddTransient<ExpenseBookEditViewModel>(s => new ExpenseBookEditViewModel(s));
+            services.AddTransient<ExpenseBookDeleteViewModel>(s => new ExpenseBookDeleteViewModel(s));
 
             //expense
             services.AddTransient<ExpenseAddNewViewModel>(s => new ExpenseAddNewViewModel(s));
             services.AddTransient<ExpenseEditViewModel>(s => new ExpenseEditViewModel(s));
             services.AddTransient<ExpenseDeleteViewModel>(s => new ExpenseDeleteViewModel(s));
+            services.AddTransient<ExpenseRecoverViewModel>(s => new ExpenseRecoverViewModel(s));
 
             //goal
             services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));
@@ -102,6 +106,8 @@ namespace PersonalFinanceApp
             services.AddTransient<GoalHistoryViewModel>(s => new GoalHistoryViewModel(s));
             services.AddTransient<GoalAddSavedAmountViewModel>(s => new GoalAddSavedAmountViewModel(s));
             services.AddTransient<GoalDeleteViewModel>(s => new GoalDeleteViewModel(s));
+            services.AddTransient<GoalAddNewCategoryViewModel>(s => new GoalAddNewCategoryViewModel(s));
+
         }
 
     }

@@ -21,7 +21,16 @@ public class AccountStore : INotifyPropertyChanged {
             }
         }
     }
-
+    private string? _usersID;
+    public string? UsersID {
+        get => _usersID;
+        set {
+            if (_usersID != value) {
+                _usersID = value;
+                OnPropertyChanged(nameof(_usersID));
+            }
+        }
+    }
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged(string? propertyName = null) {

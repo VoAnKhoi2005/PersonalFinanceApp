@@ -10,6 +10,7 @@ using PersonalFinanceApp.ViewModel.Command;
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class GoalplanViewModel : BaseViewModel
 {
+    private AccountStore _accountStore;
     #region Command
     public ICommand AddNewGoalCommand { get; set; }
 
@@ -46,7 +47,7 @@ public class GoalplanViewModel : BaseViewModel
     {
         _serviceProvider = serviceProvider;
         _goalStore = serviceProvider.GetRequiredService<GoalStore>();
-
+        _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         GoalplanCardViewModels = new ObservableCollection<GoalplanCardViewModel>();
 
         AddNewGoalCommand = new NavigateModalCommand<GoalplanAddNewViewModel>(serviceProvider);
@@ -58,7 +59,7 @@ public class GoalplanViewModel : BaseViewModel
     private void LoadedGoal(object? parameter = null) {
         //reload data to itemcontrol
         GoalplanCardViewModels.Clear();
-        List<Goal> goals = DBManager.GetAll<Goal>();
+        List<Goal> goals = DBManager.GetCondition<Goal>(g => g.User.UserID == int.Parse(_accountStore.UsersID));
         foreach (var goal in goals) {
             GoalplanCardViewModels.Add(new GoalplanCardViewModel(_serviceProvider, goal) { ID = goal.GoalID.ToString()});
         }

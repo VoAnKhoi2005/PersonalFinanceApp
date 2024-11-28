@@ -11,7 +11,16 @@ using PersonalFinanceApp.Database;
 namespace PersonalFinanceApp.Src.ViewModel.MainMenu;
 public class ExpenseViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
-    public ObservableCollection<Expense> Expenses { get; set; }
+    public ObservableCollection<Expense> Expenses { 
+        get => _expenses;
+        set {
+            if (_expenses != value) {
+                _expenses = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private ObservableCollection<Expense> _expenses;
     public ICommand AddNewExpenseCommand { get; set; }
     public ICommand EditExpenseCommand { get; set; }
     public ICommand DeleteExpenseCommand { get; set; }
@@ -20,9 +29,11 @@ public class ExpenseViewModel : BaseViewModel {
     public bool HasNoExpense { get; set; } = true;
     public ExpenseViewModel(IServiceProvider serviceProvider) {
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
-        AddNewExpenseCommand = new NavigateModalCommand<ExpenseBookAddNewViewModel>(serviceProvider);
 
-        RefreshExpenseCommand = new RelayCommand<Object>(p => LoadExpenses(p));
+        AddNewExpenseCommand = new NavigateModalCommand<ExpenseAddNewViewModel>(serviceProvider);
+        EditExpenseCommand = new NavigateModalCommand<ExpenseEditViewModel>(serviceProvider);
+
+        RefreshExpenseCommand = new RelayCommand<object>(LoadExpenses);
     }
     public void LoadExpenses(object p) {
         //load data to datagrid

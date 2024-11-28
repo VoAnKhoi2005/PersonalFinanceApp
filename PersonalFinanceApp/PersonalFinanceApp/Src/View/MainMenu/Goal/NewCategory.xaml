@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="PersonalFinanceApp.Src.View.MainMenu.Goal.NewCategory"
+﻿<UserControl x:Class="PersonalFinanceApp.Src.View.NewCategory"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Goal"
+             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border CornerRadius="30" Background="{DynamicResource CommonGridBackground}"
@@ -54,9 +54,7 @@
                     <Border  Width="350" Height="50" Margin="18,43,17,10" CornerRadius="30"
                              Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
 
-
-                    <TextBox VerticalAlignment="Center" 
-                             Text="{Binding AmountAddSaved}"
+                    <TextBox VerticalAlignment="Center" Text="{Binding NewCategoryName}"
                              Margin="0,30,0,0"
                              Width="310" Height="40"
                              TextAlignment="Center"
@@ -82,7 +80,7 @@
                 <Border Grid.Column="0" CornerRadius="30" Height="60"
                         Width="145"
                         Background="#FFC8386C" >
-                    <Button Command="{Binding CancelAddSavedGoalCommand}">
+                    <Button Command="{Binding CancelNewCategoryCommand}">
                         <TextBlock Text="Cancel" Foreground="White"
                                    VerticalAlignment="Center"
                                    Opacity="1"
@@ -117,7 +115,7 @@
                 <Border Grid.Column="1" CornerRadius="30" Height="60"
                         Width="145"
                         Background="#FF61D2BE" >
-                    <Button Command="{Binding ConfirmAddSavedGoalCommand}">
+                    <Button Command="{Binding ConfirmNewCategoryCommand}">
                         <TextBlock Text="Confirm" Foreground="Black"
                                    Opacity="0.8"
                                    VerticalAlignment="Center"

@@ -9,6 +9,11 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:nib="clr-namespace:PersonalFinanceApp.Src.etc"
              d:DesignHeight="500" d:DesignWidth="400">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadDataAddNewGoalCommand}" CommandParameter="{Binding ElementName=ExpenseBook}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <!--color done-->
     <Border Background="{DynamicResource CommonGridBackground}" Height="500" 
             Width="400" 
@@ -188,8 +193,9 @@
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                              Margin="10,0,0,0">
-
+                              Text="{Binding CategoryGoal}" Margin="10,0,0,0"
+                              SelectedItem="{Binding SelectedItemGoal}">
+                              
                     </ComboBox>
                     <!--change visibility here-->
 

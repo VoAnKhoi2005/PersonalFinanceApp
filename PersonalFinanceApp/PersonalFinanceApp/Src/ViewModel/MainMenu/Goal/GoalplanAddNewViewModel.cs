@@ -14,6 +14,8 @@ public class GoalplanAddNewViewModel : BaseViewModel
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly AccountStore _accountStore;
+    private readonly GoalStore _goalStore;
+
     #region Properties
     //name
     public string NameGoal {
@@ -109,14 +111,8 @@ public class GoalplanAddNewViewModel : BaseViewModel
         get => _categoryGoal;
         set {
             if (_categoryGoal != value) {
-                if(value.CompareTo("<New>") == 0) {
-                    NewGoalCategory();
-                    //OnPropertyChanged();
-                }
-                else {
-                    _categoryGoal = value;
-                    OnPropertyChanged();
-                }
+                _categoryGoal = value;
+                OnPropertyChanged();
             }
         }
     }
@@ -132,30 +128,49 @@ public class GoalplanAddNewViewModel : BaseViewModel
             }
         }
     }
-    public string SelectedItemGoal { get; set; }
+    public string SelectedItemGoal {
+        get => _selectedItemGoal;
+        set {
+            if(value != null &&value.CompareTo("<New>") == 0) {
+                CreateCategoryCommand.Execute(this);
+                _selectedItemGoal = value;
+                OnPropertyChanged();
+            }
+            else {
+                _selectedItemGoal = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _selectedItemGoal;
     #endregion
+    public ICommand CreateCategoryCommand {  get; set; }
     public ICommand CancelNewGoalCommand { get; set; }
     public ICommand ConfirmNewGoalCommand { get; set; }
+    public ICommand LoadDataAddNewGoalCommand { get; set; }
 
     public GoalplanAddNewViewModel(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
+        _goalStore = serviceProvider.GetRequiredService<GoalStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
-        LoadItemSourceCategoryGoal();
+        CreateCategoryCommand = new NavigateModalCommand<GoalAddNewCategoryViewModel>(serviceProvider);
+
+        LoadDataAddNewGoalCommand = new RelayCommand<object>(LoadItemSourceCategoryGoal);
         
         CancelNewGoalCommand = new RelayCommand<object>(CloseModal);
         ConfirmNewGoalCommand = new RelayCommand<object>(ConfirmNewGoal);
     }
-    public void LoadItemSourceCategoryGoal() {
+    public void LoadItemSourceCategoryGoal(object parameter) {
         ItemsGoal.Clear();
+        CategoryGoal = (_goalStore.NewCategory != null) ? _goalStore.NewCategory : "";
         var item = DBManager.GetAll<GoalCategory>();
         ItemsGoal.Add("<New>");
         foreach (var it in item) {
             ItemsGoal.Add(it.Name);
         }
-
     }
     private void CloseModal(object sender)
     {
@@ -173,18 +188,14 @@ public class GoalplanAddNewViewModel : BaseViewModel
             Status = (long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal)) ? "Completed" : "Active",
             Resources = ResourceGoal,
             Description = DescriptionGoal,
-            UserID = int.Parse(_accountStore.SharedUser[0]),
+            UserID = int.Parse(_accountStore.UsersID),
             CategoryName = CategoryGoal,
 
         };
-        var item = DBManager.GetFirst<GoalCategory>(goalcategory => goalcategory.Name == CategoryGoal);
+
 
         DBManager.Insert(goal);
 
         _modalNavigationStore.Close();
-    }
-    public void NewGoalCategory() {
-        //add new category 
-
     }
 }
