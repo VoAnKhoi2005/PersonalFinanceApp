@@ -294,6 +294,9 @@
                 <DataTemplate DataType="{x:Type viewModels:GoalDeleteViewModel}">
                     <views:Main_Goalplan_deleteConfirm/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:GoalAddNewCategoryViewModel}">
+                    <views:NewCategory/>
+                </DataTemplate>
 
             </ContentControl.Resources>
         </custom:Modal>
