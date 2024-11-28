@@ -94,9 +94,7 @@ public class ExpenseBookEditViewModel : BaseViewModel
         itemEdit.Budget = long.Parse(BudgetEditExpenseBook);
         itemEdit.Resources = ResourceEditExpenseBook;
 
-        //bool check = DBManager.Update<ExpensesBook>(itemExB);
-        
-        DBManager.Update<ExpensesBook>(itemExB);
+        bool check = DBManager.Update<ExpensesBook>(itemEdit);
 
         _modalNavigationStore.Close();
     }
