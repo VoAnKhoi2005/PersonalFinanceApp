@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:nib="clr-namespace:PersonalFinanceApp.Src.etc" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border CornerRadius="30" Background="{DynamicResource CommonGridBackground}"
@@ -111,8 +112,8 @@
                            FontWeight="Bold"
                            VerticalAlignment="Top"
                            HorizontalAlignment="Left"
-                           Margin="16,0,0,0"
-                           ></TextBlock>
+                           Margin="16,0,0,0">
+                    </TextBlock>
                     <Border Height="50" Margin="14,43,24,11" CornerRadius="30"
                          Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"/>
 
@@ -125,11 +126,11 @@
                          BorderBrush="{x:Null}"
                          Foreground="{DynamicResource CommonText}"
                          FontSize="14"
-                             HorizontalAlignment="Left"
-                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                         HorizontalAlignment="Left"
+                         materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                          CaretBrush="{DynamicResource CommonText}"
-                         SelectionBrush="{DynamicResource CommonText}"
-                             ></TextBox>
+                         SelectionBrush="{DynamicResource CommonText}">
+                    </TextBox>
 
 
                 </Grid>
@@ -142,12 +143,13 @@
                 <!--method-->
 
                 <Grid Grid.Column="0">
-                    <TextBlock Text="Budget (VND) " 
+                    <TextBlock 
+                           Text="Budget (VND) " 
                            FontWeight="Bold"
                            VerticalAlignment="Top"
                            HorizontalAlignment="Left"
-                           Margin="30,0,0,0"
-                           ></TextBlock>
+                           Margin="30,0,0,0">
+                    </TextBlock>
                     <Border  Width="350" Height="50" Margin="18,43,17,10" CornerRadius="30"
                          Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
 
@@ -159,11 +161,14 @@
                          BorderBrush="{x:Null}"
                          Foreground="{DynamicResource CommonText}"
                          FontSize="14"
-                             HorizontalAlignment="Center"
-                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                         HorizontalAlignment="Center"
+                         materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                          CaretBrush="{DynamicResource CommonText}"
-                         SelectionBrush="{DynamicResource CommonText}"
-                             ></TextBox>
+                         SelectionBrush="{DynamicResource CommonText}">
+                        <i:Interaction.Behaviors>
+                            <nib:NumericInputBehavior/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
                 </Grid>
 
                 <!--category-->

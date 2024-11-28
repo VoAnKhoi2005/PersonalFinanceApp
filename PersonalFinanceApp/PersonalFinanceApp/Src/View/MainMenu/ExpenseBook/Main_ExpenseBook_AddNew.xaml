@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:nib="clr-namespace:PersonalFinanceApp.Src.etc" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="600" d:DesignWidth="470">
     <Border CornerRadius="30" Background="{DynamicResource CommonGridBackground}"
             Width="400" Height="400">
@@ -159,11 +161,14 @@
                              BorderBrush="{x:Null}"
                              Foreground="{DynamicResource CommonText}"
                              FontSize="14"
-                                 HorizontalAlignment="Center"
-                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                             HorizontalAlignment="Center"
+                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                              CaretBrush="{DynamicResource CommonText}"
-                             SelectionBrush="{DynamicResource CommonText}"
-                                 ></TextBox>
+                             SelectionBrush="{DynamicResource CommonText}">
+                        <i:Interaction.Behaviors>
+                            <nib:NumericInputBehavior/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
                 </Grid>
 
                 <!--category-->

@@ -3,15 +3,9 @@ using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
-using PersonalFinanceApp.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace PersonalFinanceApp.Src.ViewModel.MainMenu;
+namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class ExpenseEditViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;

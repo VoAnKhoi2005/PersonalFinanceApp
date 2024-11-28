@@ -2,7 +2,6 @@
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
-using PersonalFinanceApp.ViewModel;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Windows.Input;

@@ -8,7 +8,6 @@ using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 
-
 namespace PersonalFinanceApp.ViewModel.MainMenu; 
 public class ExpenseBookViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
@@ -17,17 +16,17 @@ public class ExpenseBookViewModel : BaseViewModel {
     private readonly ExpenseBookStore _expenseBookStore;
 
     #region Properties
-    public string ID {
-        get => _iD;
+    public object ItemsExB {
+        get => _itemsExB;
         set {
-            if (_iD != value) {
-                _iD = value;
+            if (_itemsExB != value) {
+                _itemsExB = value;
+                _expenseBookStore.ExpenseBook = (ExpensesBook)value;
                 OnPropertyChanged();
             }
         }
     }
-    private string _iD;
-
+    private object _itemsExB;
     public ObservableCollection<ExpensesBook> ExpenseBooks {
         get => _expenseBooks;
         set {
@@ -38,6 +37,9 @@ public class ExpenseBookViewModel : BaseViewModel {
         }
     }
     private ObservableCollection<ExpensesBook> _expenseBooks = new();
+    #endregion
+
+    #region Command
     public ICommand AddNewExpenseBookCommand { get; set; }
     public ICommand EditExpenseBookCommand { get; set; }
     public ICommand DeleteExpenseBookCommand { get; set; }
@@ -47,6 +49,7 @@ public class ExpenseBookViewModel : BaseViewModel {
     #endregion
 
     public ExpenseBookViewModel(IServiceProvider serviceProvider) {
+
         _serviceProvider = serviceProvider;
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _expenseBookStore = serviceProvider.GetRequiredService<ExpenseBookStore>();
@@ -54,10 +57,9 @@ public class ExpenseBookViewModel : BaseViewModel {
 
         AddNewExpenseBookCommand = new NavigateModalCommand<ExpenseBookAddNewViewModel>(serviceProvider);
 
-        EditExpenseBookCommand = new NavigateModalCommand<ExpenseBookEditViewModel>(serviceProvider);
-        
-        DeleteExpenseBookCommand = new NavigateModalCommand<ExpenseBookDeleteViewModel>(serviceProvider);
         AddExpenseCommand = new NavigateModalCommand<ExpenseViewModel>(serviceProvider);
+        EditExpenseBookCommand = new NavigateModalCommand<ExpenseBookEditViewModel>(serviceProvider);
+        DeleteExpenseBookCommand = new NavigateModalCommand<ExpenseBookDeleteViewModel>(serviceProvider);
 
         LoadExpenseBookCommand = new RelayCommand<object>(LoadExpenseBooks);
         RefreshExpenseBookCommand = new RelayCommand<object>(LoadExpenseBooks);
@@ -66,10 +68,7 @@ public class ExpenseBookViewModel : BaseViewModel {
         //load data to datagrid
         ExpenseBooks.Clear();
         var items = DBManager.GetCondition<ExpensesBook>(exb => exb.UserID == int.Parse(_accountStore.UsersID));
-        
         ExpenseBooks = new(items);
     }
-    public void SaveId (object paramter) {
-        _expenseBookStore.IdExB = ID;
-    }
+    
 }

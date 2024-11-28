@@ -92,13 +92,13 @@ namespace PersonalFinanceApp
             //expense book
             services.AddTransient<ExpenseBookAddNewViewModel>(s => new ExpenseBookAddNewViewModel(s));
             services.AddTransient<ExpenseBookEditViewModel>(s => new ExpenseBookEditViewModel(s));
-            //services.AddTransient<ExpenseBookDeleteViewModel>(s => new ExpenseBookDeleteViewModel(s));
-
+            services.AddTransient<ExpenseBookDeleteViewModel>(s => new ExpenseBookDeleteViewModel(s));
 
             //expense
             services.AddTransient<ExpenseAddNewViewModel>(s => new ExpenseAddNewViewModel(s));
             services.AddTransient<ExpenseEditViewModel>(s => new ExpenseEditViewModel(s));
             services.AddTransient<ExpenseDeleteViewModel>(s => new ExpenseDeleteViewModel(s));
+            services.AddTransient<ExpenseRecoverViewModel>(s => new ExpenseRecoverViewModel(s));
 
             //goal
             services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));

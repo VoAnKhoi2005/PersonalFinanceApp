@@ -1,4 +1,3 @@
-
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
@@ -150,7 +149,7 @@ public class ExpenseBookAddNewViewModel : BaseViewModel {
             Year = int.Parse(YearExpenseBook),
             Budget = long.Parse(BudgetExpenseBook),
             Resources = ResourceExpenseBook,
-            UserID = int.Parse(_accountStore.SharedUser[0]),
+            UserID = int.Parse(_accountStore.UsersID),
         };
         DBManager.Insert(expenseBook);
         _modalNavigationStore.Close();
@@ -158,7 +157,6 @@ public class ExpenseBookAddNewViewModel : BaseViewModel {
     public class Month {
         public int Number { get; set; }
         public string Name { get; set; }
-
         public Month(int number, string name) {
             Number = number;
             Name = name;

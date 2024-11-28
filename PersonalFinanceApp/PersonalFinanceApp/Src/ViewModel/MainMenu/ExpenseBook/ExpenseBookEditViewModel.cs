@@ -13,6 +13,7 @@ public class ExpenseBookEditViewModel : BaseViewModel
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly AccountStore _accountStore;
+    private readonly ExpenseBookStore _expenseBookStore;
     #region Properties
     //month
     public string MonthEditExpenseBook {
@@ -65,24 +66,38 @@ public class ExpenseBookEditViewModel : BaseViewModel
     public ExpenseBookEditViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
+        _expenseBookStore = serviceProvider.GetRequiredService<ExpenseBookStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
-
+        LoadData();
         CancelEditExpenseBookCommand = new RelayCommand<object>(CloseModal);
         ConfirmEditExpenseBookCommand = new RelayCommand<object>(ConfirmEditExpenseBook);
     }
-
+    public void LoadData() {
+        var itemExB = _expenseBookStore.ExpenseBook;
+        if (itemExB != null) {
+            MonthEditExpenseBook = itemExB.Month.ToString();
+            YearEditExpenseBook = itemExB.Year.ToString();
+            BudgetEditExpenseBook = itemExB.Budget.ToString();
+            ResourceEditExpenseBook = itemExB.Resources; 
+        }
+    }
     private void CloseModal(object sender) {
         _modalNavigationStore.Close();
     }
     private void ConfirmEditExpenseBook(object sender) {
         //add data to database
-        //var expenseBook = new ExpensesBook() {
-        //    Month = int.Parse(MonthEditExpenseBook),
-        //    Year = int.Parse(YearEditExpenseBook),
-        //    Budget = long.Parse(BudgetEditExpenseBook),
-        //    Resources = ResourceEditExpenseBook,
-        //};
-        //bool check = DBManager.Update(expenseBook);
+        var itemExB = _expenseBookStore.ExpenseBook;
+        ExpensesBook itemEdit = DBManager.GetFirst<ExpensesBook>(exb => exb.Month == itemExB.Month && exb.Year == itemExB.Year && exb.UserID == itemExB.UserID);
+        
+        itemEdit.Month = int.Parse(MonthEditExpenseBook);
+        itemEdit.Year = int.Parse(YearEditExpenseBook);
+        itemEdit.Budget = long.Parse(BudgetEditExpenseBook);
+        itemEdit.Resources = ResourceEditExpenseBook;
+
+        //bool check = DBManager.Update<ExpensesBook>(itemExB);
+        
+        DBManager.Update<ExpensesBook>(itemExB);
+
         _modalNavigationStore.Close();
     }
 }

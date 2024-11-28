@@ -122,9 +122,9 @@
                    Margin="15,0,0,0"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
-                   DockPanel.Dock="Left"
-                   >
+                   DockPanel.Dock="Left">
                 <DatePicker
+                   SelectedDate="{Binding FindDate}"
                    VerticalAlignment="Stretch"
                    HorizontalAlignment="Stretch"
                    FontSize="14"
@@ -193,6 +193,7 @@
                HorizontalAlignment="Stretch"
                AutoGenerateColumns="False"
                IsReadOnly="True"
+               SelectedItem="{Binding ItemsExB}"
                ItemsSource="{Binding ExpenseBooks}">
                 <DataGrid.InputBindings>
                     <!--  Double click on any row  -->
@@ -212,39 +213,34 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Button
-                                       Margin="0 0 5 0"
-                                       Width="50"
-                                       Content="+"
-                                       FontSize="15"
+                                       Margin="0 0 5 0" Width="50" Content="+" FontSize="15"
                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                        Style="{StaticResource MaterialDesignRaisedButton}"
                                        ToolTip="Resource name: MaterialDesignRaisedButton"
-                                       BorderBrush="#FF514D4D"
-                                       Foreground="White"
-                                       Command="{Binding AddExpenseCommand}"
+                                       BorderBrush="#FF514D4D" Foreground="White"
+                                       Command="{Binding DataContext.AddExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
                                        CommandParameter="{Binding}">
+                                        
                                     </Button>
                                     <Button
-                                       Margin="0 0 5 0"
-                                       Width="50"
-                                       IsEnabled="True"
+                                       Margin="0 0 5 0" Width="50" IsEnabled="True"
                                        Style="{StaticResource MaterialDesignRaisedButton}"
                                        ToolTip="Resource name: MaterialDesignRaisedButton"
-                                       Background="#31B720"
-                                       BorderBrush="#FF514D4D"
-                                       Command="{Binding EditExpenseBookCommand}">
-                                        <materialDesign:PackIcon Kind="pencil" Foreground="White"/>
+                                       Background="#31B720" BorderBrush="#FF514D4D"
+                                       Command="{Binding DataContext.EditExpenseBookCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                       CommandParameter ="{Binding ElementName=ListExpenseBook, Path=SelectedItem}">
+                                       <materialDesign:PackIcon Kind="pencil" Foreground="White"/>
+                                        
                                     </Button>
                                     <Button
                                        Width="50"
                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                        Style="{StaticResource MaterialDesignRaisedButton}"
                                        ToolTip="Resource name: MaterialDesignRaisedButton"
-                                       Background="IndianRed"
-                                       BorderBrush="#FF514D4D"
-                                       Command="{Binding DeleteExpenseBookCommand}"
+                                       Background="IndianRed" BorderBrush="#FF514D4D"
+                                       Command="{Binding DataContext.DeleteExpenseBookCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
                                        CommandParameter="{Binding}">
-                                        <materialDesign:PackIcon Kind="TrashCanOutline" Foreground="White"/>
+                                       <materialDesign:PackIcon Kind="TrashCanOutline" Foreground="White"/>
                                     </Button>
                                 </StackPanel>
                             </DataTemplate>
