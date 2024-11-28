@@ -7,7 +7,7 @@ using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Windows.Input;
 
-namespace PersonalFinanceApp.Src.ViewModel;
+namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class GoalDeleteViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;

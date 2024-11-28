@@ -152,7 +152,8 @@
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                              Text="{Binding CategoryGoal}" Margin="10,0,0,0">
+                              Text="{Binding CategoryGoal}" Margin="10,0,0,0"
+                              SelectedItem="{Binding SelectedItemGoal}">
                               
                     </ComboBox>
                 </Grid>

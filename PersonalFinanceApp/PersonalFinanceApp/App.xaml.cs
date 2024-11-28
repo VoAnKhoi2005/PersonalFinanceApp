@@ -102,6 +102,8 @@ namespace PersonalFinanceApp
             services.AddTransient<GoalHistoryViewModel>(s => new GoalHistoryViewModel(s));
             services.AddTransient<GoalAddSavedAmountViewModel>(s => new GoalAddSavedAmountViewModel(s));
             services.AddTransient<GoalDeleteViewModel>(s => new GoalDeleteViewModel(s));
+            //services.AddTransient<GoalAddNewCategoryViewModel>(s => new GoalAddNewCategoryViewModel(s));
+
         }
 
     }

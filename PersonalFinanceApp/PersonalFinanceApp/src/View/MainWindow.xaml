@@ -263,6 +263,8 @@
                     <views:UC_Summary />
                 </DataTemplate>
 
+               
+
             </ContentControl.Resources>
         </ContentControl>
 
@@ -289,7 +291,10 @@
                 <DataTemplate DataType="{x:Type viewModels:GoalHistoryViewModel}">
                     <views:Main_Goalplan_History/>
                 </DataTemplate>
-                
+                <DataTemplate DataType="{x:Type viewModels:GoalDeleteViewModel}">
+                    <views:Main_Goalplan_deleteConfirm/>
+                </DataTemplate>
+
             </ContentControl.Resources>
         </custom:Modal>
 

@@ -110,8 +110,9 @@ public class GoalplanAddNewViewModel : BaseViewModel
         set {
             if (_categoryGoal != value) {
                 if(value.CompareTo("<New>") == 0) {
-                    NewGoalCategory();
                     //OnPropertyChanged();
+                    _categoryGoal = value;
+                    OnPropertyChanged();
                 }
                 else {
                     _categoryGoal = value;
@@ -132,8 +133,22 @@ public class GoalplanAddNewViewModel : BaseViewModel
             }
         }
     }
-    public string SelectedItemGoal { get; set; }
+    public string SelectedItemGoal {
+        get => _selectedItemGoal;
+        set {
+            if (_selectedItemGoal != value) {
+                if(value.CompareTo("<New>") == 0) {
+                    CreateCategoryCommand.Execute(this);
+                    _selectedItemGoal = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+    }
+    private string _selectedItemGoal { get; set; }
     #endregion
+    public ICommand CreateCategoryCommand {  get; set; }
     public ICommand CancelNewGoalCommand { get; set; }
     public ICommand ConfirmNewGoalCommand { get; set; }
 
@@ -142,7 +157,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
         _serviceProvider = serviceProvider;
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
-
+        CreateCategoryCommand = new NavigateModalCommand<GoalHistoryViewModel>(serviceProvider);
         LoadItemSourceCategoryGoal();
         
         CancelNewGoalCommand = new RelayCommand<object>(CloseModal);
@@ -183,8 +198,5 @@ public class GoalplanAddNewViewModel : BaseViewModel
 
         _modalNavigationStore.Close();
     }
-    public void NewGoalCategory() {
-        //add new category 
-
-    }
+    
 }
