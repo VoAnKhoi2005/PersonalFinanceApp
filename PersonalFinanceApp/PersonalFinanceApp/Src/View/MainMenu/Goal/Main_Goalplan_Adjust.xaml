@@ -8,7 +8,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:nib="clr-namespace:PersonalFinanceApp.Src.etc"
-             d:DesignHeight="800" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="400">
     <!--color done-->
     <Border Background="{DynamicResource CommonGridBackground}" Height="500" 
             Width="400" 
@@ -19,6 +19,28 @@
                     <Setter Property="FontFamily" Value="Sans Serif Collection"/>
                     <Setter Property="Foreground" Value="{DynamicResource CommonText}"/>
                     <Setter Property="FontWeight" Value="Regular"/>
+                </Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Transparent"></Setter>
+                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="30"
+                                    Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch">
+                                    </ContentPresenter>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Cursor" Value="Hand"></Setter>
+                            <Setter Property="Background" Value="{DynamicResource onHovered}"></Setter>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
@@ -56,11 +78,11 @@
             <!--Goal name-->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="261*"></ColumnDefinition>
-                    <ColumnDefinition Width="139*"></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBox
-                    Text="{Binding NameEditGoal}"
+                    Text="{Binding NameGoal}"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Margin="10,0,0,0"       
@@ -73,24 +95,38 @@
                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                     Foreground="{DynamicResource CommonText}"
                     Height="40" 
-                    Width="230" Grid.ColumnSpan="2" />
+                    Width="180" />
                 <Grid Grid.Column="1">
-                    <ToggleButton
-                        IsChecked="True"
-                        Style="{StaticResource MaterialDesignSwitchLightToggleButton}"
-                        ToolTip="MaterialDesignSwitchLightToggleButton" 
-                              VerticalAlignment="Center"
-                           HorizontalAlignment="Right"
-                               Margin="0,20,20,0"
-                               Height="18" Width="34" Background="{DynamicResource Underline}"
-                              />
-                    <TextBlock Text="Reminder" VerticalAlignment="Center"
-                           HorizontalAlignment="Left"
-                               Margin="0,20,0,0"
-                           FontSize="14" Opacity="0.6" />
+                    <ComboBox Width="150" Height="40" Visibility="Visible" IsEditable="True"
+                              MinWidth="128" HorizontalAlignment="Left" FontSize="14"
+                              Foreground="{DynamicResource CommonText}"
+                              ItemsSource="{Binding ItemsGoal}"
+                              materialDesign:HintAssist.Hint="Category" 
+                              materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                              materialDesign:TextFieldAssist.HasClearButton="True"
+                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              Text="{Binding CategoryGoal}" Margin="10,0,0,0">
+
+                    </ComboBox>
+                    <Border CornerRadius="30"
+                    Background="{DynamicResource CommonGridBackground}"
+                    Width="25" Height="25"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                            Margin="0,15,10,0"
+                    >
+                        <Button Command="{Binding RefreshGoalCommand}">
+                            <materialDesign:PackIcon Kind="Plus" 
+                                        Foreground="{DynamicResource CommonText}"
+                                                 Height="25"
+                                                 Width="25"
+                                                  />
+                        </Button>
+                    </Border>
+
                 </Grid>
             </Grid>
-
             <!--Target amount-->
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -144,40 +180,36 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <!--change visibility here-->
                     <ComboBox Width="180" Height="40" Visibility="Visible" IsEditable="True"
-                              HorizontalAlignment="Left"
-                              FontSize="14"
+                              HorizontalAlignment="Left" FontSize="14"
                               Foreground="{DynamicResource CommonText}"
-                              MinWidth="128"
-                              ItemsSource="{Binding ItemsGoalEdit}"
-                              materialDesign:HintAssist.Hint="Category" 
+                              ItemsSource="{Binding ItemsGoal}"
+                              materialDesign:HintAssist.Hint="Recurring" 
                               materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                              Text="{Binding CategoryEditGoal}" Margin="10,0,0,0">
-
-                        <!--not done here-->
+                              Margin="10,0,0,0">
 
                     </ComboBox>
+                    <!--change visibility here-->
+
                 </Grid>
+                <!--Text="{Binding DeadlineGoal}"-->
                 <Grid Grid.Column="1">
                     <DatePicker 
-                        SelectedDate="{Binding DeadlineEditGoal}"
-                        FontSize="14"
-                        Width="180"
-                        Height="40" 
+                        SelectedDate="{Binding DeadlineGoal}"
+                        FontSize="14" Width="180" Height="40" 
                         materialDesign:HintAssist.Hint="Deadline"
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
                         materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                         materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                         Foreground="{DynamicResource CommonText}"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </Grid>
+
 
             <!--Start date - end date-->
             <Grid Grid.Row="5">

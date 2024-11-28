@@ -107,7 +107,7 @@
                 <!--amount-->
 
                 <Grid Grid.Column="1">
-                    <TextBlock Text="Resource" 
+                    <TextBlock Text="Budget (VND)" 
                                FontWeight="Bold"
                                VerticalAlignment="Top"
                                HorizontalAlignment="Left"
@@ -142,7 +142,7 @@
                 <!--method-->
 
                 <Grid Grid.Column="0">
-                    <TextBlock Text="Budget (VND) " 
+                    <TextBlock Text="Resource" 
                                FontWeight="Bold"
                                VerticalAlignment="Top"
                                HorizontalAlignment="Left"
@@ -156,7 +156,7 @@
                              Margin="0,30,0,0"
                              Width="310" Height="40"
                              TextAlignment="Center"
-                             BorderBrush="{x:Null}"
+                             BorderBrush="{x:Null}" 
                              Foreground="{DynamicResource CommonText}"
                              FontSize="14"
                                  HorizontalAlignment="Center"

@@ -118,7 +118,7 @@
             <Border CornerRadius="25"
                    Background="{DynamicResource CommonGridBackground}"
                    Width="150"
-                   Height="45"
+                   Height="40"
                    Margin="15,0,0,0"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"

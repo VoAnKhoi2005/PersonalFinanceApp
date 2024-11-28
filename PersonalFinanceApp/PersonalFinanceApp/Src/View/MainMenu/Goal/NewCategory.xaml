@@ -55,7 +55,8 @@
                              Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
 
 
-                    <TextBox VerticalAlignment="Center" Text="{Binding AmountAddSaved}"
+                    <TextBox VerticalAlignment="Center" 
+                             Text="{Binding AmountAddSaved}"
                              Margin="0,30,0,0"
                              Width="310" Height="40"
                              TextAlignment="Center"

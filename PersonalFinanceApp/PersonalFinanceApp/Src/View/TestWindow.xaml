@@ -157,8 +157,8 @@
 
             </DockPanel>
             <!--goal plan main looking-->
-            <Border Grid.Row="2">
-                <Grid>
+            <Border Grid.Row="2" Margin="15,0,15,0">
+                <Grid >
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
                                Text="No goal found!" FontSize="30" Opacity="0.5"
                                TextAlignment="Center"

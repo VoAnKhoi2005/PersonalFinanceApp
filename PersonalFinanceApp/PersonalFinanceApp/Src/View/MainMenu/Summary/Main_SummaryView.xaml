@@ -27,7 +27,9 @@
                 <ColumnDefinition Width="0.1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <!--user-->
-            <Button Width="35" Height="35" Grid.Column="1">
+            <Button Width="35" Height="35" Grid.Column="1" Margin="0,0,15,0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="Transparent"></Setter>
@@ -172,14 +174,6 @@
 
                         </Grid.RowDefinitions>
 
-                        <ToggleButton Grid.Row="0"
-                                        Content="{materialDesign:PackIcon Kind=Heart,Size=21}"
-                                        IsChecked="True"
-                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                                        ToolTip="MaterialDesignFlatPrimaryToggleButton"
-                                      VerticalAlignment="Top"
-                                      HorizontalAlignment="Right"
-                                      Margin="0,5,5,0" Height="40" Width="40" Foreground="#FFD75F5B" Background="#FFC3C2C5"/>
 
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
@@ -370,14 +364,6 @@
 
                         </Grid.RowDefinitions>
 
-                        <ToggleButton Grid.Row="0"
-                                        Content="{materialDesign:PackIcon Kind=Heart,Size=21}"
-                                        IsChecked="True"
-                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                                        ToolTip="MaterialDesignFlatPrimaryToggleButton"
-                                      VerticalAlignment="Top"
-                                      HorizontalAlignment="Right"
-                                      Margin="0,5,5,0" Height="40" Width="40" Foreground="#FFD75F5B" Background="#FFC3C2C5"/>
 
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
@@ -580,14 +566,6 @@
 
                         </Grid.RowDefinitions>
 
-                        <ToggleButton Grid.Row="0"
-                                        Content="{materialDesign:PackIcon Kind=Heart,Size=21}"
-                                        IsChecked="True"
-                                        Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
-                                        ToolTip="MaterialDesignFlatPrimaryToggleButton"
-                                      VerticalAlignment="Top"
-                                      HorizontalAlignment="Right"
-                                      Margin="0,5,5,0" Height="40" Width="40" Foreground="#FFD75F5B" Background="#FFC3C2C5"/>
 
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
