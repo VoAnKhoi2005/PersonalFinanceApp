@@ -65,18 +65,15 @@
                         <Border  Width="50" Height="50" Margin="20,43,17,10" CornerRadius="90"
                              Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2">
                         </Border>
-                        <TextBox VerticalAlignment="Center" Text="{Binding MonthExpenseBook}"
+                        <ComboBox VerticalAlignment="Center" Text="{Binding MonthExpenseBook}"
                              Margin="2,30,0,0"
                                  BorderBrush="{x:Null}"
                              Width="25" Height="40"
-                             TextAlignment="Center"
                              Foreground="{DynamicResource CommonText}"
                              FontSize="14"
                                  HorizontalAlignment="Center"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
-                             CaretBrush="{DynamicResource CommonText}"
-                             SelectionBrush="{DynamicResource CommonText}"
-                                 ></TextBox>
+                                 ></ComboBox>
                     </Grid>
 
                     <Grid Grid.Column="1">
@@ -90,18 +87,15 @@
                                  CornerRadius="30"
                              Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2" Margin="0,44,0,0">
                         </Border>
-                        <TextBox VerticalAlignment="Center" Text="{Binding YearExpenseBook}"
+                        <ComboBox VerticalAlignment="Center" Text="{Binding YearExpenseBook}"
                              Margin="0,30,0,0"
                              Width="50" Height="40"
-                             TextAlignment="Center"
-                                 BorderBrush="{x:Null}"
+                                  BorderBrush="{x:Null}"
                              Foreground="{DynamicResource CommonText}"
                              FontSize="14"
                                  HorizontalAlignment="Center"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
-                             CaretBrush="{DynamicResource CommonText}"
-                             SelectionBrush="{DynamicResource CommonText}"
-                                 ></TextBox>
+                                 ></ComboBox>
                     </Grid>
 
                 </Grid>
