@@ -303,7 +303,5 @@
 
             </ContentControl.Resources>
         </custom:Modal>
-
-
     </Grid>
 </Window>

@@ -5,13 +5,15 @@ using System.Windows.Input;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Database;
 using System.Collections.ObjectModel;
+using PersonalFinanceApp.Src.ViewModel.Stores;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class ExpenseAddNewViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
-    private readonly SharedDataService _sharedDataService;
+    private readonly ExpenseBookStore _expenseBookStore;
+
     #region Properties
     //name
     public string NameExpense {
@@ -86,61 +88,30 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         }
     }
     private string _resourceExpense;
-    #endregion
-    //Category
-    public ObservableCollection<string> _itemsExpense = new ObservableCollection<string> {
-        #region Category of expense
-        "Ăn sáng", 
-        "Ăn tiệm", 
-        "Ăn tối", 
-        "Ăn trưa", 
-        "Cafe", 
-        "Đi chợ / siêu thị", 
-        "cho vay", 
-        "Đồ chơi", 
-        "Học phí", 
-        "Sách vở", 
-        "Sữa", 
-        "Tiền tiêu vặt", 
-        "Điện", 
-        "Điện thoại cố định", 
-        "Điện thoại di động", 
-        "Gas", "Internet", 
-        "Nước", 
-        "Thuê người giúp việc", 
-        "Truyền hình", 
-        "Bảo hiểm xe", 
-        "Gửi xe", 
-        "Rửa xe", 
-        "sửa chữa, bảo dưỡng xe", 
-        "Taxi/ thuê xe", 
-        "Xăng xe", 
-        "Biếu tặng", 
-        "Cưới xin", 
-        "Ma chay", 
-        "Thăm hỏi", 
-        "Du lịch", 
-        "Làm đẹp", 
-        "Mỹ phẩm", 
-        "Phim ảnh ca nhạc", 
-        "Vui chơi giải trí", 
-        "Phí chuyển khoản",
-        "Mua sắm đồ đạc", 
-        "Sửa chữa nhà cửa", 
-        "Thuê nhà", 
-        "Giao lưu, quan hệ", 
-        "Học hành", 
-        "Khám chữa bệnh", 
-        "Thể thao", 
-        "Thuốc men", 
-        "Trả nợ", 
-        "Giày dép", 
-        "Phụ kiện khác", 
-        "Quần áo", 
-        "<New>"
-        #endregion
-    };
-    public ObservableCollection<string> ItemsExpense {
+    //recurring
+    public bool RecurringExpense {
+        get => _recurringExpense;
+        set {
+            if (_recurringExpense != value) {
+                _recurringExpense = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private bool _recurringExpense;
+    //category
+    public int SelectedCategory {
+        get => _selectedCategory;
+        set {
+            if (_selectedCategory != value) {
+                _selectedCategory = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private int _selectedCategory;
+    //itemsource
+    public ObservableCollection<CategoryItem> ItemsExpense {
         get => _itemsExpense;
         set {
             if (_itemsExpense != value) {
@@ -149,28 +120,29 @@ public class ExpenseAddNewViewModel : BaseViewModel {
             }
         }
     }
-    public string SelectedItemExpense { get; set; }
-    public ICommand ExpenseCancelCommand { get; set; }
-    public ICommand ExpenseConfirmCommand { get; set; }
+    public ObservableCollection<CategoryItem> _itemsExpense = new();
+    #endregion
+    public ICommand CancelAddNewExpenseCommand { get; set; }
+    public ICommand ConfirmAddNewExpenseCommand { get; set; }
 
     public ExpenseAddNewViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
-        _sharedDataService = serviceProvider.GetRequiredService<SharedDataService>();
+        _expenseBookStore = serviceProvider.GetRequiredService<ExpenseBookStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
-
-        ExpenseCancelCommand = new RelayCommand<object>(CloseModal);
-        ExpenseConfirmCommand = new RelayCommand<object>(ConfirmAddNewExpense);
+        LoadItemSource();
+        CancelAddNewExpenseCommand = new RelayCommand<object>(CloseModal);
+        ConfirmAddNewExpenseCommand = new RelayCommand<object>(ConfirmAddNewExpense);
+    }
+    public void LoadItemSource() {
+        ItemsExpense.Clear();
+        ItemsExpense.Add(new CategoryItem { Id = -1, Name = "<New>" });
+        var items = DBManager.GetCondition<Category>(c => c.UserID == _expenseBookStore.ExpenseBook.UserID && c.ExBMonth == _expenseBookStore.ExpenseBook.Month && c.ExBYear == _expenseBookStore.ExpenseBook.Year);
+        foreach(var item in items) {
+            ItemsExpense.Add(new CategoryItem { Id = item.CategoryID, Name = item.Name });
+        }
     }
     private void CloseModal(object sender) {
         _modalNavigationStore.Close();
-    }
-    private Category ca() {
-        Category category = new Category();
-        return category;
-    }
-    private ExpensesBook exB() {
-        ExpensesBook exBook = new ExpensesBook();
-        return exBook;
     }
     private void ConfirmAddNewExpense(object sender) {
         //add data to database
@@ -178,11 +150,11 @@ public class ExpenseAddNewViewModel : BaseViewModel {
             Amount = int.Parse(AmountExpense),
             Name = NameExpense,
             Date = DateOnlyExpenseBook,
-            //Recurring = recurring;
-            //CategoryID = ca.CategoryID;
-            //ExBMonth = exB.Month;
-            //ExBYear = exB.Year;
-            //UserID = exB.UserID;
+            Recurring = true,
+            CategoryID = SelectedCategory,
+            ExBMonth = _expenseBookStore.ExpenseBook.Month,
+            ExBYear = _expenseBookStore.ExpenseBook.Year,
+            UserID = _expenseBookStore.ExpenseBook.UserID,
             Description = DescriptionExpense,
             TimeAdded = DateTime.Now,
             Resources = ResourceExpense,
@@ -190,5 +162,9 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         };
         DBManager.Insert(expense);
         _modalNavigationStore.Close();
+    }
+    public class CategoryItem {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }
