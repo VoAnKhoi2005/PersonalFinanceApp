@@ -1,20 +1,12 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.etc;
-using PersonalFinanceApp.Src.View;
 using PersonalFinanceApp.View;
 using PersonalFinanceApp.ViewModel.LoginMenu;
 using PersonalFinanceApp.ViewModel.MainMenu;
 using PersonalFinanceApp.ViewModel.Stores;
-using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel;
-using Windows.UI.WebUI;
 using PersonalFinanceApp.Src.ViewModel.Stores;
-using PersonalFinanceApp.Src.ViewModel.MainMenu;
-using PersonalFinanceApp.Src.ViewModel;
-using PersonalFinanceApp.Src.ViewModel.MainMenu.Expense;
 
 namespace PersonalFinanceApp
 {
@@ -32,9 +24,9 @@ namespace PersonalFinanceApp
         protected override void OnStartup(StartupEventArgs e)
         {
             //Default login window
-            //NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
-            //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<LoginNewAccountViewModel>();
-            //MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
+            NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
+            navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<LoginNewAccountViewModel>();
+            MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
 
             //Default main window
 
@@ -42,7 +34,7 @@ namespace PersonalFinanceApp
             //navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<DashboardViewModel>();
             //MainWindow = _serviceProvider.GetRequiredService<IWindowFactory>().CreateMainWindow(null);
 
-            MainWindow = new TestWindow();
+            //MainWindow = new TestWindow();
 
             MainWindow.Show();
 

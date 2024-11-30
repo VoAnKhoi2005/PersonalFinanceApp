@@ -6,6 +6,7 @@ using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using static PersonalFinanceApp.ViewModel.MainMenu.ExpenseAddNewViewModel;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -14,6 +15,7 @@ public class ExpenseEditViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
     private readonly ExpenseBookStore _expenseBookStore;
     private readonly ExpenseStore _expenseStore;
+    private readonly AccountStore _accountStore;
     #region Properties
     //name
     public string NameEditExpense {
@@ -77,17 +79,6 @@ public class ExpenseEditViewModel : BaseViewModel {
         }
     }
     private string _categoryEditExpense;
-    //resource
-    public string ResourceEditExpense {
-        get => _resourceEditExpense;
-        set {
-            if (_resourceEditExpense != value) {
-                _resourceEditExpense = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _resourceEditExpense;
     //recurring
     public bool RecurringEditExpense {
         get => _recurringEditExpense;
@@ -104,13 +95,67 @@ public class ExpenseEditViewModel : BaseViewModel {
         get => _selectedEditCategory;
         set {
             if (_selectedEditCategory != value) {
+                if (value == -1) {
+                    //new category
+                    NewCategoryCommand.Execute(this);
+                }
                 _selectedEditCategory = value;
                 OnPropertyChanged();
             }
         }
     }
     private int _selectedEditCategory;
-    //itemsource
+    //category
+    public string SelectedEditExpenseBook {
+        get => _selectedEditExpenseBook;
+        set {
+            if (_selectedEditExpenseBook != value) {
+                if (value.CompareTo("<New>") == 0) {
+                    //new expense book
+                    NewExpenseBookCommand.Execute(this);
+                }
+                _selectedEditExpenseBook = value;
+                var x = value.Split('/');
+                if (x.Length > 1) { MonthExpenseBook = x[0]; YearExpenseBook = x[1]; BudgetExpenseBook = x[2]; }
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _selectedEditExpenseBook;
+    //month
+    public string MonthExpenseBook {
+        get => _monthExpenseBook;
+        set {
+            if (_monthExpenseBook != value) {
+                _monthExpenseBook = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _monthExpenseBook;
+    //year
+    public string YearExpenseBook {
+        get => _yearExpenseBook;
+        set {
+            if (_yearExpenseBook != value) {
+                _yearExpenseBook = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _yearExpenseBook;
+    //Budget
+    public string BudgetExpenseBook {
+        get => _budgetExpenseBook;
+        set {
+            if (_budgetExpenseBook != value) {
+                _budgetExpenseBook = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _budgetExpenseBook;
+    //itemsource caetegory
     public ObservableCollection<CategoryItem> ItemsEditExpense {
         get => _itemsEditExpense;
         set {
@@ -121,15 +166,31 @@ public class ExpenseEditViewModel : BaseViewModel {
         }
     }
     public ObservableCollection<CategoryItem> _itemsEditExpense = new();
+    //itemsource expensebook
+    public ObservableCollection<ExpenseBookItem> ItemsEditExpenseBook {
+        get => _itemsEditExpenseBook;
+        set {
+            if (_itemsEditExpenseBook != value) {
+                _itemsEditExpenseBook = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    public ObservableCollection<ExpenseBookItem> _itemsEditExpenseBook = new();
     #endregion
     public ICommand CancelEditExpenseCommand { get; set; }
     public ICommand ConfirmEditExpenseCommand { get; set; }
+    public ICommand NewCategoryCommand { get; set; }
+    public ICommand NewExpenseBookCommand { get; set; }
 
     public ExpenseEditViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
         _expenseBookStore = serviceProvider.GetRequiredService<ExpenseBookStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
+        _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         LoadItemSource();
+        NewCategoryCommand = new NavigateModalCommand<ExpenseAddNewCategory>(serviceProvider);
+        //NewExpenseBookCommand = new NavigateModalCommand<ExpenseAddNewExpenseBook>(serviceProvider);
         CancelEditExpenseCommand = new RelayCommand<object>(CloseModal);
         ConfirmEditExpenseCommand = new RelayCommand<object>(ConfirmEditExpense);
     }
@@ -137,21 +198,16 @@ public class ExpenseEditViewModel : BaseViewModel {
         //itemsource category
         ItemsEditExpense.Clear();
         ItemsEditExpense.Add(new CategoryItem { Id = -1, Name = "<New>" });
-        var items = DBManager.GetCondition<Category>(c => c.UserID == _expenseBookStore.ExpenseBook.UserID && c.ExBMonth == _expenseBookStore.ExpenseBook.Month && c.ExBYear == _expenseBookStore.ExpenseBook.Year);
+        var items = DBManager.GetCondition<Category>(c => c.UserID == int.Parse(_accountStore.UsersID));
         foreach (var item in items) {
             ItemsEditExpense.Add(new CategoryItem { Id = item.CategoryID, Name = item.Name });
         }
-        //load data
-        var itemExP = _expenseStore.Expenses;
-        //var cgr = DBManager.GetFirst<Category>(c => itemExP.CategoryID == c.CategoryID && c.UserID == itemExP.UserID && c.ExBYear == itemExP.ExBYear && c.ExBMonth == itemExP.ExBMonth);
-        if (itemExP != null) {
-            AmountEditExpense = itemExP.Amount.ToString();
-            NameEditExpense = itemExP.Name;
-            DateTimeEditExpenseBook = itemExP.Date.ToDateTime(TimeOnly.MinValue);
-            //Recurring = recurring;
-            //SelectedEditCategory = cgr.Name;
-            DescriptionEditExpense = itemExP.Description;
-            ResourceEditExpense = itemExP.Resources;
+        //load item expensebook
+        ItemsEditExpenseBook.Clear();
+        ItemsEditExpenseBook.Add(new ExpenseBookItem { sExB = "<New>" });
+        var itemexBs = DBManager.GetCondition<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID));
+        foreach (var item in itemexBs) {
+            ItemsEditExpenseBook.Add(new ExpenseBookItem(item, (item.Month.ToString() + "/" + item.Year.ToString() + "/" + item.Budget.ToString())));
         }
     }
     private void CloseModal(object sender) {
@@ -159,13 +215,17 @@ public class ExpenseEditViewModel : BaseViewModel {
     }
     private void ConfirmEditExpense(object sender) {
         //add data to database
+        //update expenseBook
+        var exB = DBManager.GetFirst<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID) && e.Year == int.Parse(YearExpenseBook) && e.Month == int.Parse(MonthExpenseBook));
+        exB.Budget = long.Parse(BudgetExpenseBook);
+        DBManager.Update<ExpensesBook>(exB);
 
+        //edit expense
         var itemExP = DBManager.GetFirst<Expense>(e => e.ExpenseID == _expenseStore.Expenses.ExpenseID && e.UserID == _expenseStore.Expenses.UserID);
         itemExP.Amount = long.Parse(AmountEditExpense);
         itemExP.Name = NameEditExpense;
         itemExP.Description = DescriptionEditExpense;
         //itemExP.Recurring = true;
-        itemExP.Resources = ResourceEditExpense;
         itemExP.CategoryID = SelectedEditCategory;
         itemExP.Date = DateOnlyExpenseBook;
 
@@ -175,5 +235,17 @@ public class ExpenseEditViewModel : BaseViewModel {
     public class CategoryItem {
         public int Id { get; set; }
         public string Name { get; set; }
+    }
+    public class ExpenseBookItem {
+        public ExpensesBook exB { get; set; }
+        public string sExB { get; set; }
+        public ExpenseBookItem() { }
+        public ExpenseBookItem(ExpensesBook e, string s) {
+            exB = e;
+            sExB = s;
+        }
+        public ExpenseBookItem(string s) {
+            sExB = s;
+        }
     }
 }
