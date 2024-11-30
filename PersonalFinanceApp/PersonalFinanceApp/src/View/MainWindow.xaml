@@ -281,6 +281,15 @@
                 <DataTemplate DataType="{x:Type viewModels:FilterExpenseViewModel}">
                     <views:Main_Expense_Filter/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:ExpenseNewExpenseBook}">
+                    <views:UC_Main_ExpenseBook_AddNew/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:ExpenseAddNewCategory}">
+                    <views:Main_Expense_AddCategory/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:ExpenseDeleteViewModel}">
+                    <views:Main_Expense_DeleteConfirm/>
+                </DataTemplate>
                 <!--Goal-->
                 <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">
                     <views:UC_Main_Goalplan_Adding />

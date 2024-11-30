@@ -22,20 +22,9 @@ public class ExpenseAddNewCategory : BaseViewModel {
         }
     }
     private string _nameNewCategoryExpense;
-    public string ResourceNewCategoryExpense {
-        get => _resourceNewCategoryExpense;
-        set {
-            if (_resourceNewCategoryExpense != value) {
-                _resourceNewCategoryExpense = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _resourceNewCategoryExpense;
     public ICommand CancelNewCategoryExpenseCommand { get; set; }
     public ICommand ConfirmNewCategoryExpenseCommand { get; set; }
 
-    public bool HasNoExpense { get; set; } = true;
     public ExpenseAddNewCategory(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
         _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
@@ -52,12 +41,12 @@ public class ExpenseAddNewCategory : BaseViewModel {
         //add new category
         var newCategory = new Category() {
             Name = NameNewCategoryExpense,
-            Resources = ResourceNewCategoryExpense,
-            UserID = _expenseStore.Expenses.UserID,
-            ExBMonth = _expenseStore.Expenses.ExBMonth,
-            ExBYear = _expenseStore.Expenses.ExBYear,
+            UserID = _expenseStore.ExpenseBook.UserID,
+            ExBMonth = _expenseStore.ExpenseBook.Month,
+            ExBYear = _expenseStore.ExpenseBook.Year,
         };
         DBManager.Insert<Category>(newCategory);
+        _expenseStore.Categorys = newCategory;
         _modalNavigationStore.Close();
     }
 }

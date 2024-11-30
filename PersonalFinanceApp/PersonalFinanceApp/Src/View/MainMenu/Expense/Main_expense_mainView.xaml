@@ -4,11 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
+             xmlns:convert="clr-namespace:PersonalFinanceApp.Src.etc"
              d:DesignHeight="900" d:DesignWidth="1000"
              x:Name="Expense">
-    
+    <UserControl.Resources>
+        <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -136,7 +140,7 @@
                    HorizontalAlignment="Right"
                    Margin="0,0,5,0"
                    DockPanel.Dock="Right">
-                <Button Command="{Binding RefreshExpenseBookCommand}">
+                <Button Command="{Binding RefreshExpenseCommand}">
                     <materialDesign:PackIcon Kind="Refresh" 
                    Foreground="{DynamicResource CommonText}"
                                                 Height="25"
@@ -154,7 +158,7 @@
                    HorizontalAlignment="Right"
                    Margin="0,0,5,0"
                    DockPanel.Dock="Right">
-                <Button Command="{Binding RefreshExpenseBookCommand}">
+                <Button Command="{Binding LoadRecoverCommand}">
                     <materialDesign:PackIcon Kind="Delete"
                    Foreground="Red"
                                                 Height="25"
@@ -200,9 +204,89 @@
             </Border>
         </DockPanel>
         <!--DataGrid expensebook-->
+        <TextBlock Visibility="{Binding RecoverButton, Converter={StaticResource BoolToVisibilityConverter}}"> hello world</TextBlock>
+            <Grid Grid.Row="2" Margin="15 0 15 15">
+            <DataGrid 
+                   Margin="15,0,15,15"
+                   Name="ListExpenseBook"
+                   Grid.Row="1"
+                   HorizontalAlignment="Stretch"
+                   AutoGenerateColumns="False"
+                   IsReadOnly="True"
+                   SelectedItem="{Binding ItemsExB}"
+                   ItemsSource="{Binding Expensesadvances}">                
+                <DataGrid.InputBindings>
+                    <!--  Double click on any row  -->
+                    <MouseBinding
+                       Command="{Binding EditExpenseCommand}"
+                       CommandParameter="{Binding ElementName=ListExpenseBook, Path=SelectedItem}"
+                       Gesture="LeftDoubleClick" />
+                </DataGrid.InputBindings>
 
-        <Grid Grid.Row="2" Margin="15 0 15 15">
-            <DataGrid></DataGrid>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                    <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
+                    <DataGridTextColumn Binding="{Binding Recurring}" Header="Recurring" />
+                    <DataGridTextColumn Binding="{Binding Category}" Header="Category" />
+                    <DataGridTextColumn Binding="{Binding BudgetExp}" Header="Budget" />
+                    <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
+                    <DataGridTemplateColumn CanUserResize="False" Header="Commands">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button
+                                           Margin="0 0 5 0" Width="50" IsEnabled="True"
+                                           Style="{StaticResource MaterialDesignRaisedButton}"
+                                           ToolTip="Resource name: MaterialDesignRaisedButton"
+                                           Background="#31B720" BorderBrush="#FF514D4D"
+                                           Command="{Binding DataContext.EditExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                           CommandParameter ="{Binding ElementName=ListExpenseBook, Path=SelectedItem}">
+                                        <materialDesign:PackIcon Kind="pencil" Foreground="White"/>
+                                    </Button>
+                                            <!--Style="{StaticResource MaterialDesignRaisedButton}"-->
+                                    <Button
+                                            Margin="0 0 5 0" Width="50" 
+                                            ToolTip="Resource name: MaterialDesignRaisedButton"
+                                            Background="#31B720" BorderBrush="#FF514D4D"
+                                            Command="{Binding DataContext.EditExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                            CommandParameter ="{Binding ElementName=ListExpenseBook, Path=SelectedItem}">
+                                        <materialDesign:PackIcon Kind="pencil" Foreground="White"/>
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsButtonVisible}" Value="True">
+                                                        <!-- Khi điều kiện là True, Button sẽ hiển thị -->
+                                                        <DataTrigger.Setters>
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger.Setters>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IsButtonVisible}" Value="False">
+                                                        <!-- Khi điều kiện là False, Button sẽ ẩn -->
+                                                        <DataTrigger.Setters>
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger.Setters>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    <Button
+                                           Width="50"
+                                           IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                           Style="{StaticResource MaterialDesignRaisedButton}"
+                                           ToolTip="Resource name: MaterialDesignRaisedButton"
+                                           Background="IndianRed" BorderBrush="#FF514D4D"
+                                           Command="{Binding DataContext.DeleteExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                           CommandParameter="{Binding}">        
+                                        <materialDesign:PackIcon Kind="TrashCanOutline" Foreground="White"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </UserControl>

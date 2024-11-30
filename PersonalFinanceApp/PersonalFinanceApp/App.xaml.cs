@@ -94,6 +94,8 @@ namespace PersonalFinanceApp
             services.AddTransient<ExpenseDeleteViewModel>(s => new ExpenseDeleteViewModel(s));
             services.AddTransient<ExpenseRecoverViewModel>(s => new ExpenseRecoverViewModel(s));
             services.AddTransient<FilterExpenseViewModel>(s => new FilterExpenseViewModel(s));
+            services.AddTransient<ExpenseNewExpenseBook>(s => new ExpenseNewExpenseBook(s));
+            services.AddTransient<ExpenseAddNewCategory>(s => new ExpenseAddNewCategory(s));
 
 
             //goal

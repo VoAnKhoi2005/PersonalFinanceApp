@@ -16,6 +16,26 @@ public class ExpenseStore : INotifyPropertyChanged {
             }
         }
     }
+    private ExpensesBook? _expenseBook;
+    public ExpensesBook? ExpenseBook {
+        get => _expenseBook;
+        set {
+            if (_expenseBook != value) {
+                _expenseBook = value;
+                OnPropertyChanged(nameof(_expenseBook));
+            }
+        }
+    }
+    private Category? _categorys;
+    public Category? Categorys {
+        get => _categorys;
+        set {
+            if (_categorys != value) {
+                _categorys = value;
+                OnPropertyChanged(nameof(_categorys));
+            }
+        }
+    }
     private bool _isFilter = false;
     public bool IsFilter {
         get => _isFilter;
@@ -26,6 +46,16 @@ public class ExpenseStore : INotifyPropertyChanged {
             }
         }
     }
+    public string TextChangedExp {
+        get => _textChangedExp;
+        set {
+            if (_textChangedExp != value) {
+                _textChangedExp = value;
+                OnPropertyChanged(nameof(_textChangedExp));
+            }
+        }
+    }
+    private string _textChangedExp;
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged(string? propertyName = null) {

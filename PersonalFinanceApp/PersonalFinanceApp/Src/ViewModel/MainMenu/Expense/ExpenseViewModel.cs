@@ -15,30 +15,36 @@ public class ExpenseViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
     private readonly ExpenseStore _expenseStore;
     private readonly AccountStore _accountStore;
+    public bool IsButtonVisible {
+        get => _isButtonVisible;
+        set {
+            _isButtonVisible = value;
+            OnPropertyChanged();
+        }
+    }
+    private bool _isButtonVisible;
     public bool Filter {
         get => _filter;
         set {
             if (_filter != value) {
                 _filter = value;
                 CheckFilterCommand.Execute(this);
-                MessageBox.Show("Load");
                 OnPropertyChanged();
             }
         }
     }
     private bool _filter;
-    public object ItemsExB {
+    public ExpenseAdvance ItemsExB {
         get => _itemsExB;
         set {
-            if (_itemsExB != value) {
+            if (_itemsExB != value && value != null) {
                 _itemsExB = value;
-                var x = (ExpenseAdvance)value;
-                _expenseStore.Expenses = x.exp;
+                _expenseStore.Expenses = value.exp;
                 OnPropertyChanged();
             }
         }
     }
-    private object _itemsExB;
+    private ExpenseAdvance _itemsExB;
     public ObservableCollection<ExpenseAdvance> Expensesadvances { 
         get => _expensesAdvances;
         set {
@@ -57,6 +63,7 @@ public class ExpenseViewModel : BaseViewModel {
     public ICommand FilterExpenseCommand { get; set; }
     public ICommand CheckFilterCommand {  get; set; }
     public ICommand LoadCommand {  get; set; }
+    public ICommand LoadRecoverCommand {  get; set; }
 
     public bool HasNoExpense { get; set; } = true;
     public ExpenseViewModel(IServiceProvider serviceProvider) {
@@ -70,17 +77,28 @@ public class ExpenseViewModel : BaseViewModel {
         FilterExpenseCommand = new NavigateModalCommand<ExpenseRecoverViewModel>(serviceProvider);
         DeleteExpenseCommand = new NavigateModalCommand<ExpenseDeleteViewModel>(serviceProvider);
 
-        //DeleteExpenseCommand = new RelayCommand<object>(DeleteExpense);
+        LoadExpenses();
+        LoadRecoverCommand = new RelayCommand<object>(LoadRecover);
         RecoverExpenseCommand = new RelayCommand<object>(RecoverExpense);
         RefreshExpenseCommand = new RelayCommand<object>(LoadExpenses);
         CheckFilterCommand = new RelayCommand<object>(Check);
         LoadCommand = new RelayCommand<object>(Load);
     }
+    public void LoadRecover(object parameter) {
+        IsButtonVisible = true;
+        Expensesadvances.Clear();
+        var exp = DBManager.GetCondition<Expense>(e => e.UserID == int.Parse(_accountStore.UsersID), getDeleted:true);
+        foreach(var e in exp) {
+            var exB = DBManager.GetFirst<ExpensesBook>(ex => ex.UserID == e.UserID && ex.Month == e.ExBMonth && ex.Year == e.ExBYear);
+            Expensesadvances.Add(new ExpenseAdvance(e, exB.Budget));
+        }
+
+    }
     public void Load(object parameter) {
         //if (parameter != null)
         //    MessageBox.Show("Load");
         //if (_expenseStore.IsFilter != Filter) {
-            Filter = _expenseStore.IsFilter;
+            //Filter = _expenseStore.IsFilter;
         //}
     }
     //public void DeleteExpense(object parameter) {
@@ -100,10 +118,11 @@ public class ExpenseViewModel : BaseViewModel {
         exp.Deleted = false;
         DBManager.Update<Expense>(exp);
     }
-    public void LoadExpenses(object p) {
+    public void LoadExpenses(object? p = null) {
+        IsButtonVisible = false;
         //load data to datagrid
         Expensesadvances.Clear();
-        var items = DBManager.GetCondition<Expense>(exp => exp.Deleted == false && exp.UserID == int.Parse(_accountStore.UsersID));
+        var items = DBManager.GetCondition<Expense>(exp => exp.UserID == int.Parse(_accountStore.UsersID));
         foreach (var item in items) {
             var exB = DBManager.GetFirst<ExpensesBook>(e => e.Month == item.ExBMonth && e.Year == item.ExBYear && e.UserID == item.UserID);
             Expensesadvances.Add(new ExpenseAdvance(item, exB.Budget));
@@ -112,6 +131,15 @@ public class ExpenseViewModel : BaseViewModel {
     public class ExpenseAdvance {
         public Expense exp {  get; set; }
         public long BudgetExp { get; set; }
+        public int ExpenseID { get; set; }
+        public long Amount { get; set; }
+        public string Name { get; set; }
+        public string? Description { get; set; }
+        public DateOnly Date { get; set; }
+        public bool Recurring { get; set; }
+        public DateTime TimeAdded { get; set; }
+        public int CategoryID { get; set; }
+        public string Category { get; set; }
         public ExpenseAdvance() { }
         public ExpenseAdvance(Expense ex, long budget) {
             exp = ex;
@@ -127,14 +155,5 @@ public class ExpenseViewModel : BaseViewModel {
             var cate = DBManager.GetFirst<Category>(c => c.CategoryID == ex.CategoryID);
             Category = cate.Name;
         }
-        public int ExpenseID { get; set; }
-        public long Amount { get; set; }
-        public string Name { get; set; }
-        public string? Description { get; set; }
-        public DateOnly Date { get; set; }
-        public bool Recurring { get; set; }
-        public DateTime TimeAdded { get; set; }
-        public int CategoryID { get; set; }
-        public string Category { get; set; }
     }
 }
