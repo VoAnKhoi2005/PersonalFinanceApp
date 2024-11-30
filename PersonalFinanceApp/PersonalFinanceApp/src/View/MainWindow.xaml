@@ -251,8 +251,8 @@
                     <views:UC_Dashboard/>
                 </DataTemplate>
 
-                <DataTemplate DataType="{x:Type viewModels:ExpenseBookViewModel}">
-                    <views:Main_ExpenseBook/>
+                <DataTemplate DataType="{x:Type viewModels:ExpenseViewModel}">
+                    <views:Main_expense_mainView/>
                 </DataTemplate>
 
                 <DataTemplate DataType="{x:Type viewModels:GoalplanViewModel}">
@@ -274,12 +274,12 @@
                       Content="{Binding CurrentModalViewModel}">
             
             <ContentControl.Resources>
-                <!--expensebook-->
-                <DataTemplate DataType="{x:Type viewModels:ExpenseBookAddNewViewModel}">
-                    <views:UC_Main_ExpenseBook_AddNew/>
+                <!--expense-->
+                <DataTemplate DataType="{x:Type viewModels:ExpenseAddNewViewModel}">
+                    <views:Main_Expense_AddNew/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:ExpenseBookEditViewModel}">
-                    <views:Main_ExpenseBook_Edit/>
+                <DataTemplate DataType="{x:Type viewModels:FilterExpenseViewModel}">
+                    <views:Main_Expense_Filter/>
                 </DataTemplate>
                 <!--Goal-->
                 <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">

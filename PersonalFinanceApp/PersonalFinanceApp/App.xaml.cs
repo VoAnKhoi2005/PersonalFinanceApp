@@ -55,6 +55,7 @@ namespace PersonalFinanceApp
             services.AddSingleton<AccountStore>();
             services.AddSingleton<GoalStore>();
             services.AddSingleton<ExpenseBookStore>();
+            services.AddSingleton<ExpenseStore>();
 
             //Login window
             services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));
@@ -75,11 +76,11 @@ namespace PersonalFinanceApp
                 return new MainWindowFactory(dataContext, s);
             });
             services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
-            services.AddTransient<ExpenseBookViewModel>(s => new ExpenseBookViewModel(s));
+            services.AddTransient<ExpenseViewModel>(s => new ExpenseViewModel(s));
             services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
             services.AddTransient<SummaryViewModel>(s => new SummaryViewModel(s));
 
-            services.AddTransient<ExpenseViewModel>(s => new ExpenseViewModel(s));
+            services.AddTransient<ExpenseBookViewModel>(s => new ExpenseBookViewModel(s));
 
             //Modal-Popup
             //expense book
@@ -92,6 +93,8 @@ namespace PersonalFinanceApp
             services.AddTransient<ExpenseEditViewModel>(s => new ExpenseEditViewModel(s));
             services.AddTransient<ExpenseDeleteViewModel>(s => new ExpenseDeleteViewModel(s));
             services.AddTransient<ExpenseRecoverViewModel>(s => new ExpenseRecoverViewModel(s));
+            services.AddTransient<FilterExpenseViewModel>(s => new FilterExpenseViewModel(s));
+
 
             //goal
             services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));

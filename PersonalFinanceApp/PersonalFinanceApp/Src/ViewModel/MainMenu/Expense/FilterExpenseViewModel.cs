@@ -5,7 +5,7 @@ using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Windows.Input;
 
-namespace PersonalFinanceApp.Src.ViewModel.MainMenu.Expense;
+namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 class FilterExpenseViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
@@ -80,14 +80,15 @@ class FilterExpenseViewModel : BaseViewModel {
 
         CancelFilterCommand = new RelayCommand<object>(CloseModal);
         ConfirmFilterCommand = new RelayCommand<object>(ConfirmModal);
-
     }
     public void CloseModal(object parameter) {
         _modalNavigationStore.Close();
     }
     public void ConfirmModal(object parameter) {
         //confirm
+        if(SelectedOption.CompareTo("Expense") == 0) {
 
+        }
         _modalNavigationStore.Close();
     }
 }

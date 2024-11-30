@@ -29,7 +29,7 @@ public class MainViewModel : BaseViewModel
         _modalNavigationStore.CurrentModalViewModelChanged += OnCurrentModalViewModelChanged;
         
         DashBoardNavigateCommand = new NavigateCommand<DashboardViewModel>(serviceProvider);
-        ExpenseBookNavigateCommand = new NavigateCommand<ExpenseBookViewModel>(serviceProvider);
+        ExpenseBookNavigateCommand = new NavigateCommand<ExpenseViewModel>(serviceProvider);
         GoalplanNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
         SummaryNavigateCommand = new NavigateCommand<SummaryViewModel>(serviceProvider);
     }

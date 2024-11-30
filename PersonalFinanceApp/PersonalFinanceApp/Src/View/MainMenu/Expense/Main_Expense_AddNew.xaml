@@ -325,7 +325,7 @@
                 <Border Grid.Column="0" CornerRadius="30" Height="60"
                         Width="200"
                         Background="#FFC8386C" >
-                    <Button Command="{Binding ExpenseBookCancelCommand}">
+                    <Button Command="{Binding CancelAddNewExpenseCommand}">
                         <TextBlock Text="Cancel" Foreground="White"
                                    VerticalAlignment="Center"
                                    Opacity="1"

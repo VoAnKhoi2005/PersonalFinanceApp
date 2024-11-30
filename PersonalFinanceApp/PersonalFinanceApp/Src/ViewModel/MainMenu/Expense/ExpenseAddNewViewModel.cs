@@ -188,26 +188,26 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         LoadItemSource();
-        NewCategoryCommand = new NavigateModalCommand<ExpenseAddNewCategory>(serviceProvider);
+        //NewCategoryCommand = new NavigateModalCommand<ExpenseAddNewCategory>(serviceProvider);
         //NewExpenseBookCommand = new NavigateModalCommand<ExpenseAddNewExpenseBook>(serviceProvider);
         CancelAddNewExpenseCommand = new RelayCommand<object>(CloseModal);
         ConfirmAddNewExpenseCommand = new RelayCommand<object>(ConfirmAddNewExpense);
     }
     public void LoadItemSource() {
-        //load item source category
-        ItemsExpense.Clear();
-        ItemsExpense.Add(new CategoryItem { Id = -1, Name = "<New>" });
-        var items = DBManager.GetCondition<Category>(c => c.UserID == _expenseBookStore.ExpenseBook.UserID && c.ExBMonth == _expenseBookStore.ExpenseBook.Month && c.ExBYear == _expenseBookStore.ExpenseBook.Year);
-        foreach(var item in items) {
-            ItemsExpense.Add(new CategoryItem { Id = item.CategoryID, Name = item.Name });
-        }
-        //load item expensebook
-        ItemsExpenseBook.Clear();
-        ItemsExpenseBook.Add(new ExpenseBookItem { sExB = "<New>" });
-        var itemexBs = DBManager.GetCondition<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID));
-        foreach(var item in itemexBs) {
-            ItemsExpenseBook.Add(new ExpenseBookItem(item, (item.Month.ToString() + "/" + item.Year.ToString() + "/" + item.Budget.ToString())));
-        }
+        ////load item source category
+        //ItemsExpense.Clear();
+        //ItemsExpense.Add(new CategoryItem { Id = -1, Name = "<New>" });
+        //var items = DBManager.GetCondition<Category>(c => c.UserID == _expenseBookStore.ExpenseBook.UserID && c.ExBMonth == _expenseBookStore.ExpenseBook.Month && c.ExBYear == _expenseBookStore.ExpenseBook.Year);
+        //foreach(var item in items) {
+        //    ItemsExpense.Add(new CategoryItem { Id = item.CategoryID, Name = item.Name });
+        //}
+        ////load item expensebook
+        //ItemsExpenseBook.Clear();
+        //ItemsExpenseBook.Add(new ExpenseBookItem { sExB = "<New>" });
+        //var itemexBs = DBManager.GetCondition<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID));
+        //foreach(var item in itemexBs) {
+        //    ItemsExpenseBook.Add(new ExpenseBookItem(item, (item.Month.ToString() + "/" + item.Year.ToString() + "/" + item.Budget.ToString())));
+        //}
     }
     private void CloseModal(object sender) {
         _modalNavigationStore.Close();

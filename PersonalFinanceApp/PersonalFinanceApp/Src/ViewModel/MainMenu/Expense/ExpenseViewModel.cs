@@ -6,6 +6,7 @@ using System.Windows.Input;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.Model;
+using System.Windows;
 
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
@@ -14,6 +15,18 @@ public class ExpenseViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
     private readonly ExpenseStore _expenseStore;
     private readonly AccountStore _accountStore;
+    public bool Filter {
+        get => _filter;
+        set {
+            if (_filter != value) {
+                _filter = value;
+                CheckFilterCommand.Execute(this);
+                MessageBox.Show("Load");
+                OnPropertyChanged();
+            }
+        }
+    }
+    private bool _filter;
     public object ItemsExB {
         get => _itemsExB;
         set {
@@ -42,6 +55,8 @@ public class ExpenseViewModel : BaseViewModel {
     public ICommand RefreshExpenseCommand { get; set; }
     public ICommand RecoverExpenseCommand { get; set; }
     public ICommand FilterExpenseCommand { get; set; }
+    public ICommand CheckFilterCommand {  get; set; }
+    public ICommand LoadCommand {  get; set; }
 
     public bool HasNoExpense { get; set; } = true;
     public ExpenseViewModel(IServiceProvider serviceProvider) {
@@ -58,7 +73,15 @@ public class ExpenseViewModel : BaseViewModel {
         //DeleteExpenseCommand = new RelayCommand<object>(DeleteExpense);
         RecoverExpenseCommand = new RelayCommand<object>(RecoverExpense);
         RefreshExpenseCommand = new RelayCommand<object>(LoadExpenses);
-
+        CheckFilterCommand = new RelayCommand<object>(Check);
+        LoadCommand = new RelayCommand<object>(Load);
+    }
+    public void Load(object parameter) {
+        //if (parameter != null)
+        //    MessageBox.Show("Load");
+        //if (_expenseStore.IsFilter != Filter) {
+            Filter = _expenseStore.IsFilter;
+        //}
     }
     //public void DeleteExpense(object parameter) {
     //    var item = _expenseStore.Expenses;
@@ -66,6 +89,11 @@ public class ExpenseViewModel : BaseViewModel {
     //    exp.Deleted = true;
     //    DBManager.Update<Expense>(exp);
     //}
+    public void Check(object parameter) {
+        if(_expenseStore.IsFilter != Filter) {
+            Filter = _expenseStore.IsFilter;
+        }
+    }
     public void RecoverExpense(object parameter) {
         var item = _expenseStore.Expenses;
         var exp = DBManager.GetFirst<Expense>(e => e.UserID == int.Parse(_accountStore.UsersID) && e.ExpenseID == item.ExpenseID);

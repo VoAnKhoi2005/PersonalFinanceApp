@@ -45,14 +45,14 @@ public class ExpenseRecoverViewModel : BaseViewModel {
 
         RecoverDeleteExpenseCommand = new RelayCommand<object>(RecoverExpense);
         RefreshRecoverExpenseCommand = new RelayCommand<object>(LoadExpenses);
-        PermanentlyDeleteExpenseCommand = new RelayCommand<object>(DeleteExpense);
+        //PermanentlyDeleteExpenseCommand = new RelayCommand<object>(DeleteExpense);
     }
-    public void DeleteExpense(object parameter) {
-        var itemExp = DBManager.GetFirst<Expense>(e => e.UserID == _expenseStore.Expenses.UserID && e.ExpenseID == _expenseStore.Expenses.ExpenseID);
-        if (itemExp != null) {
-            DBManager.Remove<Expense>(itemExp);
-        }
-    }
+    //public void DeleteExpense(object parameter) {
+    //    var itemExp = DBManager.GetFirst<Expense>(e => e.UserID == _expenseStore.Expenses.UserID && e.ExpenseID == _expenseStore.Expenses.ExpenseID);
+    //    if (itemExp != null) {
+    //        DBManager.Remove<Expense>(itemExp);
+    //    }
+    //}
     public void RecoverExpense(object parameter) {
         var itemExp = DBManager.GetFirst<Expense>(e => e.UserID == _expenseStore.Expenses.UserID && e.ExpenseID == _expenseStore.Expenses.ExpenseID);
         if (itemExp != null) {

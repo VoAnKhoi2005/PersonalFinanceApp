@@ -16,7 +16,16 @@ public class ExpenseStore : INotifyPropertyChanged {
             }
         }
     }
-
+    private bool _isFilter = false;
+    public bool IsFilter {
+        get => _isFilter;
+        set {
+            if (_isFilter != value) {
+                _isFilter = value;
+                OnPropertyChanged(nameof(_isFilter));
+            }
+        }
+    }
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged(string? propertyName = null) {
