@@ -9,7 +9,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="600" d:DesignWidth="450">
     <Border Background="#053B50" CornerRadius="30"
-            Width="450" Height="600 "> 
+            Width="auto" Height="auto"> 
         <Border.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Sans Serif Collection"/>

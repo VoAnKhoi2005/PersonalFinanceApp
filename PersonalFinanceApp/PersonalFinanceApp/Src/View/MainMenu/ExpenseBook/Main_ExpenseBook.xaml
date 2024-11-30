@@ -96,7 +96,7 @@
                     <RowDefinition Height="48*"></RowDefinition>
                     <RowDefinition Height="19*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Expense book"
+                <TextBlock Text="Expense: Name"
                           FontSize="28"
                           FontWeight="Bold"
                           HorizontalAlignment="Left"
