@@ -12,9 +12,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel;
 using Windows.UI.WebUI;
 using PersonalFinanceApp.Src.ViewModel.Stores;
-using PersonalFinanceApp.Src.ViewModel.MainMenu;
 using PersonalFinanceApp.Src.ViewModel;
-using PersonalFinanceApp.Src.ViewModel.MainMenu.Expense;
 
 namespace PersonalFinanceApp
 {
@@ -63,7 +61,6 @@ namespace PersonalFinanceApp
             services.AddSingleton<AccountStore>();
             services.AddSingleton<GoalStore>();
             services.AddSingleton<ExpenseBookStore>();
-            services.AddSingleton<ExpenseStore>();
 
             //Login window
             services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));
@@ -101,7 +98,6 @@ namespace PersonalFinanceApp
             services.AddTransient<ExpenseEditViewModel>(s => new ExpenseEditViewModel(s));
             services.AddTransient<ExpenseDeleteViewModel>(s => new ExpenseDeleteViewModel(s));
             services.AddTransient<ExpenseRecoverViewModel>(s => new ExpenseRecoverViewModel(s));
-            services.AddTransient<ExpenseAddNewCategory>(s => new ExpenseAddNewCategory(s));
 
             //goal
             services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));
