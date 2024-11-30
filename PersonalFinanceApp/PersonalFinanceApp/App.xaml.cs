@@ -55,7 +55,6 @@ namespace PersonalFinanceApp
             services.AddSingleton<AccountStore>();
             services.AddSingleton<GoalStore>();
             services.AddSingleton<ExpenseBookStore>();
-            services.AddSingleton<ExpenseStore>();
 
             //Login window
             services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));
@@ -93,7 +92,6 @@ namespace PersonalFinanceApp
             services.AddTransient<ExpenseEditViewModel>(s => new ExpenseEditViewModel(s));
             services.AddTransient<ExpenseDeleteViewModel>(s => new ExpenseDeleteViewModel(s));
             services.AddTransient<ExpenseRecoverViewModel>(s => new ExpenseRecoverViewModel(s));
-            services.AddTransient<ExpenseAddNewCategory>(s => new ExpenseAddNewCategory(s));
 
             //goal
             services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));

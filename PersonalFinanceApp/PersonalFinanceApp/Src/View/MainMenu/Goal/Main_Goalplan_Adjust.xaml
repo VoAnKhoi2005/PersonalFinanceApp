@@ -102,8 +102,12 @@
                     Height="40" 
                     Width="180" />
                 <Grid Grid.Column="1">
-                    <ComboBox Width="150" Height="40" Visibility="Visible" IsEditable="True"
-                              MinWidth="128" HorizontalAlignment="Left" FontSize="14"
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="99*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox Width="180" Height="40" Visibility="Visible" IsEditable="True"
+                              MinWidth="128" HorizontalAlignment="Center" FontSize="14"
                               Foreground="{DynamicResource CommonText}"
                               ItemsSource="{Binding ItemsGoal}"
                               materialDesign:HintAssist.Hint="Category" 
@@ -111,25 +115,7 @@
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                              Text="{Binding CategoryGoal}" Margin="10,0,0,0">
-
-                    </ComboBox>
-                    <Border CornerRadius="30"
-                    Background="{DynamicResource CommonGridBackground}"
-                    Width="25" Height="25"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Right"
-                            Margin="0,15,10,0"
-                    >
-                        <Button Command="{Binding RefreshGoalCommand}">
-                            <materialDesign:PackIcon Kind="Plus" 
-                                        Foreground="{DynamicResource CommonText}"
-                                                 Height="25"
-                                                 Width="25"
-                                                  />
-                        </Button>
-                    </Border>
-
+                              Text="{Binding CategoryGoal}"/>
                 </Grid>
             </Grid>
             <!--Target amount-->
@@ -190,8 +176,7 @@
                               Foreground="{DynamicResource CommonText}"
                               MinWidth="128"
                               ItemsSource="{Binding ItemsGoalEdit}"
-                              SelectedItem="{Binding SelectedItemEdit}"
-                              materialDesign:HintAssist.Hint="Category" 
+                              materialDesign:HintAssist.Hint="Recurring" 
                               materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
