@@ -49,17 +49,18 @@
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="71*"/>
+                <RowDefinition Height="71*"></RowDefinition>
+                <RowDefinition Height="71*"></RowDefinition>
+                <RowDefinition Height="71*"></RowDefinition>
+                <RowDefinition Height="71*"></RowDefinition>
+                <RowDefinition Height="71*"></RowDefinition>
+                <RowDefinition Height="71*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <!--title-->
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Grid.RowSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition />
@@ -81,7 +82,7 @@
             </Grid>
 
             <!--Goal name-->
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Margin="0,70,0,71" Grid.RowSpan="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition ></ColumnDefinition>
                     <ColumnDefinition ></ColumnDefinition>
@@ -116,7 +117,7 @@
             </Grid>
 
             <!--Target amount-->
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -159,7 +160,7 @@
             </Grid>
 
             <!--Monthly Target amount-->
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="3" Margin="0,71,0,71" Grid.RowSpan="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -198,7 +199,7 @@
             </Grid>
 
             <!--Start date - end date-->
-            <Grid Grid.Row="5">
+            <Grid Grid.Row="5" Margin="0,71,0,71" Grid.RowSpan="3">
                 <TextBox 
                 Text="{Binding DescriptionGoal}"
                      FontSize="14"
@@ -216,7 +217,7 @@
 
             <TextBox 
                 Text="{Binding ResourceGoal}"
-                Grid.Row="4"
+                Grid.Row="5"
                      FontSize="14"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
@@ -229,7 +230,7 @@
                      Height="40" 
                     Width="380" Foreground="{DynamicResource CommonText}"/>
             <!--cancel - confirm -->
-            <Grid Grid.Row="6">
+            <Grid Grid.Row="7">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>

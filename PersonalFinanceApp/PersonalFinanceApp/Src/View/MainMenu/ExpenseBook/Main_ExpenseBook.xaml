@@ -32,7 +32,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="30"
+                            <Border CornerRadius="20"
                                    Background="{TemplateBinding Background}">
                                 <ContentPresenter HorizontalAlignment="Stretch"
                                                  VerticalAlignment="Stretch">
@@ -56,40 +56,11 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="793*"></ColumnDefinition>
+                <ColumnDefinition Width="149*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <!--user-->
-            <Button Width="35" Height="35" Grid.Column="1" Margin="0,0,15,0"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Right">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="Transparent"></Setter>
-                        <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <materialDesign:PackIcon 
-                                               Foreground="{TemplateBinding Foreground}"
-                                                   Kind="AccountBadge"
-                                                   Width="30" Height="30"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"
-                                        />
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Cursor" Value="Hand"></Setter>
-                                <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
 
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -110,6 +81,73 @@
                           Grid.Row="1">
                 </TextBlock>
             </Grid>
+            <DockPanel Grid.Column="1">
+                <Button Width="34" Height="36"
+                        VerticalAlignment="Center"
+                            DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                            Margin="0 0 15 0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="32" Height="32" Background="Transparent">
+                                            <materialDesign:PackIcon 
+                                                Foreground="{TemplateBinding Foreground}"
+                                                    Kind="AccountBadge"
+                                                    Width="30" Height="30"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                         />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Cursor" Value="Hand"></Setter>
+                                    <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Width="34" Height="36"
+                        VerticalAlignment="Center"
+                            DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                            Margin="0 0 5 0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="32" Height="32" Background="Transparent">
+                                            <materialDesign:PackIcon Kind="Bell" 
+                                                                         Foreground="{TemplateBinding Foreground}"
+                                                                            Width="28" Height="28"
+                                                                        VerticalAlignment="Center"
+                                                                        HorizontalAlignment="Center"
+                                         />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Cursor" Value="Hand"></Setter>
+                                    <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </DockPanel>
 
 
         </Grid>
@@ -197,7 +235,7 @@
                                        BorderBrush="#FF514D4D" Foreground="White"
                                        Command="{Binding DataContext.AddExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
                                        CommandParameter="{Binding}">
-                                        
+
                                     </Button>
                                     <Button
                                        Margin="0 0 5 0" Width="50" IsEnabled="True"
@@ -206,8 +244,8 @@
                                        Background="#31B720" BorderBrush="#FF514D4D"
                                        Command="{Binding DataContext.EditExpenseBookCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
                                        CommandParameter ="{Binding ElementName=ListExpenseBook, Path=SelectedItem}">
-                                       <materialDesign:PackIcon Kind="pencil" Foreground="White"/>
-                                        
+                                        <materialDesign:PackIcon Kind="pencil" Foreground="White"/>
+
                                     </Button>
                                     <Button
                                        Width="50"
@@ -217,7 +255,7 @@
                                        Background="IndianRed" BorderBrush="#FF514D4D"
                                        Command="{Binding DataContext.DeleteExpenseBookCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
                                        CommandParameter="{Binding}">
-                                       <materialDesign:PackIcon Kind="TrashCanOutline" Foreground="White"/>
+                                        <materialDesign:PackIcon Kind="TrashCanOutline" Foreground="White"/>
                                     </Button>
                                 </StackPanel>
                             </DataTemplate>

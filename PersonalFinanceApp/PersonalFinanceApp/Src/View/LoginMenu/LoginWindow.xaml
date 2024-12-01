@@ -4,12 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:loginViewModels="clr-namespace:PersonalFinanceApp.ViewModel.LoginMenu"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        
         xmlns:view="clr-namespace:PersonalFinanceApp.Src.View"
 
         mc:Ignorable="d"
         Background="#0D2129"
-        ResizeMode="CanResizeWithGrip"
-        
         TextElement.Foreground="#E5CBBFBF"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="16"
@@ -17,13 +17,27 @@
 
         WindowStartupLocation="CenterScreen"
 
-        Title="LoginWindow" Height="720" Width="1152">
+        WindowStyle="None"
+        Title="LoginWindow" 
+        Height="760"
+        Width="1152"
+        MinHeight="720"
+        MinWidth="1152"
+        >
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
             <Image Width="650"
                    Height="674"
                    HorizontalAlignment="Left"
                    Source="/Resources/img/PigBackground.png" Stretch="Fill"/>
-        <Image Width="340" Height="340" HorizontalAlignment="Right" VerticalAlignment="Top"
+            <Image Width="340" Panel.ZIndex="-1"
+                   Height="340" HorizontalAlignment="Right" VerticalAlignment="Top"
+                   
                 Source="/Resources/img/PigBackground.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5">
                 <Image.RenderTransform>
                     <TransformGroup>
@@ -61,7 +75,6 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-
             <ContentControl Content="{Binding CurrentViewModel}">
                 <ContentControl.Resources>
 
@@ -84,4 +97,111 @@
                 </ContentControl.Resources>
             </ContentControl>
         </Grid>
+        
+        <DockPanel Grid.Row="0">
+            <Button Width="40" Height="30"
+                        VerticalAlignment="Bottom"
+                            DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                            >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"></Setter>
+                        <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="40" Height="30" Background="{TemplateBinding Background}">
+                                        <materialDesign:PackIcon Kind="WindowClose" 
+                                        Foreground="{TemplateBinding Foreground}"
+                                                    Width="20" Height="20"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                                 Margin="0 0 0 0"
+                                         />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"></Setter>
+                                <Setter Property="Background" Value="Red"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Width="40" Height="30"
+                        VerticalAlignment="Bottom"
+                            DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                    Margin="0 0 5 0"
+                            >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"></Setter>
+                        <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="40" Height="30" Background="{TemplateBinding Background}">
+                                        <materialDesign:PackIcon Kind="WindowRestore"
+                                        Foreground="{TemplateBinding Foreground}"
+                                                    Width="20" Height="20"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                                 Margin="0 0 0 0"
+                                         />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"></Setter>
+                                <Setter Property="Background"  Value="#FF2B9D88" ></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Width="40" Height="30"
+                        VerticalAlignment="Bottom"
+                            DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                    Margin="0 0 5 0"
+                            >
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"></Setter>
+                        <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="40" Height="30" Background="{TemplateBinding Background}">
+                                        <materialDesign:PackIcon Kind="Minus"  
+                                        Foreground="{TemplateBinding Foreground}"
+                                                    Width="25" Height="25"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                                 Margin="0 0 0 0"
+                                         />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Cursor" Value="Hand"></Setter>
+                                <Setter Property="Background"  Value="#FF2B9D88" ></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </DockPanel>
+
+
+    </Grid>
 </Window>

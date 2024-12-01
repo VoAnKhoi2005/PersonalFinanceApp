@@ -44,41 +44,9 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                <ColumnDefinition Width="817*"></ColumnDefinition>
+                <ColumnDefinition Width="183*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
-            <!--user-->
-            <Button Width="35" Height="35" Grid.Column="1" Margin="0,0,15,0"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Right">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="Transparent"></Setter>
-                        <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <materialDesign:PackIcon 
-                                               Foreground="{TemplateBinding Foreground}"
-                                                   Kind="AccountBadge"
-                                                   Width="30" Height="30"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"
-                                        />
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Cursor" Value="Hand"></Setter>
-                                <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-
             <Grid Grid.Column="0">
                 <TextBlock Text="Name here"
                           FontSize="28"
@@ -89,6 +57,73 @@
                           Grid.Row="0">
                 </TextBlock>
             </Grid>
+            <DockPanel Grid.Column="1">
+                <Button Width="34" Height="36"
+                        VerticalAlignment="Center"
+                            DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                            Margin="0 0 15 0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="32" Height="32" Background="Transparent">
+                                            <materialDesign:PackIcon 
+                                                Foreground="{TemplateBinding Foreground}"
+                                                    Kind="AccountBadge"
+                                                    Width="30" Height="30"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                         />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Cursor" Value="Hand"></Setter>
+                                    <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Width="34" Height="36"
+                        VerticalAlignment="Center"
+                            DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                            Margin="0 0 5 0">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="32" Height="32" Background="Transparent">
+                                            <materialDesign:PackIcon Kind="Bell" 
+                                                                         Foreground="{TemplateBinding Foreground}"
+                                                                            Width="28" Height="28"
+                                                                        VerticalAlignment="Center"
+                                                                        HorizontalAlignment="Center"
+                                         />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Cursor" Value="Hand"></Setter>
+                                    <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </DockPanel>
 
 
         </Grid>

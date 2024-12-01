@@ -15,7 +15,8 @@
         ResizeMode="CanResizeWithGrip"
         MinHeight="720" MinWidth="1152"
         Height="720" Width="1152"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
 
     <!--almost done color-->
     <Grid>
@@ -52,7 +53,6 @@
                 </Style.Triggers>
             </Style>
         </Grid.Resources>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="210"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -244,64 +244,177 @@
             </Button>
         </DockPanel>
 
-        <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}">
-            <ContentControl.Resources>
+        <Grid Grid.Column="1">
 
-                <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
-                    <views:UC_Dashboard/>
-                </DataTemplate>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
 
-                <DataTemplate DataType="{x:Type viewModels:ExpenseBookViewModel}">
-                    <views:Main_ExpenseBook/>
-                </DataTemplate>
+            <DockPanel Grid.Row="0">
+                <Button Width="40" Height="30"
+                        VerticalAlignment="Bottom"
+                            DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                            >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="40" Height="30" Background="{TemplateBinding Background}">
+                                            <materialDesign:PackIcon Kind="WindowClose" 
+                                        Foreground="{TemplateBinding Foreground}"
+                                                    Width="20" Height="20"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                                 Margin="0 0 0 0"
+                                         />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Cursor" Value="Hand"></Setter>
+                                    <Setter Property="Background" Value="Red"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Width="40" Height="30"
+                        VerticalAlignment="Bottom"
+                            DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                    Margin="0 0 5 0"
+                            >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="40" Height="30" Background="{TemplateBinding Background}">
+                                            <materialDesign:PackIcon Kind="WindowRestore"
+                                        Foreground="{TemplateBinding Foreground}"
+                                                    Width="20" Height="20"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                                 Margin="0 0 0 0"
+                                         />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Cursor" Value="Hand"></Setter>
+                                    <Setter Property="Background"  Value="#FF2B9D88" ></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Width="40" Height="30"
+                        VerticalAlignment="Bottom"
+                            DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                    Margin="0 0 5 0"
+                            >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Width="40" Height="30" Background="{TemplateBinding Background}">
+                                            <materialDesign:PackIcon Kind="Minus"  
+                                        Foreground="{TemplateBinding Foreground}"
+                                                    Width="25" Height="25"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                                                 Margin="0 0 0 0"
+                                         />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Cursor" Value="Hand"></Setter>
+                                    <Setter Property="Background"  Value="#FF2B9D88" ></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </DockPanel>
+            <Grid Grid.Row="1">
+            <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}">
+                <ContentControl.Resources>
 
-                <DataTemplate DataType="{x:Type viewModels:GoalplanViewModel}">
-                    <views:UC_Goalplan />
-                </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
+                        <views:UC_Dashboard/>
+                    </DataTemplate>
 
-                <DataTemplate DataType="{x:Type viewModels:SummaryViewModel}">
-                    <views:UC_Summary />
-                </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:ExpenseBookViewModel}">
+                        <views:Main_ExpenseBook/>
+                    </DataTemplate>
 
-               
+                    <DataTemplate DataType="{x:Type viewModels:GoalplanViewModel}">
+                        <views:UC_Goalplan />
+                    </DataTemplate>
 
-            </ContentControl.Resources>
-        </ContentControl>
+                    <DataTemplate DataType="{x:Type viewModels:SummaryViewModel}">
+                        <views:UC_Summary />
+                    </DataTemplate>
 
-        <custom:Modal Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="2" 
+
+
+                </ContentControl.Resources>
+            </ContentControl>
+
+            <custom:Modal Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="2" 
                       Panel.ZIndex="100"
                       IsOpen="{Binding IsModalOpen}"
                       Content="{Binding CurrentModalViewModel}">
-            
-            <ContentControl.Resources>
-                <!--expensebook-->
-                <DataTemplate DataType="{x:Type viewModels:ExpenseBookAddNewViewModel}">
-                    <views:UC_Main_ExpenseBook_AddNew/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:ExpenseBookEditViewModel}">
-                    <views:Main_ExpenseBook_Edit/>
-                </DataTemplate>
-                <!--Goal-->
-                <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">
-                    <views:UC_Main_Goalplan_Adding />
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:GoalEditViewModel}">
-                    <views:UC_Main_Goalplan_Adjust/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:GoalAddSavedAmountViewModel}">
-                    <views:Main_Goalplan_plusMinus/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:GoalHistoryViewModel}">
-                    <views:Main_Goalplan_History/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:GoalDeleteViewModel}">
-                    <views:Main_Goalplan_deleteConfirm/>
-                </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:GoalAddNewCategoryViewModel}">
-                    <views:NewCategory/>
-                </DataTemplate>
 
-            </ContentControl.Resources>
-        </custom:Modal>
+                <ContentControl.Resources>
+                    <!--expensebook-->
+                    <DataTemplate DataType="{x:Type viewModels:ExpenseBookAddNewViewModel}">
+                        <views:UC_Main_ExpenseBook_AddNew/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:ExpenseBookEditViewModel}">
+                        <views:Main_ExpenseBook_Edit/>
+                    </DataTemplate>
+                    <!--Goal-->
+                    <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">
+                        <views:UC_Main_Goalplan_Adding />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:GoalEditViewModel}">
+                        <views:UC_Main_Goalplan_Adjust/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:GoalAddSavedAmountViewModel}">
+                        <views:Main_Goalplan_plusMinus/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:GoalHistoryViewModel}">
+                        <views:Main_Goalplan_History/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:GoalDeleteViewModel}">
+                        <views:Main_Goalplan_deleteConfirm/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:GoalAddNewCategoryViewModel}">
+                        <views:NewCategory/>
+                    </DataTemplate>
+
+                </ContentControl.Resources>
+            </custom:Modal>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

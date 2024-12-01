@@ -297,7 +297,7 @@
                                HorizontalAlignment="Left"
                                Margin="16,0,0,0"
                                ></TextBlock>
-                        <Border  Width="90" Height="50" Margin="12,43,16,9" CornerRadius="30"
+                        <Border  Width="90" Height="50" Margin="17,43,10,9" CornerRadius="30"
                              Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
                         <ComboBox Width="55" Height="40"
                               HorizontalAlignment="Left"
@@ -309,7 +309,7 @@
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
 
-                              Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="30,48,0,0"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="34,49,0,0"
                               Text="{Binding CategoryExpenseBook}">
 
                             <!--not done here-->

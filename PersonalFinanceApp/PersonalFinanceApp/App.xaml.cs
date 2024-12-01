@@ -7,6 +7,7 @@ using PersonalFinanceApp.ViewModel.LoginMenu;
 using PersonalFinanceApp.ViewModel.MainMenu;
 using PersonalFinanceApp.ViewModel.Stores;
 using PersonalFinanceApp.Src.ViewModel.Stores;
+using PersonalFinanceApp.Src.View;
 
 namespace PersonalFinanceApp
 {

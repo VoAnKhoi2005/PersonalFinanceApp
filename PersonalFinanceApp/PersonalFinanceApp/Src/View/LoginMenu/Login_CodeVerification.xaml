@@ -214,7 +214,7 @@
                             Converter={StaticResource BoolToVisibilityConverter}}">
                     <WrapPanel >
                         <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
-                        <Label Content="Invalid code verification!" Foreground="Red" FontSize="14" ></Label>
+                        <Label Content="Invalid code verification!" Foreground="Red" FontSize="16" ></Label>
                     </WrapPanel>
                 </StackPanel>
 
