@@ -174,11 +174,6 @@
                    DockPanel.Dock="Left"
                    Margin="15,0,0,0">
                 <Button Command="{Binding FilterExpenseCommand}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="DataContextChanged">
-                            <i:InvokeCommandAction Command="{Binding LoadCommand}" CommandParameter="{Binding ElementName=Expense}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
                     <Grid>
                         <TextBlock Text="Filter"
                                   FontSize="14"

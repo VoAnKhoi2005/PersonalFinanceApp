@@ -58,7 +58,6 @@ public class ExpenseViewModel : BaseViewModel {
     public ICommand RecoverExpenseCommand { get; set; }
     public ICommand RemoveExpenseCommand { get; set; }
     public ICommand FilterExpenseCommand { get; set; }
-    public ICommand LoadCommand {  get; set; }
     public ICommand LoadRecoverCommand {  get; set; }
 
     public ExpenseViewModel(IServiceProvider serviceProvider) {
@@ -81,7 +80,6 @@ public class ExpenseViewModel : BaseViewModel {
 
         LoadRecoverCommand = new RelayCommand<object>(LoadRecover);
         RefreshExpenseCommand = new RelayCommand<object>(LoadExpenses);
-        LoadCommand = new RelayCommand<object>(Load);
     }
     private void OnTriggerAction() {
         Expensesadvances.Clear();
@@ -100,14 +98,6 @@ public class ExpenseViewModel : BaseViewModel {
             Expensesadvances.Add(new ExpenseAdvance(e, exB.Budget));
         }
 
-    }
-    public void Load(object parameter) {
-        //filter
-        Expensesadvances.Clear();
-        var items = _expenseStore.SharedExpense;
-        foreach(var item in items) {
-            Expensesadvances.Add(new ExpenseAdvance(item.exp, item.BudgetExp));
-        }
     }
     public void LoadExpenses(object? p = null) {
         IsButtonVisible = true;
