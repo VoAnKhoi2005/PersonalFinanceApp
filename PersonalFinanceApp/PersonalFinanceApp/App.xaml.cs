@@ -55,7 +55,8 @@ namespace PersonalFinanceApp
             services.AddSingleton<SharedDataService>();
             services.AddSingleton<AccountStore>();
             services.AddSingleton<GoalStore>();
-            services.AddSingleton<ExpenseBookStore>();
+            services.AddSingleton<ExpenseStore>();
+            services.AddSingleton<SharedService>();
 
             //Login window
             services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));
@@ -76,23 +77,22 @@ namespace PersonalFinanceApp
                 return new MainWindowFactory(dataContext, s);
             });
             services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
-            services.AddTransient<ExpenseBookViewModel>(s => new ExpenseBookViewModel(s));
+            services.AddTransient<ExpenseViewModel>(s => new ExpenseViewModel(s));
             services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
             services.AddTransient<SummaryViewModel>(s => new SummaryViewModel(s));
 
-            services.AddTransient<ExpenseViewModel>(s => new ExpenseViewModel(s));
 
             //Modal-Popup
-            //expense book
-            services.AddTransient<ExpenseBookAddNewViewModel>(s => new ExpenseBookAddNewViewModel(s));
-            services.AddTransient<ExpenseBookEditViewModel>(s => new ExpenseBookEditViewModel(s));
-            services.AddTransient<ExpenseBookDeleteViewModel>(s => new ExpenseBookDeleteViewModel(s));
-
             //expense
             services.AddTransient<ExpenseAddNewViewModel>(s => new ExpenseAddNewViewModel(s));
             services.AddTransient<ExpenseEditViewModel>(s => new ExpenseEditViewModel(s));
             services.AddTransient<ExpenseDeleteViewModel>(s => new ExpenseDeleteViewModel(s));
+            services.AddTransient<ExpenseRemoveViewModel>(s => new ExpenseRemoveViewModel(s));
             services.AddTransient<ExpenseRecoverViewModel>(s => new ExpenseRecoverViewModel(s));
+            services.AddTransient<ExpenseFilterViewModel>(s => new ExpenseFilterViewModel(s));
+            services.AddTransient<ExpenseNewExBViewModel>(s => new ExpenseNewExBViewModel(s));
+            services.AddTransient<ExpenseNewCategoryViewModel>(s => new ExpenseNewCategoryViewModel(s));
+
 
             //goal
             services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));

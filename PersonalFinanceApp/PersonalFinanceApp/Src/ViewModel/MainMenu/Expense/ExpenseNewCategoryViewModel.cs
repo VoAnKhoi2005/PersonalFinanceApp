@@ -7,7 +7,7 @@ using PersonalFinanceApp.ViewModel.Stores;
 using System.Windows.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu; 
-public class ExpenseAddNewCategory : BaseViewModel {
+public class ExpenseNewCategoryViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly ExpenseStore _expenseStore;
@@ -15,28 +15,17 @@ public class ExpenseAddNewCategory : BaseViewModel {
     public string NameNewCategoryExpense {
         get => _nameNewCategoryExpense;
         set {
-            if(_nameNewCategoryExpense != value) {
+            if (_nameNewCategoryExpense != value) {
                 _nameNewCategoryExpense = value;
                 OnPropertyChanged();
             }
         }
     }
     private string _nameNewCategoryExpense;
-    public string ResourceNewCategoryExpense {
-        get => _resourceNewCategoryExpense;
-        set {
-            if (_resourceNewCategoryExpense != value) {
-                _resourceNewCategoryExpense = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _resourceNewCategoryExpense;
     public ICommand CancelNewCategoryExpenseCommand { get; set; }
     public ICommand ConfirmNewCategoryExpenseCommand { get; set; }
 
-    public bool HasNoExpense { get; set; } = true;
-    public ExpenseAddNewCategory(IServiceProvider serviceProvider) {
+    public ExpenseNewCategoryViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
         _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
@@ -52,12 +41,12 @@ public class ExpenseAddNewCategory : BaseViewModel {
         //add new category
         var newCategory = new Category() {
             Name = NameNewCategoryExpense,
-            Resources = ResourceNewCategoryExpense,
-            UserID = _expenseStore.Expenses.UserID,
-            ExBMonth = _expenseStore.Expenses.ExBMonth,
-            ExBYear = _expenseStore.Expenses.ExBYear,
+            UserID = _expenseStore.ExpenseBook.UserID,
+            ExBMonth = _expenseStore.ExpenseBook.Month,
+            ExBYear = _expenseStore.ExpenseBook.Year,
         };
         DBManager.Insert<Category>(newCategory);
+        _expenseStore.Categorys = newCategory;
         _modalNavigationStore.Close();
     }
 }

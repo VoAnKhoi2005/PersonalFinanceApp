@@ -1,17 +1,18 @@
-using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
-namespace PersonalFinanceApp.ViewModel.MainMenu; 
-public class ExpenseBookAddNewViewModel : BaseViewModel {
+namespace PersonalFinanceApp.ViewModel.MainMenu;
+public class ExpenseNewExBViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly AccountStore _accountStore;
+    private readonly ExpenseStore _expenseStore;
     #region Properties
     //month
     public string MonthExpenseBook {
@@ -36,7 +37,7 @@ public class ExpenseBookAddNewViewModel : BaseViewModel {
     }
     private string _yearExpenseBook;
     //itemsource month
-    public ObservableCollection<Month> Months { 
+    public ObservableCollection<Month> Months {
         get => _months;
         set {
             if (_months != value) {
@@ -47,19 +48,19 @@ public class ExpenseBookAddNewViewModel : BaseViewModel {
     }
     private ObservableCollection<Month> _months;
     //itemsource year
-    public ObservableCollection<int> Years { 
+    public ObservableCollection<int> Years {
         get => _years;
         set {
             if (_years != value) {
                 _years = value;
                 OnPropertyChanged();
             }
-        } 
+        }
     }
-    private ObservableCollection<int> _years; 
+    private ObservableCollection<int> _years = new();
     //selected item month
-    public Month SelectedMonth { 
-        get =>_selectedMonth;
+    public Month SelectedMonth {
+        get => _selectedMonth;
         set {
             if (_selectedMonth != value) {
                 _selectedMonth = value;
@@ -69,7 +70,7 @@ public class ExpenseBookAddNewViewModel : BaseViewModel {
     }
     private Month _selectedMonth;
     //selected item year
-    public int SelectedYear { 
+    public int SelectedYear {
         get => _selectedYear;
         set {
             if (_selectedYear != value) {
@@ -91,25 +92,15 @@ public class ExpenseBookAddNewViewModel : BaseViewModel {
         }
     }
     private string _budgetExpenseBook;
-    //resource
-    public string ResourceExpenseBook {
-        get => _resourceExpenseBook;
-        set {
-            if (_resourceExpenseBook != value) {
-                _resourceExpenseBook = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _resourceExpenseBook;
+
     #endregion
     public ICommand CancelExpenseBookCommand { get; set; }
     public ICommand ConfirmExpenseBookCommand { get; set; }
 
-    public ExpenseBookAddNewViewModel(IServiceProvider serviceProvider) {
+    public ExpenseNewExBViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
-
+        _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         LoadItem();
         CancelExpenseBookCommand = new RelayCommand<object>(CloseModal);
@@ -132,10 +123,9 @@ public class ExpenseBookAddNewViewModel : BaseViewModel {
             };
 
         Years = new ObservableCollection<int>();
-        for (int year = 2000; year <= 2030; year++) {
+        for (int year = 2000; year <= DateTime.Now.Year; year++) {
             Years.Add(year);
         }
-
     }
     private void CloseModal(object sender) {
         _modalNavigationStore.Close();
@@ -143,15 +133,13 @@ public class ExpenseBookAddNewViewModel : BaseViewModel {
     private void ConfirmExpenseBook(object sender) {
         //add data to database
         var expenseBook = new ExpensesBook() {
-            //Month = SelectedMonth.Number,
-            //Year = SelectedYear,
-            Month = int.Parse(MonthExpenseBook),
-            Year = int.Parse(YearExpenseBook),
+            Month = SelectedMonth.Number,
+            Year = SelectedYear,
             Budget = long.Parse(BudgetExpenseBook),
-            Resources = ResourceExpenseBook,
             UserID = int.Parse(_accountStore.UsersID),
         };
         DBManager.Insert(expenseBook);
+        _expenseStore.TextChangedExp = expenseBook.Month.ToString() + "/" + expenseBook.Year.ToString();
         _modalNavigationStore.Close();
     }
     public class Month {

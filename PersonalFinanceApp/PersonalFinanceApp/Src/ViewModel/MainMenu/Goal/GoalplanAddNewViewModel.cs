@@ -61,17 +61,6 @@ public class GoalplanAddNewViewModel : BaseViewModel
         }
     }
     private string _resourceGoal;
-    //reminder
-    public string ReminderGoal {
-        get => _reminderGoal;
-        set {
-            if (_reminderGoal != value) {
-                _reminderGoal = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _reminderGoal;
     //deadline
     public DateTime DeadlineGoal {
         get => _deadlineGoal;
@@ -118,7 +107,6 @@ public class GoalplanAddNewViewModel : BaseViewModel
     }
     private string _categoryGoal;
     //category item source
-    public ObservableCollection<string> _itemsGoal = new ObservableCollection<string> {};
     public ObservableCollection<string> ItemsGoal {
         get => _itemsGoal;
         set {
@@ -128,6 +116,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
             }
         }
     }
+    public ObservableCollection<string> _itemsGoal = new ();
     public string SelectedItemGoal {
         get => _selectedItemGoal;
         set {
@@ -143,6 +132,25 @@ public class GoalplanAddNewViewModel : BaseViewModel
         }
     }
     private string _selectedItemGoal;
+    //recurring item source
+    public ObservableCollection<string> SourceRecurring {
+        get => _sourceRecurring;
+        set {
+            if (_sourceRecurring != value) {
+                _sourceRecurring = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    public ObservableCollection<string> _sourceRecurring = new ();
+    public string SelectedRecurring {
+        get => _selectedRecurring;
+        set {
+            _selectedRecurring = value;
+                OnPropertyChanged();
+            }
+    }
+    private string _selectedRecurring;
     #endregion
     public ICommand CreateCategoryCommand {  get; set; }
     public ICommand CancelNewGoalCommand { get; set; }
@@ -171,6 +179,11 @@ public class GoalplanAddNewViewModel : BaseViewModel
         foreach (var it in item) {
             ItemsGoal.Add(it.Name);
         }
+        SourceRecurring.Clear();
+        SourceRecurring.Add("Daily");
+        SourceRecurring.Add("Weekly");
+        SourceRecurring.Add("Monthly");
+        SourceRecurring.Add("Yearly");
     }
     private void CloseModal(object sender)
     {
@@ -183,7 +196,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
             Name = NameGoal,
             Target = long.Parse(TargetGoal),
             CurrentAmount = long.Parse(CurrentAmountGoal),
-            Reminder = "Daily",
+            Reminder = SelectedRecurring,
             Deadline = DeadlineGoal,
             Status = (long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal)) ? "Completed" : "Active",
             Resources = ResourceGoal,

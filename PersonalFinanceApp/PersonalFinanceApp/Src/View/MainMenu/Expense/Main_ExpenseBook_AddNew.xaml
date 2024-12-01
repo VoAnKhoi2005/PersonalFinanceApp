@@ -55,21 +55,23 @@
                                VerticalAlignment="Top"
                                HorizontalAlignment="Left" Margin="20,-1,0,0"
                                ></TextBlock>
-                    <Border Height="50" Margin="15,43,15,11" CornerRadius="30"
-                             Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"/>
-                    <ComboBox VerticalAlignment="Top" Text="{Binding MonthExpenseBook}"
-                             Margin="0,47,0,0"
-                                 BorderBrush="{x:Null}"
-                             Width="110" Height="40"
-                             Foreground="{DynamicResource CommonText}"
-                             FontSize="14"
-                                 HorizontalAlignment="Center"
-                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
-                                 >
-                        <ComboBoxItem Content="January"/>
-                        <ComboBoxItem Content="February"/>
-                    </ComboBox>
-                </Grid>
+
+                        <Border  Width="50" Height="50" Margin="20,43,17,10" CornerRadius="90"
+                             Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2">
+                        </Border>
+                        <ComboBox 
+                            VerticalAlignment="Center" Text="{Binding MonthExpenseBook}"
+                            Margin="2,30,0,0"
+                            BorderBrush="{x:Null}"
+                            Width="25" Height="40"
+                            Foreground="{DynamicResource CommonText}"
+                            FontSize="14"
+                            HorizontalAlignment="Center"
+                            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                            SelectedItem="{Binding SelectedMonth}"
+                            ItemsSource="{Binding Months}"
+                            DisplayMemberPath="Name"></ComboBox>
+                    </Grid>
 
                 <Grid Grid.Column="1">
                     <TextBlock Text="Year" 
@@ -77,21 +79,24 @@
                                VerticalAlignment="Top"
                                HorizontalAlignment="Left" Margin="20,-1,0,0"
                                ></TextBlock>
-                    <Border Height="50" Margin="15,43,15,11" CornerRadius="30"
-                             Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"/>
-                    <ComboBox VerticalAlignment="Top" Text="{Binding MonthExpenseBook}"
-                             Margin="0,47,0,0"
-                              BorderBrush="{x:Null}"
-                             Width="110"
-                             Height="40"
+
+                        <Border  Width="90" Height="50" VerticalAlignment="Top"
+                                 HorizontalAlignment="Center"
+                                 CornerRadius="30"
+                             Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2" Margin="0,44,0,0">
+                        </Border>
+                        <ComboBox VerticalAlignment="Center" Text="{Binding YearExpenseBook}"
+                             Margin="0,30,0,0"
+                             Width="50" Height="40"
+                             BorderBrush="{x:Null}"
                              Foreground="{DynamicResource CommonText}"
                              FontSize="14"
-                                 HorizontalAlignment="Center"
-                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
-                                 >
-                        <ComboBoxItem Content="January"/>
-                        <ComboBoxItem Content="February"/>
-                    </ComboBox>
+                             HorizontalAlignment="Center"
+                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                             SelectedItem="{Binding SelectedYear}"
+                             ItemsSource="{Binding Years}"></ComboBox>
+                    </Grid>
+
                 </Grid>
 
                 <!--amount-->
@@ -114,18 +119,17 @@
 
 
 
-                    <TextBox VerticalAlignment="Top" Text="{Binding ResourceExpenseBook}"
-                             Margin="0,48,0,0"
-                             Width="270" Height="40"
+                    <TextBox VerticalAlignment="Top" Text="{Binding BudgetExpenseBook}"
+                             Margin="31,47,0,0"
+                             Width="130" Height="40"
                              TextAlignment="Center"
                              BorderBrush="{x:Null}"
                              Foreground="{DynamicResource CommonText}"
                              FontSize="14"
-                                 HorizontalAlignment="Center"
-                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                             HorizontalAlignment="Left"
+                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                              CaretBrush="{DynamicResource CommonText}"
-                             SelectionBrush="{DynamicResource CommonText}"
-                                 ></TextBox>
+                             SelectionBrush="{DynamicResource CommonText}"></TextBox>
 
 
                 </Grid>

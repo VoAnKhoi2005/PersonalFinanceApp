@@ -3,11 +3,11 @@
 namespace PersonalFinanceApp.Src.View
 {
     /// <summary>
-    /// Interaction logic for Main_Expense_Filter.xaml
+    /// Interaction logic for UC_Main_ExpenseBook_AddNew.xaml
     /// </summary>
-    public partial class Main_Expense_Filter : UserControl
+    public partial class UC_Main_ExpenseBook_AddNew : UserControl
     {
-        public Main_Expense_Filter()
+        public UC_Main_ExpenseBook_AddNew()
         {
             InitializeComponent();
         }
