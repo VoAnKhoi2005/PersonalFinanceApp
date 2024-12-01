@@ -56,7 +56,6 @@
                 <RowDefinition Height="71*"></RowDefinition>
                 <RowDefinition Height="71*"></RowDefinition>
                 <RowDefinition Height="71*"></RowDefinition>
-                <RowDefinition Height="71*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <!--title-->
@@ -198,7 +197,7 @@
             </Grid>
 
             <!--Start date - end date-->
-            <Grid Grid.Row="5" Margin="0,71,0,71" Grid.RowSpan="3">
+            <Grid Grid.Row="4" Margin="0,71,0,71" Grid.RowSpan="3">
                 <TextBox 
                 Text="{Binding DescriptionGoal}"
                      FontSize="14"
@@ -213,21 +212,6 @@
                      Height="40" 
                     Width="380" Foreground="{DynamicResource CommonText}"/>
             </Grid>
-
-            <TextBox 
-                Text="{Binding ResourceGoal}"
-                Grid.Row="5"
-                     FontSize="14"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    materialDesign:HintAssist.Hint="Resource"
-                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                         CaretBrush="{DynamicResource CommonText}"
-                    SelectionBrush="{DynamicResource CommonText}"
-                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                     Height="40" 
-                    Width="380" Foreground="{DynamicResource CommonText}"/>
             <!--cancel - confirm -->
             <Grid Grid.Row="7">
                 <Grid.ColumnDefinitions>

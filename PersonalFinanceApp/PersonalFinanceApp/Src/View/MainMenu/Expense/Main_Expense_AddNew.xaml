@@ -262,8 +262,6 @@
                               Margin="30,48,0,0"
                               Text="{Binding MonthExpenseBook}"
                               IsReadOnly="True">
-
-
                         </TextBox>
                     </Grid>
                     <Grid Grid.Column="1">

@@ -8,7 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              xmlns:convert="clr-namespace:PersonalFinanceApp.Src.etc"
-             d:DesignHeight="900" d:DesignWidth="1000"
+             d:DesignHeight="720" d:DesignWidth="942"
              x:Name="Expense">
     <UserControl.Resources>
         <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
@@ -230,7 +230,7 @@
             </Border>
         </DockPanel>
         <!--DataGrid expensebook-->
-            <Grid Grid.Row="2" Margin="15 0 15 15">
+            <Grid Grid.Row="2" >
             <DataGrid 
                    Visibility="{Binding IsButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}"
                    Margin="15,0,15,15"
