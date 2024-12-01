@@ -13,6 +13,7 @@
     <UserControl.Resources>
         <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </UserControl.Resources>
+    
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -109,11 +110,6 @@
                    DockPanel.Dock="Right"
                    Margin="0,0,15,0">
                 <Button Command="{Binding AddNewExpenseCommand}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding LoadCommand}" CommandParameter="{Binding ElementName=Expense}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
                     <Grid>
                         <TextBlock Text="New expense"
                                   FontSize="10"
@@ -179,7 +175,7 @@
                    Margin="15,0,0,0">
                 <Button Command="{Binding FilterExpenseCommand}">
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="LostFocus">
+                        <i:EventTrigger EventName="DataContextChanged">
                             <i:InvokeCommandAction Command="{Binding LoadCommand}" CommandParameter="{Binding ElementName=Expense}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
@@ -204,9 +200,9 @@
             </Border>
         </DockPanel>
         <!--DataGrid expensebook-->
-        <TextBlock Visibility="{Binding RecoverButton, Converter={StaticResource BoolToVisibilityConverter}}"> hello world</TextBlock>
             <Grid Grid.Row="2" Margin="15 0 15 15">
             <DataGrid 
+                   Visibility="{Binding IsButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}"
                    Margin="15,0,15,15"
                    Name="ListExpenseBook"
                    Grid.Row="1"
@@ -244,33 +240,6 @@
                                            CommandParameter ="{Binding ElementName=ListExpenseBook, Path=SelectedItem}">
                                         <materialDesign:PackIcon Kind="pencil" Foreground="White"/>
                                     </Button>
-                                            <!--Style="{StaticResource MaterialDesignRaisedButton}"-->
-                                    <Button
-                                            Margin="0 0 5 0" Width="50" 
-                                            ToolTip="Resource name: MaterialDesignRaisedButton"
-                                            Background="#31B720" BorderBrush="#FF514D4D"
-                                            Command="{Binding DataContext.EditExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
-                                            CommandParameter ="{Binding ElementName=ListExpenseBook, Path=SelectedItem}">
-                                        <materialDesign:PackIcon Kind="pencil" Foreground="White"/>
-                                        <Button.Style>
-                                            <Style TargetType="Button">
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsButtonVisible}" Value="True">
-                                                        <!-- Khi điều kiện là True, Button sẽ hiển thị -->
-                                                        <DataTrigger.Setters>
-                                                            <Setter Property="Visibility" Value="Visible"/>
-                                                        </DataTrigger.Setters>
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding IsButtonVisible}" Value="False">
-                                                        <!-- Khi điều kiện là False, Button sẽ ẩn -->
-                                                        <DataTrigger.Setters>
-                                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                                        </DataTrigger.Setters>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                    </Button>
                                     <Button
                                            Width="50"
                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
@@ -287,6 +256,55 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
+            <DataGrid 
+                   Visibility="{Binding IsButtonRecover, Converter={StaticResource BoolToVisibilityConverter}}"
+                   Margin="15,0,15,15"
+                   Name="ListReocver"
+                   Grid.Row="1"
+                   HorizontalAlignment="Stretch"
+                   AutoGenerateColumns="False"
+                   IsReadOnly="True"
+                   SelectedItem="{Binding ItemsExB}"
+                   ItemsSource="{Binding Expensesadvances}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                    <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
+                    <DataGridTextColumn Binding="{Binding Recurring}" Header="Recurring" />
+                    <DataGridTextColumn Binding="{Binding Category}" Header="Category" />
+                    <DataGridTextColumn Binding="{Binding BudgetExp}" Header="Budget" />
+                    <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
+                    <DataGridTemplateColumn CanUserResize="False" Header="Commands">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button
+                                       Margin="0 0 5 0" Width="50" FontSize="15"
+                                       IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                       Style="{StaticResource MaterialDesignRaisedButton}"
+                                       ToolTip="Resource name: MaterialDesignRaisedButton"
+                                       BorderBrush="#FF514D4D" Foreground="White"
+                                       Command="{Binding DataContext.RecoverExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                       CommandParameter="{Binding}">
+                                        <materialDesign:PackIcon Kind="Reload" Foreground="White"/>
+                                    </Button>
+                                    <Button
+                                       Width="50"
+                                       IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                       Style="{StaticResource MaterialDesignRaisedButton}"
+                                       ToolTip="Resource name: MaterialDesignRaisedButton"
+                                       Background="IndianRed" BorderBrush="#FF514D4D"
+                                       Command="{Binding DataContext.RemoveExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                                       CommandParameter="{Binding}">
+                                        <materialDesign:PackIcon Kind="TrashCanOutline" Foreground="White"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
+        
     </Grid>
 </UserControl>

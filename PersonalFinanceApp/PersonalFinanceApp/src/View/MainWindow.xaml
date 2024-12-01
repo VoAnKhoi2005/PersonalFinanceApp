@@ -275,21 +275,40 @@
             
             <ContentControl.Resources>
                 <!--expense-->
+                
+                <!--add new-->
                 <DataTemplate DataType="{x:Type viewModels:ExpenseAddNewViewModel}">
                     <views:Main_Expense_AddNew/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:FilterExpenseViewModel}">
+                <!--filter-->
+                <DataTemplate DataType="{x:Type viewModels:ExpenseFilterViewModel}">
                     <views:Main_Expense_Filter/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:ExpenseNewExpenseBook}">
+                <!--new expense book--> 
+                <DataTemplate DataType="{x:Type viewModels:ExpenseNewExBViewModel}">
                     <views:UC_Main_ExpenseBook_AddNew/>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type viewModels:ExpenseAddNewCategory}">
+                <!--new category-->
+                <DataTemplate DataType="{x:Type viewModels:ExpenseNewCategoryViewModel}">
                     <views:Main_Expense_AddCategory/>
                 </DataTemplate>
+                <!--edit-->
+                <DataTemplate DataType="{x:Type viewModels:ExpenseEditViewModel}">
+                    <views:Main_Expense_Edit/>
+                </DataTemplate>
+                <!--delete-->
                 <DataTemplate DataType="{x:Type viewModels:ExpenseDeleteViewModel}">
                     <views:Main_Expense_DeleteConfirm/>
                 </DataTemplate>
+                <!--recover-->
+                <DataTemplate DataType="{x:Type viewModels:ExpenseRecoverViewModel}">
+                    <views:Main_Expense_RecoverConfirm/>
+                </DataTemplate>
+                <!--remove-->
+                <DataTemplate DataType="{x:Type viewModels:ExpenseRemoveViewModel}">
+                    <views:Main_Expense_RemoveConfirm/>
+                </DataTemplate>
+                
                 <!--Goal-->
                 <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">
                     <views:UC_Main_Goalplan_Adding />

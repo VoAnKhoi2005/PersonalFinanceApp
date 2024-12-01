@@ -6,8 +6,6 @@ using System.Windows.Input;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.Model;
-using System.Windows;
-
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class ExpenseViewModel : BaseViewModel {
@@ -15,6 +13,7 @@ public class ExpenseViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
     private readonly ExpenseStore _expenseStore;
     private readonly AccountStore _accountStore;
+    private readonly SharedService _sharedService;
     public bool IsButtonVisible {
         get => _isButtonVisible;
         set {
@@ -23,17 +22,14 @@ public class ExpenseViewModel : BaseViewModel {
         }
     }
     private bool _isButtonVisible;
-    public bool Filter {
-        get => _filter;
+    public bool IsButtonRecover {
+        get => _isButtonRecover;
         set {
-            if (_filter != value) {
-                _filter = value;
-                CheckFilterCommand.Execute(this);
-                OnPropertyChanged();
-            }
+            _isButtonRecover = value;
+            OnPropertyChanged();
         }
     }
-    private bool _filter;
+    private bool _isButtonRecover;
     public ExpenseAdvance ItemsExB {
         get => _itemsExB;
         set {
@@ -56,36 +52,47 @@ public class ExpenseViewModel : BaseViewModel {
     }
     private ObservableCollection<ExpenseAdvance> _expensesAdvances = new();
     public ICommand AddNewExpenseCommand { get; set; }
+    public ICommand RefreshExpenseCommand { get; set; }
     public ICommand EditExpenseCommand { get; set; }
     public ICommand DeleteExpenseCommand { get; set; }
-    public ICommand RefreshExpenseCommand { get; set; }
     public ICommand RecoverExpenseCommand { get; set; }
+    public ICommand RemoveExpenseCommand { get; set; }
     public ICommand FilterExpenseCommand { get; set; }
-    public ICommand CheckFilterCommand {  get; set; }
     public ICommand LoadCommand {  get; set; }
     public ICommand LoadRecoverCommand {  get; set; }
 
-    public bool HasNoExpense { get; set; } = true;
     public ExpenseViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
+        _sharedService = serviceProvider.GetRequiredService<SharedService>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
 
         AddNewExpenseCommand = new NavigateModalCommand<ExpenseAddNewViewModel>(serviceProvider);
         EditExpenseCommand = new NavigateModalCommand<ExpenseEditViewModel>(serviceProvider);
-        FilterExpenseCommand = new NavigateModalCommand<ExpenseRecoverViewModel>(serviceProvider);
+        FilterExpenseCommand = new NavigateModalCommand<ExpenseFilterViewModel>(serviceProvider);
         DeleteExpenseCommand = new NavigateModalCommand<ExpenseDeleteViewModel>(serviceProvider);
+        RemoveExpenseCommand = new NavigateModalCommand<ExpenseRemoveViewModel>(serviceProvider);
+        RecoverExpenseCommand = new NavigateModalCommand<ExpenseRecoverViewModel>(serviceProvider);
 
         LoadExpenses();
+
+        _sharedService.TriggerAction += OnTriggerAction;
+
         LoadRecoverCommand = new RelayCommand<object>(LoadRecover);
-        RecoverExpenseCommand = new RelayCommand<object>(RecoverExpense);
         RefreshExpenseCommand = new RelayCommand<object>(LoadExpenses);
-        CheckFilterCommand = new RelayCommand<object>(Check);
         LoadCommand = new RelayCommand<object>(Load);
     }
+    private void OnTriggerAction() {
+        Expensesadvances.Clear();
+        var items = _expenseStore.SharedExpense;
+        foreach (var item in items) {
+            Expensesadvances.Add(new ExpenseAdvance(item.exp, item.BudgetExp));
+        }
+    }
     public void LoadRecover(object parameter) {
-        IsButtonVisible = true;
+        IsButtonVisible = false;
+        IsButtonRecover = true;
         Expensesadvances.Clear();
         var exp = DBManager.GetCondition<Expense>(e => e.UserID == int.Parse(_accountStore.UsersID), getDeleted:true);
         foreach(var e in exp) {
@@ -95,31 +102,16 @@ public class ExpenseViewModel : BaseViewModel {
 
     }
     public void Load(object parameter) {
-        //if (parameter != null)
-        //    MessageBox.Show("Load");
-        //if (_expenseStore.IsFilter != Filter) {
-            //Filter = _expenseStore.IsFilter;
-        //}
-    }
-    //public void DeleteExpense(object parameter) {
-    //    var item = _expenseStore.Expenses;
-    //    var exp = DBManager.GetFirst<Expense>(e => e.UserID == int.Parse(_accountStore.UsersID) && e.ExpenseID == item.ExpenseID);
-    //    exp.Deleted = true;
-    //    DBManager.Update<Expense>(exp);
-    //}
-    public void Check(object parameter) {
-        if(_expenseStore.IsFilter != Filter) {
-            Filter = _expenseStore.IsFilter;
+        //filter
+        Expensesadvances.Clear();
+        var items = _expenseStore.SharedExpense;
+        foreach(var item in items) {
+            Expensesadvances.Add(new ExpenseAdvance(item.exp, item.BudgetExp));
         }
     }
-    public void RecoverExpense(object parameter) {
-        var item = _expenseStore.Expenses;
-        var exp = DBManager.GetFirst<Expense>(e => e.UserID == int.Parse(_accountStore.UsersID) && e.ExpenseID == item.ExpenseID);
-        exp.Deleted = false;
-        DBManager.Update<Expense>(exp);
-    }
     public void LoadExpenses(object? p = null) {
-        IsButtonVisible = false;
+        IsButtonVisible = true;
+        IsButtonRecover = false;
         //load data to datagrid
         Expensesadvances.Clear();
         var items = DBManager.GetCondition<Expense>(exp => exp.UserID == int.Parse(_accountStore.UsersID));

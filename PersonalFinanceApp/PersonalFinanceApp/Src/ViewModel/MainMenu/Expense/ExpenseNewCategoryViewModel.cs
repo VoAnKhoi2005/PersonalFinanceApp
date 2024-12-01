@@ -7,7 +7,7 @@ using PersonalFinanceApp.ViewModel.Stores;
 using System.Windows.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu; 
-public class ExpenseAddNewCategory : BaseViewModel {
+public class ExpenseNewCategoryViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly ExpenseStore _expenseStore;
@@ -15,7 +15,7 @@ public class ExpenseAddNewCategory : BaseViewModel {
     public string NameNewCategoryExpense {
         get => _nameNewCategoryExpense;
         set {
-            if(_nameNewCategoryExpense != value) {
+            if (_nameNewCategoryExpense != value) {
                 _nameNewCategoryExpense = value;
                 OnPropertyChanged();
             }
@@ -25,7 +25,7 @@ public class ExpenseAddNewCategory : BaseViewModel {
     public ICommand CancelNewCategoryExpenseCommand { get; set; }
     public ICommand ConfirmNewCategoryExpenseCommand { get; set; }
 
-    public ExpenseAddNewCategory(IServiceProvider serviceProvider) {
+    public ExpenseNewCategoryViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
         _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();

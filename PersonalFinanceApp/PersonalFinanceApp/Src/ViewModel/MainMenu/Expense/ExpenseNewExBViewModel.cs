@@ -8,8 +8,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
-
-public class ExpenseNewExpenseBook : BaseViewModel {
+public class ExpenseNewExBViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly AccountStore _accountStore;
@@ -98,7 +97,7 @@ public class ExpenseNewExpenseBook : BaseViewModel {
     public ICommand CancelExpenseBookCommand { get; set; }
     public ICommand ConfirmExpenseBookCommand { get; set; }
 
-    public ExpenseNewExpenseBook(IServiceProvider serviceProvider) {
+    public ExpenseNewExBViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
@@ -124,10 +123,9 @@ public class ExpenseNewExpenseBook : BaseViewModel {
             };
 
         Years = new ObservableCollection<int>();
-        for (int year = 2000; year <= 2030; year++) {
+        for (int year = 2000; year <= DateTime.Now.Year; year++) {
             Years.Add(year);
         }
-
     }
     private void CloseModal(object sender) {
         _modalNavigationStore.Close();
@@ -141,7 +139,7 @@ public class ExpenseNewExpenseBook : BaseViewModel {
             UserID = int.Parse(_accountStore.UsersID),
         };
         DBManager.Insert(expenseBook);
-        _expenseStore.TextChangedExp = expenseBook.Month.ToString() + "/" + expenseBook.Year.ToString(); 
+        _expenseStore.TextChangedExp = expenseBook.Month.ToString() + "/" + expenseBook.Year.ToString();
         _modalNavigationStore.Close();
     }
     public class Month {

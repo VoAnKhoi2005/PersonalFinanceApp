@@ -1,10 +1,11 @@
-﻿using PersonalFinanceApp.Model;
+﻿using PersonalFinanceApp.Database;
+using PersonalFinanceApp.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace PersonalFinanceApp.Src.ViewModel.Stores; 
 public class ExpenseStore : INotifyPropertyChanged {
-    public ObservableCollection<string> SharedExpense { get; } = new ObservableCollection<string>();
+    public ObservableCollection<ExpenseAdvance> SharedExpense { get; set; } = new ObservableCollection<ExpenseAdvance>();
 
     private Expense? _expenses;
     public Expense? Expenses {
@@ -60,5 +61,33 @@ public class ExpenseStore : INotifyPropertyChanged {
 
     protected virtual void OnPropertyChanged(string? propertyName = null) {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+    public class ExpenseAdvance {
+        public Expense exp { get; set; }
+        public long BudgetExp { get; set; }
+        public int ExpenseID { get; set; }
+        public long Amount { get; set; }
+        public string Name { get; set; }
+        public string? Description { get; set; }
+        public DateOnly Date { get; set; }
+        public bool Recurring { get; set; }
+        public DateTime TimeAdded { get; set; }
+        public int CategoryID { get; set; }
+        public string Category { get; set; }
+        public ExpenseAdvance() { }
+        public ExpenseAdvance(Expense ex, long budget) {
+            exp = ex;
+            BudgetExp = budget;
+            ExpenseID = ex.ExpenseID;
+            Amount = ex.Amount;
+            Name = ex.Name;
+            Description = ex.Description;
+            Date = ex.Date;
+            Recurring = ex.Recurring;
+            TimeAdded = ex.TimeAdded;
+            CategoryID = ex.CategoryID;
+            var cate = DBManager.GetFirst<Category>(c => c.CategoryID == ex.CategoryID);
+            Category = cate.Name;
+        }
     }
 }

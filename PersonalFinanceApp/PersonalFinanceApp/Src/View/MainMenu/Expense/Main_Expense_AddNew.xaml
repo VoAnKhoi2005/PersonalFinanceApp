@@ -75,8 +75,8 @@
                              materialDesign:HintAssist.Hint="Your expense name"
                              Foreground="{DynamicResource CommonText}"
                              FontSize="14"
-                                 HorizontalAlignment="Center"
-                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                             HorizontalAlignment="Center"
+                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                              CaretBrush="{DynamicResource CommonText}"
                              SelectionBrush="{DynamicResource CommonText}"
                              BorderBrush="{x:Null}"
@@ -97,7 +97,7 @@
                                ></TextBlock>
 
 
-                    <ComboBox Width="160" Height="40" Visibility="Visible"
+                    <ComboBox Width="160" Height="40" IsEnabled="{Binding NotExB}"
                               HorizontalAlignment="Left"
                               VerticalAlignment="Top"
                               FontSize="14"
@@ -127,11 +127,10 @@
                              Foreground="{DynamicResource CommonText}"
                              FontSize="14"
                              BorderBrush="{x:Null}"
-                                 HorizontalAlignment="Center"
-                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                             HorizontalAlignment="Center"
+                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
                              CaretBrush="{DynamicResource CommonText}"
-                             SelectionBrush="{DynamicResource CommonText}"
-                                 ></TextBox>
+                             SelectionBrush="{DynamicResource CommonText}"></TextBox>
 
 
                 </Grid>
@@ -157,7 +156,7 @@
 
 
                     <DatePicker SelectedDate="{Binding DateTimeExpenseBook}"
-                                Width="160"
+                                Width="160" 
                                 Height="40"
                                 Foreground="{DynamicResource CommonText}"
                                 FontSize="14"
@@ -167,12 +166,9 @@
                                 VerticalAlignment="Top"
                                 Margin="0,46,0,0"
                                 BorderBrush="{x:Null}"
-                                materialDesign:TextFieldAssist.HasClearButton="True"
                                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                                 Text="{Binding DateOnlyExpenseBook}" 
-                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                        >
-                    </DatePicker>
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
 
                 </Grid>
 
@@ -219,7 +215,7 @@
                                ></TextBlock>
                     <Border  Width="200" Height="50" Margin="18,43,17,10" CornerRadius="30"
                              Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
-                    <ComboBox Width="160" Height="40"
+                    <ComboBox Width="160" Height="40" 
                               HorizontalAlignment="Left"
                               VerticalAlignment="Top"
                               BorderBrush="{x:Null}"
@@ -228,7 +224,6 @@
                               MinWidth="128"
                               materialDesign:HintAssist.Hint="which expense book?" 
                               materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                              materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                               ItemsSource="{Binding ItemsExpenseBook}"
                               SelectedValue="{Binding SelectedExpenseBook}"
@@ -256,14 +251,13 @@
                                ></TextBlock>
                         <Border  Width="90" Height="50" Margin="12,43,16,9" CornerRadius="30"
                              Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
-                        <TextBox Width="55" Height="40"
+                        <TextBox Width="55" Height="40" IsEnabled="False"
                               HorizontalAlignment="Left"
                               VerticalAlignment="Top"
                               BorderBrush="{x:Null}"
                               FontSize="14"
                               Foreground="{DynamicResource CommonText}"
                               materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                              materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                               Margin="30,48,0,0"
                               Text="{Binding MonthExpenseBook}"
@@ -281,14 +275,13 @@
                                ></TextBlock>
                         <Border  Width="90" Height="50" Margin="9,43,18,9" CornerRadius="30"
                              Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
-                        <TextBox Width="55" Height="40"
+                        <TextBox Width="55" Height="40" IsEnabled="False"
                               HorizontalAlignment="Left"
                               VerticalAlignment="Top"
                               BorderBrush="{x:Null}"
                               FontSize="14"
                               Foreground="{DynamicResource CommonText}"
                               materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                              materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                               Margin="28,48,0,0"
                               Text="{Binding YearExpenseBook}"
@@ -317,7 +310,7 @@
                              Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2"></Border>
 
                     <TextBox VerticalAlignment="Top" Text="{Binding BudgetExpenseBook}"
-                             Margin="0,47,0,0"
+                             Margin="0,47,0,0" IsEnabled="False"
                              Width="160" Height="40"
                              TextAlignment="Left"
                              materialDesign:HintAssist.Hint="Budget (VND)"
@@ -349,7 +342,6 @@
                               MinWidth="128"
                               materialDesign:HintAssist.Hint="is recurring?" 
                               materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                              materialDesign:TextFieldAssist.HasClearButton="True"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0"
                               Text="{Binding RecurringExpense}">

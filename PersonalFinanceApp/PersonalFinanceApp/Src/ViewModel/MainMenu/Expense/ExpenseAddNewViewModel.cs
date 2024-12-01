@@ -12,7 +12,6 @@ namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class ExpenseAddNewViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
-    private readonly ExpenseBookStore _expenseBookStore;
     private readonly ExpenseStore _expenseStore;
     private readonly AccountStore _accountStore;
 
@@ -192,7 +191,7 @@ public class ExpenseAddNewViewModel : BaseViewModel {
             }
         }
     }
-    public ObservableCollection<CategoryItem> _itemsExpense = new();
+    private ObservableCollection<CategoryItem> _itemsExpense = new();
     //itemsource exB
     public ObservableCollection<ExpenseBookItem> ItemsExpenseBook {
         get => _itemsExpenseBook;
@@ -203,7 +202,7 @@ public class ExpenseAddNewViewModel : BaseViewModel {
             }
         }
     }
-    public ObservableCollection<ExpenseBookItem> _itemsExpenseBook = new();
+    private ObservableCollection<ExpenseBookItem> _itemsExpenseBook = new();
     public bool NotExB {
         get => _notExB;
         set {
@@ -213,7 +212,7 @@ public class ExpenseAddNewViewModel : BaseViewModel {
             }
         }
     }
-    private bool _notExB = true;
+    private bool _notExB;
     #endregion
     public ICommand CancelAddNewExpenseCommand { get; set; }
     public ICommand ConfirmAddNewExpenseCommand { get; set; }
@@ -225,12 +224,11 @@ public class ExpenseAddNewViewModel : BaseViewModel {
     public ExpenseAddNewViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
         _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
-        _expenseBookStore = serviceProvider.GetRequiredService<ExpenseBookStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
 
-        NewCategoryCommand = new NavigateModalCommand<ExpenseAddNewCategory>(serviceProvider);
-        NewExpenseBookCommand = new NavigateModalCommand<ExpenseNewExpenseBook>(serviceProvider);
+        NewCategoryCommand = new NavigateModalCommand<ExpenseNewCategoryViewModel>(serviceProvider);
+        NewExpenseBookCommand = new NavigateModalCommand<ExpenseNewExBViewModel>(serviceProvider);
 
         LoadDataAddCommand = new RelayCommand<object>(LoadItemSource);
         CancelAddNewExpenseCommand = new RelayCommand<object>(CloseModal);
@@ -246,6 +244,7 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         YearExpenseBook = SelectedItemExpenseBook.exB.Year.ToString();
         MonthExpenseBook = SelectedItemExpenseBook.exB.Month.ToString();
         BudgetExpenseBook = SelectedItemExpenseBook.exB.Budget.ToString(); 
+
         NotExB = true;
 
         ItemsExpense.Clear();
@@ -258,14 +257,13 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         }
     }
     public void LoadItemSource(object parameter) {
-        NotExB = true;
+        NotExB = false;
         YearExpenseBook = "";
         MonthExpenseBook = "";
         BudgetExpenseBook = "";
         //load item source category
         ItemsExpense.Clear();
         ItemsExpense.Add(new CategoryItem { Id = -1, Name = "<New>" });
-        
 
         ItemsExpenseBook.Clear();
         ItemsExpenseBook.Add(new ExpenseBookItem { sExB = "<New>" });
@@ -273,20 +271,6 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         foreach (var item in itemexBs) {
             ItemsExpenseBook.Add(new ExpenseBookItem(item, (item.Month.ToString() + "/" + item.Year.ToString())));
         }
-        //load item expensebook
-        //if (_expenseStore.Categorys != null) {
-        //    TextChangedCategory = _expenseStore.Categorys.Name;
-        //    SelectionChanged(parameter);
-        //}
-        
-
-        //if (_expenseStore.TextChangedExp != null) {
-        //    TextChangedExpense = _expenseStore.TextChangedExp;
-        //    SelectionChanged(parameter);
-        //}
-        
-        
-        
     }
     private void CloseModal(object sender) {
         _modalNavigationStore.Close();

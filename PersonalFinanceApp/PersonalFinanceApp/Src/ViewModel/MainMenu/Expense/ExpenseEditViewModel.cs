@@ -4,16 +4,14 @@ using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using static PersonalFinanceApp.ViewModel.MainMenu.ExpenseAddNewViewModel;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
-
 public class ExpenseEditViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
-    private readonly ExpenseBookStore _expenseBookStore;
     private readonly ExpenseStore _expenseStore;
     private readonly AccountStore _accountStore;
     #region Properties
@@ -45,7 +43,7 @@ public class ExpenseEditViewModel : BaseViewModel {
         set {
             _dateTimeEditExpenseBook = value;
             OnPropertyChanged(nameof(DateTimeEditExpenseBook));
-            DateOnlyExpenseBook = DateOnly.FromDateTime(_dateTimeEditExpenseBook.Value);
+            if(value != null) DateOnlyExpenseBook = DateOnly.FromDateTime(_dateTimeEditExpenseBook.Value);
         }
     }
     private DateTime? _dateTimeEditExpenseBook;
@@ -69,16 +67,20 @@ public class ExpenseEditViewModel : BaseViewModel {
     }
     private string _descriptionEditExpense;
     //category
-    public string CategoryEditExpense {
+    public CategoryItem CategoryEditExpense {
         get => _categoryEditExpense;
         set {
             if (_categoryEditExpense != value) {
+                if (value != null && value.Name.CompareTo("<New>") == 0) {
+                    //excute new category
+                    NewCategoryCommand.Execute(this);
+                }
                 _categoryEditExpense = value;
                 OnPropertyChanged();
             }
         }
     }
-    private string _categoryEditExpense;
+    private CategoryItem _categoryEditExpense;
     //recurring
     public bool RecurringEditExpense {
         get => _recurringEditExpense;
@@ -90,38 +92,24 @@ public class ExpenseEditViewModel : BaseViewModel {
         }
     }
     private bool _recurringEditExpense;
-    //category
-    public int SelectedEditCategory {
-        get => _selectedEditCategory;
-        set {
-            if (_selectedEditCategory != value) {
-                if (value == -1) {
-                    //new category
-                    NewCategoryCommand.Execute(this);
-                }
-                _selectedEditCategory = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private int _selectedEditCategory;
-    //category
-    public string SelectedEditExpenseBook {
+    //expense book
+    public ExpenseBookItem SelectedEditExpenseBook {
         get => _selectedEditExpenseBook;
         set {
             if (_selectedEditExpenseBook != value) {
-                if (value.CompareTo("<New>") == 0) {
-                    //new expense book
+                if (value != null && value.sExB.CompareTo("<New>") == 0) {
+                    //excute new expensebook
                     NewExpenseBookCommand.Execute(this);
                 }
+                if (value != null) {
+                    _expenseStore.ExpenseBook = value.exB;
+                }
                 _selectedEditExpenseBook = value;
-                var x = value.Split('/');
-                if (x.Length > 1) { MonthExpenseBook = x[0]; YearExpenseBook = x[1]; BudgetExpenseBook = x[2]; }
                 OnPropertyChanged();
             }
         }
     }
-    private string _selectedEditExpenseBook;
+    private ExpenseBookItem _selectedEditExpenseBook;
     //month
     public string MonthExpenseBook {
         get => _monthExpenseBook;
@@ -177,38 +165,114 @@ public class ExpenseEditViewModel : BaseViewModel {
         }
     }
     public ObservableCollection<ExpenseBookItem> _itemsEditExpenseBook = new();
+    //text expense
+    public string TextChangedExpense {
+        get => _textChangedExpense;
+        set {
+            if (_textChangedExpense != value) {
+                _textChangedExpense = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _textChangedExpense;
+    //text category
+    public string TextChangedCategory {
+        get => _textChangedCategory;
+        set {
+            if (_textChangedCategory != value) {
+                _textChangedCategory = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _textChangedCategory;
+    //not expenseBook
+    public bool NotExB {
+        get => _notExB;
+        set {
+            if (_notExB != value) {
+                _notExB = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private bool _notExB;
     #endregion
     public ICommand CancelEditExpenseCommand { get; set; }
     public ICommand ConfirmEditExpenseCommand { get; set; }
     public ICommand NewCategoryCommand { get; set; }
     public ICommand NewExpenseBookCommand { get; set; }
+    public ICommand LoadDataAddCommand { get; set; }
+    public ICommand SelectionChangedCommand { get; set; }
 
     public ExpenseEditViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
-        _expenseBookStore = serviceProvider.GetRequiredService<ExpenseBookStore>();
+        _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
+
         LoadItemSource();
-        NewCategoryCommand = new NavigateModalCommand<ExpenseAddNewCategory>(serviceProvider);
-        //NewExpenseBookCommand = new NavigateModalCommand<ExpenseAddNewExpenseBook>(serviceProvider);
+
+        NewCategoryCommand = new NavigateModalCommand<ExpenseNewCategoryViewModel>(serviceProvider);
+        NewExpenseBookCommand = new NavigateModalCommand<ExpenseNewExBViewModel>(serviceProvider);
+
+        LoadDataAddCommand = new RelayCommand<object>(LoadItemSource);
         CancelEditExpenseCommand = new RelayCommand<object>(CloseModal);
+        SelectionChangedCommand = new RelayCommand<object>(SelectionChanged);
         ConfirmEditExpenseCommand = new RelayCommand<object>(ConfirmEditExpense);
     }
-    public void LoadItemSource() {
-        //itemsource category
+    public void SelectionChanged(object parameter) {
+        TextChangedCategory = "";
+        if (SelectedEditExpenseBook == null) return;
+        if (SelectedEditExpenseBook.sExB.CompareTo("<New>") == 0) {
+            NotExB = false;
+            return;
+        }
+        YearExpenseBook = SelectedEditExpenseBook.exB.Year.ToString();
+        MonthExpenseBook = SelectedEditExpenseBook.exB.Month.ToString();
+        BudgetExpenseBook = SelectedEditExpenseBook.exB.Budget.ToString();
+
+        NotExB = true;
+
         ItemsEditExpense.Clear();
         ItemsEditExpense.Add(new CategoryItem { Id = -1, Name = "<New>" });
-        var items = DBManager.GetCondition<Category>(c => c.UserID == int.Parse(_accountStore.UsersID));
-        foreach (var item in items) {
-            ItemsEditExpense.Add(new CategoryItem { Id = item.CategoryID, Name = item.Name });
+        if (YearExpenseBook != "" && MonthExpenseBook != "") {
+            var items = DBManager.GetCondition<Category>(c => c.UserID == int.Parse(_accountStore.UsersID) && c.ExBYear == int.Parse(YearExpenseBook) && c.ExBMonth == int.Parse(MonthExpenseBook));
+            foreach (var item in items) {
+                ItemsEditExpense.Add(new CategoryItem { Id = item.CategoryID, Name = item.Name });
+            }
         }
-        //load item expensebook
+    }
+    public void LoadItemSource(object? parameter = null) {
+        NotExB = false;
+        YearExpenseBook = "";
+        MonthExpenseBook = "";
+        BudgetExpenseBook = "";
+        //load item source category
+        ItemsEditExpense.Clear();
+        ItemsEditExpense.Add(new CategoryItem { Id = -1, Name = "<New>" });
+
         ItemsEditExpenseBook.Clear();
         ItemsEditExpenseBook.Add(new ExpenseBookItem { sExB = "<New>" });
         var itemexBs = DBManager.GetCondition<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID));
         foreach (var item in itemexBs) {
-            ItemsEditExpenseBook.Add(new ExpenseBookItem(item, (item.Month.ToString() + "/" + item.Year.ToString() + "/" + item.Budget.ToString())));
+            ItemsEditExpenseBook.Add(new ExpenseBookItem(item, (item.Month.ToString() + "/" + item.Year.ToString())));
         }
+
+        var exp = _expenseStore.Expenses;
+        NameEditExpense = exp.Name;
+        AmountEditExpense = exp.Amount.ToString();
+        DescriptionEditExpense = exp.Description;
+        DateTimeEditExpenseBook = exp.Date.ToDateTime(TimeOnly.MinValue);
+        RecurringEditExpense = exp.Recurring;
+        var cate = DBManager.GetFirst<Category>(c => exp.CategoryID == c.CategoryID && c.UserID == exp.UserID);
+        TextChangedCategory = cate.Name;
+        TextChangedExpense = exp.ExBMonth.ToString() + "/" + exp.ExBYear.ToString();
+        MonthExpenseBook = exp.ExBMonth.ToString();
+        YearExpenseBook = exp.ExBYear.ToString();
+        var exB = DBManager.GetFirst<ExpensesBook>(e => e.UserID == exp.UserID && e.Year == exp.ExBYear && e.Month == exp.ExBMonth);
+        BudgetExpenseBook = exB.Budget.ToString();
     }
     private void CloseModal(object sender) {
         _modalNavigationStore.Close();
@@ -217,16 +281,17 @@ public class ExpenseEditViewModel : BaseViewModel {
         //add data to database
         //update expenseBook
         var exB = DBManager.GetFirst<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID) && e.Year == int.Parse(YearExpenseBook) && e.Month == int.Parse(MonthExpenseBook));
-        exB.Budget = long.Parse(BudgetExpenseBook);
-        DBManager.Update<ExpensesBook>(exB);
-
+        if(exB.Budget != long.Parse(BudgetExpenseBook)) {
+            exB.Budget = long.Parse(BudgetExpenseBook);
+            DBManager.Update<ExpensesBook>(exB);
+        }
         //edit expense
         var itemExP = DBManager.GetFirst<Expense>(e => e.ExpenseID == _expenseStore.Expenses.ExpenseID && e.UserID == _expenseStore.Expenses.UserID);
         itemExP.Amount = long.Parse(AmountEditExpense);
         itemExP.Name = NameEditExpense;
         itemExP.Description = DescriptionEditExpense;
-        //itemExP.Recurring = true;
-        itemExP.CategoryID = SelectedEditCategory;
+        itemExP.Recurring = false;
+        itemExP.CategoryID = CategoryEditExpense.Id;
         itemExP.Date = DateOnlyExpenseBook;
 
         DBManager.Update<Expense>(itemExP);
