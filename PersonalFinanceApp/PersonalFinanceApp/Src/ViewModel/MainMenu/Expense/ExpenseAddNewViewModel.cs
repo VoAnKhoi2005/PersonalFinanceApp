@@ -79,20 +79,16 @@ public class ExpenseAddNewViewModel : BaseViewModel {
     }
     private string _categoryExpense;
     //recurring
-    public bool RecurringExpense {
+    public string RecurringExpense {
         get => _recurringExpense;
         set {
-            if (value) {
-                _recurringExpense = true;
-                OnPropertyChanged();
-            }
-            else {
-                _recurringExpense = false;
+            if (_recurringExpense != value) {
+                _recurringExpense = value;
                 OnPropertyChanged();
             }
         }
     }
-    private bool _recurringExpense;
+    private string _recurringExpense;
     //selected category
     public CategoryItem SelectedCategory {
         get => _selectedCategory;
@@ -258,6 +254,7 @@ public class ExpenseAddNewViewModel : BaseViewModel {
     }
     public void LoadItemSource(object parameter) {
         NotExB = false;
+        TextChangedCategory = "";
         YearExpenseBook = "";
         MonthExpenseBook = "";
         BudgetExpenseBook = "";
@@ -281,7 +278,7 @@ public class ExpenseAddNewViewModel : BaseViewModel {
             Amount = int.Parse(AmountExpense),
             Name = NameExpense,
             Date = DateOnlyExpenseBook,
-            Recurring = true,
+            Recurring = (RecurringExpense.CompareTo("YES") == 0 ) ? true:false,
             CategoryID = SelectedCategory.Id,
             ExBMonth = int.Parse(MonthExpenseBook),
             ExBYear = int.Parse(YearExpenseBook),

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:loginViewModels="clr-namespace:PersonalFinanceApp.ViewModel.LoginMenu"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         
         xmlns:view="clr-namespace:PersonalFinanceApp.Src.View"
 
@@ -16,7 +16,6 @@
         TextOptions.TextFormattingMode="Ideal"
 
         WindowStartupLocation="CenterScreen"
-
         WindowStyle="None"
         Title="LoginWindow" 
         Height="760"
@@ -100,9 +99,10 @@
         
         <DockPanel Grid.Row="0">
             <Button Width="40" Height="30"
-                        VerticalAlignment="Bottom"
-                            DockPanel.Dock="Right"
-                        HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    DockPanel.Dock="Right"
+                    HorizontalAlignment="Right"
+                    Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                             >
                 <Button.Style>
                     <Style TargetType="Button">
@@ -137,6 +137,7 @@
                             DockPanel.Dock="Right"
                         HorizontalAlignment="Right"
                     Margin="0 0 5 0"
+                    Command="{Binding WindowMaximum}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                             >
                 <Button.Style>
                     <Style TargetType="Button">
@@ -171,6 +172,8 @@
                             DockPanel.Dock="Right"
                         HorizontalAlignment="Right"
                     Margin="0 0 5 0"
+                    Command="{Binding WindowMinimum}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                    
                             >
                 <Button.Style>
                     <Style TargetType="Button">

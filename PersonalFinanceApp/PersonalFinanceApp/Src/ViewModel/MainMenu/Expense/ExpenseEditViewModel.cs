@@ -82,7 +82,7 @@ public class ExpenseEditViewModel : BaseViewModel {
     }
     private CategoryItem _categoryEditExpense;
     //recurring
-    public bool RecurringEditExpense {
+    public string RecurringEditExpense {
         get => _recurringEditExpense;
         set {
             if (_recurringEditExpense != value) {
@@ -91,7 +91,18 @@ public class ExpenseEditViewModel : BaseViewModel {
             }
         }
     }
-    private bool _recurringEditExpense;
+    private string _recurringEditExpense;
+    //recurring
+    public string TextRecurring {
+        get => _textRecurring;
+        set {
+            if (_textRecurring != value) {
+                _textRecurring = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _textRecurring;
     //expense book
     public ExpenseBookItem SelectedEditExpenseBook {
         get => _selectedEditExpenseBook;
@@ -265,7 +276,7 @@ public class ExpenseEditViewModel : BaseViewModel {
         AmountEditExpense = exp.Amount.ToString();
         DescriptionEditExpense = exp.Description;
         DateTimeEditExpenseBook = exp.Date.ToDateTime(TimeOnly.MinValue);
-        RecurringEditExpense = exp.Recurring;
+        TextRecurring = (exp.Recurring == true) ? "YES":"NO";
         var cate = DBManager.GetFirst<Category>(c => exp.CategoryID == c.CategoryID && c.UserID == exp.UserID);
         TextChangedCategory = cate.Name;
         TextChangedExpense = exp.ExBMonth.ToString() + "/" + exp.ExBYear.ToString();
@@ -290,7 +301,7 @@ public class ExpenseEditViewModel : BaseViewModel {
         itemExP.Amount = long.Parse(AmountEditExpense);
         itemExP.Name = NameEditExpense;
         itemExP.Description = DescriptionEditExpense;
-        itemExP.Recurring = false;
+        itemExP.Recurring = (RecurringEditExpense.CompareTo("YES") == 0) ? true:false;
         itemExP.CategoryID = CategoryEditExpense.Id;
         itemExP.Date = DateOnlyExpenseBook;
 

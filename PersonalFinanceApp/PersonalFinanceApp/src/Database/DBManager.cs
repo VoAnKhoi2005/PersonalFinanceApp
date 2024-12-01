@@ -307,7 +307,7 @@ public static class DBManager
     {
         using var context = new AppDbContext();
         List<Expense> expenses = GetAll<Expense>(true);
-        expenses = expenses.Where(ex => (DateTime.Now - (DateTime)ex.DeletedDate).TotalDays >= 30).ToList();
+        expenses = expenses.Where(ex => ex.DeletedDate.HasValue && (DateTime.Now - (DateTime)ex.DeletedDate).TotalDays >= 30).ToList();
 
         foreach (Expense expense in expenses)
             context.Remove(expense);

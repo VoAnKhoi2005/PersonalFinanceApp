@@ -194,13 +194,11 @@ public class LoginNewAccountViewModel : BaseViewModel {
     }
 
     private bool VerifyLogin(User? loginUser) {
-
         loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
         if (loginUser == null) {
-            IncorrectPasswordUserName = true;
             return false;
         }
-
+        IncorrectPasswordUserName = true;
         return loginUser.VerifyPassword(PasswordLogin);
     }
     private void CreateAccount(object parameter) {

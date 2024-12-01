@@ -342,10 +342,10 @@
                               materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                               materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="41,47,0,0"
-                              Text="{Binding RecurringExpense}">
+                              SelectedItem="{Binding RecurringExpense}">
                         <!--not done here-->
-                        <ComboBoxItem Content="TRUE" />
-                        <ComboBoxItem Content="FALSE" />
+                        <ComboBoxItem Content="YES" />
+                        <ComboBoxItem Content="NO" />
                     </ComboBox>
                 </Grid>
 
