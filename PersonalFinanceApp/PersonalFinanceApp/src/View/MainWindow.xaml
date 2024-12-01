@@ -250,17 +250,16 @@
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
+            
+            <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}">
+                <ContentControl.Resources>
 
-                <DataTemplate DataType="{x:Type viewModels:ExpenseViewModel}">
-                    <views:Main_expense_mainView/>
-                </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewModels:ExpenseViewModel}">
+                        <views:Main_expense_mainView/>
+                    </DataTemplate>
 
                     <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
                         <views:UC_Dashboard/>
-                    </DataTemplate>
-
-                    <DataTemplate DataType="{x:Type viewModels:ExpenseBookViewModel}">
-                        <views:Main_ExpenseBook/>
                     </DataTemplate>
 
                     <DataTemplate DataType="{x:Type viewModels:GoalplanViewModel}">
@@ -270,8 +269,6 @@
                     <DataTemplate DataType="{x:Type viewModels:SummaryViewModel}">
                         <views:UC_Summary />
                     </DataTemplate>
-
-
 
                 </ContentControl.Resources>
             </ContentControl>
@@ -336,38 +333,8 @@
                 <DataTemplate DataType="{x:Type viewModels:GoalAddNewCategoryViewModel}">
                     <views:NewCategory/>
                 </DataTemplate>
-
-                <ContentControl.Resources>
-                    <!--expensebook-->
-                    <DataTemplate DataType="{x:Type viewModels:ExpenseBookAddNewViewModel}">
-                        <views:UC_Main_ExpenseBook_AddNew/>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type viewModels:ExpenseBookEditViewModel}">
-                        <views:Main_ExpenseBook_Edit/>
-                    </DataTemplate>
-                    <!--Goal-->
-                    <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">
-                        <views:UC_Main_Goalplan_Adding />
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type viewModels:GoalEditViewModel}">
-                        <views:UC_Main_Goalplan_Adjust/>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type viewModels:GoalAddSavedAmountViewModel}">
-                        <views:Main_Goalplan_plusMinus/>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type viewModels:GoalHistoryViewModel}">
-                        <views:Main_Goalplan_History/>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type viewModels:GoalDeleteViewModel}">
-                        <views:Main_Goalplan_deleteConfirm/>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type viewModels:GoalAddNewCategoryViewModel}">
-                        <views:NewCategory/>
-                    </DataTemplate>
-
                 </ContentControl.Resources>
             </custom:Modal>
             </Grid>
-        </Grid>
     </Grid>
 </Window>

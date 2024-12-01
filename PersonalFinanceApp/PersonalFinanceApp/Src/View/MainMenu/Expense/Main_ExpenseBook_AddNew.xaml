@@ -97,12 +97,12 @@
                              ItemsSource="{Binding Years}"></ComboBox>
                     </Grid>
 
-                </Grid>
+            </Grid>
 
                 <!--amount-->
 
 
-            </Grid>
+            
 
             <!--name transaction-->
 
@@ -134,6 +134,7 @@
 
                 </Grid>
             </Grid>
+        
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
