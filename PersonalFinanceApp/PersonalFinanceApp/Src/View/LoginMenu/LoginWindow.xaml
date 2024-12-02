@@ -6,8 +6,7 @@
         xmlns:loginViewModels="clr-namespace:PersonalFinanceApp.ViewModel.LoginMenu"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         
-        xmlns:view="clr-namespace:PersonalFinanceApp.Src.View"
-
+        xmlns:view="clr-namespace:PersonalFinanceApp.Src.View" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Background="#0D2129"
         TextElement.Foreground="#E5CBBFBF"
@@ -22,6 +21,7 @@
         Width="1152"
         MinHeight="720"
         MinWidth="1152"
+        x:Name="LoginMain"
         >
     <Grid>
         <Grid.RowDefinitions>
@@ -96,8 +96,13 @@
                 </ContentControl.Resources>
             </ContentControl>
         </Grid>
-        
-        <DockPanel Grid.Row="0">
+
+        <DockPanel Grid.Row="0" Background="#0D2129">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                    <i:InvokeCommandAction Command="{Binding MoveCommand}" CommandParameter="{Binding ElementName=LoginMain}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <Button Width="40" Height="30"
                     VerticalAlignment="Bottom"
                     DockPanel.Dock="Right"

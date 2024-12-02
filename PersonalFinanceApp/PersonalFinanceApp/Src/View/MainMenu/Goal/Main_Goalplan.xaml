@@ -158,7 +158,7 @@
                         DockPanel.Dock="Right">
                     <Button Command="{Binding AddNewGoalCommand}">
                         <Grid>
-                            <TextBlock Text="new goal"
+                            <TextBlock Text="New goal"
 
                                        FontSize="12"
                                        Margin="0,0,10,0"

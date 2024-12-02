@@ -10,7 +10,8 @@
         xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
         
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:custom="clr-namespace:PersonalFinanceApp.ViewModel.Modal"
+        xmlns:custom="clr-namespace:PersonalFinanceApp.ViewModel.Modal" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         Background="#0D2129"
         ResizeMode="CanResizeWithGrip"
         MinHeight="720" MinWidth="1152 "
@@ -18,7 +19,7 @@
         WindowStartupLocation="CenterScreen" 
         x:Name="MainWindows"
         WindowStyle="None">
-
+    
     <!--almost done color-->
     <Grid>
         <Grid.Resources>
@@ -252,10 +253,15 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <DockPanel Grid.Row="0">
+            <DockPanel Grid.Row="0" Background="#0D2129">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding MoveCommand}" CommandParameter="{Binding ElementName=MainWindows}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <Button Width="40" Height="30"
                         VerticalAlignment="Bottom"
-                            DockPanel.Dock="Right"
+                        DockPanel.Dock="Right"
                         HorizontalAlignment="Right"
                     Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                             >
@@ -379,7 +385,9 @@
                         <DataTemplate DataType="{x:Type viewModels:SummaryViewModel}">
                             <views:UC_Summary />
                         </DataTemplate>
-
+                        
+                        
+                        
                     </ContentControl.Resources>
                 </ContentControl>
 

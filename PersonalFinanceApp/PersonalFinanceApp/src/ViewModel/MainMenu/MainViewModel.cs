@@ -24,6 +24,7 @@ public class MainViewModel : BaseViewModel
     public ICommand CloseCommand { get; set; }
     public ICommand WindowMinimum { get; set; }
     public ICommand WindowMaximum { get; set; }
+    public ICommand MoveCommand {  get; set; }
 
     public MainViewModel(IServiceProvider serviceProvider)
     {
@@ -37,21 +38,13 @@ public class MainViewModel : BaseViewModel
         ExpenseBookNavigateCommand = new NavigateCommand<ExpenseViewModel>(serviceProvider);
         GoalplanNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
         SummaryNavigateCommand = new NavigateCommand<SummaryViewModel>(serviceProvider);
-        CloseCommand = new RelayCommand<Window>(Close);
-        WindowMaximum = new RelayCommand<Window>(max);
-        WindowMinimum = new RelayCommand<Window>(mini);
-
-    }
-    public void max(Window window) {
-        window.WindowState = window.WindowState == WindowState.Maximized
-                    ? WindowState.Normal
-                    : WindowState.Maximized;
-    }
-    public void mini(Window window) {
-        window.WindowState = WindowState.Minimized;
-    }
-    public void Close(Window window) {
-        window?.Close();
+        CloseCommand = new RelayCommand<Window>(w => w?.Close());
+        WindowMaximum = new RelayCommand<Window>(w => 
+                    w.WindowState = w.WindowState == WindowState.Maximized
+                                    ? WindowState.Normal
+                                    : WindowState.Maximized);
+        WindowMinimum = new RelayCommand<Window>(w => w.WindowState = WindowState.Minimized);
+        MoveCommand = new RelayCommand<Window>(w => w?.DragMove());
     }
     private void OnCurrentModalViewModelChanged()
     {
