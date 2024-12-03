@@ -199,7 +199,6 @@ public class GoalplanAddNewViewModel : BaseViewModel
             Reminder = SelectedRecurring,
             Deadline = DeadlineGoal,
             Status = (long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal)) ? "Completed" : "Active",
-            Resources = ResourceGoal,
             Description = DescriptionGoal,
             UserID = int.Parse(_accountStore.UsersID),
             CategoryName = CategoryGoal,

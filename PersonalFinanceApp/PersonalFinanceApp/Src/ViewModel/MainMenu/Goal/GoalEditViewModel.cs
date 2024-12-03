@@ -182,7 +182,6 @@ public class GoalEditViewModel : BaseViewModel
         CurrentAmountEditGoal = item.CurrentAmount.ToString();
         //goalEdit.Reminder = "Daily";
         DeadlineEditGoal = item.Deadline;
-        ResourceEditGoal = item.Resources;
         DescriptionEditGoal = item.Description;
         CategoryEditGoal = item.CategoryName;
     }
@@ -201,7 +200,6 @@ public class GoalEditViewModel : BaseViewModel
             goalEdit.Reminder = "Daily";
             goalEdit.Deadline = DeadlineEditGoal;
             goalEdit.Status = (long.Parse(TargetEditGoal) <= long.Parse(CurrentAmountEditGoal)) ? "Completed" : "Active";
-            goalEdit.Resources = ResourceEditGoal;
             goalEdit.Description = DescriptionEditGoal;
             goalEdit.CategoryName = CategoryEditGoal;
         }

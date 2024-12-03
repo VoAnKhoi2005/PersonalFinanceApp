@@ -18,9 +18,6 @@ namespace PersonalFinanceApp.Model
 
         [Range(0, 1000000000000000)]
         public long Budget { get; set; }
-
-        [MaxLength(256)]
-        public string? Resources { get; set; }
         
         //Relationship
         public virtual User? User { get; set; }
@@ -29,22 +26,20 @@ namespace PersonalFinanceApp.Model
 
         public ExpensesBook() { }
 
-        public ExpensesBook(int month, int year, int userId, long budget, long spending = 0, string? resources = null)
+        public ExpensesBook(int month, int year, int userId, long budget)
         {
             Month = month;
             Year = year;
             UserID = userId;
             Budget = budget;
-            Resources = resources;
         }
 
-        public ExpensesBook(int month, int year, User user, long budget, long spending = 0, string? resources = null)
+        public ExpensesBook(int month, int year, User user, long budget)
         {
             Month = month;
             Year = year;
             UserID = user.UserID;
             Budget = budget;
-            Resources = resources;
         }
     }
 }

@@ -276,7 +276,6 @@ public class ExpenseEditViewModel : BaseViewModel {
         AmountEditExpense = exp.Amount.ToString();
         DescriptionEditExpense = exp.Description;
         DateTimeEditExpenseBook = exp.Date.ToDateTime(TimeOnly.MinValue);
-        TextRecurring = (exp.Recurring == true) ? "YES":"NO";
         var cate = DBManager.GetFirst<Category>(c => exp.CategoryID == c.CategoryID && c.UserID == exp.UserID);
         TextChangedCategory = cate.Name;
         TextChangedExpense = exp.ExBMonth.ToString() + "/" + exp.ExBYear.ToString();
@@ -301,7 +300,6 @@ public class ExpenseEditViewModel : BaseViewModel {
         itemExP.Amount = long.Parse(AmountEditExpense);
         itemExP.Name = NameEditExpense;
         itemExP.Description = DescriptionEditExpense;
-        itemExP.Recurring = (RecurringEditExpense.CompareTo("YES") == 0) ? true:false;
         itemExP.CategoryID = CategoryEditExpense.Id;
         itemExP.Date = DateOnlyExpenseBook;
 

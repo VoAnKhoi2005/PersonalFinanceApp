@@ -11,9 +11,6 @@ public class Category
     [MinLength(1)]
     public string Name { get; set; }
 
-    [MaxLength(256)]
-    public string? Resources { get; set; }
-
     //Relationship
     public virtual List<Expense> Expenses { get; set; } = new List<Expense>();
 
@@ -30,21 +27,19 @@ public class Category
 
     public Category() { }
 
-    public Category(string name, int exBMonth, int exBYear, int userId, string? resources = null)
+    public Category(string name, int exBMonth, int exBYear, int userId)
     {
         Name = name;
         ExBMonth = exBMonth;
         ExBYear = exBYear;
         UserID = userId;
-        Resources = resources;
     }
 
-    public Category(string name, ExpensesBook exB, string? resources = null)
+    public Category(string name, ExpensesBook exB)
     {
         Name = name;
         ExBMonth = exB.Month;
         ExBYear = exB.Year;
         UserID = exB.UserID;
-        Resources = resources;
     }
 }

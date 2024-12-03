@@ -2,10 +2,13 @@
 
 namespace PersonalFinanceApp.Model;
 
-public class RecurringDetail
+public class RecurringExpense
 {
     [Key]
-    public int ExpenseID { get; set; }
+    public int RecurringExpenseID { get; set; }
+
+    [Required]
+    public string Name { get; set; }
 
     [Required]
     public string Frequency { get; set; }
@@ -18,12 +21,13 @@ public class RecurringDetail
 
     //Relationship
 
-    public virtual Expense? Expense { get; set; }
+    public virtual List<Expense> Expenses { get; set; } = new List<Expense>();
 
-    private RecurringDetail() { }
+    private RecurringExpense() { }
 
-    public RecurringDetail(string frequency, int interval, DateOnly starDate)
+    public RecurringExpense(string name, string frequency, int interval, DateOnly starDate)
     {
+        Name = name;
         Frequency = frequency;
         Interval = interval;
         StarDate = starDate;
