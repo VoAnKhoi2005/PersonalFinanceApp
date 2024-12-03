@@ -88,7 +88,7 @@ public class CodeVerificationViewModel : BaseViewModel {
 
     public bool VerifyCode()
     {
-        code = _sharedDataService.SharedList[1];
+        code = _sharedDataService.RandomCode;
         if (Verify1.Length < 1 || Verify2.Length < 1 || Verify3.Length < 1 || Verify4.Length < 1 || Verify5.Length < 1 || Verify6.Length < 1) {
             IncorrectVerify = true;
             return false;

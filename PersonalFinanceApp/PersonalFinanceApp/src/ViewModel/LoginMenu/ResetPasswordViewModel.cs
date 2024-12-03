@@ -63,10 +63,10 @@ public class ResetPasswordViewModel : BaseViewModel
     {
         var usr = DBManager.GetFirst<User>(u => u.Username == UserNameReset && u.Email == GmailReset);
         if (usr != null) {
-            _sharedDataService.SharedList.Add(UserNameReset.ToString());
+            _sharedDataService.UserName = (UserNameReset.ToString());
             RandomCode();
             IncorrectUserGmail = false;
-            _sharedDataService.SharedList.Add(_randomcode.ToString());
+            _sharedDataService.RandomCode = (_randomcode.ToString());
             return true;
         }
         IncorrectUserGmail = true;

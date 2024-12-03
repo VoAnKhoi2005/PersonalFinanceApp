@@ -68,7 +68,7 @@ public class CreateNewPasswordViewModel : BaseViewModel {
     }
 
     public bool VerifyNewPassword() {
-        name = _sharedDataService.SharedList[0];
+        name = _sharedDataService.UserName;
         if (correct) {
             var usr = DBManager.GetFirst<User>(u => u.Username == name);
             if(usr.ChangePassword(PasswordReset)) return true;

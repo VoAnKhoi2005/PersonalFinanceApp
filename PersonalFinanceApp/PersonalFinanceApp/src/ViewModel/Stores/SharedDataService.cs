@@ -8,19 +8,29 @@ public class SharedDataService : INotifyPropertyChanged
 {
     public ObservableCollection<string> SharedList { get; } = new ObservableCollection<string>();
 
-    private string? _message;
-    public string? Message
+    public string? RandomCode
     {
-        get => _message;
+        get => _randomCode;
         set
         {
-            if (_message != value)
+            if (_randomCode != value)
             {
-                _message = value;
-                OnPropertyChanged(nameof(Message));
+                _randomCode = value;
+                OnPropertyChanged(nameof(RandomCode));
             }
         }
     }
+    private string? _randomCode;
+    public string? UserName {
+        get => _userName;
+        set {
+            if (_userName != value) {
+                _userName = value;
+                OnPropertyChanged(nameof(_userName));
+            }
+        }
+    }
+    private string? _userName;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
