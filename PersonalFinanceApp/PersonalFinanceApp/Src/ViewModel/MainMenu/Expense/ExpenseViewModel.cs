@@ -131,7 +131,6 @@ public class ExpenseViewModel : BaseViewModel {
             Name = ex.Name;
             Description = ex.Description;   
             Date = ex.Date;
-            Recurring = ex.Recurring;
             TimeAdded = ex.TimeAdded;
             CategoryID = ex.CategoryID;
             var cate = DBManager.GetFirst<Category>(c => c.CategoryID == ex.CategoryID);

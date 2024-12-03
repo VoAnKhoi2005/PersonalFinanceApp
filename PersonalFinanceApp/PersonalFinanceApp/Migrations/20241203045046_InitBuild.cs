@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PersonalFinanceApp.Migrations
 {
     /// <inheritdoc />
-    public partial class Database : Migration
+    public partial class InitBuild : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,12 +15,28 @@ namespace PersonalFinanceApp.Migrations
                 name: "GOALCATEGORY",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true)
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GOALCATEGORY", x => x.Name);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RecurringExpense",
+                columns: table => new
+                {
+                    RecurringExpenseID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Frequency = table.Column<string>(type: "TEXT", nullable: false),
+                    Interval = table.Column<int>(type: "INTEGER", nullable: false),
+                    StarDate = table.Column<DateOnly>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RecurringExpense", x => x.RecurringExpenseID);
+                    table.CheckConstraint("CK_Frequency", "[Frequency] IN ('Daily', 'Weekly', 'Monthly', 'Yearly')");
                 });
 
             migrationBuilder.CreateTable(
@@ -34,8 +50,7 @@ namespace PersonalFinanceApp.Migrations
                     Email = table.Column<string>(type: "TEXT", nullable: false),
                     PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
                     Saving = table.Column<long>(type: "INTEGER", nullable: false),
-                    DefaultBudget = table.Column<long>(type: "INTEGER", nullable: false),
-                    Resources = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true)
+                    DefaultBudget = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,8 +66,7 @@ namespace PersonalFinanceApp.Migrations
                     Month = table.Column<int>(type: "INTEGER", nullable: false),
                     Year = table.Column<int>(type: "INTEGER", nullable: false),
                     UserID = table.Column<int>(type: "INTEGER", nullable: false),
-                    Budget = table.Column<long>(type: "INTEGER", nullable: false),
-                    Resources = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true)
+                    Budget = table.Column<long>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,7 +94,7 @@ namespace PersonalFinanceApp.Migrations
                     Reminder = table.Column<string>(type: "TEXT", nullable: false),
                     Deadline = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Status = table.Column<string>(type: "TEXT", nullable: false),
-                    Resources = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
                     UserID = table.Column<int>(type: "INTEGER", nullable: false),
                     CategoryName = table.Column<string>(type: "TEXT", nullable: false)
                 },
@@ -110,7 +124,6 @@ namespace PersonalFinanceApp.Migrations
                     CategoryID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Resources = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     ExBMonth = table.Column<int>(type: "INTEGER", nullable: false),
                     ExBYear = table.Column<int>(type: "INTEGER", nullable: false),
                     UserID = table.Column<int>(type: "INTEGER", nullable: false)
@@ -132,7 +145,8 @@ namespace PersonalFinanceApp.Migrations
                 {
                     GoalID = table.Column<int>(type: "INTEGER", nullable: false),
                     TimeAdded = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Amount = table.Column<long>(type: "INTEGER", nullable: false)
+                    Amount = table.Column<string>(type: "TEXT", nullable: false),
+                    Current = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -155,12 +169,11 @@ namespace PersonalFinanceApp.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Date = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    Recurring = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Resources = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     TimeAdded = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Deleted = table.Column<bool>(type: "INTEGER", nullable: false),
                     DeletedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     CategoryID = table.Column<int>(type: "INTEGER", nullable: false),
+                    RecurringExpenseID = table.Column<int>(type: "INTEGER", nullable: true),
                     ExBMonth = table.Column<int>(type: "INTEGER", nullable: false),
                     ExBYear = table.Column<int>(type: "INTEGER", nullable: false),
                     UserID = table.Column<int>(type: "INTEGER", nullable: false)
@@ -181,27 +194,11 @@ namespace PersonalFinanceApp.Migrations
                         principalTable: "EXPENSESBOOK",
                         principalColumns: new[] { "Month", "Year", "UserID" },
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RECURRINGDETAIL",
-                columns: table => new
-                {
-                    ExpenseID = table.Column<int>(type: "INTEGER", nullable: false),
-                    Frequency = table.Column<string>(type: "TEXT", nullable: false),
-                    Interval = table.Column<int>(type: "INTEGER", nullable: false),
-                    StarDate = table.Column<DateOnly>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RECURRINGDETAIL", x => x.ExpenseID);
-                    table.CheckConstraint("CK_Frequency", "[Frequency] IN ('Daily', 'Weekly', 'Monthly', 'Yearly')");
                     table.ForeignKey(
-                        name: "FK_RECURRINGDETAIL_EXPENSE_ExpenseID",
-                        column: x => x.ExpenseID,
-                        principalTable: "EXPENSE",
-                        principalColumn: "ExpenseID",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_EXPENSE_RecurringExpense_RecurringExpenseID",
+                        column: x => x.RecurringExpenseID,
+                        principalTable: "RecurringExpense",
+                        principalColumn: "RecurringExpenseID");
                 });
 
             migrationBuilder.CreateIndex(
@@ -223,6 +220,11 @@ namespace PersonalFinanceApp.Migrations
                 name: "IX_EXPENSE_ExBMonth_ExBYear_UserID",
                 table: "EXPENSE",
                 columns: new[] { "ExBMonth", "ExBYear", "UserID" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EXPENSE_RecurringExpenseID",
+                table: "EXPENSE",
+                column: "RecurringExpenseID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EXPENSE_TimeAdded",
@@ -256,25 +258,25 @@ namespace PersonalFinanceApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "GOALHISTORY");
-
-            migrationBuilder.DropTable(
-                name: "RECURRINGDETAIL");
-
-            migrationBuilder.DropTable(
-                name: "GOAL");
-
-            migrationBuilder.DropTable(
                 name: "EXPENSE");
 
             migrationBuilder.DropTable(
-                name: "GOALCATEGORY");
+                name: "GOALHISTORY");
 
             migrationBuilder.DropTable(
                 name: "CATEGORY");
 
             migrationBuilder.DropTable(
+                name: "RecurringExpense");
+
+            migrationBuilder.DropTable(
+                name: "GOAL");
+
+            migrationBuilder.DropTable(
                 name: "EXPENSESBOOK");
+
+            migrationBuilder.DropTable(
+                name: "GOALCATEGORY");
 
             migrationBuilder.DropTable(
                 name: "USER");

@@ -23,8 +23,6 @@ public class Goal
 
     public string Status { get; set; }
 
-    public string? Resources { get; set; }
-
     public string? Description { get; set; }
 
     [Required]
@@ -40,11 +38,10 @@ public class Goal
 
     public Goal() { }
 
-    public Goal(string name, long target, long goalAmount, string? resources = null)
+    public Goal(string name, long target, long goalAmount)
     {
         Name = name;
         Target = target;
         CurrentAmount = goalAmount;
-        Resources = resources;
     }
 }

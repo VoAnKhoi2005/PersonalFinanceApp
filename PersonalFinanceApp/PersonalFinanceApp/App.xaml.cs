@@ -57,6 +57,7 @@ namespace PersonalFinanceApp
             services.AddSingleton<GoalStore>();
             services.AddSingleton<ExpenseStore>();
             services.AddSingleton<SharedService>();
+            services.AddSingleton<ChartServices>();
 
             //Login window
             services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));

@@ -278,7 +278,6 @@ public class ExpenseAddNewViewModel : BaseViewModel {
             Amount = int.Parse(AmountExpense),
             Name = NameExpense,
             Date = DateOnlyExpenseBook,
-            Recurring = (RecurringExpense.CompareTo("YES") == 0 ) ? true:false,
             CategoryID = SelectedCategory.Id,
             ExBMonth = int.Parse(MonthExpenseBook),
             ExBYear = int.Parse(YearExpenseBook),

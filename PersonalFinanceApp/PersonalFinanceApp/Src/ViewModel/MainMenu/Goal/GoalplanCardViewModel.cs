@@ -182,7 +182,6 @@ public class GoalplanCardViewModel:BaseViewModel
         ReminderGoalCard = goal.Reminder;
         DeadlineGoalCard = goal.Deadline.ToString();
         StatusGoalCard = goal.Status;
-        ResourceGoalCard = goal.Resources;
         CategoryGoalCard = goal.CategoryName;
         DescriptionGoalCard = goal.Description;
     }

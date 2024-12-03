@@ -12,7 +12,7 @@ public class AppDbContext : DbContext
     public DbSet<ExpensesBook> EXPENSESBOOK { get; set; }
     public DbSet<Category> CATEGORY { get; set; }
     public DbSet<Expense> EXPENSE { get; set; }
-    public DbSet<RecurringDetail> RECURRINGDETAIL { get; set; }
+    public DbSet<RecurringExpense> RecurringExpense { get; set; }
     public DbSet<Goal> GOAL { get; set; }
     public DbSet<GoalCategory> GOALCATEGORY { get; set; }
     public DbSet<GoalHistory> GOALHISTORY { get; set; }
@@ -42,7 +42,6 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Expense>().HasIndex(ex => ex.Date);
         modelBuilder.Entity<Expense>().HasIndex(ex => ex.TimeAdded).IsUnique();
         modelBuilder.Entity<Expense>().Property(ex => ex.Description).IsRequired(false);
-        modelBuilder.Entity<Expense>().Property(ex => ex.Resources).IsRequired(false);
         modelBuilder.Entity<Expense>().Property(ex => ex.DeletedDate).IsRequired(false);
         modelBuilder.Entity<Expense>().ToTable(ex => ex.HasCheckConstraint("CK_Amount", "[Amount] > 0"));
         //Expenses Book
@@ -50,7 +49,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<ExpensesBook>().ToTable(exB => exB.HasCheckConstraint("CK_Year", "[Year] >= 0"));
         modelBuilder.Entity<ExpensesBook>().ToTable(exB => exB.HasCheckConstraint("CK_Budget", "[Budget] >= 0"));
         //RecurringExpense
-        modelBuilder.Entity<RecurringDetail>().ToTable(rd => rd.HasCheckConstraint("CK_Frequency", "[Frequency] IN ('Daily', 'Weekly', 'Monthly', 'Yearly')"));
+        modelBuilder.Entity<RecurringExpense>().ToTable(rd => rd.HasCheckConstraint("CK_Frequency", "[Frequency] IN ('Daily', 'Weekly', 'Monthly', 'Yearly')"));
         //Goal
         modelBuilder.Entity<Goal>().Property(g => g.Deadline).IsRequired(false);
         modelBuilder.Entity<Goal>().ToTable(g => g.HasCheckConstraint("CK_Reminder", "[Reminder] IN ('Daily', 'Weekly', 'Monthly', 'Yearly')"));
@@ -96,10 +95,10 @@ public class AppDbContext : DbContext
             .HasMany(gc => gc.Goals)
             .WithOne(g => g.GoalCategory)
             .HasForeignKey(g => g.CategoryName);
-        //Expense and RecurringDetail
-        modelBuilder.Entity<Expense>()
-            .HasOne(ex => ex.RecurringDetail)
-            .WithOne(rd => rd.Expense)
-            .HasForeignKey<RecurringDetail>(rd => rd.ExpenseID);
+        //Expense and RecurringExpense
+        modelBuilder.Entity<RecurringExpense>()
+            .HasMany(re => re.Expenses)
+            .WithOne(ex => ex.RecurringExpense)
+            .HasForeignKey(ex => ex.RecurringExpenseID);
     }
 }
