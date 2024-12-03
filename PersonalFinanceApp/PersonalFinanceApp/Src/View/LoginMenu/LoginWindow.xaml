@@ -21,6 +21,7 @@
         Width="1152"
         MinHeight="720"
         MinWidth="1152"
+        AllowsTransparency="True"
         x:Name="LoginMain"
         >
     <Grid>

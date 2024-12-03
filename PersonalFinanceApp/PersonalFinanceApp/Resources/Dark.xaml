@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!--overall-->
+    <SolidColorBrush Color="#0d2129" x:Key="MainBackground"></SolidColorBrush>
+
     <SolidColorBrush Color="#E5CBBFBF" x:Key="CommonText"></SolidColorBrush>
     <SolidColorBrush Color="#053B50" x:Key="CommonGridBackground"></SolidColorBrush>
     <SolidColorBrush Color="#003E57" x:Key="DockpanelBackGround"></SolidColorBrush>

@@ -17,6 +17,7 @@
         MinHeight="720" MinWidth="1152 "
         Height="720" Width="1152"
         WindowStartupLocation="CenterScreen" 
+        AllowsTransparency="True"
         x:Name="MainWindows"
         WindowStyle="None">
     
@@ -57,8 +58,7 @@
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="210"></ColumnDefinition>
-            <ColumnDefinition Width="139*"></ColumnDefinition>
-            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <DockPanel Grid.Column="0" Background="{DynamicResource DockpanelBackGround}">
@@ -167,7 +167,7 @@
                      Width="30"
                      Height="30"
                      VerticalAlignment="Center"
-                     Margin="11,0,0,0" />
+                     Margin="10,0,0,0" />
 
                     <TextBlock Text="Summary" FontSize="18"
                                 HorizontalAlignment="Center"
@@ -178,6 +178,28 @@
                 </Grid>
             </Button>
 
+            <Button Height="60" VerticalAlignment="top"
+                    DockPanel.Dock="Top"
+                    IsHitTestVisible="True"
+                    >
+                <Grid VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Height="60" Width="210"
+                        Background="Transparent">
+                    <TextBlock ></TextBlock>
+
+                    <materialDesign:PackIcon Kind="Sync" 
+                    Width="30"
+                                                Height="30"
+                                                VerticalAlignment="Center" 
+                        Margin="10,0,0,0" />
+                    <TextBlock Text="Recurring" FontSize="18"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Margin="19,0,0,0" FontWeight="Normal"/>
+
+                </Grid>
+            </Button>
 
             <Grid Height="60" DockPanel.Dock="Bottom"
                   VerticalAlignment="Bottom"

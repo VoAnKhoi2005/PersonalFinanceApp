@@ -9,144 +9,232 @@
         Background="Transparent"
         Title="TestWindow" Height="720" Width="942">
 
-    <Grid>
-        <Grid.Resources>
-            <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Sans Serif Collection" />
-                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
-                <Setter Property="FontWeight" Value="Regular" />
-            </Style>
-            <Style TargetType="Button">
-                <Setter Property="Background" Value="Transparent"></Setter>
-                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="20"
-                                   Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Stretch"
-                                                 VerticalAlignment="Stretch">
-                                </ContentPresenter>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="true">
-                        <Setter Property="Cursor" Value="Hand"></Setter>
-                        <Setter Property="Background" Value="{DynamicResource onHovered}"></Setter>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-        </Grid.Resources>
+    <Border CornerRadius="30" Background="{DynamicResource CommonGridBackground}"
+         Width="390" Height="400">
         <Grid>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Opacity" Value="0.6"></Setter>
+                    <Setter Property="FontFamily" Value="Sans Serif Collection"/>
+                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"/>
+                    <Setter Property="FontWeight" Value="Regular"/>
+                    <Setter Property="FontSize" Value="18"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                </Style>
+
+            </Grid.Resources>
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="0.85*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
+
             <Grid Grid.Row="0">
+                <TextBlock Text="Adding a new recurring for your expense" 
+                        FontSize="20"
+                        FontWeight="Bold"
+                        VerticalAlignment="top"
+                        Opacity="1"
+                        ></TextBlock>
+                <TextBlock Text="please fill in the form below"
+                        FontSize="16"
+                        VerticalAlignment="Top" Margin="0,44,0,0"></TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="132*"></ColumnDefinition>
-                    <ColumnDefinition Width="25*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="48*"></RowDefinition>
-                        <RowDefinition Height="19*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="Setting"
-                              FontSize="28"
-                              FontWeight="Bold"
-                              HorizontalAlignment="Left"
-                              VerticalAlignment="Bottom" Margin="25,-10,0,0"
-                              Height="55" Width="126"
-                              Grid.Row="0">
-                    </TextBlock>
-                    <TextBlock Text="..."
-                              FontSize="14"
-                              VerticalAlignment="Center"
-                              HorizontalAlignment="Left" Margin="26,0,0,0"
-                              Height="37" Width="303"
-                              Grid.Row="1">
-                    </TextBlock>
+                    <TextBlock Text="Name" 
+                            FontWeight="Bold"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left" Margin="20,-1,0,0"
+                            ></TextBlock>
+
+                    <Border Height="45" Margin="15,43,15,11" CornerRadius="25"
+                          Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" 
+                         Opacity="0.2"/>
+                    <TextBox VerticalAlignment="Top" Text="{Binding BudgetExpenseBook}"
+                          Margin="0,45,0,0"
+                          Width="130" Height="40"
+                          TextAlignment="Center"
+                          BorderBrush="{x:Null}"
+                          Foreground="{DynamicResource CommonText}"
+                          FontSize="14"
+                          HorizontalAlignment="Center"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                          CaretBrush="{DynamicResource CommonText}"
+                          SelectionBrush="{DynamicResource CommonText}"></TextBox>
+
                 </Grid>
 
-                <!--user-->
-                <DockPanel Grid.Column="1">
-                    <Button Width="34" Height="36"
-                       VerticalAlignment="Center"
-                           DockPanel.Dock="Right"
-                       HorizontalAlignment="Right"
-                           Margin="0 0 15 0">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent"></Setter>
-                                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Width="32" Height="32" Background="Transparent">
-                                                <materialDesign:PackIcon 
-                                               Foreground="{TemplateBinding Foreground}"
-                                                   Kind="AccountBadge"
-                                                   Width="30" Height="30"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"
-                                        />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                    <Button Width="34" Height="36"
-                       VerticalAlignment="Center"
-                           DockPanel.Dock="Right"
-                       HorizontalAlignment="Right"
-                           Margin="0 0 5 0">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent"></Setter>
-                                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Width="32" Height="32" Background="Transparent">
-                                                <materialDesign:PackIcon Kind="Bell" 
-                                                                        Foreground="{TemplateBinding Foreground}"
-                                                                           Width="28" Height="28"
-                                                                       VerticalAlignment="Center"
-                                                                       HorizontalAlignment="Center"
-                                        />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                </DockPanel>
+                <Grid Grid.Column="1">
+                    <TextBlock Text="Frequency" 
+                            FontWeight="Bold"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left" Margin="20,-1,0,0"
+                            ></TextBlock>
 
+                    <Border  Height="45" Margin="15,43,15,11"
+                              CornerRadius="30"
+                          Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" Opacity="0.2">
+                    </Border>
+                    <ComboBox VerticalAlignment="Top" Text="{Binding YearExpenseBook}"
+                          Margin="0,45,0,0"
+                          Width="130" Height="40"
+                          BorderBrush="{x:Null}"
+                          Foreground="{DynamicResource CommonText}"
+                          HorizontalAlignment="Center"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                          FontSize="14"
+                           >
+                        <ComboBoxItem Content="Daily"></ComboBoxItem>
+                        <ComboBoxItem Content="Weekly"></ComboBoxItem>
+                        <ComboBoxItem Content="Monthly"></ComboBoxItem>
+                        <ComboBoxItem Content="Yearly"></ComboBoxItem>
+                    </ComboBox>
+                </Grid>
 
             </Grid>
-            <Border Grid.Row="1" Margin="10,0,15,0">
-                <DockPanel Height="auto" Width="auto">
-                </DockPanel>
-            </Border>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <TextBlock Text="Interval" 
+                            FontWeight="Bold"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left" Margin="20,-1,0,0"
+                            ></TextBlock>
+
+                    <Border Height="45" Margin="15,43,15,11" CornerRadius="25"
+                          Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" 
+                         Opacity="0.2"/>
+                    <TextBox VerticalAlignment="Top" Text="{Binding BudgetExpenseBook}"
+                          Margin="0,45,0,0"
+                          Width="130" Height="40"
+                          TextAlignment="Center"
+                          BorderBrush="{x:Null}"
+                          Foreground="{DynamicResource CommonText}"
+                          FontSize="14"
+                          HorizontalAlignment="Center"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
+                          CaretBrush="{DynamicResource CommonText}"
+                          SelectionBrush="{DynamicResource CommonText}"></TextBox>
+
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <TextBlock Text="Start date" 
+                            FontWeight="Bold"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left" Margin="20,-1,0,0"
+                            ></TextBlock>
+
+                    <Border Height="45" Margin="15,43,15,11" CornerRadius="25"
+                          Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}" 
+                         Opacity="0.2"/>
+                    <DatePicker 
+                             Width="130" 
+                             Height="40"
+                             Foreground="{DynamicResource CommonText}"
+                             FontSize="14"
+                             materialDesign:HintAssist.Hint="Pick date"
+                             materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Top"
+                             Margin="0,46,0,0"
+                             BorderBrush="{x:Null}"
+                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--cancel button-->
+                <Border Grid.Column="0" CornerRadius="30" Height="55"
+                     Width="145"
+                     Background="#FFC8386C" >
+                    <Button Command="{Binding CancelExpenseBookCommand}">
+                        <TextBlock Text="Cancel" Foreground="White"
+                                VerticalAlignment="Center"
+                                Opacity="1"
+                                HorizontalAlignment="Center"
+                                FontSize="16"></TextBlock>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="30"
+                                             Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                           VerticalAlignment="Stretch"></ContentPresenter>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand"></Setter>
+                                        <Setter Property="Background" Value="Red"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Border>
+
+                <!-- confirm button -->
+                <Border Grid.Column="1" CornerRadius="30" Height="55"
+                     Width="145"
+                     Background="#FF61D2BE" >
+                    <Button Command="{Binding ConfirmExpenseBookCommand}">
+                        <TextBlock Text="Confirm" Foreground="Black"
+                                Opacity="0.8"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                FontSize="16"></TextBlock>
+                        <Button.Resources>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent"></Setter>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="30"
+                                             Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                           VerticalAlignment="Stretch"></ContentPresenter>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand"></Setter>
+                                        <Setter Property="Background" Value="#FF6DF096"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Border>
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
 
 </Window>

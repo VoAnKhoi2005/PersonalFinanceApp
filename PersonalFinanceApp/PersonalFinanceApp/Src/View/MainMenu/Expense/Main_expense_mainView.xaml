@@ -13,7 +13,7 @@
     <UserControl.Resources>
         <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -27,7 +27,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="30"
+                            <Border CornerRadius="20"
                                    Background="{TemplateBinding Background}">
                                 <ContentPresenter HorizontalAlignment="Stretch"
                                                  VerticalAlignment="Stretch">
@@ -51,19 +51,32 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="817*"></ColumnDefinition>
-                <ColumnDefinition Width="183*"></ColumnDefinition>
+                <ColumnDefinition Width="132*"></ColumnDefinition>
+                <ColumnDefinition Width="25*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <TextBlock Text="Name here"
-                          FontSize="28"
-                          FontWeight="Bold"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"  
-                           Margin="18,0,0,0" 
-                          Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48*"></RowDefinition>
+                    <RowDefinition Height="19*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Expense book"
+                               FontSize="28"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Bottom" Margin="25,0,0,17"
+                               Height="55" Width="309"
+                               Grid.Row="0" Grid.RowSpan="2">
+                </TextBlock>
+                <TextBlock Text="Overview of your activities"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left" Margin="26,0,0,0"
+                               Height="37" Width="303"
+                               Grid.Row="1">
                 </TextBlock>
             </Grid>
+
+            <!--user-->
             <DockPanel Grid.Column="1">
                 <Button Width="34" Height="36"
                         VerticalAlignment="Center"
@@ -230,7 +243,7 @@
             </Border>
         </DockPanel>
         <!--DataGrid expensebook-->
-            <Grid Grid.Row="2" >
+        <Grid Grid.Row="2" >
             <DataGrid 
                    Visibility="{Binding IsButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}"
                    Margin="15,0,15,15"
@@ -240,7 +253,7 @@
                    AutoGenerateColumns="False"
                    IsReadOnly="True"
                    SelectedItem="{Binding ItemsExB}"
-                   ItemsSource="{Binding Expensesadvances}">                
+                   ItemsSource="{Binding Expensesadvances}">
                 <DataGrid.InputBindings>
                     <!--  Double click on any row  -->
                     <MouseBinding
@@ -277,7 +290,7 @@
                                            ToolTip="Resource name: MaterialDesignRaisedButton"
                                            Background="IndianRed" BorderBrush="#FF514D4D"
                                            Command="{Binding DataContext.DeleteExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
-                                           CommandParameter="{Binding}">        
+                                           CommandParameter="{Binding}">
                                         <materialDesign:PackIcon Kind="TrashCanOutline" Foreground="White"/>
                                     </Button>
                                 </StackPanel>
@@ -335,6 +348,6 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        
+
     </Grid>
 </UserControl>
