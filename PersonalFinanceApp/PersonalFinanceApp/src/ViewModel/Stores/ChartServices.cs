@@ -12,7 +12,7 @@ public class ChartServices
         if (expensesBook == null)
             throw new Exception("Expense book can not be null");
 
-        var expenseChart = new PlotModel
+        var columnChart = new PlotModel
         {
             TextColor = OxyColors.White,
             Title = $"{expensesBook.Month}/{expensesBook.Year}"
@@ -33,8 +33,8 @@ public class ChartServices
             Key = "x"
         };
 
-        expenseChart.Axes.Add(categoryAxis);
-        expenseChart.Axes.Add(valueAxis);
+        columnChart.Axes.Add(categoryAxis);
+        columnChart.Axes.Add(valueAxis);
 
         var barSeries = new BarSeries
         {
@@ -51,7 +51,41 @@ public class ChartServices
             barSeries.Items.Add(new BarItem(curSum));
         }
 
-        expenseChart.Series.Add(barSeries);
-        return expenseChart;
+        columnChart.Series.Add(barSeries);
+        return columnChart;
+    }
+
+    public PlotModel CreatePieChart(ExpensesBook expensesBook)
+    {
+        if (expensesBook == null)
+            throw new Exception("Expense book can not be null");
+
+        var pieChart = new PlotModel
+        {
+            TextColor = OxyColors.White
+        };
+
+        PieSeries pieSeries = new PieSeries
+        {
+            StrokeThickness = 1.0,
+            InsideLabelPosition = 0.8,
+            InsideLabelFormat = "{1:0.0}%",
+            AngleSpan = 360,
+            StartAngle = 0
+        };
+
+
+        long totalExpense = expensesBook.Expenses.Sum(ex => ex.Amount);
+        foreach (var category in expensesBook.Categories)
+        {
+            double percentage = category.Expenses.Sum(ex => ex.Amount) / totalExpense * 100.0;
+            pieSeries.Slices.Add(new PieSlice(category.Name, percentage)
+            {
+                IsExploded = false
+            });
+        }
+
+        pieChart.Series.Add(pieSeries);
+        return pieChart;
     }
 }

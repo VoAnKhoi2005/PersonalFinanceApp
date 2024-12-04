@@ -1,19 +1,23 @@
 ﻿<UserControl x:Class="PersonalFinanceApp.Src.View.UC_Dashboard"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
-             mc:Ignorable="d" 
-                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:oxy="http://oxyplot.org/wpf"
              d:DesignHeight="720" d:DesignWidth="942">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
+    </UserControl.Resources>
     <!--color done-->
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Sans Serif Collection"/>
-                <Setter Property="Foreground" Value="{DynamicResource CommonText}"/>
-                <Setter Property="FontWeight" Value="Regular"/>
+                <Setter Property="FontFamily" Value="Sans Serif Collection" />
+                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
+                <Setter Property="FontWeight" Value="Regular" />
             </Style>
             <Style TargetType="Button">
                 <Setter Property="Background" Value="Transparent"></Setter>
@@ -24,7 +28,8 @@
                             <Border CornerRadius="30"
                                     Background="{TemplateBinding Background}">
                                 <ContentPresenter HorizontalAlignment="Stretch"
-                                                  VerticalAlignment="Stretch"></ContentPresenter>
+                                                  VerticalAlignment="Stretch">
+                                </ContentPresenter>
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
@@ -32,7 +37,7 @@
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="true">
                         <Setter Property="Cursor" Value="Hand"></Setter>
-                        <Setter Property="Background" Value="{DynamicResource onHovered}" ></Setter>
+                        <Setter Property="Background" Value="{DynamicResource onHovered}"></Setter>
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -56,27 +61,27 @@
                         <RowDefinition Height="19*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0"
-                    Text="Dashboard" 
-                               FontSize="28" 
+                               Text="Dashboard"
+                               FontSize="28"
                                FontWeight="Bold"
                                HorizontalAlignment="Left"
-                               VerticalAlignment="Center" Margin="25,-10,0,0" 
-                               Height="55" Width="150"
-                               ></TextBlock>
+                               VerticalAlignment="Center" Margin="25,-10,0,0"
+                               Height="55" Width="150">
+                    </TextBlock>
                     <TextBlock Grid.Row="1"
-                    Text="easy way to get a comprehensive overview of important data" 
+                               Text="easy way to get a comprehensive overview of important data"
                                FontSize="14"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="26,0,0,-7" 
-                               Height="37" Width="383"
-                               ></TextBlock>
+                               HorizontalAlignment="Left" Margin="26,0,0,-7"
+                               Height="37" Width="383">
+                    </TextBlock>
                 </Grid>
 
                 <DockPanel Grid.Column="1">
                     <Button Width="34" Height="36"
-                        VerticalAlignment="Center"
+                            VerticalAlignment="Center"
                             DockPanel.Dock="Right"
-                        HorizontalAlignment="Right"
+                            HorizontalAlignment="Right"
                             Margin="0 0 15 0">
                         <Button.Style>
                             <Style TargetType="Button">
@@ -86,13 +91,12 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
                                             <Border Width="32" Height="32" Background="Transparent">
-                                                <materialDesign:PackIcon 
-                                                Foreground="{TemplateBinding Foreground}"
+                                                <materialDesign:PackIcon
+                                                    Foreground="{TemplateBinding Foreground}"
                                                     Kind="AccountBadge"
                                                     Width="30" Height="30"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                         />
+                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Center" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -100,16 +104,16 @@
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="true">
                                         <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
+                                        <Setter Property="Foreground" Value="{DynamicResource onHovered}"></Setter>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
                     </Button>
                     <Button Width="34" Height="36"
-                        VerticalAlignment="Center"
+                            VerticalAlignment="Center"
                             DockPanel.Dock="Right"
-                        HorizontalAlignment="Right"
+                            HorizontalAlignment="Right"
                             Margin="0 0 5 0">
                         <Button.Style>
                             <Style TargetType="Button">
@@ -119,12 +123,11 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
                                             <Border Width="32" Height="32" Background="Transparent">
-                                                <materialDesign:PackIcon Kind="Bell" 
+                                                <materialDesign:PackIcon Kind="Bell"
                                                                          Foreground="{TemplateBinding Foreground}"
-                                                                            Width="28" Height="28"
-                                                                        VerticalAlignment="Center"
-                                                                        HorizontalAlignment="Center"
-                                         />
+                                                                         Width="28" Height="28"
+                                                                         VerticalAlignment="Center"
+                                                                         HorizontalAlignment="Center" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -132,7 +135,7 @@
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="true">
                                         <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
+                                        <Setter Property="Foreground" Value="{DynamicResource onHovered}"></Setter>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -153,10 +156,10 @@
 
                 <!--TOTAL BALANCE-->
                 <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                            CornerRadius="30"
-                          Background="{DynamicResource CommonGridBackground}"
-                            Margin="15, 15,7.5,7.5">
-                    <Button >
+                        CornerRadius="30"
+                        Background="{DynamicResource CommonGridBackground}"
+                        Margin="15, 15,7.5,7.5">
+                    <Button>
                         <Grid Visibility="Visible">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="35*"></RowDefinition>
@@ -164,54 +167,56 @@
                                 <RowDefinition Height="63*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <TextBlock
-                                     Text="TOTAL BALANCE" 
-                                 FontSize="15" 
-                                 FontWeight="Bold" 
-                                 Margin="15,0,0,0"
-                                 HorizontalAlignment="Left" 
-                                 VerticalAlignment="Top" Height="40" Width="116"/>
+                                Text="TOTAL BALANCE"
+                                FontSize="15"
+                                FontWeight="Bold"
+                                Margin="15,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top" Height="40" Width="116" />
 
                             <!--Binding here-->
                             <TextBlock Grid.Row="1"
-                            Text="xxx.xxx.xxx VNĐ" 
-                                   FontSize="20"
-                                   HorizontalAlignment="Left" 
-                                   VerticalAlignment="Center" 
-                                     Margin="15,0,0,0"   
-                                   Height="53" Width="150"/>
+                                       Text="xxx.xxx.xxx VNĐ"
+                                       FontSize="20"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       Margin="15,0,0,0"
+                                       Height="53" Width="150" />
 
                             <!--Binding here-->
-                            <Grid  Grid.Row="2">
+                            <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="41*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="30*"></ColumnDefinition>
+                                    <ColumnDefinition Width="41*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Border
-                            Background="{DynamicResource Dashboard_trueColor}" CornerRadius="20"
-                            Width="66" Height="35" 
+                                    Background="{DynamicResource Dashboard_trueColor}" CornerRadius="20"
+                                    Width="66" Height="35"
                                     Margin="15,0,0,0"
-                                    HorizontalAlignment="Left" 
+                                    HorizontalAlignment="Left"
                                     VerticalAlignment="Center">
                                     <Grid>
-                                        <materialDesign:PackIcon 
-                            Width="20" Height="20"
-                            VerticalAlignment="Center" 
+                                        <materialDesign:PackIcon
+                                            Width="20" Height="20"
+                                            VerticalAlignment="Center"
                                             Foreground="{DynamicResource Dashboard_percent}"
                                             HorizontalAlignment="Left"
-                            Margin="5,0,0,0"
-                            Kind="ArrowTopRightThin" />
-                                        <TextBlock Text="x.x%" 
-                                   FontSize="14" 
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Right" 
-                                   Margin="0,0,10,0"
-                                   Foreground="{DynamicResource Dashboard_percent}"></TextBlock>
+                                            Margin="5,0,0,0"
+                                            Kind="ArrowTopRightThin" />
+                                        <TextBlock Text="x.x%"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"
+                                                   Margin="0,0,10,0"
+                                                   Foreground="{DynamicResource Dashboard_percent}">
+                                        </TextBlock>
                                     </Grid>
                                 </Border>
-                                <TextBlock Text=".vs last month" 
-                                       Grid.Column="1"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"  Height="31" Width="78"></TextBlock>
+                                <TextBlock Text=".vs last month"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left" Height="31" Width="78">
+                                </TextBlock>
                             </Grid>
                         </Grid>
                     </Button>
@@ -222,9 +227,9 @@
                 <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         CornerRadius="30"
                         Background="{DynamicResource CommonGridBackground}"
-                         Margin="7.5,15,7.5,7.5"
+                        Margin="7.5,15,7.5,7.5"
                         Grid.Column="1">
-                    <Button >
+                    <Button>
                         <Grid Visibility="Visible">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="35*"></RowDefinition>
@@ -233,52 +238,56 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0"
-                                       Text="INCOME" 
-                                       FontSize="15" 
+                                       Text="INCOME"
+                                       FontSize="15"
                                        Margin="15,0,0,0"
-                                        FontWeight="Bold" 
-                                        HorizontalAlignment="Left" 
-                                        VerticalAlignment="Top"></TextBlock>
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">
+                            </TextBlock>
 
                             <!--Binding here-->
                             <TextBlock Grid.Row="1"
-                                Text="xxx.xxx.xxx VNĐ" 
-                                       FontSize="20" 
+                                       Text="xxx.xxx.xxx VNĐ"
+                                       FontSize="20"
                                        Margin="15,0,0,0"
-                                       HorizontalAlignment="Left" 
-                                       VerticalAlignment="Top"></TextBlock>
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">
+                            </TextBlock>
 
                             <!--Binding here-->
-                            <Grid  Grid.Row="2">
+                            <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="41*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="30*"></ColumnDefinition>
+                                    <ColumnDefinition Width="41*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Border
                                     Background="#25FFAE" CornerRadius="20"
-                                    Width="66" Height="35" 
+                                    Width="66" Height="35"
                                     Margin="15,0,0,0"
-                                    HorizontalAlignment="Left" 
+                                    HorizontalAlignment="Left"
                                     VerticalAlignment="Center">
                                     <Grid>
-                                        <materialDesign:PackIcon 
-                                         Width="20" Height="20"
-                                         VerticalAlignment="Center" HorizontalAlignment="Left"
-                                         Margin="5,0,0,0"
+                                        <materialDesign:PackIcon
+                                            Width="20" Height="20"
+                                            VerticalAlignment="Center" HorizontalAlignment="Left"
+                                            Margin="5,0,0,0"
                                             Foreground="{DynamicResource Dashboard_percent}"
-                                         Kind="ArrowTopRightThin" />
-                                        <TextBlock Text="x.x%" 
-                                                     FontSize="14" 
-                                                     VerticalAlignment="Center" 
-                                                     HorizontalAlignment="Right" 
-                                                     Margin="0,0,10,0"
-                                                     Foreground="{DynamicResource Dashboard_percent}"></TextBlock>
+                                            Kind="ArrowTopRightThin" />
+                                        <TextBlock Text="x.x%"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"
+                                                   Margin="0,0,10,0"
+                                                   Foreground="{DynamicResource Dashboard_percent}">
+                                        </TextBlock>
                                     </Grid>
                                 </Border>
-                                <TextBlock Text=".vs last month" 
-                                       Grid.Column="1"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"  Height="31" Width="78"></TextBlock>
+                                <TextBlock Text=".vs last month"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left" Height="31" Width="78">
+                                </TextBlock>
                             </Grid>
                         </Grid>
                     </Button>
@@ -288,9 +297,9 @@
                 <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         CornerRadius="30"
                         Background="{DynamicResource CommonGridBackground}"
-                         Margin="7.5,15,7.5,7.5"
+                        Margin="7.5,15,7.5,7.5"
                         Grid.Column="2">
-                    <Button >
+                    <Button>
                         <Grid Visibility="Visible">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="35*"></RowDefinition>
@@ -299,52 +308,56 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0"
-                                       Text="EXPENSE" 
-                                       FontSize="15" 
+                                       Text="EXPENSE"
+                                       FontSize="15"
                                        Margin="15,0,0,0"
-                                        FontWeight="Bold" 
-                                        HorizontalAlignment="Left" 
-                                        VerticalAlignment="Top"></TextBlock>
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">
+                            </TextBlock>
 
                             <!--Binding here-->
                             <TextBlock Grid.Row="1"
-                                Text="xxx.xxx.xxx VNĐ" 
-                                       FontSize="20" 
+                                       Text="xxx.xxx.xxx VNĐ"
+                                       FontSize="20"
                                        Margin="15,0,0,0"
-                                       HorizontalAlignment="Left" 
-                                       VerticalAlignment="Top"></TextBlock>
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top">
+                            </TextBlock>
 
                             <!--Binding here-->
-                            <Grid  Grid.Row="2">
+                            <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="41*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="30*"></ColumnDefinition>
+                                    <ColumnDefinition Width="41*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Border
                                     Background="#25FFAE" CornerRadius="20"
-                                    Width="66" Height="35" 
+                                    Width="66" Height="35"
                                     Margin="15,0,0,0"
-                                    HorizontalAlignment="Left" 
+                                    HorizontalAlignment="Left"
                                     VerticalAlignment="Center">
                                     <Grid>
-                                        <materialDesign:PackIcon 
-                                         Width="20" Height="20"
+                                        <materialDesign:PackIcon
+                                            Width="20" Height="20"
                                             Foreground="{DynamicResource Dashboard_percent}"
-                                         VerticalAlignment="Center" HorizontalAlignment="Left"
-                                         Margin="5,0,0,0"
-                                         Kind="ArrowTopRightThin" />
-                                        <TextBlock Text="x.x%" 
-                                                     FontSize="14" 
-                                                     VerticalAlignment="Center" 
-                                                     HorizontalAlignment="Right" 
-                                                     Margin="0,0,10,0"
-                                                     Foreground="{DynamicResource Dashboard_percent}"></TextBlock>
+                                            VerticalAlignment="Center" HorizontalAlignment="Left"
+                                            Margin="5,0,0,0"
+                                            Kind="ArrowTopRightThin" />
+                                        <TextBlock Text="x.x%"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"
+                                                   Margin="0,0,10,0"
+                                                   Foreground="{DynamicResource Dashboard_percent}">
+                                        </TextBlock>
                                     </Grid>
                                 </Border>
-                                <TextBlock Text=".vs last month" 
-                                       Grid.Column="1"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"  Height="31" Width="78"></TextBlock>
+                                <TextBlock Text=".vs last month"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left" Height="31" Width="78">
+                                </TextBlock>
                             </Grid>
                         </Grid>
                     </Button>
@@ -354,13 +367,13 @@
                 <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         CornerRadius="30"
                         Background="{DynamicResource CommonGridBackground}"
-                         Margin="7.5,15,15,7.5"
+                        Margin="7.5,15,15,7.5"
                         Grid.Column="3">
-                    <Button >
+                    <Button>
                         <Grid Visibility="Visible">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="178*"/>
-                                <ColumnDefinition Width="35*"/>
+                                <ColumnDefinition Width="178*" />
+                                <ColumnDefinition Width="35*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="35*"></RowDefinition>
@@ -369,52 +382,55 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0"
-                                       Text="TOTAL SAVING" 
-                                       FontSize="15" 
+                                       Text="TOTAL SAVING"
+                                       FontSize="15"
                                        Margin="15,0,0,0"
-                                        FontWeight="Bold" 
-                                        HorizontalAlignment="Left" 
-                                        VerticalAlignment="Top" Grid.RowSpan="2"></TextBlock>
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" Grid.RowSpan="2">
+                            </TextBlock>
 
                             <!--Binding here-->
                             <TextBlock
-                                Text="xxx.xxx.xxx VNĐ" 
-                                       FontSize="20" 
-                                       Margin="15,35,0,0"
-                                       HorizontalAlignment="Left" 
-                                       VerticalAlignment="Top" Grid.RowSpan="3"/>
+                                Text="xxx.xxx.xxx VNĐ"
+                                FontSize="20"
+                                Margin="15,35,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top" Grid.RowSpan="3" />
 
                             <!--Binding here-->
-                            <Grid  Grid.Row="1" Grid.ColumnSpan="2" Margin="0,50,0,0" Grid.RowSpan="2">
+                            <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,50,0,0" Grid.RowSpan="2">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30*" ></ColumnDefinition>
-                                    <ColumnDefinition Width="41*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="30*"></ColumnDefinition>
+                                    <ColumnDefinition Width="41*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Border
                                     Background="{DynamicResource Dashboard_falseColor}" CornerRadius="20"
-                                    Width="66" Height="35" 
+                                    Width="66" Height="35"
                                     Margin="15,0,0,0"
-                                    HorizontalAlignment="Left" 
+                                    HorizontalAlignment="Left"
                                     VerticalAlignment="Center">
                                     <Grid>
-                                        <materialDesign:PackIcon 
-                                         Width="20" Height="20"
-                                         VerticalAlignment="Center" HorizontalAlignment="Left"
+                                        <materialDesign:PackIcon
+                                            Width="20" Height="20"
+                                            VerticalAlignment="Center" HorizontalAlignment="Left"
                                             Foreground="{DynamicResource Dashboard_percent}"
-                                         Margin="5,0,0,0"
-                                         Kind="ArrowTopRightThin" />
-                                        <TextBlock Text="x.x%" 
-                                                     FontSize="14" 
-                                                     VerticalAlignment="Center" 
-                                                     HorizontalAlignment="Right" 
-                                                     Margin="0,0,10,0"
-                                                     Foreground="{DynamicResource Dashboard_percent}"></TextBlock>
+                                            Margin="5,0,0,0"
+                                            Kind="ArrowTopRightThin" />
+                                        <TextBlock Text="x.x%"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"
+                                                   Margin="0,0,10,0"
+                                                   Foreground="{DynamicResource Dashboard_percent}">
+                                        </TextBlock>
                                     </Grid>
                                 </Border>
-                                <TextBlock Text=".vs last month" 
-                                       Grid.Column="1"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"  Height="31" Width="78"></TextBlock>
+                                <TextBlock Text=".vs last month"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left" Height="31" Width="78">
+                                </TextBlock>
                             </Grid>
                         </Grid>
                     </Button>
@@ -440,9 +456,9 @@
                     </Grid.RowDefinitions>
                     <!--chart -->
                     <Border CornerRadius="30"
-                        Grid.Row="0" 
-                            Background="{DynamicResource CommonGridBackground}" 
-                            Margin="7.5,7.5,15,7.5" >
+                            Grid.Row="0"
+                            Background="{DynamicResource CommonGridBackground}"
+                            Margin="7.5,7.5,15,7.5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40*"></ColumnDefinition>
@@ -454,19 +470,20 @@
                                     <RowDefinition Height="143*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0"
-                                       Text="BUDGET" 
-                                       HorizontalAlignment="Left"
-                                       Margin="15,0,0,0"
-                                       FontWeight="Bold"
-                                       FontSize="18"
-                                       VerticalAlignment="Top" Height="39" Grid.RowSpan="2"></TextBlock>
+                                           Text="BUDGET"
+                                           HorizontalAlignment="Left"
+                                           Margin="15,0,0,0"
+                                           FontWeight="Bold"
+                                           FontSize="18"
+                                           VerticalAlignment="Top" Height="39" Grid.RowSpan="2">
+                                </TextBlock>
 
                                 <!-- element of circle chart shown here-->
-                                <WrapPanel Orientation="Vertical" 
-                                    Margin="10"
+                                <WrapPanel Orientation="Vertical"
+                                           Margin="10"
                                            ItemHeight="25"
                                            ItemWidth="75"
-                                    Grid.Row="1">
+                                           Grid.Row="1">
 
                                     <!--example-->
                                     <TextBlock DockPanel.Dock="Top" Text="element1"></TextBlock>
@@ -494,18 +511,19 @@
                     <!--goal plan-->
                     <Grid Grid.Row="1">
                         <Border CornerRadius="30"
-                            Grid.Row="0" 
-                            Background="{DynamicResource CommonGridBackground}" 
-                            Margin="7.5,7.5,15,15">
+                                Grid.Row="0"
+                                Background="{DynamicResource CommonGridBackground}"
+                                Margin="7.5,7.5,15,15">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="15*"></RowDefinition>
                                     <RowDefinition Height="113*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="GOAL PLAN" 
+                                <TextBlock Text="GOAL PLAN"
                                            FontSize="18"
                                            FontWeight="Bold"
-                                           Margin="15,0,0,0"></TextBlock>
+                                           Margin="15,0,0,0">
+                                </TextBlock>
 
                                 <!--goal list here-->
                                 <WrapPanel Grid.Row="1">
@@ -518,20 +536,43 @@
                 </Grid>
 
                 <!--activity-->
-                <Grid Grid.Row="0">
-                    <Border                                 
-                    Background="{DynamicResource CommonGridBackground}" 
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <Border
+                        Background="{DynamicResource CommonGridBackground}"
                         CornerRadius="30"
                         Margin="15, 7.5, 7.5, 15">
-                        <Canvas>
-                            <TextBlock Text="ACTIVITIY" 
-                       FontSize="18" 
-                       Canvas.Left="17" 
-                       Canvas.Top="-2" 
-                       HorizontalAlignment="Left" 
-                       VerticalAlignment="Center"
-                       FontWeight="Bold"></TextBlock>
-                        </Canvas>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       Margin="20,10,10,5"
+                                       Text="ACTIVITIY"
+                                       FontSize="18"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       FontWeight="Bold">
+                            </TextBlock>
+                            <Button Grid.Row="1"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Command="{Binding ColumnChartNavigateCommand}">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <oxy:PlotView Background="Transparent"
+                                                      Model="{Binding ExpenseChart}"
+                                                      Controller="{Binding CustomPlotController}" />
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                            <TextBlock Grid.Row="1"
+                                       Text="No data found!"
+                                       FontSize="20" Opacity="0.7"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       TextAlignment="Center"
+                                       Visibility="{Binding HasNoData, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        </Grid>
                     </Border>
                 </Grid>
             </Grid>
