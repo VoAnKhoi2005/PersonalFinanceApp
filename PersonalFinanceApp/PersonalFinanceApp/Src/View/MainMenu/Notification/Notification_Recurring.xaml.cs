@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PersonalFinanceApp.Src.ViewModel.MainMenu.Notification
+namespace PersonalFinanceApp.Src.View.MainMenu.Notification
 {
     /// <summary>
-    /// Interaction logic for Main_Notification.xaml
+    /// Interaction logic for Notification_Recurring.xaml
     /// </summary>
-    public partial class Main_Notification : UserControl
+    public partial class Notification_Recurring : UserControl
     {
-        public Main_Notification()
+        public Notification_Recurring()
         {
             InitializeComponent();
         }

@@ -9,7 +9,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="600" d:DesignWidth="450">
     <Border Background="#053B50" CornerRadius="30"
-            Width="auto" Height="auto"> 
+            Width="450" Height="600"> 
         <Border.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Sans Serif Collection"/>
@@ -268,17 +268,6 @@
                     <!--progress money-->
 
                     <Grid Grid.Row="3">
-                        <TextBlock Text="Amount: " HorizontalAlignment="Left" Margin="0,0,0,0"
-                                   FontSize="16" FontWeight="DemiBold"
-                                   ></TextBlock>
-
-                        <!--binding here-->
-                        <TextBlock Text="{Binding CurrentAmoutGoalCard}" HorizontalAlignment="Right"
-                                   Margin="0,0,30,0"
-                                   VerticalAlignment="Center"
-                                   FontSize="16"></TextBlock>
-                    </Grid>
-                    <Grid Grid.Row="4">
                         <TextBlock Text="Status :" VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    FontWeight="DemiBold"
@@ -293,55 +282,9 @@
             </Grid>
 
             <!--Detail section-->
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <TextBlock Text="Target (VND)  : " VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="30,0,0,0"></TextBlock>
-
-                    <!--binding here-->
-                    <TextBlock Text="{Binding TargetGoalCard}" VerticalAlignment="Center"
-                               HorizontalAlignment="Right" Margin="0,0,30,0"
-                               FontWeight="Bold"></TextBlock>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <TextBlock Text="Start date  : " VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="30,0,0,0"></TextBlock>
-
-                    <!--binding here-->
-                    <TextBlock Text="{Binding StartDateGoalCard}" VerticalAlignment="Center"
-                               HorizontalAlignment="Right" Margin="0,0,30,0"
-                               FontWeight="Bold"></TextBlock>
-                </Grid>
-                <Grid Grid.Row="2">
-                    <TextBlock Text="End date  : " VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="30,0,0,0"
-                               ></TextBlock>
-
-                    <!--binding here-->
-                    <TextBlock Text="{Binding DeadlineGoalCard}" VerticalAlignment="Center"
-                               HorizontalAlignment="Right" Margin="0,0,30,0"
-                               FontWeight="Bold"></TextBlock>
-                </Grid>
-                <Grid Grid.Row="3">
-                    <TextBlock Text="Time to reach your goal  (days)  : " VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="30,0,0,0"
-                               ></TextBlock>
-
-                    <!--binding here-->
-                    <TextBlock Text="end - start (days)" VerticalAlignment="Center"
-                               HorizontalAlignment="Right" Margin="0,0,30,0"
-                               FontWeight="Bold"></TextBlock>
-                </Grid>
-            </Grid>
 
             <!--decription-->
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="21*"></RowDefinition>
                     <RowDefinition Height="79*"></RowDefinition>

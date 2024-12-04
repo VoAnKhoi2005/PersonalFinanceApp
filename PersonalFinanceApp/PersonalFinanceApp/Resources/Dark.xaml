@@ -48,4 +48,6 @@
     <!--user pop up-->
     <SolidColorBrush Color="#136688" x:Key="User_background"></SolidColorBrush>
     <SolidColorBrush Color="#FF0A4B65" x:Key="User_onHovered"></SolidColorBrush>
+
+    <SolidColorBrush Color="CadetBlue" x:Key="Ntf_goal"></SolidColorBrush>
 </ResourceDictionary>
