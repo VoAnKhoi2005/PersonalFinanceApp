@@ -39,111 +39,15 @@
         </Grid.Resources>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
                 <RowDefinition Height="17*"></RowDefinition>
                 <RowDefinition Height="49*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <!--Dashboad - user icon-->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="757*"></ColumnDefinition>
-                    <ColumnDefinition Width="185*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="48*"></RowDefinition>
-                        <RowDefinition Height="19*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
-                    Text="Dashboard" 
-                               FontSize="28" 
-                               FontWeight="Bold"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center" Margin="25,-10,0,0" 
-                               Height="55" Width="150"
-                               ></TextBlock>
-                    <TextBlock Grid.Row="1"
-                    Text="easy way to get a comprehensive overview of important data" 
-                               FontSize="14"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="26,0,0,-7" 
-                               Height="37" Width="383"
-                               ></TextBlock>
-                </Grid>
 
-                <DockPanel Grid.Column="1">
-                    <Button Width="34" Height="36"
-                        VerticalAlignment="Center"
-                            DockPanel.Dock="Right"
-                        HorizontalAlignment="Right"
-                            Margin="0 0 15 0">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent"></Setter>
-                                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Width="32" Height="32" Background="Transparent">
-                                                <materialDesign:PackIcon 
-                                                Foreground="{TemplateBinding Foreground}"
-                                                    Kind="AccountBadge"
-                                                    Width="30" Height="30"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                         />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                    <Button Width="34" Height="36"
-                        VerticalAlignment="Center"
-                            DockPanel.Dock="Right"
-                        HorizontalAlignment="Right"
-                            Margin="0 0 5 0">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent"></Setter>
-                                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Width="32" Height="32" Background="Transparent">
-                                                <materialDesign:PackIcon Kind="Bell" 
-                                                                         Foreground="{TemplateBinding Foreground}"
-                                                                            Width="28" Height="28"
-                                                                        VerticalAlignment="Center"
-                                                                        HorizontalAlignment="Center"
-                                         />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                </DockPanel>
-
-            </Grid>
 
             <!--total balance  - income - expense - total saving -->
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -423,7 +327,7 @@
 
 
             <!--Static - Chart - Goal -->
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="296*"></ColumnDefinition>
                     <ColumnDefinition Width="175*"></ColumnDefinition>

@@ -14,13 +14,13 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         Background="#0D2129"
         ResizeMode="CanResizeWithGrip"
-        MinHeight="720" MinWidth="1152 "
-        Height="720" Width="1152"
+        MinHeight="780" MinWidth="1152"
+        Height="750" Width="1152"
         WindowStartupLocation="CenterScreen" 
         AllowsTransparency="True"
         x:Name="MainWindows"
         WindowStyle="None">
-    
+
     <!--almost done color-->
     <Grid>
         <Grid.Resources>
@@ -271,51 +271,62 @@
 
         <Grid Grid.Column="1" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="70"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <DockPanel Grid.Row="0" Background="#0D2129">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseLeftButtonDown">
-                        <i:InvokeCommandAction Command="{Binding MoveCommand}" CommandParameter="{Binding ElementName=MainWindows}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <Button Width="40" Height="30"
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="371*"></ColumnDefinition>
+                    <ColumnDefinition Width="100*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding MoveCommand}" CommandParameter="{Binding ElementName=MainWindows}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Button Width="40" Height="30"
                         VerticalAlignment="Bottom"
                         DockPanel.Dock="Right"
                         HorizontalAlignment="Right"
                     Command="{Binding CloseCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                             >
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="Transparent"></Setter>
-                            <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Width="40" Height="30" Background="{TemplateBinding Background}">
-                                            <materialDesign:PackIcon Kind="WindowClose" 
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="40" Height="30" Background="{TemplateBinding Background}">
+                                                    <materialDesign:PackIcon Kind="WindowClose" 
                                         Foreground="{TemplateBinding Foreground}"
                                                     Width="20" Height="20"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Center"
-                                                                 Margin="0 0 0 0"
                                          />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="Cursor" Value="Hand"></Setter>
-                                    <Setter Property="Background" Value="Red"></Setter>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Width="40" Height="30"
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Cursor" Value="Hand"></Setter>
+                                            <Setter Property="Background" Value="Red"></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button Width="40" Height="30"
                         VerticalAlignment="Bottom"
                             DockPanel.Dock="Right"
                         HorizontalAlignment="Right"
@@ -323,35 +334,35 @@
                     Command="{Binding WindowMaximum}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                         
                             >
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="Transparent"></Setter>
-                            <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Width="40" Height="30" Background="{TemplateBinding Background}">
-                                            <materialDesign:PackIcon Kind="WindowRestore"
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="40" Height="30" Background="{TemplateBinding Background}">
+                                                    <materialDesign:PackIcon Kind="WindowRestore"
                                         Foreground="{TemplateBinding Foreground}"
                                                     Width="20" Height="20"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Center"
                                                                  Margin="0 0 0 0"
                                          />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="Cursor" Value="Hand"></Setter>
-                                    <Setter Property="Background"  Value="#FF2B9D88" ></Setter>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Width="40" Height="30"
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Cursor" Value="Hand"></Setter>
+                                            <Setter Property="Background"  Value="#FF2B9D88" ></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button Width="40" Height="30"
                         VerticalAlignment="Bottom"
                             DockPanel.Dock="Right"
                         HorizontalAlignment="Right"
@@ -359,35 +370,142 @@
                     Command="{Binding WindowMinimum}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
 
                             >
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Background" Value="Transparent"></Setter>
-                            <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
-                                        <Border Width="40" Height="30" Background="{TemplateBinding Background}">
-                                            <materialDesign:PackIcon Kind="Minus"  
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="40" Height="30" Background="{TemplateBinding Background}">
+                                                    <materialDesign:PackIcon Kind="Minus"  
                                         Foreground="{TemplateBinding Foreground}"
                                                     Width="25" Height="25"
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Center"
                                                                  Margin="0 0 0 0"
                                          />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="Cursor" Value="Hand"></Setter>
-                                    <Setter Property="Background"  Value="#FF2B9D88" ></Setter>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </DockPanel>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Cursor" Value="Hand"></Setter>
+                                            <Setter Property="Background"  Value="#FF2B9D88" ></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </DockPanel>
+                    <DockPanel Grid.Row="1">
+                        <Button Width="30" Height="30"
+                        VerticalAlignment="Center"
+                            DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                            Margin="0 10 15 0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="32" Height="32" Background="Transparent">
+                                                    <materialDesign:PackIcon 
+                                                Foreground="{TemplateBinding Foreground}"
+                                                    Kind="AccountBadge"
+                                                    Width="30" Height="30"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"
+                                         />
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Cursor" Value="Hand"></Setter>
+                                            <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button Width="30" Height="30"
+                        VerticalAlignment="Center"
+                            DockPanel.Dock="Right"
+                        HorizontalAlignment="Right"
+                            Margin="0 10 5 0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="Transparent"></Setter>
+                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Width="32" Height="32" Background="Transparent">
+                                                    <materialDesign:PackIcon Kind="Bell" 
+                                                                         Foreground="{TemplateBinding Foreground}"
+                                                                            Width="28" Height="28"
+                                                                        VerticalAlignment="Center"
+                                                                        HorizontalAlignment="Center"
+                                         />
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Cursor" Value="Hand"></Setter>
+                                            <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </DockPanel>
+                </Grid>
+
+
+                <Grid>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25*"></RowDefinition>
+                            <RowDefinition Height="10*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <!--binding textblock here-->
+                        <TextBlock Text="We are truly gay!"
+                               FontSize="28"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+
+                                   TextWrapping="Wrap"
+                                   Width="auto"
+                                   Height="auto"
+                                   Margin="15,10,0,0" />
+                        <TextBlock Text="hom nay toi buon"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   Opacity="0.8"
+                               HorizontalAlignment="Left" Margin="16,0,0,0"
+                               Width="111"
+                               Grid.Row="1" Height="38">
+                        </TextBlock>
+                    </Grid>
+
+                    <!--user-->
+
+
+
+                </Grid>
+            </Grid>
+
+
             <Grid Grid.Row="1">
                 <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}">
                     <ContentControl.Resources>
@@ -407,9 +525,9 @@
                         <DataTemplate DataType="{x:Type viewModels:SummaryViewModel}">
                             <views:UC_Summary />
                         </DataTemplate>
-                        
-                        
-                        
+
+
+
                     </ContentControl.Resources>
                 </ContentControl>
 

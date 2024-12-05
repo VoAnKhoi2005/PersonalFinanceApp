@@ -44,109 +44,11 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition Height="45"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="132*"></ColumnDefinition>
-                    <ColumnDefinition Width="25*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="48*"></RowDefinition>
-                        <RowDefinition Height="19*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="Goal plan"
-                               FontSize="28"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Bottom" Margin="25,-10,0,0"
-                               Height="55" Width="126"
-                               Grid.Row="0">
-                    </TextBlock>
-                    <TextBlock Text="Create financial goals and manage your savings"
-                               FontSize="14"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="26,0,0,0"
-                               Height="37" Width="303"
-                               Grid.Row="1">
-                    </TextBlock>
-                </Grid>
+ 
 
-                <!--user-->
-                <DockPanel Grid.Column="1">
-                    <Button Width="34" Height="36"
-                        VerticalAlignment="Center"
-                            DockPanel.Dock="Right"
-                        HorizontalAlignment="Right"
-                            Margin="0 0 15 0">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent"></Setter>
-                                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Width="32" Height="32" Background="Transparent">
-                                                <materialDesign:PackIcon 
-                                                Foreground="{TemplateBinding Foreground}"
-                                                    Kind="AccountBadge"
-                                                    Width="30" Height="30"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                         />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                    <Button Width="34" Height="36"
-                        VerticalAlignment="Center"
-                            DockPanel.Dock="Right"
-                        HorizontalAlignment="Right"
-                            Margin="0 0 5 0">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent"></Setter>
-                                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Width="32" Height="32" Background="Transparent">
-                                                <materialDesign:PackIcon Kind="Bell" 
-                                                                         Foreground="{TemplateBinding Foreground}"
-                                                                            Width="28" Height="28"
-                                                                        VerticalAlignment="Center"
-                                                                        HorizontalAlignment="Center"
-                                         />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                </DockPanel>
-
-
-            </Grid>
-
-            <DockPanel Grid.Row="1">
+            <DockPanel Grid.Row="0">
 
                 <Border CornerRadius="20"
                         VerticalAlignment="Center"
@@ -199,7 +101,7 @@
 
             </DockPanel>
             <!--goal plan main looking-->
-            <Border Grid.Row="2" Margin="15,0,15,0">
+            <Border Grid.Row="1" Margin="15,0,15,0">
                 <Grid>
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
                                Text="No goal found!" FontSize="30" Opacity="0.5"

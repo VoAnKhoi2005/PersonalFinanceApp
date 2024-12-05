@@ -7,292 +7,340 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Background="Transparent"
-        Title="TestWindow" Height="720" Width="942">
-    <Border Background="#053B50" CornerRadius="30"
-            Width="450" Height="600">
-        <Border.Resources>
+        Title="TestWindow"              
+        Width="450"
+             Height="100">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="materialDesign:PackIcon">
+                <Setter Property="Foreground" Value="{DynamicResource Ntf_goal}"></Setter>
+                <Setter Property="Height" Value="40"></Setter>
+                <Setter Property="Width" Value="40"></Setter>
+            </Style>
             <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Sans Serif Collection"/>
-                <Setter Property="Foreground" Value="{DynamicResource CommonText}"/>
-                <Setter Property="FontWeight" Value="Regular"/>
-                <Setter Property="FontSize" Value="16"></Setter>
+                <Setter Property="FontFamily" Value="Sans Serif Collection" />
+                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
+                <Setter Property="FontWeight" Value="Regular" />
             </Style>
-            <Style TargetType="Button">
-                <Setter Property="Background" Value="Transparent"></Setter>
-                <Setter Property="Foreground" Value="Transparent"></Setter>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="true">
-                        <Setter Property="Cursor" Value="Hand"></Setter>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-        </Border.Resources>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="200"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <!--overall-->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*"></ColumnDefinition>
-                    <ColumnDefinition Width="5*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-                <!--chart-->
-                <Grid Grid.Column="0">
-                    <TextBlock Text=" chart here" VerticalAlignment="Center"
-                               HorizontalAlignment="Center"></TextBlock>
-                </Grid>
-
-
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <!--icon-->
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <!--Add money to goal-->
-                        <Button Grid.Column="2" 
-                                Command="{Binding AddNewAmountGoalCommand}"
-                                VerticalAlignment="Bottom"
-                                HorizontalAlignment="Left">
-                            <!--
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Click">
-                                    <i:InvokeCommandAction Command="{Binding SaveIDGoalCard}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            -->
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Transparent"></Setter>
-                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <Border Background="{TemplateBinding Background}">
-                                                    <materialDesign:PackIcon Kind="PlusMinusVariant"
-                                             Width="30"
-                                             Height="30"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Left"
-                                             />
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="Foreground" Value="{DynamicResource Goalplan_Hover}"></Setter>
-
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                        <!--adjust goal-->
-                        <Button Grid.Column="3" 
-                                VerticalAlignment="Bottom"
-                                HorizontalAlignment="Left" 
-                                Command="{Binding EditGoalCommand}" 
-                                CommandParameter="{Binding}">
-                            <!--
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Click">
-                                    <i:InvokeCommandAction Command="{Binding SaveIDGoalCard}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            -->
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Transparent"></Setter>
-                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <Border Background="{TemplateBinding Background}">
-                                                    <materialDesign:PackIcon Kind="Pencil"
-                                             Width="30"
-                                            Height="30"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Left"></materialDesign:PackIcon>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="Foreground" Value="{DynamicResource Goalplan_Hover}"></Setter>
-
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                        <!--history-->
-                        <Button Grid.Column="4" Command="{Binding HistoryGoalCommand}"
-                                VerticalAlignment="Bottom"
-                                HorizontalAlignment="Left">
-                            <!--
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Click">
-                                    <i:InvokeCommandAction Command="{Binding SaveIDGoalCard}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            -->
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Transparent"></Setter>
-                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <Border Background="{TemplateBinding Background}">
-                                                    <materialDesign:PackIcon Kind="ClipboardTextClock"  
-                                             Width="30"
-                                            Height="30"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Left"></materialDesign:PackIcon>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="Foreground" Value="{DynamicResource Goalplan_Hover}"></Setter>
-
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                        <!--delete-->
-                        <Button Grid.Column="5" Command="{Binding DeleteGoalCommand}"
-                                VerticalAlignment="Bottom"
-                                HorizontalAlignment="Left">
-                            <!--
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Click">
-                                    <i:InvokeCommandAction Command="{Binding SaveIDGoalCard}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            -->
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Background" Value="Transparent"></Setter>
-                                    <Setter Property="Foreground" Value="#FFE35D5D"></Setter>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <Border Background="{TemplateBinding Background}">
-                                                    <materialDesign:PackIcon Kind="Delete"                                             Width="30"
-                                            Height="30"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Left"></materialDesign:PackIcon>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Cursor" Value="Hand"></Setter>
-                                            <Setter Property="Foreground" Value="#FFF42B2B"></Setter>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                    </Grid>
-
-                    <Grid Grid.Row="1">
-                        <TextBlock Text="Category :" VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   FontWeight="DemiBold"
-                                   FontSize="16"></TextBlock>
-                        <!--binding here-->
-                        <TextBlock Text="{Binding CategoryGoalCard}" VerticalAlignment="Center"
-                                   HorizontalAlignment="Right"
-                                   Margin="0,0,30,0"
-                                   FontSize="14"></TextBlock>
-                    </Grid>
-
-                    <!--name-->
-                    <!--binding name here-->
-                    <TextBlock Grid.Row="2" FontWeight="Bold"
-                        Text="{Binding NameGoalCard}" VerticalAlignment="Center"
-                               HorizontalAlignment="Left"
-                               FontSize="20">
-                    </TextBlock>
-
-
-                    <!--progress money-->
-
-                    <Grid Grid.Row="3">
-                        <TextBlock Text="Status :" VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   FontWeight="DemiBold"
-                                   FontSize="16"></TextBlock>
-                        <!--binding here-->
-                        <TextBlock Text="{Binding StatusGoalCard}" 
-                                   FontWeight="DemiBold"
-                                   FontSize="16"
-                                   HorizontalAlignment="Right" Margin="0,0,75,0"></TextBlock>
-                    </Grid>
-                </Grid>
-            </Grid>
-
-            <!--Detail section-->
-
-            <!--decription-->
-            <Expander Grid.Row="1" Header="Description"
-                      Width="auto"
-                      >
-                <Expander.Style>
-                    <Style TargetType="Expander">
-                        <Setter Property="Template" >
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Expander">
-                                    <materialDesign:PackIcon Kind="PlusMinusVariant"
-Width="30"
-Height="30"
-VerticalAlignment="Center"
-HorizontalAlignment="Left"
-/>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Expander.Style>
-                <!--binding here-->
-                <DockPanel  Height="300">
-                    <TextBlock Text="ahihi" DockPanel.Dock="top"></TextBlock>
-                    <TextBlock Text="ahihi" DockPanel.Dock="top"></TextBlock>
-                    <TextBlock Text="ahihi" DockPanel.Dock="top"></TextBlock>
-                    <TextBlock Text="ahihi" DockPanel.Dock="top"></TextBlock>
-                    <TextBlock Text="ahihi" DockPanel.Dock="top"></TextBlock>
-                    <TextBlock 
-                           HorizontalAlignment="Left" Margin="30,0,0,0"
-                           Text="{Binding DescriptionGoalCard}"
-                           TextWrapping="Wrap"></TextBlock>
-                </DockPanel>
-            </Expander>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width= "100"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Border Width="80" Height="80" CornerRadius="90"
+                    Background="White"></Border>
+            <Border Width="70" Height="70" CornerRadius="90"
+                    Background="#FFD0F3EC"></Border>
+            <Border Width="60" Height="60" CornerRadius="90"
+                    Background="#FFCDE0DF"></Border>
+            <Border Width="50" Height="50" CornerRadius="90"
+                    Background="#FFA6CFD1"></Border>
+            <materialDesign:PackIcon Kind="Trophy" 
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Center"/>
         </Grid>
-    </Border>
+
+        <Button Grid.Column="1" Margin="0 0 5 0"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Right" 
+                              >
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="Transparent"></Setter>
+                    <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border Background="{TemplateBinding Background}">
+                                    <materialDesign:PackIcon Kind="DotsVertical"
+                                    Width="25"
+                                            Height="25"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left"
+                                                             Foreground="{TemplateBinding Foreground}"></materialDesign:PackIcon>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Cursor" Value="Hand"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource Goalplan_Hover}"></Setter>
+
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Popup Placement="MousePoint" IsOpen="True"
+               >
+            <DockPanel Width="150"
+                       Height="120">
+                <!--edit-->
+                <Button DockPanel.Dock="Top"
+                        VerticalAlignment="Top"
+                        Background="{DynamicResource CommonGridBackground}">
+                    <!--
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding SaveIDGoalCard}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    -->
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background"
+                                    Value="Transparent"></Setter>
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource CommonText}"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Border Height="30"
+                                                CornerRadius="30 30 0 0"
+                                                Background="{TemplateBinding Background}">
+                                            <DockPanel>
+                                                <materialDesign:PackIcon Kind="Pencil"
+                                                                         Width="20"
+                                                                         Height="20"
+                                                                         VerticalAlignment="Center"
+                                                                         DockPanel.Dock="Left"
+                                                                         Margin="15 0 0 0"
+                                                                         HorizontalAlignment="Left"></materialDesign:PackIcon>
+                                                <TextBlock Text="Edit"
+                                                           DockPanel.Dock="Left"
+                                                           Margin="15 0 0 0"
+                                                           FontSize="14"
+                                                           VerticalAlignment="Center"
+                                                           HorizontalAlignment="Left"
+                                                           Foreground="{TemplateBinding Foreground}"></TextBlock>
+                                            </DockPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                         Value="true">
+                                    <Setter Property="Cursor"
+                                            Value="Hand"></Setter>
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource onHovered}"></Setter>
+                                    <Setter Property="Foreground"
+                                            Value="{DynamicResource Goalplan_Hover}"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button DockPanel.Dock="Top"
+                        VerticalAlignment="Top"
+                        Background="{DynamicResource CommonGridBackground}">
+                    <!--
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding SaveIDGoalCard}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    -->
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background"
+                                    Value="Transparent"></Setter>
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource CommonText}"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Border Height="30"
+                                                Background="{TemplateBinding Background}">
+                                            <DockPanel>
+                                                <materialDesign:PackIcon Kind="PlusMinusVariant"
+                                                                         Width="20"
+                                                                         Height="20"
+                                                                         VerticalAlignment="Center"
+                                                                         DockPanel.Dock="Left"
+                                                                         Margin="15 0 0 0"
+                                                                         HorizontalAlignment="Left"></materialDesign:PackIcon>
+                                                <TextBlock Text="In / Out"
+                                                           DockPanel.Dock="Left"
+                                                           Margin="15 0 0 0"
+                                                           FontSize="14"
+                                                           VerticalAlignment="Center"
+                                                           HorizontalAlignment="Left"
+                                                           Foreground="{TemplateBinding Foreground}"></TextBlock>
+                                            </DockPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                         Value="true">
+                                    <Setter Property="Cursor"
+                                            Value="Hand"></Setter>
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource onHovered}"></Setter>
+                                    <Setter Property="Foreground"
+                                            Value="{DynamicResource Goalplan_Hover}"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button DockPanel.Dock="Top"
+                        VerticalAlignment="Top"
+                        Background="{DynamicResource CommonGridBackground}">
+                    <!--
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding SaveIDGoalCard}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    -->
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background"
+                                    Value="Transparent"></Setter>
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource CommonText}"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Border Height="30"
+                                                Background="{TemplateBinding Background}">
+                                            <DockPanel>
+                                                <materialDesign:PackIcon Kind="History"
+                                                                         Width="20"
+                                                                         Height="20"
+                                                                         VerticalAlignment="Center"
+                                                                         DockPanel.Dock="Left"
+                                                                         Margin="15 0 0 0"
+                                                                         HorizontalAlignment="Left"></materialDesign:PackIcon>
+                                                <TextBlock Text="History"
+                                                           DockPanel.Dock="Left"
+                                                           Margin="15 0 0 0"
+                                                           FontSize="14"
+                                                           VerticalAlignment="Center"
+                                                           HorizontalAlignment="Left"
+                                                           Foreground="{TemplateBinding Foreground}"></TextBlock>
+                                            </DockPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                         Value="true">
+                                    <Setter Property="Cursor"
+                                            Value="Hand"></Setter>
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource onHovered}"></Setter>
+                                    <Setter Property="Foreground"
+                                            Value="{DynamicResource Goalplan_Hover}"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button DockPanel.Dock="Top"
+                        VerticalAlignment="Top"
+                        Background="{DynamicResource Cancel_button}">
+                    <!--
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:InvokeCommandAction Command="{Binding SaveIDGoalCard}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    -->
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background"
+                                    Value="Transparent"></Setter>
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource CommonText}"></Setter>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Border Height="30"
+                                                CornerRadius="0 0 30 30"
+                                                Background="{TemplateBinding Background}">
+                                            <DockPanel>
+                                                <materialDesign:PackIcon Kind="Delete"
+                                                                         Width="20"
+                                                                         Height="20"
+                                                                         VerticalAlignment="Center"
+                                                                         DockPanel.Dock="Left"
+                                                                         Margin="15 0 0 0"
+                                                                         HorizontalAlignment="Left"></materialDesign:PackIcon>
+                                                <TextBlock Text="Delete goal"
+                                                           DockPanel.Dock="Left"
+                                                           Margin="15 0 0 0"
+                                                           FontSize="14"
+                                                           VerticalAlignment="Center"
+                                                           HorizontalAlignment="Left"
+                                                           Foreground="{TemplateBinding Foreground}"></TextBlock>
+                                            </DockPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                         Value="true">
+                                    <Setter Property="Cursor"
+                                            Value="Hand"></Setter>
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource Cancel_buttonHover}"></Setter>
+                                    <Setter Property="Foreground"
+                                            Value="Red"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </DockPanel>
+        </Popup>
+        <Grid Margin="15" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25*"></ColumnDefinition>
+                <ColumnDefinition Width="39*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Name :" 
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left" />
+            <TextBlock Text="Category :"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Grid.Row="1" Foreground="#E5B2E65A" ></TextBlock>
+            <TextBlock Text="Status: "
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Grid.Row="2" ></TextBlock>
+
+            <TextBlock Text="ABCXYZ" 
+                       FontWeight="Bold"
+                       Grid.Column="1"
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Left"/>
+            <TextBlock Text="Buying some clothes"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Grid.Column="1"
+                       
+                       Grid.Row="1" Foreground="#E5B2E65A"></TextBlock>
+            <TextBlock Text="On active" Foreground="#E5B2E65A"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Grid.Column="1"
+                       Grid.Row="2" ></TextBlock>
+        </Grid>
+    </Grid>
 
 </Window>
