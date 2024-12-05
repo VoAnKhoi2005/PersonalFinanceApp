@@ -6,6 +6,8 @@ using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Database;
 using System.Collections.ObjectModel;
 using PersonalFinanceApp.Src.ViewModel.Stores;
+using XAct;
+using System.Windows;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -39,23 +41,26 @@ public class ExpenseAddNewViewModel : BaseViewModel {
     }
     private string _amountExpense;
     //date
-    public DateTime? DateTimeExpenseBook {
-        get => _dateTimeExpenseBook;
+    public string DayExpense {
+        get => _dayExpense;
         set {
-            _dateTimeExpenseBook = value;
-            OnPropertyChanged(nameof(DateTimeExpenseBook));
-            DateOnlyExpenseBook = DateOnly.FromDateTime(_dateTimeExpenseBook.Value);
+            if (value != _dayExpense) {
+                _dayExpense = value;
+                OnPropertyChanged();
+            }
         }
     }
-    private DateTime? _dateTimeExpenseBook;
-    public DateOnly DateOnlyExpenseBook {
-        get => _dateOnlyExpenseBook;
-        private set {
-            _dateOnlyExpenseBook = value;
-            OnPropertyChanged(nameof(DateOnlyExpenseBook));
+    private string _dayExpense;
+    public ObservableCollection<string> ItemDayExpense {
+        get => _itemDayExpense;
+        set {
+            if (value != _itemDayExpense) {
+                _itemDayExpense = value;
+                OnPropertyChanged();
+            }
         }
     }
-    private DateOnly _dateOnlyExpenseBook;
+    private ObservableCollection<string> _itemDayExpense = new();
     //description
     public string DescriptionExpense {
         get => _descriptionExpense;
@@ -78,17 +83,6 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         }
     }
     private string _categoryExpense;
-    //recurring
-    public string RecurringExpense {
-        get => _recurringExpense;
-        set {
-            if (_recurringExpense != value) {
-                _recurringExpense = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _recurringExpense;
     //selected category
     public CategoryItem SelectedCategory {
         get => _selectedCategory;
@@ -242,7 +236,7 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         BudgetExpenseBook = SelectedItemExpenseBook.exB.Budget.ToString(); 
 
         NotExB = true;
-
+        //category
         ItemsExpense.Clear();
         ItemsExpense.Add(new CategoryItem { Id = -1, Name = "<New>" });
         if (YearExpenseBook != "" && MonthExpenseBook != "") {
@@ -251,8 +245,36 @@ public class ExpenseAddNewViewModel : BaseViewModel {
                 ItemsExpense.Add(new CategoryItem { Id = item.CategoryID, Name = item.Name });
             }
         }
+        //day expense
+        ItemDayExpense.Clear();
+        switch (SelectedItemExpenseBook.exB.Month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                for(int i = 1; i < 31; ++i) {
+                    ItemDayExpense.Add(i.ToString());
+                }
+                break;
+            case 2:
+                int per;
+                per = (SelectedItemExpenseBook.exB.Year % 4 == 0 && SelectedItemExpenseBook.exB.Year % 100 != 0) ?  29 :  28;
+                for (int i = 1; i < per; ++i) {
+                    ItemDayExpense.Add(i.ToString());
+                }
+                break;
+            default:
+                for (int i = 1; i < 30; ++i) {
+                    ItemDayExpense.Add(i.ToString());
+                }
+                break;
+        }
     }
     public void LoadItemSource(object parameter) {
+        
         NotExB = false;
         TextChangedCategory = "";
         YearExpenseBook = "";
@@ -274,10 +296,21 @@ public class ExpenseAddNewViewModel : BaseViewModel {
     }
     private void ConfirmAddNewExpense(object sender) {
         //add data to database
+        long result;
+        if (!long.TryParse(AmountExpense, out result)) {
+            MessageBox.Show("Amount quá to! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+        else {
+            if(result == 0) {
+                MessageBox.Show("Amount phải khác 0! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
         var expense = new Expense() {
             Amount = int.Parse(AmountExpense),
             Name = NameExpense,
-            Date = DateOnlyExpenseBook,
+            Date = new  DateOnly(int.Parse(YearExpenseBook), int.Parse(MonthExpenseBook), int.Parse(DayExpense)),
             CategoryID = SelectedCategory.Id,
             ExBMonth = int.Parse(MonthExpenseBook),
             ExBYear = int.Parse(YearExpenseBook),

@@ -1,11 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
-using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
-using Windows.UI;
-using XAct;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 

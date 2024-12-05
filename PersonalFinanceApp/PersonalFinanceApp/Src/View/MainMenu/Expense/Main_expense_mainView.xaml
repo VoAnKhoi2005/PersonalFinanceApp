@@ -266,7 +266,6 @@
                     <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
                     <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
                     <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
-                    <DataGridTextColumn Binding="{Binding Recurring}" Header="Recurring" />
                     <DataGridTextColumn Binding="{Binding Category}" Header="Category" />
                     <DataGridTextColumn Binding="{Binding BudgetExp}" Header="Budget" />
                     <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
@@ -313,7 +312,6 @@
                     <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
                     <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
                     <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
-                    <DataGridTextColumn Binding="{Binding Recurring}" Header="Recurring" />
                     <DataGridTextColumn Binding="{Binding Category}" Header="Category" />
                     <DataGridTextColumn Binding="{Binding BudgetExp}" Header="Budget" />
                     <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
