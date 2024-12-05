@@ -5,6 +5,7 @@ using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
@@ -132,6 +133,11 @@ public class ExpenseNewExBViewModel : BaseViewModel {
     }
     private void ConfirmExpenseBook(object sender) {
         //add data to database
+        long result;
+        if (!long.TryParse(BudgetExpenseBook, out result)) {
+            MessageBox.Show("Budget quá to! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
         var expenseBook = new ExpensesBook() {
             Month = SelectedMonth.Number,
             Year = SelectedYear,

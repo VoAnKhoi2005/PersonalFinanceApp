@@ -7,7 +7,6 @@ using PersonalFinanceApp.ViewModel.LoginMenu;
 using PersonalFinanceApp.ViewModel.MainMenu;
 using PersonalFinanceApp.ViewModel.Stores;
 using PersonalFinanceApp.Src.ViewModel.Stores;
-using PersonalFinanceApp.Src.View;
 
 namespace PersonalFinanceApp
 {
@@ -25,6 +24,7 @@ namespace PersonalFinanceApp
         protected override void OnStartup(StartupEventArgs e)
         {
             //Default login window
+
             NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
             navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<LoginNewAccountViewModel>();
             MainWindow = _serviceProvider.GetRequiredService<LoginWindow>();
@@ -50,14 +50,15 @@ namespace PersonalFinanceApp
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<NavigationStore>();
             services.AddSingleton<ModalNavigationStore>();
             services.AddSingleton<SharedDataService>();
-            services.AddSingleton<AccountStore>();
-            services.AddSingleton<GoalStore>();
-            services.AddSingleton<ExpenseStore>();
-            services.AddSingleton<SharedService>();
+            services.AddSingleton<NavigationStore>();
             services.AddSingleton<ChartServices>();
+            services.AddSingleton<SharedService>();
+            services.AddSingleton<AccountStore>();
+            services.AddSingleton<ExpenseStore>();
+            services.AddSingleton<EmailService>();
+            services.AddSingleton<GoalStore>();
 
             //Login window
             services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));
@@ -65,8 +66,8 @@ namespace PersonalFinanceApp
             {
                 DataContext = s.GetRequiredService<LoginMainViewModel>()
             });
-            services.AddTransient<LoginNewAccountViewModel>(s => new LoginNewAccountViewModel(s));
             services.AddTransient<ResetPasswordViewModel>(s => new ResetPasswordViewModel(s));
+            services.AddTransient<LoginNewAccountViewModel>(s => new LoginNewAccountViewModel(s));
             services.AddTransient<CodeVerificationViewModel>(s => new CodeVerificationViewModel(s));
             services.AddTransient<CreateNewPasswordViewModel>(s => new CreateNewPasswordViewModel(s));
 
@@ -77,31 +78,33 @@ namespace PersonalFinanceApp
                 var dataContext = s.GetRequiredService<MainViewModel>();
                 return new MainWindowFactory(dataContext, s);
             });
-            services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
             services.AddTransient<ExpenseViewModel>(s => new ExpenseViewModel(s));
-            services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
             services.AddTransient<SummaryViewModel>(s => new SummaryViewModel(s));
-
+            services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
+            services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
 
             //Modal-Popup
             //expense
-            services.AddTransient<ExpenseAddNewViewModel>(s => new ExpenseAddNewViewModel(s));
             services.AddTransient<ExpenseEditViewModel>(s => new ExpenseEditViewModel(s));
+            services.AddTransient<ExpenseAddNewViewModel>(s => new ExpenseAddNewViewModel(s));
             services.AddTransient<ExpenseDeleteViewModel>(s => new ExpenseDeleteViewModel(s));
             services.AddTransient<ExpenseRemoveViewModel>(s => new ExpenseRemoveViewModel(s));
-            services.AddTransient<ExpenseRecoverViewModel>(s => new ExpenseRecoverViewModel(s));
             services.AddTransient<ExpenseFilterViewModel>(s => new ExpenseFilterViewModel(s));
             services.AddTransient<ExpenseNewExBViewModel>(s => new ExpenseNewExBViewModel(s));
+            services.AddTransient<ExpenseRecoverViewModel>(s => new ExpenseRecoverViewModel(s));
             services.AddTransient<ExpenseNewCategoryViewModel>(s => new ExpenseNewCategoryViewModel(s));
 
-
             //goal
-            services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));
             services.AddTransient<GoalEditViewModel>(s => new GoalEditViewModel(s));
-            services.AddTransient<GoalHistoryViewModel>(s => new GoalHistoryViewModel(s));
-            services.AddTransient<GoalAddSavedAmountViewModel>(s => new GoalAddSavedAmountViewModel(s));
             services.AddTransient<GoalDeleteViewModel>(s => new GoalDeleteViewModel(s));
+            services.AddTransient<GoalHistoryViewModel>(s => new GoalHistoryViewModel(s));
+            services.AddTransient<GoalplanAddNewViewModel>(s => new GoalplanAddNewViewModel(s));
+            services.AddTransient<GoalAddSavedAmountViewModel>(s => new GoalAddSavedAmountViewModel(s));
             services.AddTransient<GoalAddNewCategoryViewModel>(s => new GoalAddNewCategoryViewModel(s));
+
+            //recurring
+            services.AddTransient<RecurringAddnew>(s => new RecurringAddnew(s));
+            services.AddTransient<RecurringViewModel>(s => new RecurringViewModel(s));
 
         }
 

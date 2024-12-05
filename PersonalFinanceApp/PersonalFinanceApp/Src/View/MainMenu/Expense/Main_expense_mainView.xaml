@@ -191,22 +191,14 @@
                 </DataGrid.InputBindings>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Date}"
-                                        Header="Date" />
-                    <DataGridTextColumn Binding="{Binding Name}"
-                                        Header="Name" />
-                    <DataGridTextColumn Binding="{Binding Amount}"
-                                        Header="Amount" />
-                    <DataGridTextColumn Binding="{Binding Recurring}"
-                                        Header="Recurring" />
-                    <DataGridTextColumn Binding="{Binding Category}"
-                                        Header="Category" />
-                    <DataGridTextColumn Binding="{Binding BudgetExp}"
-                                        Header="Budget" />
-                    <DataGridTextColumn Binding="{Binding Description}"
-                                        Header="Description" />
-                    <DataGridTemplateColumn CanUserResize="False"
-                                            Header="Commands">
+
+                    <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                    <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
+                    <DataGridTextColumn Binding="{Binding Category}" Header="Category" />
+                    <DataGridTextColumn Binding="{Binding BudgetExp}" Header="Budget" />
+                    <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
+                    <DataGridTemplateColumn CanUserResize="False" Header="Commands">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -249,22 +241,14 @@
                       SelectedItem="{Binding ItemsExB}"
                       ItemsSource="{Binding Expensesadvances}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Date}"
-                                        Header="Date" />
-                    <DataGridTextColumn Binding="{Binding Name}"
-                                        Header="Name" />
-                    <DataGridTextColumn Binding="{Binding Amount}"
-                                        Header="Amount" />
-                    <DataGridTextColumn Binding="{Binding Recurring}"
-                                        Header="Recurring" />
-                    <DataGridTextColumn Binding="{Binding Category}"
-                                        Header="Category" />
-                    <DataGridTextColumn Binding="{Binding BudgetExp}"
-                                        Header="Budget" />
-                    <DataGridTextColumn Binding="{Binding Description}"
-                                        Header="Description" />
-                    <DataGridTemplateColumn CanUserResize="False"
-                                            Header="Commands">
+
+                    <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                    <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
+                    <DataGridTextColumn Binding="{Binding Category}" Header="Category" />
+                    <DataGridTextColumn Binding="{Binding BudgetExp}" Header="Budget" />
+                    <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
+                    <DataGridTemplateColumn CanUserResize="False" Header="Commands">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
