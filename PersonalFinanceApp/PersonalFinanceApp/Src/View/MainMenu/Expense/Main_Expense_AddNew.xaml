@@ -316,9 +316,9 @@
                             <ComboBoxItem Content="3" />
                             <ComboBoxItem Content="4" />
                         </ComboBox>
-                        <TextBlock Text=","
+                        <TextBlock Text="/"
                                    DockPanel.Dock="Left"
-                                   Margin="3 20 0 0"
+                                   Margin="3 0 0 0"
                                    HorizontalAlignment="Left"></TextBlock>
 
                         <TextBox Width="45"
@@ -337,9 +337,9 @@
                                  Text="{Binding MonthExpenseBook}"
                                  IsReadOnly="True">
                         </TextBox>
-                        <TextBlock Text=","
+                        <TextBlock Text="/"
                                    DockPanel.Dock="Left"
-                                   Margin="0 20 0 0"
+                                   Margin="0 0 0 0"
                                    HorizontalAlignment="Left"></TextBlock>
 
                         <TextBox Width="55"
