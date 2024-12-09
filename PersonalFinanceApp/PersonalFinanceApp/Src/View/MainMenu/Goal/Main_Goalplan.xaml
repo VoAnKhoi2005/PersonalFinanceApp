@@ -156,7 +156,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Top"
                                         IsItemsHost="True"
-                                        ItemHeight="600"
+                                        ItemHeight="120"
                                         ItemWidth="420" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
