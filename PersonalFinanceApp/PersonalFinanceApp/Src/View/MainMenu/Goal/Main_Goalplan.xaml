@@ -7,20 +7,26 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:command="clr-namespace:PersonalFinanceApp.ViewModel.Command"
              xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
-             d:DesignHeight="720" d:DesignWidth="942">
+             d:DesignHeight="720"
+             d:DesignWidth="942">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
     </UserControl.Resources>
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Sans Serif Collection" />
-                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
-                <Setter Property="FontWeight" Value="Regular" />
+                <Setter Property="FontFamily"
+                        Value="Sans Serif Collection" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource CommonText}" />
+                <Setter Property="FontWeight"
+                        Value="Regular" />
             </Style>
             <Style TargetType="Button">
-                <Setter Property="Background" Value="Transparent"></Setter>
-                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                <Setter Property="Background"
+                        Value="Transparent"></Setter>
+                <Setter Property="Foreground"
+                        Value="{DynamicResource CommonText}"></Setter>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -34,9 +40,12 @@
                     </Setter.Value>
                 </Setter>
                 <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="true">
-                        <Setter Property="Cursor" Value="Hand"></Setter>
-                        <Setter Property="Background" Value="{DynamicResource onHovered}"></Setter>
+                    <Trigger Property="IsMouseOver"
+                             Value="true">
+                        <Setter Property="Cursor"
+                                Value="Hand"></Setter>
+                        <Setter Property="Background"
+                                Value="{DynamicResource onHovered}"></Setter>
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -44,11 +53,39 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"></RowDefinition>
+
+                <RowDefinition Height="45"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
- 
 
-            <DockPanel Grid.Row="0">
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48*"></RowDefinition>
+                    <RowDefinition Height="19*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Goal plan"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           Margin="25,-10,0,0"
+                           Height="55"
+                           Width="126"
+                           Grid.Row="0">
+                </TextBlock>
+                <TextBlock Text="Create financial goals and manage your savings"
+                           FontSize="14"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="26,0,0,0"
+                           Height="37"
+                           Width="303"
+                           Grid.Row="1">
+                </TextBlock>
+
+
+            </Grid>
+            <DockPanel Grid.Row="1">
 
                 <Border CornerRadius="20"
                         VerticalAlignment="Center"
@@ -61,7 +98,6 @@
                     <Button Command="{Binding AddNewGoalCommand}">
                         <Grid>
                             <TextBlock Text="New goal"
-
                                        FontSize="12"
                                        Margin="0,0,10,0"
                                        VerticalAlignment="Center"
@@ -80,20 +116,19 @@
                     </Button>
                 </Border>
                 <Border CornerRadius="30"
-                    Background="{DynamicResource CommonGridBackground}"
-                    Width="40" Height="40"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Right"
-                        DockPanel.Dock="Right"
-                    >
+                        Background="{DynamicResource CommonGridBackground}"
+                        Width="40"
+                        Height="40"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        DockPanel.Dock="Right">
                     <Button Command="{Binding RefreshGoalCommand}">
-                        <materialDesign:PackIcon Kind="Refresh" 
-                    Foreground="{DynamicResource CommonText}"
+                        <materialDesign:PackIcon Kind="Refresh"
+                                                 Foreground="{DynamicResource CommonText}"
                                                  Height="25"
                                                  Width="25"
                                                  HorizontalAlignment="Center"
-                                                 VerticalAlignment="Center"
-                                                  />
+                                                 VerticalAlignment="Center" />
                     </Button>
                 </Border>
 
@@ -101,24 +136,32 @@
 
             </DockPanel>
             <!--goal plan main looking-->
-            <Border Grid.Row="1" Margin="15,0,15,0">
+            <Border Grid.Row="2"
+                    Margin="15,0,15,0">
                 <Grid>
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
-                               Text="No goal found!" FontSize="30" Opacity="0.5"
+                    <TextBlock VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Text="No goal found!"
+                               FontSize="30"
+                               Opacity="0.5"
                                TextAlignment="Center"
-                               Visibility="{Binding HasNoGoal, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="10" Margin="0,30,0,0">
+                               Visibility="{Binding HasNoGoal, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  Padding="10"
+                                  Margin="0,30,0,0">
                         <ItemsControl ItemsSource="{Binding GoalplanCardViewModels}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <views:UC_Main_Goalplan_PlanCard Margin="10"/>
+                                    <views:UC_Main_Goalplan_PlanCard Margin="10" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Top"
-                                               IsItemsHost="True" 
-                                               ItemHeight="600" ItemWidth="420"/>
+                                    <WrapPanel HorizontalAlignment="Center"
+                                               VerticalAlignment="Top"
+                                               IsItemsHost="True"
+                                               ItemHeight="600"
+                                               ItemWidth="420" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <!--<ItemsControl.ItemContainerStyle>
