@@ -8,7 +8,7 @@ using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.Model;
 using System.Text.RegularExpressions;
 using System.Windows;
-using Windows.Devices.Power;
+using System.Windows.Controls;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class ExpenseViewModel : BaseViewModel {
@@ -126,7 +126,28 @@ public class ExpenseViewModel : BaseViewModel {
         }
     }
     private ObservableCollection<ExpenseAdvance> _expensesAdvances = new();
-    //
+    //source category 
+    public ObservableCollection<CheckBox> SourceCategory {
+        get => _sourceCategory;
+        set {
+            if (_sourceCategory != value) {
+                _sourceCategory = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private ObservableCollection<CheckBox> _sourceCategory = new();
+    //source category true
+    public ObservableCollection<CheckBox> CategoryFilter {
+        get => _categoryFilter;
+        set {
+            if (_categoryFilter != value) {
+                _categoryFilter = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private ObservableCollection<CheckBox> _categoryFilter = new();
     #endregion
     #region Command
     public ICommand AddNewExpenseCommand { get; set; }
@@ -144,6 +165,7 @@ public class ExpenseViewModel : BaseViewModel {
     public ICommand FindNumberCommand { get; set; }
     public ICommand FindDateCommand { get; set; }
     public ICommand SelectionChangedCommand { get; set; }
+    //public ICommand CategoryCommand { get; set; }
     #endregion
 
     public ExpenseViewModel(IServiceProvider serviceProvider) {
@@ -171,12 +193,46 @@ public class ExpenseViewModel : BaseViewModel {
         MatchCaseCommand = new RelayCommand<object>(MatchCase);
         MatchRegexCommand = new RelayCommand<object>(MatchRegex);
 
+        //CategoryCommand = new RelayCommand<object>(LoadCategory);
+
+    }
+    public void ReviewCategory() {
+        if (SourceCategory.Count == 0) return;
+        CategoryFilter.Clear();
+        foreach(var item in SourceCategory) {
+            if(item.IsChecked == true) {
+                CategoryFilter.Add(item);
+            }
+        }
+    }
+    public void LoadCategory(object? parameter = null) {
+        var items = DBManager.GetCondition<Category>(c => c.UserID == int.Parse(_accountStore.UsersID));
+        if (items == null) return;
+        SourceCategory.Clear();
+        foreach (var item in items) {
+            CheckBox cb = new CheckBox() {
+                Content = item.Name.ToString(),
+                Name = item.CategoryID.ToString(),
+                IsChecked = false
+            };
+            SourceCategory.Add(cb);
+        }
     }
     public void Filter(string pattern) {
         var userID = int.Parse(_accountStore.UsersID);
         Expensesadvances.Clear();
 
-        var items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID);
+        List<Expense> items = new List<Expense>();
+        if (CategoryFilter.Count == 0) {
+            items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID);
+        }
+        else {
+            foreach(var item in CategoryFilter) {
+                var i = DBManager.GetFirst<Expense>(e => e.UserID == userID && item.Name.CompareTo(e.CategoryID) == 0);
+                if(i != null) items.Add(i);
+            }
+        }
+
         if (items == null) return;
 
         if (SelectedTypeFilter.CompareTo("Name") == 0) {
@@ -259,7 +315,17 @@ public class ExpenseViewModel : BaseViewModel {
         var userID = int.Parse(_accountStore.UsersID);
         Expensesadvances.Clear();
 
-        var items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID && exp.Date == date);
+        List<Expense> items = new List<Expense>();
+        if (CategoryFilter.Count == 0) {
+            items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID && exp.Date == date);
+        }
+        else {
+            foreach (var item in CategoryFilter) {
+                var i = DBManager.GetFirst<Expense>(e => e.UserID == userID && item.Name.CompareTo(e.CategoryID) == 0 && e.Date == date);
+                if (i != null) items.Add(i);
+            }
+        }
+
         if (items == null) return;
         foreach(var item in items) {
             var exB = DBManager.GetFirst<ExpensesBook>(e => e.Month == item.ExBMonth && e.Year == item.ExBYear && e.UserID == item.UserID);
@@ -339,13 +405,21 @@ public class ExpenseViewModel : BaseViewModel {
     }
     private void ApplyFilter(Func<long, long, bool> condition, long number) {
         var userID = int.Parse(_accountStore.UsersID);
-
+        List<Expense> items = new List<Expense>();
         if (SelectedTypeFilter.CompareTo("Amount") == 0) {
-            var items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID && condition(exp.Amount, number));
+            if (CategoryFilter.Count == 0) {
+                items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID && condition(exp.Amount, number));
+            }
+            else {
+                foreach (var item in CategoryFilter) {
+                    var i = DBManager.GetFirst<Expense>(e => e.UserID == userID && item.Name.CompareTo(e.CategoryID) == 0 && condition(e.Amount, number));
+                    if (i != null) items.Add(i);
+                }
+            }
             AddExpensesAdvances(items);
         }
         else {
-            var items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID);
+            items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID);
             if (items != null) {
                 foreach (var item in items) {
                     var exB = DBManager.GetFirst<ExpensesBook>(e => e.Month == item.ExBMonth && e.Year == item.ExBYear && e.UserID == item.UserID && condition(e.Budget, number));
@@ -391,6 +465,7 @@ public class ExpenseViewModel : BaseViewModel {
 
     }
     public void LoadExpenses(object? p = null) {
+        LoadCategory();
         IsButtonVisible = true;
         IsButtonRecover = false;
         //load data to datagrid

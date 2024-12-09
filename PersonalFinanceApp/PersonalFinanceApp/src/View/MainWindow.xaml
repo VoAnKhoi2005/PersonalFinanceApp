@@ -44,8 +44,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"></ContentPresenter>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
@@ -67,8 +66,8 @@
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="210"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="210" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <DockPanel Grid.Column="0"
@@ -199,7 +198,6 @@
                                VerticalAlignment="Center"
                                FontWeight="Normal"
                                Margin="18,0,0,0" />
-
                 </Grid>
             </Button>
 
@@ -247,7 +245,6 @@
                     </Button>
                 </Border>
             </Grid>
-
             <!--Option-->
             <Button Command="{Binding SettingNavigateCommand}"
                     Height="60"
@@ -272,7 +269,6 @@
                                VerticalAlignment="Center"
                                FontWeight="Normal"
                                Margin="0,0,73,0" />
-
                 </Grid>
             </Button>
         </DockPanel>
@@ -280,8 +276,8 @@
         <Grid Grid.Column="1"
               Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="35" />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
@@ -538,38 +534,38 @@
                               IsOpen="{Binding IsModalOpen}"
                               Content="{Binding CurrentModalViewModel}">
                     <ContentControl.Resources>
-                        <!--expense-->
+                        <!--  expense  -->
 
-                        <!--add new-->
+                        <!--  add new  -->
                         <DataTemplate DataType="{x:Type viewModels:ExpenseAddNewViewModel}">
                             <views:Main_Expense_AddNew />
                         </DataTemplate>
-                        <!--new expense book-->
+                        <!--  new expense book  -->
                         <DataTemplate DataType="{x:Type viewModels:ExpenseNewExBViewModel}">
                             <views:UC_Main_ExpenseBook_AddNew />
                         </DataTemplate>
-                        <!--new category-->
+                        <!--  new category  -->
                         <DataTemplate DataType="{x:Type viewModels:ExpenseNewCategoryViewModel}">
                             <views:Main_Expense_AddCategory />
                         </DataTemplate>
-                        <!--edit-->
+                        <!--  edit  -->
                         <DataTemplate DataType="{x:Type viewModels:ExpenseEditViewModel}">
                             <views:Main_Expense_Edit />
                         </DataTemplate>
-                        <!--delete-->
+                        <!--  delete  -->
                         <DataTemplate DataType="{x:Type viewModels:ExpenseDeleteViewModel}">
                             <views:Main_Expense_DeleteConfirm />
                         </DataTemplate>
-                        <!--recover-->
+                        <!--  recover  -->
                         <DataTemplate DataType="{x:Type viewModels:ExpenseRecoverViewModel}">
                             <views:Main_Expense_RecoverConfirm />
                         </DataTemplate>
-                        <!--remove-->
+                        <!--  remove  -->
                         <DataTemplate DataType="{x:Type viewModels:ExpenseRemoveViewModel}">
                             <views:Main_Expense_RemoveConfirm />
                         </DataTemplate>
 
-                        <!--Goal-->
+                        <!--  Goal  -->
                         <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">
                             <views:UC_Main_Goalplan_Adding />
                         </DataTemplate>
@@ -588,7 +584,7 @@
                         <DataTemplate DataType="{x:Type viewModels:GoalAddNewCategoryViewModel}">
                             <views:NewCategory />
                         </DataTemplate>
-                        <!--recurring-->
+                        <!--  recurring  -->
                         <DataTemplate DataType="{x:Type viewModels:RecurringViewModel}">
                             <views:Recurring_MainView />
                         </DataTemplate>

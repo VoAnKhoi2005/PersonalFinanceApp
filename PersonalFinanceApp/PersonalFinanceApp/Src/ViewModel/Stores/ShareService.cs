@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System.Windows;
 
 namespace PersonalFinanceApp.Src.ViewModel.Stores;
 public class SharedService {
@@ -10,4 +7,5 @@ public class SharedService {
     public void Notify() {
         TriggerAction?.Invoke();
     }
+    public Window? w {  get; set; }
 }

@@ -152,8 +152,6 @@ public class GoalplanCardViewModel:BaseViewModel
     public ICommand DeleteGoalCommand { get; set; }
     public ICommand HistoryGoalCommand { get; set; }
     public ICommand AddNewAmountGoalCommand { get; set; }
-    public ICommand NotifyGoalCommand { get; set; }
-    public ICommand FavoritesGoalCommand { get; set; }
     public ICommand SaveIDGoalCard {  get; set; }
     #endregion
     private GoalplanCardViewModel() { }

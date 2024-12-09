@@ -6,14 +6,15 @@ using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.etc;
 using PersonalFinanceApp.Model;
+using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.View;
 using PersonalFinanceApp.ViewModel.Command;
-using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
 public class LoginNewAccountViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
+    private readonly SharedService _sharedService;
 
     #region Properties
     public bool IncorrectPasswordUserName {
@@ -148,6 +149,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
     public LoginNewAccountViewModel(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
+        _sharedService = serviceProvider.GetRequiredService<SharedService>();
         ForgotPasswordCommand = new NavigateCommand<ResetPasswordViewModel>(serviceProvider);
         //Login
         LoginCommand = new RelayCommand<User>(LoginSuccess, VerifyLogin);
@@ -181,9 +183,12 @@ public class LoginNewAccountViewModel : BaseViewModel {
             var factory = _serviceProvider.GetRequiredService<IWindowFactory>();
             MainWindow mainWindow = factory.CreateMainWindow(loginUser);
 
-            if (Application.Current.MainWindow != null)
-                Application.Current.MainWindow.Close();
-
+            if (Application.Current.MainWindow != null) {
+                Application.Current.MainWindow.Visibility = Visibility.Collapsed;
+                var loginwindow = Application.Current.MainWindow;
+                _sharedService.w = loginwindow;
+            }
+                
             Application.Current.MainWindow = mainWindow;
             mainWindow.Show();
         }

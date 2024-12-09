@@ -7,14 +7,15 @@
             <Setter.Value>
                 <ControlTemplate TargetType="local:Modal">
                     <ControlTemplate.Resources>
-                        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
+                        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
                     </ControlTemplate.Resources>
                     <Border
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="{TemplateBinding CornerRadius}"
-                        Visibility="{TemplateBinding IsOpen, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        Visibility="{TemplateBinding IsOpen,
+                                                     Converter={StaticResource BooleanToVisibilityConverter}}">
                         <ContentControl Content="{TemplateBinding Content}" />
                     </Border>
                 </ControlTemplate>

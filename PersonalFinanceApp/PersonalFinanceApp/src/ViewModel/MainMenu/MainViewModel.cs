@@ -1,7 +1,12 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalFinanceApp.etc;
+using PersonalFinanceApp.Src.ViewModel.Stores;
+using PersonalFinanceApp.View;
 using PersonalFinanceApp.ViewModel.Command;
+using PersonalFinanceApp.ViewModel.LoginMenu;
 using PersonalFinanceApp.ViewModel.Stores;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
@@ -10,6 +15,8 @@ public class MainViewModel : BaseViewModel
 {
     private readonly NavigationStore _navigationStore;
     private readonly ModalNavigationStore _modalNavigationStore;
+    private readonly IServiceProvider _serviceProvider;
+    private readonly SharedService _sharedService;  
     public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
     public BaseViewModel? CurrentModalViewModel => _modalNavigationStore.CurrentModalViewModel;
     public bool IsModalOpen => _modalNavigationStore.IsOpen;
@@ -21,10 +28,14 @@ public class MainViewModel : BaseViewModel
     public ICommand CloseCommand { get; set; }
     public ICommand WindowMinimum { get; set; }
     public ICommand WindowMaximum { get; set; }
-    public ICommand MoveCommand {  get; set; }
+    public ICommand MoveCommand { get; set; }
+    public ICommand ExitAccountCommand { get; set; }
+
 
     public MainViewModel(IServiceProvider serviceProvider)
     {
+        _serviceProvider = serviceProvider;
+        _sharedService = serviceProvider.GetRequiredService<SharedService>();
         _navigationStore = serviceProvider.GetRequiredService<NavigationStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
@@ -42,7 +53,24 @@ public class MainViewModel : BaseViewModel
                                     : WindowState.Maximized);
         WindowMinimum = new RelayCommand<Window>(w => w.WindowState = WindowState.Minimized);
         MoveCommand = new RelayCommand<Window>(w => w?.DragMove());
+        ExitAccountCommand = new RelayCommand<object>(ExitMain);
     }
+    public void ExitMain(object? parameter = null) {
+        if (Application.Current.MainWindow != null) {
+            Application.Current.MainWindow.Close();
+        }
+
+        NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
+        navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<LoginNewAccountViewModel>();
+
+        if (_sharedService.w != null) {
+            Application.Current.MainWindow = _sharedService.w;
+            Application.Current.MainWindow.Visibility = Visibility.Visible;
+            Application.Current.MainWindow.Activate(); 
+        }
+
+    }
+
     private void OnCurrentModalViewModelChanged()
     {
         OnPropertyChanged(nameof(CurrentModalViewModel));
