@@ -1,11 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
+using XAct.Messages;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -14,6 +17,7 @@ public class GoalEditViewModel : BaseViewModel
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly GoalStore _goalStore;
+    private readonly AccountStore _accountStore;
     #region Properties
     //name
     public string NameEditGoal {
@@ -70,6 +74,28 @@ public class GoalEditViewModel : BaseViewModel
         }
     }
     private string _reminderGoal;
+    //text reminder
+    public string ReminderTextEditGoal {
+        get => _reminderTextEditGoal;
+        set {
+            if (_reminderTextEditGoal != value) {
+                _reminderTextEditGoal = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _reminderTextEditGoal;
+    //item source reminder
+    public ObservableCollection<string> SourceReminder {
+        get => _sourceReminder;
+        set {
+            if (_sourceReminder != value) {
+                _sourceReminder = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    public ObservableCollection<string> _sourceReminder = new();
     //deadline
     public DateTime? DeadlineEditGoal {
         get => _deadlineGoal;
@@ -103,7 +129,7 @@ public class GoalEditViewModel : BaseViewModel
         }
     }
     private string _descriptionEditGoal;
-    //category
+    //category text
     public string CategoryEditGoal {
         get => _categoryGoal;
         set {
@@ -114,7 +140,7 @@ public class GoalEditViewModel : BaseViewModel
         }
     }
     private string _categoryGoal;
-    public ObservableCollection<string> _itemsGoalEdit = new ObservableCollection<string> { };
+    //source category 
     public ObservableCollection<string> ItemsGoalEdit {
         get => _itemsGoalEdit;
         set {
@@ -124,6 +150,8 @@ public class GoalEditViewModel : BaseViewModel
             }
         }
     }
+    public ObservableCollection<string> _itemsGoalEdit = new();
+    //selected item category
     public string SelectedItemEdit {
         get => _selectedItemEdit;
         set {
@@ -148,39 +176,43 @@ public class GoalEditViewModel : BaseViewModel
 
     public GoalEditViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
+        _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _goalStore = serviceProvider.GetRequiredService<GoalStore>();
 
         CreateCategoryCommand = new NavigateModalCommand<GoalAddNewCategoryViewModel>(serviceProvider);
 
         LoadDataAddNewGoalCommand = new RelayCommand<object>(LoadData);
-        
-
         CancelEditGoalCommand = new RelayCommand<object>(CloseModal);
         ConfirmEditGoalCommand = new RelayCommand<object>(ConfirmEditGoal);
     }
     public void LoadData(object parameter) {
-        LoadItemSourceCategoryGoal();
+        LoadItemSourceGoal();
         loadItem();
         if (_goalStore.NewCategory != null) {
             CategoryEditGoal = _goalStore.NewCategory;
             _goalStore.NewCategory = null;
         }
     }
-    public void LoadItemSourceCategoryGoal() {
+    public void LoadItemSourceGoal() {
         ItemsGoalEdit.Clear();
         var item = DBManager.GetAll<GoalCategory>();
         ItemsGoalEdit.Add("<New>");
         foreach (var it in item) {
             ItemsGoalEdit.Add(it.Name);
         }
+        SourceReminder.Clear();
+        SourceReminder.Add("Daily");
+        SourceReminder.Add("Weekly");
+        SourceReminder.Add("Monthly");
+        SourceReminder.Add("Yearly");
     }
     public void loadItem() {
-        var item = DBManager.GetFirst<Goal>(g => int.Parse(_goalStore.GoalID) == g.GoalID);
+        var item = DBManager.GetFirst<Goal>(g => int.Parse(_goalStore.GoalID) == g.GoalID && g.UserID == int.Parse(_accountStore.UsersID));
         NameEditGoal = item.Name;
         TargetEditGoal = item.Target.ToString();
         CurrentAmountEditGoal = item.CurrentAmount.ToString();
-        //goalEdit.Reminder = "Daily";
+        ReminderTextEditGoal = item.Reminder.ToString();
         DeadlineEditGoal = item.Deadline;
         DescriptionEditGoal = item.Description;
         CategoryEditGoal = item.CategoryName;
@@ -192,18 +224,30 @@ public class GoalEditViewModel : BaseViewModel
         //add data to database
         var goalID = _goalStore.GoalID;
         Goal goalEdit = new();
-        if(goalID != null) goalEdit = DBManager.GetFirst<Goal>(g => g.GoalID == int.Parse(goalID));
+        if (goalID != null) {
+            goalEdit = DBManager.GetFirst<Goal>(g => g.GoalID == int.Parse(goalID) && g.UserID == int.Parse(_accountStore.UsersID));
+        }
         if (goalEdit != null) {
             goalEdit.Name = NameEditGoal;
             goalEdit.Target = long.Parse(TargetEditGoal);
             goalEdit.CurrentAmount = long.Parse(CurrentAmountEditGoal);
-            goalEdit.Reminder = "Daily";
+            goalEdit.Reminder = ReminderEditGoal;
             goalEdit.Deadline = DeadlineEditGoal;
             goalEdit.Status = (long.Parse(TargetEditGoal) <= long.Parse(CurrentAmountEditGoal)) ? "Completed" : "Active";
             goalEdit.Description = DescriptionEditGoal;
             goalEdit.CategoryName = CategoryEditGoal;
         }
-        bool update = DBManager.Update<Goal>(goalEdit);
+        try {
+            bool update = DBManager.Update<Goal>(goalEdit);
+            if (!update) {
+                throw new InvalidOperationException("The update operation failed because the value is false.");
+            }
+        }
+        catch (Exception ex) {
+            MessageBox.Show("Có lỗi về dữ liệu vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+
         _modalNavigationStore.Close();
     }
 }

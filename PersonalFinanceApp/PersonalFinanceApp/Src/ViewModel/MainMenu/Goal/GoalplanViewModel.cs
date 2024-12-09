@@ -61,6 +61,10 @@ public class GoalplanViewModel : BaseViewModel
         GoalplanCardViewModels.Clear();
         List<Goal> goals = DBManager.GetCondition<Goal>(g => g.User.UserID == int.Parse(_accountStore.UsersID));
         foreach (var goal in goals) {
+            if(goal.Target <= goal.CurrentAmount) {
+                goal.Status = "Completed";
+                DBManager.Update(goal);
+            }
             GoalplanCardViewModels.Add(new GoalplanCardViewModel(_serviceProvider, goal) { ID = goal.GoalID.ToString()});
         }
     }

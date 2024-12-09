@@ -255,19 +255,19 @@ public class ExpenseAddNewViewModel : BaseViewModel {
             case 8:
             case 10:
             case 12:
-                for(int i = 1; i < 31; ++i) {
+                for(int i = 1; i <= 31; ++i) {
                     ItemDayExpense.Add(i.ToString());
                 }
                 break;
             case 2:
                 int per;
                 per = (SelectedItemExpenseBook.exB.Year % 4 == 0 && SelectedItemExpenseBook.exB.Year % 100 != 0) ?  29 :  28;
-                for (int i = 1; i < per; ++i) {
+                for (int i = 1; i <= per; ++i) {
                     ItemDayExpense.Add(i.ToString());
                 }
                 break;
             default:
-                for (int i = 1; i < 30; ++i) {
+                for (int i = 1; i <= 30; ++i) {
                     ItemDayExpense.Add(i.ToString());
                 }
                 break;
@@ -308,16 +308,16 @@ public class ExpenseAddNewViewModel : BaseViewModel {
             }
         }
         var expense = new Expense() {
-            Amount = int.Parse(AmountExpense),
+            Amount = long.Parse(AmountExpense),
             Name = NameExpense,
-            Date = new  DateOnly(int.Parse(YearExpenseBook), int.Parse(MonthExpenseBook), int.Parse(DayExpense)),
+            Description = DescriptionExpense,
+            Date = new DateOnly(int.Parse(YearExpenseBook), int.Parse(MonthExpenseBook), int.Parse(DayExpense)),
+            TimeAdded = DateTime.Now,
+            Deleted = false,
             CategoryID = SelectedCategory.Id,
             ExBMonth = int.Parse(MonthExpenseBook),
             ExBYear = int.Parse(YearExpenseBook),
             UserID = int.Parse(_accountStore.UsersID),
-            Description = DescriptionExpense,
-            TimeAdded = DateTime.Now,
-            Deleted = false,
         };
         DBManager.Insert(expense);
         _modalNavigationStore.Close();

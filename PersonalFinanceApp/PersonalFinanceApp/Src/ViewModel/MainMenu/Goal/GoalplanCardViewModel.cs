@@ -152,7 +152,7 @@ public class GoalplanCardViewModel:BaseViewModel
     public ICommand DeleteGoalCommand { get; set; }
     public ICommand HistoryGoalCommand { get; set; }
     public ICommand AddNewAmountGoalCommand { get; set; }
-    public ICommand SaveIDGoalCard {  get; set; }
+    public ICommand SaveIDGoalCard { get; set; }
     #endregion
     private GoalplanCardViewModel() { }
     public GoalplanCardViewModel(IServiceProvider serviceProvider, Goal goal)
@@ -171,6 +171,7 @@ public class GoalplanCardViewModel:BaseViewModel
 
         HistoryGoalCommand = new NavigateModalCommand<GoalHistoryViewModel>(serviceProvider);
 
+
         if (goal == null)
             return;
 
@@ -183,6 +184,7 @@ public class GoalplanCardViewModel:BaseViewModel
         CategoryGoalCard = goal.CategoryName;
         DescriptionGoalCard = goal.Description;
     }
+
     public void SaveID(object sender) {
         _goalStore.GoalID = ID;
     }

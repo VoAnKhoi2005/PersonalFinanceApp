@@ -100,9 +100,9 @@ public class ExpenseNewExBViewModel : BaseViewModel {
 
     public ExpenseNewExBViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
+        _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
-        _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         LoadItem();
         CancelExpenseBookCommand = new RelayCommand<object>(CloseModal);
         ConfirmExpenseBookCommand = new RelayCommand<object>(ConfirmExpenseBook);

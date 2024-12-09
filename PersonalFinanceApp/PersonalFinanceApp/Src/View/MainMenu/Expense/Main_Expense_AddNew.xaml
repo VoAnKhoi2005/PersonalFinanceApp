@@ -204,7 +204,6 @@
                         Foreground="{DynamicResource CommonText}"
                         ItemsSource="{Binding ItemsExpenseBook}"
                         SelectedItem="{Binding SelectedItemExpenseBook}"
-                        SelectedValue="{Binding SelectedExpenseBook}"
                         Text="{Binding TextChangedExpense}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
@@ -325,18 +324,14 @@
                             BorderBrush="{x:Null}"
                             FontSize="14"
                             FontWeight="DemiBold"
-                            Foreground="{DynamicResource CommonText}">
-                            <ComboBoxItem Content="1" />
-                            <ComboBoxItem Content="2" />
-                            <ComboBoxItem Content="3" />
-                            <ComboBoxItem Content="4" />
-                        </ComboBox>
+                            Foreground="{DynamicResource CommonText}"
+                            ItemsSource="{Binding ItemDayExpense}"
+                            SelectedItem="{Binding DayExpense}" />
                         <TextBlock
                             Margin="3,0,0,0"
                             HorizontalAlignment="Left"
                             DockPanel.Dock="Left"
                             Text="/" />
-
                         <TextBox
                             Width="45"
                             Height="40"

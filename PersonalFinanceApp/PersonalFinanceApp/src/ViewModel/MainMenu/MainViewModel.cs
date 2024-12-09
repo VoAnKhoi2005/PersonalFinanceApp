@@ -1,10 +1,7 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
-using PersonalFinanceApp.etc;
 using PersonalFinanceApp.Src.ViewModel.Stores;
-using PersonalFinanceApp.View;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.LoginMenu;
 using PersonalFinanceApp.ViewModel.Stores;
@@ -46,7 +43,7 @@ public class MainViewModel : BaseViewModel
         ExpenseBookNavigateCommand = new NavigateCommand<ExpenseViewModel>(serviceProvider);
         GoalplanNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
         SummaryNavigateCommand = new NavigateCommand<SummaryViewModel>(serviceProvider);
-        CloseCommand = new RelayCommand<Window>(w => w?.Close());
+        CloseCommand = new RelayCommand<Window>(CloseWindow);
         WindowMaximum = new RelayCommand<Window>(w => 
                     w.WindowState = w.WindowState == WindowState.Maximized
                                     ? WindowState.Normal
@@ -54,6 +51,10 @@ public class MainViewModel : BaseViewModel
         WindowMinimum = new RelayCommand<Window>(w => w.WindowState = WindowState.Minimized);
         MoveCommand = new RelayCommand<Window>(w => w?.DragMove());
         ExitAccountCommand = new RelayCommand<object>(ExitMain);
+    }
+    public void CloseWindow(Window window) {
+        window?.Close();
+        _sharedService.w?.Close();
     }
     public void ExitMain(object? parameter = null) {
         if (Application.Current.MainWindow != null) {

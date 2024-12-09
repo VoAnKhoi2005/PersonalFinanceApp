@@ -427,13 +427,7 @@
                         BorderBrush="{x:Null}"
                         FontSize="12"
                         Foreground="{DynamicResource CommonText}"
-                        Text="Category">
-                        <CheckBox Content="Hoihajdflh" />
-                        <CheckBox Content="homnay" />
-                        <CheckBox Content="toibuon" />
-                        <CheckBox Content="Hoihajdflh" />
-                        <CheckBox Content="Hoihajdflh" />
-                    </ComboBox>
+                        ItemsSource="{Binding SourceCategory}" />
                 </Grid>
             </Border>
         </DockPanel>
