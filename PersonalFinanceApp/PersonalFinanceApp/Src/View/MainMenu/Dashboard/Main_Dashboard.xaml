@@ -31,7 +31,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="30"
+                            <Border CornerRadius="20"
                                     Background="{TemplateBinding Background}">
                                 <ContentPresenter HorizontalAlignment="Stretch"
                                                   VerticalAlignment="Stretch">
@@ -52,298 +52,305 @@
             </Style>
         </Grid.Resources>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"></RowDefinition>
-                <RowDefinition Height="17*"></RowDefinition>
-                <RowDefinition Height="49*"></RowDefinition>
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="187*" />
+                <ColumnDefinition Width="127*" />
+            </Grid.ColumnDefinitions>
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition />
+                    <RowDefinition Height="4*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="48*"></RowDefinition>
+                        <RowDefinition Height="19*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Text="Dashboard"
+                               FontSize="28"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Margin="25,-10,0,0"
+                               Height="55"
+                               Width="150">
+                    </TextBlock>
+                    <TextBlock Grid.Row="1"
+                               Text="easy way to get a comprehensive overview of important data"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="26,0,0,-7"
+                               Height="37"
+                               Width="383">
+                    </TextBlock>
+                </Grid>
+                <DockPanel Grid.Row="1">
+                    <Border Width="200"
+                            Height="40"
+                            Margin="15,5,15,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="{DynamicResource CommonGridBackground}"
+                            CornerRadius="20"
+                            DockPanel.Dock="Left">
+                        <Button>
+                            <Grid>
+                                <ComboBox Height="30"
+                                          Margin="40,0,10,0"
+                                          materialDesign:HintAssist.Hint="Which expense book?"
+                                          materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                                          BorderBrush="{x:Null}"
+                                          FontSize="12"
+                                          Foreground="{DynamicResource CommonText}"
+                                          ItemsSource="{Binding SourceCategory}" />
+
+                                <materialDesign:PackIcon Kind="BookOpenPageVariantOutline"
+                                                         Width="20"
+                                                         Height="20"
+                                                         Margin="10,0,0,0"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Center"
+                                                         Foreground="{DynamicResource CommonText}" />
+                            </Grid>
+                        </Button>
+                    </Border>
+                </DockPanel>
+
+                <!--total balance  - income - expense - total saving -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <!--EXPENSE-->
+                    <Border CornerRadius="25"
+                            Background="{DynamicResource CommonGridBackground}"
+                            Margin="15 5 5 5"
+                            Grid.Column="0">
+                        <Button>
+                            <Grid Visibility="Visible">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="33*"></RowDefinition>
+                                    <RowDefinition Height="79*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="TOTAL BALANCE"
+                                           FontSize="15"
+                                           Margin="10,0,0,0"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center" />
+
+                                <!--Binding here-->
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock Text="VND"
+                                               FontWeight="DemiBold"
+                                               Margin="10 0 0 0"
+                                               VerticalAlignment="Center"
+                                               FontSize="14"></TextBlock>
+                                    <TextBlock Text="xxx.xxx.xxx"
+                                               FontSize="18"
+                                               Margin="5,0,0,3"
+                                               TextWrapping="Wrap"
+                                               Width="auto"
+                                               Height="auto"
+                                               TextAlignment="Left"
+                                               VerticalAlignment="Center">
+                                    </TextBlock>
+                                </DockPanel>
+                            </Grid>
+                        </Button>
+                    </Border>
+                    <Border CornerRadius="25"
+                            Background="{DynamicResource CommonGridBackground}"
+                            Margin="5 5 5 5"
+                            Grid.Column="1">
+                        <Button>
+                            <Grid Visibility="Visible">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="33*"></RowDefinition>
+                                    <RowDefinition Height="79*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="EXPENSE"
+                                           FontSize="15"
+                                           Margin="10,0,0,0"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center" />
+
+                                <!--Binding here-->
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock Text="VND"
+                                               FontWeight="DemiBold"
+                                               Margin="10 0 0 0"
+                                               VerticalAlignment="Center"
+                                               FontSize="14"></TextBlock>
+                                    <TextBlock Text="xxx.xxx.xxx"
+                                               FontSize="18"
+                                               Margin="5,0,0,3"
+                                               TextWrapping="Wrap"
+                                               Width="auto"
+                                               Height="auto"
+                                               TextAlignment="Left"
+                                               VerticalAlignment="Center">
+                                    </TextBlock>
+                                </DockPanel>
+                            </Grid>
+                        </Button>
+                    </Border>
+                    <!--TOTAL SAVING-->
+                    <Border CornerRadius="25"
+                            Background="{DynamicResource CommonGridBackground}"
+                            Margin="5 5 5 5"
+                            Grid.Column="2">
+                        <Button>
+                            <Grid Visibility="Visible">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="33*"></RowDefinition>
+                                    <RowDefinition Height="79*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="TOTAL SAVINGS?"
+                                           FontSize="15"
+                                           Margin="10,0,0,0"
+                                           FontWeight="Bold"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center" />
+
+                                <!--Binding here-->
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock Text="VND"
+                                               FontWeight="DemiBold"
+                                               Margin="10 0 0 0"
+                                               VerticalAlignment="Center"
+                                               FontSize="14"></TextBlock>
+                                    <TextBlock Text="xxx.xxx.xxx"
+                                               FontSize="18"
+                                               Margin="5,0,0,3"
+                                               TextWrapping="Wrap"
+                                               Width="auto"
+                                               Height="auto"
+                                               TextAlignment="Left"
+                                               VerticalAlignment="Center">
+                                    </TextBlock>
+                                </DockPanel>
+                            </Grid>
+                        </Button>
+                    </Border>
+                </Grid>
+
+
+                <!--Static - Chart - Goal -->
+                <Grid Grid.Row="3"
+                      Margin="0,4,0,0">
+
+                    <!-- static -->
+                    <Grid Grid.Column="0"></Grid>
+
+                    <!--chart - goal-->
+
+                    <!--activity-->
+                    <Grid Grid.Row="0"
+                          Grid.Column="0">
+                        <Border Background="{DynamicResource CommonGridBackground}"
+                                CornerRadius="25"
+                                Margin="15, 0, 5, 15">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Margin="10,5,10,5"
+                                           Text="ACTIVITIY"
+                                           FontSize="18"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           FontWeight="Bold">
+                                </TextBlock>
+                                <Button Grid.Row="1"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Command="{Binding ColumnChartNavigateCommand}">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <oxy:PlotView Background="Transparent"
+                                                          Model="{Binding ExpenseChart}"
+                                                          Controller="{Binding CustomPlotController}" />
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <TextBlock Grid.Row="1"
+                                           Text="No data found!"
+                                           FontSize="20"
+                                           Opacity="0.7"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           TextAlignment="Center"
+                                           Visibility="{Binding HasNoData, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
 
             <!--Dashboad - user icon-->
 
-            <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="48*"></RowDefinition>
-                    <RowDefinition Height="19*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0"
-                           Text="Dashboard"
-                           FontSize="28"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
-                           Margin="25,-10,0,0"
-                           Height="55"
-                           Width="150">
-                </TextBlock>
-                <TextBlock Grid.Row="1"
-                           Text="easy way to get a comprehensive overview of important data"
-                           FontSize="14"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Left"
-                           Margin="26,0,0,-7"
-                           Height="37"
-                           Width="383">
-                </TextBlock>
-            </Grid>
-
-
-            <!--total balance  - income - expense - total saving -->
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <!--EXPENSE-->
-                <Border HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch"
-                        CornerRadius="30"
-                        Background="{DynamicResource CommonGridBackground}"
-                        Margin="15,15,7.5,7.5"
-                        Grid.Column="0">
-                    <Button>
-                        <Grid Visibility="Visible">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="35*"></RowDefinition>
-                                <RowDefinition Height="50*"></RowDefinition>
-                                <RowDefinition Height="63*"></RowDefinition>
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Grid.Row="0"
-                                       Text="EXPENSE"
-                                       FontSize="15"
-                                       Margin="15,0,0,0"
-                                       FontWeight="Bold"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Top">
-                            </TextBlock>
-
-                            <!--Binding here-->
-                            <TextBlock Grid.Row="1"
-                                       Text="xxx.xxx.xxx VNĐ"
-                                       FontSize="20"
-                                       Margin="15,0,0,0"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Top">
-                            </TextBlock>
-
-                            <!--Binding here-->
-                            <Grid Grid.Row="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30*"></ColumnDefinition>
-                                    <ColumnDefinition Width="41*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Border Background="#25FFAE"
-                                        CornerRadius="20"
-                                        Width="66"
-                                        Height="35"
-                                        Margin="15,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center">
-                                    <Grid>
-                                        <materialDesign:PackIcon Width="20"
-                                                                 Height="20"
-                                                                 Foreground="{DynamicResource Dashboard_percent}"
-                                                                 VerticalAlignment="Center"
-                                                                 HorizontalAlignment="Left"
-                                                                 Margin="5,0,0,0"
-                                                                 Kind="ArrowTopRightThin" />
-                                        <TextBlock Text="x.x%"
-                                                   FontSize="14"
-                                                   VerticalAlignment="Center"
-                                                   HorizontalAlignment="Right"
-                                                   Margin="0,0,10,0"
-                                                   Foreground="{DynamicResource Dashboard_percent}">
-                                        </TextBlock>
-                                    </Grid>
-                                </Border>
-                                <TextBlock Text=".vs last month"
-                                           Grid.Column="1"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Left"
-                                           Height="31"
-                                           Width="78">
-                                </TextBlock>
-                            </Grid>
-                        </Grid>
-                    </Button>
-                </Border>
-
-                <!--TOTAL SAVING-->
-                <Border HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch"
-                        CornerRadius="30"
-                        Background="{DynamicResource CommonGridBackground}"
-                        Margin="7.5,15,7.5,7.5"
-                        Grid.Column="1">
-                    <Button>
-                        <Grid Visibility="Visible">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="178*" />
-                                <ColumnDefinition Width="35*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="35*"></RowDefinition>
-                                <RowDefinition Height="50*"></RowDefinition>
-                                <RowDefinition Height="63*"></RowDefinition>
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Grid.Row="0"
-                                       Text="TOTAL SAVING"
-                                       FontSize="15"
-                                       Margin="15,0,0,0"
-                                       FontWeight="Bold"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Top"
-                                       Grid.RowSpan="2">
-                            </TextBlock>
-
-                            <!--Binding here-->
-                            <TextBlock Text="xxx.xxx.xxx VNĐ"
-                                       FontSize="20"
-                                       Margin="15,35,0,0"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Top"
-                                       Grid.RowSpan="3" />
-
-                            <!--Binding here-->
-                            <Grid Grid.Row="1"
-                                  Grid.ColumnSpan="2"
-                                  Margin="0,50,0,0"
-                                  Grid.RowSpan="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30*"></ColumnDefinition>
-                                    <ColumnDefinition Width="41*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Border Background="{DynamicResource Dashboard_falseColor}"
-                                        CornerRadius="20"
-                                        Width="66"
-                                        Height="35"
-                                        Margin="15,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center">
-                                    <Grid>
-                                        <materialDesign:PackIcon Width="20"
-                                                                 Height="20"
-                                                                 VerticalAlignment="Center"
-                                                                 HorizontalAlignment="Left"
-                                                                 Foreground="{DynamicResource Dashboard_percent}"
-                                                                 Margin="5,0,0,0"
-                                                                 Kind="ArrowTopRightThin" />
-                                        <TextBlock Text="x.x%"
-                                                   FontSize="14"
-                                                   VerticalAlignment="Center"
-                                                   HorizontalAlignment="Right"
-                                                   Margin="0,0,10,0"
-                                                   Foreground="{DynamicResource Dashboard_percent}">
-                                        </TextBlock>
-                                    </Grid>
-                                </Border>
-                                <TextBlock Text=".vs last month"
-                                           Grid.Column="1"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Left"
-                                           Height="31"
-                                           Width="78">
-                                </TextBlock>
-                            </Grid>
-                        </Grid>
-                    </Button>
-                </Border>
-                <Border CornerRadius="30"
-                        Grid.Column="3"
-                        Background="{DynamicResource CommonGridBackground}"
-                        Margin="7.5,15,15,7.5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40*"></ColumnDefinition>
-                            <ColumnDefinition Width="27*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="27*"></RowDefinition>
-                                <RowDefinition Height="143*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0"
-                                       Text="BUDGET"
-                                       HorizontalAlignment="Left"
-                                       Margin="15,0,0,0"
-                                       FontWeight="Bold"
-                                       FontSize="18"
-                                       VerticalAlignment="Top"
-                                       Height="39"
-                                       Grid.RowSpan="2">
-                            </TextBlock>
-
-                            <!-- element of circle chart shown here-->
-                            <WrapPanel Orientation="Vertical"
-                                       Margin="10"
-                                       ItemHeight="25"
-                                       ItemWidth="75"
-                                       Grid.Row="1">
-
-                                <!--example-->
-                                <TextBlock DockPanel.Dock="Top"
-                                           Text="element1"></TextBlock>
-                                <TextBlock DockPanel.Dock="Top"
-                                           Text="element2"></TextBlock>
-                                <TextBlock DockPanel.Dock="Top"
-                                           Text="element3"></TextBlock>
-                                <TextBlock DockPanel.Dock="Top"
-                                           Text="element4"></TextBlock>
-                                <TextBlock DockPanel.Dock="Top"
-                                           Text="element5"></TextBlock>
-                                <TextBlock DockPanel.Dock="Top"
-                                           Text="element6"></TextBlock>
-                                <TextBlock DockPanel.Dock="Top"
-                                           Text="element7"></TextBlock>
-                                <TextBlock DockPanel.Dock="Top"
-                                           Text="element8"></TextBlock>
-                                <TextBlock DockPanel.Dock="Top"
-                                           Text="element8"></TextBlock>
-                            </WrapPanel>
-                        </Grid>
-
-                        <!--circle chart here-->
-                        <Grid Grid.Column="1">
-
-                            <Canvas>
-                                <TextBlock Text="Circle chart here"></TextBlock>
-                            </Canvas>
-                        </Grid>
-                    </Grid>
-                </Border>
-            </Grid>
-
-
-            <!--Static - Chart - Goal -->
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="296*"></ColumnDefinition>
-                    <ColumnDefinition Width="175*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-                <!-- static -->
-                <Grid Grid.Column="0"></Grid>
-
-                <!--chart - goal-->
-                <Grid Grid.Column="1">
+            <Grid  Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="10*" />
+                        <RowDefinition Height="13*" />
+                    </Grid.RowDefinitions>
                     <!--chart -->
-
-
+                    <Grid Grid.Row="2">
+                        <Border CornerRadius="25"
+                                Grid.Column="2"
+                                Background="{DynamicResource CommonGridBackground}"
+                                Margin="5,5 ,15,5">
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="27*"></RowDefinition>
+                                    <RowDefinition Height="143*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Text="BUDGET"
+                                           HorizontalAlignment="Left"
+                                           Margin="15,0,0,0"
+                                           FontWeight="Bold"
+                                           FontSize="15"
+                                           VerticalAlignment="Top"
+                                           Height="39"
+                                           Grid.RowSpan="2">
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                    </Grid>
                     <!--goal plan-->
-                    <Grid Grid.Row="1">
-                        <Border CornerRadius="30"
+                    <Grid Grid.Row="3"
+                          Grid.RowSpan="2">
+                        <Border CornerRadius="25"
                                 Grid.Row="0"
                                 Background="{DynamicResource CommonGridBackground}"
-                                Margin="7.5,7.5,15,15">
+                                Margin="5,5,15,15">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="15*"></RowDefinition>
                                     <RowDefinition Height="113*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="GOAL PLAN"
-                                           FontSize="18"
+                                           FontSize="15"
                                            FontWeight="Bold"
                                            Margin="15,0,0,0">
                                 </TextBlock>
@@ -356,49 +363,6 @@
 
                         </Border>
                     </Grid>
-                </Grid>
-
-                <!--activity-->
-                <Grid Grid.Row="0"
-                      Grid.Column="0">
-                    <Border Background="{DynamicResource CommonGridBackground}"
-                            CornerRadius="30"
-                            Margin="15, 7.5, 7.5, 15">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0"
-                                       Margin="20,10,10,5"
-                                       Text="ACTIVITIY"
-                                       FontSize="18"
-                                       HorizontalAlignment="Left"
-                                       VerticalAlignment="Center"
-                                       FontWeight="Bold">
-                            </TextBlock>
-                            <Button Grid.Row="1"
-                                    Background="Transparent"
-                                    BorderThickness="0"
-                                    Command="{Binding ColumnChartNavigateCommand}">
-                                <Button.Template>
-                                    <ControlTemplate TargetType="Button">
-                                        <oxy:PlotView Background="Transparent"
-                                                      Model="{Binding ExpenseChart}"
-                                                      Controller="{Binding CustomPlotController}" />
-                                    </ControlTemplate>
-                                </Button.Template>
-                            </Button>
-                            <TextBlock Grid.Row="1"
-                                       Text="No data found!"
-                                       FontSize="20"
-                                       Opacity="0.7"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Center"
-                                       Visibility="{Binding HasNoData, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                        </Grid>
-                    </Border>
                 </Grid>
             </Grid>
         </Grid>

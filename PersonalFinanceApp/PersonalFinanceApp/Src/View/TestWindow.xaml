@@ -5,10 +5,230 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Background="Transparent"
         Title="TestWindow"
-        Width="800"
-        Height="300">
+        Width="942"
+        Foreground="{DynamicResource CommonText}"
+        Height="720">
 
+
+    <StackPanel Orientation="Vertical">
+        <Button Margin="0,0,5,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Visibility="Visible" >
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background"
+                            Value="Transparent" />
+                    <Setter Property="Foreground"
+                            Value="{DynamicResource CommonText}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border Background="{TemplateBinding Background}"
+                                        Width="100">
+                                    <DockPanel>
+                                        <materialDesign:PackIcon Kind="AlphaABoxOutline"
+                                                                 Width="25"
+                                                                 Height="25"
+                                                                 HorizontalAlignment="Left"
+                                                                 VerticalAlignment="Center"
+                                                                 Foreground="{TemplateBinding Foreground}" />
+                                        <TextBlock Text="Find word"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   Margin="5 0 0 0"></TextBlock>
+                                    </DockPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="true">
+                            <Setter Property="Cursor"
+                                    Value="Hand" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource onHovered}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Margin="0,0,5,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Visibility="Visible">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background"
+                            Value="Transparent" />
+                    <Setter Property="Foreground"
+                            Value="{DynamicResource CommonText}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border Background="{TemplateBinding Background}"
+                                        Width="100">
+                                    <DockPanel>
+                                        <materialDesign:PackIcon Kind="CaseSensitiveAlt" 
+                                                                 Width="25"
+                                                                 Height="25"
+                                                                 HorizontalAlignment="Left"
+                                                                 VerticalAlignment="Center"
+                                                                 Foreground="{TemplateBinding Foreground}" />
+                                        <TextBlock Text="Find case"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   Margin="5 0 0 0"></TextBlock>
+                                    </DockPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="true">
+                            <Setter Property="Cursor"
+                                    Value="Hand" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource onHovered}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Margin="0,0,5,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Visibility="Visible">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background"
+                            Value="Transparent" />
+                    <Setter Property="Foreground"
+                            Value="{DynamicResource CommonText}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border Background="{TemplateBinding Background}"
+                                        Width="100">
+                                    <DockPanel>
+                                        <materialDesign:PackIcon Kind="Regex" 
+                                                                 Width="25"
+                                                                 Height="25"
+                                                                 HorizontalAlignment="Left"
+                                                                 VerticalAlignment="Center"
+                                                                 Foreground="{TemplateBinding Foreground}" />
+                                        <TextBlock Text="Find regex"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   Margin="5 0 0 0"></TextBlock>
+                                    </DockPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="true">
+                            <Setter Property="Cursor"
+                                    Value="Hand" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource onHovered}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Margin="0,0,5,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Visibility="Visible">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background"
+                            Value="Transparent" />
+                    <Setter Property="Foreground"
+                            Value="{DynamicResource CommonText}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border Background="{TemplateBinding Background}"
+                                        Width="120">
+                                    <DockPanel>
+                                        <materialDesign:PackIcon Kind="Numeric8BoxMultipleOutline" 
+                                                                 Width="25"
+                                                                 Height="25"
+                                                                 HorizontalAlignment="Left"
+                                                                 VerticalAlignment="Center"
+                                                                 Foreground="{TemplateBinding Foreground}" />
+                                        <TextBlock Text="Find number"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   Margin="5 0 0 0"></TextBlock>
+                                    </DockPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="true">
+                            <Setter Property="Cursor"
+                                    Value="Hand" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource onHovered}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Margin="0,0,5,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Visibility="Visible">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background"
+                            Value="Transparent" />
+                    <Setter Property="Foreground"
+                            Value="{DynamicResource CommonText}" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border Background="{TemplateBinding Background}"
+                                        Width="100">
+                                    <DockPanel>
+                                        <materialDesign:PackIcon Kind="CalendarRange" 
+                                        Width="25"
+                                                                 Height="25"
+                                                                 HorizontalAlignment="Left"
+                                                                 VerticalAlignment="Center"
+                                                                 Foreground="{TemplateBinding Foreground}" />
+                                        <TextBlock Text="Find date"
+                                                   FontSize="14"
+                                                   VerticalAlignment="Center"
+                                                   Margin="5 0 0 0"></TextBlock>
+                                    </DockPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="true">
+                            <Setter Property="Cursor"
+                                    Value="Hand" />
+                            <Setter Property="Foreground"
+                                    Value="{DynamicResource onHovered}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+    </StackPanel>
 </Window>

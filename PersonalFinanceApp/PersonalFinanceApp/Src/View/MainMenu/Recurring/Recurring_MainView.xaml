@@ -42,7 +42,40 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
-
+            
+            <!--return here-->
+            <Button>
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background"
+                                Value="Transparent"></Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                            Background="{TemplateBinding Background}">
+                                        <materialDesign:PackIcon Kind="ArrowLeft"
+                                                                 Height="40"
+                                                                 Width="60"
+                                                                 HorizontalAlignment="Center"
+                                                                 VerticalAlignment="Center"
+                                                                 Foreground="White" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="true">
+                                <Setter Property="Cursor"
+                                        Value="Hand"></Setter>
+                                <Setter Property="Background"
+                                        Value="{DynamicResource Cancel_buttonHover}"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Resources>
+            </Button>
             <Border CornerRadius="20"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right"

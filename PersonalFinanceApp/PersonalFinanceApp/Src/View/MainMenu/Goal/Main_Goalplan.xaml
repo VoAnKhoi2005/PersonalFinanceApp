@@ -7,6 +7,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
     d:DesignHeight="720"
     d:DesignWidth="942"
     mc:Ignorable="d">
@@ -53,16 +54,16 @@
                     <RowDefinition Height="48*" />
                     <RowDefinition Height="19*" />
                 </Grid.RowDefinitions>
-                <TextBlock
-                    Grid.Row="0"
-                    Width="126"
-                    Height="55"
-                    Margin="25,-10,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Bottom"
-                    FontSize="28"
-                    FontWeight="Bold"
-                    Text="Goal plan" />
+                <DockPanel Grid.Row="0">
+                    <TextBlock Width="126"
+                               Height="55"
+                               Margin="25,-10,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Bottom"
+                               FontSize="28"
+                               FontWeight="Bold"
+                               Text="Goal plan" />
+                </DockPanel>
                 <TextBlock
                     Grid.Row="1"
                     Width="303"
@@ -130,7 +131,7 @@
 
             </DockPanel>
             <!--  goal plan main looking  -->
-            <Border Grid.Row="2" Margin="15,0,15,0">
+            <Border Grid.Row="2" Margin="0,0,15,0">
                 <Grid>
                     <TextBlock
                         HorizontalAlignment="Center"
@@ -156,7 +157,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Top"
                                         IsItemsHost="True"
-                                        ItemHeight="120"
+                                        ItemHeight="auto"
                                         ItemWidth="420" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>

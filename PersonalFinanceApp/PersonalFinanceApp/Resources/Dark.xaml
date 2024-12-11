@@ -49,4 +49,7 @@
     <SolidColorBrush x:Key="User_onHovered" Color="#FF0A4B65" />
 
     <SolidColorBrush x:Key="Ntf_goal" Color="CadetBlue" />
+
+    <SolidColorBrush x:Key="GoalCardbackground"
+                     Color="#FF26444E"></SolidColorBrush>
 </ResourceDictionary>

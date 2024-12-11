@@ -10,13 +10,18 @@
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Sans Serif Collection" />
-                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
-                <Setter Property="FontWeight" Value="Regular" />
+                <Setter Property="FontFamily"
+                        Value="Sans Serif Collection" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource CommonText}" />
+                <Setter Property="FontWeight"
+                        Value="Regular" />
             </Style>
             <Style TargetType="Button">
-                <Setter Property="Background" Value="Transparent"></Setter>
-                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                <Setter Property="Background"
+                        Value="Transparent"></Setter>
+                <Setter Property="Foreground"
+                        Value="{DynamicResource CommonText}"></Setter>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -30,9 +35,12 @@
                     </Setter.Value>
                 </Setter>
                 <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="true">
-                        <Setter Property="Cursor" Value="Hand"></Setter>
-                        <Setter Property="Background" Value="{DynamicResource onHovered}"></Setter>
+                    <Trigger Property="IsMouseOver"
+                             Value="true">
+                        <Setter Property="Cursor"
+                                Value="Hand"></Setter>
+                        <Setter Property="Background"
+                                Value="{DynamicResource onHovered}"></Setter>
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -43,11 +51,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="132*"></ColumnDefinition>
-                    <ColumnDefinition Width="25*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="48*"></RowDefinition>
                         <RowDefinition Height="19*"></RowDefinition>
@@ -56,97 +60,657 @@
                                FontSize="28"
                                FontWeight="Bold"
                                HorizontalAlignment="Left"
-                               VerticalAlignment="Bottom" Margin="25,-10,0,0"
-                               Height="55" Width="126"
+                               VerticalAlignment="Bottom"
+                               Margin="25,-10,0,0"
+                               Height="55"
+                               Width="126"
                                Grid.Row="0">
                     </TextBlock>
                     <TextBlock Text="..."
                                FontSize="14"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Left" Margin="26,0,0,0"
-                               Height="37" Width="303"
+                               HorizontalAlignment="Left"
+                               Margin="26,0,0,0"
+                               Height="37"
+                               Width="303"
                                Grid.Row="1">
                     </TextBlock>
                 </Grid>
 
-                <!--user-->
-                <DockPanel Grid.Column="1">
-                    <Button Width="34" Height="36"
-                        VerticalAlignment="Center"
-                            DockPanel.Dock="Right"
-                        HorizontalAlignment="Right"
-                            Margin="0 0 15 0">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent"></Setter>
-                                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Width="32" Height="32" Background="Transparent">
-                                                <materialDesign:PackIcon 
-                                                Foreground="{TemplateBinding Foreground}"
-                                                    Kind="AccountBadge"
-                                                    Width="30" Height="30"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                         />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                    <Button Width="34" Height="36"
-                        VerticalAlignment="Center"
-                            DockPanel.Dock="Right"
-                        HorizontalAlignment="Right"
-                            Margin="0 0 5 0">
-                        <Button.Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent"></Setter>
-                                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Width="32" Height="32" Background="Transparent">
-                                                <materialDesign:PackIcon Kind="Bell" 
-                                                                         Foreground="{TemplateBinding Foreground}"
-                                                                            Width="28" Height="28"
-                                                                        VerticalAlignment="Center"
-                                                                        HorizontalAlignment="Center"
-                                         />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter Property="Cursor" Value="Hand"></Setter>
-                                        <Setter Property="Foreground"  Value="{DynamicResource onHovered}" ></Setter>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                </DockPanel>
-
-
             </Grid>
             <!--goal plan main looking-->
-            <Border Grid.Row="2" Margin="15,0,15,0">
+            <Border Grid.Row="2"
+                    Margin="10,0,10,0">
 
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                                  Margin="0,20,0,0">
-                    <Grid>
-                    </Grid>
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              Margin="0,20,0,0">
+                    <StackPanel>
+                        <!--account-->
+                        <Expander Foreground="{DynamicResource CommonText}"
+                                  Background="{DynamicResource CommonGridBackground}"
+                                  BorderThickness="3">
+                            <Expander.Header>
+                                <DockPanel>
+
+                                    <materialDesign:PackIcon Kind="AccountCog"
+                                                             Foreground="{DynamicResource CommonText}"
+                                                             Height="30"
+                                                             Width="30"
+                                                             HorizontalAlignment="Left"
+                                                             VerticalAlignment="Center" />
+                                    <TextBlock Text="Account"
+                                               FontSize="20"
+                                               FontWeight="Bold"
+                                               Margin="15 0 0 0" />
+                                </DockPanel>
+                            </Expander.Header>
+                            <DockPanel Height="260"
+                                       Margin="20 0 20 0">
+
+                                <!--change email-->
+                                <Button Height="50"
+                                        DockPanel.Dock="Top"
+                                        VerticalAlignment="Top">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background"
+                                                    Value="Transparent"></Setter>
+                                            <Setter Property="Foreground"
+                                                    Value="{DynamicResource CommonText}"></Setter>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Background="{TemplateBinding Background}">
+                                                            <Grid>
+                                                                <materialDesign:PackIcon Kind="EmailEdit"
+                                                                                         Foreground="{DynamicResource CommonText}"
+                                                                                         Height="25"
+                                                                                         Width="25"
+                                                                                         HorizontalAlignment="Left"
+                                                                                         VerticalAlignment="Center"
+                                                                                         Margin="10,0,0,0" />
+                                                                <TextBlock Text="Change your email"
+                                                                           FontSize="18"
+                                                                           VerticalAlignment="Center"
+                                                                           HorizontalAlignment="Left"
+                                                                           Margin="60 0 0 0"></TextBlock>
+                                                                <TextBlock Text=">"
+                                                                           FontSize="18"
+                                                                           VerticalAlignment="Center"
+                                                                           HorizontalAlignment="Right"
+                                                                           Margin="0 0 15 0"></TextBlock>
+                                                            </Grid>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver"
+                                                         Value="true">
+                                                    <Setter Property="Cursor"
+                                                            Value="Hand"></Setter>
+                                                    <Setter Property="Background"
+                                                            Value="{DynamicResource onHovered}"></Setter>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+
+                                <!--change password-->
+                                <Button Height="50"
+                                        DockPanel.Dock="Top"
+                                        VerticalAlignment="Top">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background"
+                                                    Value="Transparent"></Setter>
+                                            <Setter Property="Foreground"
+                                                    Value="{DynamicResource CommonText}"></Setter>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Background="{TemplateBinding Background}">
+                                                            <Grid>
+                                                                <materialDesign:PackIcon Kind="LockReset"
+                                                                                         Foreground="{DynamicResource CommonText}"
+                                                                                         Height="25"
+                                                                                         Width="25"
+                                                                                         HorizontalAlignment="Left"
+                                                                                         VerticalAlignment="Center"
+                                                                                         Margin="10,0,0,0" />
+                                                                <TextBlock Text="Change your password"
+                                                                           FontSize="18"
+                                                                           VerticalAlignment="Center"
+                                                                           HorizontalAlignment="Left"
+                                                                           Margin="60 0 0 0"></TextBlock>
+                                                                <TextBlock Text=">"
+                                                                           FontSize="18"
+                                                                           VerticalAlignment="Center"
+                                                                           HorizontalAlignment="Right"
+                                                                           Margin="0 0 15 0"></TextBlock>
+                                                            </Grid>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver"
+                                                         Value="true">
+                                                    <Setter Property="Cursor"
+                                                            Value="Hand"></Setter>
+                                                    <Setter Property="Background"
+                                                            Value="{DynamicResource onHovered}"></Setter>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <!--Delete cache-->
+                                <Button Height="50"
+                                        DockPanel.Dock="Top"
+                                        VerticalAlignment="Top">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background"
+                                                    Value="Transparent"></Setter>
+                                            <Setter Property="Foreground"
+                                                    Value="{DynamicResource CommonText}"></Setter>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Background="{TemplateBinding Background}">
+                                                            <Grid>
+                                                                <materialDesign:PackIcon Kind="Sync"
+                                                                                         Foreground="{DynamicResource CommonText}"
+                                                                                         Height="25"
+                                                                                         Width="25"
+                                                                                         HorizontalAlignment="Left"
+                                                                                         VerticalAlignment="Center"
+                                                                                         Margin="10,0,0,0" />
+                                                                <TextBlock Text="Delete cache "
+                                                                           FontSize="18"
+                                                                           VerticalAlignment="Center"
+                                                                           HorizontalAlignment="Left"
+                                                                           Margin="60 0 0 0"></TextBlock>
+                                                                <TextBlock Text=">"
+                                                                           FontSize="18"
+                                                                           VerticalAlignment="Center"
+                                                                           HorizontalAlignment="Right"
+                                                                           Margin="0 0 15 0"></TextBlock>
+                                                            </Grid>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver"
+                                                         Value="true">
+                                                    <Setter Property="Cursor"
+                                                            Value="Hand"></Setter>
+                                                    <Setter Property="Background"
+                                                            Value="{DynamicResource onHovered}"></Setter>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <!--delete account-->
+                                <Button Height="50"
+                                        DockPanel.Dock="Top"
+                                        VerticalAlignment="Top">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background"
+                                                    Value="Transparent"></Setter>
+                                            <Setter Property="Foreground"
+                                                    Value="{DynamicResource CommonText}"></Setter>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Background="{TemplateBinding Background}">
+                                                            <Grid>
+                                                                <materialDesign:PackIcon Kind="Delete"
+                                                                                         Height="25"
+                                                                                         Width="25"
+                                                                                         Foreground="#FFFF7373"
+                                                                                         HorizontalAlignment="Left"
+                                                                                         VerticalAlignment="Center"
+                                                                                         Margin="10,0,0,0" />
+                                                                <TextBlock Text="Delete your account"
+                                                                           Foreground="#FFFF7373"
+                                                                           FontSize="18"
+                                                                           VerticalAlignment="Center"
+                                                                           HorizontalAlignment="Left"
+                                                                           Margin="60 0 0 0"></TextBlock>
+                                                                <TextBlock Text=">"
+                                                                           FontSize="18"
+                                                                           VerticalAlignment="Center"
+                                                                           HorizontalAlignment="Right"
+                                                                           Margin="0 0 15 0"></TextBlock>
+                                                            </Grid>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver"
+                                                         Value="true">
+                                                    <Setter Property="Cursor"
+                                                            Value="Hand"></Setter>
+                                                    <Setter Property="Background"
+                                                            Value="{DynamicResource onHovered}"></Setter>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <!--log out -->
+                                <Button Height="50"
+                                        DockPanel.Dock="Top"
+                                        VerticalAlignment="Top">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background"
+                                                    Value="Transparent"></Setter>
+                                            <Setter Property="Foreground"
+                                                    Value="{DynamicResource CommonText}"></Setter>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Background="{TemplateBinding Background}">
+                                                            <Grid>
+                                                                <materialDesign:PackIcon Kind="Logout"
+                                                                                         Foreground="{DynamicResource CommonText}"
+                                                                                         Height="25"
+                                                                                         Width="25"
+                                                                                         HorizontalAlignment="Left"
+                                                                                         VerticalAlignment="Center"
+                                                                                         Margin="10,0,0,0" />
+                                                                <TextBlock Text="Log out"
+                                                                           FontSize="18"
+                                                                           VerticalAlignment="Center"
+                                                                           HorizontalAlignment="Left"
+                                                                           Margin="60 0 0 0"></TextBlock>
+                                                                <TextBlock Text=">"
+                                                                           FontSize="18"
+                                                                           VerticalAlignment="Center"
+                                                                           HorizontalAlignment="Right"
+                                                                           Margin="0 0 15 0"></TextBlock>
+                                                            </Grid>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver"
+                                                         Value="true">
+                                                    <Setter Property="Cursor"
+                                                            Value="Hand"></Setter>
+                                                    <Setter Property="Background"
+                                                            Value="{DynamicResource onHovered}"></Setter>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </DockPanel>
+                        </Expander>
+
+                        <!--Notification-->
+                        <Expander Foreground="{DynamicResource CommonText}"
+                                  Background="{DynamicResource CommonGridBackground}"
+                                  BorderThickness="3">
+                            <Expander.Header>
+                                <DockPanel>
+
+                                    <materialDesign:PackIcon Kind="BellCog"
+                                                             Foreground="{DynamicResource CommonText}"
+                                                             Height="30"
+                                                             Width="30"
+                                                             HorizontalAlignment="Left"
+                                                             VerticalAlignment="Center" />
+                                    <TextBlock Text="Notification"
+                                               FontSize="20"
+                                               FontWeight="Bold"
+                                               Margin="15 0 0 0" />
+                                </DockPanel>
+                            </Expander.Header>
+                            <Grid Height="100"
+                                  Margin="20 0 20 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <!--Allow notification-->
+                                <Grid Width="220"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"
+                                      Grid.Column="0">
+                                    <TextBlock Text="Allow notification"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"></TextBlock>
+                                    <ToggleButton IsChecked="True"
+                                                  Width="45"
+                                                  Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                                  ToolTip="MaterialDesignSwitchToggleButton"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Right"
+                                                  Background="#FF13C8B4"
+                                                  Foreground="#DDFFFFFF" />
+                                </Grid>
+
+                                <!--Push notification-->
+                                <Grid Width="220"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"
+                                      Grid.Column="1">
+                                    <TextBlock Text="Push notification"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"></TextBlock>
+                                    <ToggleButton IsChecked="True"
+                                                  Width="45"
+                                                  Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                                  ToolTip="MaterialDesignSwitchToggleButton"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Right"
+                                                  Background="#FF13C8B4"
+                                                  Foreground="#DDFFFFFF" />
+                                </Grid>
+
+                                <!--Email notification-->
+                                <Grid Width="200"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Center"
+                                      Grid.Column="2">
+                                    <TextBlock Text="Email notification"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"></TextBlock>
+                                    <ToggleButton IsChecked="True"
+                                                  Width="45"
+                                                  Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                                  ToolTip="MaterialDesignSwitchToggleButton"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Right"
+                                                  Background="#FF13C8B4"
+                                                  Foreground="#DDFFFFFF" />
+                                </Grid>
+                            </Grid>
+                        </Expander>
+
+                        <!--theme-->
+                        <Expander Foreground="{DynamicResource CommonText}"
+                                  Background="{DynamicResource CommonGridBackground}"
+                                  BorderThickness="3">
+                            <Expander.Header>
+                                <DockPanel>
+
+                                    <materialDesign:PackIcon Kind="ThemeLightDark"
+                                                             Foreground="{DynamicResource CommonText}"
+                                                             Height="30"
+                                                             Width="30"
+                                                             HorizontalAlignment="Left"
+                                                             VerticalAlignment="Center" />
+                                    <TextBlock Text="Theme "
+                                               FontSize="20"
+                                               FontWeight="Bold"
+                                               Margin="15 0 0 0" />
+                                </DockPanel>
+                            </Expander.Header>
+                            <Grid Height="100"
+                                  Margin="20 0 20 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <materialDesign:PackIcon Kind="WhiteBalanceSunny"
+                                                             Foreground="{DynamicResource CommonText}"
+                                                             Height="30"
+                                                             Width="30"
+                                                             HorizontalAlignment="Left"
+                                                             Margin="160 0 0 0"
+                                                             VerticalAlignment="Center" />
+                                    <TextBlock Text="Light theme"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Margin="50 0 0 0">
+
+                                    </TextBlock>
+                                    <RadioButton Width="20"
+                                                 Height="20"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Left"
+                                                 Margin="20 0 0 0"
+                                                 Background="#FF3AA9B7"
+                                                 BorderBrush="#FF28FFE0"></RadioButton>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <materialDesign:PackIcon Kind="WeatherNight"
+                                                             Foreground="{DynamicResource CommonText}"
+                                                             Height="30"
+                                                             Width="30"
+                                                             HorizontalAlignment="Left"
+                                                             Margin="160 0 0 0"
+                                                             VerticalAlignment="Center" />
+                                    <TextBlock Text="Dark theme"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Margin="50 0 0 0">
+
+                                    </TextBlock>
+                                    <RadioButton Width="20"
+                                                 Height="20"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Left"
+                                                 Margin="20 0 0 0"
+                                                 Background="#FF3AA9B7"
+                                                 BorderBrush="#FF28FFE0"></RadioButton>
+                                </Grid>
+                            </Grid>
+                        </Expander>
+
+                        <!--Export to file-->
+                        <Expander Foreground="{DynamicResource CommonText}"
+                                  Background="{DynamicResource CommonGridBackground}"
+                                  BorderThickness="3">
+                            <Expander.Header>
+                                <DockPanel>
+
+                                    <materialDesign:PackIcon Kind="FileExport"
+                                                             Foreground="{DynamicResource CommonText}"
+                                                             Height="30"
+                                                             Width="30"
+                                                             HorizontalAlignment="Left"
+                                                             VerticalAlignment="Center" />
+                                    <TextBlock Text="Export to file"
+                                               FontSize="20"
+                                               FontWeight="Bold"
+                                               Margin="15 0 0 0" />
+                                </DockPanel>
+                            </Expander.Header>
+                            <DockPanel Height="60"
+                                       Margin="20 0 20 0">
+
+                                <!--Export file-->
+                                <Button Height="50"
+                                        DockPanel.Dock="Top"
+                                        VerticalAlignment="Top">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background"
+                                                    Value="Transparent"></Setter>
+                                            <Setter Property="Foreground"
+                                                    Value="{DynamicResource CommonText}"></Setter>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Background="{TemplateBinding Background}">
+                                                            <Grid>
+                                                                <materialDesign:PackIcon Kind="FilePdfBox"
+                                                                                         Foreground="{DynamicResource CommonText}"
+                                                                                         Height="25"
+                                                                                         Width="25"
+                                                                                         HorizontalAlignment="Left"
+                                                                                         VerticalAlignment="Center"
+                                                                                         Margin="10,0,0,0" />
+                                                                <TextBlock Text="Export PDF file"
+                                                                           FontSize="18"
+                                                                           VerticalAlignment="Center"
+                                                                           HorizontalAlignment="Left"
+                                                                           Margin="60 0 0 0"></TextBlock>
+                                                                <TextBlock Text=">"
+                                                                           FontSize="18"
+                                                                           VerticalAlignment="Center"
+                                                                           HorizontalAlignment="Right"
+                                                                           Margin="0 0 15 0"></TextBlock>
+                                                            </Grid>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver"
+                                                         Value="true">
+                                                    <Setter Property="Cursor"
+                                                            Value="Hand"></Setter>
+                                                    <Setter Property="Background"
+                                                            Value="{DynamicResource onHovered}"></Setter>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </DockPanel>
+                        </Expander>
+
+                        <!--nothing here-->
+                        <Expander Foreground="{DynamicResource CommonText}"
+                                  Background="{DynamicResource CommonGridBackground}"
+                                  BorderThickness="3">
+                            <Expander.Header>
+                                <DockPanel>
+
+                                    <materialDesign:PackIcon Kind="Information"
+                                                             Foreground="{DynamicResource CommonText}"
+                                                             Height="30"
+                                                             Width="30"
+                                                             HorizontalAlignment="Left"
+                                                             VerticalAlignment="Center" />
+                                    <TextBlock Text="About us"
+                                               FontSize="20"
+                                               FontWeight="Bold"
+                                               Margin="15 0 0 0" />
+                                </DockPanel>
+                            </Expander.Header>
+
+                            <DockPanel Height="150"
+                                       Margin="20 0 20 0">
+                                <TextBlock Text="A group project to learn WPF using the C# programming language in IT008.12 class"
+                                           DockPanel.Dock="Top"
+                                           FontSize="18">
+                                </TextBlock>
+                                <Grid Height="30"
+                                      DockPanel.Dock="Top"
+                                      VerticalAlignment="Top">
+                                    <BulletDecorator VerticalAlignment="Center"
+                                                     HorizontalAlignment="Left">
+                                        <BulletDecorator.Bullet>
+                                            <Ellipse Width="10"
+                                                     Height="10"
+                                                     Margin="10 0 0 0"
+                                                     Fill="{DynamicResource CommonText}"></Ellipse>
+                                        </BulletDecorator.Bullet>
+                                    </BulletDecorator>
+                                    <TextBlock Text="23520790"
+                                               FontWeight="DemiBold"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Margin="30 0 0 0"></TextBlock>
+                                    <TextBlock Text="Võ An Khôi"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Margin="130 0 0 0"></TextBlock>
+                                    <TextBlock Text="@gmail.com"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right"
+                                               Margin="0 0 30 0"></TextBlock>
+                                </Grid>
+                                <Grid Height="30"
+                                      DockPanel.Dock="Top"
+                                      VerticalAlignment="Top">
+                                    <BulletDecorator VerticalAlignment="Center"
+                                                     HorizontalAlignment="Left">
+                                        <BulletDecorator.Bullet>
+                                            <Ellipse Width="10"
+                                                     Height="10"
+                                                     Margin="10 0 0 0"
+                                                     Fill="{DynamicResource CommonText}"></Ellipse>
+                                        </BulletDecorator.Bullet>
+                                    </BulletDecorator>
+                                    <TextBlock Text="23520802"
+                                               FontWeight="DemiBold"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Margin="30 0 0 0"></TextBlock>
+                                    <TextBlock Text="Nguyễn Trung Kiên"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Margin="130 0 0 0"></TextBlock>
+                                    <TextBlock Text="@gmail.com"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right"
+                                               Margin="0 0 30 0"></TextBlock>
+                                </Grid>
+                                <Grid Height="30"
+                                      DockPanel.Dock="Top"
+                                      VerticalAlignment="Top">
+                                    <BulletDecorator VerticalAlignment="Center"
+                                                     HorizontalAlignment="Left">
+                                        <BulletDecorator.Bullet>
+                                            <Ellipse Width="10"
+                                                     Height="10"
+                                                     Margin="10 0 0 0"
+                                                     Fill="{DynamicResource CommonText}"></Ellipse>
+                                        </BulletDecorator.Bullet>
+                                    </BulletDecorator>
+                                    <TextBlock Text="23520869"
+                                               FontWeight="DemiBold"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Margin="30 0 0 0"></TextBlock>
+                                    <TextBlock Text="Hồ Nguyễn Tài Lợi"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Margin="130 0 0 0"></TextBlock>
+                                    <TextBlock Text="@gmail.com"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right"
+                                               Margin="0 0 30 0"></TextBlock>
+                                </Grid>
+                            </DockPanel>
+                        </Expander>
+                    </StackPanel>
                 </ScrollViewer>
             </Border>
         </Grid>
