@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -25,16 +26,21 @@ namespace PersonalFinanceApp.Src.View
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
             LocalToastNotification notify = new LocalToastNotification();
             notify.Tile = "Test";
             notify.Content = "Hello app";
             notify.ShowNotification();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Conmemay_DisplayModeChanged(object sender, CalendarModeChangedEventArgs e)
         {
-
+            var calendar = sender as Calendar;
+            if (calendar == null)
+            {
+                MessageBox.Show("NO!");
+            }
         }
     }
 }
