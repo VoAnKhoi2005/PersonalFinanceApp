@@ -80,17 +80,6 @@ public class GoalplanCardViewModel:BaseViewModel
         }
     }
     private string _deadlineGoalCard;
-    //DecriptionGoalCard
-    public string DecriptionGoalCard {
-        get => _decriptionGoalCard;
-        set {
-            if (_decriptionGoalCard != value) {
-                _decriptionGoalCard = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _decriptionGoalCard;
     //CurrentAmoutGoalCard
     public string CurrentAmoutGoalCard {
         get => _currentAmoutGoalCard;
@@ -124,17 +113,6 @@ public class GoalplanCardViewModel:BaseViewModel
         }
     }
     private string _reminderGoalCard;
-    //resourceGoalCard
-    public string ResourceGoalCard {
-        get => _resourceGoalCard;
-        set {
-            if(_resourceGoalCard != value) {
-                _resourceGoalCard = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _resourceGoalCard;
     //resourceGoalCard
     public string DescriptionGoalCard {
         get => _descriptionGoalCard;
@@ -170,11 +148,11 @@ public class GoalplanCardViewModel:BaseViewModel
         AddNewAmountGoalCommand = new NavigateModalCommand<GoalAddSavedAmountViewModel>(serviceProvider);
 
         HistoryGoalCommand = new NavigateModalCommand<GoalHistoryViewModel>(serviceProvider);
-
-
         if (goal == null)
             return;
-
+        LoadGoalCard(goal);
+    }
+    public void LoadGoalCard(Goal goal) {
         NameGoalCard = goal.Name;
         TargetGoalCard = goal.Target.ToString();
         CurrentAmoutGoalCard = goal.CurrentAmount.ToString();
@@ -184,7 +162,6 @@ public class GoalplanCardViewModel:BaseViewModel
         CategoryGoalCard = goal.CategoryName;
         DescriptionGoalCard = goal.Description;
     }
-
     public void SaveID(object sender) {
         _goalStore.GoalID = ID;
     }

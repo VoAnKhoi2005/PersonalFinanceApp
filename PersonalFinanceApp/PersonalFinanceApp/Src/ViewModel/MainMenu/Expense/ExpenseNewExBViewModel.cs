@@ -14,6 +14,7 @@ public class ExpenseNewExBViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
     private readonly AccountStore _accountStore;
     private readonly ExpenseStore _expenseStore;
+    private readonly SharedService _sharedService;
     #region Properties
     //month
     public string MonthExpenseBook {
@@ -103,6 +104,7 @@ public class ExpenseNewExBViewModel : BaseViewModel {
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
+        _sharedService = serviceProvider.GetRequiredService<SharedService>();
         LoadItem();
         CancelExpenseBookCommand = new RelayCommand<object>(CloseModal);
         ConfirmExpenseBookCommand = new RelayCommand<object>(ConfirmExpenseBook);
@@ -146,6 +148,10 @@ public class ExpenseNewExBViewModel : BaseViewModel {
         };
         DBManager.Insert(expenseBook);
         _expenseStore.TextChangedExp = expenseBook.Month.ToString() + "/" + expenseBook.Year.ToString();
+
+        _expenseStore.ExpenseBook = expenseBook;
+        _sharedService.Notify();
+
         _modalNavigationStore.Close();
     }
     public class Month {

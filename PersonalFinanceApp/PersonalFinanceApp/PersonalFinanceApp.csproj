@@ -46,7 +46,6 @@
     <Resource Include="Resources\img\ac8257e1cfc4e63f5c63f3d4869eb7c4.jpg" />
     <Resource Include="Resources\img\Logo_UIT_updated.svg.png" />
     <Resource Include="Resources\img\PigBackground.png" />
-    <Resource Include="Resources\img\png-transparent-personal-finance-android-budget-android-blue-personal-finance-logo.png" />
   </ItemGroup>
 
   <ItemGroup>

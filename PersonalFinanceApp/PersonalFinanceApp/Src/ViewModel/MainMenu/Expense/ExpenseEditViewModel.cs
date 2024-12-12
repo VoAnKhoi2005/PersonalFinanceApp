@@ -174,7 +174,7 @@ public class ExpenseEditViewModel : BaseViewModel {
 
         YearExpenseBook = _expenseStore.ExpenseBook.Year.ToString();
         MonthExpenseBook = _expenseStore.ExpenseBook.Month.ToString();
-        BudgetExpenseBook = _expenseStore.BudgetCurrent;
+        BudgetExpenseBook = _expenseStore.BudgetCurrentExb;
 
         //load item source category
         ItemsEditExpense.Clear();
@@ -219,7 +219,7 @@ public class ExpenseEditViewModel : BaseViewModel {
         CategoryEditExpense = new CategoryItem { Id = cate.CategoryID, Name = cate.Name };
         MonthExpenseBook = exp.ExBMonth.ToString();
         YearExpenseBook = exp.ExBYear.ToString();
-        BudgetExpenseBook = _expenseStore.BudgetCurrent;
+        BudgetExpenseBook = _expenseStore.BudgetCurrentExb;
         TextDayExpenseEdit = exp.Date.Day.ToString();
         DayExpenseEdit = exp.Date.Day.ToString();
     }

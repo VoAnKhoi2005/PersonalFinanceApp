@@ -13,7 +13,6 @@ public class GoalplanViewModel : BaseViewModel
     private AccountStore _accountStore;
     #region Command
     public ICommand AddNewGoalCommand { get; set; }
-
     public ICommand RefreshGoalCommand { get; set; }
     #endregion
 

@@ -27,6 +27,7 @@ public class MainViewModel : BaseViewModel
     public ICommand WindowMaximum { get; set; }
     public ICommand MoveCommand { get; set; }
     public ICommand ExitAccountCommand { get; set; }
+    public ICommand CloseWindowCommand { get; set; }
 
 
     public MainViewModel(IServiceProvider serviceProvider)
@@ -53,6 +54,7 @@ public class MainViewModel : BaseViewModel
         WindowMinimum = new RelayCommand<Window>(w => w.WindowState = WindowState.Minimized);
         MoveCommand = new RelayCommand<Window>(w => w?.DragMove());
         ExitAccountCommand = new RelayCommand<object>(ExitMain);
+        CloseWindowCommand = new RelayCommand<Window>(CloseWindow);
     }
     public void CloseWindow(Window window) {
         window?.Close();

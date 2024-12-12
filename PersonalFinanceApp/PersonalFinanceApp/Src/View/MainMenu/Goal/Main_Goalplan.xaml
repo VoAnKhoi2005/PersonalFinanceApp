@@ -4,10 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:command="clr-namespace:PersonalFinanceApp.ViewModel.Command"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
-    xmlns:fa="http://schemas.fontawesome.io/icons/"
     d:DesignHeight="720"
     d:DesignWidth="942"
     mc:Ignorable="d">
@@ -55,14 +55,15 @@
                     <RowDefinition Height="19*" />
                 </Grid.RowDefinitions>
                 <DockPanel Grid.Row="0">
-                    <TextBlock Width="126"
-                               Height="55"
-                               Margin="25,-10,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Bottom"
-                               FontSize="28"
-                               FontWeight="Bold"
-                               Text="Goal plan" />
+                    <TextBlock
+                        Width="126"
+                        Height="55"
+                        Margin="25,-10,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        FontSize="28"
+                        FontWeight="Bold"
+                        Text="Goal plan" />
                 </DockPanel>
                 <TextBlock
                     Grid.Row="1"

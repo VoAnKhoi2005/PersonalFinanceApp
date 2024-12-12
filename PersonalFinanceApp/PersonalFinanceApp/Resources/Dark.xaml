@@ -50,8 +50,6 @@
 
     <SolidColorBrush x:Key="Ntf_goal" Color="CadetBlue" />
 
-    <SolidColorBrush x:Key="GoalCardbackground"
-                     Color="#FF26444E"></SolidColorBrush>
-    <SolidColorBrush x:Key="CalendarBackground"
-                     Color="#FF0D98E6"></SolidColorBrush>
+    <SolidColorBrush x:Key="GoalCardbackground" Color="#FF26444E" />
+    <SolidColorBrush x:Key="CalendarBackground" Color="#FF0D98E6" />
 </ResourceDictionary>

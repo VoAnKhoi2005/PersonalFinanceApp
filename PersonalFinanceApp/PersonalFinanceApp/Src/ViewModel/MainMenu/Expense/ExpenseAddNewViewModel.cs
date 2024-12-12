@@ -165,7 +165,7 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         TextChangedCategory = "";
         YearExpenseBook = _expenseStore.ExpenseBook.Year.ToString(); ;
         MonthExpenseBook = _expenseStore.ExpenseBook.Month.ToString();
-        BudgetExpenseBook = _expenseStore.BudgetCurrent;
+        BudgetExpenseBook = _expenseStore.BudgetCurrentExb;
 
         //load item source category
         ItemsExpense.Clear();
@@ -220,20 +220,25 @@ public class ExpenseAddNewViewModel : BaseViewModel {
                 return;
             }
         }
-        var expense = new Expense() {
-            Amount = long.Parse(AmountExpense),
-            Name = NameExpense,
-            Description = DescriptionExpense,
-            Date = new DateOnly(int.Parse(YearExpenseBook), int.Parse(MonthExpenseBook), int.Parse(DayExpense)),
-            TimeAdded = DateTime.Now,
-            Deleted = false,
-            CategoryID = SelectedCategory.Id,
-            ExBMonth = int.Parse(MonthExpenseBook),
-            ExBYear = int.Parse(YearExpenseBook),
-            UserID = int.Parse(_accountStore.UsersID),
-            //RecurringExpenseID = 1,
-        };
-        DBManager.Insert(expense);
+        try {
+            var expense = new Expense() {
+                Amount = long.Parse(AmountExpense),
+                Name = NameExpense,
+                Description = DescriptionExpense,
+                Date = new DateOnly(int.Parse(YearExpenseBook), int.Parse(MonthExpenseBook), int.Parse(DayExpense)),
+                TimeAdded = DateTime.Now,
+                Deleted = false,
+                CategoryID = SelectedCategory.Id,
+                ExBMonth = int.Parse(MonthExpenseBook),
+                ExBYear = int.Parse(YearExpenseBook),
+                UserID = int.Parse(_accountStore.UsersID),
+                //RecurringExpenseID = 1,
+            };
+            DBManager.Insert(expense);
+        }catch(Exception ex) {
+            MessageBox.Show("Vui lòng nhập đầy đủ và đúng chuẩn thông tin nhé!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
         _modalNavigationStore.Close();
     }
     public class CategoryItem {
