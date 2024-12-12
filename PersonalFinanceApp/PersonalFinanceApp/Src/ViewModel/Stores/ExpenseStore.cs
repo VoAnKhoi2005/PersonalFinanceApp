@@ -27,6 +27,16 @@ public class ExpenseStore : INotifyPropertyChanged {
             }
         }
     }
+    public string BudgetCurrent {
+        get => _budgetCurrent;
+        set {
+            if (_budgetCurrent != value) {
+                _budgetCurrent = value;
+                OnPropertyChanged(nameof(_budgetCurrent));
+            }
+        }
+    }
+    private string _budgetCurrent;
     private Category? _categorys;
     public Category? Categorys {
         get => _categorys;

@@ -4,7 +4,6 @@ using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
-using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -37,24 +36,39 @@ public class ExpenseEditViewModel : BaseViewModel {
         }
     }
     private string _amountEditExpense;
-    //date
-    public DateTime? DateTimeEditExpenseBook {
-        get => _dateTimeEditExpenseBook;
+    //day selected
+    public string DayExpenseEdit {
+        get => _dayExpenseEdit;
         set {
-            _dateTimeEditExpenseBook = value;
-            OnPropertyChanged(nameof(DateTimeEditExpenseBook));
-            if(value != null) DateOnlyExpenseBook = DateOnly.FromDateTime(_dateTimeEditExpenseBook.Value);
+            if (value != _dayExpenseEdit) {
+                _dayExpenseEdit = value;
+                OnPropertyChanged();
+            }
         }
     }
-    private DateTime? _dateTimeEditExpenseBook;
-    public DateOnly DateOnlyExpenseBook {
-        get => _dateOnlyExpenseBook;
-        private set {
-            _dateOnlyExpenseBook = value;
-            OnPropertyChanged(nameof(DateOnlyExpenseBook));
+    private string _dayExpenseEdit;
+    //day text
+    public string TextDayExpenseEdit {
+        get => _textDayExpenseEdit;
+        set {
+            if (value != _textDayExpenseEdit) {
+                _textDayExpenseEdit = value;
+                OnPropertyChanged();
+            }
         }
     }
-    private DateOnly _dateOnlyExpenseBook;
+    private string _textDayExpenseEdit;
+    //itemsource day
+    public ObservableCollection<string> ItemDayExpense {
+        get => _itemDayExpense;
+        set {
+            if (_itemDayExpense != value) {
+                _itemDayExpense = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private ObservableCollection<string> _itemDayExpense = new();
     //description
     public string DescriptionEditExpense {
         get => _descriptionEditExpense;
@@ -66,7 +80,7 @@ public class ExpenseEditViewModel : BaseViewModel {
         }
     }
     private string _descriptionEditExpense;
-    //category
+    //category selected
     public CategoryItem CategoryEditExpense {
         get => _categoryEditExpense;
         set {
@@ -81,46 +95,28 @@ public class ExpenseEditViewModel : BaseViewModel {
         }
     }
     private CategoryItem _categoryEditExpense;
-    //recurring
-    public string RecurringEditExpense {
-        get => _recurringEditExpense;
+    //text category
+    public string TextChangedCategory {
+        get => _textChangedCategory;
         set {
-            if (_recurringEditExpense != value) {
-                _recurringEditExpense = value;
+            if (_textChangedCategory != value) {
+                _textChangedCategory = value;
                 OnPropertyChanged();
             }
         }
     }
-    private string _recurringEditExpense;
-    //recurring
-    public string TextRecurring {
-        get => _textRecurring;
+    private string _textChangedCategory;
+    //itemsource caetegory
+    public ObservableCollection<CategoryItem> ItemsEditExpense {
+        get => _itemsEditExpense;
         set {
-            if (_textRecurring != value) {
-                _textRecurring = value;
+            if (_itemsEditExpense != value) {
+                _itemsEditExpense = value;
                 OnPropertyChanged();
             }
         }
     }
-    private string _textRecurring;
-    //expense book
-    public ExpenseBookItem SelectedEditExpenseBook {
-        get => _selectedEditExpenseBook;
-        set {
-            if (_selectedEditExpenseBook != value) {
-                if (value != null && value.sExB.CompareTo("<New>") == 0) {
-                    //excute new expensebook
-                    NewExpenseBookCommand.Execute(this);
-                }
-                if (value != null) {
-                    _expenseStore.ExpenseBook = value.exB;
-                }
-                _selectedEditExpenseBook = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private ExpenseBookItem _selectedEditExpenseBook;
+    public ObservableCollection<CategoryItem> _itemsEditExpense = new();
     //month
     public string MonthExpenseBook {
         get => _monthExpenseBook;
@@ -143,7 +139,7 @@ public class ExpenseEditViewModel : BaseViewModel {
         }
     }
     private string _yearExpenseBook;
-    //Budget
+    //Budget current
     public string BudgetExpenseBook {
         get => _budgetExpenseBook;
         set {
@@ -154,68 +150,11 @@ public class ExpenseEditViewModel : BaseViewModel {
         }
     }
     private string _budgetExpenseBook;
-    //itemsource caetegory
-    public ObservableCollection<CategoryItem> ItemsEditExpense {
-        get => _itemsEditExpense;
-        set {
-            if (_itemsEditExpense != value) {
-                _itemsEditExpense = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    public ObservableCollection<CategoryItem> _itemsEditExpense = new();
-    //itemsource expensebook
-    public ObservableCollection<ExpenseBookItem> ItemsEditExpenseBook {
-        get => _itemsEditExpenseBook;
-        set {
-            if (_itemsEditExpenseBook != value) {
-                _itemsEditExpenseBook = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    public ObservableCollection<ExpenseBookItem> _itemsEditExpenseBook = new();
-    //text expense
-    public string TextChangedExpense {
-        get => _textChangedExpense;
-        set {
-            if (_textChangedExpense != value) {
-                _textChangedExpense = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _textChangedExpense;
-    //text category
-    public string TextChangedCategory {
-        get => _textChangedCategory;
-        set {
-            if (_textChangedCategory != value) {
-                _textChangedCategory = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _textChangedCategory;
-    //not expenseBook
-    public bool NotExB {
-        get => _notExB;
-        set {
-            if (_notExB != value) {
-                _notExB = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private bool _notExB;
     #endregion
     public ICommand CancelEditExpenseCommand { get; set; }
     public ICommand ConfirmEditExpenseCommand { get; set; }
     public ICommand NewCategoryCommand { get; set; }
-    public ICommand NewExpenseBookCommand { get; set; }
     public ICommand LoadDataAddCommand { get; set; }
-    public ICommand SelectionChangedCommand { get; set; }
 
     public ExpenseEditViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
@@ -226,82 +165,76 @@ public class ExpenseEditViewModel : BaseViewModel {
         LoadItemSource();
 
         NewCategoryCommand = new NavigateModalCommand<ExpenseNewCategoryViewModel>(serviceProvider);
-        NewExpenseBookCommand = new NavigateModalCommand<ExpenseNewExBViewModel>(serviceProvider);
 
         LoadDataAddCommand = new RelayCommand<object>(LoadItemSource);
         CancelEditExpenseCommand = new RelayCommand<object>(CloseModal);
-        SelectionChangedCommand = new RelayCommand<object>(SelectionChanged);
         ConfirmEditExpenseCommand = new RelayCommand<object>(ConfirmEditExpense);
     }
-    public void SelectionChanged(object parameter) {
-        TextChangedCategory = "";
-        if (SelectedEditExpenseBook == null) return;
-        if (SelectedEditExpenseBook.sExB.CompareTo("<New>") == 0) {
-            NotExB = false;
-            return;
-        }
-        YearExpenseBook = SelectedEditExpenseBook.exB.Year.ToString();
-        MonthExpenseBook = SelectedEditExpenseBook.exB.Month.ToString();
-        BudgetExpenseBook = SelectedEditExpenseBook.exB.Budget.ToString();
-
-        NotExB = true;
-
-        ItemsEditExpense.Clear();
-        ItemsEditExpense.Add(new CategoryItem { Id = -1, Name = "<New>" });
-        if (YearExpenseBook != "" && MonthExpenseBook != "") {
-            var items = DBManager.GetCondition<Category>(c => c.UserID == int.Parse(_accountStore.UsersID) && c.ExBYear == int.Parse(YearExpenseBook) && c.ExBMonth == int.Parse(MonthExpenseBook));
-            foreach (var item in items) {
-                ItemsEditExpense.Add(new CategoryItem { Id = item.CategoryID, Name = item.Name });
-            }
-        }
-    }
     public void LoadItemSource(object? parameter = null) {
-        NotExB = false;
-        YearExpenseBook = "";
-        MonthExpenseBook = "";
-        BudgetExpenseBook = "";
+
+        YearExpenseBook = _expenseStore.ExpenseBook.Year.ToString();
+        MonthExpenseBook = _expenseStore.ExpenseBook.Month.ToString();
+        BudgetExpenseBook = _expenseStore.BudgetCurrent;
+
         //load item source category
         ItemsEditExpense.Clear();
         ItemsEditExpense.Add(new CategoryItem { Id = -1, Name = "<New>" });
-
-        ItemsEditExpenseBook.Clear();
-        ItemsEditExpenseBook.Add(new ExpenseBookItem { sExB = "<New>" });
-        var itemexBs = DBManager.GetCondition<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID));
-        foreach (var item in itemexBs) {
-            ItemsEditExpenseBook.Add(new ExpenseBookItem(item, (item.Month.ToString() + "/" + item.Year.ToString())));
+        var items = DBManager.GetCondition<Category>(c => c.UserID == int.Parse(_accountStore.UsersID) && c.ExBYear == int.Parse(YearExpenseBook) && c.ExBMonth == int.Parse(MonthExpenseBook));
+        foreach (var item in items) {
+            ItemsEditExpense.Add(new CategoryItem { Id = item.CategoryID, Name = item.Name });
         }
-
+        //day expense
+        ItemDayExpense.Clear();
+        switch (_expenseStore.ExpenseBook.Month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                for (int i = 1; i <= 31; ++i) {
+                    ItemDayExpense.Add(i.ToString());
+                }
+                break;
+            case 2:
+                int per;
+                per = (_expenseStore.ExpenseBook.Year % 4 == 0 && _expenseStore.ExpenseBook.Year % 100 != 0) ? 29 : 28;
+                for (int i = 1; i <= per; ++i) {
+                    ItemDayExpense.Add(i.ToString());
+                }
+                break;
+            default:
+                for (int i = 1; i <= 30; ++i) {
+                    ItemDayExpense.Add(i.ToString());
+                }
+                break;
+        }
         var exp = _expenseStore.Expenses;
         NameEditExpense = exp.Name;
         AmountEditExpense = exp.Amount.ToString();
         DescriptionEditExpense = exp.Description;
-        DateTimeEditExpenseBook = exp.Date.ToDateTime(TimeOnly.MinValue);
         var cate = DBManager.GetFirst<Category>(c => exp.CategoryID == c.CategoryID && c.UserID == exp.UserID);
         TextChangedCategory = cate.Name;
-        TextChangedExpense = exp.ExBMonth.ToString() + "/" + exp.ExBYear.ToString();
+        CategoryEditExpense = new CategoryItem { Id = cate.CategoryID, Name = cate.Name };
         MonthExpenseBook = exp.ExBMonth.ToString();
         YearExpenseBook = exp.ExBYear.ToString();
-        var exB = DBManager.GetFirst<ExpensesBook>(e => e.UserID == exp.UserID && e.Year == exp.ExBYear && e.Month == exp.ExBMonth);
-        BudgetExpenseBook = exB.Budget.ToString();
+        BudgetExpenseBook = _expenseStore.BudgetCurrent;
+        TextDayExpenseEdit = exp.Date.Day.ToString();
+        DayExpenseEdit = exp.Date.Day.ToString();
     }
     private void CloseModal(object sender) {
         _modalNavigationStore.Close();
     }
     private void ConfirmEditExpense(object sender) {
         //add data to database
-        //update expenseBook
-        var exB = DBManager.GetFirst<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID) && e.Year == int.Parse(YearExpenseBook) && e.Month == int.Parse(MonthExpenseBook));
-        if(exB.Budget != long.Parse(BudgetExpenseBook)) {
-            exB.Budget = long.Parse(BudgetExpenseBook);
-            DBManager.Update<ExpensesBook>(exB);
-        }
         //edit expense
         var itemExP = DBManager.GetFirst<Expense>(e => e.ExpenseID == _expenseStore.Expenses.ExpenseID && e.UserID == _expenseStore.Expenses.UserID);
         itemExP.Amount = long.Parse(AmountEditExpense);
         itemExP.Name = NameEditExpense;
         itemExP.Description = DescriptionEditExpense;
         itemExP.CategoryID = CategoryEditExpense.Id;
-        itemExP.Date = DateOnlyExpenseBook;
+        itemExP.Date = new DateOnly(int.Parse(YearExpenseBook), int.Parse(MonthExpenseBook),int.Parse(DayExpenseEdit));
 
         DBManager.Update<Expense>(itemExP);
         _modalNavigationStore.Close();

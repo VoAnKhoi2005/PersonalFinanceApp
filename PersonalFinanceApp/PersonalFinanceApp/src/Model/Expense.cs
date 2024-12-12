@@ -23,7 +23,7 @@ public class Expense
     [Required] public int CategoryID { get; set; }
     public virtual Category? Category { get; set; }
 
-    public int? RecurringExpenseID { get; set; } = -1;
+    public int? RecurringExpenseID { get; set; } = null;
     public virtual RecurringExpense? RecurringExpense { get; set; }
 
     [Required] [Range(1, 12)] public int ExBMonth { get; set; }

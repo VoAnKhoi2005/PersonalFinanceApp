@@ -36,7 +36,7 @@ public class ExpenseViewModel : BaseViewModel {
     }
     private bool _isButtonRecover;
 
-
+    //FILTER
     //is number
     public bool IsNumber {
         get => _isNumber;
@@ -101,6 +101,17 @@ public class ExpenseViewModel : BaseViewModel {
         }
     }
     private string _dataFilter;
+    //text type
+    public string TextType {
+        get => _textType;
+        set {
+            if (_textType != value) {
+                _textType = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _textType;
 
 
     //choose expense advance
@@ -148,6 +159,71 @@ public class ExpenseViewModel : BaseViewModel {
         }
     }
     private ObservableCollection<CheckBoxCategory> _categoryFilter = new();
+
+
+    //EXPENS BOOK
+    public ObservableCollection<ExpenseBookAdvance> SourceExpenseBook {
+        get => _sourceExpenseBook;
+        set {
+            if (_sourceExpenseBook != value) {
+                _sourceExpenseBook = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private ObservableCollection<ExpenseBookAdvance> _sourceExpenseBook;
+    //selected exb
+    public ExpenseBookAdvance SelectedExpenseBook {
+        get => _selectedExpenseBook;
+        set {
+            if (_selectedExpenseBook != value) {
+                if (value != null && value.DateExB.CompareTo("<New>") == 0) {
+                    //excute new expensebook
+                    NewExpenseBookCommand.Execute(this);
+                }
+                if (value != null) {
+                    _expenseStore.ExpenseBook = value.expensesBook;
+                    _expenseStore.BudgetCurrent = BudgetCurrent;//<================
+                }
+                _selectedExpenseBook = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private ExpenseBookAdvance _selectedExpenseBook;
+    //text exb
+    public string TextExpenseBook {
+        get => _textExpenseBook;
+        set {
+            if (_textExpenseBook != value) {
+                _textExpenseBook = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _textExpenseBook;
+    //budget expensebook official
+    public string BudgetOfficial {
+        get => _budgetOfficial;
+        set {
+            if (_budgetOfficial != value) {
+                _budgetOfficial = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _budgetOfficial;
+    //budget expense current
+    public string BudgetCurrent {
+        get => _budgetCurrent;
+        set {
+            if (value != _budgetCurrent) {
+                _budgetCurrent = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _budgetCurrent;
     #endregion
     #region Command
     public ICommand AddNewExpenseCommand { get; set; }
@@ -165,7 +241,8 @@ public class ExpenseViewModel : BaseViewModel {
     public ICommand FindNumberCommand { get; set; }
     public ICommand FindDateCommand { get; set; }
     public ICommand SelectionChangedCommand { get; set; }
-    //public ICommand CategoryCommand { get; set; }
+    public ICommand SelectionChangedExpenseBookCommand { get; set; }
+    public ICommand NewExpenseBookCommand {  get; set; }
     #endregion
 
     public ExpenseViewModel(IServiceProvider serviceProvider) {
@@ -173,38 +250,64 @@ public class ExpenseViewModel : BaseViewModel {
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
+        
+        //AddNewExpenseCommand = new NavigateModalCommand<ExpenseAddNewViewModel>(serviceProvider);
+        //EditExpenseCommand = new NavigateModalCommand<ExpenseEditViewModel>(serviceProvider);
+        //DeleteExpenseCommand = new NavigateModalCommand<ExpenseDeleteViewModel>(serviceProvider);
+        //RemoveExpenseCommand = new NavigateModalCommand<ExpenseRemoveViewModel>(serviceProvider);
+        //RecoverExpenseCommand = new NavigateModalCommand<ExpenseRecoverViewModel>(serviceProvider);
+        //RecurringDetailCommand = new NavigateModalCommand<RecurringViewModel>(serviceProvider);
+        //NewExpenseBookCommand = new NavigateModalCommand<ExpenseNewExBViewModel>(serviceProvider);
 
-        AddNewExpenseCommand = new NavigateModalCommand<ExpenseAddNewViewModel>(serviceProvider);
-        EditExpenseCommand = new NavigateModalCommand<ExpenseEditViewModel>(serviceProvider);
-        DeleteExpenseCommand = new NavigateModalCommand<ExpenseDeleteViewModel>(serviceProvider);
-        RemoveExpenseCommand = new NavigateModalCommand<ExpenseRemoveViewModel>(serviceProvider);
-        RecoverExpenseCommand = new NavigateModalCommand<ExpenseRecoverViewModel>(serviceProvider);
-        RecurringDetailCommand = new NavigateModalCommand<RecurringViewModel>(serviceProvider);
+        //GetNewest();
+        ////LoadExpenses();
 
-        LoadExpenses();
-
-        LoadRecoverCommand = new RelayCommand<object>(LoadRecover);
-        RefreshExpenseCommand = new RelayCommand<object>(LoadExpenses);
-        SelectionChangedCommand = new RelayCommand<object>(SelectionChanged);
+        //LoadRecoverCommand = new RelayCommand<object>(LoadRecover);
+        //RefreshExpenseCommand = new RelayCommand<object>(LoadExpenses);
+        //SelectionChangedCommand = new RelayCommand<object>(SelectionChanged);
         //FindNumberCommand = new RelayCommand<object>(FilterNumber);
+
         //FindDateCommand = new RelayCommand<object>(FilterDate);
         //MatchWholeWordCommand = new RelayCommand<object>(Matchwholeword);
         //MatchCaseCommand = new RelayCommand<object>(MatchCase);
         //MatchRegexCommand = new RelayCommand<object>(MatchRegex);
-
-        //CategoryCommand = new RelayCommand<object>(LoadCategory);
-
+        //SelectionChangedExpenseBookCommand = new RelayCommand<object>(ChangedExB);
     }
-    //public void ReviewCategory() {
-    //    if (SourceCategory.Count == 0) return;
-    //    CategoryFilter.Clear();
-    //    foreach(var item in SourceCategory) {
-    //        if(item.IsChecked == true) {
-    //            CategoryFilter.Add(item);
-    //        }
-    //    }
-    //}
+    public void ChangedExB(object? parameter = null) {
+        if (SelectedExpenseBook == null) {
+            TextExpenseBook = string.Empty;
+            BudgetOfficial = string.Empty;
+            BudgetCurrent = string.Empty;
+            return;
+        }
+        BudgetOfficial = SelectedExpenseBook.expensesBook.Budget.ToString();
+        var budgetcur = SelectedExpenseBook.expensesBook.Budget;
+        foreach(var item in Expensesadvances) {
+            budgetcur -= item.Amount;
+        }
+        BudgetCurrent = budgetcur.ToString();
+    }
+    public void GetNewest() {
+        var items = DBManager.GetCondition<ExpensesBook>(e => int.Parse(_accountStore.UsersID) == e.UserID);
+        ExpensesBook itemmax = items[0];
+        foreach(var item in items) {
+            if(item.Year > itemmax.Year || (item.Month > itemmax.Month && item.Year == itemmax.Year)) {
+                itemmax = item;
+            }
+        }
+        _expenseStore.ExpenseBook = itemmax;
+    }
+    public void ReviewCategory() {
+        if (SourceCategory.Count == 0) return;
+        CategoryFilter.Clear();
+        foreach (var item in SourceCategory) {
+            if (item.IsChecked == true) {
+                CategoryFilter.Add(item);
+            }
+        }
+    }
     public void LoadCategory(object? parameter = null) {
+
         var items = DBManager.GetCondition<Category>(c => c.UserID == int.Parse(_accountStore.UsersID));
         if (items == null) return;
         SourceCategory.Clear();
@@ -217,234 +320,251 @@ public class ExpenseViewModel : BaseViewModel {
             SourceCategory.Add(ckb);
         }
     }
-    public class CheckBoxCategory {
-        public int IDCategory { get; set; }
-        public CheckBox ckb { get; set; }
-        public CheckBoxCategory(int id, CheckBox cb) {
-            IDCategory = id;
-            ckb = cb;
+    public void Filter(string pattern) {
+        var userID = int.Parse(_accountStore.UsersID);
+        Expensesadvances.Clear();
+
+        List<Expense> items = new List<Expense>();
+        if (CategoryFilter.Count == 0) {
+            items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID);
+        }
+        else {
+            foreach (var item in CategoryFilter) {
+                var i = DBManager.GetCondition<Expense>(e => e.UserID == userID && item.IDCategory == e.CategoryID);
+                if (i != null) {
+                    foreach(var j in i) {
+                        items.Add(j);
+                    }
+                }
+            }
+        }
+        if (items == null) return;
+        if (SelectedTypeFilter.CompareTo("Name") == 0) {
+            foreach (var item in items) {
+                if (Regex.IsMatch(item.Name, pattern)) {
+                    Expensesadvances.Add(new ExpenseAdvance(item));
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+        else if (SelectedTypeFilter.CompareTo("Description") == 0) {
+            foreach (var item in items) {
+                if (Regex.IsMatch(item.Description, pattern)) {
+                    Expensesadvances.Add(new ExpenseAdvance(item));
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+        else {
+            MessageBox.Show("Dữ liệu có vấn đề! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
-    //public void Filter(string pattern) {
-    //    var userID = int.Parse(_accountStore.UsersID);
-    //    Expensesadvances.Clear();
-
-    //    List<Expense> items = new List<Expense>();
-    //    if (CategoryFilter.Count == 0) {
-    //        items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID);
-    //    }
-    //    else {
-    //        foreach(var item in CategoryFilter) {
-    //            var i = DBManager.GetFirst<Expense>(e => e.UserID == userID && item.Name.CompareTo(e.CategoryID) == 0);
-    //            if(i != null) items.Add(i);
-    //        }
-    //    }
-
-    //    if (items == null) return;
-
-    //    if (SelectedTypeFilter.CompareTo("Name") == 0) {
-    //        foreach (var item in items) {
-    //            if (Regex.IsMatch(item.Name, pattern)) {
-    //                var exB = DBManager.GetFirst<ExpensesBook>(e => e.Month == item.ExBMonth && e.Year == item.ExBYear && e.UserID == item.UserID);
-    //                if (exB != null) Expensesadvances.Add(new ExpenseAdvance(item, exB.Budget));
-    //            }
-    //            else {
-    //                continue;
-    //            }
-    //        }
-    //    }
-    //    else if (SelectedTypeFilter.CompareTo("Description") == 0) {
-    //        foreach (var item in items) {
-    //            if (Regex.IsMatch(item.Description, pattern)) {
-    //                var exB = DBManager.GetFirst<ExpensesBook>(e => e.Month == item.ExBMonth && e.Year == item.ExBYear && e.UserID == item.UserID);
-    //                if (exB != null) Expensesadvances.Add(new ExpenseAdvance(item, exB.Budget));
-    //            }
-    //            else {
-    //                continue;
-    //            }
-    //        }
-    //    }
-    //    else {
-    //        MessageBox.Show("Dữ liệu có vấn đề! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //    }
-    //}
-    //public void FilterDate(object? parameter = null) {
-    //    if (DataFilter == null) {
-    //        MessageBox.Show("Dữ liệu có vấn đề! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //        return;
-    //    }
-    //    string pattern = $@"^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$";
-    //    if(!Regex.IsMatch(DataFilter, pattern)) {
-    //        MessageBox.Show("Dữ liệu có vấn đề! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //        return;
-    //    }
+    public void FilterDate(object? parameter = null) {
+        ReviewCategory();
+        if (DataFilter == null) {
+            MessageBox.Show("Dữ liệu có vấn đề! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+        string pattern = @"^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$";
         
-    //    var datefilter = DataFilter.Split('/');
-    //    var day = int.Parse(datefilter[0]);
-    //    var month = int.Parse(datefilter[1]);
-    //    var year = int.Parse(datefilter[2]);
-    //    var date = new DateOnly(day, month, year);
-    //    switch (month) {
-    //        case 1:
-    //        case 3:
-    //        case 5:
-    //        case 7:
-    //        case 8:
-    //        case 10:
-    //        case 12:
-    //            if (day > 31 || day < 1) {
-    //                MessageBox.Show("Ngày không phù hợp! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //                return;
-    //            }
-    //            break;
-    //        case 2:
-    //            if (year % 4 == 0 && year % 100 != 0) {
-    //                if(day > 29 || day < 1) {
-    //                    MessageBox.Show("Ngày không phù hợp! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //                    return;
-    //                }
-    //            }
-    //            else {
-    //                if (day > 28 || day < 1) {
-    //                    MessageBox.Show("Ngày không phù hợp! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //                    return;
-    //                }
-    //            }
-    //            break;
-    //        default:
-    //            if (day > 30 || day < 1) {
-    //                MessageBox.Show("Ngày không phù hợp! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //                return;
-    //            }
-    //            break;
-    //    }
+        if (!Regex.IsMatch(DataFilter, pattern)) {
+            MessageBox.Show("Nhập dữ liệu theo quy tác DD/MM/yy (ví dụ: 30/04/2024)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
 
-    //    var userID = int.Parse(_accountStore.UsersID);
-    //    Expensesadvances.Clear();
+        var datefilter = DataFilter.Split('/');
+        var day = int.Parse(datefilter[0]);
+        var month = int.Parse(datefilter[1]);
+        var year = int.Parse(datefilter[2]);
+        var date = new DateOnly(year, month, day);
+        switch (month) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                if (day > 31 || day < 1) {
+                    MessageBox.Show("Ngày không phù hợp! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                break;
+            case 2:
+                if (year % 4 == 0 && year % 100 != 0) {
+                    if (day > 29 || day < 1) {
+                        MessageBox.Show("Ngày không phù hợp! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
+                else {
+                    if (day > 28 || day < 1) {
+                        MessageBox.Show("Ngày không phù hợp! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+                }
+                break;
+            default:
+                if (day > 30 || day < 1) {
+                    MessageBox.Show("Ngày không phù hợp! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                break;
+        }
 
-    //    List<Expense> items = new List<Expense>();
-    //    if (CategoryFilter.Count == 0) {
-    //        items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID && exp.Date == date);
-    //    }
-    //    else {
-    //        foreach (var item in CategoryFilter) {
-    //            var i = DBManager.GetFirst<Expense>(e => e.UserID == userID && item.Name.CompareTo(e.CategoryID) == 0 && e.Date == date);
-    //            if (i != null) items.Add(i);
-    //        }
-    //    }
+        var userID = int.Parse(_accountStore.UsersID);
+        Expensesadvances.Clear();
 
-    //    if (items == null) return;
-    //    foreach(var item in items) {
-    //        var exB = DBManager.GetFirst<ExpensesBook>(e => e.Month == item.ExBMonth && e.Year == item.ExBYear && e.UserID == item.UserID);
-    //        if (exB != null) Expensesadvances.Add(new ExpenseAdvance(item, exB.Budget));
-    //    }
-    //}
-    //public void MatchRegex(object? parameter = null) {
-    //    if (DataFilter == null) {
-    //        MessageBox.Show("Dữ liệu có vấn đề! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //        return;
-    //    }
-    //    if (!IsRegexValid(DataFilter)) return;
-    //    string pattern = $@"{DataFilter}";
-    //    Filter(pattern);
-    //}
-    //public bool IsRegexValid(string pattern) {
-    //    try {
-    //        Regex regex = new Regex(pattern);
-    //        return true;
-    //    }
-    //    catch (ArgumentException) {
-    //        MessageBox.Show("Dữ liệu có vấn đề! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //        return false;
-    //    }
-    //}
-    //public void MatchCase(object? parameter = null) {
-    //    if (DataFilter == null) {
-    //        MessageBox.Show("Dữ liệu có vấn đề! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //        return;
-    //    }
-    //    string pattern = $@"{Regex.Escape(DataFilter)}";
-    //    Filter(pattern);
-    //}
-    //public void Matchwholeword(object? parameter = null) {
-    //    if(DataFilter == null) {
-    //        MessageBox.Show("Dữ liệu có vấn đề! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //        return;
-    //    }
-    //    string pattern = $@"\b{Regex.Escape(DataFilter)}\b";
-    //    Filter(pattern);
-    //}
-    //public void FilterNumber(object? parameter = null) {
-    //    string[] patterns = {
-    //    @"^(<)([0-9])$",
-    //    @"^(>)([0-9])$",
-    //    @"^(=)([0-9])$",
-    //    @"^(!)([0-9])$",
-    //    @"^(<)(=)([0-9])$",
-    //    @"^(>)(=)([0-9])$"
-    //};
+        List<Expense> items = new List<Expense>();
+        if (CategoryFilter.Count == 0) {
+            items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID && exp.Date == date);
+        }
+        else {
+            foreach (var item in CategoryFilter) {
+                var i = DBManager.GetCondition<Expense>(e => e.UserID == userID && item.IDCategory == e.CategoryID && e.Date == date);
+                if (i != null) {
+                    foreach(var j in i) {
+                        items.Add(j);
+                    }
+                };
+            }
+        }
 
-    //    Func<string, long, Func<long, long, bool>>[] conditions = {
-    //    (op, val) => (x, y) => x < y,
-    //    (op, val) => (x, y) => x > y,
-    //    (op, val) => (x, y) => x == y,
-    //    (op, val) => (x, y) => x != y,
-    //    (op, val) => (x, y) => x <= y,
-    //    (op, val) => (x, y) => x >= y
-    //};
+        if (items == null) return;
 
-    //    string numberString = Regex.Match(DataFilter, "\\d+").Value;
-    //    if (!long.TryParse(numberString, out long number)) {
-    //        MessageBox.Show("Dữ liệu tìm kiếm quá to! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //        return;
-    //    }
+        foreach (var item in items) {
+            Expensesadvances.Add(new ExpenseAdvance(item));
+        }
+    }
+    public void MatchRegex(object? parameter = null) {
+        ReviewCategory();
+        if (DataFilter == null) {
+            MessageBox.Show("Dữ liệu có vấn đề! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+        if (!IsRegexValid(DataFilter)) return;
+        string pattern = $@"{DataFilter}";
+        Filter(pattern);
+    }
+    public bool IsRegexValid(string pattern) {
+        try {
+            Regex regex = new Regex(pattern);
+            return true;
+        }
+        catch (ArgumentException) {
+            MessageBox.Show("Dữ liệu phải là một regular expression (ví dụ: ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$)! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return false;
+        }
+    }
+    public void MatchCase(object? parameter = null) {
+        ReviewCategory();
+        if (DataFilter == null) {
+            MessageBox.Show("Dữ liệu có vấn đề! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+        string pattern = $@"{Regex.Escape(DataFilter)}";
+        Filter(pattern);
+    }
+    public void Matchwholeword(object? parameter = null) {
+        ReviewCategory();
+        if (DataFilter == null) {
+            MessageBox.Show("Dữ liệu có vấn đề! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+        string pattern = $@"\b{Regex.Escape(DataFilter)}\b";
+        Filter(pattern);
+    }
 
-    //    Expensesadvances.Clear();
-    //    for (int i = 0; i < patterns.Length; i++) {
-    //        if (Regex.IsMatch(DataFilter, patterns[i])) {
-    //            var condition = conditions[i]("", number);
-    //            ApplyFilter(condition, number);
-    //            return;
-    //        }
-    //    }
+    public void FilterNumber(object? parameter = null) {
+        ReviewCategory();
+        ReviewCategory();
+        string[] patterns = {
+        @"^(<)([0-9]+)$",
+        @"^(>)([0-9]+)$",
+        @"^(=)([0-9]+)$",
+        @"^(!)([0-9]+)$",
+        @"^(<)(=)([0-9]+)$",
+        @"^(>)(=)([0-9]+)$"
+    };
 
-    //    MessageBox.Show("Sai định dạng rồi! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-    //}
-    //private void ApplyFilter(Func<long, long, bool> condition, long number) {
-    //    var userID = int.Parse(_accountStore.UsersID);
-    //    List<Expense> items = new List<Expense>();
-    //    if (SelectedTypeFilter.CompareTo("Amount") == 0) {
-    //        if (CategoryFilter.Count == 0) {
-    //            items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID && condition(exp.Amount, number));
-    //        }
-    //        else {
-    //            foreach (var item in CategoryFilter) {
-    //                var i = DBManager.GetFirst<Expense>(e => e.UserID == userID && item.Name.CompareTo(e.CategoryID) == 0 && condition(e.Amount, number));
-    //                if (i != null) items.Add(i);
-    //            }
-    //        }
-    //        AddExpensesAdvances(items);
-    //    }
-    //    else {
-    //        items = DBManager.GetCondition<Expense>(exp => exp.UserID == userID);
-    //        if (items != null) {
-    //            foreach (var item in items) {
-    //                var exB = DBManager.GetFirst<ExpensesBook>(e => e.Month == item.ExBMonth && e.Year == item.ExBYear && e.UserID == item.UserID && condition(e.Budget, number));
-    //                if (exB != null) Expensesadvances.Add(new ExpenseAdvance(item, exB.Budget));
-    //            }
-    //        }
-    //    }
-    //}
-    //private void AddExpensesAdvances(IEnumerable<Expense> items) {
-    //    if (items != null) {
-    //        foreach (var item in items) {
-    //            var exB = DBManager.GetFirst<ExpensesBook>(e => e.Month == item.ExBMonth && e.Year == item.ExBYear && e.UserID == item.UserID);
-    //            if (exB != null) Expensesadvances.Add(new ExpenseAdvance(item, exB.Budget));
-    //        }
-    //    }
-    //}
+        Func<string, long, Func<long, long, bool>>[] conditions = {
+        (op, val) => (x, y) => x < y,
+        (op, val) => (x, y) => x > y,
+        (op, val) => (x, y) => x == y,
+        (op, val) => (x, y) => x != y,
+        (op, val) => (x, y) => x <= y,
+        (op, val) => (x, y) => x >= y
+    };
+
+        string numberString = Regex.Match(DataFilter, "\\d+").Value;
+        if (!long.TryParse(numberString, out long number)) {
+            MessageBox.Show("Dữ liệu tìm kiếm quá to! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+
+        Expensesadvances.Clear();
+        for (int i = 0; i < patterns.Length; i++) {
+            if (Regex.IsMatch(DataFilter, patterns[i])) {
+                var condition = conditions[i]("", number);
+                ApplyFilter(condition, number);
+                return;
+            }
+        }
+
+        MessageBox.Show("Sai định dạng rồi! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+    }
+    private void ApplyFilter(Func<long, long, bool> condition, long number) {
+        var userID = int.Parse(_accountStore.UsersID);
+        List<Expense> items = new();
+        try {
+            //none category
+            if (CategoryFilter.Count == 0) {
+                var itemss = DBManager.GetCondition<Expense>(exp => exp.UserID == userID);
+                foreach(var item in itemss) {
+                    if(condition(item.Amount, number)) {
+                        items.Add(item);
+                    }
+                }
+            }
+            else {
+                //have category
+                List<Expense> itemss = new();
+                foreach (var item in CategoryFilter) {
+                    var i = DBManager.GetCondition<Expense>(e => e.UserID == userID && item.IDCategory == e.CategoryID);
+                    if (i != null) {
+                        foreach(var j in i) {
+                            itemss.Add(j);
+                        }
+                    }
+                }
+                foreach (var item in itemss) {
+                    if (condition(item.Amount, number)) {
+                        items.Add(item);
+                    }
+                }
+            }
+            AddExpensesAdvances(items);
+        }
+        catch (Exception ex) {
+            MessageBox.Show("Có lỗi xảy ra", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+    }
+    private void AddExpensesAdvances(IEnumerable<Expense> items) {
+        if (items != null) {
+            foreach (var item in items) {
+                Expensesadvances.Add(new ExpenseAdvance(item));
+            }
+        }
+    }
     public void SelectionChanged(object? parameter = null) {
-        if(SelectedTypeFilter.CompareTo("Amount") == 0 || SelectedTypeFilter.CompareTo("Budget") == 0) {
+
+        if (SelectedTypeFilter == null) return;
+        if(SelectedTypeFilter.CompareTo("Amount") == 0) {
             IsNumber = true;
             IsString = false;
             IsDate = false;
@@ -466,35 +586,61 @@ public class ExpenseViewModel : BaseViewModel {
         Expensesadvances.Clear();
         var exp = DBManager.GetCondition<Expense>(e => e.UserID == int.Parse(_accountStore.UsersID), getDeleted:true);
         foreach(var e in exp) {
-            var exB = DBManager.GetFirst<ExpensesBook>(ex => ex.UserID == e.UserID && ex.Month == e.ExBMonth && ex.Year == e.ExBYear);
-            Expensesadvances.Add(new ExpenseAdvance(e, exB.Budget));
+            Expensesadvances.Add(new ExpenseAdvance(e));
         }
 
     }
-    public void LoadExpenses(object? p = null) {
-        LoadCategory();
-        IsButtonVisible = true;
-        IsButtonRecover = false;
-        //load data to datagrid
-        Expensesadvances.Clear();
-        var items = DBManager.GetCondition<Expense>(exp => exp.UserID == int.Parse(_accountStore.UsersID));
-        foreach (var item in items) {
-            var exB = DBManager.GetFirst<ExpensesBook>(e => e.Month == item.ExBMonth && e.Year == item.ExBYear && e.UserID == item.UserID);
-            Expensesadvances.Add(new ExpenseAdvance(item, exB.Budget));
+    //public void LoadExpenses(object? p = null) {
+    //    LoadCategory();
+    //    IsButtonVisible = true;
+    //    IsButtonRecover = false;
+    //    IsDate = true;
+    //    IsNumber = false;
+    //    IsString= false;
+    //    //load data to datagrid
+    //    Expensesadvances.Clear();
+    //    var items = DBManager.GetCondition<Expense>(exp => exp.UserID == int.Parse(_accountStore.UsersID));
+    //    foreach (var item in items) {
+    //        Expensesadvances.Add(new ExpenseAdvance(item));
+    //    }
+    //    //Load data to Type filter
+    //    SourceFilter.Clear();
+    //    //string
+    //    SourceFilter.Add("Date");
+    //    SourceFilter.Add("Name");
+    //    SourceFilter.Add("Description");
+    //    //number
+    //    SourceFilter.Add("Amount");
+    //    TextType = "Date";
+    //    SelectedTypeFilter = "Date";
+    //    DataFilter = string.Empty;
+
+    //    //expensebook
+    //    SourceExpenseBook.Clear();
+    //    var exBitem = DBManager.GetCondition<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID));
+    //    SourceExpenseBook.Add(new ExpenseBookAdvance());
+    //    foreach (var item in exBitem) {
+    //        SourceExpenseBook.Add(new ExpenseBookAdvance(item.Month, item.Year, item));
+    //    }
+    //    ExpenseBookAdvance exbA = new ExpenseBookAdvance(_expenseStore.ExpenseBook.Month, _expenseStore.ExpenseBook.Year, _expenseStore.ExpenseBook);
+    //    SelectedExpenseBook = exbA;
+    //    TextExpenseBook = exbA.DateExB;
+
+    //}
+    public class CheckBoxCategory {
+        public int IDCategory { get; set; }
+        public string Name{ get; set; }
+        public bool IsChecked { get; set; }
+        public CheckBox ckb { get; set; }
+        public CheckBoxCategory(int id, CheckBox cb) {
+            IDCategory = id;
+            ckb = cb;
+            Name = cb.Content.ToString();
+            IsChecked = false;
         }
-        //Load data to Type filter
-        SourceFilter.Clear();
-        //string
-        SourceFilter.Add("Date");
-        SourceFilter.Add("Name");
-        SourceFilter.Add("Description");
-        //number
-        SourceFilter.Add("Amount");
-        SourceFilter.Add("Budget");
     }
     public class ExpenseAdvance {
         public Expense exp {  get; set; }
-        public long BudgetExp { get; set; }
         public int ExpenseID { get; set; }
         public long Amount { get; set; }
         public string Name { get; set; }
@@ -505,9 +651,8 @@ public class ExpenseViewModel : BaseViewModel {
         public int CategoryID { get; set; }
         public string Category { get; set; }
         public ExpenseAdvance() { }
-        public ExpenseAdvance(Expense ex, long budget) {
+        public ExpenseAdvance(Expense ex) {
             exp = ex;
-            BudgetExp = budget;
             ExpenseID = ex.ExpenseID;
             Amount = ex.Amount;
             Name = ex.Name;
@@ -515,8 +660,20 @@ public class ExpenseViewModel : BaseViewModel {
             Date = ex.Date;
             TimeAdded = ex.TimeAdded;
             CategoryID = ex.CategoryID;
-            var cate = DBManager.GetFirst<Category>(c => c.CategoryID == ex.CategoryID);
+            var cate = DBManager.GetFirst<Category>(c => c.CategoryID == ex.CategoryID && c.UserID == ex.UserID);
             Category = cate.Name;
         }
     }
+    public class ExpenseBookAdvance {
+        public ExpenseBookAdvance(int month, int year, ExpensesBook e) {
+            DateExB = month.ToString() + "/" + year.ToString();
+            expensesBook = e;
+        }
+        public ExpenseBookAdvance() {
+            DateExB = "<New>";
+        }
+        public string DateExB { get; set; }
+        public ExpensesBook expensesBook { get; set; }
+    }
+
 }

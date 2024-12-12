@@ -43,6 +43,8 @@ public class MainViewModel : BaseViewModel
         ExpenseBookNavigateCommand = new NavigateCommand<ExpenseViewModel>(serviceProvider);
         GoalplanNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
         SummaryNavigateCommand = new NavigateCommand<SummaryViewModel>(serviceProvider);
+        //SummaryNavigateCommand = new NavigateCommand<SummaryViewModel>(serviceProvider);
+
         CloseCommand = new RelayCommand<Window>(CloseWindow);
         WindowMaximum = new RelayCommand<Window>(w => 
                     w.WindowState = w.WindowState == WindowState.Maximized
