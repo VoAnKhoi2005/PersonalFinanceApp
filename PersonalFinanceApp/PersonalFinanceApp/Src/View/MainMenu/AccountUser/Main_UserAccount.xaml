@@ -10,7 +10,7 @@
     <!--  color done  -->
     <Border
         Width="300"
-        Height="350"
+        Height="300"
         Background="{DynamicResource User_background}"
         CornerRadius="30">
         <Grid>
@@ -65,43 +65,17 @@
                     <RowDefinition Height="4*" />
                     <RowDefinition Height="5*" />
                     <RowDefinition Height="5*" />
-                    <RowDefinition Height="5*" />
                 </Grid.RowDefinitions>
 
                 <!--  user name  -->
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Text="@username" />
-
-                <!--  account detail  -->
-                <Border Grid.Row="1">
-                    <Button>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*" />
-                                <ColumnDefinition Width="23*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock
-                                Grid.Column="1"
-                                Margin="15,0,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                Text="Account detail" />
-                            <materialDesign:PackIcon
-                                Width="30"
-                                Height="30"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Kind="AccountCog" />
-                        </Grid>
-                    </Button>
-                </Border>
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Text="@username" />
 
                 <!--  sign out  -->
-                <Border Grid.Row="2">
+                <Border Grid.Row="1">
                     <Button>
                         <Grid>
                             <Grid.ColumnDefinitions>

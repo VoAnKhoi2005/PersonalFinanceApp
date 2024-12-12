@@ -12,8 +12,22 @@
              d:DesignWidth="400"
              mc:Ignorable="d">
 
-    <Border CornerRadius="30"
-            Background="{DynamicResource CommonGridBackground}">
+    <Border CornerRadius="30">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0"
+                                 EndPoint="1,1">
+                <GradientStop Color="#FF053B50"
+                              Offset="0.1" />
+                <GradientStop Color="#FF3A607F"
+                              Offset="0.59" />
+                <GradientStop Color="#FF1E6D8F"
+                              Offset="0.42" />
+                <GradientStop Color="#FF05476A"
+                              Offset="0.7" />
+                <GradientStop Color="#FF052E47"
+                              Offset="1" />
+            </LinearGradientBrush>
+        </Border.Background>
         <Border.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily"

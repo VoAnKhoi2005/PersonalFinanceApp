@@ -18,6 +18,7 @@
   <ItemGroup>
     <None Remove="Resources\img\ac8257e1cfc4e63f5c63f3d4869eb7c4.jpg" />
     <None Remove="Resources\img\Logo_UIT_updated.svg.png" />
+    <None Remove="Resources\img\png-transparent-personal-finance-android-budget-android-blue-personal-finance-logo.png" />
     <None Remove="Resources\PigBackground.png" />
   </ItemGroup>
 
@@ -45,6 +46,7 @@
     <Resource Include="Resources\img\ac8257e1cfc4e63f5c63f3d4869eb7c4.jpg" />
     <Resource Include="Resources\img\Logo_UIT_updated.svg.png" />
     <Resource Include="Resources\img\PigBackground.png" />
+    <Resource Include="Resources\img\png-transparent-personal-finance-android-budget-android-blue-personal-finance-logo.png" />
   </ItemGroup>
 
   <ItemGroup>

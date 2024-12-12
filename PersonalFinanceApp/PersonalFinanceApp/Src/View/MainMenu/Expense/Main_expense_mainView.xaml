@@ -49,30 +49,53 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="48*" />
-                <RowDefinition Height="19*" />
-            </Grid.RowDefinitions>
-            <TextBlock
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Width="417"
-                Height="55"
-                Margin="25,0,0,17"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                FontSize="28"
-                FontWeight="Bold"
-                Text="Expense" />
-            <TextBlock
-                Grid.Row="1"
-                Width="303"
-                Height="37"
-                Margin="26,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontSize="14"
-                Text="Overview of your activities" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48*" />
+                    <RowDefinition Height="19*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Width="417"
+                           Height="55"
+                           Margin="25,0,0,17"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Text="Expense" />
+                <TextBlock Grid.Row="1"
+                           Width="303"
+                           Height="37"
+                           Margin="26,0,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="Overview of your activities" />
+            </Grid>
+            <DockPanel Grid.Column="1">
+                <TextBlock Text="Total budget" 
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Left"></TextBlock>
+                <TextBlock Text="xxx xxx xxx"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Left"
+                           Margin=" 10 0 0 0 "></TextBlock>
+
+                <TextBlock Text="Remaining budget"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Left"
+                           Margin=" 50 0 0 0 "></TextBlock>
+                <TextBlock Text="xxx xxx xxx"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Left"
+                           Margin=" 10 0 0 0 "></TextBlock>
+            </DockPanel>
+
         </Grid>
         <DockPanel Grid.Row="1">
             <!--  add new  -->
@@ -106,15 +129,30 @@
                     </Grid>
                 </Button>
             </Border>
-            <Border
-                Width="40"
-                Height="40"
-                Margin="0,0,5,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Background="{DynamicResource CommonGridBackground}"
-                CornerRadius="30"
-                DockPanel.Dock="Right">
+            <Border Width="40"
+                    Height="40"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource CommonGridBackground}"
+                    CornerRadius="30"
+                    DockPanel.Dock="Right">
+                <Button Command="{Binding RefreshGoalCommand}">
+                    <materialDesign:PackIcon Width="25"
+                                             Height="25"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"
+                                             Foreground="{DynamicResource CommonText}"
+                                             Kind="Refresh" />
+                </Button>
+            </Border>
+            <Border Width="40"
+                    Height="40"
+                    Margin="0,0,5,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource CommonGridBackground}"
+                    CornerRadius="30"
+                    DockPanel.Dock="Right">
                 <Button Command="{Binding LoadRecoverCommand}">
                     <materialDesign:PackIcon
                         Width="25"
@@ -142,23 +180,21 @@
                     FontSize="13"
                     Foreground="{DynamicResource CommonText}" />
             </Border>
-            <Border
-                Width="120"
-                Height="40"
-                Margin="5,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                Background="{DynamicResource CommonGridBackground}"
-                CornerRadius="20"
-                DockPanel.Dock="Left">
-                <ComboBox
-                    Width="100"
-                    Margin="10,2,10,3"
-                    materialDesign:HintAssist.Hint="Filter"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                    FontSize="13"
-                    Foreground="{DynamicResource CommonText}" />
+            <Border Width="135"
+                    Height="40"
+                    Margin="5,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource CommonGridBackground}"
+                    CornerRadius="20"
+                    DockPanel.Dock="Left">
+                <ComboBox Width="100"
+                          Margin="10,2,10,3"
+                          materialDesign:HintAssist.Hint="Filter"
+                          materialDesign:TextFieldAssist.HasClearButton="True"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                          FontSize="13"
+                          Foreground="{DynamicResource CommonText}" />
             </Border>
 
             <Border
@@ -217,22 +253,20 @@
                                                         Height="30"
                                                         Background="{TemplateBinding Background}">
                                                         <DockPanel>
-                                                            <materialDesign:PackIcon
-                                                                Width="20"
-                                                                Height="20"
-                                                                Margin="15,0,0,0"
-                                                                HorizontalAlignment="Left"
-                                                                VerticalAlignment="Center"
-                                                                DockPanel.Dock="Left"
-                                                                Kind="CalendarRange" />
-                                                            <TextBlock
-                                                                Margin="15,0,0,0"
-                                                                HorizontalAlignment="Left"
-                                                                VerticalAlignment="Center"
-                                                                DockPanel.Dock="Left"
-                                                                FontSize="14"
-                                                                Foreground="{TemplateBinding Foreground}"
-                                                                Text="Find date" />
+                                                            <materialDesign:PackIcon Kind="CalendarRange"
+                                                                                     Width="20"
+                                                                                     Height="20"
+                                                                                     VerticalAlignment="Center"
+                                                                                     DockPanel.Dock="Left"
+                                                                                     Margin="15 0 0 0"
+                                                                                     HorizontalAlignment="Left"></materialDesign:PackIcon>
+                                                            <TextBlock Text="Find date"
+                                                                       DockPanel.Dock="Left"
+                                                                       Margin="15 0 0 0"
+                                                                       FontSize="14"
+                                                                       VerticalAlignment="Center"
+                                                                       HorizontalAlignment="Left"
+                                                                       Foreground="{TemplateBinding Foreground}"></TextBlock>
                                                         </DockPanel>
                                                     </Border>
                                                 </ControlTemplate>
@@ -684,17 +718,22 @@
                 </DataGrid.InputBindings>
 
                 <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Date}"
+                                        Header="Date" />
+                    <DataGridTextColumn Binding="{Binding Name}"
+                                        Header="Name" />
+                    <DataGridTextColumn Binding="{Binding Amount}"
+                                        Header="Amount" />
+                    <DataGridTextColumn Binding="{Binding Category}"
+                                        Header="Category" />
+                    <DataGridTextColumn Binding="{Binding BudgetExp}"
+                                        Header="Budget" />
+                    <DataGridTextColumn Binding="{Binding Description}"
+                                        Header="Description"
+                                        Width="*" />
 
-                    <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
-                    <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
-                    <DataGridTextColumn Binding="{Binding Category}" Header="Category" />
-                    <DataGridTextColumn
-                        Width="*"
-                        Binding="{Binding Description}"
-                        Header="Description" />
-
-                    <DataGridTemplateColumn CanUserResize="False" Header="Commands">
+                    <DataGridTemplateColumn CanUserResize="False"
+                                            Header="Commands">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
