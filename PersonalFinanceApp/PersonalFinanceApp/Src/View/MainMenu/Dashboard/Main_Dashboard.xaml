@@ -319,7 +319,7 @@
                                 Grid.Column="2"
                                 Background="{DynamicResource CommonGridBackground}"
                                 Margin="5,5 ,15,5">
-                            <Grid Grid.Column="0">
+                            <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="27*"></RowDefinition>
                                     <RowDefinition Height="143*"></RowDefinition>
@@ -334,6 +334,16 @@
                                            Height="39"
                                            Grid.RowSpan="2">
                                 </TextBlock>
+
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--item control here-->
+                                    <ItemsControl Grid.Column="0"></ItemsControl>
+                                </Grid>
                             </Grid>
                         </Border>
                     </Grid>
@@ -355,10 +365,9 @@
                                            Margin="15,0,0,0">
                                 </TextBlock>
 
-                                <!--goal list here-->
-                                <WrapPanel Grid.Row="1">
-
-                                </WrapPanel>
+                                <!--item control here-->
+                                <ItemsControl Grid.Row="1">
+                                </ItemsControl>
                             </Grid>
 
                         </Border>

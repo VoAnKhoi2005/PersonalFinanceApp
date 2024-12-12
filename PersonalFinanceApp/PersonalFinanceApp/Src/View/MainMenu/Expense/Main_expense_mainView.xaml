@@ -58,29 +58,52 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="48*" />
-                <RowDefinition Height="19*" />
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0"
-                       Grid.RowSpan="2"
-                       Width="417"
-                       Height="55"
-                       Margin="25,0,0,17"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Bottom"
-                       FontSize="28"
-                       FontWeight="Bold"
-                       Text="Expense" />
-            <TextBlock Grid.Row="1"
-                       Width="303"
-                       Height="37"
-                       Margin="26,0,0,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       FontSize="14"
-                       Text="Overview of your activities" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48*" />
+                    <RowDefinition Height="19*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Width="417"
+                           Height="55"
+                           Margin="25,0,0,17"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Text="Expense" />
+                <TextBlock Grid.Row="1"
+                           Width="303"
+                           Height="37"
+                           Margin="26,0,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="Overview of your activities" />
+            </Grid>
+            <DockPanel Grid.Column="1">
+                <TextBlock Text="Total budget" 
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Left"></TextBlock>
+                <TextBlock Text="xxx xxx xxx"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Left"
+                           Margin=" 10 0 0 0 "></TextBlock>
 
+                <TextBlock Text="Remaining budget"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Left"
+                           Margin=" 50 0 0 0 "></TextBlock>
+                <TextBlock Text="xxx xxx xxx"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Left"
+                           Margin=" 10 0 0 0 "></TextBlock>
+            </DockPanel>
 
         </Grid>
         <DockPanel Grid.Row="1">
@@ -115,6 +138,22 @@
 
             <Border Width="40"
                     Height="40"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource CommonGridBackground}"
+                    CornerRadius="30"
+                    DockPanel.Dock="Right">
+                <Button Command="{Binding RefreshGoalCommand}">
+                    <materialDesign:PackIcon Width="25"
+                                             Height="25"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"
+                                             Foreground="{DynamicResource CommonText}"
+                                             Kind="Refresh" />
+                </Button>
+            </Border>
+            <Border Width="40"
+                    Height="40"
                     Margin="0,0,5,0"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
@@ -145,7 +184,7 @@
                           FontSize="13"
                           Foreground="{DynamicResource CommonText}" />
             </Border>
-            <Border Width="120"
+            <Border Width="135"
                     Height="40"
                     Margin="5,0,0,0"
                     HorizontalAlignment="Left"
@@ -222,8 +261,7 @@
                                                                                      VerticalAlignment="Center"
                                                                                      DockPanel.Dock="Left"
                                                                                      Margin="15 0 0 0"
-                                                                                     HorizontalAlignment="Left"
-                                                                                     ></materialDesign:PackIcon>
+                                                                                     HorizontalAlignment="Left"></materialDesign:PackIcon>
                                                             <TextBlock Text="Find date"
                                                                        DockPanel.Dock="Left"
                                                                        Margin="15 0 0 0"
@@ -717,11 +755,10 @@
                                         Header="Budget" />
                     <DataGridTextColumn Binding="{Binding Description}"
                                         Header="Description"
-                                        Width="*"/>
+                                        Width="*" />
 
                     <DataGridTemplateColumn CanUserResize="False"
-                                            Header="Commands"
-                                            >
+                                            Header="Commands">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal"
