@@ -1,10 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.ServiceProcess;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
@@ -13,6 +17,8 @@ public class ExpenseEditViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
     private readonly ExpenseStore _expenseStore;
     private readonly AccountStore _accountStore;
+    private readonly SharedService _sharedService;
+
     #region Properties
     //name
     public string NameEditExpense {
@@ -161,6 +167,7 @@ public class ExpenseEditViewModel : BaseViewModel {
         _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
+        _sharedService = serviceProvider.GetRequiredService<SharedService>();
 
         LoadItemSource();
 
@@ -229,14 +236,24 @@ public class ExpenseEditViewModel : BaseViewModel {
     private void ConfirmEditExpense(object sender) {
         //add data to database
         //edit expense
-        var itemExP = DBManager.GetFirst<Expense>(e => e.ExpenseID == _expenseStore.Expenses.ExpenseID && e.UserID == _expenseStore.Expenses.UserID);
-        itemExP.Amount = long.Parse(AmountEditExpense);
-        itemExP.Name = NameEditExpense;
-        itemExP.Description = DescriptionEditExpense;
-        itemExP.CategoryID = CategoryEditExpense.Id;
-        itemExP.Date = new DateOnly(int.Parse(YearExpenseBook), int.Parse(MonthExpenseBook),int.Parse(DayExpenseEdit));
+        try {
+            var itemExP = DBManager.GetFirst<Expense>(e => e.ExpenseID == _expenseStore.Expenses.ExpenseID && e.UserID == _expenseStore.Expenses.UserID);
+            itemExP.Amount = long.Parse(AmountEditExpense);
+            itemExP.Name = NameEditExpense;
+            itemExP.Description = DescriptionEditExpense;
+            itemExP.CategoryID = CategoryEditExpense.Id;
+            itemExP.Date = new DateOnly(int.Parse(YearExpenseBook), int.Parse(MonthExpenseBook),int.Parse(DayExpenseEdit));
 
-        DBManager.Update<Expense>(itemExP);
+            bool update = DBManager.Update<Expense>(itemExP);
+            if (!update) {
+                throw new DataException("Error");
+            }
+            _sharedService.Notify();
+        }
+        catch (Exception ex){
+            MessageBox.Show("Update thất bại thửi lại nhé", "Update", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
         _modalNavigationStore.Close();
     }
     public class CategoryItem {

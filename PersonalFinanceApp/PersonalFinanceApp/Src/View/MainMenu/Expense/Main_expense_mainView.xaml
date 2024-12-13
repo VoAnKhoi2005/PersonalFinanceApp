@@ -80,10 +80,11 @@
                     Text="Overview of your activities" />
             </Grid>
             <DockPanel Grid.Column="1">
-                <TextBlock
+                <Button
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"
-                    Text="Total budget" />
+                    Command="{Binding EditBudgetExBCommand}"
+                    Content="Total budget" />
                 <TextBlock
                     Margin="10,0,0,0"
                     HorizontalAlignment="Left"
@@ -114,7 +115,7 @@
                 Background="{DynamicResource CommonGridBackground}"
                 CornerRadius="20"
                 DockPanel.Dock="Right">
-                <Button Command="{Binding AddNewExpenseCommand}">
+                <Button Command="{Binding AddNewExpenseCommand}" IsEnabled="{Binding HaveExpenseBook}">
                     <Grid>
                         <TextBlock
                             Margin="0,0,5,0"
@@ -143,7 +144,7 @@
                 Background="{DynamicResource CommonGridBackground}"
                 CornerRadius="30"
                 DockPanel.Dock="Right">
-                <Button Command="{Binding RefreshExpenseCommand}">
+                <Button Command="{Binding RefreshExpenseCommand}" IsEnabled="{Binding HaveExpenseBook}">
                     <materialDesign:PackIcon
                         Width="25"
                         Height="25"
@@ -162,7 +163,7 @@
                 Background="{DynamicResource CommonGridBackground}"
                 CornerRadius="30"
                 DockPanel.Dock="Right">
-                <Button Command="{Binding RecycleExpenseCommand}">
+                <Button Command="{Binding RecycleExpenseCommand}" IsEnabled="{Binding HaveExpenseBook}">
                     <materialDesign:PackIcon
                         Width="25"
                         Height="25"
@@ -216,6 +217,7 @@
                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                     FontSize="13"
                     Foreground="{DynamicResource CommonText}"
+                    IsEnabled="{Binding HaveExpenseBook}"
                     ItemsSource="{Binding SourceFilter}"
                     SelectedItem="{Binding SelectedTypeFilter}"
                     Text="{Binding TextType}">
@@ -257,6 +259,7 @@
                         DockPanel.Dock="Left"
                         FontSize="14"
                         Foreground="{DynamicResource CommonText}"
+                        IsEnabled="{Binding HaveExpenseBook}"
                         SelectionBrush="{DynamicResource CommonText}"
                         Text="{Binding DataFilter}"
                         TextAlignment="Left" />
@@ -267,6 +270,7 @@
                         VerticalAlignment="Center"
                         Background="Transparent"
                         Foreground="{DynamicResource CommonText}"
+                        IsEnabled="{Binding HaveExpenseBook}"
                         PopupMode="Click"
                         Style="{StaticResource MaterialDesignPopupBox}"
                         Visibility="{Binding IsString, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -421,6 +425,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Command="{Binding FindDateCommand}"
+                        IsEnabled="{Binding HaveExpenseBook}"
                         Visibility="{Binding IsDate, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Button.Style>
                             <Style TargetType="Button">
@@ -456,6 +461,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Command="{Binding FindNumberCommand}"
+                        IsEnabled="{Binding HaveExpenseBook}"
                         Visibility="{Binding IsNumber, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Button.Style>
                             <Style TargetType="Button">
@@ -512,10 +518,16 @@
                         materialDesign:HintAssist.Hint="Category"
                         materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                         BorderBrush="{x:Null}"
-                        DisplayMemberPath="Name"
                         FontSize="12"
                         Foreground="{DynamicResource CommonText}"
-                        ItemsSource="{Binding SourceCategory}" />
+                        IsEnabled="{Binding HaveExpenseBook}"
+                        ItemsSource="{Binding SourceCategory}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </Grid>
             </Border>
         </DockPanel>

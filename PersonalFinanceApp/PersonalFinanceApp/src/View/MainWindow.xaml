@@ -606,21 +606,25 @@
                 <DataTemplate DataType="{x:Type viewModels:ExpenseEditViewModel}">
                     <views:Main_Expense_Edit />
                 </DataTemplate>
-                <!--  delete  -->
+                <!--  delete confirm  -->
                 <DataTemplate DataType="{x:Type viewModels:ExpenseDeleteViewModel}">
                     <views:Main_Expense_DeleteConfirm />
                 </DataTemplate>
-                <!--  recover  -->
+                <!--  recover confirm  -->
                 <DataTemplate DataType="{x:Type viewModels:ExpenseRecoverViewModel}">
                     <views:Main_Expense_RecoverConfirm />
                 </DataTemplate>
-                <!--  remove  -->
+                <!--  pernemently remove  -->
                 <DataTemplate DataType="{x:Type viewModels:ExpenseRemoveViewModel}">
                     <views:Main_Expense_RemoveConfirm />
                 </DataTemplate>
-                <!--  remove  -->
+                <!--  recycle  -->
                 <DataTemplate DataType="{x:Type viewModels:ExpenseRecycleViewModel}">
                     <views:Main_Expense_Recycle />
+                </DataTemplate>
+                <!--  Edit Budget  -->
+                <DataTemplate DataType="{x:Type viewModels:ExpenseEditBudgetViewModel}">
+                    <views:Main_Expense_Budget />
                 </DataTemplate>
 
                 <!--  Goal  -->
@@ -642,6 +646,7 @@
                 <DataTemplate DataType="{x:Type viewModels:GoalAddNewCategoryViewModel}">
                     <views:NewCategory />
                 </DataTemplate>
+
                 <!--  recurring  -->
                 <DataTemplate DataType="{x:Type viewModels:RecurringViewModel}">
                     <views:Recurring_MainView />

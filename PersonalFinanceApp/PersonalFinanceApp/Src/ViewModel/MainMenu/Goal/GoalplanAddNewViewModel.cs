@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
@@ -192,21 +193,25 @@ public class GoalplanAddNewViewModel : BaseViewModel
     private void ConfirmNewGoal(object sender) {
         //add data to database
         //Goal
-        Goal goal = new Goal() {
-            Name = NameGoal,
-            Target = long.Parse(TargetGoal),
-            CurrentAmount = long.Parse(CurrentAmountGoal),
-            Reminder = SelectedRecurring,
-            Deadline = DeadlineGoal,
-            Status = (long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal)) ? "Completed" : "Active",
-            Description = DescriptionGoal,
-            UserID = int.Parse(_accountStore.UsersID),
-            CategoryName = CategoryGoal,
-
-        };
-
-
-        DBManager.Insert(goal);
+        try {
+            Goal goal = new Goal() {
+                Name = NameGoal,
+                Target = long.Parse(TargetGoal),
+                CurrentAmount = long.Parse(CurrentAmountGoal),
+                Reminder = SelectedRecurring,
+                Deadline = DeadlineGoal,
+                Status = (long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal)) ? "Completed" : "Active",
+                Description = DescriptionGoal,
+                UserID = int.Parse(_accountStore.UsersID),
+                CategoryName = CategoryGoal,
+            };
+            DBManager.Insert(goal);
+            _goalStore.NotifyGoal();
+        }
+        catch (Exception ex) {
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại nhé", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
 
         _modalNavigationStore.Close();
     }

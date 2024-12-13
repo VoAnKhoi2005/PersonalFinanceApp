@@ -15,6 +15,7 @@ public class ExpenseAddNewViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
     private readonly ExpenseStore _expenseStore;
     private readonly AccountStore _accountStore;
+    private readonly SharedService _shareService;
 
     #region Properties
     //name
@@ -153,6 +154,7 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
+        _shareService = serviceProvider.GetRequiredService<SharedService>();
 
         NewCategoryCommand = new NavigateModalCommand<ExpenseNewCategoryViewModel>(serviceProvider);
 
@@ -221,6 +223,19 @@ public class ExpenseAddNewViewModel : BaseViewModel {
             }
         }
         try {
+            if (long.Parse(_expenseStore.BudgetCurrentExb) - long.Parse(AmountExpense) < 0) {
+                MessageBoxResult rs = MessageBox.Show(
+                    "Ngân sách âm rồi, bạn có muốn tiếp tục không?",
+                    "Warning!",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning
+                );
+
+                if (rs == MessageBoxResult.No) {
+                    return;
+                }
+                
+            }
             var expense = new Expense() {
                 Amount = long.Parse(AmountExpense),
                 Name = NameExpense,
@@ -235,6 +250,7 @@ public class ExpenseAddNewViewModel : BaseViewModel {
                 //RecurringExpenseID = 1,
             };
             DBManager.Insert(expense);
+            _shareService.Notify();
         }catch(Exception ex) {
             MessageBox.Show("Vui lòng nhập đầy đủ và đúng chuẩn thông tin nhé!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;

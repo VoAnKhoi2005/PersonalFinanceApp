@@ -4,6 +4,7 @@ using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
@@ -54,28 +55,36 @@ public class GoalAddSavedAmountViewModel : BaseViewModel {
     }
     private void ConfirmSavedGoal(object sender) {
         //add data to database
-        var idgoal = _goalStore.GoalID;
-        var item = DBManager.GetFirst<Goal>(g => g.GoalID == int.Parse(idgoal));
-        if(!IsDeposit) {
-            item.CurrentAmount += long.Parse(AmountAddSaved);
-        }
-        else {
-            if (item.CurrentAmount - long.Parse(AmountAddSaved) < 0) item.CurrentAmount = 0;
-            else item.CurrentAmount -= long.Parse(AmountAddSaved);
-        }
-        GoalHistory goalhistory = new GoalHistory() {
-            GoalID = int.Parse(idgoal),
-            TimeAdded = DateTime.Now,
-            Amount = (IsDeposit) ? '-' + AmountAddSaved : '+' + AmountAddSaved,
-            Current = item.CurrentAmount.ToString(),
-        };
+        try {
+            var idgoal = _goalStore.GoalID;
+            var item = DBManager.GetFirst<Goal>(g => g.GoalID == int.Parse(idgoal));
+            if(!IsDeposit) {
+                item.CurrentAmount += long.Parse(AmountAddSaved);
+            }
+            else {
+                if (item.CurrentAmount - long.Parse(AmountAddSaved) < 0) item.CurrentAmount = 0;
+                else item.CurrentAmount -= long.Parse(AmountAddSaved);
+            }
+            GoalHistory goalhistory = new GoalHistory() {
+                GoalID = int.Parse(idgoal),
+                TimeAdded = DateTime.Now,
+                Amount = (IsDeposit) ? '-' + AmountAddSaved : '+' + AmountAddSaved,
+                Current = item.CurrentAmount.ToString(),
+            };
 
-        //status
-        if (item.Target <= item.CurrentAmount) item.Status = "Completed";
-        else { item.Status = "Active"; }
+            //status
+            if (item.Target <= item.CurrentAmount) item.Status = "Completed";
+            else { item.Status = "Active"; }
 
-        DBManager.Insert(goalhistory);
-        bool checkUpdate = DBManager.Update<Goal>(item);
+            DBManager.Insert(goalhistory);
+            bool checkUpdate = DBManager.Update<Goal>(item);
+
+            _goalStore.NotifyGoal();
+        }
+        catch (Exception ex) {
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
         _modalNavigationStore.Close();
     }
 }

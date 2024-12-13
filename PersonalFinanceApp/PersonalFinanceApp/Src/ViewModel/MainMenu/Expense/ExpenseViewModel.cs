@@ -18,6 +18,17 @@ public class ExpenseViewModel : BaseViewModel {
     private readonly AccountStore _accountStore;
     private readonly SharedService _sharedService;
     #region Properties
+    //have expenseBook
+    public bool HaveExpenseBook {
+        get => _haveExpenseBook;
+        set {
+            if (_haveExpenseBook != value) {
+                _haveExpenseBook = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private bool _haveExpenseBook;
     //FILTER
     //is number
     public bool IsNumber {
@@ -222,6 +233,8 @@ public class ExpenseViewModel : BaseViewModel {
     public ICommand NewExpenseBookCommand {  get; set; }
     public ICommand SelectionChangedCommand { get; set; }
     public ICommand ChangedExpenseBookCommand { get; set; }
+    public ICommand EditBudgetExBCommand {  get; set; } 
+
     #endregion
 
     public ExpenseViewModel(IServiceProvider serviceProvider) {
@@ -236,6 +249,7 @@ public class ExpenseViewModel : BaseViewModel {
         DeleteExpenseCommand = new NavigateModalCommand<ExpenseDeleteViewModel>(serviceProvider);
         RecycleExpenseCommand = new NavigateModalCommand<ExpenseRecycleViewModel>(serviceProvider);
         NewExpenseBookCommand = new NavigateModalCommand<ExpenseNewExBViewModel>(serviceProvider);
+        EditBudgetExBCommand = new NavigateModalCommand<ExpenseEditBudgetViewModel>(serviceProvider);
 
         GetNewest();
         LoadExpenses();
@@ -256,6 +270,7 @@ public class ExpenseViewModel : BaseViewModel {
     }
     public void LoadNewExpenseBook() {
         if (_expenseStore.ExpenseBook != null) {
+            HaveExpenseBook = true;
             SourceExpenseBook.Clear();
             var exBitem = DBManager.GetCondition<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID));
             SourceExpenseBook.Add(new ExpenseBookAdvance());
@@ -266,6 +281,7 @@ public class ExpenseViewModel : BaseViewModel {
             ExpenseBookAdvance exbA = new ExpenseBookAdvance(_expenseStore.ExpenseBook.Month, _expenseStore.ExpenseBook.Year, _expenseStore.ExpenseBook);
             SelectedExpenseBook = exbA;
             TextExpenseBook = exbA.DateExB;
+            LoadExpenses();
         }
     }
     public void ChangedExB(object? parameter = null) {
@@ -282,13 +298,20 @@ public class ExpenseViewModel : BaseViewModel {
     }
     public void GetNewest() {
         var items = DBManager.GetCondition<ExpensesBook>(e => int.Parse(_accountStore.UsersID) == e.UserID);
-        ExpensesBook itemmax = items[0];
-        foreach(var item in items) {
-            if(item.Year > itemmax.Year || (item.Month > itemmax.Month && item.Year == itemmax.Year)) {
-                itemmax = item;
-            }
+        if(items.Count == 0) {
+            HaveExpenseBook = false;
+            return;
         }
-        _expenseStore.ExpenseBook = itemmax;
+        else {
+            HaveExpenseBook = true;
+            ExpensesBook itemmax = items[0];
+            foreach(var item in items) {
+                if(item.Year > itemmax.Year || (item.Month > itemmax.Month && item.Year == itemmax.Year)) {
+                    itemmax = item;
+                }
+            }
+            _expenseStore.ExpenseBook = itemmax;
+        }
     }
     public void ReviewCategory() {
         if (SourceCategory.Count == 0) return;
@@ -445,7 +468,7 @@ public class ExpenseViewModel : BaseViewModel {
     }
     public bool IsRegexValid(string pattern) {
         try {
-            Regex regex = new Regex(pattern);
+            Regex.Match("", pattern);
             return true;
         }
         catch (ArgumentException) {
@@ -573,14 +596,6 @@ public class ExpenseViewModel : BaseViewModel {
             IsDate = false;
         }
     }
-    public void LoadRecover(object parameter) {
-        Expensesadvances.Clear();
-        var exp = DBManager.GetCondition<Expense>(e => e.UserID == int.Parse(_accountStore.UsersID), getDeleted:true);
-        foreach(var e in exp) {
-            Expensesadvances.Add(new ExpenseAdvance(e));
-        }
-
-    }
     public void ExpenseBookChanged(object? parameter = null) {
         if(SelectedExpenseBook == null) {
             return;
@@ -611,43 +626,62 @@ public class ExpenseViewModel : BaseViewModel {
         ChangedExB();
     }
     public void LoadExpenses(object? p = null) {
-        LoadCategory();
-        IsDate = true;
-        IsNumber = false;
-        IsString = false;
-        //load data to datagrid
-        Expensesadvances.Clear();
-        var exB = _expenseStore.ExpenseBook;
-        var items = DBManager.GetCondition<Expense>(exp => exp.UserID == int.Parse(_accountStore.UsersID) && exB.Month == exp.ExBMonth && exB.Year == exp.ExBYear);
-        foreach (var item in items) {
-            Expensesadvances.Add(new ExpenseAdvance(item));
+        if (HaveExpenseBook == false) {
+            SourceExpenseBook.Clear();
+            SourceExpenseBook.Add(new ExpenseBookAdvance());
+            //Load data to Type filter
+            SourceFilter.Clear();
+            //string
+            SourceFilter.Add("Date");
+            SourceFilter.Add("Name");
+            SourceFilter.Add("Description");
+            //number
+            SourceFilter.Add("Amount");
+            TextType = "Date";
+            SelectedTypeFilter = "Date";
+            DataFilter = string.Empty;
         }
-        //Load data to Type filter
-        SourceFilter.Clear();
-        //string
-        SourceFilter.Add("Date");
-        SourceFilter.Add("Name");
-        SourceFilter.Add("Description");
-        //number
-        SourceFilter.Add("Amount");
-        TextType = "Date";
-        SelectedTypeFilter = "Date";
-        DataFilter = string.Empty;
+        else {
+            HaveExpenseBook = true;
+            LoadCategory();
+            IsDate = true;
+            IsNumber = false;
+            IsString = false;
+            //load data to datagrid
+            Expensesadvances.Clear();
+            var exB = _expenseStore.ExpenseBook;
+            var items = DBManager.GetCondition<Expense>(exp => exp.UserID == int.Parse(_accountStore.UsersID) && exB.Month == exp.ExBMonth && exB.Year == exp.ExBYear);
+            foreach (var item in items) {
+                Expensesadvances.Add(new ExpenseAdvance(item));
+            }
+            //Load data to Type filter
+            SourceFilter.Clear();
+            //string
+            SourceFilter.Add("Date");
+            SourceFilter.Add("Name");
+            SourceFilter.Add("Description");
+            //number
+            SourceFilter.Add("Amount");
+            TextType = "Date";
+            SelectedTypeFilter = "Date";
+            DataFilter = string.Empty;
 
-        //expensebook
-        SourceExpenseBook.Clear();
-        var exBitem = DBManager.GetCondition<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID));
-        SourceExpenseBook.Add(new ExpenseBookAdvance());
-        foreach (var item in exBitem) {
-            SourceExpenseBook.Add(new ExpenseBookAdvance(item.Month, item.Year, item));
+            //expensebook
+
+            SourceExpenseBook.Clear();
+            var exBitem = DBManager.GetCondition<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID));
+            SourceExpenseBook.Add(new ExpenseBookAdvance());
+            foreach (var item in exBitem) {
+                SourceExpenseBook.Add(new ExpenseBookAdvance(item.Month, item.Year, item));
+            }
+            SortObservableCollection(SourceExpenseBook);
+            if (_expenseStore.ExpenseBook != null) {
+                ExpenseBookAdvance exbA = new ExpenseBookAdvance(_expenseStore.ExpenseBook.Month, _expenseStore.ExpenseBook.Year, _expenseStore.ExpenseBook);
+                SelectedExpenseBook = exbA;
+                TextExpenseBook = exbA.DateExB;
+            }
+            ChangedExB();
         }
-        SortObservableCollection(SourceExpenseBook);
-        if (_expenseStore.ExpenseBook != null) {
-            ExpenseBookAdvance exbA = new ExpenseBookAdvance(_expenseStore.ExpenseBook.Month, _expenseStore.ExpenseBook.Year, _expenseStore.ExpenseBook);
-            SelectedExpenseBook = exbA;
-            TextExpenseBook = exbA.DateExB;
-        }
-        ChangedExB(); 
     }
     static void SortObservableCollection(ObservableCollection<ExpenseBookAdvance> collection) {
         var sortedList = collection.OrderBy(x => x).ToList();

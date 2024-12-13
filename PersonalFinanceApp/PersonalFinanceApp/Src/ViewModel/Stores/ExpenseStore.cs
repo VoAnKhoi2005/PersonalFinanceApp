@@ -70,6 +70,10 @@ public class ExpenseStore : INotifyPropertyChanged {
     private string _textChangedExp;
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    public event Action TriggerAction;
+    public void NotifyRecycle() {
+        TriggerAction?.Invoke();
+    }
     protected virtual void OnPropertyChanged(string? propertyName = null) {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

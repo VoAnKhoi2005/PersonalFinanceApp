@@ -54,6 +54,11 @@ public class GoalplanViewModel : BaseViewModel
         RefreshGoalCommand = new RelayCommand<object>(LoadedGoal);
 
         LoadedGoal();
+
+        _goalStore.TriggerAction += Reload;
+    }
+    public void Reload() {
+        LoadedGoal();
     }
     private void LoadedGoal(object? parameter = null) {
         //reload data to itemcontrol
