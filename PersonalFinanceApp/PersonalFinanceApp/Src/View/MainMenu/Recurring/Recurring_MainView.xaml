@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="clr-namespace:PersonalFinanceApp.ViewModel.Converter"
     d:DesignHeight="1000"
     d:DesignWidth="1000"
     mc:Ignorable="d">
@@ -124,64 +125,8 @@
             <!--  add new  -->
 
         </DockPanel>
-        <!--  DataGrid expensebook  -->
-        <Grid Grid.Row="2" Margin="15,0,15,0">
-            <DataGrid
-                Name="ListExpenseBook"
-                Grid.Row="1"
-                Margin="15,0,15,15"
-                HorizontalAlignment="Stretch"
-                AutoGenerateColumns="False"
-                IsReadOnly="True"
-                ItemsSource="{Binding recurringExpenses}"
-                SelectedItem="{Binding ItemsRecurring}">
-                <DataGrid.InputBindings>
-                    <!--  Double click on any row  -->
-                    <MouseBinding
-                        Command="{Binding EditExpenseCommand}"
-                        CommandParameter="{Binding ElementName=ListExpenseBook, Path=SelectedItem}"
-                        Gesture="LeftDoubleClick" />
-                </DataGrid.InputBindings>
-
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding StarDate}" Header="Date" />
-                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
-                    <DataGridTextColumn Binding="{Binding Frequency}" Header="Frequency" />
-                    <DataGridTextColumn Binding="{Binding Interval}" Header="Interval" />
-                    <DataGridTemplateColumn CanUserResize="False" Header="Commands">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button
-                                        Width="50"
-                                        Margin="0,0,5,0"
-                                        Background="#31B720"
-                                        BorderBrush="#FF514D4D"
-                                        Command="{Binding DataContext.EditExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                        CommandParameter="{Binding ElementName=ListExpenseBook, Path=SelectedItem}"
-                                        IsEnabled="True"
-                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                        ToolTip="Resource name: MaterialDesignRaisedButton">
-                                        <materialDesign:PackIcon Foreground="White" Kind="pencil" />
-                                    </Button>
-                                    <Button
-                                        Width="50"
-                                        Background="IndianRed"
-                                        BorderBrush="#FF514D4D"
-                                        Command="{Binding DataContext.DeleteExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                        CommandParameter="{Binding}"
-                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                        ToolTip="Resource name: MaterialDesignRaisedButton">
-                                        <materialDesign:PackIcon Foreground="White" Kind="TrashCanOutline" />
-                                    </Button>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-
+        <ScrollViewer Grid.Row="1">
+            <local:Calendar Grid.Row="1" DataContext="{Binding calendarViewModel}"></local:Calendar>
+        </ScrollViewer>
     </Grid>
 </UserControl>
