@@ -9,6 +9,9 @@
 
 
     <UserControl.Resources>
+
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
+
         <Style x:Key="CalendarStyle1"
                TargetType="{x:Type Calendar}">
             <Setter Property="Foreground"
@@ -526,8 +529,9 @@
                                         Margin="5, 0, 5, 5"
                                         CornerRadius="10"
                                         Height="20" Width="Auto"
-                                        Background="Red">
-                                    <TextBlock Text="Info"
+                                        Background="Red"
+                                        Visibility="{Binding HaveInfo1, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <TextBlock Text="{Binding Info1}"
                                                Foreground="White"
                                                FontSize="20"
                                                HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -537,8 +541,9 @@
                                         Margin="5, 0, 5, 5"
                                         CornerRadius="10"
                                         Height="20" Width="Auto"
-                                        Background="Red">
-                                    <TextBlock Text="Info"
+                                        Background="Green"
+                                        Visibility="{Binding HaveInfo2, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <TextBlock Text="{Binding Info2}"
                                                Foreground="White"
                                                FontSize="20"
                                                HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -548,8 +553,9 @@
                                         Margin="5, 0, 5, 5"
                                         CornerRadius="10"
                                         Height="20" Width="Auto"
-                                        Background="Blue">
-                                    <TextBlock Text="+2 more"
+                                        Background="Blue"
+                                        Visibility="{Binding HaveAdditionalInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <TextBlock Text="{Binding AdditionalInfo}"
                                                Foreground="White"
                                                FontSize="20"
                                                HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -703,7 +709,9 @@
                   CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}"
                   CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}"
                   Style="{DynamicResource CalendarStyle1}"
-                  FontFamily="Trebuchet MS">
+                  FontFamily="Trebuchet MS"
+                  Loaded="UpdateDataContextCalenderButton"
+                  DisplayDateChanged="UpdateDataContextCalenderButton">
             <Calendar.Resources>
                 <Style TargetType="Calendar">
                     <Setter Property="VirtualizingStackPanel.IsVirtualizing"

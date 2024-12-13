@@ -126,7 +126,7 @@
 
         </DockPanel>
         <ScrollViewer Grid.Row="1">
-            <local:Calendar Grid.Row="1" DataContext="{Binding calendarViewModel}"></local:Calendar>
+            <local:Calendar DataContext="{Binding calendarViewModel}"></local:Calendar>
         </ScrollViewer>
     </Grid>
 </UserControl>

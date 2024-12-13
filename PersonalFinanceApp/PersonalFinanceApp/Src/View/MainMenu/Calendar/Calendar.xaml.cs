@@ -1,15 +1,21 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using PersonalFinanceApp.ViewModel.MainMenu;
 
-namespace PersonalFinanceApp.Src.View
+namespace PersonalFinanceApp.Src.View;
+
+public partial class Calendar : UserControl
 {
-    /// <summary>
-    /// Interaction logic for Calendar.xaml
-    /// </summary>
-    public partial class Calendar : UserControl
+    public Calendar()
     {
-        public Calendar()
+        InitializeComponent();
+    }
+
+    private void UpdateDataContextCalenderButton(object sender, RoutedEventArgs e)
+    {
+        if (sender is System.Windows.Controls.Calendar calendar && calendar.DataContext is CalendarViewModel viewModel)
         {
-            InitializeComponent();
+            viewModel.LoadDataContextCalenderButton(calendar);
         }
     }
 }
