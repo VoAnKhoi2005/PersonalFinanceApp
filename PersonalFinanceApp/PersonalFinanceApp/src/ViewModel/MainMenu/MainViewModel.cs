@@ -22,6 +22,7 @@ public class MainViewModel : BaseViewModel
     public ICommand ExpenseBookNavigateCommand { get; set; }
     public ICommand GoalplanNavigateCommand { get; set; }
     public ICommand SettingNavigateCommand { get; set; }
+    public ICommand RecurringNavigateCommand { get; set; }
     public ICommand CloseCommand { get; set; }
     public ICommand WindowMinimum { get; set; }
     public ICommand WindowMaximum { get; set; }
@@ -44,6 +45,7 @@ public class MainViewModel : BaseViewModel
         ExpenseBookNavigateCommand = new NavigateCommand<ExpenseViewModel>(serviceProvider);
         GoalplanNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
         SettingNavigateCommand = new NavigateCommand<SettingViewModel>(serviceProvider);
+        RecurringNavigateCommand = new NavigateCommand<RecurringViewModel>(serviceProvider);
 
         CloseCommand = new RelayCommand<Window>(CloseWindow);
         WindowMaximum = new RelayCommand<Window>(w => 

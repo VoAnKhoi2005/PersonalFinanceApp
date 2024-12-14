@@ -30,12 +30,17 @@ public class RecurringViewModel : BaseViewModel {
         }
     }
     private RecurringExpense _itemsRecurring;
+
+    public CalendarViewModel calendarViewModel { get; set; }
+
     public ICommand AddNewRecurringCommand { get; set; }
     public ICommand RefreshRecurringCommand { get; set;}
 
     public RecurringViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
+
+        calendarViewModel = new CalendarViewModel(serviceProvider);
 
         AddNewRecurringCommand = new NavigateModalCommand<RecurringAddnew>(serviceProvider);
         RefreshRecurringCommand = new RelayCommand<object>(LoadData);

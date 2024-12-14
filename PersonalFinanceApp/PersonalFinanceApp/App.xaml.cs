@@ -7,7 +7,6 @@ using PersonalFinanceApp.ViewModel.LoginMenu;
 using PersonalFinanceApp.ViewModel.MainMenu;
 using PersonalFinanceApp.ViewModel.Stores;
 using PersonalFinanceApp.Src.ViewModel.Stores;
-using PersonalFinanceApp.Src.View;
 
 namespace PersonalFinanceApp
 {
@@ -80,9 +79,10 @@ namespace PersonalFinanceApp
                 return new MainWindowFactory(dataContext, s);
             });
             services.AddTransient<ExpenseViewModel>(s => new ExpenseViewModel(s));
-            services.AddTransient<SettingViewModel>(s => new SettingViewModel(s));
             services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
             services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
+            services.AddTransient<SettingViewModel>(s => new SettingViewModel(s));
+            services.AddTransient<RecurringViewModel>(s => new RecurringViewModel(s));
 
             //Modal-Popup
             //expense
