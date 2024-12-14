@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OxyPlot;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
@@ -12,6 +13,7 @@ public class GoalplanCardViewModel:BaseViewModel
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly GoalStore _goalStore;
+    private readonly ChartServices _chartServices;
 
     #region Properties
     //id
@@ -25,6 +27,17 @@ public class GoalplanCardViewModel:BaseViewModel
         }
     }
     private string _iD;
+    //can add amount
+    public bool CanAddAmount {
+        get => _canAddAmount;
+        set {
+            if (_canAddAmount != value) {
+                _canAddAmount = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private bool _canAddAmount;
     //status
     public string StatusGoalCard {
         get => _statusGoalCard;
@@ -124,6 +137,15 @@ public class GoalplanCardViewModel:BaseViewModel
         }
     }
     private string _descriptionGoalCard;
+    //goal
+    public PlotModel? GoalChart {
+        get => _goalChart;
+        set {
+            _goalChart = value;
+            OnPropertyChanged();
+        }
+    }
+    private PlotModel? _goalChart;
     #endregion
     #region Command
     public ICommand EditGoalCommand { get; set; }
@@ -138,6 +160,7 @@ public class GoalplanCardViewModel:BaseViewModel
         _serviceProvider = serviceProvider;
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _goalStore = serviceProvider.GetRequiredService<GoalStore>();
+        _chartServices = serviceProvider.GetRequiredService<ChartServices>();
 
         SaveIDGoalCard = new RelayCommand<object>(SaveID);
 
@@ -153,6 +176,9 @@ public class GoalplanCardViewModel:BaseViewModel
         LoadGoalCard(goal);
     }
     public void LoadGoalCard(Goal goal) {
+
+        GoalChart = _chartServices.CreatePieChart(goal);
+
         NameGoalCard = goal.Name;
         TargetGoalCard = goal.Target.ToString();
         CurrentAmoutGoalCard = goal.CurrentAmount.ToString();
@@ -161,6 +187,13 @@ public class GoalplanCardViewModel:BaseViewModel
         StatusGoalCard = goal.Status;
         CategoryGoalCard = goal.CategoryName;
         DescriptionGoalCard = goal.Description;
+
+        if(goal.Target <= goal.CurrentAmount || DateTime.Now > goal.Deadline) {
+            CanAddAmount = false;
+        }
+        else {
+            CanAddAmount = true;
+        }
     }
     public void SaveID(object sender) {
         _goalStore.GoalID = ID;

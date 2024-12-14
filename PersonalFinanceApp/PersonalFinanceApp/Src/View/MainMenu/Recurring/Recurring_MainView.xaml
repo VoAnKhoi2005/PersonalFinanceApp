@@ -2,11 +2,11 @@
     x:Class="PersonalFinanceApp.Src.View.Recurring_MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:PersonalFinanceApp.ViewModel.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:converter="clr-namespace:PersonalFinanceApp.ViewModel.Converter"
     d:DesignHeight="1000"
     d:DesignWidth="1000"
     mc:Ignorable="d">
@@ -42,36 +42,6 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
-
-            <!--  return here  -->
-            <Button>
-                <Button.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <materialDesign:PackIcon
-                                            Width="60"
-                                            Height="40"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Foreground="White"
-                                            Kind="ArrowLeft" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Cursor" Value="Hand" />
-                                <Setter Property="Background" Value="{DynamicResource Cancel_buttonHover}" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Resources>
-            </Button>
             <Border
                 Width="100"
                 Height="40"
@@ -122,11 +92,9 @@
                 </Button>
             </Border>
 
-            <!--  add new  -->
-
         </DockPanel>
         <ScrollViewer Grid.Row="1">
-            <local:Calendar DataContext="{Binding calendarViewModel}"></local:Calendar>
+            <local:Calendar DataContext="{Binding calendarViewModel}" />
         </ScrollViewer>
     </Grid>
 </UserControl>

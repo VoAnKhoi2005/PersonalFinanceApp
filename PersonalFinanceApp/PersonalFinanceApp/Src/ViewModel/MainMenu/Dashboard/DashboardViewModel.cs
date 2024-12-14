@@ -154,7 +154,6 @@ public class DashboardViewModel : BaseViewModel
     private PlotModel? _budgetChart;
 
     public PlotController CustomPlotController { get; set; }
-    public PlotController CustomPlotController2 { get; set; }
     public bool HasNoData => ExpenseChart == null;
     #endregion
     #region Command

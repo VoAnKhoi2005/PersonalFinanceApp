@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:oxy="http://oxyplot.org/wpf"
     Width="400"
     Height="500"
     d:DesignHeight="500"
@@ -46,13 +47,17 @@
 
                 <!--  chart  -->
                 <Grid Grid.Column="0">
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Text=" chart here" />
+                    <Button
+                        Grid.Column="1"
+                        Background="Transparent"
+                        BorderThickness="0">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <oxy:PlotView Background="Transparent" Model="{Binding GoalChart}" />
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                 </Grid>
-
-
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -79,7 +84,8 @@
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Bottom"
                                 Command="{Binding AddNewAmountGoalCommand}"
-                                Content="New Amount">
+                                Content="New Amount"
+                                IsEnabled="{Binding CanAddAmount}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="Click">
                                         <i:InvokeCommandAction Command="{Binding SaveIDGoalCard}" />

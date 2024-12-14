@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
@@ -200,7 +201,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
                 CurrentAmount = long.Parse(CurrentAmountGoal),
                 Reminder = SelectedRecurring,
                 Deadline = DeadlineGoal,
-                Status = (long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal)) ? "Completed" : "Active",
+                Status = GoalStatus(),
                 Description = DescriptionGoal,
                 UserID = int.Parse(_accountStore.UsersID),
                 CategoryName = CategoryGoal,
@@ -214,5 +215,16 @@ public class GoalplanAddNewViewModel : BaseViewModel
         }
 
         _modalNavigationStore.Close();
+    }
+    public string GoalStatus() {
+        if (long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal) && DateTime.Now <= DeadlineGoal) {
+            return "Completed";
+        }
+        else if(long.Parse(TargetGoal) > long.Parse(CurrentAmountGoal) && DateTime.Now > DeadlineGoal) {
+            return "Canceled";
+        }
+        else {
+            return "Active";
+        }
     }
 }

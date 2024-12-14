@@ -41,14 +41,13 @@ public class RecurringViewModel : BaseViewModel {
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
         calendarViewModel = new CalendarViewModel(serviceProvider);
-
+        
+        LoadData();
         AddNewRecurringCommand = new NavigateModalCommand<RecurringAddnew>(serviceProvider);
         RefreshRecurringCommand = new RelayCommand<object>(LoadData);
     }
     public void LoadData(object? parameter = null) {
-        recurringExpenses.Clear();
-        var item = DBManager.GetAll<RecurringExpense>();
-        recurringExpenses = new(item);
+
     }
     
 }

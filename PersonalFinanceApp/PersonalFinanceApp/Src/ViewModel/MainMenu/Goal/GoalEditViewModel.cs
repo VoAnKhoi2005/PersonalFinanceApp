@@ -234,7 +234,7 @@ public class GoalEditViewModel : BaseViewModel
                 goalEdit.CurrentAmount = long.Parse(CurrentAmountEditGoal);
                 goalEdit.Reminder = ReminderEditGoal;
                 goalEdit.Deadline = DeadlineEditGoal;
-                goalEdit.Status = (long.Parse(TargetEditGoal) <= long.Parse(CurrentAmountEditGoal)) ? "Completed" : "Active";
+                goalEdit.Status = GoalStatus();
                 goalEdit.Description = DescriptionEditGoal;
                 goalEdit.CategoryName = CategoryEditGoal;
             }
@@ -248,5 +248,16 @@ public class GoalEditViewModel : BaseViewModel
             return;
         }
         _modalNavigationStore.Close();
+    }
+    public string GoalStatus() {
+        if (long.Parse(TargetEditGoal) <= long.Parse(CurrentAmountEditGoal) && DateTime.Now <= DeadlineEditGoal) {
+            return "Completed";
+        }
+        else if (long.Parse(TargetEditGoal) > long.Parse(CurrentAmountEditGoal) && DateTime.Now > DeadlineEditGoal) {
+            return "Canceled";
+        }
+        else {
+            return "Active";
+        }
     }
 }

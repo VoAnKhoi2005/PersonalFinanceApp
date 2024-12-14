@@ -88,4 +88,34 @@ public class ChartServices
         pieChart.Series.Add(pieSeries);
         return pieChart;
     }
+    public PlotModel CreatePieChart(Goal goal) {
+        if (goal == null)
+            throw new Exception("Goal can not be null");
+
+        var pieChart = new PlotModel {
+            TextColor = OxyColors.White
+        };
+
+        PieSeries pieSeries = new PieSeries {
+            StrokeThickness = 1.0,
+            InsideLabelPosition = 0.8,
+            InsideLabelFormat = "{1:0.0}%",
+            AngleSpan = 360,
+            StartAngle = 0
+        };
+
+        long totalExpense = goal.Target;
+        double percentage = (goal.CurrentAmount * 100.0 / totalExpense > 100.0) ? 100: goal.CurrentAmount * 100.0 / totalExpense;
+
+        pieSeries.Slices.Add(new PieSlice("CurrentAmount", percentage) {
+            IsExploded = false
+        });
+        if(percentage != 100) {
+            pieSeries.Slices.Add(new PieSlice("Remain", 100 - percentage) {
+                IsExploded = false
+            });
+        }
+        pieChart.Series.Add(pieSeries);
+        return pieChart;
+    }
 }

@@ -73,8 +73,7 @@ public class GoalAddSavedAmountViewModel : BaseViewModel {
             };
 
             //status
-            if (item.Target <= item.CurrentAmount) item.Status = "Completed";
-            else { item.Status = "Active"; }
+            item.Status = GoalStatus(item);
 
             DBManager.Insert(goalhistory);
             bool checkUpdate = DBManager.Update<Goal>(item);
@@ -86,5 +85,16 @@ public class GoalAddSavedAmountViewModel : BaseViewModel {
             return;
         }
         _modalNavigationStore.Close();
+    }
+    public string GoalStatus(Goal g) {
+        if (g.Target <= g.CurrentAmount && DateTime.Now <= g.Deadline) {
+            return "Completed";
+        }
+        else if (g.Target > g.CurrentAmount && DateTime.Now > g.Deadline) {
+            return "Canceled";
+        }
+        else {
+            return "Active";
+        }
     }
 }

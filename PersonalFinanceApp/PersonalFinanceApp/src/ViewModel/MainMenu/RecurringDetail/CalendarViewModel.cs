@@ -20,7 +20,7 @@ public class CalendarViewModel : BaseViewModel
             DateTime date = (DateTime)dayButton.DataContext;
             CalendarButtonViewModel calendarDayViewModel = new CalendarButtonViewModel
             {
-                Date = date
+                Date = date,
             };
             DayDataContexts.Add(calendarDayViewModel);
             dayButton.DataContext = calendarDayViewModel;
