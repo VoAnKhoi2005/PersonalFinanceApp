@@ -78,7 +78,7 @@ public class ChartServices
         long totalExpense = expensesBook.Expenses.Sum(ex => ex.Amount);
         foreach (var category in expensesBook.Categories)
         {
-            double percentage = category.Expenses.Sum(ex => ex.Amount) / totalExpense * 100.0;
+            double percentage = category.Expenses.Sum(ex => ex.Amount) * 100.0 / totalExpense ;
             pieSeries.Slices.Add(new PieSlice(category.Name, percentage)
             {
                 IsExploded = false

@@ -80,7 +80,7 @@ namespace PersonalFinanceApp
                 return new MainWindowFactory(dataContext, s);
             });
             services.AddTransient<ExpenseViewModel>(s => new ExpenseViewModel(s));
-            services.AddTransient<SummaryViewModel>(s => new SummaryViewModel(s));
+            services.AddTransient<SettingViewModel>(s => new SettingViewModel(s));
             services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
             services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
 

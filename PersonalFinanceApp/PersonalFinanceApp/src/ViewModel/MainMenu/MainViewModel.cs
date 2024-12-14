@@ -21,7 +21,7 @@ public class MainViewModel : BaseViewModel
     public ICommand DashBoardNavigateCommand { get; set; }
     public ICommand ExpenseBookNavigateCommand { get; set; }
     public ICommand GoalplanNavigateCommand { get; set; }
-    public ICommand SummaryNavigateCommand { get; set; }
+    public ICommand SettingNavigateCommand { get; set; }
     public ICommand CloseCommand { get; set; }
     public ICommand WindowMinimum { get; set; }
     public ICommand WindowMaximum { get; set; }
@@ -43,8 +43,7 @@ public class MainViewModel : BaseViewModel
         DashBoardNavigateCommand = new NavigateCommand<DashboardViewModel>(serviceProvider);
         ExpenseBookNavigateCommand = new NavigateCommand<ExpenseViewModel>(serviceProvider);
         GoalplanNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
-        SummaryNavigateCommand = new NavigateCommand<SummaryViewModel>(serviceProvider);
-        //SummaryNavigateCommand = new NavigateCommand<SummaryViewModel>(serviceProvider);
+        SettingNavigateCommand = new NavigateCommand<SettingViewModel>(serviceProvider);
 
         CloseCommand = new RelayCommand<Window>(CloseWindow);
         WindowMaximum = new RelayCommand<Window>(w => 
