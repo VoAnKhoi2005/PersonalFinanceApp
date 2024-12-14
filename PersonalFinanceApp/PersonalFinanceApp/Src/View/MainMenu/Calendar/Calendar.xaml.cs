@@ -1,28 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using PersonalFinanceApp.ViewModel.MainMenu;
 
-namespace PersonalFinanceApp.Src.View.MainMenu.Calendar
+namespace PersonalFinanceApp.Src.View;
+
+public partial class Calendar : UserControl
 {
-    /// <summary>
-    /// Interaction logic for Calendar.xaml
-    /// </summary>
-    public partial class Calendar : UserControl
+    public Calendar()
     {
-        public Calendar()
+        InitializeComponent();
+    }
+
+    private void UpdateDataContextCalenderButton(object sender, RoutedEventArgs e)
+    {
+        if (sender is System.Windows.Controls.Calendar calendar && calendar.DataContext is CalendarViewModel viewModel)
         {
-            InitializeComponent();
+            viewModel.LoadDataContextCalenderButton(calendar);
         }
     }
 }

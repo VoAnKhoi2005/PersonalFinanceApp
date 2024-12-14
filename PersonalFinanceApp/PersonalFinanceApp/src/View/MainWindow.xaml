@@ -181,8 +181,8 @@
                 </DockPanel>
             </Button>
             <!--  Recurring  -->
-            <!--  Binding here  -->
             <Button
+                Command="{Binding RecurringNavigateCommand}"
                 Height="60"
                 VerticalAlignment="top"
                 DockPanel.Dock="Top"
@@ -343,76 +343,16 @@
                         <DataTemplate DataType="{x:Type viewModels:SummaryViewModel}">
                             <views:UC_Summary />
                         </DataTemplate>
-                    </ContentControl.Resources>
-                </ContentControl>
-                <custom:Modal
-                    Grid.RowSpan="1"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Panel.ZIndex="100"
-                    Content="{Binding CurrentModalViewModel}"
-                    IsOpen="{Binding IsModalOpen}">
-                    <ContentControl.Resources>
-                        <!--  expense  -->
 
-                        <!--  add new  -->
-                        <DataTemplate DataType="{x:Type viewModels:ExpenseAddNewViewModel}">
-                            <views:Main_Expense_AddNew />
-                        </DataTemplate>
-                        <!--  new expense book  -->
-                        <DataTemplate DataType="{x:Type viewModels:ExpenseNewExBViewModel}">
-                            <views:UC_Main_ExpenseBook_AddNew />
-                        </DataTemplate>
-                        <!--  new category  -->
-                        <DataTemplate DataType="{x:Type viewModels:ExpenseNewCategoryViewModel}">
-                            <views:Main_Expense_AddCategory />
-                        </DataTemplate>
-                        <!--  edit  -->
-                        <DataTemplate DataType="{x:Type viewModels:ExpenseEditViewModel}">
-                            <views:Main_Expense_Edit />
-                        </DataTemplate>
-                        <!--  delete  -->
-                        <DataTemplate DataType="{x:Type viewModels:ExpenseDeleteViewModel}">
-                            <views:Main_Expense_DeleteConfirm />
-                        </DataTemplate>
-                        <!--  recover  -->
-                        <DataTemplate DataType="{x:Type viewModels:ExpenseRecoverViewModel}">
-                            <views:Main_Expense_RecoverConfirm />
-                        </DataTemplate>
-                        <!--  remove  -->
-                        <DataTemplate DataType="{x:Type viewModels:ExpenseRemoveViewModel}">
-                            <views:Main_Expense_RemoveConfirm />
-                        </DataTemplate>
-
-                        <!--  Goal  -->
-                        <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">
-                            <views:UC_Main_Goalplan_Adding />
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModels:GoalEditViewModel}">
-                            <views:UC_Main_Goalplan_Adjust />
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModels:GoalAddSavedAmountViewModel}">
-                            <views:Main_Goalplan_plusMinus />
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModels:GoalHistoryViewModel}">
-                            <views:Main_Goalplan_History />
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModels:GoalDeleteViewModel}">
-                            <views:Main_Goalplan_deleteConfirm />
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModels:GoalAddNewCategoryViewModel}">
-                            <views:NewCategory />
-                        </DataTemplate>
-                        <!--  recurring  -->
                         <DataTemplate DataType="{x:Type viewModels:RecurringViewModel}">
                             <views:Recurring_MainView />
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type viewModels:RecurringAddnew}">
-                            <views:Recurring_Expense_Addnew />
-                        </DataTemplate>
 
+                        <DataTemplate DataType="{x:Type viewModels:SettingViewModel}">
+                            <views:Main_Setting />
+                        </DataTemplate>
                     </ContentControl.Resources>
-                </custom:Modal>
+                </ContentControl>
                 <Popup Placement="MousePoint" StaysOpen="False">
                     <Border
                         Width="300"

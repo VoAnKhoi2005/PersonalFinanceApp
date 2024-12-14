@@ -1,9 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using PersonalFinanceApp.ViewModel;
+﻿using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.ViewModel.Stores;
-using System.Windows.Input;
 
-namespace PersonalFinanceApp.Src.ViewModel.MainMenu.Setting;
+namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class SettingViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
