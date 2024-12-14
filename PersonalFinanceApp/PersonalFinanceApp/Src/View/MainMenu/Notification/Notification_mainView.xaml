@@ -9,7 +9,8 @@
              HorizontalAlignment="Right"
              Margin="0 50 30 0"
              Height="650" Width="650">
-    <Grid>
+    <Grid Height="650"
+          Width="650">
         <Grid.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Sans Serif Collection" />
