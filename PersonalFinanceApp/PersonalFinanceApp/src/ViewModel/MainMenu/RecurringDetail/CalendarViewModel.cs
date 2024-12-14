@@ -8,18 +8,17 @@ namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class CalendarViewModel : BaseViewModel
 {
-    public List<CalendarDayViewModel> DayDataContexts { get; set; } = new List<CalendarDayViewModel>();
+    public List<CalendarButtonViewModel> DayDataContexts { get; set; } = new List<CalendarButtonViewModel>();
 
     public CalendarViewModel(IServiceProvider serviceProvider) { }
 
     public void LoadDataContextCalenderButton(Calendar calendar)
     {
         List<CalendarDayButton> dayButtons = GetVisualChildren<CalendarDayButton>(calendar).ToList();
-
         foreach (CalendarDayButton dayButton in dayButtons)
         {
             DateTime date = (DateTime)dayButton.DataContext;
-            CalendarDayViewModel calendarDayViewModel = new CalendarDayViewModel
+            CalendarButtonViewModel calendarDayViewModel = new CalendarButtonViewModel
             {
                 Date = date
             };

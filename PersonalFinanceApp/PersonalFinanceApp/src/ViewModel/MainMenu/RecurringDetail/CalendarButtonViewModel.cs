@@ -2,7 +2,7 @@
 
 namespace PersonalFinanceApp.Src.View;
 
-public class CalendarDayViewModel : BaseViewModel
+public class CalendarButtonViewModel : BaseViewModel
 {
     public DateTime Date { get; set; }
 
