@@ -158,7 +158,7 @@ public class ExpenseNewExBViewModel : BaseViewModel {
 
         }
         catch (Exception ex) {
-            MessageBox.Show($"Có lỗi xảy ra vui lòng thử lại\n({ex})", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 

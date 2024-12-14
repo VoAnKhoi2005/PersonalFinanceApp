@@ -102,6 +102,7 @@
                                     DisplayMemberPath="DateExB"
                                     FontSize="12"
                                     Foreground="{DynamicResource CommonText}"
+                                    IsEditable="False"
                                     ItemsSource="{Binding SourceExpenseBook}"
                                     SelectedItem="{Binding SelectedExpenseBook}"
                                     Text="{Binding TextExpenseBook}">
@@ -417,7 +418,7 @@
                                             TextAlignment="Center"
                                             Visibility="{Binding HasNoGoal, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                         <ScrollViewer
-                                            Margin="0,30,0,0"
+                                            Margin="0,0,0,30"
                                             Padding="10"
                                             VerticalScrollBarVisibility="Auto">
                                             <ItemsControl ItemsSource="{Binding GoalViewModels}">
@@ -433,7 +434,7 @@
                                                             VerticalAlignment="Top"
                                                             IsItemsHost="True"
                                                             ItemHeight="auto"
-                                                            ItemWidth="420" />
+                                                            ItemWidth="350" />
                                                     </ItemsPanelTemplate>
                                                 </ItemsControl.ItemsPanel>
                                             </ItemsControl>

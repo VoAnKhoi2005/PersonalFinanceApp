@@ -54,27 +54,24 @@ public class MainViewModel : BaseViewModel
                                     : WindowState.Maximized);
         WindowMinimum = new RelayCommand<Window>(w => w.WindowState = WindowState.Minimized);
         MoveCommand = new RelayCommand<Window>(w => w?.DragMove());
-        ExitAccountCommand = new RelayCommand<object>(ExitMain);
-        CloseWindowCommand = new RelayCommand<Window>(CloseWindow);
+        ExitAccountCommand = new RelayCommand<object>(ExitMain);//logout
+        CloseWindowCommand = new RelayCommand<Window>(CloseWindow);//exit
     }
     public void CloseWindow(Window window) {
         window?.Close();
         _sharedService.w?.Close();
     }
     public void ExitMain(object? parameter = null) {
-        if (Application.Current.MainWindow != null) {
-            Application.Current.MainWindow.Close();
-        }
-
         NavigationStore navigationStore = _serviceProvider.GetRequiredService<NavigationStore>();
         navigationStore.CurrentViewModel = _serviceProvider.GetRequiredService<LoginNewAccountViewModel>();
 
         if (_sharedService.w != null) {
+            _sharedService.m = (View.MainWindow?)Application.Current.MainWindow;
+            Application.Current.MainWindow.Visibility = Visibility.Collapsed;
             Application.Current.MainWindow = _sharedService.w;
             Application.Current.MainWindow.Visibility = Visibility.Visible;
-            Application.Current.MainWindow.Activate(); 
+            Application.Current.MainWindow.Activate();
         }
-
     }
 
     private void OnCurrentModalViewModelChanged()

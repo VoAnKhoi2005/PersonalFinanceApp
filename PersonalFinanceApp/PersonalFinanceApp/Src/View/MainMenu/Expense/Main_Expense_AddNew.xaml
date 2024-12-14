@@ -190,9 +190,7 @@
                         DisplayMemberPath="Name"
                         FontSize="14"
                         Foreground="{DynamicResource CommonText}"
-                        IsEditable="True"
-                        IsEnabled="{Binding NotExB}"
-                        IsReadOnly="{Binding NotExB}"
+                        IsEditable="False"
                         ItemsSource="{Binding ItemsExpense}"
                         SelectedItem="{Binding SelectedCategory}"
                         Text="{Binding TextChangedCategory}" />
@@ -263,6 +261,7 @@
                             FontSize="14"
                             FontWeight="DemiBold"
                             Foreground="{DynamicResource CommonText}"
+                            IsEditable="False"
                             ItemsSource="{Binding ItemDayExpense}"
                             SelectedItem="{Binding DayExpense}" />
                         <TextBlock

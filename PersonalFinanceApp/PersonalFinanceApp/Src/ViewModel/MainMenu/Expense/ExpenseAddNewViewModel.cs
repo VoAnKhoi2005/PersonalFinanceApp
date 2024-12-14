@@ -163,47 +163,51 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         ConfirmAddNewExpenseCommand = new RelayCommand<object>(ConfirmAddNewExpense);
     }
     public void LoadItemSource(object parameter) {
-        
-        TextChangedCategory = "";
-        YearExpenseBook = _expenseStore.ExpenseBook.Year.ToString(); ;
-        MonthExpenseBook = _expenseStore.ExpenseBook.Month.ToString();
-        BudgetExpenseBook = _expenseStore.BudgetCurrentExb;
+        try {
+            TextChangedCategory = "";
+            YearExpenseBook = _expenseStore.ExpenseBook.Year.ToString(); ;
+            MonthExpenseBook = _expenseStore.ExpenseBook.Month.ToString();
+            BudgetExpenseBook = _expenseStore.BudgetCurrentExb;
 
-        //load item source category
-        ItemsExpense.Clear();
-        ItemsExpense.Add(new CategoryItem { Id = -1, Name = "<New>" });
-        var items = DBManager.GetCondition<Category>(c => c.UserID == int.Parse(_accountStore.UsersID) && c.ExBYear == int.Parse(YearExpenseBook) && c.ExBMonth == int.Parse(MonthExpenseBook));
-        if(items != null) {
-            foreach (var item in items) {
-                ItemsExpense.Add(new CategoryItem { Id = item.CategoryID, Name = item.Name });
+            //load item source category
+            ItemsExpense.Clear();
+            ItemsExpense.Add(new CategoryItem { Id = -1, Name = "<New>" });
+            var items = DBManager.GetCondition<Category>(c => c.UserID == int.Parse(_accountStore.UsersID) && c.ExBYear == int.Parse(YearExpenseBook) && c.ExBMonth == int.Parse(MonthExpenseBook));
+            if (items != null) {
+                foreach (var item in items) {
+                    ItemsExpense.Add(new CategoryItem { Id = item.CategoryID, Name = item.Name });
+                }
+            }
+            //day expense
+            ItemDayExpense.Clear();
+            switch (_expenseStore.ExpenseBook.Month) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    for (int i = 1; i <= 31; ++i) {
+                        ItemDayExpense.Add(i.ToString());
+                    }
+                    break;
+                case 2:
+                    int per;
+                    per = (_expenseStore.ExpenseBook.Year % 4 == 0 && _expenseStore.ExpenseBook.Year % 100 != 0) ? 29 : 28;
+                    for (int i = 1; i <= per; ++i) {
+                        ItemDayExpense.Add(i.ToString());
+                    }
+                    break;
+                default:
+                    for (int i = 1; i <= 30; ++i) {
+                        ItemDayExpense.Add(i.ToString());
+                    }
+                    break;
             }
         }
-        //day expense
-        ItemDayExpense.Clear();
-        switch (_expenseStore.ExpenseBook.Month) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                for (int i = 1; i <= 31; ++i) {
-                    ItemDayExpense.Add(i.ToString());
-                }
-                break;
-            case 2:
-                int per;
-                per = (_expenseStore.ExpenseBook.Year % 4 == 0 && _expenseStore.ExpenseBook.Year % 100 != 0) ? 29 : 28;
-                for (int i = 1; i <= per; ++i) {
-                    ItemDayExpense.Add(i.ToString());
-                }
-                break;
-            default:
-                for (int i = 1; i <= 30; ++i) {
-                    ItemDayExpense.Add(i.ToString());
-                }
-                break;
+        catch(Exception ex) {
+            MessageBox.Show("Có lỗi xảy ra xin vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
     private void CloseModal(object sender) {
