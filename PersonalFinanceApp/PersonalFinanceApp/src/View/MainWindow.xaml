@@ -537,9 +537,11 @@
                         <DataTemplate DataType="{x:Type viewModels:GoalplanViewModel}">
                             <views:UC_Goalplan />
                         </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type viewModels:SummaryViewModel}">
-                            <views:UC_Summary />
+                        <DataTemplate DataType="{x:Type viewModels:SettingViewModel}">
+                            <views:Main_Setting />
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewModels:RecurringViewModel}">
+                            <views:Recurring_MainView />
                         </DataTemplate>
                     </ContentControl.Resources>
                 </ContentControl>

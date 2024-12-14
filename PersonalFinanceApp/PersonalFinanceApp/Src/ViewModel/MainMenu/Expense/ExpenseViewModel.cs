@@ -494,7 +494,6 @@ public class ExpenseViewModel : BaseViewModel {
         string pattern = $@"\b{Regex.Escape(DataFilter)}\b";
         Filter(pattern);
     }
-
     public void FilterNumber(object? parameter = null) {
         ReviewCategory();
         ReviewCategory();
@@ -680,6 +679,7 @@ public class ExpenseViewModel : BaseViewModel {
                 SelectedExpenseBook = exbA;
                 TextExpenseBook = exbA.DateExB;
             }
+
             ChangedExB();
         }
     }

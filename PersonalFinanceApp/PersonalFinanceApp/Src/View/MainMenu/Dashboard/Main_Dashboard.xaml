@@ -3,10 +3,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:oxy="http://oxyplot.org/wpf"
+    xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
     d:DesignHeight="720"
     d:DesignWidth="942"
     mc:Ignorable="d">
@@ -97,9 +99,18 @@
                                     materialDesign:HintAssist.Hint="Which expense book?"
                                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                                     BorderBrush="{x:Null}"
+                                    DisplayMemberPath="DateExB"
                                     FontSize="12"
                                     Foreground="{DynamicResource CommonText}"
-                                    ItemsSource="{Binding SourceCategory}" />
+                                    ItemsSource="{Binding SourceExpenseBook}"
+                                    SelectedItem="{Binding SelectedExpenseBook}"
+                                    Text="{Binding TextExpenseBook}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding ChangedExpenseBookCommand}" CommandParameter="{Binding}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ComboBox>
 
                                 <materialDesign:PackIcon
                                     Width="20"
@@ -126,7 +137,7 @@
                         Margin="15,5,5,5"
                         Background="{DynamicResource CommonGridBackground}"
                         CornerRadius="25">
-                        <Button>
+                        <Button Command="{Binding ExpenseNavigateCommand}">
                             <Grid Visibility="Visible">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="33*" />
@@ -138,7 +149,7 @@
                                     VerticalAlignment="Center"
                                     FontSize="15"
                                     FontWeight="Bold"
-                                    Text="TOTAL BALANCE" />
+                                    Text="BUDGET LEFT" />
                                 <!--  Binding here  -->
                                 <DockPanel Grid.Row="1">
                                     <TextBlock
@@ -153,7 +164,7 @@
                                         Margin="5,0,0,3"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        Text="xxx.xxx.xxx"
+                                        Text="{Binding BudgetLeft}"
                                         TextAlignment="Left"
                                         TextWrapping="Wrap" />
                                 </DockPanel>
@@ -165,7 +176,7 @@
                         Margin="5,5,5,5"
                         Background="{DynamicResource CommonGridBackground}"
                         CornerRadius="25">
-                        <Button>
+                        <Button Command="{Binding ExpenseNavigateCommand}">
                             <Grid Visibility="Visible">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="33*" />
@@ -192,7 +203,7 @@
                                         Margin="5,0,0,3"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        Text="xxx.xxx.xxx"
+                                        Text="{Binding ExpenseTotal}"
                                         TextAlignment="Left"
                                         TextWrapping="Wrap" />
                                 </DockPanel>
@@ -205,7 +216,7 @@
                         Margin="5,5,5,5"
                         Background="{DynamicResource CommonGridBackground}"
                         CornerRadius="25">
-                        <Button>
+                        <Button Command="{Binding ExpenseNavigateCommand}">
                             <Grid Visibility="Visible">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="33*" />
@@ -217,7 +228,7 @@
                                     VerticalAlignment="Center"
                                     FontSize="15"
                                     FontWeight="Bold"
-                                    Text="TOTAL SAVINGS?" />
+                                    Text="TOTAL SAVING" />
                                 <!--  Binding here  -->
                                 <DockPanel Grid.Row="1">
                                     <TextBlock
@@ -232,7 +243,7 @@
                                         Margin="5,0,0,3"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        Text="xxx.xxx.xxx"
+                                        Text="{Binding SavingTotal}"
                                         TextAlignment="Left"
                                         TextWrapping="Wrap" />
                                 </DockPanel>
@@ -246,6 +257,7 @@
                     <!--  static  -->
                     <Grid Grid.Column="0" />
                     <!--  chart - goal  -->
+
                     <!--  activity  -->
                     <Grid Grid.Row="0" Grid.Column="0">
                         <Border
@@ -269,7 +281,7 @@
                                     Grid.Row="1"
                                     Background="Transparent"
                                     BorderThickness="0"
-                                    Command="{Binding ColumnChartNavigateCommand}">
+                                    Command="{Binding ExpenseNavigateCommand}">
                                     <Button.Template>
                                         <ControlTemplate TargetType="Button">
                                             <oxy:PlotView
@@ -304,33 +316,69 @@
                     </Grid.RowDefinitions>
                     <!--  chart  -->
                     <Grid Grid.Row="2">
-                        <Border CornerRadius="25"
-                                Grid.Column="2"
-                                Background="{DynamicResource CommonGridBackground}"
-                                Margin="5,5 ,15,5">
+                        <Border
+                            Grid.Column="2"
+                            Margin="5,5,15,5"
+                            Background="{DynamicResource CommonGridBackground}"
+                            CornerRadius="25">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="27*" />
                                     <RowDefinition Height="143*" />
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0"
-                                           Text="BUDGET"
-                                           HorizontalAlignment="Left"
-                                           Margin="15,0,0,0"
-                                           FontWeight="Bold"
-                                           FontSize="15"
-                                           VerticalAlignment="Top"
-                                           Height="39"
-                                           Grid.RowSpan="2">
-                                </TextBlock>
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    Height="39"
+                                    Margin="15,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Text="BUDGET" />
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="1*" />
                                         <ColumnDefinition Width="2*" />
                                     </Grid.ColumnDefinitions>
-
-                                    <!--item control here-->
-                                    <ItemsControl Grid.Column="0"></ItemsControl>
+                                    <Grid Grid.Column="0">
+                                        <ItemsControl Grid.Column="0" ItemsSource="{Binding SourceCategory}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Top"
+                                                        IsItemsHost="True"
+                                                        ItemHeight="auto"
+                                                        ItemWidth="100" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </Grid>
+                                    <!--  Chart budget here  -->
+                                    <Button
+                                        Grid.Column="1"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Command="{Binding ExpenseNavigateCommand}">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <oxy:PlotView
+                                                    Background="Transparent"
+                                                    Controller="{Binding CustomPlotController}"
+                                                    Model="{Binding BudgetChart}" />
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="20"
+                                        Opacity="0.7"
+                                        Text="No data found!"
+                                        TextAlignment="Center"
+                                        Visibility="{Binding HasNoData, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </Grid>
                             </Grid>
                         </Border>
@@ -352,9 +400,46 @@
                                     FontSize="15"
                                     FontWeight="Bold"
                                     Text="GOAL PLAN" />
-                                <!--item control here-->
-                                <ItemsControl Grid.Row="1">
-                                </ItemsControl>
+                                <!--  item control here  -->
+                                <Button Grid.Row="1" Command="{Binding GoalNavigateCommand}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction Command="{Binding GoalNavigateCommand}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                    <Grid>
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="30"
+                                            Opacity="0.5"
+                                            Text="No goal found!"
+                                            TextAlignment="Center"
+                                            Visibility="{Binding HasNoGoal, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        <ScrollViewer
+                                            Margin="0,30,0,0"
+                                            Padding="10"
+                                            VerticalScrollBarVisibility="Auto">
+                                            <ItemsControl ItemsSource="{Binding GoalViewModels}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <views:Main_Dashboard_GoalplanCard Margin="10" />
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Top"
+                                                            IsItemsHost="True"
+                                                            ItemHeight="auto"
+                                                            ItemWidth="420" />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                            </ItemsControl>
+                                        </ScrollViewer>
+                                    </Grid>
+                                </Button>
                             </Grid>
                         </Border>
                     </Grid>
