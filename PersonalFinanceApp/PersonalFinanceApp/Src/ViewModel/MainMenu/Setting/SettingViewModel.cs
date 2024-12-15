@@ -104,25 +104,25 @@ public class SettingViewModel : BaseViewModel {
         }
         return usr.VerifyPassword(passwrd);
     }
-    public void ExportToExcel(DataGrid dgrid) {
-        Excel.Application excel = new Excel.Application();
-        excel.Visible = true;
-        Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
-        Worksheet sheet1 = (Worksheet)workbook.Sheets[1];
+    //public void ExportToExcel(DataGrid dgrid) {
+    //    Excel.Application excel = new Excel.Application();
+    //    excel.Visible = true;
+    //    Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+    //    Worksheet sheet1 = (Worksheet)workbook.Sheets[1];
 
-        for (int j = 0; j < dgrid.Columns.Count; j++) 
-        {
-            Range myRange = (Range)sheet1.Cells[1, j + 1];
-            sheet1.Cells[1, j + 1].Font.Bold = true; 
-            sheet1.Columns[j + 1].ColumnWidth = 15; 
-            myRange.Value2 = dgrid.Columns[j].Header;
-        }
-        for (int i = 0; i < dgrid.Columns.Count; i++) { 
-            for (int j = 0; j < dgrid.Items.Count; j++) {
-                TextBlock b = dgrid.Columns[i].GetCellContent(dgrid.Items[j]) as TextBlock;
-                Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
-                myRange.Value2 = b.Text;
-            }
-        }
-    }
+    //    for (int j = 0; j < dgrid.Columns.Count; j++) 
+    //    {
+    //        Range myRange = (Range)sheet1.Cells[1, j + 1];
+    //        sheet1.Cells[1, j + 1].Font.Bold = true; 
+    //        sheet1.Columns[j + 1].ColumnWidth = 15; 
+    //        myRange.Value2 = dgrid.Columns[j].Header;
+    //    }
+    //    for (int i = 0; i < dgrid.Columns.Count; i++) { 
+    //        for (int j = 0; j < dgrid.Items.Count; j++) {
+    //            TextBlock b = dgrid.Columns[i].GetCellContent(dgrid.Items[j]) as TextBlock;
+    //            Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
+    //            myRange.Value2 = b.Text;
+    //        }
+    //    }
+    //}
 }

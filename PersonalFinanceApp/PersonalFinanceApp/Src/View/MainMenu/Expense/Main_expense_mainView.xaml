@@ -70,13 +70,14 @@
                 <TextBlock Grid.Row="0"
                            Grid.RowSpan="2"
                            Width="417"
+                           Foreground="{DynamicResource SuperText}"
                            Height="55"
                            Margin="25,0,0,17"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Bottom"
                            FontSize="28"
                            FontWeight="Bold"
-                           Text="Expense" />
+                           Text="Expense book" />
                 <TextBlock Grid.Row="1"
                            Width="303"
                            Height="37"
@@ -89,6 +90,7 @@
             <DockPanel Grid.Column="1">
                 <Button HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
+                        Foreground="{DynamicResource SuperText}"
                         Command="{Binding EditBudgetExBCommand}"
                         Content="Total budget:"
                         FontWeight="Bold"
@@ -129,6 +131,7 @@
 
                 <TextBlock Margin="100,30,0,0"
                            FontSize="16"
+                           Foreground="{DynamicResource SuperText}"
                            Text="Remaining budget:" 
                            FontWeight="Bold"/>
                 <TextBlock Margin="10,45,0,0"
@@ -156,8 +159,8 @@
                                    HorizontalAlignment="Right"
                                    VerticalAlignment="Center"
                                    FontSize="10"
+                                   Foreground="{DynamicResource SuperText}"
                                    FontWeight="Normal"
-                                   Foreground="{DynamicResource CommonText}"
                                    Text="New expense" />
                         <materialDesign:PackIcon Width="25"
                                                  Height="25"
@@ -559,7 +562,8 @@
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <CheckBox Content="{Binding Name}"
-                                          IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                          IsChecked="{Binding IsChecked, Mode=TwoWay}" 
+                                          />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
@@ -576,7 +580,8 @@
                       AutoGenerateColumns="False"
                       IsReadOnly="True"
                       ItemsSource="{Binding Expensesadvances}"
-                      SelectedItem="{Binding ItemsExB}">
+                      SelectedItem="{Binding ItemsExB}"
+                      >
                 <DataGrid.InputBindings>
                     <!--  Double click on any row  -->
                     <MouseBinding Command="{Binding EditExpenseCommand}"

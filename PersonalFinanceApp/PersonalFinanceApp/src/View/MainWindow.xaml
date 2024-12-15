@@ -301,6 +301,7 @@
                                     <RowDefinition Height="16*" />
                                     <RowDefinition Height="19*" />
                                 </Grid.RowDefinitions>
+                            
                                 <!--  avatar  -->
                                 <Border Width="150"
                                         Height="150"
@@ -325,7 +326,8 @@
                                                Text="@username" />
 
                                     <!--  sign out  -->
-                                    <Border Grid.Row="1">
+                                <Border Grid.Row="1"
+                                        Height="50">
                                         <Button>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -346,7 +348,7 @@
                                         </Button>
                                     </Border>
                                     <!--  exit program  -->
-                                    <Border Grid.Row="3">
+                                    <Border Grid.Row="3" Height="50">
                                         <Button>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -373,8 +375,7 @@
                                                     <Setter Property="Template">
                                                         <Setter.Value>
                                                             <ControlTemplate TargetType="Button">
-                                                                <Border Background="{TemplateBinding Background}"
-                                                                        CornerRadius="0,0,30,30">
+                                                                <Border Background="{TemplateBinding Background}">
                                                                     <ContentPresenter HorizontalAlignment="Stretch"
                                                                                       VerticalAlignment="Stretch" />
                                                                 </Border>
@@ -463,7 +464,7 @@
                                                     <Setter Property="Cursor"
                                                             Value="Hand"></Setter>
                                                     <Setter Property="Background"
-                                                            Value="#FF3DC5CF"></Setter>
+                                                            Value="White"></Setter>
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>
@@ -502,7 +503,7 @@
                                                     <Setter Property="Cursor"
                                                             Value="Hand"></Setter>
                                                     <Setter Property="Background"
-                                                            Value="#FF2B9D88"></Setter>
+                                                            Value="White"></Setter>
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>

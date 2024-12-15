@@ -344,7 +344,8 @@
                                              HorizontalAlignment="Left"
                                              VerticalAlignment="Center"
                                              Background="#FF3AA9B7"
-                                             BorderBrush="#FF28FFE0" />
+                                             BorderBrush="#FF28FFE0"
+                                             Click="RadioButton_Click"/>
                                 <materialDesign:PackIcon Width="30"
                                                          Height="30"
                                                          Margin="160,0,0,0"
@@ -363,7 +364,8 @@
                                              HorizontalAlignment="Left"
                                              VerticalAlignment="Center"
                                              Background="#FF3AA9B7"
-                                             BorderBrush="#FF28FFE0" />
+                                             BorderBrush="#FF28FFE0" 
+                                             Click="RadioButton_Click_1"/>
                             </DockPanel>
                         </Expander>
 

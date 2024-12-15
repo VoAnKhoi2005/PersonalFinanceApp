@@ -34,7 +34,7 @@
             <Grid Grid.Row="1" >
                 <TextBlock Text="Are you sure you want to recover this expense?"
                    FontSize="19" TextWrapping="Wrap" VerticalAlignment="Center"
-                   HorizontalAlignment="Center" Foreground="#E56BDF18"
+                   HorizontalAlignment="Center" Foreground="{DynamicResource Cancel_button}"
                    ></TextBlock>
             </Grid>
             <!--cancel - confirm -->
