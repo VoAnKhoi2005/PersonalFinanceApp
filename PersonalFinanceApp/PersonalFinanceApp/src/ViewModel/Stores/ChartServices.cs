@@ -1,91 +1,56 @@
-﻿using OxyPlot;
-using OxyPlot.Axes;
-using OxyPlot.Series;
+﻿using LiveChartsCore.Measure;
+using LiveChartsCore.SkiaSharpView;
 using PersonalFinanceApp.Model;
 
 namespace PersonalFinanceApp.ViewModel.Stores;
 
 public class ChartServices
 {
-    public PlotModel CreateColumnChart(ExpensesBook expensesBook)
+    public List<PieSeries<double>> CreateDoughnutChart(ExpensesBook expensesBook)
     {
-        if (expensesBook == null)
-            throw new Exception("Expense book can not be null");
-
-        var columnChart = new PlotModel
+        ExpensesBook ExBTemp = expensesBook;
+        long remainBudget = ExBTemp.Budget - ExBTemp.Expenses.Sum(ex => ex.Amount);
+        ExBTemp.Categories.Add(new Category
         {
-            TextColor = OxyColors.White,
-            Title = $"{expensesBook.Month}/{expensesBook.Year}"
-        };
+            Name = "Remaining budget",
+            Expenses = new List<Expense> {new Expense {Amount = remainBudget}}
+        });
 
-        var categoryAxis = new CategoryAxis
+        var pieSeries = new List<PieSeries<double>>();
+        foreach (Category category in ExBTemp.Categories)
         {
-            Position = AxisPosition.Bottom,
-            Title = "Day",
-            Key = "y"
-        };
-
-        var valueAxis = new LinearAxis
-        {
-            Position = AxisPosition.Left,
-            StringFormat = "#,0",
-            Minimum = 0,
-            Key = "x"
-        };
-
-        columnChart.Axes.Add(categoryAxis);
-        columnChart.Axes.Add(valueAxis);
-
-        var barSeries = new BarSeries
-        {
-            Title = "Daily Expenses",
-            FillColor = OxyColors.SteelBlue,
-            LabelPlacement = LabelPlacement.Outside,
-            TrackerFormatString = "{Value:#,0}",
-            XAxisKey = "x",
-            YAxisKey = "y"
-        };
-        for (int day = 1; day <= DateTime.DaysInMonth(expensesBook.Year, expensesBook.Month); day++)
-        {
-            long curSum = expensesBook.Expenses.Where(ex => ex.Date == new DateOnly(expensesBook.Year, expensesBook.Month, day)).Sum(ex => ex.Amount);
-            barSeries.Items.Add(new BarItem(curSum));
+            var pieSerie = new PieSeries<double>
+            {
+                Values = new List<double> { category.Expenses.Sum(ex => ex.Amount) },
+                Name = category.Name,
+                InnerRadius = 0.6,
+                MaxRadialColumnWidth = 60,
+                DataLabelsPosition = PolarLabelsPosition.Outer,
+                ToolTipLabelFormatter =  point => point.Model.ToString("N0") + " VND",
+            };
+            pieSeries.Add(pieSerie);
         }
 
-        columnChart.Series.Add(barSeries);
-        return columnChart;
+        return pieSeries;
     }
 
-    public PlotModel CreatePieChart(ExpensesBook expensesBook)
+    public List<PieSeries<double>> CreateDoughnutChartRandom()
     {
-        if (expensesBook == null)
-            throw new Exception("Expense book can not be null");
-
-        var pieChart = new PlotModel
+        var random = new Random();
+        var pieSeries = new List<PieSeries<double>>();
+        for (int i = 0; i < 5; i++)
         {
-            TextColor = OxyColors.White
-        };
-
-        PieSeries pieSeries = new PieSeries
-        {
-            StrokeThickness = 1.0,
-            InsideLabelPosition = 0.8,
-            InsideLabelFormat = "{1:0.0}%",
-            AngleSpan = 360,
-            StartAngle = 0
-        };
-
-
-        long totalExpense = expensesBook.Expenses.Sum(ex => ex.Amount);
-        foreach (var category in expensesBook.Categories)
-        {
-            double percentage = category.Expenses.Sum(ex => ex.Amount) / totalExpense * 100.0;
-            pieSeries.Slices.Add(new PieSlice(category.Name, percentage)
+            var pieSerie = new PieSeries<double>
             {
-                IsExploded = false
-            });
+                Values = new List<double> { random.Next(1000000, 1000000000) },
+                Name = $"Category {i}",
+                InnerRadius = 0.6,
+                MaxRadialColumnWidth = 30,
+                ToolTipLabelFormatter =  point => point.Model.ToString("N0") + " VND",
+            };
+            pieSeries.Add(pieSerie);
         }
 
-        pieChart.Series.Add(pieSeries);
-        return pieChart;
+        return pieSeries;
     }
 }
