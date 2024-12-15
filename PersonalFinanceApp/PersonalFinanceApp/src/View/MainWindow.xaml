@@ -1,28 +1,33 @@
-﻿<Window x:Class="PersonalFinanceApp.View.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:custom="clr-namespace:PersonalFinanceApp.ViewModel.Modal"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModels="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu"
-        xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
-        x:Name="MainWindows"
-        Width="1152"
-        Height="750"
-        MinWidth="1152"
-        MinHeight="780"
-        Background="{DynamicResource MainBackground}"
-        ResizeMode="CanResizeWithGrip"
-        WindowStartupLocation="CenterScreen"
-        mc:Ignorable="d">
+﻿<Window
+    x:Class="PersonalFinanceApp.View.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:custom="clr-namespace:PersonalFinanceApp.ViewModel.Modal"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:notify="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Notification"
+    xmlns:viewModels="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu"
+    xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
+    x:Name="MainWindows"
+    Width="1152"
+    Height="750"
+    MinWidth="1152"
+    MinHeight="780"
+    Background="{DynamicResource MainBackground}"
+    ResizeMode="CanResizeWithGrip"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closed">
             <i:InvokeCommandAction Command="{Binding CloseWindowCommand}"
                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
     <!--  almost done color  -->
     <Grid>
         <Grid.Resources>
@@ -471,7 +476,8 @@
                     <!--  notification  -->
                     <materialDesign:PopupBox Margin="0,12,5,0"
                                              HorizontalAlignment="Right"
-                                             VerticalAlignment="Top">
+                                             VerticalAlignment="Top" 
+                                             PlacementMode="BottomAndAlignRightEdges">
                         <materialDesign:PopupBox.ToggleContent>
                             <materialDesign:PackIcon Width="28"
                                                      Height="28"
@@ -584,9 +590,39 @@
                                            FontWeight="SemiBold"
                                            Text="Notification" />
                             </DockPanel>
-
                             <Border Grid.Row="1">
-                                <DataGrid />
+                                <Grid>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="30"
+                                        Opacity="0.5"
+                                        Text="No goal found!"
+                                        TextAlignment="Center"
+                                        Visibility="{Binding HasNoGoal, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    <ScrollViewer
+                                        Margin="0,0,0,5"
+                                        Padding="5"
+                                        VerticalScrollBarVisibility="Auto">
+                                        <ItemsControl ItemsSource="{Binding NotifyCardViewModels}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <notify:Notifcation_Goal Margin="5" />
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Top"
+                                                        IsItemsHost="True"
+                                                        ItemHeight="auto"
+                                                        ItemWidth="420" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                </Grid>
                             </Border>
                         </Grid>
                     </materialDesign:PopupBox>
@@ -599,11 +635,9 @@
                         <DataTemplate DataType="{x:Type viewModels:ExpenseViewModel}">
                             <views:Main_expense_mainView />
                         </DataTemplate>
-
                         <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
                             <views:UC_Dashboard />
                         </DataTemplate>
-
                         <DataTemplate DataType="{x:Type viewModels:GoalplanViewModel}">
                             <views:UC_Goalplan />
                         </DataTemplate>
@@ -659,6 +693,11 @@
                 <DataTemplate DataType="{x:Type viewModels:ExpenseRecycleViewModel}">
                     <views:Main_Expense_Recycle />
                 </DataTemplate>
+                <!--  remove  -->
+                <DataTemplate DataType="{x:Type viewModels:ExpenseEditBudgetViewModel}">
+                    <views:Main_Expense_Budget />
+                </DataTemplate>
+
                 <!--  Goal  -->
                 <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">
                     <views:UC_Main_Goalplan_Adding />

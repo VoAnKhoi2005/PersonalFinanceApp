@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using System.Collections.Specialized;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -18,6 +19,7 @@ public class DashboardViewModel : BaseViewModel
     private readonly ExpenseStore _expenseStore;
     private readonly AccountStore _accountStore;
     private readonly IServiceProvider _serviceProvider;
+    private readonly SharedService _sharedService;
     #region Properties
     public int usr { get; set; }
     //have expenseBook
@@ -152,6 +154,7 @@ public class DashboardViewModel : BaseViewModel
         }
     }
     private PlotModel? _budgetChart;
+    
 
     public PlotController CustomPlotController { get; set; }
     public bool HasNoData => ExpenseChart == null;
@@ -171,13 +174,18 @@ public class DashboardViewModel : BaseViewModel
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
         GoalViewModels = new ObservableCollection<DashboardGoalViewModel>();
+        _sharedService = serviceProvider.GetRequiredService<SharedService>();
 
         usr = int.Parse(_accountStore.UsersID);
 
         LoadDashBoard();
 
         ChangedExpenseBookCommand = new RelayCommand<object>(ExpenseBookChanged);
+
+        _sharedService.Notify();
     }
+
+
     public void LoadGoal() {
         //load goal
         GoalViewModels.Clear();

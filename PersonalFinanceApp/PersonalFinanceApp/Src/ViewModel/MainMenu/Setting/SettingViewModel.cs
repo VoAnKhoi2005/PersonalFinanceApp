@@ -31,6 +31,7 @@ public class SettingViewModel : BaseViewModel {
     public ICommand DeleteYourAccountCommand { get; set; }
     public ICommand LogOutCommand {  get; set; }
     public ICommand ExportFileCommand { get; set; }
+    public ICommand ChangedBudgetDefaultCommand { get; set; }
     #endregion
     public SettingViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
@@ -41,10 +42,23 @@ public class SettingViewModel : BaseViewModel {
         ChangedYourEmailCommand = new NavigateModalCommand<SettingChangedEmailViewModel>(serviceProvider);
         ChangedYourPasswordCommand = new NavigateModalCommand<SettingChangedPasswordViewModel>(serviceProvider);
         ExportFileCommand = new NavigateModalCommand<SettingExportToExcelViewModel>(serviceProvider);
-
+        //ChangedBudgetDefaultCommand = new NavigateModalCommand
         LogOutCommand = new RelayCommand<object>(Logout);
 
         DeleteYourAccountCommand = new RelayCommand<object>(DeleteUser);
+    }
+    public void ChangedBudgetDefault() {
+        try {
+            var usr = DBManager.GetFirst<User>(u => u.UserID == int.Parse(_accountStore.UsersID));
+            if (usr != null) {
+                //usr = long.Parse(DefaultBudgetNew);
+            }
+            DBManager.Update<User>(usr);
+        }
+        catch (Exception ex) {
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        
     }
     public void DeleteUser(object? w) {
         Logout();

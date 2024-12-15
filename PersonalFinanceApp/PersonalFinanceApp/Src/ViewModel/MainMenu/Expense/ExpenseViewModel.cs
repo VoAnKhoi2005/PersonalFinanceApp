@@ -280,6 +280,7 @@ public class ExpenseViewModel : BaseViewModel {
             SelectedExpenseBook = exbA;
             TextExpenseBook = exbA.DateExB;
             LoadExpenses();
+            ChangedExB();
         }
     }
     public void ChangedExB(object? parameter = null) {
@@ -294,10 +295,25 @@ public class ExpenseViewModel : BaseViewModel {
         BudgetCurrent = budgetcur.ToString();
         _expenseStore.BudgetCurrentExb = BudgetCurrent;
     }
+    public void CreateNewExpenseBook() {
+        try {
+            ExpensesBook exB = new ExpensesBook(DateTime.Now.Month, DateTime.Now.Year, _accountStore.Users, _accountStore.Users.DefaultBudget);
+            DBManager.Insert<ExpensesBook>(exB);
+            HaveExpenseBook = true;
+            ExpenseBookAdvance ex = new ExpenseBookAdvance(exB.Month, exB.Year, exB);
+            SelectedExpenseBook = ex;
+            TextExpenseBook = ex.DateExB;
+            LoadNewExpenseBook();
+        }
+        catch (Exception ex) {
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
     public void GetNewest() {
         var items = DBManager.GetCondition<ExpensesBook>(e => int.Parse(_accountStore.UsersID) == e.UserID);
         if(items.Count == 0) {
             HaveExpenseBook = false;
+            CreateNewExpenseBook();
             return;
         }
         else {
