@@ -102,6 +102,7 @@
                                 <Button
                                     Height="50"
                                     VerticalAlignment="Top"
+                                    Command="{Binding ChangedYourEmailCommand}"
                                     DockPanel.Dock="Top">
                                     <Button.Style>
                                         <Style TargetType="Button">
@@ -152,6 +153,7 @@
                                 <Button
                                     Height="50"
                                     VerticalAlignment="Top"
+                                    Command="{Binding ChangedYourPasswordCommand}"
                                     DockPanel.Dock="Top">
                                     <Button.Style>
                                         <Style TargetType="Button">
@@ -397,6 +399,7 @@
                                 <Button
                                     Height="50"
                                     VerticalAlignment="Top"
+                                    Command="{Binding ExportFileCommand}"
                                     DockPanel.Dock="Top">
                                     <Button.Style>
                                         <Style TargetType="Button">

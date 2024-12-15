@@ -228,8 +228,6 @@ public class ExpenseViewModel : BaseViewModel {
     public ICommand MatchRegexCommand { get; set; }
     public ICommand FindNumberCommand { get; set; }
     public ICommand FindDateCommand { get; set; }
-    public ICommand SelectionTypeChangedCommand { get; set; }
-    public ICommand SelectionChangedExpenseBookCommand { get; set; }
     public ICommand NewExpenseBookCommand {  get; set; }
     public ICommand SelectionChangedCommand { get; set; }
     public ICommand ChangedExpenseBookCommand { get; set; }

@@ -109,6 +109,12 @@ namespace PersonalFinanceApp
             services.AddTransient<RecurringAddnew>(s => new RecurringAddnew(s));
             services.AddTransient<RecurringViewModel>(s => new RecurringViewModel(s));
 
+            //setting
+            services.AddTransient<SettingChangedEmailViewModel>(s => new SettingChangedEmailViewModel(s));
+            services.AddTransient<SettingChangedPasswordViewModel>(s => new SettingChangedPasswordViewModel(s));
+            services.AddTransient<SettingExportToExcelViewModel>(s => new SettingExportToExcelViewModel(s));
+
+
         }
 
     }

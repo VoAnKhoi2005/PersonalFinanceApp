@@ -1,124 +1,134 @@
-﻿<UserControl x:Class="PersonalFinanceApp.Src.View.MainMenu.Setting.Main_Setting_ChangeEmail"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Setting"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d"
-             Height="400"
-             Width="560"
-             d:DesignHeight="450"
-             d:DesignWidth="800">
-
-    <Border CornerRadius="30"
-            Height="400"
-            Width="560"
-            Background="{DynamicResource CommonGridBackground}">
+﻿<UserControl
+    x:Class="PersonalFinanceApp.Src.View.Main_Setting_ChangeEmail"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="560"
+    Height="400"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <Border
+        Width="560"
+        Height="400"
+        Background="{DynamicResource CommonGridBackground}"
+        CornerRadius="30">
 
         <Grid>
             <Grid.Resources>
                 <Style TargetType="Button">
-                    <Setter Property="Background"
-                            Value="{DynamicResource Login_button}"></Setter>
-                    <Setter Property="Foreground"
-                            Value="{DynamicResource CommonText}"></Setter>
+                    <Setter Property="Background" Value="{DynamicResource Login_button}" />
+                    <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
                                 <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"></ContentPresenter>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
                     <Style.Triggers>
-                        <Trigger Property="IsMouseOver"
-                                 Value="true">
-                            <Setter Property="Cursor"
-                                    Value="Hand"></Setter>
-                            <Setter Property="Background"
-                                    Value="{DynamicResource onHovered}"></Setter>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Cursor" Value="Hand" />
+                            <Setter Property="Background" Value="{DynamicResource onHovered}" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>
             </Grid.Resources>
-            <Label Content="Change your email"
-                   FontSize="30"
-                   FontFamily="Sans Serif Collection"
-                   VerticalContentAlignment="Top"
-                   HorizontalAlignment="Center"
-                   Margin="0,20,0,314"></Label>
-            <Label Content="Current email"
-                   Foreground="{DynamicResource CommonText}"
-                   FontSize="16"
-                   Margin="10,130,430,209"></Label>
-            <Border CornerRadius="15"
-                    Background="{DynamicResource Login_border}"
-                    Margin="124,124,36,236"
-                    Width="400"
-                    Height="40">
-                <TextBox VerticalAlignment="Top"
-                         BorderBrush="{x:Null}"
-                         CaretBrush="{DynamicResource CommonText}"
-                         SelectionBrush="{DynamicResource CommonText}"
-                         materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         Width="380"
-                         Height="40"
-                         Background="Transparent"
-                         Text="{Binding PasswordReset}">
-                </TextBox>
+            <Label
+                Margin="0,20,0,314"
+                HorizontalAlignment="Center"
+                VerticalContentAlignment="Top"
+                Content="Change your email"
+                FontFamily="Sans Serif Collection"
+                FontSize="30" />
+            <Label
+                Margin="10,130,430,209"
+                Content="Current email"
+                FontSize="16"
+                Foreground="{DynamicResource CommonText}" />
+            <Border
+                Width="400"
+                Height="40"
+                Margin="124,124,36,236"
+                Background="{DynamicResource Login_border}"
+                CornerRadius="15">
+                <TextBox
+                    Width="380"
+                    Height="40"
+                    VerticalAlignment="Top"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                    Background="Transparent"
+                    BorderBrush="{x:Null}"
+                    CaretBrush="{DynamicResource CommonText}"
+                    SelectionBrush="{DynamicResource CommonText}"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding EmailCurrent}" />
 
             </Border>
 
-            <Label Content="New email"
-                   FontSize="16"
-                   Foreground="{DynamicResource CommonText}"
-                   Margin="26,210,441,149" />
+            <Label
+                Margin="26,210,441,149"
+                Content="New email"
+                FontSize="16"
+                Foreground="{DynamicResource CommonText}" />
 
-            <Border Width="400"
+            <Border
+                Width="400"
+                Height="40"
+                Margin="124,205,36,155"
+                Background="{DynamicResource Login_border}"
+                CornerRadius="15">
+                <TextBox
+                    Width="380"
                     Height="40"
-                    Margin="124,205,36,155"
-                    Background="{DynamicResource Login_border}"
-                    CornerRadius="15">
-                <TextBox VerticalAlignment="Top"
-                         BorderBrush="{x:Null}"
-                         CaretBrush="{DynamicResource CommonText}"
-                         SelectionBrush="{DynamicResource CommonText}"
-                         materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         Width="380"
-                         Height="40"
-                         Background="Transparent"
-                         Text="{Binding PasswordReset}">
-                </TextBox>
+                    VerticalAlignment="Top"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                    Background="Transparent"
+                    BorderBrush="{x:Null}"
+                    CaretBrush="{DynamicResource CommonText}"
+                    SelectionBrush="{DynamicResource CommonText}"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding EmailChanged}" />
             </Border>
 
             <StackPanel>
-                <Grid Margin="130 168 140 50"
-                      Width="362">
-                    <materialDesign:PackIcon Kind="CloseCircle"
-                                             Foreground="Red"
-                                             VerticalAlignment="Center" />
-                    <TextBlock Text="Invalid email"
-                               Foreground="Red"
-                               FontSize="12"
-                               Margin="21,0,-1,0"
-                               TextWrapping="Wrap"></TextBlock>
+                <Grid
+                    Width="362"
+                    Margin="130,168,140,50"
+                    Visibility="{Binding CorrectEmailCurrent, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <materialDesign:PackIcon
+                        VerticalAlignment="Center"
+                        Foreground="Red"
+                        Kind="CloseCircle" />
+                    <TextBlock
+                        Margin="21,0,-1,0"
+                        FontSize="12"
+                        Foreground="Red"
+                        Text="Invalid email"
+                        TextWrapping="Wrap" />
+
                 </Grid>
             </StackPanel>
             <StackPanel>
-                <WrapPanel Margin="130 250 150 50">
-                    <materialDesign:PackIcon Kind="CloseCircle"
-                                             Foreground="Red"
-                                             VerticalAlignment="Center" />
-                    <TextBlock Text="Invalid email"
-                               Foreground="Red"
-                               FontSize="12"
-                               Margin="4 0 0 0"
-                               TextWrapping="Wrap" />
+                <WrapPanel Margin="130,250,150,50" Visibility="{Binding CorrectEmailNew, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <materialDesign:PackIcon
+                        VerticalAlignment="Center"
+                        Foreground="Red"
+                        Kind="CloseCircle" />
+                    <TextBlock
+                        Margin="4,0,0,0"
+                        FontSize="12"
+                        Foreground="Red"
+                        Text="Invalid email"
+                        TextWrapping="Wrap" />
                 </WrapPanel>
             </StackPanel>
 
@@ -216,5 +226,4 @@
             </Button>
         </Grid>
     </Border>
-
 </UserControl>

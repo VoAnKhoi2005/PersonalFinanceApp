@@ -160,7 +160,7 @@
                                                     x:Name="buttonContent"
                                                     Width="auto"
                                                     Height="auto"
-                                                    Margin="15 10 0 0"
+                                                    Margin="15,10,0,0"
                                                     HorizontalAlignment="Left"
                                                     VerticalAlignment="Top"
                                                     Content="{TemplateBinding Content}"
