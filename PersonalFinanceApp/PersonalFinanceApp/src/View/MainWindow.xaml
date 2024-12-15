@@ -322,6 +322,15 @@
                                     <RowDefinition Height="5*" />
                                     <RowDefinition Height="5*" />
                                 </Grid.RowDefinitions>
+                            
+                                <!--  avatar  -->
+                                <Border Width="150"
+                                        Height="150"
+                                        Margin="0,10,0,0"
+                                        CornerRadius="90" />
+                                <TextBlock HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Text="User avatar here" />
 
                                 <!--  user name  -->
                                 <TextBlock
@@ -390,15 +399,78 @@
                                                 </Setter>
                                                 <Style.Triggers>
 
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Cursor" Value="Hand" />
-                                                        <Setter Property="Background" Value="{DynamicResource User_onHovered}" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                    </Button>
-                                </Border>
+                                    <!--  sign out  -->
+                                <Border Grid.Row="1"
+                                        Height="50">
+                                        <Button>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="7*" />
+                                                    <ColumnDefinition Width="23*" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="1"
+                                                           Margin="15,0,0,0"
+                                                           HorizontalAlignment="Left"
+                                                           VerticalAlignment="Center"
+                                                           Text="Sign out" />
+                                                <materialDesign:PackIcon Width="30"
+                                                                         Height="30"
+                                                                         HorizontalAlignment="Center"
+                                                                         VerticalAlignment="Center"
+                                                                         Kind="AccountLockOpen" />
+                                            </Grid>
+                                        </Button>
+                                    </Border>
+                                    <!--  exit program  -->
+                                    <Border Grid.Row="3" Height="50">
+                                        <Button>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="7*" />
+                                                    <ColumnDefinition Width="23*" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="1"
+                                                           Margin="15,0,0,0"
+                                                           HorizontalAlignment="Left"
+                                                           VerticalAlignment="Center"
+                                                           Text="Exit" />
+                                                <materialDesign:PackIcon Width="30"
+                                                                         Height="30"
+                                                                         HorizontalAlignment="Center"
+                                                                         VerticalAlignment="Center"
+                                                                         Kind="Logout" />
+                                            </Grid>
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Background"
+                                                            Value="Transparent" />
+                                                    <Setter Property="BorderThickness"
+                                                            Value="0" />
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Stretch"
+                                                                                      VerticalAlignment="Stretch" />
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Style.Triggers>
+
+                                                        <Trigger Property="IsMouseOver"
+                                                                 Value="True">
+                                                            <Setter Property="Cursor"
+                                                                    Value="Hand" />
+                                                            <Setter Property="Background"
+                                                                    Value="{DynamicResource User_onHovered}" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </Border>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </materialDesign:PopupBox>
@@ -462,9 +534,12 @@
                                                 </Setter.Value>
                                             </Setter>
                                             <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="true">
-                                                    <Setter Property="Cursor" Value="Hand" />
-                                                    <Setter Property="Background" Value="#FF3DC5CF" />
+                                                <Trigger Property="IsMouseOver"
+                                                         Value="true">
+                                                    <Setter Property="Cursor"
+                                                            Value="Hand"></Setter>
+                                                    <Setter Property="Background"
+                                                            Value="White"></Setter>
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>
@@ -499,9 +574,12 @@
                                                 </Setter.Value>
                                             </Setter>
                                             <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="true">
-                                                    <Setter Property="Cursor" Value="Hand" />
-                                                    <Setter Property="Background" Value="#FF2B9D88" />
+                                                <Trigger Property="IsMouseOver"
+                                                         Value="true">
+                                                    <Setter Property="Cursor"
+                                                            Value="Hand"></Setter>
+                                                    <Setter Property="Background"
+                                                            Value="White"></Setter>
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>

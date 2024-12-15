@@ -11,6 +11,14 @@
 
     <UserControl.Resources>
 
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily"
+                    Value="Sans Serif Collection" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource CommonText}" />
+            <Setter Property="FontWeight"
+                    Value="Regular" />
+        </Style>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
         <Style x:Key="CalendarStyle1" TargetType="{x:Type Calendar}">
@@ -725,7 +733,8 @@
     </UserControl.Resources>
 
     <Grid>
-        <Calendar
+        <Calendar Grid.Row="1"
+                  Margin="0 10 0 0"
             CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}"
             CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}"
             CalendarItemStyle="{DynamicResource CalendarCalendarItemStyle1}"

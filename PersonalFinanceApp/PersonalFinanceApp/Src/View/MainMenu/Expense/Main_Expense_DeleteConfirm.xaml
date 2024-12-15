@@ -44,7 +44,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="19"
-                    Foreground="#E56BDF18"
+                    Foreground="{DynamicResource Sure_confirm}"
                     Text="Are you sure you want to delete this expense?"
                     TextWrapping="Wrap" />
             </Grid>

@@ -22,21 +22,22 @@
             </Style>
         </Grid.Resources>
         <TextBlock
-            Margin="0,10,0,0"
+            Margin="0,5,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontWeight="DemiBold"
+            FontSize="16"
             Text="Name" />
         <TextBlock
-            Margin="0,10,0,0"
+            Margin="0,7,0,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            FontSize="12"
-            Foreground="#FF47A8C3"
+            FontSize="14"
+            Foreground="{DynamicResource TextProgressBar}"
             Text="{Binding NameGoalCard}" />
         <ProgressBar
             x:Name="PBar"
-            Height="20"
+            Height="30"
             Maximum="100"
             Value="{Binding ProcessValue}">
             <ProgressBar.Style>
@@ -49,13 +50,13 @@
                                     Background="White"
                                     BorderBrush="Black"
                                     BorderThickness="1"
-                                    CornerRadius="11">
+                                    CornerRadius="12">
                                     <Grid Background="Transparent">
                                         <Rectangle
                                             x:Name="PART_Indicator"
                                             Margin="1.5"
                                             HorizontalAlignment="Left"
-                                            Fill="#FF19CEED"
+                                            Fill="{DynamicResource InnerProgress}"
                                             RadiusX="10"
                                             RadiusY="10">
                                             <Rectangle.Width>
@@ -67,10 +68,11 @@
                                         </Rectangle>
                                         <TextBlock
                                             x:Name="PART_IndicatorText"
+                                            FontWeight="Bold"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                            Foreground="Black"
-                                            Opacity="0.3"
+                                            Foreground="{DynamicResource percentProgressBar}"
+                                            Opacity="1"
                                             Text="{Binding Path=Value, ElementName=PBar, StringFormat={}{0}%}" />
                                     </Grid>
                                 </Border>

@@ -58,35 +58,34 @@
                     <RowDefinition Height="48*" />
                     <RowDefinition Height="19*" />
                 </Grid.RowDefinitions>
-                <TextBlock
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Width="417"
-                    Height="55"
-                    Margin="25,0,0,17"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Bottom"
-                    FontSize="28"
-                    FontWeight="Bold"
-                    Text="Expense" />
-                <TextBlock
-                    Grid.Row="1"
-                    Width="303"
-                    Height="37"
-                    Margin="26,0,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Text="Overview of your activities" />
+                <TextBlock Grid.Row="0"
+                           Grid.RowSpan="2"
+                           Width="417"
+                           Foreground="{DynamicResource SuperText}"
+                           Height="55"
+                           Margin="25,0,0,17"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Text="Expense book" />
+                <TextBlock Grid.Row="1"
+                           Width="303"
+                           Height="37"
+                           Margin="26,0,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="Overview of your activities" />
             </Grid>
             <DockPanel Grid.Column="1">
-                <Button
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Bottom"
-                    Command="{Binding EditBudgetExBCommand}"
-                    Content="Total budget:"
-                    FontSize="16"
-                    FontWeight="Bold">
+                <Button HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Foreground="{DynamicResource SuperText}"
+                        Command="{Binding EditBudgetExBCommand}"
+                        Content="Total budget:"
+                        FontWeight="Bold"
+                        FontSize="16">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="Transparent" />
@@ -115,17 +114,16 @@
                     Text="{Binding BudgetOfficial}"
                     TextWrapping="Wrap" />
 
-                <TextBlock
-                    Margin="100,30,0,0"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Text="Remaining budget:" />
-                <TextBlock
-                    Margin="10,45,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Text="{Binding BudgetCurrent}" />
+                <TextBlock Margin="100,30,0,0"
+                           FontSize="16"
+                           Foreground="{DynamicResource SuperText}"
+                           Text="Remaining budget:" 
+                           FontWeight="Bold"/>
+                <TextBlock Margin="10,45,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Text="{Binding BudgetCurrent}" />
             </DockPanel>
 
         </Grid>
@@ -142,22 +140,20 @@
                 DockPanel.Dock="Right">
                 <Button Command="{Binding AddNewExpenseCommand}" IsEnabled="{Binding HaveExpenseBook}">
                     <Grid>
-                        <TextBlock
-                            Margin="0,0,5,0"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            FontSize="10"
-                            FontWeight="Normal"
-                            Foreground="{DynamicResource CommonText}"
-                            Text="New expense" />
-                        <materialDesign:PackIcon
-                            Width="25"
-                            Height="25"
-                            Margin="5,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Foreground="{DynamicResource CommonText}"
-                            Kind="PlusCircle" />
+                        <TextBlock Margin="0,0,5,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="10"
+                                   Foreground="{DynamicResource SuperText}"
+                                   FontWeight="Normal"
+                                   Text="New expense" />
+                        <materialDesign:PackIcon Width="25"
+                                                 Height="25"
+                                                 Margin="5,0,0,0"
+                                                 HorizontalAlignment="Left"
+                                                 VerticalAlignment="Center"
+                                                 Foreground="{DynamicResource CommonText}"
+                                                 Kind="PlusCircle" />
                     </Grid>
                 </Button>
             </Border>
@@ -554,7 +550,9 @@
                         ItemsSource="{Binding SourceCategory}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                <CheckBox Content="{Binding Name}"
+                                          IsChecked="{Binding IsChecked, Mode=TwoWay}" 
+                                          />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
@@ -564,15 +562,15 @@
 
         <!--  DataGrid expensebook  -->
         <Grid Grid.Row="2">
-            <DataGrid
-                Name="ListExpenseBook"
-                Grid.Row="1"
-                Margin="15,0,15,15"
-                HorizontalAlignment="Stretch"
-                AutoGenerateColumns="False"
-                IsReadOnly="True"
-                ItemsSource="{Binding Expensesadvances}"
-                SelectedItem="{Binding ItemsExB}">
+            <DataGrid Name="ListExpenseBook" 
+                      Grid.Row="1"
+                      Margin="15,0,15,15"
+                      HorizontalAlignment="Stretch"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding Expensesadvances}"
+                      SelectedItem="{Binding ItemsExB}"
+                      >
                 <DataGrid.InputBindings>
                     <!--  Double click on any row  -->
                     <MouseBinding

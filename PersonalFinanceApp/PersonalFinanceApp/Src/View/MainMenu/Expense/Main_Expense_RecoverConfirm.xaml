@@ -27,26 +27,19 @@
                 <RowDefinition Height="23*" />
                 <RowDefinition Height="33*" />
             </Grid.RowDefinitions>
-            <TextBlock
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Width="209"
-                Height="64"
-                Margin="10,-5,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                FontSize="24"
-                FontWeight="Bold"
-                Foreground="White"
-                Text="Recover expense" />
-            <Grid Grid.Row="1">
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="19"
-                    Foreground="#E56BDF18"
-                    Text="Are you sure you want to recover this expense?"
-                    TextWrapping="Wrap" />
+            <TextBlock Text="Recover expense" Foreground="White"
+               FontSize="24"                            
+               VerticalAlignment="Top"
+               HorizontalAlignment="Left"
+               Margin="10,-5,0,0"
+               FontWeight="Bold" Height="64" Grid.Row="0" Width="209" Grid.RowSpan="2">
+
+            </TextBlock>
+            <Grid Grid.Row="1" >
+                <TextBlock Text="Are you sure you want to recover this expense?"
+                   FontSize="19" TextWrapping="Wrap" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" Foreground="{DynamicResource Cancel_button}"
+                   ></TextBlock>
             </Grid>
             <!--  cancel - confirm  -->
             <Grid Grid.Row="2">
