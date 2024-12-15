@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu"
              mc:Ignorable="d"
              d:DesignHeight="800"
              d:DesignWidth="1000">
@@ -530,8 +531,8 @@
                                         CornerRadius="10"
                                         Height="20" Width="Auto"
                                         Background="Red"
-                                        Visibility="{Binding HaveInfo1, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                    <TextBlock Text="{Binding Info1}"
+                                        Visibility="{Binding (local:CalendarHelper.ViewModel).HaveInfo1, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <TextBlock Text="{Binding (local:CalendarHelper.ViewModel).Info1, RelativeSource={RelativeSource TemplatedParent}}"
                                                Foreground="White"
                                                FontSize="20"
                                                HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -542,8 +543,8 @@
                                         CornerRadius="10"
                                         Height="20" Width="Auto"
                                         Background="Green"
-                                        Visibility="{Binding HaveInfo2, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                    <TextBlock Text="{Binding Info2}"
+                                        Visibility="{Binding (local:CalendarHelper.ViewModel).HaveInfo2, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <TextBlock Text="{Binding (local:CalendarHelper.ViewModel).Info2, RelativeSource={RelativeSource TemplatedParent}}"
                                                Foreground="White"
                                                FontSize="20"
                                                HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -554,8 +555,8 @@
                                         CornerRadius="10"
                                         Height="20" Width="Auto"
                                         Background="Blue"
-                                        Visibility="{Binding HaveAdditionalInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                    <TextBlock Text="{Binding AdditionalInfo}"
+                                        Visibility="{Binding (local:CalendarHelper.ViewModel).HaveAdditionalInfo, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <TextBlock Text="{Binding (local:CalendarHelper.ViewModel).AdditionalInfo, RelativeSource={RelativeSource TemplatedParent}}"
                                                Foreground="White"
                                                FontSize="20"
                                                HorizontalAlignment="Center" VerticalAlignment="Center">
