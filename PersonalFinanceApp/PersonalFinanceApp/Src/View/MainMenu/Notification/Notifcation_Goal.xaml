@@ -9,7 +9,7 @@
     Width="450"
     Height="100"
     mc:Ignorable="d">
-    <Grid>
+    <Grid Background="White">
         <Grid.Resources>
             <Style TargetType="materialDesign:PackIcon">
                 <Setter Property="Foreground" Value="{DynamicResource Ntf_goal}" />
@@ -59,15 +59,19 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="New Requested on" />
             <TextBlock
                 Grid.Row="1"
+                Foreground="Red"
+                Text="{Binding CategoryGoal}" />
+            <TextBlock
+                Grid.Row="0"
                 Foreground="#E5B2E65A"
-                Text="Name of goal" />
+                Text="{Binding NameGoal}" />
             <TextBlock
                 Grid.Row="2"
+                Foreground="Aqua"
                 Opacity="0.6"
-                Text="1 day ago" />
+                Text="{Binding StartEndDate}" />
         </Grid>
     </Grid>
 

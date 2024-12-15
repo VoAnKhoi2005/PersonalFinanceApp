@@ -93,6 +93,7 @@ namespace PersonalFinanceApp.Migrations
                     CurrentAmount = table.Column<long>(type: "INTEGER", nullable: false),
                     Reminder = table.Column<string>(type: "TEXT", nullable: false),
                     Deadline = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    StartDay = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Status = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     UserID = table.Column<int>(type: "INTEGER", nullable: false),

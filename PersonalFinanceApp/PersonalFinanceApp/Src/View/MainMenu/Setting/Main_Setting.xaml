@@ -496,20 +496,13 @@
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        FontWeight="DemiBold"
-                                        Text="23520790" />
-                                    <TextBlock
-                                        Margin="130,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        FontSize="18"
                                         Text="Võ An Khôi" />
                                     <TextBlock
                                         Margin="0,0,30,0"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        Text="@gmail.com" />
+                                        Text="23520790@gmail.com" />
                                 </Grid>
                                 <Grid
                                     Height="30"
@@ -524,15 +517,9 @@
                                                 Fill="{DynamicResource CommonText}" />
                                         </BulletDecorator.Bullet>
                                     </BulletDecorator>
+
                                     <TextBlock
                                         Margin="30,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        FontSize="18"
-                                        FontWeight="DemiBold"
-                                        Text="23520802" />
-                                    <TextBlock
-                                        Margin="130,0,0,0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         FontSize="18"
@@ -542,7 +529,7 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        Text="@gmail.com" />
+                                        Text="23520802@gmail.com" />
                                 </Grid>
                                 <Grid
                                     Height="30"
@@ -557,15 +544,9 @@
                                                 Fill="{DynamicResource CommonText}" />
                                         </BulletDecorator.Bullet>
                                     </BulletDecorator>
+
                                     <TextBlock
                                         Margin="30,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        FontSize="18"
-                                        FontWeight="DemiBold"
-                                        Text="23520869" />
-                                    <TextBlock
-                                        Margin="130,0,0,0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         FontSize="18"
@@ -575,7 +556,7 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        Text="@gmail.com" />
+                                        Text="23520869@gmail.com" />
                                 </Grid>
                             </DockPanel>
                         </Expander>

@@ -21,6 +21,8 @@ public class Goal
 
     public DateTime? Deadline { get; set; }
 
+    public DateTime? StartDay { get; set; }
+
     public string Status { get; set; }
 
     public string? Description { get; set; }
@@ -43,5 +45,6 @@ public class Goal
         Name = name;
         Target = target;
         CurrentAmount = goalAmount;
+        StartDay = DateTime.Now;
     }
 }

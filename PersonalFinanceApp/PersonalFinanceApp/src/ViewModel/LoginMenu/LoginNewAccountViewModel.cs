@@ -224,6 +224,8 @@ public class LoginNewAccountViewModel : BaseViewModel {
         var user = DBManager.GetFirst<User>(u => u.Username == UserNameNewAccount);
         if (ti != null && user == null) {
             User usr = new User(UserNameNewAccount, PasswordNewAccount, Gmail);
+            usr.DefaultBudget = 100000;
+            usr.Saving = 0;
             DBManager.Insert(usr);
             ti.Focus();
         }

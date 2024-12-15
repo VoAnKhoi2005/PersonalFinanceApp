@@ -251,15 +251,35 @@ public class ExpenseAddNewViewModel : BaseViewModel {
                 ExBMonth = int.Parse(MonthExpenseBook),
                 ExBYear = int.Parse(YearExpenseBook),
                 UserID = int.Parse(_accountStore.UsersID),
-                //RecurringExpenseID = 1,
+                
             };
             DBManager.Insert(expense);
+
+            LoadSaving();
+
             _shareService.Notify();
         }catch(Exception ex) {
             MessageBox.Show("Vui lòng nhập đầy đủ và đúng chuẩn thông tin nhé!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
         _modalNavigationStore.Close();
+    }
+    public void LoadSaving() {
+        //load saving in user
+        try {
+            long saving = 0;
+            var items = DBManager.GetCondition<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID));
+            foreach (var item in items) {
+                item.Expenses = DBManager.GetCondition<Expense>(e => e.UserID == int.Parse(_accountStore.UsersID) && item.Month == e.ExBMonth && item.Year == e.ExBYear);
+                saving += item.Expenses.Sum(ex => ex.Amount);
+            }
+            var usr = DBManager.GetFirst<User>(u => u.UserID == int.Parse(_accountStore.UsersID));
+            if (usr != null) { usr.Saving = saving; }
+            DBManager.Update(usr);
+        }
+        catch(Exception ex) {
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
     public class CategoryItem {
         public int Id { get; set; }

@@ -205,6 +205,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
                 Description = DescriptionGoal,
                 UserID = int.Parse(_accountStore.UsersID),
                 CategoryName = CategoryGoal,
+                StartDay = DateTime.Now,
             };
             DBManager.Insert(goal);
             _goalStore.NotifyGoal();
@@ -217,10 +218,10 @@ public class GoalplanAddNewViewModel : BaseViewModel
         _modalNavigationStore.Close();
     }
     public string GoalStatus() {
-        if (long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal) && DateTime.Now <= DeadlineGoal) {
+        if (long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal) && DateTime.Today <= DeadlineGoal) {
             return "Completed";
         }
-        else if(long.Parse(TargetGoal) > long.Parse(CurrentAmountGoal) && DateTime.Now > DeadlineGoal) {
+        else if(long.Parse(TargetGoal) > long.Parse(CurrentAmountGoal) && DateTime.Today > DeadlineGoal) {
             return "Canceled";
         }
         else {

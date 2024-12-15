@@ -7,6 +7,7 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:notify="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Notification"
     xmlns:viewModels="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu"
     xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
     x:Name="MainWindows"
@@ -23,6 +24,9 @@
             <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
     <!--  almost done color  -->
     <Grid>
 
@@ -254,6 +258,7 @@
                         Background="{DynamicResource CommonGridBackground}"
                         DockPanel.Dock="Right"
                         Foreground="{DynamicResource CommonText}"
+                        PlacementMode="BottomAndAlignRightEdges"
                         PopupMode="Click"
                         PopupUniformCornerRadius="30"
                         Style="{StaticResource MaterialDesignPopupBox}">
@@ -402,7 +407,8 @@
                     <materialDesign:PopupBox
                         Margin="0,12,5,0"
                         HorizontalAlignment="Right"
-                        VerticalAlignment="Top">
+                        VerticalAlignment="Top"
+                        PlacementMode="BottomAndAlignRightEdges">
                         <materialDesign:PopupBox.ToggleContent>
                             <materialDesign:PackIcon
                                 Width="28"
@@ -411,7 +417,7 @@
                                 VerticalAlignment="Center"
                                 Kind="Bell" />
                         </materialDesign:PopupBox.ToggleContent>
-                        <Grid Width="650" Height="650">
+                        <Grid Width="460" Height="650">
                             <Grid.Resources>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="FontFamily" Value="Sans Serif Collection" />
@@ -502,7 +508,7 @@
                                     </Button.Style>
                                 </Button>
                                 <TextBlock
-                                    Margin="10,0,0,0"
+                                    Margin="0,0,0,0"
                                     VerticalAlignment="Center"
                                     DockPanel.Dock="Left"
                                     FontSize="16"
@@ -511,7 +517,38 @@
                             </DockPanel>
 
                             <Border Grid.Row="1">
-                                <DataGrid />
+                                <Grid>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="30"
+                                        Opacity="0.5"
+                                        Text="No goal found!"
+                                        TextAlignment="Center"
+                                        Visibility="{Binding HasNoGoal, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    <ScrollViewer
+                                        Margin="0,0,0,5"
+                                        Padding="5"
+                                        VerticalScrollBarVisibility="Auto">
+                                        <ItemsControl ItemsSource="{Binding NotifyCardViewModels}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <notify:Notifcation_Goal Margin="5" />
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Top"
+                                                        IsItemsHost="True"
+                                                        ItemHeight="auto"
+                                                        ItemWidth="420" />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                        </ItemsControl>
+                                    </ScrollViewer>
+                                </Grid>
                             </Border>
                         </Grid>
                     </materialDesign:PopupBox>
@@ -523,11 +560,9 @@
                         <DataTemplate DataType="{x:Type viewModels:ExpenseViewModel}">
                             <views:Main_expense_mainView />
                         </DataTemplate>
-
                         <DataTemplate DataType="{x:Type viewModels:DashboardViewModel}">
                             <views:UC_Dashboard />
                         </DataTemplate>
-
                         <DataTemplate DataType="{x:Type viewModels:GoalplanViewModel}">
                             <views:UC_Goalplan />
                         </DataTemplate>
@@ -749,6 +784,11 @@
                 <DataTemplate DataType="{x:Type viewModels:ExpenseRecycleViewModel}">
                     <views:Main_Expense_Recycle />
                 </DataTemplate>
+                <!--  remove  -->
+                <DataTemplate DataType="{x:Type viewModels:ExpenseEditBudgetViewModel}">
+                    <views:Main_Expense_Budget />
+                </DataTemplate>
+
                 <!--  Goal  -->
                 <DataTemplate DataType="{x:Type viewModels:GoalplanAddNewViewModel}">
                     <views:UC_Main_Goalplan_Adding />
