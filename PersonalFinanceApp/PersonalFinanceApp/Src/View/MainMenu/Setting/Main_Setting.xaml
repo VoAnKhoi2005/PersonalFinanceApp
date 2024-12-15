@@ -423,7 +423,7 @@
                                                                     HorizontalAlignment="Left"
                                                                     VerticalAlignment="Center"
                                                                     FontSize="18"
-                                                                    Text="Export PDF file" />
+                                                                    Text="Export Excel file" />
                                                                 <TextBlock
                                                                     Margin="0,0,15,0"
                                                                     HorizontalAlignment="Right"

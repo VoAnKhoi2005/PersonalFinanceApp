@@ -13,7 +13,8 @@
              d:DesignWidth="400"
              mc:Ignorable="d">
 
-    <Border CornerRadius="30" BorderThickness="0.2"
+    <Border CornerRadius="30"
+            BorderThickness="0.2"
             BorderBrush="White">
         <Border.Background>
             <LinearGradientBrush StartPoint="0,0"
@@ -51,9 +52,9 @@
         </Border.Resources>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="167*" />
-                <RowDefinition Height="100*" />
-                <RowDefinition Height="183*" />
+                <RowDefinition Height="185*" />
+                <RowDefinition Height="150*" />
+                <RowDefinition Height="164*" />
             </Grid.RowDefinitions>
             <!--  overall  -->
             <Grid Grid.Row="0">
@@ -325,7 +326,7 @@
                         <TextBlock VerticalAlignment="Center"
                                    DockPanel.Dock="Left"
                                    FontSize="14"
-                                   FontWeight="Regular"
+                                   FontWeight="Bold"
                                    Text="Name :" />
                         <TextBlock Margin="0,0,10,0"
                                    HorizontalAlignment="Right"
@@ -339,6 +340,7 @@
                         <TextBlock VerticalAlignment="Center"
                                    DockPanel.Dock="Left"
                                    FontSize="14"
+                                   FontWeight="Bold"
                                    Text="Category :" />
                         <!--  binding here  -->
                         <TextBlock Margin="0,0,10,0"
@@ -354,6 +356,7 @@
                         <TextBlock HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
                                    FontSize="14"
+                                   FontWeight="Bold"
                                    Text="Status :" />
                         <!--  binding here  -->
                         <TextBlock Margin="0,0,10,0"
@@ -364,7 +367,8 @@
                     </DockPanel>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="1">
+            <Grid Margin="0,185,0,0"
+                  Grid.RowSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="217*" />
                     <ColumnDefinition Width="183*" />
@@ -375,15 +379,24 @@
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                DockPanel.Dock="Top"
+                               FontWeight="Bold"
                                Text="Target (VND)  :" />
                     <TextBlock Margin="15,0,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
+                               FontWeight="Bold"
                                DockPanel.Dock="Top"
                                Text="Amount  :" />
                     <TextBlock Margin="15,0,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
+                               FontWeight="Bold"
+                               DockPanel.Dock="Top"
+                               Text="Start date  :" />
+                    <TextBlock Margin="15,0,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               FontWeight="Bold"
                                DockPanel.Dock="Top"
                                Text="End date  :" />
                 </DockPanel>
@@ -407,12 +420,21 @@
                                DockPanel.Dock="Top"
                                FontWeight="DemiBold"
                                Text="{Binding DeadlineGoalCard}" />
+
+                    <TextBlock Margin="0,0,15,0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Top"
+                               DockPanel.Dock="Top"
+                               FontWeight="DemiBold"
+                               Text="{Binding DeadlineGoalCard}" />
                 </DockPanel>
             </Grid>
-            <DockPanel Grid.Row="2">
+            <DockPanel Grid.Row="2"
+                       Margin="0,2,0,0">
                 <TextBlock Margin="15,0,0,0"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Top"
+                           FontWeight="Bold"
                            DockPanel.Dock="Top"
                            Foreground="#E5BFCBCA"
                            Text="Description  :" />
