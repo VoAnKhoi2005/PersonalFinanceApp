@@ -82,6 +82,7 @@ namespace PersonalFinanceApp
             services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
             services.AddTransient<SettingViewModel>(s => new SettingViewModel(s));
             services.AddTransient<RecurringViewModel>(s => new RecurringViewModel(s));
+            services.AddTransient<CalendarViewModel>(s => new CalendarViewModel(s));
 
             //Modal-Popup
             //expense
@@ -93,6 +94,7 @@ namespace PersonalFinanceApp
             services.AddTransient<ExpenseRecoverViewModel>(s => new ExpenseRecoverViewModel(s));
             services.AddTransient<ExpenseNewCategoryViewModel>(s => new ExpenseNewCategoryViewModel(s));
             services.AddTransient<ExpenseRecycleViewModel>(s => new ExpenseRecycleViewModel(s));
+            services.AddTransient<ExpenseEditBudgetViewModel>(s => new ExpenseEditBudgetViewModel(s));
 
             //goal
             services.AddTransient<GoalEditViewModel>(s => new GoalEditViewModel(s));
@@ -105,6 +107,12 @@ namespace PersonalFinanceApp
             //recurring
             services.AddTransient<RecurringAddnew>(s => new RecurringAddnew(s));
             services.AddTransient<RecurringViewModel>(s => new RecurringViewModel(s));
+
+            //setting
+            services.AddTransient<SettingChangedEmailViewModel>(s => new SettingChangedEmailViewModel(s));
+            services.AddTransient<SettingChangedPasswordViewModel>(s => new SettingChangedPasswordViewModel(s));
+            services.AddTransient<SettingExportToExcelViewModel>(s => new SettingExportToExcelViewModel(s));
+
 
         }
 

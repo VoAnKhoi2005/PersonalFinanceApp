@@ -12,6 +12,7 @@ public partial class LoginWindow : Window
         InitializeComponent();
         Closed += OnWindowClosed;
         User newUser = new User("admin", "pass", "admin@123");
+        newUser.DefaultBudget = 100000;
         DBManager.Insert(newUser);
     }
 

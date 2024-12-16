@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PersonalFinanceApp.Src.View
+namespace PersonalFinanceApp.Src.View.Splash
 {
     /// <summary>
-    /// Interaction logic for UC_Summary.xaml
+    /// Interaction logic for SplashScreen.xaml
     /// </summary>
-    public partial class UC_Summary : UserControl
+    public partial class SplashScreen : Window
     {
-        public UC_Summary()
+        public SplashScreen()
         {
             InitializeComponent();
         }

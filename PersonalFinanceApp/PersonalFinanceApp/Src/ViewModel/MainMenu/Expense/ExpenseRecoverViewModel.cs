@@ -4,7 +4,9 @@ using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
+using System.Windows;
 using System.Windows.Input;
+using XAct.Messages;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu; 
 public class ExpenseRecoverViewModel : BaseViewModel {
@@ -25,11 +27,19 @@ public class ExpenseRecoverViewModel : BaseViewModel {
     }
     private void ConfirmRecoverExpense(object sender) {
         //add data to database
-        var itemExp = DBManager.GetFirst<Expense>(e => _expenseStore.Expenses.UserID == e.UserID && _expenseStore.Expenses.ExpenseID == e.ExpenseID, getDeleted: true);
-        if (itemExp != null) {
-            itemExp.Deleted = false;
+        try {
+            var itemExp = DBManager.GetFirst<Expense>(e => _expenseStore.Expenses.UserID == e.UserID && _expenseStore.Expenses.ExpenseID == e.ExpenseID, getDeleted: true);
+            if (itemExp != null) {
+                itemExp.Deleted = false;
+            }
+            DBManager.Update<Expense>(itemExp);
+            _expenseStore.NotifyRecycle();
         }
-        DBManager.Update<Expense>(itemExp);
+        catch (Exception ex) {
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+
         _modalNavigationStore.Close();
     }
 }

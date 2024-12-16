@@ -1,20 +1,20 @@
-﻿<UserControl x:Class="PersonalFinanceApp.Src.View.MainMenu.Notification.Notifcation_Goal"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Notification"
-             mc:Ignorable="d" 
-             Width="450"
-             Height="100"
-             >
-    <Grid>
+﻿<UserControl
+    x:Class="PersonalFinanceApp.Src.View.MainMenu.Notification.Notifcation_Goal"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Notification"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="450"
+    Height="100"
+    mc:Ignorable="d">
+    <Grid Background="White">
         <Grid.Resources>
             <Style TargetType="materialDesign:PackIcon">
-                <Setter Property="Foreground" Value="{DynamicResource Ntf_goal}"></Setter>
-                <Setter Property="Height" Value="40"></Setter>
-                <Setter Property="Width" Value="40"></Setter>
+                <Setter Property="Foreground" Value="{DynamicResource Ntf_goal}" />
+                <Setter Property="Height" Value="40" />
+                <Setter Property="Width" Value="40" />
             </Style>
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Sans Serif Collection" />
@@ -23,37 +23,56 @@
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width= "100"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
-            <Border Width="80" Height="80" CornerRadius="90"
-                    Background="White"></Border>
-            <Border Width="70" Height="70" CornerRadius="90"
-                    Background="#FFD0F3EC"></Border>
-            <Border Width="60" Height="60" CornerRadius="90"
-                    Background="#FFCDE0DF"></Border>
-            <Border Width="50" Height="50" CornerRadius="90"
-                    Background="#FF69D0D4"></Border>
-            <materialDesign:PackIcon Kind="Trophy" 
-                                     VerticalAlignment="Center"
-                                     HorizontalAlignment="Center"/>
+            <Border
+                Width="80"
+                Height="80"
+                Background="White"
+                CornerRadius="90" />
+            <Border
+                Width="70"
+                Height="70"
+                Background="#FFD0F3EC"
+                CornerRadius="90" />
+            <Border
+                Width="60"
+                Height="60"
+                Background="#FFCDE0DF"
+                CornerRadius="90" />
+            <Border
+                Width="50"
+                Height="50"
+                Background="#FF69D0D4"
+                CornerRadius="90" />
+            <materialDesign:PackIcon
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Kind="Trophy" />
         </Grid>
 
-        <Grid Margin="15" Grid.Column="1">
+        <Grid Grid.Column="1" Margin="15">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock Text="New Requested on"
-                       Grid.Row="0"></TextBlock>
-            <TextBlock Text="Name of goal"
-                       Grid.Row="1" Foreground="#E5B2E65A"></TextBlock>
-            <TextBlock Text="1 day ago"
-                       Opacity="0.6"
-                       Grid.Row="2"></TextBlock>
+            <TextBlock
+                Grid.Row="1"
+                Foreground="Red"
+                Text="{Binding CategoryGoal}" />
+            <TextBlock
+                Grid.Row="0"
+                Foreground="#E5B2E65A"
+                Text="{Binding NameGoal}" />
+            <TextBlock
+                Grid.Row="2"
+                Foreground="Aqua"
+                Opacity="0.6"
+                Text="{Binding StartEndDate}" />
         </Grid>
     </Grid>
-    
+
 </UserControl>

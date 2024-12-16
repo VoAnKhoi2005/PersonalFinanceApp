@@ -4,7 +4,9 @@ using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
+using System.Windows;
 using System.Windows.Input;
+using XAct.Messages;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class GoalDeleteViewModel : BaseViewModel {
@@ -26,8 +28,15 @@ public class GoalDeleteViewModel : BaseViewModel {
     }
     public void ConfirmDeleteGoal(object sender) {
         //Delete data in database
-        var goaldelete = DBManager.GetFirst<Goal>(g => g.GoalID == int.Parse(_goalStore.GoalID));
-        DBManager.Remove<Goal>(goaldelete);
+        try {
+            var goaldelete = DBManager.GetFirst<Goal>(g => g.GoalID == int.Parse(_goalStore.GoalID));
+            DBManager.Remove<Goal>(goaldelete);
+            _goalStore.NotifyGoal();
+        }
+        catch (Exception ex) {
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại nhé", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
         _modalNavigationStore.Close();
     } 
 }

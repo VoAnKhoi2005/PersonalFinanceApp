@@ -135,22 +135,32 @@ public class ExpenseNewExBViewModel : BaseViewModel {
     }
     private void ConfirmExpenseBook(object sender) {
         //add data to database
-        long result;
-        if (!long.TryParse(BudgetExpenseBook, out result)) {
-            MessageBox.Show("Budget quá to! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        try {
+            long result;
+            if (!long.TryParse(BudgetExpenseBook, out result)) {
+                MessageBox.Show("Budget quá to! Vui lòng thử lại.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            var expenseBook = new ExpensesBook() {
+                Month = SelectedMonth.Number,
+                Year = SelectedYear,
+                Budget = long.Parse(BudgetExpenseBook),
+                UserID = int.Parse(_accountStore.UsersID),
+            };
+            if(DBManager.GetFirst<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID) && expenseBook.Month == e.Month && expenseBook.Year == e.Year) != null) {
+                throw new Exception("Đã tạo ExpenseBook này rồi không tạo nữa nha");
+            }
+            DBManager.Insert(expenseBook);
+            _expenseStore.TextChangedExp = expenseBook.Month.ToString() + "/" + expenseBook.Year.ToString();
+
+            _expenseStore.ExpenseBook = expenseBook;
+            _sharedService.Notify();
+
+        }
+        catch (Exception ex) {
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
-        var expenseBook = new ExpensesBook() {
-            Month = SelectedMonth.Number,
-            Year = SelectedYear,
-            Budget = long.Parse(BudgetExpenseBook),
-            UserID = int.Parse(_accountStore.UsersID),
-        };
-        DBManager.Insert(expenseBook);
-        _expenseStore.TextChangedExp = expenseBook.Month.ToString() + "/" + expenseBook.Year.ToString();
-
-        _expenseStore.ExpenseBook = expenseBook;
-        _sharedService.Notify();
 
         _modalNavigationStore.Close();
     }

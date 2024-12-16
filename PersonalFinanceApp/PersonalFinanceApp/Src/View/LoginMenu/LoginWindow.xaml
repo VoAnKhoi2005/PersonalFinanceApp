@@ -14,37 +14,30 @@
     Height="760"
     MinWidth="1152"
     MinHeight="720"
-    AllowsTransparency="True"
-    Background="#0D2129"
+    
+    Background="{DynamicResource MainBackground}"
     TextElement.FontSize="16"
     TextElement.FontWeight="Regular"
     TextElement.Foreground="#E5CBBFBF"
     TextOptions.TextFormattingMode="Ideal"
     WindowStartupLocation="CenterScreen"
-    WindowStyle="None"
     mc:Ignorable="d">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
 
         <Grid Grid.Row="1">
-            <Image
-                Width="650"
-                Height="674"
-                HorizontalAlignment="Left"
-                Source="/Resources/img/PigBackground.png"
-                Stretch="Fill" />
-            <Image
-                Width="340"
-                Height="340"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Panel.ZIndex="-1"
-                RenderTransformOrigin="0.5,0.5"
-                Source="/Resources/img/PigBackground.png"
-                Stretch="Fill">
+            <Image Width="650"
+                   Height="674"
+                   HorizontalAlignment="Left"
+                   Source="/Resources/img/PigBackground.png"
+                   Stretch="Fill" />
+            <Image Width="340"
+                   Height="340"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top"
+                   Panel.ZIndex="-1"
+                   RenderTransformOrigin="0.5,0.5"
+                   Source="/Resources/img/PigBackground.png"
+                   Stretch="Fill">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform />
@@ -54,14 +47,13 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image
-                Width="250"
-                Height="250"
-                Margin="100,0,0,0"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                RenderTransformOrigin="0.5,0.5"
-                Source="/Resources/img/PigBackground.png">
+            <Image Width="250"
+                   Height="250"
+                   Margin="100,0,0,0"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   RenderTransformOrigin="0.5,0.5"
+                   Source="/Resources/img/PigBackground.png">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform />
@@ -71,15 +63,14 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            <Image
-                Width="400"
-                Height="400"
-                Margin="0,0,10,30"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                RenderTransformOrigin="0.5,0.5"
-                Source="/Resources/img/PigBackground.png"
-                Stretch="Fill">
+            <Image Width="400"
+                   Height="400"
+                   Margin="0,0,10,30"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   RenderTransformOrigin="0.5,0.5"
+                   Source="/Resources/img/PigBackground.png"
+                   Stretch="Fill">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="-1" />
@@ -111,135 +102,5 @@
                 </ContentControl.Resources>
             </ContentControl>
         </Grid>
-
-        <DockPanel Grid.Row="0" Background="#0D2129">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseLeftButtonDown">
-                    <i:InvokeCommandAction Command="{Binding MoveCommand}" CommandParameter="{Binding ElementName=LoginMain}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <Button
-                Width="40"
-                Height="30"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Command="{Binding CloseCommand}"
-                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                DockPanel.Dock="Right">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border
-                                        Width="40"
-                                        Height="30"
-                                        Background="{TemplateBinding Background}">
-                                        <materialDesign:PackIcon
-                                            Width="20"
-                                            Height="20"
-                                            Margin="0,0,0,0"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Foreground="{TemplateBinding Foreground}"
-                                            Kind="WindowClose" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Cursor" Value="Hand" />
-                                <Setter Property="Background" Value="Red" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <Button
-                Width="40"
-                Height="30"
-                Margin="0,0,5,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Command="{Binding WindowMaximum}"
-                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                DockPanel.Dock="Right">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border
-                                        Width="40"
-                                        Height="30"
-                                        Background="{TemplateBinding Background}">
-                                        <materialDesign:PackIcon
-                                            Width="20"
-                                            Height="20"
-                                            Margin="0,0,0,0"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Foreground="{TemplateBinding Foreground}"
-                                            Kind="WindowRestore" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Cursor" Value="Hand" />
-                                <Setter Property="Background" Value="#FF2B9D88" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <Button
-                Width="40"
-                Height="30"
-                Margin="0,0,5,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Command="{Binding WindowMinimum}"
-                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                DockPanel.Dock="Right">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border
-                                        Width="40"
-                                        Height="30"
-                                        Background="{TemplateBinding Background}">
-                                        <materialDesign:PackIcon
-                                            Width="25"
-                                            Height="25"
-                                            Margin="0,0,0,0"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Foreground="{TemplateBinding Foreground}"
-                                            Kind="Minus" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Cursor" Value="Hand" />
-                                <Setter Property="Background" Value="#FF2B9D88" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-        </DockPanel>
     </Grid>
 </Window>

@@ -6,8 +6,6 @@ public class CalendarButtonViewModel : BaseViewModel
 {
     public DateTime Date { get; set; }
 
-    private string _info1 = string.Empty;
-
     public string Info1
     {
         get => _info1;
@@ -29,6 +27,7 @@ public class CalendarButtonViewModel : BaseViewModel
         {
             _info2 = value;
             OnPropertyChanged();
+            OnPropertyChanged(nameof(HaveInfo2));
         }
     }
 

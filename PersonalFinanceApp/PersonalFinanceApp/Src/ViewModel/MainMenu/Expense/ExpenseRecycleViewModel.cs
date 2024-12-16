@@ -5,6 +5,7 @@ using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Collections.ObjectModel;
+using System.ServiceProcess;
 using System.Windows.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
@@ -13,6 +14,7 @@ public class ExpenseRecycleViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
     private readonly ExpenseStore _expenseStore;
     private readonly AccountStore _accountStore;
+    private readonly SharedService _sharedService;
 
     //source expense advance
     public ObservableCollection<ExpenseAdvance> Expensesadvances {
@@ -47,16 +49,21 @@ public class ExpenseRecycleViewModel : BaseViewModel {
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
+        _sharedService = serviceProvider.GetRequiredService<SharedService>();
 
         RefreshRecycle();
-
+        _expenseStore.TriggerAction += Reload;
         RecoverExpenseCommand = new NavigateModalCommand<ExpenseRecoverViewModel>(serviceProvider);
         RemoveExpenseCommand = new NavigateModalCommand<ExpenseRemoveViewModel>(serviceProvider);
 
         ExitRecoverCommand = new RelayCommand<object>(CloseModal);
         RefreshExpenseCommand = new RelayCommand<object>(RefreshRecycle);
     }
+    public void Reload() {
+        RefreshRecycle();
+    }
     private void CloseModal(object sender) {
+        _sharedService.Notify();
         _modalNavigationStore.Close();
     }
     private void RefreshRecycle(object? sender = null) {
@@ -92,8 +99,5 @@ public class ExpenseRecycleViewModel : BaseViewModel {
             var cate = DBManager.GetFirst<Category>(c => c.CategoryID == ex.CategoryID && c.UserID == ex.UserID);
             Category = cate.Name;
         }
-    }
-    public ExpensesBook exB() {
-        return _expenseStore.ExpenseBook;
     }
 }

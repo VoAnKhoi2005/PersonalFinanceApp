@@ -109,6 +109,7 @@
                         BorderBrush="{x:Null}"
                         FontSize="14"
                         Foreground="{DynamicResource CommonText}"
+                        IsEditable="False"
                         ItemsSource="{Binding ItemsSourceFrequency}"
                         SelectedItem="{Binding SelectedFrequency}" />
                 </Grid>

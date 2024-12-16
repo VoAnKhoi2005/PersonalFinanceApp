@@ -9,6 +9,7 @@ using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.View;
 using PersonalFinanceApp.ViewModel.Command;
+using PersonalFinanceApp.ViewModel.MainMenu;
 
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
@@ -181,16 +182,27 @@ public class LoginNewAccountViewModel : BaseViewModel {
             loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
 
             var factory = _serviceProvider.GetRequiredService<IWindowFactory>();
-            MainWindow mainWindow = factory.CreateMainWindow(loginUser);
-
-            if (Application.Current.MainWindow != null) {
-                Application.Current.MainWindow.Visibility = Visibility.Collapsed;
-                var loginwindow = Application.Current.MainWindow;
-                _sharedService.w = loginwindow;
+            if (_sharedService.m != null) {
+                _sharedService.m.DataContext = null;
+                _sharedService.m = factory.Relogin(loginUser);
+                if (Application.Current.MainWindow != null) {
+                    Application.Current.MainWindow.Visibility = Visibility.Collapsed;
+                    var loginwindow = Application.Current.MainWindow;
+                    _sharedService.w = loginwindow;
+                }
+                Application.Current.MainWindow = _sharedService.m;
+                Application.Current.MainWindow.Show();
             }
-                
-            Application.Current.MainWindow = mainWindow;
-            mainWindow.Show();
+            else {
+                MainWindow mainWindow = factory.CreateMainWindow(loginUser);
+                if (Application.Current.MainWindow != null) {
+                    Application.Current.MainWindow.Visibility = Visibility.Collapsed;
+                    var loginwindow = Application.Current.MainWindow;
+                    _sharedService.w = loginwindow;
+                }
+                Application.Current.MainWindow = mainWindow;
+                mainWindow.Show();
+            }
         }
         else {
             IncorrectPasswordUserName = true;
@@ -201,6 +213,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
     private bool VerifyLogin(User? loginUser) {
         loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
         if (loginUser == null) {
+            IncorrectPasswordUserName = true;
             return false;
         }
         IncorrectPasswordUserName = true;
@@ -211,6 +224,8 @@ public class LoginNewAccountViewModel : BaseViewModel {
         var user = DBManager.GetFirst<User>(u => u.Username == UserNameNewAccount);
         if (ti != null && user == null) {
             User usr = new User(UserNameNewAccount, PasswordNewAccount, Gmail);
+            usr.DefaultBudget = 100000;
+            usr.Saving = 0;
             DBManager.Insert(usr);
             ti.Focus();
         }

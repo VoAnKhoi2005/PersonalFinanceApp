@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="720"
@@ -95,12 +96,13 @@
                                         Text="Account" />
                                 </DockPanel>
                             </Expander.Header>
-                            <DockPanel Height="260" Margin="20,0,20,0">
+                            <DockPanel Height="210" Margin="20,0,20,0">
 
                                 <!--  change email  -->
                                 <Button
                                     Height="50"
                                     VerticalAlignment="Top"
+                                    Command="{Binding ChangedYourEmailCommand}"
                                     DockPanel.Dock="Top">
                                     <Button.Style>
                                         <Style TargetType="Button">
@@ -151,6 +153,7 @@
                                 <Button
                                     Height="50"
                                     VerticalAlignment="Top"
+                                    Command="{Binding ChangedYourPasswordCommand}"
                                     DockPanel.Dock="Top">
                                     <Button.Style>
                                         <Style TargetType="Button">
@@ -200,6 +203,7 @@
                                 <Button
                                     Height="50"
                                     VerticalAlignment="Top"
+                                    Command="{Binding DeleteYourAccountCommand}"
                                     DockPanel.Dock="Top">
                                     <Button.Style>
                                         <Style TargetType="Button">
@@ -250,6 +254,7 @@
                                 <Button
                                     Height="50"
                                     VerticalAlignment="Top"
+                                    Command="{Binding LogOutCommand}"
                                     DockPanel.Dock="Top">
                                     <Button.Style>
                                         <Style TargetType="Button">
@@ -307,7 +312,6 @@
                             Foreground="{DynamicResource CommonText}">
                             <Expander.Header>
                                 <DockPanel>
-
                                     <materialDesign:PackIcon
                                         Width="30"
                                         Height="30"
@@ -322,60 +326,49 @@
                                         Text="Theme " />
                                 </DockPanel>
                             </Expander.Header>
-                            <Grid Height="100" Margin="20,0,20,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        Margin="160,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        Foreground="{DynamicResource CommonText}"
-                                        Kind="WhiteBalanceSunny" />
-                                    <TextBlock
-                                        Margin="50,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        FontSize="18"
-                                        Text="Light theme" />
-                                    <RadioButton
-                                        Width="20"
-                                        Height="20"
-                                        Margin="20,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        Background="#FF3AA9B7"
-                                        BorderBrush="#FF28FFE0" />
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <materialDesign:PackIcon
-                                        Width="30"
-                                        Height="30"
-                                        Margin="160,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        Foreground="{DynamicResource CommonText}"
-                                        Kind="WeatherNight" />
-                                    <TextBlock
-                                        Margin="50,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        FontSize="18"
-                                        Text="Dark theme" />
-                                    <RadioButton
-                                        Width="20"
-                                        Height="20"
-                                        Margin="20,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        Background="#FF3AA9B7"
-                                        BorderBrush="#FF28FFE0" />
-                                </Grid>
-                            </Grid>
+                            <DockPanel Height="100"
+                                       Margin="20,0,20,0">
+                                <materialDesign:PackIcon Width="30"
+                                                         Height="30"
+                                                         Margin="160,0,0,0"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Center"
+                                                         Foreground="{DynamicResource CommonText}"
+                                                         Kind="WhiteBalanceSunny" />
+                                <TextBlock Margin="50,0,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           FontSize="18"
+                                           Text="Light theme" />
+                                <RadioButton Width="20"
+                                             Height="20"
+                                             Margin="20,0,0,0"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center"
+                                             Background="#FF3AA9B7"
+                                             BorderBrush="#FF28FFE0"
+                                             Click="RadioButton_Click"/>
+                                <materialDesign:PackIcon Width="30"
+                                                         Height="30"
+                                                         Margin="160,0,0,0"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Center"
+                                                         Foreground="{DynamicResource CommonText}"
+                                                         Kind="WeatherNight" />
+                                <TextBlock Margin="50,0,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           FontSize="18"
+                                           Text="Dark theme" />
+                                <RadioButton Width="20"
+                                             Height="20"
+                                             Margin="20,0,0,0"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center"
+                                             Background="#FF3AA9B7"
+                                             BorderBrush="#FF28FFE0" 
+                                             Click="RadioButton_Click_1"/>
+                            </DockPanel>
                         </Expander>
 
                         <!--  Export to file  -->
@@ -406,6 +399,7 @@
                                 <Button
                                     Height="50"
                                     VerticalAlignment="Top"
+                                    Command="{Binding ExportFileCommand}"
                                     DockPanel.Dock="Top">
                                     <Button.Style>
                                         <Style TargetType="Button">
@@ -429,7 +423,7 @@
                                                                     HorizontalAlignment="Left"
                                                                     VerticalAlignment="Center"
                                                                     FontSize="18"
-                                                                    Text="Export PDF file" />
+                                                                    Text="Export Excel file" />
                                                                 <TextBlock
                                                                     Margin="0,0,15,0"
                                                                     HorizontalAlignment="Right"
@@ -499,20 +493,13 @@
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        FontWeight="DemiBold"
-                                        Text="23520790" />
-                                    <TextBlock
-                                        Margin="130,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        FontSize="18"
                                         Text="Võ An Khôi" />
                                     <TextBlock
                                         Margin="0,0,30,0"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        Text="@gmail.com" />
+                                        Text="23520790@gmail.com" />
                                 </Grid>
                                 <Grid
                                     Height="30"
@@ -527,15 +514,9 @@
                                                 Fill="{DynamicResource CommonText}" />
                                         </BulletDecorator.Bullet>
                                     </BulletDecorator>
+
                                     <TextBlock
                                         Margin="30,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        FontSize="18"
-                                        FontWeight="DemiBold"
-                                        Text="23520802" />
-                                    <TextBlock
-                                        Margin="130,0,0,0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         FontSize="18"
@@ -545,7 +526,7 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        Text="@gmail.com" />
+                                        Text="23520802@gmail.com" />
                                 </Grid>
                                 <Grid
                                     Height="30"
@@ -560,15 +541,9 @@
                                                 Fill="{DynamicResource CommonText}" />
                                         </BulletDecorator.Bullet>
                                     </BulletDecorator>
+
                                     <TextBlock
                                         Margin="30,0,0,0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Center"
-                                        FontSize="18"
-                                        FontWeight="DemiBold"
-                                        Text="23520869" />
-                                    <TextBlock
-                                        Margin="130,0,0,0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
                                         FontSize="18"
@@ -578,7 +553,7 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        Text="@gmail.com" />
+                                        Text="23520869@gmail.com" />
                                 </Grid>
                             </DockPanel>
                         </Expander>

@@ -44,44 +44,57 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <TextBlock VerticalAlignment="top"
-                           FontSize="26"
-                           FontWeight="Bold"
-                           Opacity="1"
-                           Text="Edit your expense" />
-                <TextBlock VerticalAlignment="Bottom"
-                           FontSize="18"
-                           Text="Adjust your current expense" />
+                <TextBlock
+                    VerticalAlignment="top"
+                    FontSize="26"
+                    FontWeight="Bold"
+                    Opacity="1"
+                    Text="Edit expense" />
+                <TextBlock
+                    VerticalAlignment="Bottom"
+                    FontSize="18"
+                    Text="please fill in the form below" />
             </Grid>
 
             <Grid Grid.Row="1">
                 <Grid>
-                    <TextBlock Margin="16,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Text="Name" />
-                    <Border Width="440"
-                            Height="50"
-                            Margin="15,43,15,10"
-                            Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
-                            CornerRadius="30"
-                            Opacity="0.2" />
+                    <TextBlock
+                        Margin="16,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Text="Name" />
+                    <TextBlock
+                        Margin="70,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Foreground="#FFC8386C"
+                        Opacity="1"
+                        Text="*"
+                        Visibility="Visible" />
+                    <Border
+                        Height="50"
+                        Margin="15,43,15,9"
+                        Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
+                        CornerRadius="30"
+                        Opacity="0.2" />
 
-                    <TextBox Width="410"
-                             Height="40"
-                             Margin="0,47,0,0"
-                             HorizontalAlignment="Center"
-                             VerticalAlignment="Top"
-                             materialDesign:HintAssist.Hint="Your expense name"
-                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                             BorderBrush="{x:Null}"
-                             CaretBrush="{DynamicResource CommonText}"
-                             FontSize="14"
-                             Foreground="{DynamicResource CommonText}"
-                             SelectionBrush="{DynamicResource CommonText}"
-                             Text="{Binding NameEditExpense}"
-                             TextAlignment="Left" />
+                    <TextBox
+                        Width="410"
+                        Height="40"
+                        Margin="15,47,15,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Hint="Your expense name"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                        BorderBrush="{x:Null}"
+                        CaretBrush="{DynamicResource CommonText}"
+                        FontSize="14"
+                        Foreground="{DynamicResource CommonText}"
+                        SelectionBrush="{DynamicResource CommonText}"
+                        Text="{Binding NameEditExpense}"
+                        TextAlignment="Left" />
 
                 </Grid>
 
@@ -95,13 +108,31 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                
                 <Grid Grid.Column="0">
-                    <TextBlock Margin="16,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Text="Amount" />
+                    <TextBlock
+                        Margin="16,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Text="Amount" />
+
+                    <!--  set visible here  -->
+                    <TextBlock
+                        Margin="90,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Foreground="#FFC8386C"
+                        Opacity="1"
+                        Text="*"
+                        Visibility="Visible" />
+                    <Border
+                        Width="200"
+                        Height="50"
+                        Margin="18,43,17,10"
+                        Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
+                        CornerRadius="30"
+                        Opacity="0.2" />
 
                     <TextBox
                         Width="160"
@@ -133,6 +164,16 @@
                         VerticalAlignment="Top"
                         FontWeight="Bold"
                         Text="Category" />
+                    <!--  set visible here  -->
+                    <TextBlock
+                        Margin="100,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Foreground="#FFC8386C"
+                        Opacity="1"
+                        Text="*"
+                        Visibility="Visible" />
 
                     <ComboBox
                         Width="160"
@@ -149,11 +190,9 @@
                         DisplayMemberPath="Name"
                         FontSize="14"
                         Foreground="{DynamicResource CommonText}"
-                        IsEditable="True"
-                        IsEnabled="{Binding NotExB}"
-                        IsReadOnly="{Binding NotExB}"
-                        ItemsSource="{Binding ItemsExpense}"
-                        SelectedItem="{Binding SelectedCategory}"
+                        IsEditable="False"
+                        ItemsSource="{Binding ItemsEditExpense}"
+                        SelectedItem="{Binding CategoryEditExpense}"
                         Text="{Binding TextChangedCategory}" />
 
                     <!--  when choose Your custom Category : this shown  -->
@@ -173,6 +212,7 @@
                         TextAlignment="Center"
                         Visibility="Collapsed" />
 
+
                 </Grid>
             </Grid>
 
@@ -189,7 +229,16 @@
                         VerticalAlignment="Top"
                         FontWeight="Bold"
                         Text="Date " />
-
+                    <!--  set visible here  -->
+                    <TextBlock
+                        Margin="60,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Foreground="#FFC8386C"
+                        Opacity="1"
+                        Text="*"
+                        Visibility="Visible" />
                     <Border
                         Width="200"
                         Height="50"
@@ -213,7 +262,8 @@
                             FontWeight="DemiBold"
                             Foreground="{DynamicResource CommonText}"
                             ItemsSource="{Binding ItemDayExpense}"
-                            SelectedItem="{Binding DayExpense}" />
+                            SelectedItem="{Binding DayExpenseEdit}"
+                            Text="{Binding TextDayExpenseEdit}" />
                         <TextBlock
                             Margin="3,0,0,0"
                             HorizontalAlignment="Left"
@@ -267,7 +317,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         FontWeight="Bold"
-                        Text="Budget" />
+                        Text="Budget remain" />
                     <Border
                         Width="200"
                         Height="50"
@@ -304,6 +354,7 @@
                     VerticalAlignment="Top"
                     FontWeight="Bold"
                     Text="Description " />
+
                 <Border
                     Margin="18,40,18,21"
                     Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
@@ -327,6 +378,7 @@
                     Text="{Binding DescriptionEditExpense}"
                     TextWrapping="Wrap" />
             </Grid>
+
             <Grid Grid.Row="6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -361,7 +413,6 @@
                                     </Setter.Value>
                                 </Setter>
                                 <Style.Triggers>
-
                                     <Trigger Property="IsMouseOver" Value="true">
                                         <Setter Property="Cursor" Value="Hand" />
                                         <Setter Property="Background" Value="Red" />
@@ -411,5 +462,6 @@
                 </Border>
             </Grid>
         </Grid>
+
     </Border>
 </UserControl>

@@ -314,7 +314,13 @@ public static class DBManager
 
         context.SaveChanges();
     }
+    public static void PermanentlyDelete(Expense exp) {
+        using var context = new AppDbContext();
 
+        context.Remove(exp);
+
+        context.SaveChanges();
+    }
     #endregion Delete
 
     public static bool CheckTypeDatabase(Type type)

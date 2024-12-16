@@ -37,6 +37,10 @@ public class GoalStore : INotifyPropertyChanged {
             }
         }
     }
+    public event Action TriggerAction;
+    public void NotifyGoal() {
+        TriggerAction?.Invoke();
+    }
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged(string? propertyName = null) {

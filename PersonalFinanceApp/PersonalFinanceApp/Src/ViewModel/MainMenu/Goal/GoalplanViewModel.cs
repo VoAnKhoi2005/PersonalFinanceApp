@@ -38,6 +38,7 @@ public class GoalplanViewModel : BaseViewModel
     }
 
     public bool HasNoGoal => !GoalplanCardViewModels.Any();
+
     private readonly IServiceProvider _serviceProvider;
     private readonly GoalStore _goalStore;
 
@@ -47,12 +48,18 @@ public class GoalplanViewModel : BaseViewModel
         _serviceProvider = serviceProvider;
         _goalStore = serviceProvider.GetRequiredService<GoalStore>();
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
+
         GoalplanCardViewModels = new ObservableCollection<GoalplanCardViewModel>();
 
         AddNewGoalCommand = new NavigateModalCommand<GoalplanAddNewViewModel>(serviceProvider);
 
         RefreshGoalCommand = new RelayCommand<object>(LoadedGoal);
 
+        LoadedGoal();
+
+        _goalStore.TriggerAction += Reload;
+    }
+    public void Reload() {
         LoadedGoal();
     }
     private void LoadedGoal(object? parameter = null) {

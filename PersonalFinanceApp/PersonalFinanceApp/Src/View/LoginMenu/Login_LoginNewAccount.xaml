@@ -1,327 +1,416 @@
-﻿<UserControl x:Class="PersonalFinanceApp.Src.View.UC_Login_LoginNewAccountView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" >
+﻿<UserControl
+    x:Class="PersonalFinanceApp.Src.View.UC_Login_LoginNewAccountView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button">
-                <Setter Property="Background" Value="{DynamicResource Login_button}"></Setter>
-                <Setter Property="Foreground" Value="{DynamicResource CommonText}"></Setter>
+                <Setter Property="Background" Value="{DynamicResource Login_button}" />
+                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="30" Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"></ContentPresenter>
+                            <Border Background="{TemplateBinding Background}" CornerRadius="30">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="true">
-                        <Setter Property="Cursor" Value="Hand"></Setter>
-                        <Setter Property="Background" Value="{DynamicResource onHovered}" ></Setter>
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Setter Property="Background" Value="{DynamicResource onHovered}" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
         </Grid.Resources>
-        <materialDesign:Card x:Name="LoginCard"
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Center" 
-            Visibility="Visible" 
+        <materialDesign:Card
+            x:Name="LoginCard"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             UniformCornerRadius="40"
-            >
+            Visibility="Visible">
             <Grid Background="{DynamicResource CommonGridBackground}">
-                <TabControl Height="400" Width="560"  
-                materialDesign:ColorZoneAssist.Foreground="{DynamicResource Underline}"
-                materialDesign:ColorZoneAssist.Mode="Custom" >
+                <TabControl
+                    Width="560"
+                    Height="400"
+                    materialDesign:ColorZoneAssist.Foreground="{DynamicResource Underline}"
+                    materialDesign:ColorZoneAssist.Mode="Custom">
 
-                    <!--Login tab-->
-                    <TabItem Height="60" x:Name="LoginTab">
+                    <!--  Login tab  -->
+                    <TabItem x:Name="LoginTab" Height="60">
 
                         <TabItem.Header>
-                            <Label Content="LOGIN" FontSize="22" FontFamily="Arial" ></Label>
+                            <Label
+                                Content="LOGIN"
+                                FontFamily="Arial"
+                                FontSize="22" />
                         </TabItem.Header>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="473*"/>
-                                <ColumnDefinition Width="87*"/>
+                                <ColumnDefinition Width="473*" />
+                                <ColumnDefinition Width="87*" />
                             </Grid.ColumnDefinitions>
 
-                            <!--Username textbox-->
-                            <Label Content="Username" Foreground="{DynamicResource CommonText}" FontSize="16" Margin="31,67,356,238"></Label>
-                            <Border CornerRadius="15" Background="{DynamicResource Login_border}" Margin="124,62,36,238" Width="400" Height="40" Grid.ColumnSpan="2">
-                                <!--x:Name="UserLogin"-->
-                                <TextBox 
+                            <!--  Username textbox  -->
+                            <Label
+                                Margin="31,67,356,238"
+                                Content="Username"
+                                FontSize="16"
+                                Foreground="{DynamicResource CommonText}" />
+                            <Border
+                                Grid.ColumnSpan="2"
+                                Width="400"
+                                Height="40"
+                                Margin="124,62,36,238"
+                                Background="{DynamicResource Login_border}"
+                                CornerRadius="15">
+                                <!--  x:Name="UserLogin"  -->
+                                <TextBox
                                     x:Name="UserNameLogin"
-                                    Foreground="{DynamicResource CommonText}"
+                                    Width="380"
+                                    Height="40"
                                     VerticalAlignment="Top"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                                    Background="Transparent"
+                                    BorderBrush="{x:Null}"
                                     CaretBrush="{DynamicResource CommonText}"
+                                    Foreground="{DynamicResource CommonText}"
                                     SelectionBrush="{DynamicResource CommonText}"
-                                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"  
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                    Text="{Binding UserNameLogin}"
-                                    Width="380" Height="40"
-                                    Background="Transparent" BorderBrush="{x:Null}">
-                                </TextBox>
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding UserNameLogin}" />
                             </Border>
 
-                            <!--password passwordbox-->
-                            <Label Content="Password" FontSize="16"  Foreground="{DynamicResource CommonText}" Margin="31,134,366,174" RenderTransformOrigin="0.411,0.567"></Label>
-                            <Border Width="400" Height="40" Margin="123,130,37,170" Background="{DynamicResource Login_border}" CornerRadius="15" Grid.ColumnSpan="2">
-                                <PasswordBox 
-                                        Width="380" Height="40" x:Name="passwordlogin"
-                                        CaretBrush="{DynamicResource CommonText}"
-                                        SelectionBrush="{DynamicResource CommonText}"
-                                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}" 
-                                        materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
-                                        materialDesign:TextFieldAssist.HasClearButton="True"
-                                        IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                                        Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}">
+                            <!--  password passwordbox  -->
+                            <Label
+                                Margin="31,134,366,174"
+                                Content="Password"
+                                FontSize="16"
+                                Foreground="{DynamicResource CommonText}"
+                                RenderTransformOrigin="0.411,0.567" />
+                            <Border
+                                Grid.ColumnSpan="2"
+                                Width="400"
+                                Height="40"
+                                Margin="123,130,37,170"
+                                Background="{DynamicResource Login_border}"
+                                CornerRadius="15">
+                                <PasswordBox
+                                    x:Name="passwordlogin"
+                                    Width="380"
+                                    Height="40"
+                                    materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
+                                    materialDesign:TextFieldAssist.HasClearButton="True"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                                    BorderBrush="{x:Null}"
+                                    CaretBrush="{DynamicResource CommonText}"
+                                    IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
+                                    SelectionBrush="{DynamicResource CommonText}"
+                                    Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="PasswordChanged">
-                                            <i:InvokeCommandAction Command="{Binding PasswordLoginChangedCommand}"
-                                                                   CommandParameter="{Binding ElementName=passwordlogin}"/>
+                                            <i:InvokeCommandAction Command="{Binding PasswordLoginChangedCommand}" CommandParameter="{Binding ElementName=passwordlogin}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </PasswordBox>
                             </Border>
-                            <!--Remember me -->
-                            <CheckBox Content="Remember me"
-                                      Foreground="{DynamicResource CommonText}"
-                                      Background="{DynamicResource CommonText}" Margin="50,198,200,102" FontSize="15"/>
-
-
-                            <Button 
-                                Style="{StaticResource MaterialDesignFlatButton}"
-                                Content="Forgot your password?" 
-                                Command="{Binding ForgotPasswordCommand}"
+                            <!--  Remember me  -->
+                            <CheckBox
+                                Margin="50,198,200,102"
+                                Background="{DynamicResource CommonText}"
+                                Content="Remember me"
                                 FontSize="15"
-                                Width="200"
-                                FontWeight="Bold" FontStyle="Italic" 
-                                Background="Transparent" 
-                                Margin="200 200 -100 100"  
-                                Foreground="{DynamicResource CommonText}" Grid.ColumnSpan="2" />
+                                Foreground="{DynamicResource CommonText}" />
 
-                            <!--button Login confirm-->
-                            <Button IsDefault="True"
-                                    Content="Login Confirm" 
-                                    FontSize="18"
-                                    Width="300"
-                                    Height="50"
-                                    Foreground="{DynamicResource Login_buttonText}" 
-                                    Margin="130,245,43,45">
+
+                            <Button
+                                Grid.ColumnSpan="2"
+                                Width="200"
+                                Margin="200,200,-100,100"
+                                Background="Transparent"
+                                Command="{Binding ForgotPasswordCommand}"
+                                Content="Forgot your password?"
+                                FontSize="15"
+                                FontStyle="Italic"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource CommonText}"
+                                Style="{StaticResource MaterialDesignFlatButton}" />
+
+                            <!--  button Login confirm  -->
+                            <Button
+                                Width="300"
+                                Height="50"
+                                Margin="130,245,43,45"
+                                Content="Login Confirm"
+                                FontSize="18"
+                                Foreground="{DynamicResource Login_buttonText}"
+                                IsDefault="True">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="Click">
-                                        <i:InvokeCommandAction Command="{Binding LoginCommand}"/>
+                                        <i:InvokeCommandAction Command="{Binding LoginCommand}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </Button>
 
-                            <StackPanel Visibility="{Binding IncorrectPasswordUserName, Converter={StaticResource BoolToVisibilityConverter}}"
-                                        Margin="130 175 0 130">
-                                <WrapPanel >
-                                    <materialDesign:PackIcon 
-                                        Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
-                                    <Label Content="Incorrect username or password!" FontSize="12"
-                                           Foreground="Red" />
+                            <StackPanel Margin="130,175,0,130" Visibility="{Binding IncorrectPasswordUserName, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <WrapPanel>
+                                    <materialDesign:PackIcon
+                                        VerticalAlignment="Center"
+                                        Foreground="Red"
+                                        Kind="CloseCircle" />
+                                    <Label
+                                        Content="Incorrect username or password!"
+                                        FontSize="12"
+                                        Foreground="Red" />
                                 </WrapPanel>
                             </StackPanel>
                         </Grid>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="GotFocus">
-                                <i:InvokeCommandAction Command="{Binding FocusLoginCommand}" 
-                                                       CommandParameter="{Binding ElementName=LoginTab}"/>
+                                <i:InvokeCommandAction Command="{Binding FocusLoginCommand}" CommandParameter="{Binding ElementName=LoginTab}" />
                             </i:EventTrigger>
                             <i:EventTrigger EventName="GotFocus">
-                                <i:InvokeCommandAction Command="{Binding ClearPasswordNewAccountCommand}" 
-                                                       CommandParameter="{Binding ElementName=PasswordCreateAccount}" />
+                                <i:InvokeCommandAction Command="{Binding ClearPasswordNewAccountCommand}" CommandParameter="{Binding ElementName=PasswordCreateAccount}" />
                             </i:EventTrigger>
                             <i:EventTrigger EventName="GotFocus">
-                                <i:InvokeCommandAction Command="{Binding ClearPasswordNewAccountConfirmCommand}" 
-                                                       CommandParameter="{Binding ElementName=PasswordConfirmCreateAccount}" />
+                                <i:InvokeCommandAction Command="{Binding ClearPasswordNewAccountConfirmCommand}" CommandParameter="{Binding ElementName=PasswordConfirmCreateAccount}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </TabItem>
 
 
-                    <!--New account -->
-                    <TabItem  Height="60" x:Name="NewAccountTab">
+                    <!--  New account  -->
+                    <TabItem x:Name="NewAccountTab" Height="60">
                         <TabItem.Header>
-                            <Label Content="NEW ACCOUNT" FontSize="22"></Label>
+                            <Label Content="NEW ACCOUNT" FontSize="22" />
                         </TabItem.Header>
                         <Grid>
-                            <Label Content="Username" Foreground="{DynamicResource CommonText}" 
-                                   FontSize="16" Margin="32,41,442,264"></Label>
-                            <Border CornerRadius="15" Background="{DynamicResource Login_border}" Width="400" Height="40" VerticalAlignment="Top" Margin="130,36,30,0">
-                                <TextBox 
-                                VerticalAlignment="Top" x:Name="UserNameNewAccount"
+                            <Label
+                                Margin="32,41,442,264"
+                                Content="Username"
+                                FontSize="16"
+                                Foreground="{DynamicResource CommonText}" />
+                            <Border
+                                Width="400"
+                                Height="40"
+                                Margin="130,36,30,0"
+                                VerticalAlignment="Top"
+                                Background="{DynamicResource Login_border}"
+                                CornerRadius="15">
+                                <TextBox
+                                    x:Name="UserNameNewAccount"
+                                    Width="380"
+                                    Height="40"
+                                    VerticalAlignment="Top"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                                    Background="Transparent"
+                                    BorderBrush="{x:Null}"
                                     CaretBrush="{DynamicResource CommonText}"
                                     SelectionBrush="{DynamicResource CommonText}"
-                                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"  
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                Width="380" 
-                                Height="40"
-                                Background="Transparent" BorderBrush="{x:Null}"
-                                Text="{Binding UserNameNewAccount}">
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding UserNameNewAccount}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
-                                            <i:InvokeCommandAction Command="{Binding CheckFormatUserNameNewAccountCommand}"
-                                                                   CommandParameter="{Binding ElementName=UserNameNewAccount}"/>
+                                            <i:InvokeCommandAction Command="{Binding CheckFormatUserNameNewAccountCommand}" CommandParameter="{Binding ElementName=UserNameNewAccount}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </TextBox>
                             </Border>
 
-                            <Label Content="Gmail" Foreground="{DynamicResource CommonText}" FontSize="16" VerticalAlignment="Top"
-                                   HorizontalAlignment="Left" Margin="32,100,0,0"></Label>
-                            <Border CornerRadius="15" Background="{DynamicResource Login_border}" 
-                                    Width="400" Height="40" 
-                                    VerticalAlignment="Center" 
-                                    Margin="130,-105,30,0">
-                                <TextBox 
-                                VerticalAlignment="Top" x:Name="Gmail" BorderBrush="{x:Null}"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                                    CaretBrush="{DynamicResource CommonText}"
-                                         SelectionBrush="{DynamicResource CommonText}"
-                                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"  
-                                Width="380" 
+                            <Label
+                                Margin="32,100,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="Gmail"
+                                FontSize="16"
+                                Foreground="{DynamicResource CommonText}" />
+                            <Border
+                                Width="400"
                                 Height="40"
-                                Background="Transparent"
-                                Text="{Binding Gmail}">
+                                Margin="130,-105,30,0"
+                                VerticalAlignment="Center"
+                                Background="{DynamicResource Login_border}"
+                                CornerRadius="15">
+                                <TextBox
+                                    x:Name="Gmail"
+                                    Width="380"
+                                    Height="40"
+                                    VerticalAlignment="Top"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                                    Background="Transparent"
+                                    BorderBrush="{x:Null}"
+                                    CaretBrush="{DynamicResource CommonText}"
+                                    SelectionBrush="{DynamicResource CommonText}"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding Gmail}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
-                                            <i:InvokeCommandAction Command="{Binding CheckFormatGmailCommand}"
-                                                                   CommandParameter="{Binding ElementName=Gmail}"/>
+                                            <i:InvokeCommandAction Command="{Binding CheckFormatGmailCommand}" CommandParameter="{Binding ElementName=Gmail}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </TextBox>
                             </Border>
 
-                            <Label Content="Password" FontSize="16"  Foreground="{DynamicResource CommonText}" Margin="32,163,441,145" RenderTransformOrigin="0.503,1.257"></Label>
-                            <Border Width="400" Height="40"
-                                    VerticalAlignment="Center"
-                                    Margin="130,100,30,80" 
-                                    Background="{DynamicResource Login_border}" 
-                                    CornerRadius="15">
-                                <PasswordBox 
-                                x:Name="PasswordCreateAccount"
-                                Width="380" Height="40"
-                                CaretBrush="{DynamicResource CommonText}"
-                                SelectionBrush="{DynamicResource CommonText}"
-                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"  
-                                materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
-                                materialDesign:TextFieldAssist.HasClearButton="True"
-                                IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                                Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="PasswordChanged">
-                                            <i:InvokeCommandAction Command="{Binding PasswordNewAccountChangedCommand}"
-                                                                   CommandParameter="{Binding ElementName=PasswordCreateAccount}"/>
-                                        </i:EventTrigger>
-                                        <i:EventTrigger EventName="LostFocus">
-                                            <i:InvokeCommandAction Command="{Binding CheckFormatPasswordNewAccountCommand}"
-                                                                   CommandParameter="{Binding ElementName=PasswordCreateAccount}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </PasswordBox>
-                            </Border>
-                            <Border Width="400" Height="40" Margin="130,171,30,80" 
-                                    Background="{DynamicResource Login_border }" CornerRadius="15" VerticalAlignment="Bottom">
-                                <PasswordBox 
-                                 x:Name="PasswordConfirmCreateAccount"
-                                 Width="380" Height="40"
+                            <Label
+                                Margin="32,163,441,145"
+                                Content="Password"
+                                FontSize="16"
+                                Foreground="{DynamicResource CommonText}"
+                                RenderTransformOrigin="0.503,1.257" />
+                            <Border
+                                Width="400"
+                                Height="40"
+                                Margin="130,100,30,80"
+                                VerticalAlignment="Center"
+                                Background="{DynamicResource Login_border}"
+                                CornerRadius="15">
+                                <PasswordBox
+                                    x:Name="PasswordCreateAccount"
+                                    Width="380"
+                                    Height="40"
+                                    materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
+                                    materialDesign:TextFieldAssist.HasClearButton="True"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                                    BorderBrush="{x:Null}"
                                     CaretBrush="{DynamicResource CommonText}"
-                                         SelectionBrush="{DynamicResource CommonText}"
-                                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"  
-                                 materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
-                                 materialDesign:TextFieldAssist.HasClearButton="True"
-                                 IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
-                                 Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" BorderBrush="{x:Null}">
+                                    IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
+                                    SelectionBrush="{DynamicResource CommonText}"
+                                    Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="PasswordChanged">
-                                            <i:InvokeCommandAction Command="{Binding PasswordConfirmChangedCommand}"
-                                                                   CommandParameter="{Binding ElementName=PasswordConfirmCreateAccount}"/>
+                                            <i:InvokeCommandAction Command="{Binding PasswordNewAccountChangedCommand}" CommandParameter="{Binding ElementName=PasswordCreateAccount}" />
                                         </i:EventTrigger>
                                         <i:EventTrigger EventName="LostFocus">
-                                            <i:InvokeCommandAction Command="{Binding CheckMathConfirmPasswordCommand}"
-                                                                   CommandParameter="{Binding ElementName=PasswordConfirmCreateAccount}"/>
+                                            <i:InvokeCommandAction Command="{Binding CheckFormatPasswordNewAccountCommand}" CommandParameter="{Binding ElementName=PasswordCreateAccount}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </PasswordBox>
                             </Border>
-                            <Label Content="Password&#xA;confirm" 
-                                   FontSize="16"  
-                                   Foreground="{DynamicResource CommonText}"  
-                                   VerticalAlignment="Bottom"
-                                   RenderTransformOrigin="0.503,1.257" Margin="32,0,442,75" HorizontalAlignment="Left"/>
+                            <Border
+                                Width="400"
+                                Height="40"
+                                Margin="130,171,30,80"
+                                VerticalAlignment="Bottom"
+                                Background="{DynamicResource Login_border}"
+                                CornerRadius="15">
+                                <PasswordBox
+                                    x:Name="PasswordConfirmCreateAccount"
+                                    Width="380"
+                                    Height="40"
+                                    materialDesign:PasswordBoxAssist.Password="{Binding Password2, Mode=TwoWay}"
+                                    materialDesign:TextFieldAssist.HasClearButton="True"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                                    BorderBrush="{x:Null}"
+                                    CaretBrush="{DynamicResource CommonText}"
+                                    IsEnabled="{Binding ElementName=RevealPasswordFloatingEnabled, Path=IsChecked}"
+                                    SelectionBrush="{DynamicResource CommonText}"
+                                    Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="PasswordChanged">
+                                            <i:InvokeCommandAction Command="{Binding PasswordConfirmChangedCommand}" CommandParameter="{Binding ElementName=PasswordConfirmCreateAccount}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding CheckMathConfirmPasswordCommand}" CommandParameter="{Binding ElementName=PasswordConfirmCreateAccount}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </PasswordBox>
+                            </Border>
+                            <Label
+                                Margin="32,0,442,75"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Content="Password&#xA;confirm"
+                                FontSize="16"
+                                Foreground="{DynamicResource CommonText}"
+                                RenderTransformOrigin="0.503,1.257" />
 
 
-                            <!--invalid something-->
+                            <!--  invalid something  -->
 
-                            <!--Worst Username-->
+                            <!--  Worst Username  -->
                             <StackPanel Visibility="{Binding InCorrectName, Converter={StaticResource BoolToVisibilityConverter}}">
-                                <WrapPanel Margin="130 75 100 50">
-                                    <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
-                                    <Label Content="Username is already in use!" FontSize="12"
-                                           Foreground="Red" ></Label>
+                                <WrapPanel Margin="130,75,100,50">
+                                    <materialDesign:PackIcon
+                                        VerticalAlignment="Center"
+                                        Foreground="Red"
+                                        Kind="CloseCircle" />
+                                    <Label
+                                        Content="Username is already in use!"
+                                        FontSize="12"
+                                        Foreground="Red" />
                                 </WrapPanel>
                             </StackPanel>
-                            <!--Wrong Format Gmail-->
+                            <!--  Wrong Format Gmail  -->
                             <StackPanel Visibility="{Binding InCorrectGmail, Converter={StaticResource BoolToVisibilityConverter}}">
-                                <WrapPanel Margin="130 137 100 50">
-                                    <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
-                                    <Label Content="Invalid Gmail!" Foreground="Red" 
-                                           FontSize="12"></Label>
+                                <WrapPanel Margin="130,137,100,50">
+                                    <materialDesign:PackIcon
+                                        VerticalAlignment="Center"
+                                        Foreground="Red"
+                                        Kind="CloseCircle" />
+                                    <Label
+                                        Content="Invalid Gmail!"
+                                        FontSize="12"
+                                        Foreground="Red" />
                                 </WrapPanel>
                             </StackPanel>
-                            <!--At least 8 characters. Contains capital letter, lowercase letter, digit, special-->
+                            <!--  At least 8 characters. Contains capital letter, lowercase letter, digit, special  -->
                             <StackPanel Visibility="{Binding InCorrectPassword, Converter={StaticResource BoolToVisibilityConverter}}">
-                                <WrapPanel Margin="130 197 0 50">
-                                    <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
-                                    <Label Content="Password must 6-16 characters long!" 
-                                           FontSize="12"
-                                           Foreground="Red" ></Label>
+                                <WrapPanel Margin="130,197,0,50">
+                                    <materialDesign:PackIcon
+                                        VerticalAlignment="Center"
+                                        Foreground="Red"
+                                        Kind="CloseCircle" />
+                                    <Label
+                                        Content="Password must 6-16 characters long!"
+                                        FontSize="12"
+                                        Foreground="Red" />
                                 </WrapPanel>
                             </StackPanel>
-                            <!--Password not match-->
+                            <!--  Password not match  -->
                             <StackPanel Visibility="{Binding InCorrectPasswordConfirm, Converter={StaticResource BoolToVisibilityConverter}}">
-                                <WrapPanel Margin="130 260 100 50">
-                                    <materialDesign:PackIcon Kind="CloseCircle" Foreground="Red" VerticalAlignment="Center"/>
-                                    <Label Content="Password not match. Try again" FontSize="12"
-                                           Foreground="Red" ></Label>
+                                <WrapPanel Margin="130,260,100,50">
+                                    <materialDesign:PackIcon
+                                        VerticalAlignment="Center"
+                                        Foreground="Red"
+                                        Kind="CloseCircle" />
+                                    <Label
+                                        Content="Password not match. Try again"
+                                        FontSize="12"
+                                        Foreground="Red" />
                                 </WrapPanel>
                             </StackPanel>
 
-                            <Button 
-                                Content="Create Account" 
-                                FontSize="18"
+                            <Button
+                                x:Name="CreateAccount"
                                 Width="300"
-                                Height="50" x:Name="CreateAccount"
-                                Foreground="{DynamicResource Login_buttonText}" 
-                                Margin="130,285,130,5">
+                                Height="50"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Margin="10 0 0 15"
+                                Content="Create Account"
+                                FontSize="18"
+                                Foreground="{DynamicResource Login_buttonText}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="GotFocus">
-                                        <i:InvokeCommandAction Command="{Binding CreateAccountCommand}" CommandParameter="{Binding ElementName=LoginTab}"/>
+                                        <i:InvokeCommandAction Command="{Binding CreateAccountCommand}" CommandParameter="{Binding ElementName=LoginTab}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </Button>
                         </Grid>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="GotFocus">
-                                <i:InvokeCommandAction Command="{Binding FocusNewAccountCommand}" 
-                                                       CommandParameter="{Binding ElementName=NewAccountTab}"/>
+                                <i:InvokeCommandAction Command="{Binding FocusNewAccountCommand}" CommandParameter="{Binding ElementName=NewAccountTab}" />
                             </i:EventTrigger>
                             <i:EventTrigger EventName="GotFocus">
-                                <i:InvokeCommandAction Command="{Binding ClearPasswordLoginCommand}" 
-                                                       CommandParameter="{Binding ElementName=passwordlogin}" />
+                                <i:InvokeCommandAction Command="{Binding ClearPasswordLoginCommand}" CommandParameter="{Binding ElementName=passwordlogin}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </TabItem>

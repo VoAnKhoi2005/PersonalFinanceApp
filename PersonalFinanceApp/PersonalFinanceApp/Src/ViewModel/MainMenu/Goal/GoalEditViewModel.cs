@@ -222,32 +222,42 @@ public class GoalEditViewModel : BaseViewModel
     }
     private void ConfirmEditGoal(object sender) {
         //add data to database
-        var goalID = _goalStore.GoalID;
-        Goal goalEdit = new();
-        if (goalID != null) {
-            goalEdit = DBManager.GetFirst<Goal>(g => g.GoalID == int.Parse(goalID) && g.UserID == int.Parse(_accountStore.UsersID));
-        }
-        if (goalEdit != null) {
-            goalEdit.Name = NameEditGoal;
-            goalEdit.Target = long.Parse(TargetEditGoal);
-            goalEdit.CurrentAmount = long.Parse(CurrentAmountEditGoal);
-            goalEdit.Reminder = ReminderEditGoal;
-            goalEdit.Deadline = DeadlineEditGoal;
-            goalEdit.Status = (long.Parse(TargetEditGoal) <= long.Parse(CurrentAmountEditGoal)) ? "Completed" : "Active";
-            goalEdit.Description = DescriptionEditGoal;
-            goalEdit.CategoryName = CategoryEditGoal;
-        }
         try {
+            var goalID = _goalStore.GoalID;
+            Goal goalEdit = new();
+            if (goalID != null) {
+                goalEdit = DBManager.GetFirst<Goal>(g => g.GoalID == int.Parse(goalID) && g.UserID == int.Parse(_accountStore.UsersID));
+            }
+            if (goalEdit != null) {
+                goalEdit.Name = NameEditGoal;
+                goalEdit.Target = long.Parse(TargetEditGoal);
+                goalEdit.CurrentAmount = long.Parse(CurrentAmountEditGoal);
+                goalEdit.Reminder = ReminderEditGoal;
+                goalEdit.Deadline = DeadlineEditGoal;
+                goalEdit.Status = GoalStatus();
+                goalEdit.Description = DescriptionEditGoal;
+                goalEdit.CategoryName = CategoryEditGoal;
+            }
             bool update = DBManager.Update<Goal>(goalEdit);
             if (!update) {
                 throw new InvalidOperationException("The update operation failed because the value is false.");
             }
-        }
-        catch (Exception ex) {
+            _goalStore.NotifyGoal();
+        }catch (Exception ex) {
             MessageBox.Show("Có lỗi về dữ liệu vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
-
         _modalNavigationStore.Close();
+    }
+    public string GoalStatus() {
+        if (long.Parse(TargetEditGoal) <= long.Parse(CurrentAmountEditGoal) && DateTime.Now <= DeadlineEditGoal) {
+            return "Completed";
+        }
+        else if (long.Parse(TargetEditGoal) > long.Parse(CurrentAmountEditGoal) && DateTime.Now > DeadlineEditGoal) {
+            return "Canceled";
+        }
+        else {
+            return "Active";
+        }
     }
 }
