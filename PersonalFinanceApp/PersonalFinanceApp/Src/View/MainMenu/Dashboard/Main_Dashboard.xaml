@@ -44,8 +44,8 @@
         </Grid.Resources>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="187*" />
-                <ColumnDefinition Width="127*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Grid>
                 <Grid.RowDefinitions>
@@ -256,7 +256,7 @@
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition />
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TextBlock
                                     Grid.Row="0"
@@ -280,7 +280,12 @@
                                     Opacity="0.7"
                                     Text="No data found!"
                                     TextAlignment="Center"
-                                    Visibility="{Binding HasNoData, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    Visibility="{Binding HasNoActivityData, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                <lvc:CartesianChart Grid.Row="1"
+                                                    Series="{Binding ActivitySeries}"
+                                                    XAxes="{Binding XAxisActivity}"
+                                                    YAxes="{Binding YAxisActivity}">
+                                </lvc:CartesianChart>
                             </Grid>
                         </Border>
                     </Grid>

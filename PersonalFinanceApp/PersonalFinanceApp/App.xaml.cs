@@ -53,7 +53,6 @@ namespace PersonalFinanceApp
             services.AddSingleton<ModalNavigationStore>();
             services.AddSingleton<SharedDataService>();
             services.AddSingleton<NavigationStore>();
-            services.AddSingleton<ChartServices>();
             services.AddSingleton<SharedService>();
             services.AddSingleton<AccountStore>();
             services.AddSingleton<ExpenseStore>();

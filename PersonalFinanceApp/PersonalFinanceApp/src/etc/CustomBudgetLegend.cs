@@ -27,7 +27,7 @@ public class CustomBudgetLegend : IChartLegend<SkiaSharpDrawingContext>
     {
         var legendPosition = chart.GetLegendPosition();
 
-        _stackPanel.X = legendPosition.X;
+        _stackPanel.X = legendPosition.X - 20f;
         _stackPanel.Y = legendPosition.Y;
 
         chart.AddVisual(_stackPanel);
