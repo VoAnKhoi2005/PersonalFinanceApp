@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OxyPlot;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
@@ -13,7 +12,6 @@ public class GoalplanCardViewModel:BaseViewModel
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly GoalStore _goalStore;
-    private readonly ChartServices _chartServices;
 
     #region Properties
     //id
@@ -138,14 +136,6 @@ public class GoalplanCardViewModel:BaseViewModel
     }
     private string _descriptionGoalCard;
     //goal
-    public PlotModel? GoalChart {
-        get => _goalChart;
-        set {
-            _goalChart = value;
-            OnPropertyChanged();
-        }
-    }
-    private PlotModel? _goalChart;
     #endregion
     #region Command
     public ICommand EditGoalCommand { get; set; }
@@ -160,7 +150,6 @@ public class GoalplanCardViewModel:BaseViewModel
         _serviceProvider = serviceProvider;
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _goalStore = serviceProvider.GetRequiredService<GoalStore>();
-        _chartServices = serviceProvider.GetRequiredService<ChartServices>();
 
         SaveIDGoalCard = new RelayCommand<object>(SaveID);
 
@@ -175,10 +164,8 @@ public class GoalplanCardViewModel:BaseViewModel
             return;
         LoadGoalCard(goal);
     }
-    public void LoadGoalCard(Goal goal) {
-
-        GoalChart = _chartServices.CreatePieChart(goal);
-
+    public void LoadGoalCard(Goal goal) 
+    {
         NameGoalCard = goal.Name;
         TargetGoalCard = goal.Target.ToString();
         CurrentAmoutGoalCard = goal.CurrentAmount.ToString();

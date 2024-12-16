@@ -73,8 +73,6 @@
                             BorderThickness="0">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <oxy:PlotView Background="Transparent"
-                                              Model="{Binding GoalChart}" />
                             </ControlTemplate>
                         </Button.Template>
                     </Button>

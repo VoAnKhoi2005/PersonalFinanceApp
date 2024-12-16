@@ -8,6 +8,8 @@
     xmlns:oxy="http://oxyplot.org/wpf"
     xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
     xmlns:etc="clr-namespace:PersonalFinanceApp.etc"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:view="clr-namespace:PersonalFinanceApp.Src.View"
     d:DesignHeight="720"
     d:DesignWidth="942"
     mc:Ignorable="d">
@@ -327,9 +329,7 @@
                                            Foreground="{DynamicResource SuperText}"
                                            Margin="15,0,0,0"
                                            HorizontalAlignment="Left"
-                                           VerticalAlignment="Top"
-                                           Height="39"
-                                           Grid.RowSpan="2">
+                                           VerticalAlignment="Top">
                                 </TextBlock>
                                 <lvc:PieChart Grid.Row="1" 
                                               LegendPosition="Right"
@@ -380,7 +380,7 @@
                                             <ItemsControl ItemsSource="{Binding GoalViewModels}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
-                                                        <views:Main_Dashboard_GoalplanCard Margin="10" />
+                                                        <view:Main_Dashboard_GoalplanCard Margin="10" />
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
                                                 <ItemsControl.ItemsPanel>

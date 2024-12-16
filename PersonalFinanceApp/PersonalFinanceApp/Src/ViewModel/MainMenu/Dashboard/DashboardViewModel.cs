@@ -16,6 +16,7 @@ using PersonalFinanceApp.Src.ViewModel.Stores;
 using System.Collections.Specialized;
 using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -30,12 +31,24 @@ public class DashboardViewModel : BaseViewModel
 
     public DashboardViewModel(IServiceProvider serviceProvider)
     {
-        BudgetSeries = CreateDoughnutChartRandom();
+        ExpenseNavigateCommand = new NavigateCommand<ExpenseViewModel>(serviceProvider);
+        GoalNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
 
-        //XAxisActivity = new List<ICartesianAxis>
-        //{
-        //    new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd"))
-        //};
+        _serviceProvider = serviceProvider;
+        _accountStore = serviceProvider.GetRequiredService<AccountStore>();
+        _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
+        GoalViewModels = new ObservableCollection<DashboardGoalViewModel>();
+        _sharedService = serviceProvider.GetRequiredService<SharedService>();
+
+        usr = int.Parse(_accountStore.UsersID);
+
+        LoadDashBoard();
+
+        ChangedExpenseBookCommand = new RelayCommand<object>(ExpenseBookChanged);
+
+        _sharedService.Notify();
+
+        BudgetSeries = CreateDoughnutChartRandom();
         XAxisActivity = new List<ICartesianAxis>
         {
             new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd"))
@@ -152,8 +165,8 @@ public class DashboardViewModel : BaseViewModel
         };
 
         return columnSeries;
-=======
-    private readonly ChartServices _chartServices;
+    }
+
     private readonly ExpenseStore _expenseStore;
     private readonly AccountStore _accountStore;
     private readonly IServiceProvider _serviceProvider;
@@ -272,56 +285,13 @@ public class DashboardViewModel : BaseViewModel
     }
 
     public bool HasNoGoal => !GoalViewModels.Any();
-    //expense
-    public PlotModel? ExpenseChart
-    {
-        get => _expenseChart;
-        set
-        {
-            _expenseChart = value;
-            OnPropertyChanged();
-        }
-    }
-    private PlotModel? _expenseChart;
-    //budget
-    public PlotModel? BudgetChart {
-        get => _budgetChart;
-        set {
-            _budgetChart = value;
-            OnPropertyChanged();
-        }
-    }
-    private PlotModel? _budgetChart;
-    
-
-    public PlotController CustomPlotController { get; set; }
-    public bool HasNoData => ExpenseChart == null;
+    public bool HasNoData => false;
     #endregion
     #region Command
     public ICommand ExpenseNavigateCommand { get; set; }
     public ICommand ChangedExpenseBookCommand { get; set; }
     public ICommand GoalNavigateCommand { get; set; }
     #endregion
-    public DashboardViewModel(IServiceProvider serviceProvider)
-    {
-        ExpenseNavigateCommand = new NavigateCommand<ExpenseViewModel>(serviceProvider);
-        GoalNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
-
-        _serviceProvider = serviceProvider;
-        _chartServices = serviceProvider.GetRequiredService<ChartServices>();
-        _accountStore = serviceProvider.GetRequiredService<AccountStore>();
-        _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
-        GoalViewModels = new ObservableCollection<DashboardGoalViewModel>();
-        _sharedService = serviceProvider.GetRequiredService<SharedService>();
-
-        usr = int.Parse(_accountStore.UsersID);
-
-        LoadDashBoard();
-
-        ChangedExpenseBookCommand = new RelayCommand<object>(ExpenseBookChanged);
-
-        _sharedService.Notify();
-    }
 
 
     public void LoadGoal() {
@@ -350,16 +320,6 @@ public class DashboardViewModel : BaseViewModel
             };
             SourceCategory.Add(tb);
         }
-        var expenses = DBManager.GetCondition<Expense>(e => e.ExBMonth == SelectedExpenseBook._month &&
-                                                                e.ExBYear == SelectedExpenseBook._year &&
-                                                                e.UserID == usr);
-        if (curExpensesBook != null) {
-            curExpensesBook.Categories = listCategory;
-            curExpensesBook.Expenses = expenses;
-            BudgetChart = _chartServices.CreatePieChart(curExpensesBook);
-        }
-        else
-            BudgetChart = null;
     }
     public void LoadTotal() {
         //load expense
@@ -429,10 +389,6 @@ public class DashboardViewModel : BaseViewModel
         }
     }
     public void LoadDashBoard() {
-
-        CustomPlotController = new PlotController();
-        CustomPlotController.UnbindMouseDown(OxyMouseButton.Left);
-        CustomPlotController.BindMouseEnter(PlotCommands.HoverSnapTrack);
         if (DBManager.GetFirst<ExpensesBook>(e => e.UserID == usr) == null) return;
         GetNewest();
         LoadSourceExpeseBook();
@@ -452,12 +408,6 @@ public class DashboardViewModel : BaseViewModel
     public void LoadColumnChart() {
         ExpensesBook? curExpensesBook = DBManager.GetFirst<ExpensesBook>(exB => exB.UserID == usr && exB.Month == SelectedExpenseBook._month && exB.Year == SelectedExpenseBook._year);
         var expenses = DBManager.GetCondition<Expense>(e => e.UserID == usr && e.ExBMonth == SelectedExpenseBook._month && e.ExBYear == SelectedExpenseBook._year);
-        if (curExpensesBook != null) {
-            curExpensesBook.Expenses = expenses;
-            ExpenseChart = _chartServices.CreateColumnChart(curExpensesBook);
-        }
-        else
-            ExpenseChart = null;
     }
     static void SortObservableCollection(ObservableCollection<ExpenseBookAdvance> collection) {
         var sortedList = collection.OrderBy(x => x).ToList();

@@ -6,6 +6,7 @@ public class CalendarButtonViewModel : BaseViewModel
 {
     public DateTime Date { get; set; }
 
+    private string _info1;
     public string Info1
     {
         get => _info1;
