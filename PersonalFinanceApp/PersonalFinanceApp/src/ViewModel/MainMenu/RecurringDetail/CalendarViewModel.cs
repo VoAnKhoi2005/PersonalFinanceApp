@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using PersonalFinanceApp.Src.View;
@@ -14,7 +15,9 @@ public class CalendarViewModel : BaseViewModel
 
     public void LoadDataContextCalenderButton(Calendar calendar)
     {
-        List<CalendarDayButton> dayButtons = GetVisualChildren<CalendarDayButton>(calendar).ToList();
+        DayDataContexts.Clear();
+
+        ObservableCollection<CalendarDayButton> dayButtons = GetVisualChildren<CalendarDayButton>(calendar);
         foreach (CalendarDayButton dayButton in dayButtons)
         {
             DateTime date = (DateTime)dayButton.DataContext;
@@ -23,24 +26,26 @@ public class CalendarViewModel : BaseViewModel
                 Date = date,
             };
             DayDataContexts.Add(calendarDayViewModel);
-            dayButton.DataContext = calendarDayViewModel;
+            CalendarHelper.SetViewModel(dayButton, calendarDayViewModel);
         }
     }
 
-    private IEnumerable<T> GetVisualChildren<T>(DependencyObject parent) where T : DependencyObject
+    private ObservableCollection<T> GetVisualChildren<T>(DependencyObject parent) where T : DependencyObject
     {
+        ObservableCollection<T> children = new ObservableCollection<T>();
         for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
         {
             var child = VisualTreeHelper.GetChild(parent, i);
             if (child is T typedChild)
             {
-                yield return typedChild;
+                children.Add(typedChild);
             }
 
             foreach (var descendant in GetVisualChildren<T>(child))
             {
-                yield return descendant;
+                children.Add(descendant);
             }
         }
+        return children;
     }
 }

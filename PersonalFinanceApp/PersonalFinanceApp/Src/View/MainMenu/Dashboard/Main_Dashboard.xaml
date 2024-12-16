@@ -1,16 +1,18 @@
-﻿<UserControl x:Class="PersonalFinanceApp.Src.View.UC_Dashboard"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:oxy="http://oxyplot.org/wpf"
-             xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
-             d:DesignHeight="720"
-             d:DesignWidth="942"
-             mc:Ignorable="d">
+<UserControl
+    x:Class="PersonalFinanceApp.Src.View.UC_Dashboard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:oxy="http://oxyplot.org/wpf"
+    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+    xmlns:etc="clr-namespace:PersonalFinanceApp.etc"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:view="clr-namespace:PersonalFinanceApp.Src.View"
+    d:DesignHeight="720"
+    d:DesignWidth="942"
+    mc:Ignorable="d">
     <UserControl.Resources>
         <Style TargetType="ComboBoxItem"
                x:Key="ComboBox_style">
@@ -83,8 +85,8 @@
         </Grid.Resources>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="187*" />
-                <ColumnDefinition Width="127*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Grid>
                 <Grid.RowDefinitions>
@@ -296,37 +298,36 @@
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition />
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0"
-                                           Margin="10,5,10,5"
-                                           HorizontalAlignment="Left"
-                                           Foreground="{DynamicResource SuperText}"
-                                           VerticalAlignment="Center"
-                                           FontSize="18"
-                                           FontWeight="Bold"
-                                           Text="ACTIVITIY" />
-                                <Button Grid.Row="1"
-                                        Background="Transparent"
-                                        BorderThickness="0"
-                                        Command="{Binding ExpenseNavigateCommand}">
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="Button">
-                                            <oxy:PlotView Background="Transparent"
-                                                          Foreground="Red"
-                                                          Controller="{Binding CustomPlotController}"
-                                                          Model="{Binding ExpenseChart}" />
-                                        </ControlTemplate>
-                                    </Button.Template>
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Margin="10,5,10,5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Text="ACTIVITIY" />
+                                <Button
+                                    Grid.Row="1"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Command="{Binding ColumnChartNavigateCommand}">
                                 </Button>
-                                <TextBlock Grid.Row="1"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           FontSize="20"
-                                           Opacity="0.7"
-                                           Text="No data found!"
-                                           TextAlignment="Center"
-                                           Visibility="{Binding HasNoData, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                <TextBlock
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="20"
+                                    Opacity="0.7"
+                                    Text="No data found!"
+                                    TextAlignment="Center"
+                                    Visibility="{Binding HasNoActivityData, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                <lvc:CartesianChart Grid.Row="1"
+                                                    Series="{Binding ActivitySeries}"
+                                                    XAxes="{Binding XAxisActivity}"
+                                                    YAxes="{Binding YAxisActivity}">
+                                </lvc:CartesianChart>
                             </Grid>
                         </Border>
                     </Grid>
@@ -358,52 +359,15 @@
                                            Foreground="{DynamicResource SuperText}"
                                            Margin="15,0,0,0"
                                            HorizontalAlignment="Left"
-                                           VerticalAlignment="Top"
-                                           FontSize="15"
-                                           FontWeight="Bold"
-                                           Text="BUDGET" />
-                                <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*" />
-                                        <ColumnDefinition Width="2*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0" >
-                                        <ItemsControl Grid.Column="0" FontSize="14"
-                                                      ItemsSource="{Binding SourceCategory}">
-                                            <ItemsControl.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <WrapPanel HorizontalAlignment="Center"
-                                                               VerticalAlignment="Top"
-                                                               IsItemsHost="True"
-                                                               ItemHeight="auto"
-                                                               ItemWidth="100" />
-                                                </ItemsPanelTemplate>
-                                            </ItemsControl.ItemsPanel>
-                                        </ItemsControl>
-                                    </Grid>
-                                    <!--  Chart budget here  -->
-                                    <Button Grid.Column="1"
-                                            Background="Transparent"
-                                            BorderThickness="0"
-                                            Command="{Binding ExpenseNavigateCommand}">
-                                        <Button.Template>
-                                            <ControlTemplate TargetType="Button">
-                                                <oxy:PlotView Background="Transparent"
-                                                              Controller="{Binding CustomPlotController}"
-                                                              Model="{Binding BudgetChart}" />
-                                            </ControlTemplate>
-                                        </Button.Template>
-                                    </Button>
-                                    <TextBlock Grid.Column="1"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"
-                                               FontSize="20"
-                                               Opacity="0.7"
-                                               Text="No data found!"
-                                               Foreground="{DynamicResource CommonText}"
-                                               TextAlignment="Center"
-                                               Visibility="{Binding HasNoData, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                </Grid>
+                                           VerticalAlignment="Top">
+                                </TextBlock>
+                                <lvc:PieChart Grid.Row="1" 
+                                              LegendPosition="Right"
+                                              Series="{Binding BudgetSeries}">
+                                    <lvc:PieChart.Legend>
+                                        <etc:CustomBudgetLegend></etc:CustomBudgetLegend>
+                                    </lvc:PieChart.Legend>
+                                </lvc:PieChart>
                             </Grid>
                         </Border>
                     </Grid>
@@ -446,7 +410,7 @@
                                             <ItemsControl ItemsSource="{Binding GoalViewModels}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
-                                                        <views:Main_Dashboard_GoalplanCard Margin="10" />
+                                                        <view:Main_Dashboard_GoalplanCard Margin="10" />
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
                                                 <ItemsControl.ItemsPanel>

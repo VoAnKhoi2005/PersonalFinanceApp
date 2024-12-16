@@ -6,6 +6,7 @@ public class CalendarButtonViewModel : BaseViewModel
 {
     public DateTime Date { get; set; }
 
+    private string _info1;
     public string Info1
     {
         get => _info1;
@@ -15,8 +16,10 @@ public class CalendarButtonViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    private string _info1 = string.Empty;
-    public bool HaveInfo1 => Info1 != "";
+
+    public bool HaveInfo1 => !string.IsNullOrEmpty(Info1);
+
+    private string _info2 = string.Empty;
 
     public string Info2
     {
@@ -28,8 +31,10 @@ public class CalendarButtonViewModel : BaseViewModel
             OnPropertyChanged(nameof(HaveInfo2));
         }
     }
-    private string _info2 = string.Empty;
+
     public bool HaveInfo2 => !string.IsNullOrEmpty(Info2);
+
+    private string _additionalInfo = string.Empty;
 
     public string AdditionalInfo
     {
@@ -40,6 +45,5 @@ public class CalendarButtonViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
-    private string _additionalInfo = string.Empty;
-    public bool HaveAdditionalInfo => AdditionalInfo != "";
+    public bool HaveAdditionalInfo => !string.IsNullOrEmpty(AdditionalInfo);
 }

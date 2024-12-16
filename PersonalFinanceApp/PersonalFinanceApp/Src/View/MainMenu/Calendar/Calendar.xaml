@@ -1,12 +1,12 @@
-﻿<UserControl
-    x:Class="PersonalFinanceApp.Src.View.Calendar"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="800"
-    d:DesignWidth="1000"
-    mc:Ignorable="d">
+<UserControl x:Class="PersonalFinanceApp.Src.View.Calendar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu"
+             mc:Ignorable="d"
+             d:DesignHeight="800"
+             d:DesignWidth="1000">
 
 
     <UserControl.Resources>
@@ -337,115 +337,6 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type CalendarDayButton}">
                         <Grid>
-                            <Rectangle
-                                x:Name="TodayBackground"
-                                Fill="{DynamicResource CalendarBackground}"
-                                Opacity="0"
-                                RadiusX="20"
-                                RadiusY="20" />
-                            <Rectangle
-                                x:Name="SelectedBackground"
-                                Fill="{DynamicResource CalendarBackground}"
-                                Opacity="0"
-                                RadiusX="20"
-                                RadiusY="20" />
-                            <Border
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}" />
-                            <Rectangle
-                                x:Name="HighlightBackground"
-                                Opacity="0"
-                                RadiusX="20"
-                                RadiusY="20"
-                                Stroke="{DynamicResource CalendarBackground}"
-                                StrokeThickness="2" />
-                            <ContentPresenter
-                                x:Name="NormalText"
-                                Margin="10"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                TextElement.Foreground="#FFFFFF" />
-                            <Path
-                                x:Name="Blackout"
-                                Margin="3"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633,11.029181 L15.191895,11.029181 L12.844727,13.999395 L15.21875,17.060919 L12.962891,17.060919 L11.673828,15.256231 L10.352539,17.060919 L8.1396484,17.060919 L10.519043,14.042364 z"
-                                Fill="#FF000000"
-                                Opacity="0"
-                                RenderTransformOrigin="0.5,0.5"
-                                Stretch="Fill" />
-
-                            <Rectangle
-                                x:Name="DayButtonFocusVisual"
-                                IsHitTestVisible="false"
-                                RadiusX="1"
-                                RadiusY="1"
-                                Stroke="Transparent"
-                                Visibility="Collapsed" />
-                            <Grid
-                                x:Name="AdditionalDataGrid"
-                                Margin="0,40,0,0"
-                                Opacity="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-
-                                <Border
-                                    Grid.Row="0"
-                                    Width="Auto"
-                                    Height="20"
-                                    Margin="5,0,5,5"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Center"
-                                    Background="Red"
-                                    CornerRadius="10"
-                                    Visibility="{Binding HaveInfo1, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        FontSize="20"
-                                        Foreground="White"
-                                        Text="{Binding Info1}" />
-                                </Border>
-                                <Border
-                                    Grid.Row="1"
-                                    Width="Auto"
-                                    Height="20"
-                                    Margin="5,0,5,5"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Center"
-                                    Background="Green"
-                                    CornerRadius="10"
-                                    Visibility="{Binding HaveInfo2, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        FontSize="20"
-                                        Foreground="White"
-                                        Text="{Binding Info2}" />
-                                </Border>
-                                <Border
-                                    Grid.Row="2"
-                                    Width="Auto"
-                                    Height="20"
-                                    Margin="5,0,5,5"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Center"
-                                    Background="Blue"
-                                    CornerRadius="10"
-                                    Visibility="{Binding HaveAdditionalInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                    <TextBlock
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        FontSize="20"
-                                        Foreground="White"
-                                        Text="{Binding AdditionalInfo}" />
-                                </Border>
-                            </Grid>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualStateGroup.Transitions>
@@ -590,6 +481,91 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
+
+                            <Rectangle x:Name="TodayBackground"
+                                       Fill="{DynamicResource CalendarBackground}"
+                                       Opacity="0"
+                                       RadiusX="20"
+                                       RadiusY="20" />
+                            <Rectangle x:Name="SelectedBackground"
+                                       Fill="{DynamicResource CalendarBackground}"
+                                       Opacity="0"
+                                       RadiusX="20"
+                                       RadiusY="20" />
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}" />
+                            <Rectangle x:Name="HighlightBackground"
+                                       Stroke="{DynamicResource CalendarBackground}"
+                                       StrokeThickness="2"
+                                       Opacity="0"
+                                       RadiusX="20"
+                                       RadiusY="20" />
+                            <ContentPresenter x:Name="NormalText"
+                                              TextElement.Foreground="#FFFFFF"
+                                              HorizontalAlignment="Left"
+                                              Margin="10"
+                                              VerticalAlignment="Top" />
+                            <Path x:Name="Blackout"
+                                  Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633,11.029181 L15.191895,11.029181 L12.844727,13.999395 L15.21875,17.060919 L12.962891,17.060919 L11.673828,15.256231 L10.352539,17.060919 L8.1396484,17.060919 L10.519043,14.042364 z"
+                                  Fill="#FF000000"
+                                  HorizontalAlignment="Stretch"
+                                  Margin="3"
+                                  Opacity="0"
+                                  RenderTransformOrigin="0.5,0.5"
+                                  Stretch="Fill"
+                                  VerticalAlignment="Stretch" />
+
+                            <Rectangle x:Name="DayButtonFocusVisual"
+                                       IsHitTestVisible="false"
+                                       RadiusX="1"
+                                       RadiusY="1"
+                                       Stroke="Transparent"
+                                       Visibility="Collapsed" />
+                            <Grid x:Name="AdditionalDataGrid" Margin="0, 40, 0, 0" Opacity="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Border Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                        Margin="5, 0, 5, 5"
+                                        CornerRadius="10"
+                                        Height="20" Width="Auto"
+                                        Background="Red"
+                                        Visibility="{Binding (local:CalendarHelper.ViewModel).HaveInfo1, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <TextBlock Text="{Binding (local:CalendarHelper.ViewModel).Info1, RelativeSource={RelativeSource TemplatedParent}}"
+                                               Foreground="White"
+                                               FontSize="20"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    </TextBlock>
+                                </Border>
+                                <Border Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                        Margin="5, 0, 5, 5"
+                                        CornerRadius="10"
+                                        Height="20" Width="Auto"
+                                        Background="Green"
+                                        Visibility="{Binding (local:CalendarHelper.ViewModel).HaveInfo2, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <TextBlock Text="{Binding (local:CalendarHelper.ViewModel).Info2, RelativeSource={RelativeSource TemplatedParent}}"
+                                               Foreground="White"
+                                               FontSize="20"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    </TextBlock>
+                                </Border>
+                                <Border Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                                        Margin="5, 0, 5, 5"
+                                        CornerRadius="10"
+                                        Height="20" Width="Auto"
+                                        Background="Blue"
+                                        Visibility="{Binding (local:CalendarHelper.ViewModel).HaveAdditionalInfo, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <TextBlock Text="{Binding (local:CalendarHelper.ViewModel).AdditionalInfo, RelativeSource={RelativeSource TemplatedParent}}"
+                                               Foreground="White"
+                                               FontSize="20"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    </TextBlock>
+                                </Border>
+                            </Grid>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
