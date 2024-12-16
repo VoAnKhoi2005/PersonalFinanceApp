@@ -11,6 +11,9 @@
     d:DesignHeight="450"
     d:DesignWidth="450"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <nib:NumberToFormattedStringConverter x:Key="NumberFormatter" />
+    </UserControl.Resources>
     <Border
         Width="400"
         Height="400"
@@ -110,7 +113,7 @@
                         FontSize="14"
                         Foreground="{DynamicResource CommonText}"
                         SelectionBrush="{DynamicResource CommonText}"
-                        Text="{Binding AmountAddSaved}"
+                        Text="{Binding AmountAddSaved, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}"
                         TextAlignment="Center">
                         <i:Interaction.Behaviors>
                             <nib:NumericInputBehavior />

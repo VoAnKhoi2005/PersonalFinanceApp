@@ -164,6 +164,9 @@ public class ExpenseAddNewViewModel : BaseViewModel {
     }
     public void LoadItemSource(object parameter) {
         try {
+            if (_expenseStore.ExpenseBook == null) {
+                return;
+            }
             TextChangedCategory = "";
             YearExpenseBook = _expenseStore.ExpenseBook.Year.ToString(); ;
             MonthExpenseBook = _expenseStore.ExpenseBook.Month.ToString();

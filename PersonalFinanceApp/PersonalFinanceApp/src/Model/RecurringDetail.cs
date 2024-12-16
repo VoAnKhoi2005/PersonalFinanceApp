@@ -17,19 +17,30 @@ public class RecurringExpense
     public int Interval { get; set; }
 
     [Required]
-    public DateOnly StarDate { get; set; }
+    public DateOnly StartDate { get; set; }
+
+    [Required]
+    public DateOnly LastTime { get; set; }
+
+    [Required] 
+    public int UserID { get; set; }
 
     //Relationship
 
     public virtual List<Expense> Expenses { get; set; } = new List<Expense>();
 
+    //public virtual DateTime Date { get; set; } = DateTime.MinValue;
+
     private RecurringExpense() { }
 
-    public RecurringExpense(string name, string frequency, int interval, DateOnly starDate)
+    public RecurringExpense(string name, string frequency, int interval, DateOnly startDate, int id)
     {
         Name = name;
         Frequency = frequency;
         Interval = interval;
-        StarDate = starDate;
+        StartDate = startDate;
+        //LastTime = DateOnly.FromDateTime(DateTime.Now);
+        LastTime = StartDate;
+        UserID = id;
     }
 }

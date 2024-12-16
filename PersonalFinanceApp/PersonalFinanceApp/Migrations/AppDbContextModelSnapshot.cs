@@ -235,8 +235,14 @@ namespace PersonalFinanceApp.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("StarDate")
+                    b.Property<DateOnly>("StartDate")
                         .HasColumnType("TEXT");
+
+                    b.Property<DateOnly>("LastTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("RecurringExpenseID");
 

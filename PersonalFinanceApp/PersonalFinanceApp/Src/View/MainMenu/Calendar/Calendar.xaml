@@ -384,7 +384,7 @@
                                 Visibility="Collapsed" />
                             <Grid
                                 x:Name="AdditionalDataGrid"
-                                Margin="0, 40, 0, 0"
+                                Margin="0,40,0,0"
                                 Opacity="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -396,7 +396,7 @@
                                     Grid.Row="0"
                                     Width="Auto"
                                     Height="20"
-                                    Margin="5, 0, 5, 5"
+                                    Margin="5,0,5,5"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
                                     Background="Red"
@@ -413,7 +413,7 @@
                                     Grid.Row="1"
                                     Width="Auto"
                                     Height="20"
-                                    Margin="5, 0, 5, 5"
+                                    Margin="5,0,5,5"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
                                     Background="Green"
@@ -430,7 +430,7 @@
                                     Grid.Row="2"
                                     Width="Auto"
                                     Height="20"
-                                    Margin="5, 0, 5, 5"
+                                    Margin="5,0,5,5"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
                                     Background="Blue"

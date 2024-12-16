@@ -65,7 +65,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         FontSize="14"
-                               Text="Fine-tune your preferences" />
+                        Text="Fine-tune your preferences" />
                 </Grid>
 
             </Grid>
@@ -326,48 +326,53 @@
                                         Text="Theme " />
                                 </DockPanel>
                             </Expander.Header>
-                            <DockPanel Height="100"
-                                       Margin="20,0,20,0">
-                                <materialDesign:PackIcon Width="30"
-                                                         Height="30"
-                                                         Margin="160,0,0,0"
-                                                         HorizontalAlignment="Left"
-                                                         VerticalAlignment="Center"
-                                                         Foreground="{DynamicResource CommonText}"
-                                                         Kind="WhiteBalanceSunny" />
-                                <TextBlock Margin="50,0,0,0"
-                                           HorizontalAlignment="Left"
-                                           VerticalAlignment="Center"
-                                           FontSize="18"
-                                           Text="Light theme" />
-                                <RadioButton Width="20"
-                                             Height="20"
-                                             Margin="20,0,0,0"
-                                             HorizontalAlignment="Left"
-                                             VerticalAlignment="Center"
-                                             Background="#FF3AA9B7"
-                                             BorderBrush="#FF28FFE0"
-                                             Click="RadioButton_Click_1"/>
-                                <materialDesign:PackIcon Width="30"
-                                                         Height="30"
-                                                         Margin="160,0,0,0"
-                                                         HorizontalAlignment="Left"
-                                                         VerticalAlignment="Center"
-                                                         Foreground="{DynamicResource CommonText}"
-                                                         Kind="WeatherNight" />
-                                <TextBlock Margin="50,0,0,0"
-                                           HorizontalAlignment="Left"
-                                           VerticalAlignment="Center"
-                                           FontSize="18"
-                                           Text="Dark theme" />
-                                <RadioButton Width="20"
-                                             Height="20"
-                                             Margin="20,0,0,0"
-                                             HorizontalAlignment="Left"
-                                             VerticalAlignment="Center"
-                                             Background="#FF3AA9B7"
-                                             BorderBrush="#FF28FFE0" 
-                                             Click="RadioButton_Click"/>
+                            <DockPanel Height="100" Margin="20,0,20,0">
+                                <materialDesign:PackIcon
+                                    Width="30"
+                                    Height="30"
+                                    Margin="160,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="{DynamicResource CommonText}"
+                                    Kind="WhiteBalanceSunny" />
+                                <TextBlock
+                                    Margin="50,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Text="Light theme" />
+                                <RadioButton
+                                    Width="20"
+                                    Height="20"
+                                    Margin="20,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Background="#FF3AA9B7"
+                                    BorderBrush="#FF28FFE0"
+                                    Click="RadioButton_Click_1" />
+                                <materialDesign:PackIcon
+                                    Width="30"
+                                    Height="30"
+                                    Margin="160,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="{DynamicResource CommonText}"
+                                    Kind="WeatherNight" />
+                                <TextBlock
+                                    Margin="50,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Text="Dark theme" />
+                                <RadioButton
+                                    Width="20"
+                                    Height="20"
+                                    Margin="20,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Background="#FF3AA9B7"
+                                    BorderBrush="#FF28FFE0"
+                                    Click="RadioButton_Click" />
                             </DockPanel>
                         </Expander>
 
@@ -526,7 +531,7 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                               Text="23520802@gm.uit.edu.vn" />
+                                        Text="23520802@gm.uit.edu.vn" />
                                 </Grid>
                                 <Grid
                                     Height="30"
@@ -553,7 +558,7 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                               Text="23520869@gm.uit.edu.vn" />
+                                        Text="23520869@gm.uit.edu.vn" />
                                 </Grid>
                             </DockPanel>
                         </Expander>

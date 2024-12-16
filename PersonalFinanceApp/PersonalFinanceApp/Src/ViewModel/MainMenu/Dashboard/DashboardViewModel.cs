@@ -1,5 +1,4 @@
-﻿using LiveChartsCore;
-using LiveChartsCore.Defaults;
+﻿using LiveChartsCore.Defaults;
 using LiveChartsCore.Drawing;
 using LiveChartsCore.Kernel.Sketches;
 using LiveChartsCore.Measure;
@@ -10,12 +9,10 @@ using SkiaSharp;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.ViewModel.Command;
-using PersonalFinanceApp.ViewModel.Stores;
 using System.Collections.ObjectModel;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using System.Collections.Specialized;
 using System.Windows.Controls;
-using System.Windows;
 using System.Windows.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
@@ -23,7 +20,6 @@ namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class DashboardViewModel : BaseViewModel
 {
     public List<PieSeries<double>> BudgetSeries { get; set; }
-
     public List<ColumnSeries<DateTimePoint>> ActivitySeries { get; set; }
     public List<ICartesianAxis> XAxisActivity { get; set; }
     public List<ICartesianAxis> YAxisActivity { get; set; }
@@ -49,6 +45,7 @@ public class DashboardViewModel : BaseViewModel
         _sharedService.Notify();
 
         BudgetSeries = CreateDoughnutChartRandom();
+
         XAxisActivity = new List<ICartesianAxis>
         {
             new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd"))
@@ -61,6 +58,7 @@ public class DashboardViewModel : BaseViewModel
                 ForceStepToMin = true,
             }
         };
+
         YAxisActivity = new List<ICartesianAxis>
         {
             new Axis
@@ -68,6 +66,7 @@ public class DashboardViewModel : BaseViewModel
                 LabelsPaint = new SolidColorPaint(SKColors.White),
             }
         };
+
         ActivitySeries = CreateActivityChartRandom();
     }
 
@@ -118,6 +117,7 @@ public class DashboardViewModel : BaseViewModel
 
         return pieSeries;
     }
+
 
     public List<ColumnSeries<DateTimePoint>> CreateActivityChart(ExpensesBook expensesBook)
     {
@@ -393,9 +393,9 @@ public class DashboardViewModel : BaseViewModel
         GetNewest();
         LoadSourceExpeseBook();
         LoadTotal();
-        LoadGoal();
-        LoadBudget();
-        LoadColumnChart();
+        //LoadGoal();
+        //LoadBudget();
+        //LoadColumnChart();
     }
     public decimal BudgetRemainExpenseBook(ExpensesBook exb) {
         decimal sum = 0;

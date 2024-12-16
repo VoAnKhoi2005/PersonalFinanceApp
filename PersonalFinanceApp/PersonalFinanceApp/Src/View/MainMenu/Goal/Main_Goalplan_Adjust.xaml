@@ -11,6 +11,9 @@
     d:DesignHeight="500"
     d:DesignWidth="400"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <nib:NumberToFormattedStringConverter x:Key="NumberFormatter" />
+    </UserControl.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadDataAddNewGoalCommand}" CommandParameter="{Binding ElementName=ExpenseBook}" />
@@ -150,7 +153,7 @@
                     Foreground="{DynamicResource CommonText}"
                     SelectionBrush="{DynamicResource CommonText}"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding TargetEditGoal}">
+                    Text="{Binding TargetEditGoal, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
                         <nib:NumericInputBehavior />
                     </i:Interaction.Behaviors>
@@ -170,7 +173,7 @@
                     Foreground="{DynamicResource CommonText}"
                     SelectionBrush="{DynamicResource CommonText}"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding CurrentAmountEditGoal}">
+                    Text="{Binding CurrentAmountEditGoal, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
                         <nib:NumericInputBehavior />
                     </i:Interaction.Behaviors>

@@ -13,35 +13,25 @@
     d:DesignWidth="942"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <Style TargetType="ComboBoxItem"
-               x:Key="ComboBox_style">
-            <Setter Property="Background"
-                    Value="{DynamicResource ComboBoxBackground}" />
-            <Setter Property="Foreground"
-                    Value="{DynamicResource ComponentText}" />
-            <Setter Property="BorderBrush"
-                    Value="Transparent"></Setter>
-            <Setter Property="BorderThickness"
-                    Value="0"></Setter>
-            <Setter Property="Height"
-                    Value="40"></Setter>
-            <Setter Property="Width"
-                    Value="150"></Setter>
+        <Style x:Key="ComboBox_style" TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="{DynamicResource ComboBoxBackground}" />
+            <Setter Property="Foreground" Value="{DynamicResource ComponentText}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="150" />
             <Style.Triggers>
-                <!-- Highlight selected item -->
-                <Trigger Property="IsSelected"
-                         Value="True">
-                    <Setter Property="Background"
-                            Value="LightGreen" />
+                <!--  Highlight selected item  -->
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="LightGreen" />
                 </Trigger>
-                <!-- Highlight item on hover -->
-                <Trigger Property="IsMouseOver"
-                         Value="True">
-                    <Setter Property="Background"
-                            Value="{DynamicResource ComboBoxonHovered}" />
+                <!--  Highlight item on hover  -->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource ComboBoxonHovered}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <convert:NumberToFormattedStringConverter x:Key="NumberFormatter" />
         <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
     </UserControl.Resources>
@@ -88,33 +78,36 @@
                     <RowDefinition Height="48*" />
                     <RowDefinition Height="19*" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0"
-                           Grid.RowSpan="2"
-                           Width="417"
-                           Foreground="{DynamicResource SuperText}"
-                           Height="55"
-                           Margin="25,0,0,17"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Bottom"
-                           FontSize="28"
-                           FontWeight="Bold"
-                           Text="Expense book" />
-                <TextBlock Grid.Row="1"
-                           Width="303"
-                           Height="37"
-                           Margin="26,0,0,0"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
-                           FontSize="14"
-                           Text="Overview of your activities" />
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Width="417"
+                    Height="55"
+                    Margin="25,0,0,17"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    FontSize="28"
+                    FontWeight="Bold"
+                    Foreground="{DynamicResource SuperText}"
+                    Text="Expense book" />
+                <TextBlock
+                    Grid.Row="1"
+                    Width="303"
+                    Height="37"
+                    Margin="26,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="Overview of your activities" />
             </Grid>
             <DockPanel Grid.Column="1">
-                <Button HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom"
-                        Command="{Binding EditBudgetExBCommand}"
-                        Content="Total budget:"
-                        FontWeight="Bold"
-                        FontSize="16">
+                <Button
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Command="{Binding EditBudgetExBCommand}"
+                    Content="Total budget:"
+                    FontSize="16"
+                    FontWeight="Bold">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="Transparent" />
@@ -122,7 +115,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" >
+                                        <Border Background="{TemplateBinding Background}">
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                                         </Border>
                                     </ControlTemplate>
@@ -140,19 +133,21 @@
                 <TextBlock
                     Margin="10,33.9,0,0"
                     FontSize="14"
-                    Text="{Binding BudgetOfficial}"
+                    Text="{Binding BudgetOfficial, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}"
                     TextWrapping="Wrap" />
 
-                <TextBlock Margin="100,30,0,0"
-                           FontSize="16"
-                           Foreground="{DynamicResource SuperText}"
-                           Text="Remaining budget:" 
-                           FontWeight="Bold"/>
-                <TextBlock Margin="10,45,0,0"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
-                           FontSize="14"
-                           Text="{Binding BudgetCurrent}" />
+                <TextBlock
+                    Margin="100,30,0,0"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Foreground="{DynamicResource SuperText}"
+                    Text="Remaining budget:" />
+                <TextBlock
+                    Margin="10,45,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    FontSize="14"
+                    Text="{Binding BudgetCurrent, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}" />
             </DockPanel>
 
         </Grid>
@@ -169,20 +164,22 @@
                 DockPanel.Dock="Right">
                 <Button Command="{Binding AddNewExpenseCommand}" IsEnabled="{Binding HaveExpenseBook}">
                     <Grid>
-                        <TextBlock Margin="0,0,5,0"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                   FontSize="10"
-                                   Foreground="{DynamicResource SuperText}"
-                                   FontWeight="Normal"
-                                   Text="New expense" />
-                        <materialDesign:PackIcon Width="25"
-                                                 Height="25"
-                                                 Margin="5,0,0,0"
-                                                 HorizontalAlignment="Left"
-                                                 VerticalAlignment="Center"
-                                                 Foreground="{DynamicResource CommonText}"
-                                                 Kind="PlusCircle" />
+                        <TextBlock
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontSize="10"
+                            FontWeight="Normal"
+                            Foreground="{DynamicResource SuperText}"
+                            Text="New expense" />
+                        <materialDesign:PackIcon
+                            Width="25"
+                            Height="25"
+                            Margin="5,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Foreground="{DynamicResource CommonText}"
+                            Kind="PlusCircle" />
                     </Grid>
                 </Button>
             </Border>
@@ -236,16 +233,15 @@
                 <ComboBox
                     Width="100"
                     materialDesign:HintAssist.Hint="Expense book"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                     DisplayMemberPath="DateExB"
                     FontSize="13"
                     Foreground="{DynamicResource CommonText}"
                     IsEditable="False"
+                    ItemContainerStyle="{StaticResource ComboBox_style}"
                     ItemsSource="{Binding SourceExpenseBook}"
                     SelectedItem="{Binding SelectedExpenseBook}"
-                    Text="{Binding TextExpenseBook}"
-                    ItemContainerStyle="{StaticResource ComboBox_style}">
+                    Text="{Binding TextExpenseBook}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding ChangedExpenseBookCommand}" CommandParameter="{Binding}" />
@@ -266,16 +262,15 @@
                     Width="110"
                     Margin="10,2,10,3"
                     materialDesign:HintAssist.Hint="Filter"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                     FontSize="13"
                     Foreground="{DynamicResource CommonText}"
                     IsEditable="False"
                     IsEnabled="{Binding HaveExpenseBook}"
+                    ItemContainerStyle="{StaticResource ComboBox_style}"
                     ItemsSource="{Binding SourceFilter}"
                     SelectedItem="{Binding SelectedTypeFilter}"
-                    Text="{Binding TextType}"
-                          ItemContainerStyle="{StaticResource ComboBox_style}">
+                    Text="{Binding TextType}">
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
@@ -317,7 +312,7 @@
                         Foreground="{DynamicResource CommonText}"
                         IsEnabled="{Binding HaveExpenseBook}"
                         SelectionBrush="{DynamicResource CommonText}"
-                        Text="{Binding DataFilter}"
+                        Text="{Binding DataFilter, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}"
                         TextAlignment="Left" />
                     <materialDesign:PopupBox
                         Width="35"
@@ -354,15 +349,14 @@
                                                                 Margin="15,0,0,0"
                                                                 HorizontalAlignment="Left"
                                                                 VerticalAlignment="Center"
-                                                                                     Foreground="{DynamicResource ComponentText}"
-                                                                                     DockPanel.Dock="Left"
+                                                                DockPanel.Dock="Left"
+                                                                Foreground="{DynamicResource ComponentText}"
                                                                 Kind="AlphaEBoxOutline" />
                                                             <TextBlock
                                                                 Margin="15,0,0,0"
                                                                 HorizontalAlignment="Left"
                                                                 VerticalAlignment="Center"
                                                                 DockPanel.Dock="Left"
-
                                                                 FontSize="14"
                                                                 Foreground="{TemplateBinding Foreground}"
                                                                 Text="Find word" />
@@ -388,8 +382,7 @@
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent" />
-                                        <Setter Property="Foreground"
-                                                Value="{DynamicResource ComponentText}" />
+                                        <Setter Property="Foreground" Value="{DynamicResource ComponentText}" />
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate>
@@ -405,8 +398,8 @@
                                                                 HorizontalAlignment="Left"
                                                                 VerticalAlignment="Center"
                                                                 DockPanel.Dock="Left"
-                                                                                     Foreground="{DynamicResource ComponentText}"
-                                                                                     Kind="CaseSensitiveAlt" />
+                                                                Foreground="{DynamicResource ComponentText}"
+                                                                Kind="CaseSensitiveAlt" />
                                                             <TextBlock
                                                                 Margin="15,0,0,0"
                                                                 HorizontalAlignment="Left"
@@ -437,8 +430,7 @@
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent" />
-                                        <Setter Property="Foreground"
-                                                Value="{DynamicResource ComponentText}" />
+                                        <Setter Property="Foreground" Value="{DynamicResource ComponentText}" />
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate>
@@ -454,7 +446,7 @@
                                                                 HorizontalAlignment="Left"
                                                                 VerticalAlignment="Center"
                                                                 DockPanel.Dock="Left"
-                                                                                     Foreground="{DynamicResource ComponentText}"
+                                                                Foreground="{DynamicResource ComponentText}"
                                                                 Kind="Regex" />
                                                             <TextBlock
                                                                 Margin="15,0,0,0"
@@ -585,14 +577,12 @@
                         Foreground="{DynamicResource CommonText}"
                         IsEditable="False"
                         IsEnabled="{Binding HaveExpenseBook}"
-                        ItemsSource="{Binding SourceCategory}"
-                              ItemContainerStyle="{StaticResource ComboBox_style}">
+                        ItemContainerStyle="{StaticResource ComboBox_style}"
+                        ItemsSource="{Binding SourceCategory}">
 
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <CheckBox Content="{Binding Name}"
-                                          IsChecked="{Binding IsChecked, Mode=TwoWay}" 
-                                          />
+                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
@@ -602,15 +592,15 @@
 
         <!--  DataGrid expensebook  -->
         <Grid Grid.Row="2">
-            <DataGrid Name="ListExpenseBook" 
-                      Grid.Row="1"
-                      Margin="15,0,15,15"
-                      HorizontalAlignment="Stretch"
-                      AutoGenerateColumns="False"
-                      IsReadOnly="True"
-                      ItemsSource="{Binding Expensesadvances}"
-                      SelectedItem="{Binding ItemsExB}"
-                      >
+            <DataGrid
+                Name="ListExpenseBook"
+                Grid.Row="1"
+                Margin="15,0,15,15"
+                HorizontalAlignment="Stretch"
+                AutoGenerateColumns="False"
+                IsReadOnly="True"
+                ItemsSource="{Binding Expensesadvances}"
+                SelectedItem="{Binding ItemsExB}">
                 <DataGrid.InputBindings>
                     <!--  Double click on any row  -->
                     <MouseBinding
@@ -621,7 +611,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
                     <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
-                    <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
+                    <DataGridTextColumn Binding="{Binding Amount, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}" Header="Amount" />
                     <DataGridTextColumn Binding="{Binding Category}" Header="Category" />
                     <DataGridTextColumn
                         Width="*"

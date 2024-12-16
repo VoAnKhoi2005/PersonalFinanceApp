@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Windows.Security.Authentication.OnlineId;
 
 #nullable disable
 
@@ -31,7 +32,9 @@ namespace PersonalFinanceApp.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Frequency = table.Column<string>(type: "TEXT", nullable: false),
                     Interval = table.Column<int>(type: "INTEGER", nullable: false),
-                    StarDate = table.Column<DateOnly>(type: "TEXT", nullable: false)
+                    StartDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    LastTime = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    UserID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
