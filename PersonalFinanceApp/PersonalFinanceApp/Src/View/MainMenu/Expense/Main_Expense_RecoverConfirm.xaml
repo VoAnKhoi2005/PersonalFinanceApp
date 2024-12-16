@@ -27,7 +27,7 @@
                 <RowDefinition Height="23*" />
                 <RowDefinition Height="33*" />
             </Grid.RowDefinitions>
-            <TextBlock Text="Recover expense" Foreground="White"
+            <TextBlock Text="Recover expense" Foreground="{DynamicResource SuperText}"
                FontSize="24"                            
                VerticalAlignment="Top"
                HorizontalAlignment="Left"
@@ -38,7 +38,7 @@
             <Grid Grid.Row="1" >
                 <TextBlock Text="Are you sure you want to recover this expense?"
                    FontSize="19" TextWrapping="Wrap" VerticalAlignment="Center"
-                   HorizontalAlignment="Center" Foreground="{DynamicResource Cancel_button}"
+                   HorizontalAlignment="Center" Foreground="{DynamicResource Confirm_button}"
                    ></TextBlock>
             </Grid>
             <!--  cancel - confirm  -->

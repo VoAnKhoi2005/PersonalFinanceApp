@@ -13,7 +13,8 @@
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button">
-                <Setter Property="Background" Value="{DynamicResource Login_button}" />
+                <Setter Property="Background"
+                        Value="{DynamicResource Login_border}" />
                 <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
                 <Setter Property="Template">
                     <Setter.Value>
@@ -40,17 +41,22 @@
             Visibility="Visible">
             <Grid Background="{DynamicResource CommonGridBackground}">
                 <TabControl
+                    BorderBrush="Black"
+                    BorderThickness="1"
                     Width="560"
                     Height="400"
+                    Foreground="{DynamicResource CommonText}"
                     materialDesign:ColorZoneAssist.Foreground="{DynamicResource Underline}"
                     materialDesign:ColorZoneAssist.Mode="Custom">
 
                     <!--  Login tab  -->
-                    <TabItem x:Name="LoginTab" Height="60">
+                    <TabItem x:Name="LoginTab"
+                             Foreground="{DynamicResource CommonText}"
+                             Height="60">
 
                         <TabItem.Header>
-                            <Label
-                                Content="LOGIN"
+                            <Label Foreground="{DynamicResource CommonText}"
+                                   Content="LOGIN"
                                 FontFamily="Arial"
                                 FontSize="22" />
                         </TabItem.Header>
@@ -123,13 +129,21 @@
                                 </PasswordBox>
                             </Border>
                             <!--  Remember me  -->
-                            <CheckBox
-                                Margin="50,198,200,102"
-                                Background="{DynamicResource CommonText}"
-                                Content="Remember me"
-                                FontSize="15"
-                                Foreground="{DynamicResource CommonText}" />
-
+                            <Border Background ="Transparent"
+                                    Margin="50,198,200,102">
+                            <CheckBox 
+                                      Content="Remember me"
+                                      FontSize="15"
+                                      BorderThickness="1"
+                                      Foreground="{DynamicResource CommonText}">
+                                <CheckBox.Resources>
+                                        <SolidColorBrush x:Key="MaterialDesignCheckBoxOff"
+                                                         Color="Red" />
+                                        <SolidColorBrush x:Key="PrimaryHueMidBrush"
+                                                         Color="red" />
+                                    </CheckBox.Resources>
+                            </CheckBox>
+                            </Border>
 
                             <Button
                                 Grid.ColumnSpan="2"
@@ -151,7 +165,7 @@
                                 Margin="130,245,43,45"
                                 Content="Login Confirm"
                                 FontSize="18"
-                                Foreground="{DynamicResource Login_buttonText}"
+                                Foreground="{DynamicResource Login_confirm}"
                                 IsDefault="True">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="Click">
@@ -190,7 +204,9 @@
                     <!--  New account  -->
                     <TabItem x:Name="NewAccountTab" Height="60">
                         <TabItem.Header>
-                            <Label Content="NEW ACCOUNT" FontSize="22" />
+                            <Label Content="NEW ACCOUNT"
+                                   Foreground="{DynamicResource CommonText}"
+                                   FontSize="22" />
                         </TabItem.Header>
                         <Grid>
                             <Label
@@ -397,7 +413,7 @@
                                 Margin="10 0 0 15"
                                 Content="Create Account"
                                 FontSize="18"
-                                Foreground="{DynamicResource Login_buttonText}">
+                                Foreground="{DynamicResource Login_confirm}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="GotFocus">
                                         <i:InvokeCommandAction Command="{Binding CreateAccountCommand}" CommandParameter="{Binding ElementName=LoginTab}" />

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Notification"
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             Width="650"
+             Width="590"
              Height="100"
             >
     <Grid>

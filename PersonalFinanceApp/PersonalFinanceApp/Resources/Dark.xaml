@@ -5,6 +5,8 @@
 
     <SolidColorBrush x:Key="CommonText"
                      Color="#AFB6C1" />
+    <SolidColorBrush x:Key="ComponentText"
+                     Color="#DFDFDF" />
     <SolidColorBrush x:Key="SuperText"
                      Color="#E5E6E8"></SolidColorBrush>
         <SolidColorBrush x:Key="CommonGridBackground"
@@ -85,4 +87,14 @@
     <Color x:Key="Hig5">#202123</Color>
     <Color x:Key="Hig6">#A7BBCB</Color>
 
+    <SolidColorBrush x:Key="Notifcation_PopupBox"
+                     Color="#FFFFFF" />
+    <SolidColorBrush x:Key="Notification_onHovered"
+                     Color="#949495" />
+
+    <!--combobox-->
+    <SolidColorBrush x:Key="ComboBoxonHovered"
+                     Color="#C0C0C0" />
+    <SolidColorBrush x:Key="ComboBoxBackground"
+                     Color="Transparent" />
 </ResourceDictionary>

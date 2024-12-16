@@ -37,14 +37,14 @@
                 VerticalAlignment="Top"
                 FontSize="24"
                 FontWeight="Bold"
-                Foreground="White"
+                Foreground="{DynamicResource SuperText}"
                 Text="Delete expense" />
             <Grid Grid.Row="1">
                 <TextBlock
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    FontSize="19"
-                    Foreground="{DynamicResource Sure_confirm}"
+                           Foreground="{DynamicResource Sure_confirm}"
+                           FontSize="19"
                     Text="Are you sure you want to delete this expense?"
                     TextWrapping="Wrap" />
             </Grid>

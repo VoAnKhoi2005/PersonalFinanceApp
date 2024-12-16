@@ -27,7 +27,7 @@
                 <RowDefinition Height="23*" />
                 <RowDefinition Height="33*" />
             </Grid.RowDefinitions>
-            <TextBlock Text="Remove expense" Foreground="White"
+            <TextBlock Text="Remove expense" Foreground="{DynamicResource SuperText}"
                    FontSize="24"                            
                    VerticalAlignment="Top"
                    HorizontalAlignment="Left"

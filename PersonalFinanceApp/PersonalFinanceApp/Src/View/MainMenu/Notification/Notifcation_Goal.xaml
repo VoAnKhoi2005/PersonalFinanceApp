@@ -6,10 +6,10 @@
     xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Notification"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="450"
+    Width="590"
     Height="100"
     mc:Ignorable="d">
-    <Grid Background="White">
+    <Grid Background="{DynamicResource CommonGridBackground}">
         <Grid.Resources>
             <Style TargetType="materialDesign:PackIcon">
                 <Setter Property="Foreground" Value="{DynamicResource Ntf_goal}" />
