@@ -9,7 +9,14 @@
                      Color="#DFDFDF" />
     <SolidColorBrush x:Key="SuperText"
                      Color="#E5E6E8"></SolidColorBrush>
-        <SolidColorBrush x:Key="CommonGridBackground"
+    <SolidColorBrush x:Key="CalendarBackground1"
+                     Color="#4E92C0"></SolidColorBrush>
+    <SolidColorBrush x:Key="CalendarBackground2"
+                     Color="#3D6884"></SolidColorBrush>
+    <SolidColorBrush x:Key="CalendarBackground3"
+                     Color="#2C526B"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="CommonGridBackground"
                      Color="#2D2D30 " />
     <SolidColorBrush x:Key="DockpanelBackGround"
                      Color="#37373A" />
@@ -97,4 +104,10 @@
                      Color="#C0C0C0" />
     <SolidColorBrush x:Key="ComboBoxBackground"
                      Color="Transparent" />
+
+    <SolidColorBrush x:Key="NotifiHover"
+                     Color="#A6A1A1" />
+
+    <SolidColorBrush x:Key="MainCalendar"
+                     Color="#1F2325"></SolidColorBrush>
 </ResourceDictionary>

@@ -354,14 +354,16 @@
                                     <RowDefinition Height="143*" />
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0"
+                                           Text="BUDGET"
+                                           FontSize="18"
+                                           FontWeight="DemiBold"
                                            Grid.RowSpan="2"
-                                           Height="39"
                                            Foreground="{DynamicResource SuperText}"
                                            Margin="15,0,0,0"
                                            HorizontalAlignment="Left"
                                            VerticalAlignment="Top">
                                 </TextBlock>
-                                <lvc:PieChart Grid.Row="1" 
+                                <lvc:PieChart Grid.Row="1"
                                               LegendPosition="Right"
                                               Series="{Binding BudgetSeries}">
                                     <lvc:PieChart.Legend>

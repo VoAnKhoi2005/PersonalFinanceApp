@@ -8,7 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    mc:Ignorable="d">
+    Width="900"
+    Height="700"
+             mc:Ignorable="d">
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
@@ -52,8 +54,8 @@
                                 <ControlTemplate TargetType="Button">
                                     <Border Background="{TemplateBinding Background}">
                                         <materialDesign:PackIcon
-                                            Width="60"
-                                            Height="40"
+                                            Width="50"
+                                            Height="25"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
                                             Foreground="White"

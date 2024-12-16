@@ -48,7 +48,6 @@
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
-            <RowDefinition Height="45" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -77,56 +76,40 @@
 
 
         </Grid>
-        <DockPanel Grid.Row="1">
-            <Border Width="100"
-                    Height="40"
-                    Margin="5,0,15,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Background="{DynamicResource CommonGridBackground}"
-                    CornerRadius="20"
-                    DockPanel.Dock="Right">
-
-                <Button Command="{Binding AddNewRecurringCommand}">
-                    <Grid>
-                        <TextBlock Margin="0,0,10,0"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                   FontSize="12"
-                                   FontWeight="Normal"
-                                   Foreground="{DynamicResource SuperText}"
-                                   Text=" Recurring" />
-                        <materialDesign:PackIcon Width="25"
-                                                 Height="25"
-                                                 Margin="5,0,0,0"
-                                                 HorizontalAlignment="Left"
-                                                 VerticalAlignment="Center"
-                                                 Foreground="{DynamicResource CommonText}"
-                                                 Kind="PlusCircle" />
-                    </Grid>
-                </Button>
-            </Border>
-            <Border Width="40"
-                    Height="40"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Background="{DynamicResource CommonGridBackground}"
-                    CornerRadius="30"
-                    DockPanel.Dock="Right">
-                <Button Command="{Binding RefreshRecurringCommand}">
-                    <materialDesign:PackIcon Width="25"
-                                             Height="25"
-                                             HorizontalAlignment="Center"
-                                             VerticalAlignment="Center"
-                                             Foreground="{DynamicResource CommonText}"
-                                             Kind="Refresh" />
-                </Button>
-            </Border>
-
-        </DockPanel>
-
         <ScrollViewer Grid.Row="2">
-            <local:Calendar DataContext="{Binding calendarViewModel}" />
+            <Grid>
+
+                <local:Calendar DataContext="{Binding calendarViewModel}" />
+                <Border Width="100"
+                        Height="40"
+                        Margin="0,15,120,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="{DynamicResource Summary_TransactionAndCategoryBackground}"
+                        CornerRadius="20"
+                        DockPanel.Dock="Top">
+                    
+                    <Button Command="{Binding AddNewRecurringCommand}">
+                        <Grid>
+                            <TextBlock Margin="0,0,10,0"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       FontSize="12"
+                                       FontWeight="Normal"
+                                       Foreground="{DynamicResource SuperText}"
+                                       Text=" Recurring" />
+                            <materialDesign:PackIcon Width="25"
+                                                     Height="25"
+                                                     Margin="5,0,0,0"
+                                                     HorizontalAlignment="Left"
+                                                     VerticalAlignment="Center"
+                                                     Foreground="{DynamicResource CommonText}"
+                                                     Kind="PlusCircle" />
+                        </Grid>
+                    </Button>
+                </Border>
+            </Grid>
         </ScrollViewer>
+        
     </Grid>
 </UserControl>

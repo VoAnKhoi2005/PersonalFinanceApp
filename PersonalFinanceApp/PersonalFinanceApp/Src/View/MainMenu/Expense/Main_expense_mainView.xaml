@@ -565,37 +565,35 @@
                 CornerRadius="20"
                 DockPanel.Dock="Left">
                 <Grid>
-                    <materialDesign:PackIcon
-                        Width="25"
-                        Height="25"
-                        Margin="5,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource CommonText}"
-                        Kind="Shape" />
-                    <ComboBox
-                        Height="30"
-                        Margin="35,0,10,0"
-                        materialDesign:HintAssist.FloatingHintHorizontalAlignment="Stretch"
-                        materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                        materialDesign:HintAssist.Hint="Category"
-                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                        BorderBrush="{x:Null}"
-                        FontSize="12"
-                        Foreground="{DynamicResource CommonText}"
-                        IsEditable="False"
-                        IsEnabled="{Binding HaveExpenseBook}"
-                        ItemsSource="{Binding SourceCategory}"
-                              ItemContainerStyle="{StaticResource ComboBox_style}">
-
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <CheckBox Content="{Binding Name}"
-                                          IsChecked="{Binding IsChecked, Mode=TwoWay}" 
-                                          />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                    <TextBlock Text="Category" VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Margin="10 0 0 0"
+                               ></TextBlock>
+                    <materialDesign:PopupBox Height="40"
+                                             Width="110"
+                                             materialDesign:HintAssist.FloatingHintHorizontalAlignment="Stretch"
+                                             materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                                             BorderBrush="{x:Null}"
+                                             FontSize="12"
+                                             Foreground="{DynamicResource CommonText}"
+                                             IsEnabled="{Binding HaveExpenseBook}"
+                                             HorizontalAlignment="Center">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PackIcon Width="25"
+                                                     Height="25"
+                                                     Margin="5,0,0,0"
+                                                     HorizontalAlignment="Right"
+                                                     VerticalAlignment="Center"
+                                                     Foreground="{DynamicResource CommonText}"
+                                                     Kind="Shape" />
+                        </materialDesign:PopupBox.ToggleContent>
+                        
+                        <!--ahihi conkiki-->
+                        <ItemsControl></ItemsControl>
+                        
+                        
+                    </materialDesign:PopupBox>
                 </Grid>
             </Border>
         </DockPanel>

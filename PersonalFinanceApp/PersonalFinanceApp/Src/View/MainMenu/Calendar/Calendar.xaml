@@ -21,7 +21,7 @@
 
         <Style x:Key="CalendarStyle1" TargetType="{x:Type Calendar}">
             <Setter Property="Foreground" Value="#FFFFFF" />
-            <Setter Property="Background" Value="#282F33" />
+            <Setter Property="Background" Value="{DynamicResource MainCalendar}" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -325,6 +325,11 @@
             </Setter>
         </Style>
         <Style x:Key="CalendarCalendarDayButtonStyle1" TargetType="{x:Type CalendarDayButton}">
+            
+            
+            
+            
+            
             <Setter Property="MinHeight" Value="120" />
             <Setter Property="FontSize" Value="20" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -399,14 +404,14 @@
                                     Margin="5, 0, 5, 5"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
-                                    Background="Red"
+                                    Background="{DynamicResource CalendarBackground1}"
                                     CornerRadius="10"
                                     Visibility="{Binding (local:CalendarHelper.ViewModel).HaveInfo1, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <TextBlock
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="20"
-                                        Foreground="White"
+                                        Foreground="{DynamicResource CommonText}"
                                         Text="{Binding (local:CalendarHelper.ViewModel).Info1, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </Border>
                                 <Border
@@ -416,14 +421,14 @@
                                     Margin="5, 0, 5, 5"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
-                                    Background="Green"
+                                    Background="{DynamicResource CalendarBackground2}"
                                     CornerRadius="10"
                                     Visibility="{Binding (local:CalendarHelper.ViewModel).HaveInfo2, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <TextBlock
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="20"
-                                        Foreground="White"
+                                        Foreground="{DynamicResource ComponentText}"
                                         Text="{Binding (local:CalendarHelper.ViewModel).Info2, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </Border>
                                 <Border
@@ -433,14 +438,14 @@
                                     Margin="5, 0, 5, 5"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
-                                    Background="Blue"
+                                    Background="{DynamicResource CalendarBackground3}"
                                     CornerRadius="10"
                                     Visibility="{Binding (local:CalendarHelper.ViewModel).HaveAdditionalInfo, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <TextBlock
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="20"
-                                        Foreground="White"
+                                        Foreground="{DynamicResource SuperText}"
                                         Text="{Binding (local:CalendarHelper.ViewModel).AdditionalInfo, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </Border>
                             </Grid>
@@ -608,9 +613,13 @@
                                 x:Name="SelectedBackground"
                                 Fill="{TemplateBinding Background}"
                                 Opacity="0"
-                                RadiusX="20"
+                                       Width="100"
+                                       Height="100"
+                                       RadiusX="20"
                                 RadiusY="20" />
                             <Rectangle
+                                Width="100"
+                                Height="100"
                                 x:Name="Background"
                                 Fill="{TemplateBinding Background}"
                                 Opacity="0"
@@ -626,7 +635,9 @@
                                 x:Name="CalendarButtonFocusVisual"
                                 IsHitTestVisible="false"
                                 RadiusX="20"
-                                RadiusY="20"
+                                       Width="100"
+                                       Height="100"
+                                       RadiusY="20"
                                 Stroke="{DynamicResource CommonGridBackground}"
                                 Visibility="Collapsed" />
                             <VisualStateManager.VisualStateGroups>
@@ -747,5 +758,20 @@
                 </Style>
             </Calendar.Resources>
         </Calendar>
+        <Popup x:Name="DayPopup"
+               Placement="Mouse"
+               IsOpen="False"
+               StaysOpen="False"
+               >
+            <Border Background="LightGray"
+                    Padding="10"
+                    CornerRadius="5"
+                    Width="300"
+                    Height="300">
+                <TextBlock x:Name="PopupText"
+                           Text="Day Info"
+                           FontWeight="Bold" />
+            </Border>
+        </Popup>
     </Grid>
 </UserControl>

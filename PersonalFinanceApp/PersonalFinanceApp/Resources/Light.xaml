@@ -157,4 +157,14 @@
                      Color="#C0C0C0" />
     <SolidColorBrush x:Key="ComboBoxBackground"
                      Color="Transparent" />
+
+    <SolidColorBrush x:Key="CalendarBackground1"
+                     Color="#4E92C0"></SolidColorBrush>
+    <SolidColorBrush x:Key="CalendarBackground2"
+                     Color="#3D6884"></SolidColorBrush>
+    <SolidColorBrush x:Key="CalendarBackground3"
+                     Color="#2C526B"></SolidColorBrush>
+
+    <SolidColorBrush x:Key="MainCalendar"
+                     Color="#282F33"></SolidColorBrush>
 </ResourceDictionary>
