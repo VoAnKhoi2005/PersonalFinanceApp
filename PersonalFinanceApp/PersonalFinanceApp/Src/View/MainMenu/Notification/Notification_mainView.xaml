@@ -7,7 +7,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="650"
-    Height="650"
+    Height="700"
     Margin="0,50,30,0"
     HorizontalAlignment="Right"
     VerticalAlignment="Center"
@@ -140,8 +140,8 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
                                     IsItemsHost="True"
-                                    ItemHeight="auto"
-                                    ItemWidth="420" />
+                                    ItemHeight="100"
+                                    ItemWidth="auto" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>

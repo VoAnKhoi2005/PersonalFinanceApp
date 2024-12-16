@@ -249,6 +249,7 @@
                                              Foreground="{DynamicResource CommonText}"
                                              PopupMode="Click"
                                              PopupUniformCornerRadius="30"
+                                             PlacementMode="BottomAndAlignRightEdges"
                                              Style="{StaticResource MaterialDesignPopupBox}">
                         <materialDesign:PopupBox.ToggleContent>
                             <materialDesign:PackIcon Width="30"
@@ -262,7 +263,7 @@
                                     <Setter Property="FontFamily"
                                             Value="Sans Serif Collection" />
                                     <Setter Property="Foreground"
-                                            Value="{DynamicResource CommonText}" />
+                                            Value="{DynamicResource Notifcation_PopupBox}" />
                                     <Setter Property="FontWeight"
                                             Value="Regular" />
                                     <Setter Property="FontSize"
@@ -366,7 +367,8 @@
                                                                      Height="30"
                                                                      HorizontalAlignment="Center"
                                                                      VerticalAlignment="Center"
-                                                                     Kind="Logout" />
+                                                                     Kind="Logout"
+                                                                     Foreground="{DynamicResource Notifcation_PopupBox}" />
                                         </Grid>
                                         <Button.Style>
                                             <Style TargetType="Button">
@@ -416,7 +418,8 @@
                                                                      Height="30"
                                                                      HorizontalAlignment="Center"
                                                                      VerticalAlignment="Center"
-                                                                     Kind="AccountLockOpen" />
+                                                                     Kind="AccountLockOpen"
+                                                                     Foreground="{DynamicResource Notifcation_PopupBox}" />
                                         </Grid>
                                     </Button>
                                 </Border>
@@ -485,8 +488,10 @@
                                                      VerticalAlignment="Center"
                                                      Kind="Bell" />
                         </materialDesign:PopupBox.ToggleContent>
-                        <Grid Width="650"
-                              Height="650">
+                        <Border CornerRadius="30"
+                                Width="650"
+                                Height="650">
+                        <Grid >
                             <Grid.Resources>
                                 <Style TargetType="TextBlock">
                                     <Setter Property="FontFamily"
@@ -514,7 +519,7 @@
                                             <Setter Property="Background"
                                                     Value="Transparent" />
                                             <Setter Property="Foreground"
-                                                    Value="{DynamicResource CommonText}" />
+                                                    Value="{DynamicResource Notifcation_PopupBox}" />
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="Button">
@@ -538,7 +543,7 @@
                                                     <Setter Property="Cursor"
                                                             Value="Hand"></Setter>
                                                     <Setter Property="Background"
-                                                            Value="White"></Setter>
+                                                            Value="{DynamicResource Notification_onHovered}"></Setter>
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>
@@ -554,7 +559,7 @@
                                             <Setter Property="Background"
                                                     Value="Transparent" />
                                             <Setter Property="Foreground"
-                                                    Value="{DynamicResource CommonText}" />
+                                                    Value="{DynamicResource Notifcation_PopupBox}" />
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="Button">
@@ -577,7 +582,7 @@
                                                     <Setter Property="Cursor"
                                                             Value="Hand"></Setter>
                                                     <Setter Property="Background"
-                                                            Value="White"></Setter>
+                                                            Value="{DynamicResource Notification_onHovered}"></Setter>
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>
@@ -588,6 +593,7 @@
                                            DockPanel.Dock="Left"
                                            FontSize="16"
                                            FontWeight="SemiBold"
+                                           Foreground="{DynamicResource Notifcation_PopupBox}"
                                            Text="Notification" />
                             </DockPanel>
                             <Border Grid.Row="1">
@@ -617,7 +623,7 @@
                                                         VerticalAlignment="Top"
                                                         IsItemsHost="True"
                                                         ItemHeight="auto"
-                                                        ItemWidth="420" />
+                                                        ItemWidth="800" />
                                                 </ItemsPanelTemplate>
                                             </ItemsControl.ItemsPanel>
                                         </ItemsControl>
@@ -625,6 +631,7 @@
                                 </Grid>
                             </Border>
                         </Grid>
+                        </Border>
                     </materialDesign:PopupBox>
 
                 </DockPanel>

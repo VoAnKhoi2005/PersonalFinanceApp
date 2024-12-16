@@ -69,8 +69,6 @@
                         CornerRadius="25"
                         Opacity="0.2" />
                     <TextBlock
-                        Width="110"
-                        Height="40"
                         Margin="0,47,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
@@ -95,8 +93,6 @@
                         CornerRadius="30"
                         Opacity="0.2" />
                     <TextBlock
-                        Width="110"
-                        Height="40"
                         Margin="0,47,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"

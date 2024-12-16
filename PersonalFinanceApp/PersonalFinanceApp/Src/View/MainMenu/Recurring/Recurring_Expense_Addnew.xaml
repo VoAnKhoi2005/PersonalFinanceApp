@@ -9,6 +9,37 @@
     d:DesignHeight="800"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="ComboBoxItem"
+               x:Key="ComboBox_style">
+            <Setter Property="Background"
+                    Value="{DynamicResource ComboBoxBackground}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource ComponentText}" />
+            <Setter Property="BorderBrush"
+                    Value="Transparent"></Setter>
+            <Setter Property="BorderThickness"
+                    Value="0"></Setter>
+            <Setter Property="Height"
+                    Value="40"></Setter>
+            <Setter Property="Width"
+                    Value="150"></Setter>
+            <Style.Triggers>
+                <!-- Highlight selected item -->
+                <Trigger Property="IsSelected"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="LightGreen" />
+                </Trigger>
+                <!-- Highlight item on hover -->
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="{DynamicResource ComboBoxonHovered}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Border
         Width="370"
         Height="400"
@@ -111,7 +142,8 @@
                         Foreground="{DynamicResource CommonText}"
                         IsEditable="False"
                         ItemsSource="{Binding ItemsSourceFrequency}"
-                        SelectedItem="{Binding SelectedFrequency}" />
+                        SelectedItem="{Binding SelectedFrequency}"
+                        ItemContainerStyle="{StaticResource ComboBox_style}"/>
                 </Grid>
 
             </Grid>
@@ -172,12 +204,12 @@
                         Margin="0,46,0,0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
-                        materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                        materialDesign:HintAssist.Foreground="{DynamicResource SuperText}"
                         materialDesign:HintAssist.Hint="Pick date"
-                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                         BorderBrush="{x:Null}"
                         FontSize="14"
-                        Foreground="{DynamicResource CommonText}"
+                        Foreground="{DynamicResource ComponentText}"
                         SelectedDate="{Binding DateTimeRecurring}"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                 </Grid>

@@ -65,7 +65,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         FontSize="14"
-                        Text="..." />
+                               Text="Fine-tune your preferences" />
                 </Grid>
 
             </Grid>
@@ -347,7 +347,7 @@
                                              VerticalAlignment="Center"
                                              Background="#FF3AA9B7"
                                              BorderBrush="#FF28FFE0"
-                                             Click="RadioButton_Click"/>
+                                             Click="RadioButton_Click_1"/>
                                 <materialDesign:PackIcon Width="30"
                                                          Height="30"
                                                          Margin="160,0,0,0"
@@ -367,7 +367,7 @@
                                              VerticalAlignment="Center"
                                              Background="#FF3AA9B7"
                                              BorderBrush="#FF28FFE0" 
-                                             Click="RadioButton_Click_1"/>
+                                             Click="RadioButton_Click"/>
                             </DockPanel>
                         </Expander>
 
@@ -499,7 +499,7 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        Text="23520790@gmail.com" />
+                                        Text="23520790@gm.uit.edu.vn" />
                                 </Grid>
                                 <Grid
                                     Height="30"
@@ -526,7 +526,7 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        Text="23520802@gmail.com" />
+                                               Text="23520802@gm.uit.edu.vn" />
                                 </Grid>
                                 <Grid
                                     Height="30"
@@ -553,7 +553,7 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         FontSize="18"
-                                        Text="23520869@gmail.com" />
+                                               Text="23520869@gm.uit.edu.vn" />
                                 </Grid>
                             </DockPanel>
                         </Expander>

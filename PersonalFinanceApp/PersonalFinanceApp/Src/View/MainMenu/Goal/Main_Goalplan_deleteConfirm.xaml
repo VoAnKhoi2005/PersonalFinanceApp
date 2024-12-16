@@ -37,14 +37,14 @@
                 VerticalAlignment="Top"
                 FontSize="24"
                 FontWeight="Bold"
-                Foreground="White"
+                Foreground="{DynamicResource SuperText}"
                 Text="Delete goal" />
             <Grid Grid.Row="1">
                 <TextBlock
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="20"
-                    Foreground="#E56BDF18"
+                    Foreground="{DynamicResource Sure_confirm}"
                     Text="Are you sure you want to delete this goal?"
                     TextWrapping="Wrap" />
             </Grid>

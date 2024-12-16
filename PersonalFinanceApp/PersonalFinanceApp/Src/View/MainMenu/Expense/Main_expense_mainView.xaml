@@ -13,7 +13,37 @@
     d:DesignWidth="942"
     mc:Ignorable="d">
     <UserControl.Resources>
+        <Style TargetType="ComboBoxItem"
+               x:Key="ComboBox_style">
+            <Setter Property="Background"
+                    Value="{DynamicResource ComboBoxBackground}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource ComponentText}" />
+            <Setter Property="BorderBrush"
+                    Value="Transparent"></Setter>
+            <Setter Property="BorderThickness"
+                    Value="0"></Setter>
+            <Setter Property="Height"
+                    Value="40"></Setter>
+            <Setter Property="Width"
+                    Value="150"></Setter>
+            <Style.Triggers>
+                <!-- Highlight selected item -->
+                <Trigger Property="IsSelected"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="LightGreen" />
+                </Trigger>
+                <!-- Highlight item on hover -->
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="{DynamicResource ComboBoxonHovered}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
     </UserControl.Resources>
     <Grid>
         <Grid.Resources>
@@ -81,7 +111,6 @@
             <DockPanel Grid.Column="1">
                 <Button HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
-                        Foreground="{DynamicResource SuperText}"
                         Command="{Binding EditBudgetExBCommand}"
                         Content="Total budget:"
                         FontWeight="Bold"
@@ -93,7 +122,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                                        <Border Background="{TemplateBinding Background}" >
                                             <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                                         </Border>
                                     </ControlTemplate>
@@ -215,7 +244,8 @@
                     IsEditable="False"
                     ItemsSource="{Binding SourceExpenseBook}"
                     SelectedItem="{Binding SelectedExpenseBook}"
-                    Text="{Binding TextExpenseBook}">
+                    Text="{Binding TextExpenseBook}"
+                    ItemContainerStyle="{StaticResource ComboBox_style}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding ChangedExpenseBookCommand}" CommandParameter="{Binding}" />
@@ -244,7 +274,9 @@
                     IsEnabled="{Binding HaveExpenseBook}"
                     ItemsSource="{Binding SourceFilter}"
                     SelectedItem="{Binding SelectedTypeFilter}"
-                    Text="{Binding TextType}">
+                    Text="{Binding TextType}"
+                          ItemContainerStyle="{StaticResource ComboBox_style}">
+
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding}" />
@@ -307,7 +339,7 @@
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent" />
-                                        <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
+                                        <Setter Property="Foreground" Value="{DynamicResource ComponentText}" />
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate>
@@ -322,13 +354,15 @@
                                                                 Margin="15,0,0,0"
                                                                 HorizontalAlignment="Left"
                                                                 VerticalAlignment="Center"
-                                                                DockPanel.Dock="Left"
+                                                                                     Foreground="{DynamicResource ComponentText}"
+                                                                                     DockPanel.Dock="Left"
                                                                 Kind="AlphaEBoxOutline" />
                                                             <TextBlock
                                                                 Margin="15,0,0,0"
                                                                 HorizontalAlignment="Left"
                                                                 VerticalAlignment="Center"
                                                                 DockPanel.Dock="Left"
+
                                                                 FontSize="14"
                                                                 Foreground="{TemplateBinding Foreground}"
                                                                 Text="Find word" />
@@ -354,7 +388,8 @@
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent" />
-                                        <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
+                                        <Setter Property="Foreground"
+                                                Value="{DynamicResource ComponentText}" />
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate>
@@ -370,7 +405,8 @@
                                                                 HorizontalAlignment="Left"
                                                                 VerticalAlignment="Center"
                                                                 DockPanel.Dock="Left"
-                                                                Kind="CaseSensitiveAlt" />
+                                                                                     Foreground="{DynamicResource ComponentText}"
+                                                                                     Kind="CaseSensitiveAlt" />
                                                             <TextBlock
                                                                 Margin="15,0,0,0"
                                                                 HorizontalAlignment="Left"
@@ -401,7 +437,8 @@
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent" />
-                                        <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
+                                        <Setter Property="Foreground"
+                                                Value="{DynamicResource ComponentText}" />
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate>
@@ -417,6 +454,7 @@
                                                                 HorizontalAlignment="Left"
                                                                 VerticalAlignment="Center"
                                                                 DockPanel.Dock="Left"
+                                                                                     Foreground="{DynamicResource ComponentText}"
                                                                 Kind="Regex" />
                                                             <TextBlock
                                                                 Margin="15,0,0,0"
@@ -547,7 +585,9 @@
                         Foreground="{DynamicResource CommonText}"
                         IsEditable="False"
                         IsEnabled="{Binding HaveExpenseBook}"
-                        ItemsSource="{Binding SourceCategory}">
+                        ItemsSource="{Binding SourceCategory}"
+                              ItemContainerStyle="{StaticResource ComboBox_style}">
+
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <CheckBox Content="{Binding Name}"

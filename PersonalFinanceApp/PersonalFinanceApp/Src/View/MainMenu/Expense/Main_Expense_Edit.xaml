@@ -372,7 +372,7 @@
                     BorderBrush="{x:Null}"
                     CaretBrush="{DynamicResource CommonText}"
                     FontSize="14"
-                    Foreground="#E5CBBFBF"
+                    Foreground="{DynamicResource CommonText}"
                     SelectionBrush="{DynamicResource CommonText}"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding DescriptionEditExpense}"

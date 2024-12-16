@@ -7,9 +7,12 @@
     <!-- Văn bản thông thường (xám đen) -->
     <SolidColorBrush x:Key="SuperText"
                      Color="#000000" />
+
+    <SolidColorBrush x:Key="ComponentText"
+                     Color="#DFDFDF" />
     <!-- Văn bản nổi bật (đen) -->
     <SolidColorBrush x:Key="CommonGridBackground"
-                     Color="#F3F4F6" />
+                     Color="#ECEDEE" />
     <!-- Nền grid (xám nhạt) -->
     <SolidColorBrush x:Key="DockpanelBackGround"
                      Color="#E8EAF0" />
@@ -19,36 +22,38 @@
                      Color="#D6EAF8" />
     <!-- Nền khi nhấn (xanh lam nhạt) -->
     <SolidColorBrush x:Key="onHovered"
-                     Color="#EBF5FB" />
+                     Color="#B0D6F3" />
     <!-- Nền khi hover (xanh lam sáng hơn) -->
     <SolidColorBrush x:Key="Underline"
                      Color="#1A73E8" />
     <!-- Gạch dưới liên kết (xanh lam đậm) -->
 
     <SolidColorBrush x:Key="Login_button"
-                     Color="#E3F2FD" />
+                     Color="#D0EAFD" />
     <!-- Nút đăng nhập (xanh lam nhạt) -->
     <SolidColorBrush x:Key="Login_border"
                      Color="#90CAF9" />
     <!-- Viền nút đăng nhập (xanh lam nhạt hơn) -->
     <SolidColorBrush x:Key="Login_buttonText"
-                     Color="#0D47A1" />
+                     Color="#FCEEEE" />
+    <SolidColorBrush x:Key="Login_confirm"
+                     Color="#FFFFFF" />
     <!-- Văn bản trên nút (xanh lam đậm) -->
 
     <SolidColorBrush x:Key="Confirm_button"
-                     Color="#81C784" />
+                     Color="#66C66D" />
     <!-- Nút xác nhận (xanh lá nhạt) -->
     <SolidColorBrush x:Key="Confirm_buttonHover"
                      Color="#66BB6A" />
     <!-- Nút xác nhận khi hover (xanh lá đậm hơn) -->
     <SolidColorBrush x:Key="Cancel_button"
-                     Color="#E57373" />
+                     Color="#E55454" />
     <!-- Nút hủy (đỏ nhạt) -->
     <SolidColorBrush x:Key="Cancel_buttonHover"
                      Color="#D32F2F" />
     <!-- Nút hủy khi hover (đỏ đậm hơn) -->
     <SolidColorBrush x:Key="Sure_confirm"
-                     Color="#FFE0B2" />
+                     Color="#0A0101" />
     <!-- Xác nhận chắc chắn (vàng nhạt) -->
 
     <!-- Dashboard -->
@@ -70,7 +75,7 @@
                      Color="#B71C1C" />
     <!-- Mũi tên xuống (đỏ đậm) -->
     <SolidColorBrush x:Key="ExpenseBook_addnew_backgroundBorder"
-                     Color="#B3E5FC" />
+                     Color="#74BBDE" />
     <!-- Viền thêm mới (xanh lam nhạt) -->
 
     <!-- Goal Plan -->
@@ -111,7 +116,7 @@
                      Color="#FFFFFF" />
     <!-- Nền user pop-up (trắng) -->
     <SolidColorBrush x:Key="User_onHovered"
-                     Color="#E3F2FD" />
+                     Color="#949495" />
     <!-- Hover user (xanh lam nhạt) -->
 
     <SolidColorBrush x:Key="Ntf_goal"
@@ -122,7 +127,7 @@
                      Color="#E1F5FE" />
     <!-- Nền thẻ mục tiêu -->
     <SolidColorBrush x:Key="CalendarBackground"
-                     Color="#FFF9C4" />
+                     Color="#8D8E91" />
     <!-- Nền lịch (vàng nhạt) -->
 
     <SolidColorBrush x:Key="InnerProgress"
@@ -141,4 +146,15 @@
     <Color x:Key="Hig4">#E0E0E0</Color>
     <Color x:Key="Hig5">#BDBDBD</Color>
     <Color x:Key="Hig6">#757575</Color>
+
+    <SolidColorBrush x:Key="Notifcation_PopupBox"
+                     Color="#FFFFFF" />
+    <SolidColorBrush x:Key="Notification_onHovered"
+                     Color="#949495" />
+    
+    <!--combobox-->
+    <SolidColorBrush x:Key="ComboBoxonHovered"
+                     Color="#C0C0C0" />
+    <SolidColorBrush x:Key="ComboBoxBackground"
+                     Color="Transparent" />
 </ResourceDictionary>

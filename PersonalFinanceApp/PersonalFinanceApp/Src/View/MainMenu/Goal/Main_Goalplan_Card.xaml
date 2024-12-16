@@ -113,7 +113,7 @@
                                         <Setter Property="Background"
                                                 Value="Transparent" />
                                         <Setter Property="Foreground"
-                                                Value="{DynamicResource CommonText}" />
+                                                Value="{DynamicResource ComponentText}" />
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate>
@@ -127,7 +127,8 @@
                                                                                      HorizontalAlignment="Left"
                                                                                      VerticalAlignment="Center"
                                                                                      DockPanel.Dock="Left"
-                                                                                     Kind="PlusMinusVariant" />
+                                                                                     Kind="PlusMinusVariant"
+                                                                                     Foreground="{DynamicResource ComponentText}"/>
                                                             <TextBlock Margin="15,0,0,0"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Center"
@@ -168,7 +169,7 @@
                                         <Setter Property="Background"
                                                 Value="Transparent" />
                                         <Setter Property="Foreground"
-                                                Value="{DynamicResource CommonText}" />
+                                                Value="{DynamicResource ComponentText}" />
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate>
@@ -182,7 +183,9 @@
                                                                                      HorizontalAlignment="Left"
                                                                                      VerticalAlignment="Center"
                                                                                      DockPanel.Dock="Left"
-                                                                                     Kind="Pencil" />
+                                                                                     Foreground="{DynamicResource ComponentText}" 
+
+                                                            Kind="Pencil" />
                                                             <TextBlock Margin="15,0,0,0"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Center"
@@ -223,7 +226,7 @@
                                         <Setter Property="Background"
                                                 Value="Transparent" />
                                         <Setter Property="Foreground"
-                                                Value="{DynamicResource CommonText}" />
+                                                Value="{DynamicResource ComponentText}" />
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate>
@@ -236,6 +239,7 @@
                                                                                      HorizontalAlignment="Left"
                                                                                      VerticalAlignment="Center"
                                                                                      DockPanel.Dock="Left"
+                                                                                     Foreground="{DynamicResource ComponentText}" 
                                                                                      Kind="History" />
                                                             <TextBlock Margin="15,0,0,0"
                                                                        HorizontalAlignment="Left"
@@ -291,6 +295,7 @@
                                                                                      HorizontalAlignment="Left"
                                                                                      VerticalAlignment="Center"
                                                                                      DockPanel.Dock="Left"
+                                                                                     Foreground="#FFE35D5D"
                                                                                      Kind="Delete" />
                                                             <TextBlock Margin="15,0,0,0"
                                                                        HorizontalAlignment="Left"
@@ -434,7 +439,7 @@
                            VerticalAlignment="Top"
                            FontWeight="Bold"
                            DockPanel.Dock="Top"
-                           Foreground="#E5BFCBCA"
+                           Foreground="{DynamicResource CommonText}"
                            Text="Description  :" />
                 <TextBlock Width="auto"
                            Height="auto"
