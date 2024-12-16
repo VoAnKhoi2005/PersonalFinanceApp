@@ -60,4 +60,5 @@ public class Expense
         TimeAdded = DateTime.Now;
         Deleted = false;
     }
+
 }

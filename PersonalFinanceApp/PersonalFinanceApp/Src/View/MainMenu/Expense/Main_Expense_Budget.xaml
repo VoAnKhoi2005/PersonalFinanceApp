@@ -2,13 +2,19 @@
     x:Class="PersonalFinanceApp.Src.View.Main_Expense_Budget"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convert="clr-namespace:PersonalFinanceApp.Src.etc"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:nib="clr-namespace:PersonalFinanceApp.Src.etc"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <convert:NumberToFormattedStringConverter x:Key="NumberFormatter" />
+    </UserControl.Resources>
     <Border
         Width="350"
         Height="400"
@@ -128,8 +134,12 @@
                         FontSize="14"
                         Foreground="{DynamicResource CommonText}"
                         SelectionBrush="{DynamicResource CommonText}"
-                        Text="{Binding BudgetExpenseBook}"
-                        TextAlignment="Center" />
+                        Text="{Binding BudgetExpenseBook, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}"
+                        TextAlignment="Center">
+                        <i:Interaction.Behaviors>
+                            <nib:NumericInputBehavior />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
                 </Grid>
             </Grid>
 

@@ -20,8 +20,7 @@
         mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closed">
-            <i:InvokeCommandAction Command="{Binding CloseWindowCommand}"
-                                   CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+            <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
@@ -31,40 +30,29 @@
     <Grid>
         <Grid.Resources>
             <Style TargetType="TextBlock">
-                <Setter Property="FontFamily"
-                        Value="Sans Serif Collection" />
-                <Setter Property="Foreground"
-                        Value="{DynamicResource CommonText}" />
-                <Setter Property="FontWeight"
-                        Value="Regular" />
+                <Setter Property="FontFamily" Value="Sans Serif Collection" />
+                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
+                <Setter Property="FontWeight" Value="Regular" />
             </Style>
             <Style TargetType="Button">
-                <Setter Property="Background"
-                        Value="Transparent" />
-                <Setter Property="Foreground"
-                        Value="{DynamicResource CommonText}" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center" />
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
                 <Style.Triggers>
-                    <Trigger Property="IsFocused"
-                             Value="True">
-                        <Setter Property="Background"
-                                Value="{DynamicResource onClicked}" />
+                    <Trigger Property="IsFocused" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource onClicked}" />
                     </Trigger>
-                    <Trigger Property="IsMouseOver"
-                             Value="true">
-                        <Setter Property="Cursor"
-                                Value="Hand" />
-                        <Setter Property="Background"
-                                Value="{DynamicResource onHovered}" />
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Setter Property="Background" Value="{DynamicResource onHovered}" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -73,179 +61,201 @@
             <ColumnDefinition Width="210" />
             <ColumnDefinition Width="433*" />
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0"
-                   Background="{DynamicResource DockpanelBackGround}">
-            <Border Height="60"
-                    VerticalAlignment="Top"
-                    DockPanel.Dock="Top">
+        <DockPanel Grid.Column="0" Background="{DynamicResource DockpanelBackGround}">
+            <Border
+                Height="60"
+                VerticalAlignment="Top"
+                DockPanel.Dock="Top">
                 <Grid>
-                    <Image Width="44"
-                           Height="44"
-                           Margin="20,0,0,0"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"
-                           Source="/Resources/img/Logo_UIT_updated.svg.png" />
-                    <TextBlock Margin="50,0,0,0"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               FontSize="40"
-                               FontWeight="Bold"
-                               Text="PFA" />
+                    <Image
+                        Width="44"
+                        Height="44"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Source="/Resources/img/Logo_UIT_updated.svg.png" />
+                    <TextBlock
+                        Margin="50,0,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="40"
+                        FontWeight="Bold"
+                        Text="PFA" />
 
                 </Grid>
             </Border>
             <!--  Dashboard  -->
-            <Button Height="60"
-                    VerticalAlignment="top"
-                    Command="{Binding DashBoardNavigateCommand}"
-                    DockPanel.Dock="Top"
-                    IsHitTestVisible="True">
-                <DockPanel Width="210"
-                           Height="60"
-                           Background="Transparent">
+            <Button
+                Height="60"
+                VerticalAlignment="top"
+                Command="{Binding DashBoardNavigateCommand}"
+                DockPanel.Dock="Top"
+                IsHitTestVisible="True">
+                <DockPanel
+                    Width="210"
+                    Height="60"
+                    Background="Transparent">
 
-                    <materialDesign:PackIcon Width="30"
-                                             Height="30"
-                                             Margin="10,0,0,0"
-                                             VerticalAlignment="Center"
-                                             DockPanel.Dock="Left"
-                                             Kind="Signal" />
-                    <TextBlock Margin="40,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               DockPanel.Dock="Left"
-                               FontSize="18"
-                               FontWeight="Normal"
-                               Text="Dashboard" />
+                    <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Left"
+                        Kind="Signal" />
+                    <TextBlock
+                        Margin="40,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Left"
+                        FontSize="18"
+                        FontWeight="Normal"
+                        Text="Dashboard" />
 
                 </DockPanel>
             </Button>
             <!--  Expense book  -->
-            <Button Height="60"
-                    VerticalAlignment="top"
-                    Command="{Binding ExpenseBookNavigateCommand}"
-                    DockPanel.Dock="Top"
-                    IsHitTestVisible="True">
-                <DockPanel Width="210"
-                           Height="60"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Background="Transparent">
+            <Button
+                Height="60"
+                VerticalAlignment="top"
+                Command="{Binding ExpenseBookNavigateCommand}"
+                DockPanel.Dock="Top"
+                IsHitTestVisible="True">
+                <DockPanel
+                    Width="210"
+                    Height="60"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="Transparent">
 
-                    <materialDesign:PackIcon Width="30"
-                                             Height="30"
-                                             Margin="10,0,0,0"
-                                             VerticalAlignment="Center"
-                                             DockPanel.Dock="Left"
-                                             Kind="BookOpenPageVariant" />
-                    <TextBlock Margin="40,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               DockPanel.Dock="Left"
-                               FontSize="18"
-                               FontWeight="Normal"
-                               Text="Expense book" />
+                    <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Left"
+                        Kind="BookOpenPageVariant" />
+                    <TextBlock
+                        Margin="40,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Left"
+                        FontSize="18"
+                        FontWeight="Normal"
+                        Text="Expense book" />
 
 
                 </DockPanel>
             </Button>
             <!--  Goal plan  -->
-            <Button Height="60"
-                    VerticalAlignment="top"
-                    Command="{Binding GoalplanNavigateCommand}"
-                    DockPanel.Dock="Top"
-                    IsHitTestVisible="True">
-                <DockPanel Width="210"
-                           Height="60"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Background="Transparent">
-                    <materialDesign:PackIcon Width="30"
-                                             Height="30"
-                                             Margin="10,0,0,0"
-                                             VerticalAlignment="Center"
-                                             DockPanel.Dock="Left"
-                                             Kind="FlagCheckered" />
-                    <TextBlock Margin="40,0,0,0"
-                               VerticalAlignment="Center"
-                               DockPanel.Dock="Left"
-                               FontSize="18"
-                               FontWeight="Normal"
-                               Text="Goal plan" />
+            <Button
+                Height="60"
+                VerticalAlignment="top"
+                Command="{Binding GoalplanNavigateCommand}"
+                DockPanel.Dock="Top"
+                IsHitTestVisible="True">
+                <DockPanel
+                    Width="210"
+                    Height="60"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="Transparent">
+                    <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Left"
+                        Kind="FlagCheckered" />
+                    <TextBlock
+                        Margin="40,0,0,0"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Left"
+                        FontSize="18"
+                        FontWeight="Normal"
+                        Text="Goal plan" />
 
                 </DockPanel>
             </Button>
             <!--  Recurring  -->
             <!--  Binding here  -->
-            <Button Height="60"
-                    VerticalAlignment="top"
-                    Command="{Binding RecurringNavigateCommand}"
-                    DockPanel.Dock="Top"
-                    IsHitTestVisible="True">
-                <DockPanel Width="210"
-                           Height="60"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Background="Transparent">
-                    <materialDesign:PackIcon Width="30"
-                                             Height="30"
-                                             Margin="10,0,0,0"
-                                             VerticalAlignment="Center"
-                                             DockPanel.Dock="Left"
-                                             Kind="CalendarClockOutline" />
+            <Button
+                Height="60"
+                VerticalAlignment="top"
+                Command="{Binding RecurringNavigateCommand}"
+                DockPanel.Dock="Top"
+                IsHitTestVisible="True">
+                <DockPanel
+                    Width="210"
+                    Height="60"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="Transparent">
+                    <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Left"
+                        Kind="CalendarClockOutline" />
 
-                    <TextBlock Margin="40,0,0,0"
-                               VerticalAlignment="Center"
-                               DockPanel.Dock="Left"
-                               FontSize="18"
-                               FontWeight="Normal"
-                               Text="Recurring" />
+                    <TextBlock
+                        Margin="40,0,0,0"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Left"
+                        FontSize="18"
+                        FontWeight="Normal"
+                        Text="Recurring" />
                 </DockPanel>
             </Button>
             <!--  Option  -->
-            <Button Height="60"
-                    VerticalAlignment="Bottom"
-                    Command="{Binding SettingNavigateCommand}"
-                    DockPanel.Dock="Bottom">
-                <DockPanel Width="210"
-                           Height="60"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Background="Transparent">
+            <Button
+                Height="60"
+                VerticalAlignment="Bottom"
+                Command="{Binding SettingNavigateCommand}"
+                DockPanel.Dock="Bottom">
+                <DockPanel
+                    Width="210"
+                    Height="60"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="Transparent">
 
 
-                    <materialDesign:PackIcon Width="30"
-                                             Height="30"
-                                             Margin="10,0,0,0"
-                                             VerticalAlignment="Center"
-                                             DockPanel.Dock="Left"
-                                             Kind="CogBox" />
+                    <materialDesign:PackIcon
+                        Width="30"
+                        Height="30"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Left"
+                        Kind="CogBox" />
 
-                    <TextBlock Margin="40,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               DockPanel.Dock="Left"
-                               FontSize="18"
-                               FontWeight="Normal"
-                               Text="Setting" />
+                    <TextBlock
+                        Margin="40,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Left"
+                        FontSize="18"
+                        FontWeight="Normal"
+                        Text="Setting" />
                 </DockPanel>
             </Button>
         </DockPanel>
 
-        <Grid Grid.Column="1"
-              Grid.ColumnSpan="2">
+        <Grid Grid.Column="1" Grid.ColumnSpan="2">
             <Grid Grid.Row="1">
                 <DockPanel Panel.ZIndex="100">
-                    <materialDesign:PopupBox Margin="0,10,20,0"
-                                             HorizontalAlignment="Left"
-                                             VerticalAlignment="Top"
-                                             Background="{DynamicResource CommonGridBackground}"
-                                             DockPanel.Dock="Right"
-                                             Foreground="{DynamicResource CommonText}"
-                                             PopupMode="Click"
-                                             PopupUniformCornerRadius="30"
-                                             PlacementMode="BottomAndAlignRightEdges"
-                                             Style="{StaticResource MaterialDesignPopupBox}">
+                    <materialDesign:PopupBox
+                        Margin="0,10,20,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="{DynamicResource CommonGridBackground}"
+                        DockPanel.Dock="Right"
+                        Foreground="{DynamicResource CommonText}"
+                        PlacementMode="BottomAndAlignRightEdges"
+                        PopupMode="Click"
+                        PopupUniformCornerRadius="30"
+                        Style="{StaticResource MaterialDesignPopupBox}">
                         <materialDesign:PopupBox.ToggleContent>
                             <materialDesign:PackIcon Width="30"
                                                      Foreground="{DynamicResource SuperText}"
@@ -256,42 +266,31 @@
                         <Grid Width="300">
                             <Grid.Resources>
                                 <Style TargetType="TextBlock">
-                                    <Setter Property="FontFamily"
-                                            Value="Sans Serif Collection" />
-                                    <Setter Property="Foreground"
-                                            Value="{DynamicResource Notifcation_PopupBox}" />
-                                    <Setter Property="FontWeight"
-                                            Value="Regular" />
-                                    <Setter Property="FontSize"
-                                            Value="16" />
+                                    <Setter Property="FontFamily" Value="Sans Serif Collection" />
+                                    <Setter Property="Foreground" Value="{DynamicResource Notifcation_PopupBox}" />
+                                    <Setter Property="FontWeight" Value="Regular" />
+                                    <Setter Property="FontSize" Value="16" />
                                 </Style>
                                 <Style TargetType="materialDesign:PackIcon">
-                                    <Setter Property="Foreground"
-                                            Value="{DynamicResource CommonText}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
                                 </Style>
                                 <Style TargetType="Button">
-                                    <Setter Property="Background"
-                                            Value="Transparent" />
-                                    <Setter Property="BorderThickness"
-                                            Value="0" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderThickness" Value="0" />
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="Button">
                                                 <Border Background="{TemplateBinding Background}">
-                                                    <ContentPresenter HorizontalAlignment="Stretch"
-                                                                      VerticalAlignment="Stretch" />
+                                                    <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                                                 </Border>
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>
                                     <Style.Triggers>
 
-                                        <Trigger Property="IsMouseOver"
-                                                 Value="True">
-                                            <Setter Property="Cursor"
-                                                    Value="Hand" />
-                                            <Setter Property="Background"
-                                                    Value="{DynamicResource User_onHovered}" />
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Cursor" Value="Hand" />
+                                            <Setter Property="Background" Value="{DynamicResource User_onHovered}" />
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
@@ -301,13 +300,15 @@
                                 <RowDefinition Height="19*" />
                             </Grid.RowDefinitions>
                             <!--  avatar  -->
-                            <Border Width="150"
-                                    Height="150"
-                                    Margin="0,10,0,0"
-                                    CornerRadius="90" />
-                            <TextBlock HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Text="User avatar here" />
+                            <Border
+                                Width="150"
+                                Height="150"
+                                Margin="0,10,0,0"
+                                CornerRadius="90" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Text="User avatar here" />
                             <Grid Grid.Row="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="4*" />
@@ -316,12 +317,13 @@
                                 </Grid.RowDefinitions>
 
                                 <!--  user name  -->
-                                <TextBlock HorizontalAlignment="Center"
-                                           VerticalAlignment="Bottom"
-                                           FontSize="16"
-                                           FontWeight="Bold"
-                                           Text="@username"
-                                           Grid.Row="0" />
+                                <TextBlock
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    FontSize="16"
+                                    FontWeight="Bold"
+                                    Text="@username" />
 
                                 <!--  sign out  -->
                                 <Border Grid.Row="1">
@@ -348,8 +350,7 @@
 
                                 <!--  exit program  -->
                                 <Border Grid.Row="2">
-                                    <Button Command="{Binding CloseWindowCommand}"
-                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                                    <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="7*" />
@@ -529,8 +530,7 @@
                     </materialDesign:PopupBox>
 
                 </DockPanel>
-                <ContentControl Grid.Column="1"
-                                Content="{Binding CurrentViewModel}">
+                <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}">
                     <ContentControl.Resources>
 
                         <DataTemplate DataType="{x:Type viewModels:ExpenseViewModel}">
@@ -552,12 +552,13 @@
                 </ContentControl>
             </Grid>
         </Grid>
-        <custom:Modal Grid.RowSpan="1"
-                      Grid.Column="0"
-                      Grid.ColumnSpan="2"
-                      Panel.ZIndex="100"
-                      Content="{Binding CurrentModalViewModel}"
-                      IsOpen="{Binding IsModalOpen}">
+        <custom:Modal
+            Grid.RowSpan="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Panel.ZIndex="100"
+            Content="{Binding CurrentModalViewModel}"
+            IsOpen="{Binding IsModalOpen}">
 
             <ContentControl.Resources>
                 <!--  expense  -->

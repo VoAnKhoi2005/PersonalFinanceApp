@@ -93,17 +93,17 @@ public class MainViewModel : BaseViewModel
                     NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
                 }
                 else if (item.Reminder.CompareTo("Weekly") == 0) {
-                    if (dt.DayOfWeek == DateTime.Today.DayOfWeek) {
+                    if (dt.AddDays(7) == DateTime.Today) {
                         NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
                     }
                 }
                 else if (item.Reminder.CompareTo("Monthly") == 0) {
-                    if ((DateTime.Today - dt).Days % 30 == 0) {
+                    if (dt.AddMonths(1) == DateTime.Today) {
                         NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
                     }
                 }
                 else {//yearly
-                    if (DateTime.Today.Day == dt.Day && DateTime.Today.Month == dt.Month && DateTime.Today.Year > dt.Year) {
+                    if (dt.AddYears(1) == DateTime.Today) {
                         NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
                     }
                 }
@@ -115,6 +115,15 @@ public class MainViewModel : BaseViewModel
             MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         _sharedService.TriggerAction -= LoadNotifyGoal;
+    }
+
+    public void LoadNotifyRecurring() {
+        try {
+
+        }
+        catch(Exception ex) {
+
+        }
     }
     public void CloseWindow(Window window) {
         window?.Close();

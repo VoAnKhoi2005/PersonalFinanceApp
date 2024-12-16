@@ -59,6 +59,7 @@ namespace PersonalFinanceApp
             services.AddSingleton<ExpenseStore>();
             services.AddSingleton<EmailService>();
             services.AddSingleton<GoalStore>();
+            services.AddSingleton<RecurringStore>();
 
             //Login window
             services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));
@@ -108,6 +109,7 @@ namespace PersonalFinanceApp
             //recurring
             services.AddTransient<RecurringAddnew>(s => new RecurringAddnew(s));
             services.AddTransient<RecurringViewModel>(s => new RecurringViewModel(s));
+            services.AddTransient<RecurringAddExpenseViewModel>(s => new RecurringAddExpenseViewModel(s));
 
             //setting
             services.AddTransient<SettingChangedEmailViewModel>(s => new SettingChangedEmailViewModel(s));

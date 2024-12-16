@@ -57,13 +57,13 @@
                 <DockPanel Grid.Row="0">
                     <TextBlock
                         Width="126"
-                               Foreground="{DynamicResource SuperText}"
-                               Height="55"
+                        Height="55"
                         Margin="25,-10,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom"
                         FontSize="28"
                         FontWeight="Bold"
+                        Foreground="{DynamicResource SuperText}"
                         Text="Goal plan" />
                 </DockPanel>
                 <TextBlock
@@ -96,8 +96,8 @@
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 FontSize="12"
-                                       Foreground="{DynamicResource SuperText}"
-                                       FontWeight="Normal"
+                                FontWeight="Normal"
+                                Foreground="{DynamicResource SuperText}"
                                 Text="New goal" />
                             <materialDesign:PackIcon
                                 Width="25"

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LiveChartsCore.Measure;
+using LiveChartsCore.SkiaSharpView;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
@@ -14,6 +16,8 @@ public class GoalplanCardViewModel:BaseViewModel
     private readonly GoalStore _goalStore;
 
     #region Properties
+    //pie chart
+    public List<PieSeries<double>> PieChartGoal { get; set; }
     //id
     public string ID {
         get => _iD;
@@ -80,7 +84,7 @@ public class GoalplanCardViewModel:BaseViewModel
         }
     }
     private string _startDateGoalCard;
-    //startDateGoalCard
+    //DeadlineGoalCard
     public string DeadlineGoalCard {
         get => _deadlineGoalCard;
         set {
@@ -124,7 +128,7 @@ public class GoalplanCardViewModel:BaseViewModel
         }
     }
     private string _reminderGoalCard;
-    //resourceGoalCard
+    //DescriptionGoalCard
     public string DescriptionGoalCard {
         get => _descriptionGoalCard;
         set {
@@ -135,7 +139,7 @@ public class GoalplanCardViewModel:BaseViewModel
         }
     }
     private string _descriptionGoalCard;
-    //goal
+
     #endregion
     #region Command
     public ICommand EditGoalCommand { get; set; }
@@ -149,6 +153,7 @@ public class GoalplanCardViewModel:BaseViewModel
     {
         _serviceProvider = serviceProvider;
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
+
         _goalStore = serviceProvider.GetRequiredService<GoalStore>();
 
         SaveIDGoalCard = new RelayCommand<object>(SaveID);
@@ -162,6 +167,7 @@ public class GoalplanCardViewModel:BaseViewModel
         HistoryGoalCommand = new NavigateModalCommand<GoalHistoryViewModel>(serviceProvider);
         if (goal == null)
             return;
+        PieChartGoal = CreateDoughnutChart();
         LoadGoalCard(goal);
     }
     public void LoadGoalCard(Goal goal) 
@@ -174,8 +180,9 @@ public class GoalplanCardViewModel:BaseViewModel
         StatusGoalCard = goal.Status;
         CategoryGoalCard = goal.CategoryName;
         DescriptionGoalCard = goal.Description;
+        StartDateGoalCard = goal.StartDay.ToString();
 
-        if(goal.Target <= goal.CurrentAmount || DateTime.Now > goal.Deadline) {
+        if (goal.Target <= goal.CurrentAmount || DateTime.Now > goal.Deadline) {
             CanAddAmount = false;
         }
         else {
@@ -184,5 +191,61 @@ public class GoalplanCardViewModel:BaseViewModel
     }
     public void SaveID(object sender) {
         _goalStore.GoalID = ID;
+    }
+    public List<PieSeries<double>> CreateDoughnutChart(Goal goal) {
+        Goal GoalTemp = goal;
+        long remainBudget = GoalTemp.Target - GoalTemp.CurrentAmount;
+
+        var pieSeries = new List<PieSeries<double>>();
+            var pieSerie = new PieSeries<double> {
+                Values = new List<double> { goal.CurrentAmount, remainBudget },
+                Name = goal.Name,
+                InnerRadius = 0.6,
+                MaxRadialColumnWidth = 60,
+                DataLabelsPosition = PolarLabelsPosition.Outer,
+                ToolTipLabelFormatter = point => point.Model.ToString("N0") + " VND",
+            };
+            pieSeries.Add(pieSerie);
+
+        return pieSeries;
+    }
+    public List<PieSeries<double>> CreateDoughnutChart() {
+        var random = new Random();
+        var pieSeries = new List<PieSeries<double>>();
+
+        // Tạo series cho "Target"
+        var targetSeries = new PieSeries<double> {
+            Values = new List<double> { random.Next(1000000, 1000000000) }, // Giá trị ngẫu nhiên
+            Name = "Target",
+            InnerRadius = 0.6,
+            MaxRadialColumnWidth = 30,
+            ToolTipLabelFormatter = point => point.Model.ToString("N0") + " VND",
+        };
+        pieSeries.Add(targetSeries);
+
+        // Tạo series cho "Amount"
+        var amountSeries = new PieSeries<double> {
+            Values = new List<double> { random.Next(1000000, 1000000000) }, // Giá trị ngẫu nhiên
+            Name = "Amount",
+            InnerRadius = 0.6,
+            MaxRadialColumnWidth = 30,
+            ToolTipLabelFormatter = point => point.Model.ToString("N0") + " VND",
+        };
+        pieSeries.Add(amountSeries);
+
+        return pieSeries;
+    }
+    public List<PieSeries<double>> CreateDoughnutChartRandom() {
+        var random = new Random();
+        var pieSeries = new List<PieSeries<double>>();
+            var pieSerie = new PieSeries<double> {
+                Values = new List<double> { 30, 70 },
+                InnerRadius = 0.6,
+                MaxRadialColumnWidth = 30,
+                ToolTipLabelFormatter = point => point.Model.ToString("N0") + " VND",
+            };
+            pieSeries.Add(pieSerie);
+
+        return pieSeries;
     }
 }
