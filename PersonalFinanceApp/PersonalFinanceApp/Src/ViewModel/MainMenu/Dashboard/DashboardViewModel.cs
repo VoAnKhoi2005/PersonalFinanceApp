@@ -33,7 +33,7 @@ public class DashboardViewModel : BaseViewModel
             {
                 LabelsPaint = new SolidColorPaint(SKColors.White),
                 TextSize = 13,
-                Padding = new Padding(0, -20, 0, 20),
+                Padding = new Padding(0, 0, 0, 10),
                 SeparatorsPaint = null,
                 MinStep = TimeSpan.FromDays(1).Ticks,
                 ForceStepToMin = true,
@@ -138,6 +138,7 @@ public class DashboardViewModel : BaseViewModel
                 DataLabelsFormatter = _ => "",
                 XToolTipLabelFormatter = point => point.Model.DateTime.ToString("dd/MM/yyyy"),
                 YToolTipLabelFormatter = point => point.Model.Value.HasValue ? point.Model.Value.Value.ToString("N0") + " VND" : string.Empty,
+                Fill = new SolidColorPaint(SKColors.DodgerBlue)
             }
         };
 
