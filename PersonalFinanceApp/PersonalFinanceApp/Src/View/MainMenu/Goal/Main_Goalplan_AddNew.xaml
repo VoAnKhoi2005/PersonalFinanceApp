@@ -125,6 +125,7 @@
                         Foreground="{DynamicResource CommonText}"
                         IsEditable="False"
                         ItemsSource="{Binding ItemsGoal}"
+                        SelectedItem="{Binding SelectedItemGoal}"
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                         Text="{Binding CategoryGoal}"
                         Visibility="Visible" />

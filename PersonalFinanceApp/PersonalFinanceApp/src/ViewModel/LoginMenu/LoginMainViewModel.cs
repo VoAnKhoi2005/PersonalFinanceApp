@@ -16,6 +16,7 @@ public class LoginMainViewModel : BaseViewModel
     public ICommand WindowMinimum { get; set; }
     public ICommand WindowMaximum { get; set; }
     public ICommand MoveCommand { get; set; }
+    public ICommand CloseWindowCommand { get; set; }
     public LoginMainViewModel(IServiceProvider serviceProvider)
     {
         _SharedService = serviceProvider.GetRequiredService<SharedService>();
@@ -28,6 +29,7 @@ public class LoginMainViewModel : BaseViewModel
                                     : WindowState.Maximized);
         WindowMinimum = new RelayCommand<Window>(w => w.WindowState = WindowState.Minimized);
         MoveCommand = new RelayCommand<Window>(w => w?.DragMove());
+        CloseWindowCommand = new RelayCommand<Window>(CloseWindow);
     }
     public void CloseWindow(Window? window) {
         window?.Close();

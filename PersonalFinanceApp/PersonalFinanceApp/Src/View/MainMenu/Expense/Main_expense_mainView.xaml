@@ -557,34 +557,50 @@
                 CornerRadius="20"
                 DockPanel.Dock="Left">
                 <Grid>
-                    <TextBlock Text="Category" VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Margin="10 0 0 0"
-                               ></TextBlock>
-                    <materialDesign:PopupBox Height="40"
-                                             Width="110"
-                                             materialDesign:HintAssist.FloatingHintHorizontalAlignment="Stretch"
-                                             materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                                             BorderBrush="{x:Null}"
-                                             FontSize="12"
-                                             Foreground="{DynamicResource CommonText}"
-                                             IsEnabled="{Binding HaveExpenseBook}"
-                                             HorizontalAlignment="Center">
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text="Category" />
+                    <materialDesign:PopupBox
+                        Width="110"
+                        Height="40"
+                        HorizontalAlignment="Center"
+                        materialDesign:HintAssist.FloatingHintHorizontalAlignment="Stretch"
+                        materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                        BorderBrush="{x:Null}"
+                        FontSize="12"
+                        Foreground="{DynamicResource CommonText}"
+                        IsEnabled="{Binding HaveExpenseBook}"
+                        PopupMode="Click"
+                        StaysOpen="True">
                         <materialDesign:PopupBox.ToggleContent>
-                            <materialDesign:PackIcon Width="25"
-                                                     Height="25"
-                                                     Margin="5,0,0,0"
-                                                     HorizontalAlignment="Right"
-                                                     VerticalAlignment="Center"
-                                                     Foreground="{DynamicResource CommonText}"
-                                                     Kind="Shape" />
+                            <materialDesign:PackIcon
+                                Width="25"
+                                Height="25"
+                                Margin="5,0,0,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Foreground="{DynamicResource CommonText}"
+                                Kind="Shape" />
                         </materialDesign:PopupBox.ToggleContent>
-                        
-                        <!--ahihi conkiki-->
-                        <ItemsControl></ItemsControl>
-                        
-                        
+
+                        <!--  ahihi conkiki  -->
+                        <ItemsControl
+                            Width="auto"
+                            Height="auto"
+                            ItemsSource="{Binding SourceCategory}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+
                     </materialDesign:PopupBox>
                 </Grid>
             </Border>

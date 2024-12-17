@@ -74,6 +74,10 @@ public class ExpenseStore : INotifyPropertyChanged {
     public void NotifyRecycle() {
         TriggerAction?.Invoke();
     }
+    public event Action TriggerNewCategory;
+    public void NotifyHaveNewCategory() {
+        TriggerNewCategory?.Invoke();
+    }
     protected virtual void OnPropertyChanged(string? propertyName = null) {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

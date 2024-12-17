@@ -1,20 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Windows.ApplicationModel.VoiceCommands;
-using Windows.Services.Maps;
+using Windows.UI.Notifications;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class RecurringAddExpenseViewModel : BaseViewModel {
@@ -66,23 +59,56 @@ public class RecurringAddExpenseViewModel : BaseViewModel {
 
     }
     public void CloseModal(object? parameter = null) {
-        var result = MessageBox.Show("Bạn có chắc không muốn thêm bất kỳ expense nào nữa chứ!", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Information);
-        if (result == MessageBoxResult.Yes) {
-            _modalNavigationStore.Close();  
+        try {
+            var result = MessageBox.Show("Bạn có chắc không muốn thêm bất kỳ expense nào nữa chứ!", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            if (result == MessageBoxResult.Yes) {
+                List<Expense> ex = _recurringStore.ShareExpense
+                    .GroupBy(e => e.RecurringExpenseID)
+                    .Select(g => g.First())
+                    .ToList();
+                foreach (var item in ex) {
+                    var rec = DBManager.GetFirst<RecurringExpense>(re => re.UserID == usr.UserID && re.RecurringExpenseID == item.RecurringExpenseID);
+                    if (rec.Frequency.CompareTo("Daily") == 0) {
+                        rec.LastTime = rec.LastTime.AddDays(rec.Interval);
+                    }
+                    else if (rec.Frequency.CompareTo("Weekly") == 0) {
+                        rec.LastTime = rec.LastTime.AddDays(rec.Interval * 7);
+                    }
+                    else if (rec.Frequency.CompareTo("Monthly") == 0) {
+                        rec.LastTime = rec.LastTime.AddMonths(rec.Interval);
+                    }
+                    else if (rec.Frequency.CompareTo("Yearly") == 0) {
+                        rec.LastTime = rec.LastTime.AddYears(rec.Interval);
+                    }
+                    DBManager.Update(rec);
+                }
+                _recurringStore.ShareExpense.Clear();
+                _modalNavigationStore.Close();
+            }
         }
+        catch (Exception ex) {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+        
     }
     public void AddNewExpense(object? parameter = null) {
-        SourceRecurringExpense.Remove(ItemRecurring);
         Expense exp = new Expense(ItemRecurring.Amount, ItemRecurring.Name, DateOnly.FromDateTime(DateTime.Now),
                        ItemRecurring.CategoryID, ItemRecurring.ExBMonth, ItemRecurring.ExBYear, usr.UserID, ItemRecurring.Description);
         exp.RecurringExpenseID = ItemRecurring.RecurringExpenseID;
         DBManager.Insert(exp);
+
+        SourceRecurringExpense.Remove(ItemRecurring);
     }
 
     public void CancelAddExpense(object? parameter = null) {
-        SourceRecurringExpense.Remove(ItemRecurring);
+        var result = MessageBox.Show("Bạn có chắc không muốn thêm expense này!", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        if (result == MessageBoxResult.Yes) {
+            SourceRecurringExpense.Remove(ItemRecurring);
+        }
     }
     public void LoadData() {
         SourceRecurringExpense = _recurringStore.ShareExpense;
     }
+
 }

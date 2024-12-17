@@ -32,11 +32,6 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadDataAddCommand}" CommandParameter="{Binding}" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
     <Border
         Width="470"
         Height="700"
@@ -282,7 +277,6 @@
                             Margin="15,0,0,0"
                             materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
                             materialDesign:HintAssist.Hint="Day"
-                            materialDesign:TextFieldAssist.HasClearButton="True"
                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                             BorderBrush="{x:Null}"
                             FontSize="14"

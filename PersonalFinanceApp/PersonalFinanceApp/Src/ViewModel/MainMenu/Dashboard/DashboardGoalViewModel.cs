@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using PersonalFinanceApp.Model;
-using PersonalFinanceApp.Src.ViewModel.Stores;
+﻿using PersonalFinanceApp.Model;
 using PersonalFinanceApp.ViewModel.Command;
 using System.Windows.Input;
 

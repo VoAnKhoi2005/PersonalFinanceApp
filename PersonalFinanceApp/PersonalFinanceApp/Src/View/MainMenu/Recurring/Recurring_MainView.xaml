@@ -50,15 +50,15 @@
                 <RowDefinition Height="19*" />
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0">
-                <Button Command="{Binding TestAddRecurringCommand}">Click</Button>
-                <TextBlock Height="55"
-                           Margin="25,-10,0,0"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Bottom"
-                           FontSize="28"
-                           FontWeight="Bold"
-                           Foreground="{DynamicResource SuperText}"
-                           Text="Recurring" />
+                <TextBlock
+                    Height="55"
+                    Margin="25,-10,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    FontSize="28"
+                    FontWeight="Bold"
+                    Foreground="{DynamicResource SuperText}"
+                    Text="Recurring" />
             </DockPanel>
             <TextBlock Grid.Row="1"
                        Width="303"

@@ -6,6 +6,8 @@ using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Windows.Input;
+using OxyPlot;
+using OxyPlot.Series;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -14,6 +16,9 @@ public class GoalplanCardViewModel:BaseViewModel
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly GoalStore _goalStore;
+
+    public PlotModel ProgressPlotModel { get; set; }
+    public PlotController CustomPlotController { get; set; }
 
     #region Properties
     //pie chart
@@ -139,7 +144,17 @@ public class GoalplanCardViewModel:BaseViewModel
         }
     }
     private string _descriptionGoalCard;
-
+    //goal
+    private string _progressPercentage;
+    public string ProgressPercentage
+    {
+        get => _progressPercentage;
+        set
+        {
+            _progressPercentage = value;
+            OnPropertyChanged();
+        }
+    }
     #endregion
     #region Command
     public ICommand EditGoalCommand { get; set; }
@@ -157,17 +172,20 @@ public class GoalplanCardViewModel:BaseViewModel
         _goalStore = serviceProvider.GetRequiredService<GoalStore>();
 
         SaveIDGoalCard = new RelayCommand<object>(SaveID);
-
         EditGoalCommand = new NavigateModalCommand<GoalEditViewModel>(serviceProvider);
-
         DeleteGoalCommand = new NavigateModalCommand<GoalDeleteViewModel>(serviceProvider);
-
         AddNewAmountGoalCommand = new NavigateModalCommand<GoalAddSavedAmountViewModel>(serviceProvider);
-
         HistoryGoalCommand = new NavigateModalCommand<GoalHistoryViewModel>(serviceProvider);
+
+
         if (goal == null)
             return;
-        PieChartGoal = CreateDoughnutChart();
+
+        CustomPlotController = new PlotController();
+        CustomPlotController.UnbindMouseDown(OxyMouseButton.Left);
+        CustomPlotController.BindMouseEnter(PlotCommands.HoverSnapTrack);
+
+        ProgressPlotModel = CreateProgressPlotModel(goal);
         LoadGoalCard(goal);
     }
     public void LoadGoalCard(Goal goal) 
@@ -192,60 +210,64 @@ public class GoalplanCardViewModel:BaseViewModel
     public void SaveID(object sender) {
         _goalStore.GoalID = ID;
     }
-    public List<PieSeries<double>> CreateDoughnutChart(Goal goal) {
-        Goal GoalTemp = goal;
-        long remainBudget = GoalTemp.Target - GoalTemp.CurrentAmount;
 
-        var pieSeries = new List<PieSeries<double>>();
-            var pieSerie = new PieSeries<double> {
-                Values = new List<double> { goal.CurrentAmount, remainBudget },
-                Name = goal.Name,
-                InnerRadius = 0.6,
-                MaxRadialColumnWidth = 60,
-                DataLabelsPosition = PolarLabelsPosition.Outer,
-                ToolTipLabelFormatter = point => point.Model.ToString("N0") + " VND",
-            };
-            pieSeries.Add(pieSerie);
-
-        return pieSeries;
-    }
-    public List<PieSeries<double>> CreateDoughnutChart() {
-        var random = new Random();
-        var pieSeries = new List<PieSeries<double>>();
-
-        // Tạo series cho "Target"
-        var targetSeries = new PieSeries<double> {
-            Values = new List<double> { random.Next(1000000, 1000000000) }, // Giá trị ngẫu nhiên
-            Name = "Target",
-            InnerRadius = 0.6,
-            MaxRadialColumnWidth = 30,
-            ToolTipLabelFormatter = point => point.Model.ToString("N0") + " VND",
+    public PlotModel CreateProgressPlotModel(Goal goal)
+    {
+        PlotModel plotModel = new PlotModel();
+        var pieSeries = new PieSeries
+        {
+            InnerDiameter = 0.7,
+            StrokeThickness = 0,
+            OutsideLabelFormat = null,
+            InsideLabelFormat = null,
+            AngleSpan = 360,
+            StartAngle = -90,
+            TextColor = OxyColors.White,
+            TrackerFormatString = "{Label}: {Value:#,0} VND ({3:P1})",
         };
-        pieSeries.Add(targetSeries);
 
-        // Tạo series cho "Amount"
-        var amountSeries = new PieSeries<double> {
-            Values = new List<double> { random.Next(1000000, 1000000000) }, // Giá trị ngẫu nhiên
-            Name = "Amount",
-            InnerRadius = 0.6,
-            MaxRadialColumnWidth = 30,
-            ToolTipLabelFormatter = point => point.Model.ToString("N0") + " VND",
-        };
-        pieSeries.Add(amountSeries);
+        pieSeries.Slices.Add(new PieSlice("Current Amount", goal.CurrentAmount)
+        {
+            Fill = OxyColors.DodgerBlue
+        });
+        pieSeries.Slices.Add(new PieSlice("Remaining Amount", goal.Target - goal.CurrentAmount)
+        {
+            Fill = OxyColors.Gray
+        });
 
-        return pieSeries;
+        plotModel.Series.Add(pieSeries);
+        double percentage = goal.CurrentAmount * 100.0 / goal.Target;
+        ProgressPercentage = percentage.ToString("0.0") + "%";
+        return plotModel;
     }
-    public List<PieSeries<double>> CreateDoughnutChartRandom() {
-        var random = new Random();
-        var pieSeries = new List<PieSeries<double>>();
-            var pieSerie = new PieSeries<double> {
-                Values = new List<double> { 30, 70 },
-                InnerRadius = 0.6,
-                MaxRadialColumnWidth = 30,
-                ToolTipLabelFormatter = point => point.Model.ToString("N0") + " VND",
-            };
-            pieSeries.Add(pieSerie);
+    public PlotModel CreateProgressPlotModelRandom()
+    {
+        Random random = new Random();
+        PlotModel plotModel = new PlotModel();
+        var pieSeries = new PieSeries
+        {
+            InnerDiameter = 0.7,
+            StrokeThickness = 0,
+            OutsideLabelFormat = null,
+            InsideLabelFormat = null,
+            AngleSpan = 360,
+            StartAngle = -90,
+            TextColor = OxyColors.White,
+            TrackerFormatString = "{Label}: {Value:#,0} VND ({3:P1})",
+        };
+        long CurrentAmount = random.Next(1000000, 100000000);
+        pieSeries.Slices.Add(new PieSlice("Current Amount", CurrentAmount)
+        {
+            Fill = OxyColors.DodgerBlue
+        });
+        pieSeries.Slices.Add(new PieSlice("Remaining Amount", 100000000 - CurrentAmount)
+        {
+            Fill = OxyColors.Gray
+        });
 
-        return pieSeries;
+        plotModel.Series.Add(pieSeries);
+        double percentage = CurrentAmount * 100.0 / 100000000;
+        ProgressPercentage = percentage.ToString("0.0") + "%";
+        return plotModel;
     }
 }

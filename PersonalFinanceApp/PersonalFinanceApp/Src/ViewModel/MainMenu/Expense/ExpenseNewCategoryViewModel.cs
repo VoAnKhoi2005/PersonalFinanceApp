@@ -47,6 +47,7 @@ public class ExpenseNewCategoryViewModel : BaseViewModel {
         };
         DBManager.Insert<Category>(newCategory);
         _expenseStore.Categorys = newCategory;
+        _expenseStore.NotifyHaveNewCategory();
         _modalNavigationStore.Close();
     }
 }

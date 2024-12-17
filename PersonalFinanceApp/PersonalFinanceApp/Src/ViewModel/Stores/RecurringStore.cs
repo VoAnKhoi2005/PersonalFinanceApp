@@ -1,6 +1,7 @@
 ﻿using PersonalFinanceApp.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace PersonalFinanceApp.Src.ViewModel.Stores;
 public class RecurringStore : INotifyPropertyChanged {
@@ -17,6 +18,17 @@ public class RecurringStore : INotifyPropertyChanged {
             }
         }
     }
+    public Calendar? calendar {
+        get => _calendar;
+        set {
+            if (_calendar != value) {
+                _calendar = value;
+                OnPropertyChanged(nameof(_calendar));
+            }
+        }
+    }
+    private Calendar? _calendar;
+
     public event Action TriggerAction;
     public void NotifyRecurring() {
         TriggerAction?.Invoke();

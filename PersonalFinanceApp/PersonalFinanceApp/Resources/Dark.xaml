@@ -114,14 +114,11 @@
     <SolidColorBrush x:Key="Notification_onHovered"
                      Color="#949495" />
 
-    <!--combobox-->
-    <SolidColorBrush x:Key="ComboBoxonHovered"
-                     Color="#C0C0C0" />
-    <SolidColorBrush x:Key="ComboBoxBackground"
-                     Color="Transparent" />
+    <!--  combobox  -->
+    <SolidColorBrush x:Key="ComboBoxonHovered" Color="#C0C0C0" />
+    <SolidColorBrush x:Key="ComboBoxBackground" Color="Transparent" />
 
-    <SolidColorBrush x:Key="NotifiHover"
-                     Color="#A6A1A1" />
+    <SolidColorBrush x:Key="NotifiHover" Color="#A6A1A1" />
 
     <SolidColorBrush x:Key="MainCalendar"
                      Color="#2E2E2E"></SolidColorBrush>

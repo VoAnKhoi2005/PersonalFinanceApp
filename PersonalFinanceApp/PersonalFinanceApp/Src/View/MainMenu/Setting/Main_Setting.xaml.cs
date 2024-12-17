@@ -12,15 +12,5 @@ namespace PersonalFinanceApp.Src.View
         {
             InitializeComponent();
         }
-
-        private void RadioButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Apptheme.ChangeTheme(new Uri("Resources/Dark.xaml",UriKind.Relative));
-        }
-
-        private void RadioButton_Click_1(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Apptheme.ChangeTheme(new Uri("Resources/Light.xaml", UriKind.Relative));
-        }
     }
 }
