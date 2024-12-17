@@ -4,6 +4,8 @@ using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Windows.Input;
+using OxyPlot;
+using OxyPlot.Series;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -12,6 +14,9 @@ public class GoalplanCardViewModel:BaseViewModel
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly GoalStore _goalStore;
+
+    public PlotModel ProgressPlotModel { get; set; }
+    public PlotController CustomPlotController { get; set; }
 
     #region Properties
     //id
@@ -136,6 +141,16 @@ public class GoalplanCardViewModel:BaseViewModel
     }
     private string _descriptionGoalCard;
     //goal
+    private string _progressPercentage;
+    public string ProgressPercentage
+    {
+        get => _progressPercentage;
+        set
+        {
+            _progressPercentage = value;
+            OnPropertyChanged();
+        }
+    }
     #endregion
     #region Command
     public ICommand EditGoalCommand { get; set; }
@@ -152,16 +167,20 @@ public class GoalplanCardViewModel:BaseViewModel
         _goalStore = serviceProvider.GetRequiredService<GoalStore>();
 
         SaveIDGoalCard = new RelayCommand<object>(SaveID);
-
         EditGoalCommand = new NavigateModalCommand<GoalEditViewModel>(serviceProvider);
-
         DeleteGoalCommand = new NavigateModalCommand<GoalDeleteViewModel>(serviceProvider);
-
         AddNewAmountGoalCommand = new NavigateModalCommand<GoalAddSavedAmountViewModel>(serviceProvider);
-
         HistoryGoalCommand = new NavigateModalCommand<GoalHistoryViewModel>(serviceProvider);
+
+
         if (goal == null)
             return;
+
+        CustomPlotController = new PlotController();
+        CustomPlotController.UnbindMouseDown(OxyMouseButton.Left);
+        CustomPlotController.BindMouseEnter(PlotCommands.HoverSnapTrack);
+
+        ProgressPlotModel = CreateProgressPlotModel(goal);
         LoadGoalCard(goal);
     }
     public void LoadGoalCard(Goal goal) 
@@ -184,5 +203,65 @@ public class GoalplanCardViewModel:BaseViewModel
     }
     public void SaveID(object sender) {
         _goalStore.GoalID = ID;
+    }
+
+    public PlotModel CreateProgressPlotModel(Goal goal)
+    {
+        PlotModel plotModel = new PlotModel();
+        var pieSeries = new PieSeries
+        {
+            InnerDiameter = 0.7,
+            StrokeThickness = 0,
+            OutsideLabelFormat = null,
+            InsideLabelFormat = null,
+            AngleSpan = 360,
+            StartAngle = -90,
+            TextColor = OxyColors.White,
+            TrackerFormatString = "{Label}: {Value:#,0} VND ({3:P1})",
+        };
+
+        pieSeries.Slices.Add(new PieSlice("Current Amount", goal.CurrentAmount)
+        {
+            Fill = OxyColors.DodgerBlue
+        });
+        pieSeries.Slices.Add(new PieSlice("Remaining Amount", goal.Target - goal.CurrentAmount)
+        {
+            Fill = OxyColors.Gray
+        });
+
+        plotModel.Series.Add(pieSeries);
+        double percentage = goal.CurrentAmount * 100.0 / goal.Target;
+        ProgressPercentage = percentage.ToString("0.0") + "%";
+        return plotModel;
+    }
+    public PlotModel CreateProgressPlotModelRandom()
+    {
+        Random random = new Random();
+        PlotModel plotModel = new PlotModel();
+        var pieSeries = new PieSeries
+        {
+            InnerDiameter = 0.7,
+            StrokeThickness = 0,
+            OutsideLabelFormat = null,
+            InsideLabelFormat = null,
+            AngleSpan = 360,
+            StartAngle = -90,
+            TextColor = OxyColors.White,
+            TrackerFormatString = "{Label}: {Value:#,0} VND ({3:P1})",
+        };
+        long CurrentAmount = random.Next(1000000, 100000000);
+        pieSeries.Slices.Add(new PieSlice("Current Amount", CurrentAmount)
+        {
+            Fill = OxyColors.DodgerBlue
+        });
+        pieSeries.Slices.Add(new PieSlice("Remaining Amount", 100000000 - CurrentAmount)
+        {
+            Fill = OxyColors.Gray
+        });
+
+        plotModel.Series.Add(pieSeries);
+        double percentage = CurrentAmount * 100.0 / 100000000;
+        ProgressPercentage = percentage.ToString("0.0") + "%";
+        return plotModel;
     }
 }

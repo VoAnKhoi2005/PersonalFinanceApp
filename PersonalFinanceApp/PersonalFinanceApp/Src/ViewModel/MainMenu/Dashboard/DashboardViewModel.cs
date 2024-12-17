@@ -1,5 +1,4 @@
-﻿using LiveChartsCore;
-using LiveChartsCore.Defaults;
+﻿using LiveChartsCore.Defaults;
 using LiveChartsCore.Drawing;
 using LiveChartsCore.Kernel.Sketches;
 using LiveChartsCore.Measure;
@@ -10,19 +9,17 @@ using SkiaSharp;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.ViewModel.Command;
-using PersonalFinanceApp.ViewModel.Stores;
 using System.Collections.ObjectModel;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using System.Collections.Specialized;
 using System.Windows.Controls;
-using System.Windows;
 using System.Windows.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class DashboardViewModel : BaseViewModel
 {
-    public List<PieSeries<double>> BudgetSeries { get; set; }
+    public List<PieSeries<long>> BudgetSeries { get; set; }
 
     public List<ColumnSeries<DateTimePoint>> ActivitySeries { get; set; }
     public List<ICartesianAxis> XAxisActivity { get; set; }
@@ -71,7 +68,7 @@ public class DashboardViewModel : BaseViewModel
         ActivitySeries = CreateActivityChartRandom();
     }
 
-    public List<PieSeries<double>> CreateDoughnutChart(ExpensesBook expensesBook)
+    public List<PieSeries<long>> CreateDoughnutChart(ExpensesBook expensesBook)
     {
         ExpensesBook ExBTemp = expensesBook;
         long remainBudget = ExBTemp.Budget - ExBTemp.Expenses.Sum(ex => ex.Amount);
@@ -81,12 +78,12 @@ public class DashboardViewModel : BaseViewModel
             Expenses = new List<Expense> { new Expense { Amount = remainBudget } }
         });
 
-        var pieSeries = new List<PieSeries<double>>();
+        var pieSeries = new List<PieSeries<long>>();
         foreach (Category category in ExBTemp.Categories)
         {
-            var pieSerie = new PieSeries<double>
+            var pieSerie = new PieSeries<long>
             {
-                Values = new List<double> { category.Expenses.Sum(ex => ex.Amount) },
+                Values = new List<long> { category.Expenses.Sum(ex => ex.Amount) },
                 Name = category.Name,
                 InnerRadius = 0.6,
                 MaxRadialColumnWidth = 60,
@@ -99,15 +96,15 @@ public class DashboardViewModel : BaseViewModel
         return pieSeries;
     }
 
-    public List<PieSeries<double>> CreateDoughnutChartRandom()
+    public List<PieSeries<long>> CreateDoughnutChartRandom()
     {
         var random = new Random();
-        var pieSeries = new List<PieSeries<double>>();
+        var pieSeries = new List<PieSeries<long>>();
         for (int i = 0; i < 5; i++)
         {
-            var pieSerie = new PieSeries<double>
+            var pieSerie = new PieSeries<long>
             {
-                Values = new List<double> { random.Next(1000000, 1000000000) },
+                Values = new List<long> { random.Next(1000000, 1000000000) },
                 Name = $"Category {i}",
                 InnerRadius = 0.6,
                 MaxRadialColumnWidth = 30,

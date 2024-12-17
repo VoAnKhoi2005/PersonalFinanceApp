@@ -65,17 +65,25 @@
 
                 <!--  chart  -->
                 <Grid Grid.Column="0">
-                    <Button Grid.Column="1"
-                            Width="170"
-                            FontFamily="Regular"
-                            FontSize="14"
-                            Background="Transparent"
-                            BorderThickness="0">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
+                    <oxy:PlotView Background="Transparent"
+                                  Panel.ZIndex="10"
+                                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                  Model="{Binding ProgressPlotModel}"
+                                  Controller="{Binding CustomPlotController}">
+                        <oxy:PlotView.DefaultTrackerTemplate>
+                            <ControlTemplate>
+                                <oxy:TrackerControl Position="{Binding Position}" LineStroke="Transparent" Background="GhostWhite">
+                                    <oxy:TrackerControl.Content>
+                                        <TextBlock Text="{Binding}" Margin="5" MaxWidth="150" TextWrapping="Wrap"/>
+                                    </oxy:TrackerControl.Content>
+                                </oxy:TrackerControl>
                             </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                        </oxy:PlotView.DefaultTrackerTemplate>
+                    </oxy:PlotView>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                               TextAlignment="Center" Margin="5, 5, 0, 0"
+                               Text="{Binding ProgressPercentage}" Foreground="White"
+                               FontSize="30"/>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
@@ -122,13 +130,13 @@
                                                             Background="{TemplateBinding Background}">
                                                         <DockPanel>
                                                             <materialDesign:PackIcon Width="20"
-                                                                                     Height="20"
-                                                                                     Margin="15,0,0,0"
-                                                                                     HorizontalAlignment="Left"
-                                                                                     VerticalAlignment="Center"
-                                                                                     DockPanel.Dock="Left"
-                                                                                     Kind="PlusMinusVariant"
-                                                                                     Foreground="{DynamicResource ComponentText}"/>
+                                                                Height="20"
+                                                                Margin="15,0,0,0"
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Center"
+                                                                DockPanel.Dock="Left"
+                                                                Kind="PlusMinusVariant"
+                                                                Foreground="{DynamicResource ComponentText}" />
                                                             <TextBlock Margin="15,0,0,0"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Center"
@@ -178,14 +186,14 @@
                                                             CornerRadius="30 30 0 0">
                                                         <DockPanel>
                                                             <materialDesign:PackIcon Width="20"
-                                                                                     Height="20"
-                                                                                     Margin="15,0,0,0"
-                                                                                     HorizontalAlignment="Left"
-                                                                                     VerticalAlignment="Center"
-                                                                                     DockPanel.Dock="Left"
-                                                                                     Foreground="{DynamicResource ComponentText}" 
+                                                                Height="20"
+                                                                Margin="15,0,0,0"
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Center"
+                                                                DockPanel.Dock="Left"
+                                                                Foreground="{DynamicResource ComponentText}"
 
-                                                            Kind="Pencil" />
+                                                                Kind="Pencil" />
                                                             <TextBlock Margin="15,0,0,0"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Center"
@@ -234,13 +242,13 @@
                                                             Background="{TemplateBinding Background}">
                                                         <DockPanel>
                                                             <materialDesign:PackIcon Width="20"
-                                                                                     Height="20"
-                                                                                     Margin="15,0,0,0"
-                                                                                     HorizontalAlignment="Left"
-                                                                                     VerticalAlignment="Center"
-                                                                                     DockPanel.Dock="Left"
-                                                                                     Foreground="{DynamicResource ComponentText}" 
-                                                                                     Kind="History" />
+                                                                Height="20"
+                                                                Margin="15,0,0,0"
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Center"
+                                                                DockPanel.Dock="Left"
+                                                                Foreground="{DynamicResource ComponentText}"
+                                                                Kind="History" />
                                                             <TextBlock Margin="15,0,0,0"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Center"
@@ -290,13 +298,13 @@
                                                             CornerRadius="0 0 30 30">
                                                         <DockPanel>
                                                             <materialDesign:PackIcon Width="20"
-                                                                                     Height="20"
-                                                                                     Margin="15,0,0,0"
-                                                                                     HorizontalAlignment="Left"
-                                                                                     VerticalAlignment="Center"
-                                                                                     DockPanel.Dock="Left"
-                                                                                     Foreground="#FFE35D5D"
-                                                                                     Kind="Delete" />
+                                                                Height="20"
+                                                                Margin="15,0,0,0"
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Center"
+                                                                DockPanel.Dock="Left"
+                                                                Foreground="#FFE35D5D"
+                                                                Kind="Delete" />
                                                             <TextBlock Margin="15,0,0,0"
                                                                        HorizontalAlignment="Left"
                                                                        VerticalAlignment="Center"
