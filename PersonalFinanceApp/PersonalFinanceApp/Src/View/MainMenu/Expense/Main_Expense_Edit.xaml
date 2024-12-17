@@ -2,11 +2,13 @@
     x:Class="PersonalFinanceApp.Src.View.Main_Expense_Edit"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convert="clr-namespace:PersonalFinanceApp.Src.etc"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:nib="clr-namespace:PersonalFinanceApp.Src.etc"
     d:DesignHeight="850"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -15,6 +17,9 @@
             <i:InvokeCommandAction Command="{Binding LoadDataAddCommand}" CommandParameter="{Binding}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <convert:NumberToFormattedStringConverter x:Key="NumberFormatter" />
+    </UserControl.Resources>
     <Border
         Width="470"
         Height="700"
@@ -147,8 +152,12 @@
                         FontSize="14"
                         Foreground="{DynamicResource CommonText}"
                         SelectionBrush="{DynamicResource CommonText}"
-                        Text="{Binding AmountEditExpense}"
-                        TextAlignment="Left" />
+                        Text="{Binding AmountEditExpense, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}"
+                        TextAlignment="Left">
+                        <i:Interaction.Behaviors>
+                            <nib:NumericInputBehavior />
+                        </i:Interaction.Behaviors>
+                    </TextBox>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Border
@@ -341,7 +350,7 @@
                         IsEnabled="False"
                         IsReadOnly="True"
                         SelectionBrush="{DynamicResource CommonText}"
-                        Text="{Binding BudgetExpenseBook}"
+                        Text="{Binding BudgetExpenseBook, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}"
                         TextAlignment="Left" />
                 </Grid>
             </Grid>

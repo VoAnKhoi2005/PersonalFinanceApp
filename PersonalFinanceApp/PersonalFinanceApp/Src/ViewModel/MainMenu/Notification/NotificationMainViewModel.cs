@@ -16,8 +16,8 @@ public class NotificationMainViewModel : BaseViewModel {
     private readonly AccountStore _accountStore;
     private readonly GoalStore _goalStore;
 
-    private ObservableCollection<NotificationGoalCard> _goalplanCardViewModels = new ObservableCollection<NotificationGoalCard>();
-    public ObservableCollection<NotificationGoalCard> GoalNotifyCardViewModels {
+    private ObservableCollection<object> _goalplanCardViewModels = new ObservableCollection<object>();
+    public ObservableCollection<object> GoalNotifyCardViewModels {
         get => _goalplanCardViewModels;
         set {
             if (_goalplanCardViewModels != value) {
@@ -38,7 +38,8 @@ public class NotificationMainViewModel : BaseViewModel {
         _serviceProvider = serviceProvider;
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _goalStore = serviceProvider.GetRequiredService<GoalStore>();
-        GoalNotifyCardViewModels = new ObservableCollection<NotificationGoalCard>();
+        GoalNotifyCardViewModels = new ObservableCollection<object>();
+
         var items = DBManager.GetAll<Goal>();
         foreach(var goal in items) {
             GoalNotifyCardViewModels.Add(new NotificationGoalCard(serviceProvider, goal));

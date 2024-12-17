@@ -9,6 +9,8 @@ using PersonalFinanceApp.Model;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Globalization;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class ExpenseViewModel : BaseViewModel {
@@ -174,8 +176,10 @@ public class ExpenseViewModel : BaseViewModel {
                     //excute new expensebook
                     NewExpenseBookCommand.Execute(this);
                 }
-                if (value != null) {
-                    _expenseStore.ExpenseBook = value.expensesBook;
+                if(value != null) {
+                    if (value.expensesBook != null) {
+                        _expenseStore.ExpenseBook = value.expensesBook;
+                    }
                 }
                 _selectedExpenseBook = value;
                 OnPropertyChanged();

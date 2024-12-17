@@ -7,6 +7,7 @@ using PersonalFinanceApp.ViewModel.LoginMenu;
 using PersonalFinanceApp.ViewModel.MainMenu;
 using PersonalFinanceApp.ViewModel.Stores;
 using PersonalFinanceApp.Src.ViewModel.Stores;
+using PersonalFinanceApp.Src.View;
 
 namespace PersonalFinanceApp
 {
@@ -58,6 +59,7 @@ namespace PersonalFinanceApp
             services.AddSingleton<ExpenseStore>();
             services.AddSingleton<EmailService>();
             services.AddSingleton<GoalStore>();
+            services.AddSingleton<RecurringStore>();
 
             //Login window
             services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));
@@ -77,11 +79,11 @@ namespace PersonalFinanceApp
                 var dataContext = s.GetRequiredService<MainViewModel>();
                 return new MainWindowFactory(dataContext, s);
             });
+            services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
             services.AddTransient<ExpenseViewModel>(s => new ExpenseViewModel(s));
             services.AddTransient<GoalplanViewModel>(s => new GoalplanViewModel(s));
-            services.AddTransient<DashboardViewModel>(s => new DashboardViewModel(s));
-            services.AddTransient<SettingViewModel>(s => new SettingViewModel(s));
             services.AddTransient<RecurringViewModel>(s => new RecurringViewModel(s));
+            services.AddTransient<SettingViewModel>(s => new SettingViewModel(s));
             services.AddTransient<CalendarViewModel>(s => new CalendarViewModel(s));
 
             //Modal-Popup
@@ -107,6 +109,7 @@ namespace PersonalFinanceApp
             //recurring
             services.AddTransient<RecurringAddnew>(s => new RecurringAddnew(s));
             services.AddTransient<RecurringViewModel>(s => new RecurringViewModel(s));
+            services.AddTransient<RecurringAddExpenseViewModel>(s => new RecurringAddExpenseViewModel(s));
 
             //setting
             services.AddTransient<SettingChangedEmailViewModel>(s => new SettingChangedEmailViewModel(s));

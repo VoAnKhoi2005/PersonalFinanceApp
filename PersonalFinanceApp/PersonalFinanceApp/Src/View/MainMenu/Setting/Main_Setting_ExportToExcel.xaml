@@ -84,7 +84,6 @@
                 <ComboBox
                     Width="100"
                     materialDesign:HintAssist.Hint="Expense book"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                     DisplayMemberPath="DateExB"
                     FontSize="13"

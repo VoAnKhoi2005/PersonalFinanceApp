@@ -46,6 +46,7 @@ public class DashboardViewModel : BaseViewModel
         _sharedService.Notify();
 
         BudgetSeries = CreateDoughnutChartRandom();
+
         XAxisActivity = new List<ICartesianAxis>
         {
             new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd"))
@@ -58,6 +59,7 @@ public class DashboardViewModel : BaseViewModel
                 ForceStepToMin = true,
             }
         };
+
         YAxisActivity = new List<ICartesianAxis>
         {
             new Axis
@@ -65,6 +67,7 @@ public class DashboardViewModel : BaseViewModel
                 LabelsPaint = new SolidColorPaint(SKColors.White),
             }
         };
+
         ActivitySeries = CreateActivityChartRandom();
     }
 
@@ -115,6 +118,7 @@ public class DashboardViewModel : BaseViewModel
 
         return pieSeries;
     }
+
 
     public List<ColumnSeries<DateTimePoint>> CreateActivityChart(ExpensesBook expensesBook)
     {
@@ -390,9 +394,9 @@ public class DashboardViewModel : BaseViewModel
         GetNewest();
         LoadSourceExpeseBook();
         LoadTotal();
-        LoadGoal();
-        LoadBudget();
-        LoadColumnChart();
+        //LoadGoal();
+        //LoadBudget();
+        //LoadColumnChart();
     }
     public decimal BudgetRemainExpenseBook(ExpensesBook exb) {
         decimal sum = 0;

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LiveChartsCore.Measure;
+using LiveChartsCore.SkiaSharpView;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
@@ -19,6 +21,8 @@ public class GoalplanCardViewModel:BaseViewModel
     public PlotController CustomPlotController { get; set; }
 
     #region Properties
+    //pie chart
+    public List<PieSeries<double>> PieChartGoal { get; set; }
     //id
     public string ID {
         get => _iD;
@@ -85,7 +89,7 @@ public class GoalplanCardViewModel:BaseViewModel
         }
     }
     private string _startDateGoalCard;
-    //startDateGoalCard
+    //DeadlineGoalCard
     public string DeadlineGoalCard {
         get => _deadlineGoalCard;
         set {
@@ -129,7 +133,7 @@ public class GoalplanCardViewModel:BaseViewModel
         }
     }
     private string _reminderGoalCard;
-    //resourceGoalCard
+    //DescriptionGoalCard
     public string DescriptionGoalCard {
         get => _descriptionGoalCard;
         set {
@@ -164,6 +168,7 @@ public class GoalplanCardViewModel:BaseViewModel
     {
         _serviceProvider = serviceProvider;
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
+
         _goalStore = serviceProvider.GetRequiredService<GoalStore>();
 
         SaveIDGoalCard = new RelayCommand<object>(SaveID);
@@ -193,8 +198,9 @@ public class GoalplanCardViewModel:BaseViewModel
         StatusGoalCard = goal.Status;
         CategoryGoalCard = goal.CategoryName;
         DescriptionGoalCard = goal.Description;
+        StartDateGoalCard = goal.StartDay.ToString();
 
-        if(goal.Target <= goal.CurrentAmount || DateTime.Now > goal.Deadline) {
+        if (goal.Target <= goal.CurrentAmount || DateTime.Now > goal.Deadline) {
             CanAddAmount = false;
         }
         else {

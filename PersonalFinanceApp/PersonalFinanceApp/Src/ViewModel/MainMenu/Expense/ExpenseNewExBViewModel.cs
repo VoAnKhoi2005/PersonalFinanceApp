@@ -131,6 +131,7 @@ public class ExpenseNewExBViewModel : BaseViewModel {
         }
     }
     private void CloseModal(object sender) {
+        _sharedService.Notify();
         _modalNavigationStore.Close();
     }
     private void ConfirmExpenseBook(object sender) {
