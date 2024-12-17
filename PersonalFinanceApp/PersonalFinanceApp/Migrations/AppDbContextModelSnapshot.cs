@@ -192,7 +192,12 @@ namespace PersonalFinanceApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserID")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Name");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("GOALCATEGORY");
                 });
@@ -231,14 +236,14 @@ namespace PersonalFinanceApp.Migrations
                     b.Property<int>("Interval")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateOnly>("LastTime")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateOnly>("StartDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateOnly>("LastTime")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserID")
@@ -355,6 +360,17 @@ namespace PersonalFinanceApp.Migrations
                         .IsRequired();
 
                     b.Navigation("GoalCategory");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PersonalFinanceApp.Model.GoalCategory", b =>
+                {
+                    b.HasOne("PersonalFinanceApp.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });

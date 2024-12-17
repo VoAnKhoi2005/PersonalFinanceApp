@@ -38,6 +38,7 @@
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="EPPlus" Version="7.5.2" />
     <PackageReference Include="FontAwesome" Version="4.7.0" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc4.5" />
     <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
@@ -65,9 +66,6 @@
   <ItemGroup>
     <None Update="msvcr100.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="PFA.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

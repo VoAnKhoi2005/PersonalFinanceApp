@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Windows.Security.Authentication.OnlineId;
 
 #nullable disable
 
@@ -12,17 +11,6 @@ namespace PersonalFinanceApp.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "GOALCATEGORY",
-                columns: table => new
-                {
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GOALCATEGORY", x => x.Name);
-                });
-
             migrationBuilder.CreateTable(
                 name: "RecurringExpense",
                 columns: table => new
@@ -86,6 +74,46 @@ namespace PersonalFinanceApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GOALCATEGORY",
+                columns: table => new
+                {
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    UserID = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GOALCATEGORY", x => x.Name);
+                    table.ForeignKey(
+                        name: "FK_GOALCATEGORY_USER_UserID",
+                        column: x => x.UserID,
+                        principalTable: "USER",
+                        principalColumn: "UserID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CATEGORY",
+                columns: table => new
+                {
+                    CategoryID = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    ExBMonth = table.Column<int>(type: "INTEGER", nullable: false),
+                    ExBYear = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserID = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CATEGORY", x => x.CategoryID);
+                    table.ForeignKey(
+                        name: "FK_CATEGORY_EXPENSESBOOK_ExBMonth_ExBYear_UserID",
+                        columns: x => new { x.ExBMonth, x.ExBYear, x.UserID },
+                        principalTable: "EXPENSESBOOK",
+                        principalColumns: new[] { "Month", "Year", "UserID" },
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "GOAL",
                 columns: table => new
                 {
@@ -118,48 +146,6 @@ namespace PersonalFinanceApp.Migrations
                         column: x => x.UserID,
                         principalTable: "USER",
                         principalColumn: "UserID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CATEGORY",
-                columns: table => new
-                {
-                    CategoryID = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    ExBMonth = table.Column<int>(type: "INTEGER", nullable: false),
-                    ExBYear = table.Column<int>(type: "INTEGER", nullable: false),
-                    UserID = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CATEGORY", x => x.CategoryID);
-                    table.ForeignKey(
-                        name: "FK_CATEGORY_EXPENSESBOOK_ExBMonth_ExBYear_UserID",
-                        columns: x => new { x.ExBMonth, x.ExBYear, x.UserID },
-                        principalTable: "EXPENSESBOOK",
-                        principalColumns: new[] { "Month", "Year", "UserID" },
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GOALHISTORY",
-                columns: table => new
-                {
-                    GoalID = table.Column<int>(type: "INTEGER", nullable: false),
-                    TimeAdded = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Amount = table.Column<string>(type: "TEXT", nullable: false),
-                    Current = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GOALHISTORY", x => new { x.GoalID, x.TimeAdded });
-                    table.ForeignKey(
-                        name: "FK_GOALHISTORY_GOAL_GoalID",
-                        column: x => x.GoalID,
-                        principalTable: "GOAL",
-                        principalColumn: "GoalID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -203,6 +189,26 @@ namespace PersonalFinanceApp.Migrations
                         column: x => x.RecurringExpenseID,
                         principalTable: "RecurringExpense",
                         principalColumn: "RecurringExpenseID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GOALHISTORY",
+                columns: table => new
+                {
+                    GoalID = table.Column<int>(type: "INTEGER", nullable: false),
+                    TimeAdded = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Amount = table.Column<string>(type: "TEXT", nullable: false),
+                    Current = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GOALHISTORY", x => new { x.GoalID, x.TimeAdded });
+                    table.ForeignKey(
+                        name: "FK_GOALHISTORY_GOAL_GoalID",
+                        column: x => x.GoalID,
+                        principalTable: "GOAL",
+                        principalColumn: "GoalID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -249,6 +255,11 @@ namespace PersonalFinanceApp.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_GOAL_UserID",
                 table: "GOAL",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GOALCATEGORY_UserID",
+                table: "GOALCATEGORY",
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
