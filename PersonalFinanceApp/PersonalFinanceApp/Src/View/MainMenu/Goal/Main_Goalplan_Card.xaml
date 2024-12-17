@@ -61,27 +61,39 @@
 
                 <!--  chart  -->
                 <Grid Grid.Column="0">
-                    <oxy:PlotView 
+                    <oxy:PlotView
                         Margin="5"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Panel.ZIndex="10"
                         Background="Transparent"
-                                  Panel.ZIndex="10"
-                                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                  Model="{Binding ProgressPlotModel}"
-                                  Controller="{Binding CustomPlotController}">
+                        Controller="{Binding CustomPlotController}"
+                        Model="{Binding ProgressPlotModel}">
                         <oxy:PlotView.DefaultTrackerTemplate>
                             <ControlTemplate>
-                                <oxy:TrackerControl Position="{Binding Position}" LineStroke="Transparent" Background="GhostWhite">
+                                <oxy:TrackerControl
+                                    Background="GhostWhite"
+                                    LineStroke="Transparent"
+                                    Position="{Binding Position}">
                                     <oxy:TrackerControl.Content>
-                                        <TextBlock Text="{Binding}" Margin="5" MaxWidth="150" TextWrapping="Wrap"/>
+                                        <TextBlock
+                                            MaxWidth="150"
+                                            Margin="5"
+                                            Text="{Binding}"
+                                            TextWrapping="Wrap" />
                                     </oxy:TrackerControl.Content>
                                 </oxy:TrackerControl>
                             </ControlTemplate>
                         </oxy:PlotView.DefaultTrackerTemplate>
                     </oxy:PlotView>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
-                               TextAlignment="Center" Margin="5, 5, 0, 0"
-                               Text="{Binding ProgressPercentage}" Foreground="White"
-                               FontSize="30"/>
+                    <TextBlock
+                        Margin="5,5,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="30"
+                        Foreground="{DynamicResource SuperText}"
+                        Text="{Binding ProgressPercentage}"
+                        TextAlignment="Center" />
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>

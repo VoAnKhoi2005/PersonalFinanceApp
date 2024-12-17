@@ -104,18 +104,6 @@ public class DashboardViewModel : BaseViewModel
     }
     private string _textExpenseBook;
 
-    //source category
-    public ObservableCollection<TextBlock> SourceCategory {
-        get => _sourceCategory;
-        set {
-            if (_sourceCategory != value) {
-                _sourceCategory = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private ObservableCollection<TextBlock> _sourceCategory = new();
-
     //source goal
     public ObservableCollection<DashboardGoalViewModel> GoalViewModels {
         get => _goalViewModels;
@@ -136,11 +124,11 @@ public class DashboardViewModel : BaseViewModel
 
     public bool HasNoGoal => !GoalViewModels.Any();
     public bool HasNoData => false;
+
     #endregion
     #region Command
     public ICommand ExpenseNavigateCommand { get; set; }
     public ICommand ChangedExpenseBookCommand { get; set; }
-    public ICommand GoalNavigateCommand { get; set; }
     #endregion
     private List<PieSeries<double>> _budgetSeries;
     public List<PieSeries<double>> BudgetSeries {
@@ -178,7 +166,6 @@ public class DashboardViewModel : BaseViewModel
     public DashboardViewModel(IServiceProvider serviceProvider)
     {
         ExpenseNavigateCommand = new NavigateCommand<ExpenseViewModel>(serviceProvider);
-        GoalNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
 
         _serviceProvider = serviceProvider;
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
@@ -202,7 +189,7 @@ public class DashboardViewModel : BaseViewModel
         CustomPlotController.UnbindMouseDown(OxyMouseButton.Left);
         CustomPlotController.BindMouseEnter(PlotCommands.HoverSnapTrack);
 
-        ActivityPlotModel = CreateActivityPlotModel(null);
+        //ActivityPlotModel = CreateActivityPlotModel(null);
     }
 
     //them vao
@@ -244,7 +231,7 @@ public class DashboardViewModel : BaseViewModel
         {
             expensesDaily.Add(new BarItem
             {
-                Value = exB.Expenses.Where(ex => ex.Date.Day == day).Sum(ex => ex.Amount),
+                Value = exB.Expenses.Where(ex => ex.Date.Day == day && ex.UserID == exB.UserID).Sum(ex => ex.Amount),
 
             });
         }
@@ -415,8 +402,9 @@ public class DashboardViewModel : BaseViewModel
                 }
             }
             _expenseStore.ExpenseBook = itemmax;
-            if(BudgetSeries!= null) BudgetSeries.Clear();
             BudgetSeries = CreateDoughnutChart(itemmax);
+
+            ActivityPlotModel = CreateActivityPlotModel(itemmax);
         }
     }
     public void LoadDashBoard() {

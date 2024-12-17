@@ -318,20 +318,15 @@
                                     Text="No data found!"
                                     TextAlignment="Center"
                                     Visibility="{Binding HasNoActivityData, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                <oxy:PlotView Grid.Row="1" 
-                                              Background="Transparent"
-                                              Model="{Binding ActivityPlotModel}"
-                                              Controller="{Binding CustomPlotController}">
-                                    <oxy:PlotView.DefaultTrackerTemplate>
-                                        <ControlTemplate>
-                                            <oxy:TrackerControl Position="{Binding Position}" LineStroke="Transparent" Background="GhostWhite">
-                                                <oxy:TrackerControl.Content>
-                                                    <TextBlock Text="{Binding}" Margin="5" MaxWidth="150" TextWrapping="Wrap"/>
-                                                </oxy:TrackerControl.Content>
-                                            </oxy:TrackerControl>
-                                        </ControlTemplate>
-                                    </oxy:PlotView.DefaultTrackerTemplate>
-                                </oxy:PlotView>
+                                <!--<lvc:CartesianChart
+                                    Grid.Row="1"
+                                    Series="{Binding ActivityPlotModel}"
+                                     />-->
+                                <oxy:PlotView
+                                    Grid.Row="1"
+                                    Background="Transparent"
+                                    Controller="{Binding CustomPlotController}"
+                                    Model="{Binding ActivityPlotModel}" />
                             </Grid>
                         </Border>
                     </Grid>
@@ -398,45 +393,51 @@
                                     Foreground="{DynamicResource SuperText}"
                                     Text="GOAL PLAN" />
                                 <!--  item control here  -->
-                                <Button Grid.Row="1" Command="{Binding GoalNavigateCommand}">
+                                <Grid>
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="30"
+                                        Opacity="0.5"
+                                        Text="No goal found!"
+                                        TextAlignment="Center"
+                                        Visibility="{Binding HasNoGoal, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                </Grid>
+                                <ScrollViewer
+                                    Grid.Row="1"
+                                    Margin="0,0,0,30"
+                                    Padding="10"
+                                    VerticalScrollBarVisibility="Hidden">
+                                    <Grid>
+                                        <ItemsControl ItemsSource="{Binding GoalViewModels}">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <StackPanel />
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+
+                                            <ItemsControl.ItemContainerStyle>
+                                                <Style TargetType="ContentPresenter">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                                </Style>
+                                            </ItemsControl.ItemContainerStyle>
+
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <view:Main_Dashboard_GoalplanCard Margin="10" />
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Grid>
+                                </ScrollViewer>
+                                <!--<Button Grid.Row="1" Command="{Binding GoalNavigateCommand}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Click">
                                             <i:InvokeCommandAction Command="{Binding GoalNavigateCommand}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
-                                    <Grid>
-                                        <TextBlock
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            FontSize="30"
-                                            Opacity="0.5"
-                                            Text="No goal found!"
-                                            TextAlignment="Center"
-                                            Visibility="{Binding HasNoGoal, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                        <ScrollViewer
-                                            Margin="0,0,0,30"
-                                            Padding="10"
-                                            VerticalScrollBarVisibility="Auto">
-                                            <ItemsControl ItemsSource="{Binding GoalViewModels}">
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <view:Main_Dashboard_GoalplanCard Margin="10" />
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                                <ItemsControl.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <WrapPanel
-                                                            HorizontalAlignment="Center"
-                                                            VerticalAlignment="Top"
-                                                            IsItemsHost="True"
-                                                            ItemHeight="100"
-                                                            ItemWidth="420" />
-                                                    </ItemsPanelTemplate>
-                                                </ItemsControl.ItemsPanel>
-                                            </ItemsControl>
-                                        </ScrollViewer>
-                                    </Grid>
-                                </Button>
+
+                                </Button>-->
                             </Grid>
                         </Border>
                     </Grid>

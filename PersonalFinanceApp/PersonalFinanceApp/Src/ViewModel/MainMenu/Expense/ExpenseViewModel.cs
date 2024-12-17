@@ -733,6 +733,7 @@ public class ExpenseViewModel : BaseViewModel {
         public DateTime TimeAdded { get; set; }
         public int CategoryID { get; set; }
         public string Category { get; set; }
+        public string FormattedDate => Date.ToString("dd/MM/yyyy");
         public ExpenseAdvance() { }
         public ExpenseAdvance(Expense ex) {
             exp = ex;

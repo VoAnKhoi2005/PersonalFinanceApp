@@ -12,39 +12,35 @@
     <Grid>
         <Grid.Resources>
 
-            <Style x:Key="CustomRadioButtonStyle"
-                   TargetType="RadioButton">
+            <Style x:Key="CustomRadioButtonStyle" TargetType="RadioButton">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="RadioButton">
                             <BulletDecorator Background="Transparent">
                                 <BulletDecorator.Bullet>
-                                    <Border Width="16"
-                                            Height="16"
-                                            CornerRadius="8"
-                                            BorderThickness="2"
-                                            BorderBrush="{DynamicResource Setting_RadioButtonBG}">
-                                        <!-- Màu viền -->
+                                    <Border
+                                        Width="16"
+                                        Height="16"
+                                        BorderBrush="{DynamicResource Setting_RadioButtonBG}"
+                                        BorderThickness="2"
+                                        CornerRadius="8">
+                                        <!--  Màu viền  -->
                                         <Ellipse Fill="{TemplateBinding Background}" />
                                     </Border>
                                 </BulletDecorator.Bullet>
-                                <ContentPresenter VerticalAlignment="Center"
-                                                  Margin="5,0,0,0"
-                                                  RecognizesAccessKey="True" />
+                                <ContentPresenter
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    RecognizesAccessKey="True" />
                             </BulletDecorator>
                             <ControlTemplate.Triggers>
-                                <Trigger Property="IsChecked"
-                                         Value="True">
-                                    <Setter 
-                                            Property="Background"
-                                            Value="{DynamicResource Setting_RadioButtonChecked}" />
-                                    <!-- Màu khi được chọn -->
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource Setting_RadioButtonChecked}" />
+                                    <!--  Màu khi được chọn  -->
                                 </Trigger>
-                                <Trigger Property="IsChecked"
-                                         Value="False">
-                                    <Setter Property="Background"
-                                            Value="{DynamicResource Setting_RadioButtonChecked}" />
-                                    <!-- Màu khi được chọn -->
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter Property="Background" Value="{DynamicResource Setting_RadioButtonChecked}" />
+                                    <!--  Màu khi được chọn  -->
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -372,51 +368,56 @@
                                         Text="Theme " />
                                 </DockPanel>
                             </Expander.Header>
-                            <DockPanel Height="100"
-                                       Margin="150,0,20,0">
-                                <materialDesign:PackIcon Width="30"
-                                                         Height="30"
-                                                         HorizontalAlignment="Left"
-                                                         VerticalAlignment="Center"
-                                                         Foreground="{DynamicResource CommonText}"
-                                                         Kind="WhiteBalanceSunny" />
-                                <TextBlock Margin="20,0,0,0"
-                                           HorizontalAlignment="Left"
-                                           VerticalAlignment="Center"
-                                           FontSize="18"
-                                           Text="Light theme" />
-                                <RadioButton Width="20"
-                                             Height="20"
-                                             Margin="10,0,0,0"
-                                             HorizontalAlignment="Left"
-                                             VerticalAlignment="Center"
-                                             Style="{StaticResource CustomRadioButtonStyle}"
-                                             Click="RadioButton_Click_1" />
+                            <DockPanel Height="100" Margin="150,0,20,0">
+                                <materialDesign:PackIcon
+                                    Width="30"
+                                    Height="30"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="{DynamicResource CommonText}"
+                                    Kind="WhiteBalanceSunny" />
+                                <TextBlock
+                                    Margin="20,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="18"
+                                    Text="Light theme" />
+                                <RadioButton
+                                    Width="20"
+                                    Height="20"
+                                    Margin="10,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Command="{Binding ChangedThemeLightCommand}"
+                                    Style="{StaticResource CustomRadioButtonStyle}" />
 
 
 
-                                <RadioButton Width="20"
-                                             Height="20"
-                                             Margin="0 0 150 0"
-                                             DockPanel.Dock="Right"
-                                             HorizontalAlignment="Right"
-                                             VerticalAlignment="Center"
-                                             Style="{StaticResource CustomRadioButtonStyle}"
-                                             Click="RadioButton_Click" />
-                                <TextBlock Margin="0,0,20,0"
-                                           HorizontalAlignment="Right"
-                                           VerticalAlignment="Center"
-                                           DockPanel.Dock="Right"
-                                           FontSize="18"
-                                           Text="Dark theme" />
-                                <materialDesign:PackIcon Width="30"
-                                                         Height="30"
-                                                         Margin="0,0,20,0"
-                                                         HorizontalAlignment="Right"
-                                                         DockPanel.Dock="Right"
-                                                         VerticalAlignment="Center"
-                                                         Foreground="{DynamicResource CommonText}"
-                                                         Kind="WeatherNight" />
+                                <RadioButton
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0,0,150,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Command="{Binding ChangedThemeDarkCommand}"
+                                    DockPanel.Dock="Right"
+                                    Style="{StaticResource CustomRadioButtonStyle}" />
+                                <TextBlock
+                                    Margin="0,0,20,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    DockPanel.Dock="Right"
+                                    FontSize="18"
+                                    Text="Dark theme" />
+                                <materialDesign:PackIcon
+                                    Width="30"
+                                    Height="30"
+                                    Margin="0,0,20,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    DockPanel.Dock="Right"
+                                    Foreground="{DynamicResource CommonText}"
+                                    Kind="WeatherNight" />
 
                             </DockPanel>
                         </Expander>
