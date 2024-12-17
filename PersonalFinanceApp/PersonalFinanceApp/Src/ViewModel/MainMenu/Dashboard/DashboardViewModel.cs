@@ -14,6 +14,12 @@ using PersonalFinanceApp.Src.ViewModel.Stores;
 using System.Collections.Specialized;
 using System.Windows.Controls;
 using System.Windows.Input;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
+using Axis = LiveChartsCore.SkiaSharpView.Axis;
+using AxisPosition = OxyPlot.Axes.AxisPosition;
+using DateTimeAxis = LiveChartsCore.SkiaSharpView.DateTimeAxis;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -25,6 +31,10 @@ public class DashboardViewModel : BaseViewModel
     public List<ICartesianAxis> XAxisActivity { get; set; }
     public List<ICartesianAxis> YAxisActivity { get; set; }
     public bool HasNoActivityData { get; set; }
+
+    //TEST
+    public PlotModel ActivityPlotModel { get; set; }
+    public PlotController CustomPlotController { get; set; }
 
     public DashboardViewModel(IServiceProvider serviceProvider)
     {
@@ -69,7 +79,79 @@ public class DashboardViewModel : BaseViewModel
         };
 
         ActivitySeries = CreateActivityChartRandom();
+
+
+        //TEST
+        CustomPlotController = new PlotController();
+        CustomPlotController.UnbindMouseDown(OxyMouseButton.Left);
+        CustomPlotController.BindMouseEnter(PlotCommands.HoverSnapTrack);
+
+        ActivityPlotModel = CreateActivityPlotModel(new ExpensesBook{Month = 1, Year = 1});
     }
+
+    public PlotModel CreateActivityPlotModel(ExpensesBook exB)
+    {
+        PlotModel plotModel = new PlotModel();
+
+        var categoryAxis = new CategoryAxis
+        {
+            Title = "Days",
+            Position = AxisPosition.Bottom,
+            TextColor = OxyColors.White,
+            TitleColor = OxyColors.White,
+            Key = "DaysAxis",
+        };
+        for (int day = 1; day <= DateTime.DaysInMonth(exB.Year, exB.Month); day++)
+        {
+            categoryAxis.Labels.Add(day.ToString());
+        }
+        plotModel.Axes.Add(categoryAxis);
+
+        var valueAxis = new LinearAxis
+        {
+            Position = AxisPosition.Left,
+            Minimum = 0,
+            TextColor = OxyColors.White,
+            TitleColor = OxyColors.White,
+            LabelFormatter = CustomCurrencyFormat,
+            MajorGridlineStyle = LineStyle.Solid,
+            Key = "ValueAxis",
+        };
+        plotModel.Axes.Add(valueAxis);
+
+        List<BarItem> expensesDaily = new List<BarItem>();
+        for (int day = 1; day <= DateTime.DaysInMonth(exB.Year, exB.Month); day++)
+        {
+            expensesDaily.Add(new BarItem
+            {
+                Value = exB.Expenses.Where(ex => ex.Date.Day == day).Sum(ex => ex.Amount),
+
+            });
+        }
+
+        BarSeries columnSeries = new BarSeries
+        {
+            LabelPlacement = LabelPlacement.Outside,
+            TextColor = OxyColors.White,
+            ItemsSource = expensesDaily,
+            XAxisKey = "ValueAxis",
+            YAxisKey = "DaysAxis",
+            FillColor = OxyColors.DodgerBlue,
+            TrackerFormatString = "{2:N0} VND",
+        };
+        plotModel.Series.Add(columnSeries);
+        return plotModel;
+    }
+
+    private string CustomCurrencyFormat(double value)
+    {
+        if (value >= 1000000)
+            return (value / 1000000.0).ToString("F1") + "M";
+        if (value >= 100000)
+            return (value / 1000).ToString("F1") + "K";
+        return value.ToString("N0");
+    }
+
 
     public List<PieSeries<long>> CreateDoughnutChart(ExpensesBook expensesBook)
     {

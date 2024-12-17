@@ -1,5 +1,4 @@
-﻿using LiveChartsCore.Measure;
-using LiveChartsCore.SkiaSharpView;
+﻿using LiveChartsCore.SkiaSharpView;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
