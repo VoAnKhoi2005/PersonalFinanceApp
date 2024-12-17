@@ -18,12 +18,14 @@
                 <Setter Property="FontWeight" Value="Regular" />
             </Style>
             <Style TargetType="Button">
-                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Background"
+                        Value="{DynamicResource CalendarBackground}" />
                 <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="20">
+                            <Border Background="{TemplateBinding Background}" 
+                                    CornerRadius="20">
                                 <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                             </Border>
                         </ControlTemplate>
@@ -32,7 +34,7 @@
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="true">
                         <Setter Property="Cursor" Value="Hand" />
-                        <Setter Property="Background" Value="{DynamicResource onHovered}" />
+                        <Setter Property="Background" Value="{DynamicResource CalendarHover}" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -49,82 +51,28 @@
             </Grid.RowDefinitions>
             <DockPanel Grid.Row="0">
                 <Button Command="{Binding TestAddRecurringCommand}">Click</Button>
-                <TextBlock
-                    Height="55"
-                    Margin="25,-10,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Bottom"
-                    FontSize="28"
-                    FontWeight="Bold"
-                    Foreground="{DynamicResource SuperText}"
-                    Text="Recurring" />
+                <TextBlock Height="55"
+                           Margin="25,-10,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource SuperText}"
+                           Text="Recurring" />
             </DockPanel>
-            <TextBlock
-                Grid.Row="1"
-                Width="303"
-                Height="37"
-                Margin="26,0,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Center"
-                FontSize="14"
-                Text="A calendar show your activities" />
+            <TextBlock Grid.Row="1"
+                       Width="303"
+                       Height="37"
+                       Margin="26,0,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       FontSize="14"
+                       Text="A calendar show your activities" />
 
 
         </Grid>
-        <DockPanel Grid.Row="1">
-            <Border
-                Width="100"
-                Height="40"
-                Margin="5,0,15,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Background="{DynamicResource CommonGridBackground}"
-                CornerRadius="20"
-                DockPanel.Dock="Right">
-
-                <Button Command="{Binding AddNewRecurringCommand}">
-                    <Grid>
-                        <TextBlock
-                            Margin="0,0,10,0"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            FontSize="12"
-                            FontWeight="Normal"
-                            Foreground="{DynamicResource SuperText}"
-                            Text=" Recurring" />
-                        <materialDesign:PackIcon
-                            Width="25"
-                            Height="25"
-                            Margin="5,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Foreground="{DynamicResource CommonText}"
-                            Kind="PlusCircle" />
-                    </Grid>
-                </Button>
-            </Border>
-            <Border
-                Width="40"
-                Height="40"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Background="{DynamicResource CommonGridBackground}"
-                CornerRadius="30"
-                DockPanel.Dock="Right">
-                <Button Command="{Binding RefreshRecurringCommand}">
-                    <materialDesign:PackIcon
-                        Width="25"
-                        Height="25"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource CommonText}"
-                        Kind="Refresh" />
-                </Button>
-            </Border>
-
-        </DockPanel>
-
-        <ScrollViewer Grid.Row="2">
+        <ScrollViewer Grid.Row="2"
+                      Margin="10" >
             <Grid>
 
                 <local:Calendar DataContext="{Binding calendarViewModel}" />
@@ -136,7 +84,7 @@
                         Background="{DynamicResource Summary_TransactionAndCategoryBackground}"
                         CornerRadius="20"
                         DockPanel.Dock="Top">
-                    
+
                     <Button Command="{Binding AddNewRecurringCommand}">
                         <Grid>
                             <TextBlock Margin="0,0,10,0"
@@ -144,20 +92,20 @@
                                        VerticalAlignment="Center"
                                        FontSize="12"
                                        FontWeight="Normal"
-                                       Foreground="{DynamicResource SuperText}"
+                                       Foreground="{DynamicResource ComponentText}"
                                        Text=" Recurring" />
                             <materialDesign:PackIcon Width="25"
                                                      Height="25"
                                                      Margin="5,0,0,0"
                                                      HorizontalAlignment="Left"
                                                      VerticalAlignment="Center"
-                                                     Foreground="{DynamicResource CommonText}"
+                                                     Foreground="{DynamicResource ComponentText}"
                                                      Kind="PlusCircle" />
                         </Grid>
                     </Button>
                 </Border>
             </Grid>
         </ScrollViewer>
-        
+
     </Grid>
 </UserControl>

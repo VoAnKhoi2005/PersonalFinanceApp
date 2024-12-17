@@ -48,6 +48,7 @@
                 VerticalContentAlignment="Top"
                 Content="Change your email"
                 FontFamily="Sans Serif Collection"
+                Foreground="{DynamicResource SuperText}"
                 FontSize="30" />
             <Label
                 Margin="10,130,430,209"

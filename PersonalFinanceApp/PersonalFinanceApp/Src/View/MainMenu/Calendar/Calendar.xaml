@@ -54,7 +54,7 @@
                                     FontFamily="Trebuchet MS"
                                     FontSize="14"
                                     FontWeight="Bold"
-                                    Foreground="#FFFFFF"
+                                    Foreground="{DynamicResource CalendarSuperText}"
                                     Text="{Binding}" />
                             </DataTemplate>
                         </ControlTemplate.Resources>
@@ -166,7 +166,7 @@
                                                     Opacity="0.7"
                                                     TextBlock.FontSize="20"
                                                     TextBlock.TextAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                    TextElement.Foreground="#FFFFFF" />
+                                                    TextElement.Foreground="{DynamicResource CalendarSuperText}" />
                                                 <VisualStateManager.VisualStateGroups>
                                                     <VisualStateGroup x:Name="CommonStates">
                                                         <VisualState x:Name="Normal" />
@@ -764,7 +764,7 @@
                StaysOpen="False"
                >
             <Border Background="LightGray"
-                    Padding="10"
+                    Padding="10" 
                     CornerRadius="5"
                     Width="300"
                     Height="300">

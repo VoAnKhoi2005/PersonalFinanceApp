@@ -30,7 +30,7 @@
             <Grid
                 Width="560"
                 Height="400"
-                Background="#053b50">
+                Background="{DynamicResource CommonGridBackground}">
                 <Label
                     Margin="0,20,0,296"
                     HorizontalAlignment="Center"
@@ -315,8 +315,8 @@
                                     Width="50"
                                     Height="50"
                                     HorizontalAlignment="Center"
-                                    Background="#FF053B50"
-                                    Foreground="#FFDFD1D1"
+                                    Background="Transparent"
+                                    Foreground="{DynamicResource CommonText}"
                                     Kind="ArrowUpCircle"
                                     RenderTransformOrigin="0.5,0.5">
                                     <materialDesign:PackIcon.RenderTransform>

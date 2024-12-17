@@ -378,6 +378,7 @@
                     <materialDesign:PopupBox Margin="0,12,5,0"
                                              HorizontalAlignment="Right"
                                              VerticalAlignment="Top"
+                                            
                                              PlacementMode="BottomAndAlignRightEdges">
                         <materialDesign:PopupBox.ToggleContent>
                             <materialDesign:PackIcon Width="28"
@@ -387,7 +388,7 @@
                                                      VerticalAlignment="Center"
                                                      Kind="Bell" />
                         </materialDesign:PopupBox.ToggleContent>
-                        <Border CornerRadius="30"
+                        <Border 
                                 Width="650"
                                 Height="650">
                             <Grid>
