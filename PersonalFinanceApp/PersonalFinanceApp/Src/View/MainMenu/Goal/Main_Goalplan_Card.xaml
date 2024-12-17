@@ -61,7 +61,9 @@
 
                 <!--  chart  -->
                 <Grid Grid.Column="0">
-                    <oxy:PlotView Background="Transparent"
+                    <oxy:PlotView 
+                        Margin="5"
+                        Background="Transparent"
                                   Panel.ZIndex="10"
                                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                   Model="{Binding ProgressPlotModel}"

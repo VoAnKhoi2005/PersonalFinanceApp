@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics.Eventing.Reader;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.DependencyInjection;
@@ -184,7 +183,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
     public void LoadItemSourceCategoryGoal(object parameter) {
         ItemsGoal.Clear();
         CategoryGoal = (_goalStore.NewCategory != null) ? _goalStore.NewCategory : "";
-        var item = DBManager.GetAll<GoalCategory>();
+        var item = DBManager.GetCondition<GoalCategory>(g => g.UserID == _accountStore.Users.UserID);
         ItemsGoal.Add("<New>");
         foreach (var it in item) {
             ItemsGoal.Add(it.Name);

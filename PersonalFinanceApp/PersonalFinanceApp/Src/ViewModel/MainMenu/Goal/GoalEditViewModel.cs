@@ -186,7 +186,7 @@ public class GoalEditViewModel : BaseViewModel
     }
     public void LoadItemSourceGoal() {
         ItemsGoalEdit.Clear();
-        var item = DBManager.GetAll<GoalCategory>();
+        var item = DBManager.GetCondition<GoalCategory>(g => g.UserID == _accountStore.Users.UserID);
         ItemsGoalEdit.Add("<New>");
         foreach (var it in item) {
             ItemsGoalEdit.Add(it.Name);

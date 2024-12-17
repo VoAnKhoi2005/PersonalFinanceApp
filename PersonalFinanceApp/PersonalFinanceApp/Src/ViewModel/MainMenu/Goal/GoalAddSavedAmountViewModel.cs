@@ -77,11 +77,11 @@ public class GoalAddSavedAmountViewModel : BaseViewModel {
 
             DBManager.Insert(goalhistory);
             bool checkUpdate = DBManager.Update<Goal>(item);
-
+            if (!checkUpdate) { throw new Exception("Update Goal failed"); }
             _goalStore.NotifyGoal();
         }
         catch (Exception ex) {
-            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
         _modalNavigationStore.Close();

@@ -12,6 +12,7 @@ public class GoalAddNewCategoryViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly GoalStore _goalStore;
+    private readonly AccountStore _accountStore;
 
     #region Properties
     //name
@@ -31,6 +32,7 @@ public class GoalAddNewCategoryViewModel : BaseViewModel {
 
     public GoalAddNewCategoryViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
+        _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _goalStore = _serviceProvider.GetRequiredService<GoalStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         CancelNewCategoryCommand = new RelayCommand<object>(CloseModal);
@@ -43,7 +45,8 @@ public class GoalAddNewCategoryViewModel : BaseViewModel {
     private void ConfirmNewCategoryGoal(object sender) {
         //add data to database
         GoalCategory goalCategory = new GoalCategory() {
-            Name = NewCategoryName
+            Name = NewCategoryName,
+            UserID = _accountStore.Users.UserID,
         };
         DBManager.Insert(goalCategory);
         _goalStore.NewCategory = NewCategoryName;

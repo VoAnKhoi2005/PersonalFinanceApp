@@ -228,11 +228,11 @@ public class GoalplanCardViewModel:BaseViewModel
 
         pieSeries.Slices.Add(new PieSlice("Current Amount", goal.CurrentAmount)
         {
-            Fill = OxyColors.DodgerBlue
+            Fill = OxyColors.DarkGray
         });
         pieSeries.Slices.Add(new PieSlice("Remaining Amount", goal.Target - goal.CurrentAmount)
         {
-            Fill = OxyColors.Gray
+            Fill = OxyColors.WhiteSmoke
         });
 
         plotModel.Series.Add(pieSeries);
