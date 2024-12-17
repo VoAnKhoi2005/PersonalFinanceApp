@@ -222,7 +222,6 @@ public class DashboardViewModel : BaseViewModel
             }
         };
 
-        //ActivitySeries = CreateActivityChartRandom();
     }
     public void UpdatePieChart(ExpensesBook expensesBook) {
         var newSeries = CreateDoughnutChart(expensesBook);

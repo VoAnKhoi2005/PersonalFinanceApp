@@ -11,7 +11,7 @@ using PersonalFinanceApp.Database;
 namespace PersonalFinanceApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241203045046_InitBuild")]
+    [Migration("20241217075407_InitBuild")]
     partial class InitBuild
     {
         /// <inheritdoc />
@@ -163,6 +163,9 @@ namespace PersonalFinanceApp.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime?>("StartDay")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -192,7 +195,12 @@ namespace PersonalFinanceApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("UserID")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Name");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("GOALCATEGORY");
                 });
@@ -231,12 +239,18 @@ namespace PersonalFinanceApp.Migrations
                     b.Property<int>("Interval")
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateOnly>("LastTime")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("StarDate")
+                    b.Property<DateOnly>("StartDate")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("RecurringExpenseID");
 
@@ -349,6 +363,17 @@ namespace PersonalFinanceApp.Migrations
                         .IsRequired();
 
                     b.Navigation("GoalCategory");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PersonalFinanceApp.Model.GoalCategory", b =>
+                {
+                    b.HasOne("PersonalFinanceApp.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
