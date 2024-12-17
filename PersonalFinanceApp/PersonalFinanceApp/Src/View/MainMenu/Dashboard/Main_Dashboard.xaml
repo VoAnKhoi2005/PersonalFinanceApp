@@ -318,11 +318,20 @@
                                     Text="No data found!"
                                     TextAlignment="Center"
                                     Visibility="{Binding HasNoActivityData, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                <lvc:CartesianChart
-                                    Grid.Row="1"
-                                    Series="{Binding ActivitySeries}"
-                                    XAxes="{Binding XAxisActivity}"
-                                    YAxes="{Binding YAxisActivity}" />
+                                <oxy:PlotView Grid.Row="1" 
+                                              Background="Transparent"
+                                              Model="{Binding ActivityPlotModel}"
+                                              Controller="{Binding CustomPlotController}">
+                                    <oxy:PlotView.DefaultTrackerTemplate>
+                                        <ControlTemplate>
+                                            <oxy:TrackerControl Position="{Binding Position}" LineStroke="Transparent" Background="GhostWhite">
+                                                <oxy:TrackerControl.Content>
+                                                    <TextBlock Text="{Binding}" Margin="5" MaxWidth="150" TextWrapping="Wrap"/>
+                                                </oxy:TrackerControl.Content>
+                                            </oxy:TrackerControl>
+                                        </ControlTemplate>
+                                    </oxy:PlotView.DefaultTrackerTemplate>
+                                </oxy:PlotView>
                             </Grid>
                         </Border>
                     </Grid>

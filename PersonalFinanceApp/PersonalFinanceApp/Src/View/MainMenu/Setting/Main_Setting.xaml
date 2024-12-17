@@ -11,6 +11,47 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.Resources>
+
+            <Style x:Key="CustomRadioButtonStyle"
+                   TargetType="RadioButton">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <BulletDecorator Background="Transparent">
+                                <BulletDecorator.Bullet>
+                                    <Border Width="16"
+                                            Height="16"
+                                            CornerRadius="8"
+                                            BorderThickness="2"
+                                            BorderBrush="{DynamicResource Setting_RadioButtonBG}">
+                                        <!-- Màu viền -->
+                                        <Ellipse Fill="{TemplateBinding Background}" />
+                                    </Border>
+                                </BulletDecorator.Bullet>
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  Margin="5,0,0,0"
+                                                  RecognizesAccessKey="True" />
+                            </BulletDecorator>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked"
+                                         Value="True">
+                                    <Setter 
+                                            Property="Background"
+                                            Value="{DynamicResource Setting_RadioButtonChecked}" />
+                                    <!-- Màu khi được chọn -->
+                                </Trigger>
+                                <Trigger Property="IsChecked"
+                                         Value="False">
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource Setting_RadioButtonChecked}" />
+                                    <!-- Màu khi được chọn -->
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Sans Serif Collection" />
                 <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
@@ -331,59 +372,51 @@
                                         Text="Theme " />
                                 </DockPanel>
                             </Expander.Header>
-                            <DockPanel Height="100" Margin="150,0,20,0">
-                                <materialDesign:PackIcon
-                                    Width="30"
-                                    Height="30"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Foreground="{DynamicResource CommonText}"
-                                    Kind="WhiteBalanceSunny" />
-                                <TextBlock
-                                    Margin="20,0,0,0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    FontSize="18"
-                                    Text="Light theme" />
-                                <RadioButton
-                                    Width="20"
-                                    Height="20"
-                                    Margin="10,0,0,0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Background="{DynamicResource SuperText}"
-                                    BorderBrush="{DynamicResource SuperText}"
-                                    Command="{Binding ChangedThemeLightCommand}" />
+                            <DockPanel Height="100"
+                                       Margin="150,0,20,0">
+                                <materialDesign:PackIcon Width="30"
+                                                         Height="30"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Center"
+                                                         Foreground="{DynamicResource CommonText}"
+                                                         Kind="WhiteBalanceSunny" />
+                                <TextBlock Margin="20,0,0,0"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           FontSize="18"
+                                           Text="Light theme" />
+                                <RadioButton Width="20"
+                                             Height="20"
+                                             Margin="10,0,0,0"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center"
+                                             Style="{StaticResource CustomRadioButtonStyle}"
+                                             Click="RadioButton_Click_1" />
 
 
 
-                                <RadioButton
-                                    Width="20"
-                                    Height="20"
-                                    Margin="0,0,150,0"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    Background="{DynamicResource SuperText}"
-                                    BorderBrush="{DynamicResource SuperText}"
-                                    Command="{Binding ChangedThemeDarkCommand}"
-                                    DockPanel.Dock="Right"
-                                    IsChecked="True" />
-                                <TextBlock
-                                    Margin="0,0,20,0"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    DockPanel.Dock="Right"
-                                    FontSize="18"
-                                    Text="Dark theme" />
-                                <materialDesign:PackIcon
-                                    Width="30"
-                                    Height="30"
-                                    Margin="0,0,20,0"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    DockPanel.Dock="Right"
-                                    Foreground="{DynamicResource CommonText}"
-                                    Kind="WeatherNight" />
+                                <RadioButton Width="20"
+                                             Height="20"
+                                             Margin="0 0 150 0"
+                                             DockPanel.Dock="Right"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Center"
+                                             Style="{StaticResource CustomRadioButtonStyle}"
+                                             Click="RadioButton_Click" />
+                                <TextBlock Margin="0,0,20,0"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           DockPanel.Dock="Right"
+                                           FontSize="18"
+                                           Text="Dark theme" />
+                                <materialDesign:PackIcon Width="30"
+                                                         Height="30"
+                                                         Margin="0,0,20,0"
+                                                         HorizontalAlignment="Right"
+                                                         DockPanel.Dock="Right"
+                                                         VerticalAlignment="Center"
+                                                         Foreground="{DynamicResource CommonText}"
+                                                         Kind="WeatherNight" />
 
                             </DockPanel>
                         </Expander>
