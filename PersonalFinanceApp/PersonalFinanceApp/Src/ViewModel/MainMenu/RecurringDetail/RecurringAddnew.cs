@@ -14,6 +14,7 @@ public class RecurringAddnew : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly AccountStore _accountStore;
+    private readonly RecurringStore _recurringStore;
 
     #region Properties
     //name
@@ -112,17 +113,6 @@ public class RecurringAddnew : BaseViewModel {
         }
     }
     private string _descriptionRecurring;
-    //name expense
-    public string NameExpense {
-        get => _nameExpense;
-        set {
-            if (_nameExpense != value) {
-                _nameExpense = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _nameExpense;
 
     public User usr { get; set; }
 
@@ -134,6 +124,7 @@ public class RecurringAddnew : BaseViewModel {
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         usr = _accountStore.Users;
+        _recurringStore = serviceProvider.GetRequiredService<RecurringStore>();
 
         LoadItemsource();
 
@@ -182,7 +173,7 @@ public class RecurringAddnew : BaseViewModel {
             }
             //create expense
             
-            Expense exp = new Expense(long.Parse(AmountRecurring), NameExpense, DateOnlyRecurring, cate, exB, DescriptionRecurring);
+            Expense exp = new Expense(long.Parse(AmountRecurring), NameRecurring, DateOnlyRecurring, cate, exB, DescriptionRecurring);
             var recurring = DBManager.GetFirst<RecurringExpense>(re => re.StartDate == DateOnlyRecurring && 
                                                                 re.Name == NameRecurring && re.Frequency == SelectedFrequency && 
                                                                 re.Interval == int.Parse(IntervalRecurring) && re.UserID == int.Parse(_accountStore.UsersID));
@@ -191,6 +182,7 @@ public class RecurringAddnew : BaseViewModel {
             if (check == false) {
                 throw new Exception("Thêm Expense thất bại");
             }
+            _recurringStore.NotifyRecurring();
         }
         catch (Exception ex) {
             MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -14,159 +14,12 @@ using PersonalFinanceApp.Src.ViewModel.Stores;
 using System.Collections.Specialized;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Security.RightsManagement;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
 public class DashboardViewModel : BaseViewModel
 {
-    public List<PieSeries<double>> BudgetSeries { get; set; }
-    public List<ColumnSeries<DateTimePoint>> ActivitySeries { get; set; }
-    public List<ICartesianAxis> XAxisActivity { get; set; }
-    public List<ICartesianAxis> YAxisActivity { get; set; }
-    public bool HasNoActivityData { get; set; }
-
-    public DashboardViewModel(IServiceProvider serviceProvider)
-    {
-        ExpenseNavigateCommand = new NavigateCommand<ExpenseViewModel>(serviceProvider);
-        GoalNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
-
-        _serviceProvider = serviceProvider;
-        _accountStore = serviceProvider.GetRequiredService<AccountStore>();
-        _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
-        GoalViewModels = new ObservableCollection<DashboardGoalViewModel>();
-        _sharedService = serviceProvider.GetRequiredService<SharedService>();
-
-        usr = int.Parse(_accountStore.UsersID);
-
-        LoadDashBoard();
-
-        ChangedExpenseBookCommand = new RelayCommand<object>(ExpenseBookChanged);
-
-        _sharedService.Notify();
-
-        BudgetSeries = CreateDoughnutChartRandom();
-
-        XAxisActivity = new List<ICartesianAxis>
-        {
-            new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd"))
-            {
-                LabelsPaint = new SolidColorPaint(SKColors.White),
-                TextSize = 13,
-                Padding = new Padding(0, 0, 0, 10),
-                SeparatorsPaint = null,
-                MinStep = TimeSpan.FromDays(1).Ticks,
-                ForceStepToMin = true,
-            }
-        };
-
-        YAxisActivity = new List<ICartesianAxis>
-        {
-            new Axis
-            {
-                LabelsPaint = new SolidColorPaint(SKColors.White),
-            }
-        };
-
-        ActivitySeries = CreateActivityChartRandom();
-    }
-
-    public List<PieSeries<double>> CreateDoughnutChart(ExpensesBook expensesBook)
-    {
-        ExpensesBook ExBTemp = expensesBook;
-        long remainBudget = ExBTemp.Budget - ExBTemp.Expenses.Sum(ex => ex.Amount);
-        ExBTemp.Categories.Add(new Category
-        {
-            Name = "Remaining budget",
-            Expenses = new List<Expense> { new Expense { Amount = remainBudget } }
-        });
-
-        var pieSeries = new List<PieSeries<double>>();
-        foreach (Category category in ExBTemp.Categories)
-        {
-            var pieSerie = new PieSeries<double>
-            {
-                Values = new List<double> { category.Expenses.Sum(ex => ex.Amount) },
-                Name = category.Name,
-                InnerRadius = 0.6,
-                MaxRadialColumnWidth = 60,
-                DataLabelsPosition = PolarLabelsPosition.Outer,
-                ToolTipLabelFormatter = point => point.Model.ToString("N0") + " VND",
-            };
-            pieSeries.Add(pieSerie);
-        }
-
-        return pieSeries;
-    }
-
-    public List<PieSeries<double>> CreateDoughnutChartRandom()
-    {
-        var random = new Random();
-        var pieSeries = new List<PieSeries<double>>();
-        for (int i = 0; i < 5; i++)
-        {
-            var pieSerie = new PieSeries<double>
-            {
-                Values = new List<double> { random.Next(1000000, 1000000000) },
-                Name = $"Category {i}",
-                InnerRadius = 0.6,
-                MaxRadialColumnWidth = 30,
-                ToolTipLabelFormatter = point => point.Model.ToString("N0") + " VND",
-            };
-            pieSeries.Add(pieSerie);
-        }
-
-        return pieSeries;
-    }
-
-
-    public List<ColumnSeries<DateTimePoint>> CreateActivityChart(ExpensesBook expensesBook)
-    {
-        List<DateTimePoint> dateTimePoints = new List<DateTimePoint>();
-        for (int i = 1; i <= DateTime.DaysInMonth(expensesBook.Year, expensesBook.Month); i++)
-        {
-            DateTimePoint dateTimePoint = new DateTimePoint
-            {
-                DateTime = new DateTime(expensesBook.Year, expensesBook.Month, i),
-                Value = expensesBook.Expenses.Where(ex => ex.Date.Day == i).Sum(ex => ex.Amount),
-            };
-            dateTimePoints.Add(dateTimePoint);
-        }
-
-        List<ColumnSeries<DateTimePoint>> columnSeries = new List<ColumnSeries<DateTimePoint>>
-        {
-            new ColumnSeries<DateTimePoint>
-            {
-                Values = dateTimePoints,
-                DataLabelsFormatter = _ => "",
-            }
-        };
-        return columnSeries;
-    }
-
-    public List<ColumnSeries<DateTimePoint>> CreateActivityChartRandom()
-    {
-        Random random = new Random();
-        List<DateTimePoint> dateTimePoints = new List<DateTimePoint>();
-        for (int i = 1; i <= 30; i++)
-        {
-            dateTimePoints.Add(new DateTimePoint(new DateTime(2024, 1, i), random.Next(10000, 10000000)));
-        }
-
-        List<ColumnSeries<DateTimePoint>> columnSeries = new List<ColumnSeries<DateTimePoint>>
-        {
-            new ColumnSeries<DateTimePoint>
-            {
-                Values = dateTimePoints,
-                DataLabelsFormatter = _ => "",
-                XToolTipLabelFormatter = point => point.Model.DateTime.ToString("dd/MM/yyyy"),
-                YToolTipLabelFormatter = point => point.Model.Value.HasValue ? point.Model.Value.Value.ToString("N0") + " VND" : string.Empty,
-                Fill = new SolidColorPaint(SKColors.DodgerBlue)
-            }
-        };
-
-        return columnSeries;
-    }
-
     private readonly ExpenseStore _expenseStore;
     private readonly AccountStore _accountStore;
     private readonly IServiceProvider _serviceProvider;
@@ -292,33 +145,229 @@ public class DashboardViewModel : BaseViewModel
     public ICommand ChangedExpenseBookCommand { get; set; }
     public ICommand GoalNavigateCommand { get; set; }
     #endregion
+    private List<PieSeries<double>> _budgetSeries;
+    public List<PieSeries<double>> BudgetSeries {
+        get => _budgetSeries;
+        set {
+            _budgetSeries = value;
+            OnPropertyChanged(nameof(BudgetSeries));
+        }
+    }
+    private List<ColumnSeries<DateTimePoint>> _activitySeries;
+    public List<ColumnSeries<DateTimePoint>> ActivitySeries {
+        get => _activitySeries;
+        set {
+            _activitySeries = value;
+            OnPropertyChanged(nameof(ActivitySeries));
+        }
+    }
+    private List<ICartesianAxis> _xAxisActivity;
+    public List<ICartesianAxis> XAxisActivity {
+        get => _xAxisActivity;
+        set {
+            _xAxisActivity = value;
+            OnPropertyChanged(nameof(XAxisActivity));
+        }
+    }
+    private List<ICartesianAxis> _yAxisActivity;
+    public List<ICartesianAxis> YAxisActivity {
+        get => _yAxisActivity;
+        set {
+            _yAxisActivity = value;
+            OnPropertyChanged(nameof(YAxisActivity));
+        }
+    }
+    public bool HasNoActivityData { get; set; }
+
+    public DashboardViewModel(IServiceProvider serviceProvider)
+    {
+        ExpenseNavigateCommand = new NavigateCommand<ExpenseViewModel>(serviceProvider);
+        GoalNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
+
+        _serviceProvider = serviceProvider;
+        _accountStore = serviceProvider.GetRequiredService<AccountStore>();
+        _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
+        GoalViewModels = new ObservableCollection<DashboardGoalViewModel>();
+        _sharedService = serviceProvider.GetRequiredService<SharedService>();
+
+        usr = int.Parse(_accountStore.UsersID);
+
+        BudgetSeries = new List<PieSeries<double>>();
+
+        LoadDashBoard();
+
+        ChangedExpenseBookCommand = new RelayCommand<object>(ExpenseBookChanged);
+
+        _sharedService.Notify();
 
 
+        XAxisActivity = new List<ICartesianAxis>
+        {
+            new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd"))
+            {
+                LabelsPaint = new SolidColorPaint(SKColors.White),
+                TextSize = 13,
+                Padding = new Padding(0, 0, 0, 10),
+                SeparatorsPaint = null,
+                MinStep = TimeSpan.FromDays(1).Ticks,
+                ForceStepToMin = true,
+            }
+        };
+
+        YAxisActivity = new List<ICartesianAxis>
+        {
+            new Axis
+            {
+                LabelsPaint = new SolidColorPaint(SKColors.White),
+            }
+        };
+
+        //ActivitySeries = CreateActivityChartRandom();
+    }
+    public void UpdatePieChart(ExpensesBook expensesBook) {
+        var newSeries = CreateDoughnutChart(expensesBook);
+        BudgetSeries = newSeries;
+    }
+    public void UpdateColumnChart(ExpensesBook expensesBook) {
+        XAxisActivity = new List<ICartesianAxis>
+{
+            new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd"))
+            {
+                LabelsPaint = new SolidColorPaint(SKColors.White),
+                TextSize = 13,
+                Padding = new Padding(0, 0, 0, 10),
+                SeparatorsPaint = null,
+                MinStep = TimeSpan.FromDays(1).Ticks,
+                ForceStepToMin = true,
+            }
+        };
+
+        YAxisActivity = new List<ICartesianAxis>
+        {
+            new Axis
+            {
+                LabelsPaint = new SolidColorPaint(SKColors.White),
+            }
+        };
+        var newSeries = CreateActivityChart(expensesBook);
+        ActivitySeries = newSeries;
+    }
+    public List<PieSeries<double>> CreateDoughnutChart(ExpensesBook expensesBook)
+    {
+        ExpensesBook ExBTemp = expensesBook;
+        var items = DBManager.GetCondition<Expense>(e => e.UserID == expensesBook.UserID && e.ExBMonth == expensesBook.Month && e.ExBYear == expensesBook.Year);
+        ExBTemp.Expenses = items;
+        long remainBudget = ExBTemp.Budget - ExBTemp.Expenses.Sum(ex => ex.Amount);
+
+        var listcate = DBManager.GetCondition<Category>(c => c.UserID == expensesBook.UserID && c.ExBMonth == expensesBook.Month && c.ExBYear == expensesBook.Year);
+
+        ExBTemp.Categories = listcate;
+
+        ExBTemp.Categories.Add(new Category
+        {
+            Name = "Remaining budget",
+            Expenses = new List<Expense> { new Expense { Amount = remainBudget } }
+        });
+
+        var pieSeries = new List<PieSeries<double>>();
+        foreach (Category category in ExBTemp.Categories)
+        {
+            var exp = DBManager.GetCondition<Expense>(e => e.UserID == expensesBook.UserID && e.CategoryID == category.CategoryID && 
+                            e.ExBMonth == category.ExBMonth && e.ExBYear == category.ExBYear);
+            if (exp.Count != 0) category.Expenses = exp;
+            var pieSerie = new PieSeries<double>
+            {
+                Values = new List<double> { category.Expenses.Sum(ex => ex.Amount) },
+                Name = category.Name,
+                InnerRadius = 0.6,
+                MaxRadialColumnWidth = 60,
+                DataLabelsPosition = PolarLabelsPosition.Outer,
+                ToolTipLabelFormatter = point => point.Model.ToString("N0") + " VND",
+            };
+            pieSeries.Add(pieSerie);
+        }
+
+        return pieSeries;
+    }
+
+    public List<PieSeries<double>> CreateDoughnutChartRandom()
+    {
+        var random = new Random();
+        var pieSeries = new List<PieSeries<double>>();
+        for (int i = 0; i < 5; i++)
+        {
+            var pieSerie = new PieSeries<double>
+            {
+                Values = new List<double> { random.Next(1000000, 1000000000) },
+                Name = $"Category {i}",
+                InnerRadius = 0.6,
+                MaxRadialColumnWidth = 30,
+                ToolTipLabelFormatter = point => point.Model.ToString("N0") + " VND",
+            };
+            pieSeries.Add(pieSerie);
+        }
+
+        return pieSeries;
+    }
+
+
+    public List<ColumnSeries<DateTimePoint>> CreateActivityChart(ExpensesBook expensesBook)
+    {
+        List<DateTimePoint> dateTimePoints = new List<DateTimePoint>();
+        for (int i = 1; i <= DateTime.DaysInMonth(expensesBook.Year, expensesBook.Month); i++)
+        {
+            DateTimePoint dateTimePoint = new DateTimePoint
+            {
+                DateTime = new DateTime(expensesBook.Year, expensesBook.Month, i),
+                Value = expensesBook.Expenses.Where(ex => ex.Date.Day == i).Sum(ex => ex.Amount),
+            };
+            dateTimePoints.Add(dateTimePoint);
+        }
+
+        List<ColumnSeries<DateTimePoint>> columnSeries = new List<ColumnSeries<DateTimePoint>>
+        {
+            new ColumnSeries<DateTimePoint>
+            {
+                Values = dateTimePoints,
+                DataLabelsFormatter = _ => "",
+                XToolTipLabelFormatter = point => point.Model.DateTime.ToString("dd/MM/yyyy"),
+                YToolTipLabelFormatter = point => point.Model.Value.HasValue ? point.Model.Value.Value.ToString("N0") + " VND" : string.Empty,
+                Fill = new SolidColorPaint(SKColors.DodgerBlue)
+            }
+        };
+        return columnSeries;
+    }
+
+    public List<ColumnSeries<DateTimePoint>> CreateActivityChartRandom()
+    {
+        Random random = new Random();
+        List<DateTimePoint> dateTimePoints = new List<DateTimePoint>();
+        for (int i = 1; i <= 30; i++)
+        {
+            dateTimePoints.Add(new DateTimePoint(new DateTime(2024, 1, i), random.Next(10000, 10000000)));
+        }
+
+        List<ColumnSeries<DateTimePoint>> columnSeries = new List<ColumnSeries<DateTimePoint>>
+        {
+            new ColumnSeries<DateTimePoint>
+            {
+                Values = dateTimePoints,
+                DataLabelsFormatter = _ => "",
+                XToolTipLabelFormatter = point => point.Model.DateTime.ToString("dd/MM/yyyy"),
+                YToolTipLabelFormatter = point => point.Model.Value.HasValue ? point.Model.Value.Value.ToString("N0") + " VND" : string.Empty,
+                Fill = new SolidColorPaint(SKColors.DodgerBlue)
+            }
+        };
+
+        return columnSeries;
+    }
+    
     public void LoadGoal() {
         //load goal
         GoalViewModels.Clear();
         List<Goal> goals = DBManager.GetCondition<Goal>(g => g.User.UserID == usr);
         foreach (var goal in goals) {
             GoalViewModels.Add(new DashboardGoalViewModel(_serviceProvider, goal));
-        }
-    }
-    public void LoadBudget() {
-        //load budget
-        SourceCategory.Clear();
-
-        ExpensesBook? curExpensesBook = DBManager.GetFirst<ExpensesBook>(exB => exB.Year == SelectedExpenseBook._year &&
-                                                                                exB.Month == SelectedExpenseBook._month && exB.UserID == int.Parse(_accountStore.UsersID));
-        var listCategory = DBManager.GetCondition<Category>(c => c.UserID == usr && c.ExBMonth == SelectedExpenseBook._month && c.ExBYear == SelectedExpenseBook._year);
-        foreach (var category in listCategory) {
-            var listExpense = DBManager.GetCondition<Expense>(e => e.ExBMonth == SelectedExpenseBook._month &&
-                                                               e.ExBYear == SelectedExpenseBook._year &&
-                                                               e.UserID == usr && e.CategoryID == category.CategoryID);
-            category.Expenses = listExpense;
-
-            TextBlock tb = new TextBlock() {
-                Text = category.Name
-            };
-            SourceCategory.Add(tb);
         }
     }
     public void LoadTotal() {
@@ -367,9 +416,11 @@ public class DashboardViewModel : BaseViewModel
             SelectedExpenseBook = exbA;
             TextExpenseBook = exbA.DateExB;
         }
+
+
+        UpdatePieChart(SelectedExpenseBook.expensesBook);
+        UpdateColumnChart(SelectedExpenseBook.expensesBook);
         LoadTotal();
-        LoadBudget();
-        LoadColumnChart();
     }
     public void GetNewest() {
         var items = DBManager.GetCondition<ExpensesBook>(e => usr == e.UserID);
@@ -386,6 +437,9 @@ public class DashboardViewModel : BaseViewModel
                 }
             }
             _expenseStore.ExpenseBook = itemmax;
+            if(BudgetSeries!= null) BudgetSeries.Clear();
+            BudgetSeries = CreateDoughnutChart(itemmax);
+            ActivitySeries = CreateActivityChart(itemmax);
         }
     }
     public void LoadDashBoard() {
@@ -393,9 +447,7 @@ public class DashboardViewModel : BaseViewModel
         GetNewest();
         LoadSourceExpeseBook();
         LoadTotal();
-        //LoadGoal();
-        //LoadBudget();
-        //LoadColumnChart();
+        LoadGoal();
     }
     public decimal BudgetRemainExpenseBook(ExpensesBook exb) {
         decimal sum = 0;
@@ -404,10 +456,6 @@ public class DashboardViewModel : BaseViewModel
             sum += item.Amount;
         }
         return exb.Budget - sum;
-    }
-    public void LoadColumnChart() {
-        ExpensesBook? curExpensesBook = DBManager.GetFirst<ExpensesBook>(exB => exB.UserID == usr && exB.Month == SelectedExpenseBook._month && exB.Year == SelectedExpenseBook._year);
-        var expenses = DBManager.GetCondition<Expense>(e => e.UserID == usr && e.ExBMonth == SelectedExpenseBook._month && e.ExBYear == SelectedExpenseBook._year);
     }
     static void SortObservableCollection(ObservableCollection<ExpenseBookAdvance> collection) {
         var sortedList = collection.OrderBy(x => x).ToList();

@@ -13,8 +13,7 @@
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button">
-                <Setter Property="Background"
-                        Value="{DynamicResource Login_border}" />
+                <Setter Property="Background" Value="{DynamicResource Login_border}" />
                 <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
                 <Setter Property="Template">
                     <Setter.Value>
@@ -41,24 +40,26 @@
             Visibility="Visible">
             <Grid Background="{DynamicResource CommonGridBackground}">
                 <TabControl
-                    BorderBrush="Black"
-                    BorderThickness="1"
                     Width="560"
                     Height="400"
-                    Foreground="{DynamicResource CommonText}"
                     materialDesign:ColorZoneAssist.Foreground="{DynamicResource Underline}"
-                    materialDesign:ColorZoneAssist.Mode="Custom">
+                    materialDesign:ColorZoneAssist.Mode="Custom"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    Foreground="{DynamicResource CommonText}">
 
                     <!--  Login tab  -->
-                    <TabItem x:Name="LoginTab"
-                             Foreground="{DynamicResource CommonText}"
-                             Height="60">
+                    <TabItem
+                        x:Name="LoginTab"
+                        Height="60"
+                        Foreground="{DynamicResource CommonText}">
 
                         <TabItem.Header>
-                            <Label Foreground="{DynamicResource CommonText}"
-                                   Content="LOGIN"
+                            <Label
+                                Content="LOGIN"
                                 FontFamily="Arial"
-                                FontSize="22" />
+                                FontSize="22"
+                                Foreground="{DynamicResource CommonText}" />
                         </TabItem.Header>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -129,20 +130,17 @@
                                 </PasswordBox>
                             </Border>
                             <!--  Remember me  -->
-                            <Border Background ="Transparent"
-                                    Margin="50,198,200,102">
-                            <CheckBox 
-                                      Content="Remember me"
-                                      FontSize="15"
-                                      BorderThickness="1"
-                                      Foreground="{DynamicResource CommonText}">
-                                <CheckBox.Resources>
-                                        <SolidColorBrush x:Key="MaterialDesignCheckBoxOff"
-                                                         Color="Red" />
-                                        <SolidColorBrush x:Key="PrimaryHueMidBrush"
-                                                         Color="red" />
+                            <Border Margin="50,198,200,102" Background="Transparent">
+                                <CheckBox
+                                    BorderThickness="1"
+                                    Content="Remember me"
+                                    FontSize="15"
+                                    Foreground="{DynamicResource CommonText}">
+                                    <CheckBox.Resources>
+                                        <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="Red" />
+                                        <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="red" />
                                     </CheckBox.Resources>
-                            </CheckBox>
+                                </CheckBox>
                             </Border>
 
                             <Button
@@ -204,9 +202,10 @@
                     <!--  New account  -->
                     <TabItem x:Name="NewAccountTab" Height="60">
                         <TabItem.Header>
-                            <Label Content="NEW ACCOUNT"
-                                   Foreground="{DynamicResource CommonText}"
-                                   FontSize="22" />
+                            <Label
+                                Content="NEW ACCOUNT"
+                                FontSize="22"
+                                Foreground="{DynamicResource CommonText}" />
                         </TabItem.Header>
                         <Grid>
                             <Label
@@ -408,9 +407,9 @@
                                 x:Name="CreateAccount"
                                 Width="300"
                                 Height="50"
+                                Margin="10,0,0,15"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Bottom"
-                                Margin="10 0 0 15"
                                 Content="Create Account"
                                 FontSize="18"
                                 Foreground="{DynamicResource Login_confirm}">

@@ -46,6 +46,19 @@ public class Expense
         TimeAdded = DateTime.Now;
         Deleted = false;
     }
+    public Expense(long amount, string name, DateOnly date, int categoryId, int exBMonth, int exBYear, int userId, int recexpID, string? description = null) {
+        Amount = amount;
+        Name = name;
+        Date = date;
+        CategoryID = categoryId;
+        ExBMonth = exBMonth;
+        ExBYear = exBYear;
+        UserID = userId;
+        Description = description;
+        TimeAdded = DateTime.Now;
+        Deleted = false;
+        RecurringExpenseID = recexpID;
+    }
 
     public Expense(long amount, string name, DateOnly date, Category ca, ExpensesBook exB, string? description = null)
     {

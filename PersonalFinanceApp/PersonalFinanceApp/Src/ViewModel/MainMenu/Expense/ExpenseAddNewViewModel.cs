@@ -157,12 +157,24 @@ public class ExpenseAddNewViewModel : BaseViewModel {
         _shareService = serviceProvider.GetRequiredService<SharedService>();
 
         NewCategoryCommand = new NavigateModalCommand<ExpenseNewCategoryViewModel>(serviceProvider);
-
-        LoadDataAddCommand = new RelayCommand<object>(LoadItemSource);
+        _expenseStore.TriggerNewCategory += LoadCategoryNew;
+        LoadItemSource();
         CancelAddNewExpenseCommand = new RelayCommand<object>(CloseModal);
         ConfirmAddNewExpenseCommand = new RelayCommand<object>(ConfirmAddNewExpense);
     }
-    public void LoadItemSource(object parameter) {
+    public void LoadCategoryNew() {
+        try {
+            LoadItemSource();
+            if (_expenseStore.Categorys != null) {
+                SelectedCategory = new CategoryItem() { Id = _expenseStore.Categorys.CategoryID, Name = _expenseStore.Categorys.Name };
+                TextChangedCategory = _expenseStore.Categorys.Name;
+            }
+        }
+        catch (Exception ex) {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+    public void LoadItemSource(object? parameter = null) {
         try {
             if (_expenseStore.ExpenseBook == null) {
                 return;
@@ -243,6 +255,9 @@ public class ExpenseAddNewViewModel : BaseViewModel {
                 }
                 
             }
+            if(AmountExpense == null || NameExpense == null || DayExpense == null || SelectedCategory == null) {
+                throw new Exception("Vui lòng nhập đầy đủ tất cả thông tin");
+            }
             var expense = new Expense() {
                 Amount = long.Parse(AmountExpense),
                 Name = NameExpense,
@@ -254,7 +269,6 @@ public class ExpenseAddNewViewModel : BaseViewModel {
                 ExBMonth = int.Parse(MonthExpenseBook),
                 ExBYear = int.Parse(YearExpenseBook),
                 UserID = int.Parse(_accountStore.UsersID),
-                
             };
             DBManager.Insert(expense);
 

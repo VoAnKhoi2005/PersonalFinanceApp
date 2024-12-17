@@ -29,27 +29,21 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Border Width="470"
-            Height="700"
-            Background="{DynamicResource CommonGridBackground}"
-            CornerRadius="30">
+    <Border
+        Width="470"
+        Height="700"
+        Background="{DynamicResource CommonGridBackground}"
+        CornerRadius="30">
         <Grid>
             <Grid.Resources>
                 <Style TargetType="TextBlock">
-                    <Setter Property="Opacity"
-                            Value="0.6" />
-                    <Setter Property="FontFamily"
-                            Value="Sans Serif Collection" />
-                    <Setter Property="Foreground"
-                            Value="{DynamicResource CommonText}" />
-                    <Setter Property="FontWeight"
-                            Value="Regular" />
-                    <Setter Property="FontSize"
-                            Value="18" />
-                    <Setter Property="VerticalAlignment"
-                            Value="Center" />
-                    <Setter Property="HorizontalAlignment"
-                            Value="Center" />
+                    <Setter Property="Opacity" Value="0.6" />
+                    <Setter Property="FontFamily" Value="Sans Serif Collection" />
+                    <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
+                    <Setter Property="FontWeight" Value="Regular" />
+                    <Setter Property="FontSize" Value="18" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
                 </Style>
 
             </Grid.Resources>
@@ -64,14 +58,16 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <TextBlock VerticalAlignment="top"
-                           FontSize="26"
-                           FontWeight="Bold"
-                           Opacity="1"
-                           Text="Adding new recurring" />
-                <TextBlock VerticalAlignment="Bottom"
-                           FontSize="18"
-                           Text="please fill in the form below" />
+                <TextBlock
+                    VerticalAlignment="top"
+                    FontSize="26"
+                    FontWeight="Bold"
+                    Opacity="1"
+                    Text="Adding new recurring" />
+                <TextBlock
+                    VerticalAlignment="Bottom"
+                    FontSize="18"
+                    Text="please fill in the form below" />
             </Grid>
 
             <Grid Grid.Row="1">
@@ -80,75 +76,83 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid>
-                    <TextBlock Margin="16,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Text="Name" />
-                    <TextBlock Margin="70,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Foreground="#FFC8386C"
-                               Opacity="1"
-                               Text="*"
-                               Visibility="Visible" />
-                    <Border Height="50"
-                            Margin="15,43,15,9"
-                            Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
-                            CornerRadius="30"
-                            Opacity="0.2" />
+                    <TextBlock
+                        Margin="16,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Text="Name" />
+                    <TextBlock
+                        Margin="70,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Foreground="#FFC8386C"
+                        Opacity="1"
+                        Text="*"
+                        Visibility="Visible" />
+                    <Border
+                        Height="50"
+                        Margin="15,43,15,9"
+                        Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
+                        CornerRadius="30"
+                        Opacity="0.2" />
 
-                    <TextBox Width="160"
-                             Height="40"
-                             Margin="15,47,15,0"
-                             HorizontalAlignment="Center"
-                             VerticalAlignment="Top"
-                             materialDesign:HintAssist.Hint="Your recurring name"
-                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                             BorderBrush="{x:Null}"
-                             CaretBrush="{DynamicResource CommonText}"
-                             FontSize="14"
-                             Foreground="{DynamicResource CommonText}"
-                             SelectionBrush="{DynamicResource CommonText}"
-                             Text="{Binding NameExpense}"
-                             TextAlignment="Left" />
+                    <TextBox
+                        Width="160"
+                        Height="40"
+                        Margin="15,47,15,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Hint="Your recurring name"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                        BorderBrush="{x:Null}"
+                        CaretBrush="{DynamicResource CommonText}"
+                        FontSize="14"
+                        Foreground="{DynamicResource CommonText}"
+                        SelectionBrush="{DynamicResource CommonText}"
+                        Text="{Binding NameRecurring}"
+                        TextAlignment="Left" />
 
                 </Grid>
 
                 <Grid Grid.Column="1">
-                    <TextBlock Margin="20,-1,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Text="Start date" />
+                    <TextBlock
+                        Margin="20,-1,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Text="Start date" />
 
-                    <TextBlock Margin="110,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Foreground="#FFC8386C"
-                               Opacity="1"
-                               Text="*"
-                               Visibility="Visible" />
-                    <Border Height="45"
-                            Margin="15,43,15,11"
-                            Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
-                            CornerRadius="25"
-                            Opacity="0.2" />
-                    <DatePicker                         Width="160"
-                                                        Height="40"
-                                                        Margin="0,46,0,0"
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Top"
-                                                        materialDesign:HintAssist.Foreground="{DynamicResource SuperText}"
-                                                        materialDesign:HintAssist.Hint="Pick a date"
-                                                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                                                        BorderBrush="{x:Null}"
-                                                        FontSize="14"
-                                                        Foreground="{DynamicResource ComponentText}"
-                                                        SelectedDate="{Binding DateTimeRecurring}"
-                                                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                    <TextBlock
+                        Margin="110,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Foreground="#FFC8386C"
+                        Opacity="1"
+                        Text="*"
+                        Visibility="Visible" />
+                    <Border
+                        Height="45"
+                        Margin="15,43,15,11"
+                        Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
+                        CornerRadius="25"
+                        Opacity="0.2" />
+                    <DatePicker
+                        Width="160"
+                        Height="40"
+                        Margin="0,46,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Foreground="{DynamicResource SuperText}"
+                        materialDesign:HintAssist.Hint="Pick a date"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                        BorderBrush="{x:Null}"
+                        FontSize="14"
+                        Foreground="{DynamicResource ComponentText}"
+                        SelectedDate="{Binding DateTimeRecurring}"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                 </Grid>
 
 
@@ -162,94 +166,103 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <TextBlock Margin="16,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Text="Amount" />
+                    <TextBlock
+                        Margin="16,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Text="Amount" />
 
                     <!--  set visible here  -->
-                    <TextBlock Margin="90,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Foreground="#FFC8386C"
-                               Opacity="1"
-                               Text="*"
-                               Visibility="Visible" />
-                    <Border Width="200"
-                            Height="50"
-                            Margin="18,43,17,10"
-                            Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
-                            CornerRadius="30"
-                            Opacity="0.2" />
+                    <TextBlock
+                        Margin="90,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Foreground="#FFC8386C"
+                        Opacity="1"
+                        Text="*"
+                        Visibility="Visible" />
+                    <Border
+                        Width="200"
+                        Height="50"
+                        Margin="18,43,17,10"
+                        Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
+                        CornerRadius="30"
+                        Opacity="0.2" />
 
-                    <TextBox Width="160"
-                             Height="40"
-                             Margin="0,47,0,0"
-                             HorizontalAlignment="Center"
-                             VerticalAlignment="Top"
-                             materialDesign:HintAssist.Hint="Amount (VND)"
-                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                             BorderBrush="{x:Null}"
-                             CaretBrush="{DynamicResource CommonText}"
-                             FontSize="14"
-                             Foreground="{DynamicResource CommonText}"
-                             SelectionBrush="{DynamicResource CommonText}"
-                             Text="{Binding AmountExpense}"
-                             TextAlignment="Left" />
+                    <TextBox
+                        Width="160"
+                        Height="40"
+                        Margin="0,47,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Hint="Amount (VND)"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                        BorderBrush="{x:Null}"
+                        CaretBrush="{DynamicResource CommonText}"
+                        FontSize="14"
+                        Foreground="{DynamicResource CommonText}"
+                        SelectionBrush="{DynamicResource CommonText}"
+                        Text="{Binding AmountRecurring}"
+                        TextAlignment="Left" />
                 </Grid>
                 <Grid Grid.Column="1">
-                    <Border Width="200"
-                            Height="50"
-                            Margin="18,43,17,10"
-                            Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
-                            CornerRadius="30"
-                            Opacity="0.2" />
-                    <TextBlock Margin="16,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Text="Category" />
+                    <Border
+                        Width="200"
+                        Height="50"
+                        Margin="18,43,17,10"
+                        Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
+                        CornerRadius="30"
+                        Opacity="0.2" />
+                    <TextBlock
+                        Margin="16,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Text="Category" />
                     <!--  set visible here  -->
-                    <TextBlock Margin="100,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Foreground="#FFC8386C"
-                               Opacity="1"
-                               Text="*"
-                               Visibility="Visible" />
+                    <TextBlock
+                        Margin="100,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Foreground="#FFC8386C"
+                        Opacity="1"
+                        Text="*"
+                        Visibility="Visible" />
 
-                    <TextBox Width="160"
-                             Height="40"
-                             Margin="0,47,0,0"
-                             HorizontalAlignment="Center"
-                             VerticalAlignment="Top"
-                             materialDesign:HintAssist.Hint="Your category"
-                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                             BorderBrush="{x:Null}"
-                             CaretBrush="{DynamicResource CommonText}"
-                             FontSize="14"
-                             Foreground="{DynamicResource CommonText}"
-                             SelectionBrush="{DynamicResource CommonText}"
-                             Text="{Binding AmountExpense}"
-                             TextAlignment="Left" />
+                    <TextBox
+                        Width="160"
+                        Height="40"
+                        Margin="0,47,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Hint="Your category"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                        BorderBrush="{x:Null}"
+                        CaretBrush="{DynamicResource CommonText}"
+                        FontSize="14"
+                        Foreground="{DynamicResource CommonText}"
+                        SelectionBrush="{DynamicResource CommonText}"
+                        Text="{Binding CategoryRecurring}"
+                        TextAlignment="Left" />
                     <!--  when choose Your custom Category : this shown  -->
-                    <TextBox Width="160"
-                             Height="40"
-                             Margin="0,30,0,0"
-                             HorizontalAlignment="Center"
-                             VerticalAlignment="Center"
-                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                             BorderBrush="{x:Null}"
-                             CaretBrush="{DynamicResource CommonText}"
-                             FontSize="14"
-                             Foreground="{DynamicResource CommonText}"
-                             SelectionBrush="{DynamicResource CommonText}"
-                             Text="{Binding AmountExpenseBook}"
-                             TextAlignment="Center"
-                             Visibility="Collapsed" />
+                    <TextBox
+                        Width="160"
+                        Height="40"
+                        Margin="0,30,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                        BorderBrush="{x:Null}"
+                        CaretBrush="{DynamicResource CommonText}"
+                        FontSize="14"
+                        Foreground="{DynamicResource CommonText}"
+                        SelectionBrush="{DynamicResource CommonText}"
+                        Text="{Binding AmountExpenseBook}"
+                        TextAlignment="Center"
+                        Visibility="Collapsed" />
 
 
                 </Grid>
@@ -262,105 +275,116 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <TextBlock Margin="20,-1,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Text="Interval" />
-                    <TextBlock Margin="95,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Foreground="#FFC8386C"
-                               Opacity="1"
-                               Text="*"
-                               Visibility="Visible" />
-                    <Border Height="50"
-                            Margin="18,43,17,10"
-                            Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
-                            CornerRadius="25"
-                            Opacity="0.2" />
-                    <TextBox                        materialDesign:HintAssist.Hint="None"
+                    <TextBlock
+                        Margin="20,-1,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Text="Interval" />
+                    <TextBlock
+                        Margin="95,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Foreground="#FFC8386C"
+                        Opacity="1"
+                        Text="*"
+                        Visibility="Visible" />
+                    <Border
+                        Height="50"
+                        Margin="18,43,17,10"
+                        Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
+                        CornerRadius="25"
+                        Opacity="0.2" />
+                    <TextBox
                         Width="160"
-                                                     Height="40"
-                                                     Margin="0,45,0,0"
-                                                     HorizontalAlignment="Center"
-                                                     VerticalAlignment="Top"
-                                                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                                                     BorderBrush="{x:Null}"
-                                                     CaretBrush="{DynamicResource CommonText}"
-                                                     FontSize="14"
-                                                     Foreground="{DynamicResource CommonText}"
-                                                     SelectionBrush="{DynamicResource CommonText}"
-                                                     Text="{Binding IntervalRecurring}"
-                                                     TextAlignment="Left" />
+                        Height="40"
+                        Margin="0,45,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Hint="None"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                        BorderBrush="{x:Null}"
+                        CaretBrush="{DynamicResource CommonText}"
+                        FontSize="14"
+                        Foreground="{DynamicResource CommonText}"
+                        SelectionBrush="{DynamicResource CommonText}"
+                        Text="{Binding IntervalRecurring}"
+                        TextAlignment="Left" />
 
                 </Grid>
 
                 <Grid Grid.Column="1">
-                    <TextBlock Margin="20,-1,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Text="Frequency" />
-                    <TextBlock Margin="115,0,0,0"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top"
-                               FontWeight="Bold"
-                               Foreground="#FFC8386C"
-                               Opacity="1"
-                               Text="*"
-                               Visibility="Visible" />
-                    <Border Height="50"
-                            Margin="18,43,17,10"
-                            Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
-                            CornerRadius="30"
-                            Opacity="0.2" />
-                    <ComboBox Width="160"
-                              materialDesign:HintAssist.Hint="None"
-                              Height="40"
-                              Margin="0,45,0,0"
-                              HorizontalAlignment="Center"
-                              VerticalAlignment="Top"
-                              materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                              BorderBrush="{x:Null}"
-                              FontSize="14"
-                              Foreground="{DynamicResource CommonText}"
-                              IsEditable="False"
-                              ItemsSource="{Binding ItemsSourceFrequency}"
-                              SelectedItem="{Binding SelectedFrequency}"
-                              ItemContainerStyle="{StaticResource ComboBox_style}" />
+                    <TextBlock
+                        Margin="20,-1,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Text="Frequency" />
+                    <TextBlock
+                        Margin="115,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontWeight="Bold"
+                        Foreground="#FFC8386C"
+                        Opacity="1"
+                        Text="*"
+                        Visibility="Visible" />
+                    <Border
+                        Height="50"
+                        Margin="18,43,17,10"
+                        Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
+                        CornerRadius="30"
+                        Opacity="0.2" />
+                    <ComboBox
+                        Width="160"
+                        Height="40"
+                        Margin="0,45,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        materialDesign:HintAssist.Hint="None"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                        BorderBrush="{x:Null}"
+                        FontSize="14"
+                        Foreground="{DynamicResource CommonText}"
+                        IsEditable="False"
+                        ItemContainerStyle="{StaticResource ComboBox_style}"
+                        ItemsSource="{Binding ItemsSourceFrequency}"
+                        SelectedItem="{Binding SelectedFrequency}" />
                 </Grid>
             </Grid>
 
 
             <Grid Grid.Row="4">
-                <TextBlock Margin="16,0,0,0"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           FontWeight="Bold"
-                           Text="Description " />
+                <TextBlock
+                    Margin="16,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    FontWeight="Bold"
+                    Text="Description " />
 
-                <Border Margin="18,40,18,21"
-                        Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
-                        CornerRadius="30"
-                        Opacity="0.2" />
-                <TextBox Width="400"
-                         Height="126"
-                         Margin="38,46,32,0"
-                         VerticalAlignment="Top"
-                         materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                         materialDesign:HintAssist.Hint="Your description"
-                         materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                         AcceptsReturn="True"
-                         BorderBrush="{x:Null}"
-                         CaretBrush="{DynamicResource CommonText}"
-                         FontSize="14"
-                         Foreground="{DynamicResource CommonText}"
-                         SelectionBrush="{DynamicResource CommonText}"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         Text="{Binding DescriptionExpense}"
-                         TextWrapping="Wrap" />
+                <Border
+                    Margin="18,40,18,21"
+                    Background="{DynamicResource ExpenseBook_addnew_backgroundBorder}"
+                    CornerRadius="30"
+                    Opacity="0.2" />
+                <TextBox
+                    Width="400"
+                    Height="126"
+                    Margin="38,46,32,0"
+                    VerticalAlignment="Top"
+                    materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                    materialDesign:HintAssist.Hint="Your description"
+                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                    AcceptsReturn="True"
+                    BorderBrush="{x:Null}"
+                    CaretBrush="{DynamicResource CommonText}"
+                    FontSize="14"
+                    Foreground="{DynamicResource CommonText}"
+                    SelectionBrush="{DynamicResource CommonText}"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding DescriptionRecurring}"
+                    TextWrapping="Wrap" />
             </Grid>
 
             <Grid Grid.Row="6">
@@ -370,40 +394,36 @@
                 </Grid.ColumnDefinitions>
 
                 <!--  cancel button  -->
-                <Border Grid.Column="0"
-                        Width="200"
-                        Height="60"
-                        Background="#FFC8386C"
-                        CornerRadius="30">
-                    <Button Command="{Binding CancelAddNewExpenseCommand}">
-                        <TextBlock HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   FontSize="16"
-                                   Foreground="White"
-                                   Opacity="1"
-                                   Text="Cancel" />
+                <Border
+                    Grid.Column="0"
+                    Width="200"
+                    Height="60"
+                    Background="#FFC8386C"
+                    CornerRadius="30">
+                    <Button Command="{Binding CancelRecurringCommand}">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            Foreground="White"
+                            Opacity="1"
+                            Text="Cancel" />
                         <Button.Resources>
                             <Style TargetType="Button">
-                                <Setter Property="Background"
-                                        Value="Transparent" />
+                                <Setter Property="Background" Value="Transparent" />
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
-                                            <Border Background="{TemplateBinding Background}"
-                                                    CornerRadius="30">
-                                                <ContentPresenter HorizontalAlignment="Stretch"
-                                                                  VerticalAlignment="Stretch" />
+                                            <Border Background="{TemplateBinding Background}" CornerRadius="30">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver"
-                                             Value="true">
-                                        <Setter Property="Cursor"
-                                                Value="Hand" />
-                                        <Setter Property="Background"
-                                                Value="Red" />
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Background" Value="Red" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -412,40 +432,36 @@
                 </Border>
 
                 <!--  confirm button  -->
-                <Border Grid.Column="1"
-                        Width="200"
-                        Height="60"
-                        Background="#FF61D2BE"
-                        CornerRadius="30">
-                    <Button Command="{Binding ConfirmAddNewExpenseCommand}">
-                        <TextBlock HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   FontSize="16"
-                                   Foreground="Black"
-                                   Opacity="0.8"
-                                   Text="Confirm" />
+                <Border
+                    Grid.Column="1"
+                    Width="200"
+                    Height="60"
+                    Background="#FF61D2BE"
+                    CornerRadius="30">
+                    <Button Command="{Binding ConfirmRecurringCommand}">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            Foreground="Black"
+                            Opacity="0.8"
+                            Text="Confirm" />
                         <Button.Resources>
                             <Style TargetType="Button">
-                                <Setter Property="Background"
-                                        Value="Transparent" />
+                                <Setter Property="Background" Value="Transparent" />
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
-                                            <Border Background="{TemplateBinding Background}"
-                                                    CornerRadius="30">
-                                                <ContentPresenter HorizontalAlignment="Stretch"
-                                                                  VerticalAlignment="Stretch" />
+                                            <Border Background="{TemplateBinding Background}" CornerRadius="30">
+                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver"
-                                             Value="true">
-                                        <Setter Property="Cursor"
-                                                Value="Hand" />
-                                        <Setter Property="Background"
-                                                Value="#FF6DF096" />
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Background" Value="#FF6DF096" />
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>

@@ -33,7 +33,6 @@ public class GoalAddNewCategoryViewModel : BaseViewModel {
         _serviceProvider = serviceProvider;
         _goalStore = _serviceProvider.GetRequiredService<GoalStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
-
         CancelNewCategoryCommand = new RelayCommand<object>(CloseModal);
         ConfirmNewCategoryCommand = new RelayCommand<object>(ConfirmNewCategoryGoal);
     }
@@ -48,6 +47,7 @@ public class GoalAddNewCategoryViewModel : BaseViewModel {
         };
         DBManager.Insert(goalCategory);
         _goalStore.NewCategory = NewCategoryName;
+        _goalStore.NotifyNewCategory();
         _modalNavigationStore.Close();
     }
 }

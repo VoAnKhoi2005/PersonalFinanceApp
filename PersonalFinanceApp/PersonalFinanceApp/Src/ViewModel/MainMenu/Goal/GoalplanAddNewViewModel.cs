@@ -122,12 +122,11 @@ public class GoalplanAddNewViewModel : BaseViewModel
     public string SelectedItemGoal {
         get => _selectedItemGoal;
         set {
-            if(value != null &&value.CompareTo("<New>") == 0) {
-                CreateCategoryCommand.Execute(this);
-                _selectedItemGoal = value;
-                OnPropertyChanged();
-            }
-            else {
+            if (_selectedItemGoal != value) {
+                if (value != null && value.CompareTo("<New>") == 0) {
+                    //excute new category
+                    CreateCategoryCommand.Execute(this);
+                }
                 _selectedItemGoal = value;
                 OnPropertyChanged();
             }
@@ -168,10 +167,19 @@ public class GoalplanAddNewViewModel : BaseViewModel
 
         CreateCategoryCommand = new NavigateModalCommand<GoalAddNewCategoryViewModel>(serviceProvider);
 
+        _goalStore.TriggerActionNewCategory += LoadNewCategory;
+
         LoadDataAddNewGoalCommand = new RelayCommand<object>(LoadItemSourceCategoryGoal);
         
         CancelNewGoalCommand = new RelayCommand<object>(CloseModal);
         ConfirmNewGoalCommand = new RelayCommand<object>(ConfirmNewGoal);
+    }
+    public void LoadNewCategory() {
+        if (_goalStore.NewCategory != null) {
+            SelectedItemGoal = _goalStore.NewCategory;
+            CategoryGoal = _goalStore.NewCategory;
+            _goalStore.NewCategory = null;
+        }
     }
     public void LoadItemSourceCategoryGoal(object parameter) {
         ItemsGoal.Clear();
@@ -189,6 +197,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
     }
     private void CloseModal(object sender)
     {
+        _goalStore.TriggerActionNewCategory -= LoadNewCategory;
         _modalNavigationStore.Close();
     }
     private void ConfirmNewGoal(object sender) {
@@ -214,7 +223,7 @@ public class GoalplanAddNewViewModel : BaseViewModel
             MessageBox.Show("Có lỗi xảy ra vui lòng thử lại nhé", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
-
+        _goalStore.TriggerActionNewCategory -= LoadNewCategory;
         _modalNavigationStore.Close();
     }
     public string GoalStatus() {

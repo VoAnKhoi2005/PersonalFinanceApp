@@ -37,9 +37,15 @@ public class GoalStore : INotifyPropertyChanged {
             }
         }
     }
+    //reload
     public event Action TriggerAction;
     public void NotifyGoal() {
         TriggerAction?.Invoke();
+    }
+    //new cateogry
+    public event Action TriggerActionNewCategory;
+    public void NotifyNewCategory() {
+        TriggerActionNewCategory?.Invoke();
     }
     public event PropertyChangedEventHandler? PropertyChanged;
 

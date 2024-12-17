@@ -3,7 +3,9 @@ using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
@@ -16,17 +18,34 @@ namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class CalendarViewModel : BaseViewModel
 {
     private readonly AccountStore _accountStore;
+    private readonly RecurringStore _recurringStore;
+
     public User usr {  get; set; }
     public List<CalendarButtonViewModel> DayDataContexts { get; set; } = new List<CalendarButtonViewModel>();
+    public Calendar? CalendarGlobal { 
+        get => _calendar;
+        set {
+            if (value != _calendar) {
+                _calendar = value; OnPropertyChanged();
+            }
+        }
+    }
+    private Calendar? _calendar;
 
+    public ICommand UpdateDataContextCalenderButton {  get; set; }
     public CalendarViewModel(IServiceProvider serviceProvider) {
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         usr = _accountStore.Users;
-    }
+        _recurringStore = serviceProvider.GetRequiredService<RecurringStore>();
 
+        _recurringStore.TriggerAction += () => LoadDataContextCalenderButton(CalendarGlobal);
+
+        UpdateDataContextCalenderButton = new RelayCommand<Calendar>((c) => { CalendarGlobal = c; LoadDataContextCalenderButton(c); });
+    }
     public void LoadDataContextCalenderButton(Calendar calendar)
     {
         try {
+
             DayDataContexts.Clear();
 
             ObservableCollection<CalendarDayButton> dayButtons = GetVisualChildren<CalendarDayButton>(calendar);

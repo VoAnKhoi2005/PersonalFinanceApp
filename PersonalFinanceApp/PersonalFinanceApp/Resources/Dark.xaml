@@ -2,29 +2,18 @@
     <!--  overall  -->
     <SolidColorBrush x:Key="MainBackground" Color="#202123" />
 
-    <SolidColorBrush x:Key="CommonText"
-                     Color="#AFB6C1" />
-    <SolidColorBrush x:Key="ComponentText"
-                     Color="#DFDFDF" />
-    <SolidColorBrush x:Key="SuperText"
-                     Color="#E5E6E8"></SolidColorBrush>
-    <SolidColorBrush x:Key="CalendarBackground1"
-                     Color="#4E92C0"></SolidColorBrush>
-    <SolidColorBrush x:Key="CalendarBackground2"
-                     Color="#3D6884"></SolidColorBrush>
-    <SolidColorBrush x:Key="CalendarBackground3"
-                     Color="#2C526B"></SolidColorBrush>
+    <SolidColorBrush x:Key="CommonText" Color="#AFB6C1" />
+    <SolidColorBrush x:Key="ComponentText" Color="#DFDFDF" />
+    <SolidColorBrush x:Key="SuperText" Color="#E5E6E8" />
+    <SolidColorBrush x:Key="CalendarBackground1" Color="#4E92C0" />
+    <SolidColorBrush x:Key="CalendarBackground2" Color="#3D6884" />
+    <SolidColorBrush x:Key="CalendarBackground3" Color="#2C526B" />
 
-    <SolidColorBrush x:Key="CommonGridBackground"
-                     Color="#2D2D30 " />
-    <SolidColorBrush x:Key="DockpanelBackGround"
-                     Color="#37373A" />
-    <SolidColorBrush x:Key="onClicked"
-                     Color="#4A4A51" />
-    <SolidColorBrush x:Key="onHovered"
-                     Color="#4A4A51" />
-    <SolidColorBrush x:Key="Underline"
-                     Color="#DEDEE1" />
+    <SolidColorBrush x:Key="CommonGridBackground" Color="#2D2D30 " />
+    <SolidColorBrush x:Key="DockpanelBackGround" Color="#37373A" />
+    <SolidColorBrush x:Key="onClicked" Color="#4A4A51" />
+    <SolidColorBrush x:Key="onHovered" Color="#4A4A51" />
+    <SolidColorBrush x:Key="Underline" Color="#DEDEE1" />
 
     <SolidColorBrush x:Key="Login_button" Color="#4E4E58" />
 
@@ -87,15 +76,11 @@
     <SolidColorBrush x:Key="Notifcation_PopupBox" Color="#FFFFFF" />
     <SolidColorBrush x:Key="Notification_onHovered" Color="#949495" />
 
-    <!--combobox-->
-    <SolidColorBrush x:Key="ComboBoxonHovered"
-                     Color="#C0C0C0" />
-    <SolidColorBrush x:Key="ComboBoxBackground"
-                     Color="Transparent" />
+    <!--  combobox  -->
+    <SolidColorBrush x:Key="ComboBoxonHovered" Color="#C0C0C0" />
+    <SolidColorBrush x:Key="ComboBoxBackground" Color="Transparent" />
 
-    <SolidColorBrush x:Key="NotifiHover"
-                     Color="#A6A1A1" />
+    <SolidColorBrush x:Key="NotifiHover" Color="#A6A1A1" />
 
-    <SolidColorBrush x:Key="MainCalendar"
-                     Color="#1F2325"></SolidColorBrush>
+    <SolidColorBrush x:Key="MainCalendar" Color="#1F2325" />
 </ResourceDictionary>

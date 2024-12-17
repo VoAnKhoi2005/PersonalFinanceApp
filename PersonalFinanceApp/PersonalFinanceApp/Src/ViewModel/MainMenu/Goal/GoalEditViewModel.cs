@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+﻿using LiveChartsCore.Geo;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
@@ -52,17 +53,6 @@ public class GoalEditViewModel : BaseViewModel
         }
     }
     private string _currentAmountGoal;
-    //resource
-    public string ResourceEditGoal {
-        get => _resourceGoal;
-        set {
-            if (_resourceGoal != value) {
-                _resourceGoal = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _resourceGoal;
     //reminder
     public string ReminderEditGoal {
         get => _reminderGoal;
@@ -129,17 +119,6 @@ public class GoalEditViewModel : BaseViewModel
         }
     }
     private string _descriptionEditGoal;
-    //category text
-    public string CategoryEditGoal {
-        get => _categoryGoal;
-        set {
-            if (_categoryGoal != value) {
-                _categoryGoal = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-    private string _categoryGoal;
     //source category 
     public ObservableCollection<string> ItemsGoalEdit {
         get => _itemsGoalEdit;
@@ -151,20 +130,29 @@ public class GoalEditViewModel : BaseViewModel
         }
     }
     public ObservableCollection<string> _itemsGoalEdit = new();
+    //category text
+    public string CategoryEditGoal {
+        get => _categoryGoal;
+        set {
+            if (_categoryGoal != value) {
+                _categoryGoal = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _categoryGoal;
     //selected item category
     public string SelectedItemEdit {
         get => _selectedItemEdit;
         set {
-            if (value != null && value.CompareTo("<New>") == 0) {
-                CreateCategoryCommand.Execute(this);
+            if (_selectedItemEdit != value) {
+                if (value != null && value.CompareTo("<New>") == 0) {
+                    //excute new category
+                    CreateCategoryCommand.Execute(this);
+                }
                 _selectedItemEdit = value;
                 OnPropertyChanged();
             }
-            else {
-                _selectedItemEdit = value;
-                OnPropertyChanged();
-            }
-
         }
     }
     private string _selectedItemEdit;
@@ -179,19 +167,21 @@ public class GoalEditViewModel : BaseViewModel
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _goalStore = serviceProvider.GetRequiredService<GoalStore>();
-
         CreateCategoryCommand = new NavigateModalCommand<GoalAddNewCategoryViewModel>(serviceProvider);
-
+        _goalStore.TriggerActionNewCategory += () => LoadData(this);
         LoadDataAddNewGoalCommand = new RelayCommand<object>(LoadData);
         CancelEditGoalCommand = new RelayCommand<object>(CloseModal);
         ConfirmEditGoalCommand = new RelayCommand<object>(ConfirmEditGoal);
     }
-    public void LoadData(object parameter) {
+    public void LoadData(object? parameter = null) {
         LoadItemSourceGoal();
         loadItem();
+        LoadNewCategory();
+    }
+    public void LoadNewCategory() {
         if (_goalStore.NewCategory != null) {
+            SelectedItemEdit = _goalStore.NewCategory;
             CategoryEditGoal = _goalStore.NewCategory;
-            _goalStore.NewCategory = null;
         }
     }
     public void LoadItemSourceGoal() {
@@ -216,8 +206,10 @@ public class GoalEditViewModel : BaseViewModel
         DeadlineEditGoal = item.Deadline;
         DescriptionEditGoal = item.Description;
         CategoryEditGoal = item.CategoryName;
+        SelectedItemEdit = item.CategoryName;
     }
     private void CloseModal(object sender) {
+        _goalStore.TriggerActionNewCategory -= () => LoadData(this);
         _modalNavigationStore.Close();
     }
     private void ConfirmEditGoal(object sender) {
@@ -247,6 +239,7 @@ public class GoalEditViewModel : BaseViewModel
             MessageBox.Show("Có lỗi về dữ liệu vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
+        _goalStore.TriggerActionNewCategory -= () => LoadData(this);
         _modalNavigationStore.Close();
     }
     public string GoalStatus() {
