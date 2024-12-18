@@ -310,37 +310,46 @@
                     DockPanel.Dock="Left">
 
                 <Grid>
-                    <materialDesign:PackIcon Width="18"
-                                             Height="18"
-                                             Margin="10,0,0,0"
-                                             HorizontalAlignment="Left"
-                                             VerticalAlignment="Center"
-                                             Foreground="{DynamicResource CommonText}"
-                                             Kind="Magnify" />
-                    <TextBox Width="230"
-                             Margin="35,0,0,0"
-                             HorizontalAlignment="Left"
-                             VerticalAlignment="Center"
-                             materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                             BorderBrush="{x:Null}"
-                             CaretBrush="{DynamicResource CommonText}"
-                             DockPanel.Dock="Left"
-                             FontSize="14"
-                             Foreground="{DynamicResource CommonText}"
-                             IsEnabled="{Binding HaveExpenseBook}"
-                             SelectionBrush="{DynamicResource CommonText}"
-                             Text="{Binding DataFilter, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}"
-                             TextAlignment="Left" />
-                    <materialDesign:PopupBox Width="35"
-                                             Height="30"
-                                             HorizontalAlignment="Right"
-                                             VerticalAlignment="Center"
-                                             Background="Transparent"
-                                             Foreground="{DynamicResource CommonText}"
-                                             IsEnabled="{Binding HaveExpenseBook}"
-                                             PopupMode="Click"
-                                             Style="{StaticResource MaterialDesignPopupBox}"
-                                             Visibility="{Binding IsString, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <materialDesign:PackIcon
+                        Width="18"
+                        Height="18"
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Foreground="{DynamicResource CommonText}"
+                        Kind="Magnify" />
+                    <TextBox
+                        Width="230"
+                        Margin="35,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                        BorderBrush="{x:Null}"
+                        CaretBrush="{DynamicResource CommonText}"
+                        DockPanel.Dock="Left"
+                        FontSize="14"
+                        Foreground="{DynamicResource CommonText}"
+                        IsEnabled="{Binding HaveExpenseBook}"
+                        SelectionBrush="{DynamicResource CommonText}"
+                        Text="{Binding DataFilter, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}"
+                        TextAlignment="Left">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding TextChangedFilterCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                    <materialDesign:PopupBox
+                        Width="35"
+                        Height="30"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Background="Transparent"
+                        Foreground="{DynamicResource CommonText}"
+                        IsEnabled="{Binding HaveExpenseBook}"
+                        PopupMode="Click"
+                        Style="{StaticResource MaterialDesignPopupBox}"
+                        Visibility="{Binding IsString, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <StackPanel>
                             <!--  Find whole word  -->
                             <Button HorizontalAlignment="Left"
@@ -611,10 +620,17 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <CheckBox Content="{Binding Name}"
-                                                  IsChecked="{Binding IsChecked,
-                                            Mode=TwoWay}"
-                                                  Margin="10 10 0 5 " />
+                                        <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                            >
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Checked">
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.FilterCategoryCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                                </i:EventTrigger>
+                                                <i:EventTrigger EventName="Unchecked">
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.FilterCategoryCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </CheckBox>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -677,8 +693,16 @@
                                        Text="Category" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width="*"
-                                        Binding="{Binding Description}">
+                    <DataGridTextColumn Binding="{Binding Recurring}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="Recurring" />
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Binding="{Binding Description}">
                         <DataGridTextColumn.Header>
                             <TextBlock FontSize="13"
                                        FontWeight="Bold"

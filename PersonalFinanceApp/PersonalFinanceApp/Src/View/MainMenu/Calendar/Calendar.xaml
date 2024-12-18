@@ -771,7 +771,6 @@
                 </Style>
             </Calendar.Resources>
         </Calendar>
-        
         <Popup x:Name="DayPopup"
                Placement="Mouse"
                StaysOpen="False"
@@ -789,7 +788,6 @@
                                FontWeight="Bold" />
                 </Grid>
             </ScrollViewer>
-
         </Popup>
     </Grid>
 </UserControl>

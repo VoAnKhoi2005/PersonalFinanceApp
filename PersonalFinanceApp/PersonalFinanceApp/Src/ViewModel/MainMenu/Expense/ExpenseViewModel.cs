@@ -227,15 +227,17 @@ public class ExpenseViewModel : BaseViewModel {
     public ICommand EditExpenseCommand { get; set; }
     public ICommand DeleteExpenseCommand { get; set; }
     public ICommand RecycleExpenseCommand { get; set; }
-    public ICommand MatchWholeWordCommand {  get; set; }
+    public ICommand MatchWholeWordCommand { get; set; }
     public ICommand MatchCaseCommand { get; set; }
     public ICommand MatchRegexCommand { get; set; }
     public ICommand FindNumberCommand { get; set; }
     public ICommand FindDateCommand { get; set; }
-    public ICommand NewExpenseBookCommand {  get; set; }
+    public ICommand NewExpenseBookCommand { get; set; }
     public ICommand SelectionChangedCommand { get; set; }
     public ICommand ChangedExpenseBookCommand { get; set; }
-    public ICommand EditBudgetExBCommand {  get; set; } 
+    public ICommand EditBudgetExBCommand { get; set; } 
+    public ICommand TextChangedFilterCommand { get; set; }
+    public ICommand FilterCategoryCommand { get; set; } 
 
     #endregion
 
@@ -269,6 +271,31 @@ public class ExpenseViewModel : BaseViewModel {
         MatchWholeWordCommand = new RelayCommand<object>(Matchwholeword);
         MatchCaseCommand = new RelayCommand<object>(MatchCase);
         MatchRegexCommand = new RelayCommand<object>(MatchRegex);
+        //auto
+        TextChangedFilterCommand = new RelayCommand<object>(FilterTextChanged);
+        FilterCategoryCommand = new RelayCommand<object>(FilterCategory);
+
+    }
+    public void FilterCategory(object? parameter = null) {
+        ReviewCategory();
+        FilterTextChanged();
+    }
+    public void FilterTextChanged(object? parameter = null) {
+        try {
+            if ((DataFilter == null || DataFilter.Trim() == "") && (CategoryFilter.Count == 0)) {
+                LoadExpensesNoneChangedTypeFilter();
+                return;
+            }
+            else if((DataFilter == null || DataFilter.Trim() == "") && (CategoryFilter.Count != 0)) {
+                LoadFilterHaveCategory();
+            }
+            if (DataFilter != "") {
+                MatchCase();
+            }
+        }
+        catch (Exception ex) {
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
     public void LoadNewExpenseBook() {
         if (_expenseStore.ExpenseBook != null) {
@@ -385,7 +412,28 @@ public class ExpenseViewModel : BaseViewModel {
         }
         else if (SelectedTypeFilter.CompareTo("Description") == 0) {
             foreach (var item in items) {
+                if (item.Description == null) continue;
                 if (Regex.IsMatch(item.Description, pattern)) {
+                    Expensesadvances.Add(new ExpenseAdvance(item));
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+        else if(SelectedTypeFilter.CompareTo("Date") == 0) {
+            foreach (var item in items) {
+                if (Regex.IsMatch(item.Date.ToString("dd/MM/yyyy"), pattern)) {
+                    Expensesadvances.Add(new ExpenseAdvance(item));
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+        else if(SelectedTypeFilter.CompareTo("Amount") == 0) {
+            foreach (var item in items) {
+                if (Regex.IsMatch(item.Amount.ToString(), pattern)) {
                     Expensesadvances.Add(new ExpenseAdvance(item));
                 }
                 else {
@@ -601,16 +649,19 @@ public class ExpenseViewModel : BaseViewModel {
             IsNumber = true;
             IsString = false;
             IsDate = false;
+            DataFilter = string.Empty;
         }
         else if(SelectedTypeFilter.CompareTo("Date") == 0){
             IsNumber = false;
             IsString = false;
             IsDate = true;
+            DataFilter = string.Empty;
         }
         else {
             IsNumber = false;
             IsString = true;
             IsDate = false;
+            DataFilter = string.Empty;
         }
     }
     public void ExpenseBookChanged(object? parameter = null) {
@@ -641,6 +692,37 @@ public class ExpenseViewModel : BaseViewModel {
             TextExpenseBook = exbA.DateExB;
         }
         ChangedExB();
+    }
+    public void LoadFilterHaveCategory() {
+        try {
+            Expensesadvances.Clear();
+            var exB = _expenseStore.ExpenseBook;
+            var items = DBManager.GetCondition<Expense>(exp => exp.UserID == int.Parse(_accountStore.UsersID) && exB.Month == exp.ExBMonth && exB.Year == exp.ExBYear);
+            HashSet<int> categoryIds = new HashSet<int>(CategoryFilter.Select(c => c.IDCategory));
+
+            List<Expense> filteredExpenses = items.Where(e => categoryIds.Contains(e.CategoryID)).ToList();
+            foreach (var item in filteredExpenses) {
+                Expensesadvances.Add(new ExpenseAdvance(item));
+            }
+        }
+        catch(Exception ex) {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        
+    }
+    public void LoadExpensesNoneChangedTypeFilter() {
+        try {
+            //load data to datagrid
+            Expensesadvances.Clear();
+            var exB = _expenseStore.ExpenseBook;
+            var items = DBManager.GetCondition<Expense>(exp => exp.UserID == int.Parse(_accountStore.UsersID) && exB.Month == exp.ExBMonth && exB.Year == exp.ExBYear);
+            foreach (var item in items) {
+                Expensesadvances.Add(new ExpenseAdvance(item));
+            }
+        }
+        catch(Exception ex) {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
     public void LoadExpenses(object? p = null) {
         if (HaveExpenseBook == false) {
@@ -746,6 +828,7 @@ public class ExpenseViewModel : BaseViewModel {
             CategoryID = ex.CategoryID;
             var cate = DBManager.GetFirst<Category>(c => c.CategoryID == ex.CategoryID && c.UserID == ex.UserID);
             Category = cate.Name;
+            Recurring = (ex.RecurringExpenseID == null) ? false : true;
         }
     }
     public class ExpenseBookAdvance : IComparable<ExpenseBookAdvance> {

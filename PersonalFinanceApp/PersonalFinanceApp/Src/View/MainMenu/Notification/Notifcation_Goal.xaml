@@ -7,25 +7,18 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Button Background="{DynamicResource CommonGridBackground}"
-            Height="100">
+    <Button Height="100" Background="{DynamicResource CommonGridBackground}">
         <Grid Width="590">
             <Grid.Resources>
                 <Style TargetType="materialDesign:PackIcon">
-                    <Setter Property="Foreground"
-                            Value="{DynamicResource Ntf_goal}" />
-                    <Setter Property="Height"
-                            Value="40" />
-                    <Setter Property="Width"
-                            Value="40" />
+                    <Setter Property="Foreground" Value="{DynamicResource Ntf_goal}" />
+                    <Setter Property="Height" Value="40" />
+                    <Setter Property="Width" Value="40" />
                 </Style>
                 <Style TargetType="TextBlock">
-                    <Setter Property="FontFamily"
-                            Value="Sans Serif Collection" />
-                    <Setter Property="Foreground"
-                            Value="{DynamicResource CommonText}" />
-                    <Setter Property="FontWeight"
-                            Value="Regular" />
+                    <Setter Property="FontFamily" Value="Sans Serif Collection" />
+                    <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
+                    <Setter Property="FontWeight" Value="Regular" />
                 </Style>
             </Grid.Resources>
             <Grid.ColumnDefinitions>
@@ -33,56 +26,60 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Border Width="80"
-                        Height="80"
-                        Background="White"
-                        CornerRadius="90" />
-                <Border Width="70"
-                        Height="70"
-                        Background="#FFD0F3EC"
-                        CornerRadius="90" />
-                <Border Width="60"
-                        Height="60"
-                        Background="#FFCDE0DF"
-                        CornerRadius="90" />
-                <Border Width="50"
-                        Height="50"
-                        Background="#FF69D0D4"
-                        CornerRadius="90" />
-                <materialDesign:PackIcon HorizontalAlignment="Center"
-                                         VerticalAlignment="Center"
-                                         Kind="Trophy" />
+                <Border
+                    Width="80"
+                    Height="80"
+                    Background="White"
+                    CornerRadius="90" />
+                <Border
+                    Width="70"
+                    Height="70"
+                    Background="#FFD0F3EC"
+                    CornerRadius="90" />
+                <Border
+                    Width="60"
+                    Height="60"
+                    Background="#FFCDE0DF"
+                    CornerRadius="90" />
+                <Border
+                    Width="50"
+                    Height="50"
+                    Background="#FF69D0D4"
+                    CornerRadius="90" />
+                <materialDesign:PackIcon
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Kind="Trophy" />
             </Grid>
 
-            <Grid Grid.Column="1"
-                  Margin="15">
+            <Grid Grid.Column="1" Margin="15">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="1"
-                           Foreground="Red"
-                           Text="{Binding CategoryGoal}" />
-                <TextBlock Grid.Row="0"
-                           Foreground="#E5B2E65A"
-                           Text="{Binding NameGoal}" />
-                <TextBlock Grid.Row="2"
-                           Foreground="Aqua"
-                           Opacity="0.6"
-                           Text="{Binding StartEndDate}" />
+                <TextBlock
+                    Grid.Row="1"
+                    Foreground="Red"
+                    Text="{Binding CategoryGoal}" />
+                <TextBlock
+                    Grid.Row="0"
+                    Foreground="#E5B2E65A"
+                    Text="{Binding NameGoal}" />
+                <TextBlock
+                    Grid.Row="2"
+                    Foreground="Aqua"
+                    Opacity="0.6"
+                    Text="{Binding StartEndDate}" />
             </Grid>
         </Grid>
 
         <Button.Style>
             <Style TargetType="{x:Type Button}">
                 <Style.Triggers>
-                    <Trigger Property="IsMouseOver"
-                             Value="true">
-                        <Setter Property="Cursor"
-                                Value="Hand" />
-                        <Setter Property="Background"
-                                Value="{DynamicResource NotifiHover}" />
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Setter Property="Background" Value="{DynamicResource NotifiHover}" />
                     </Trigger>
                 </Style.Triggers>
             </Style>

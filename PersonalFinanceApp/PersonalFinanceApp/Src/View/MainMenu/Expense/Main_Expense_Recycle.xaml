@@ -113,7 +113,7 @@
                       Foreground="{DynamicResource DatagridFG}"
                       SelectedItem="{Binding ItemsExB}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Date}">
+                    <DataGridTextColumn Binding="{Binding FormattedDate}">
                         <DataGridTextColumn.Header>
                             <TextBlock Text="Date"
                                        Foreground="{DynamicResource SuperText}"

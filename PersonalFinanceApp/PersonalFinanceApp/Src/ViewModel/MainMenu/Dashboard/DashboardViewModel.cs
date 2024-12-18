@@ -12,6 +12,7 @@ using System.Windows.Input;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using System.Windows;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -181,7 +182,7 @@ public class DashboardViewModel : BaseViewModel
 
         ChangedExpenseBookCommand = new RelayCommand<object>(ExpenseBookChanged);
 
-        _sharedService.Notify();
+        _sharedService.NotifyNotification();
 
 
         //them vao
@@ -389,10 +390,30 @@ public class DashboardViewModel : BaseViewModel
         //UpdateColumnChart(SelectedExpenseBook.expensesBook);
         LoadTotal();
     }
+    public void CreateNewExpenseBook() {
+        try {
+            ExpensesBook exB = new ExpensesBook(DateTime.Now.Month, DateTime.Now.Year, _accountStore.Users, _accountStore.Users.DefaultBudget);
+            DBManager.Insert<ExpensesBook>(exB);
+            HaveExpenseBook = true;
+            ExpenseBookAdvance ex = new ExpenseBookAdvance(exB);
+            SelectedExpenseBook = ex;
+            TextExpenseBook = ex.DateExB;
+
+            _expenseStore.ExpenseBook = exB;
+
+            BudgetSeries = CreateDoughnutChart(exB);
+
+            ActivityPlotModel = CreateActivityPlotModel(exB);
+        }
+        catch (Exception ex) {
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
     public void GetNewest() {
         var items = DBManager.GetCondition<ExpensesBook>(e => usr == e.UserID);
         if (items.Count == 0) {
             HaveExpenseBook = false;
+            CreateNewExpenseBook();
             return;
         }
         else {
@@ -404,6 +425,7 @@ public class DashboardViewModel : BaseViewModel
                 }
             }
             _expenseStore.ExpenseBook = itemmax;
+
             BudgetSeries = CreateDoughnutChart(itemmax);
 
             ActivityPlotModel = CreateActivityPlotModel(itemmax);

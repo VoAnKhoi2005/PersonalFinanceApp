@@ -1,31 +1,24 @@
-﻿<UserControl x:Class="PersonalFinanceApp.Src.View.MainMenu.Notification.Notification_Recurring"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Notification"
-             mc:Ignorable="d" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-            >
-    <Button Background="{DynamicResource CommonGridBackground}"
-            Height="100">
+﻿<UserControl
+    x:Class="PersonalFinanceApp.Src.View.MainMenu.Notification.Notification_Recurring"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Notification"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Button Height="100" Background="{DynamicResource CommonGridBackground}">
         <Grid Width="590">
             <Grid.Resources>
                 <Style TargetType="materialDesign:PackIcon">
-                    <Setter Property="Foreground"
-                            Value="{DynamicResource Ntf_goal}" />
-                    <Setter Property="Height"
-                            Value="40" />
-                    <Setter Property="Width"
-                            Value="40" />
+                    <Setter Property="Foreground" Value="{DynamicResource Ntf_goal}" />
+                    <Setter Property="Height" Value="40" />
+                    <Setter Property="Width" Value="40" />
                 </Style>
                 <Style TargetType="TextBlock">
-                    <Setter Property="FontFamily"
-                            Value="Sans Serif Collection" />
-                    <Setter Property="Foreground"
-                            Value="{DynamicResource CommonText}" />
-                    <Setter Property="FontWeight"
-                            Value="Regular" />
+                    <Setter Property="FontFamily" Value="Sans Serif Collection" />
+                    <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
+                    <Setter Property="FontWeight" Value="Regular" />
                 </Style>
             </Grid.Resources>
             <Grid.ColumnDefinitions>
@@ -33,58 +26,62 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Border Width="80"
-                        Height="80"
-                        CornerRadius="90"
-                        Background="White"></Border>
-                <Border Width="70"
-                        Height="70"
-                        CornerRadius="90"
-                        Background="#FFD0F3EC"></Border>
-                <Border Width="60"
-                        Height="60"
-                        CornerRadius="90"
-                        Background="#FFCDE0DF"></Border>
-                <Border Width="50"
-                        Height="50"
-                        CornerRadius="90"
-                        Background="#FF69D0D4"></Border>
-                <materialDesign:PackIcon Kind="NoteText"
-                                         VerticalAlignment="Center"
-                                         HorizontalAlignment="Center" />
+                <Border
+                    Width="80"
+                    Height="80"
+                    Background="White"
+                    CornerRadius="90" />
+                <Border
+                    Width="70"
+                    Height="70"
+                    Background="#FFD0F3EC"
+                    CornerRadius="90" />
+                <Border
+                    Width="60"
+                    Height="60"
+                    Background="#FFCDE0DF"
+                    CornerRadius="90" />
+                <Border
+                    Width="50"
+                    Height="50"
+                    Background="#FF69D0D4"
+                    CornerRadius="90" />
+                <materialDesign:PackIcon
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Kind="NoteText" />
             </Grid>
 
-            <Grid Grid.Column="1"
-                  Margin="15">
+            <Grid Grid.Column="1" Margin="15">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                
-                <!--binding here-->
-                <TextBlock Grid.Row="1"
-                           Foreground="Red"
-                           Text="ahuhu" />
-                <TextBlock Grid.Row="0"
-                           Foreground="#E5B2E65A"
-                           Text="ahehe" />
-                <TextBlock Grid.Row="2"
-                           Foreground="Aqua"
-                           Opacity="0.6"
-                           Text="ahihi" />
+
+                <!--  binding here  -->
+                <TextBlock
+                    Grid.Row="1"
+                    Foreground="Red"
+                    Text="{Binding NameRecurring}" />
+                <TextBlock
+                    Grid.Row="0"
+                    Foreground="#E5B2E65A"
+                    Text="{Binding StartDate}" />
+                <TextBlock
+                    Grid.Row="2"
+                    Foreground="Aqua"
+                    Opacity="0.6"
+                    Text="{Binding LastTime}" />
             </Grid>
         </Grid>
 
         <Button.Style>
             <Style TargetType="{x:Type Button}">
                 <Style.Triggers>
-                    <Trigger Property="IsMouseOver"
-                             Value="true">
-                        <Setter Property="Cursor"
-                                Value="Hand" />
-                        <Setter Property="Background"
-                                Value="{DynamicResource NotifiHover}" />
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Setter Property="Background" Value="{DynamicResource NotifiHover}" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
