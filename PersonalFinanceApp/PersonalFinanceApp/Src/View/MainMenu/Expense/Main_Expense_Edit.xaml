@@ -18,8 +18,36 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <UserControl.Resources>
+        <Style x:Key="ComboBox_style"
+               TargetType="ComboBoxItem">
+            <Setter Property="Background"
+                    Value="{DynamicResource ComboBoxBackground}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource ComponentText}" />
+            <Setter Property="BorderBrush"
+                    Value="Transparent" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Height"
+                    Value="40" />
+            <Style.Triggers>
+                <!--  Highlight selected item  -->
+                <Trigger Property="IsSelected"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="LightGreen" />
+                </Trigger>
+                <!--  Highlight item on hover  -->
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="{DynamicResource ComboBoxonHovered}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <convert:NumberToFormattedStringConverter x:Key="NumberFormatter" />
     </UserControl.Resources>
+    
     <Border
         Width="470"
         Height="700"
@@ -202,7 +230,8 @@
                         IsEditable="False"
                         ItemsSource="{Binding ItemsEditExpense}"
                         SelectedItem="{Binding CategoryEditExpense}"
-                        Text="{Binding TextChangedCategory}" />
+                        Text="{Binding TextChangedCategory}"
+                              ItemContainerStyle="{StaticResource ComboBox_style}" />
 
                     <!--  when choose Your custom Category : this shown  -->
                     <TextBox
@@ -272,7 +301,8 @@
                             Foreground="{DynamicResource CommonText}"
                             ItemsSource="{Binding ItemDayExpense}"
                             SelectedItem="{Binding DayExpenseEdit}"
-                            Text="{Binding TextDayExpenseEdit}" />
+                            Text="{Binding TextDayExpenseEdit}"
+                                  ItemContainerStyle="{StaticResource ComboBox_style}" />
                         <TextBlock
                             Margin="3,0,0,0"
                             HorizontalAlignment="Left"

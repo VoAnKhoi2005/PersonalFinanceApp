@@ -158,8 +158,8 @@
 
                             <!--  button Login confirm  -->
                             <Button
-                                Width="300"
-                                Height="50"
+                                Width="290"
+                                Height="45"
                                 Margin="130,245,43,45"
                                 Content="Login Confirm"
                                 FontSize="18"
@@ -406,7 +406,7 @@
                             <Button
                                 x:Name="CreateAccount"
                                 Width="300"
-                                Height="50"
+                                Height="45"
                                 Margin="10,0,0,15"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Bottom"

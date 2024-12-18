@@ -401,8 +401,8 @@
                                 <Border
                                     Grid.Row="0"
                                     Width="Auto"
-                                    Height="20"
-                                    Margin="5,0,5,5"
+                                    Height="25"
+                                    Margin="5,0,5,2"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
                                     Background="{DynamicResource CalendarBackground1}"
@@ -412,14 +412,14 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="20"
-                                        Foreground="{DynamicResource CommonText}"
+                                        Foreground="{DynamicResource CalendarText1}"
                                         Text="{Binding (local:CalendarHelper.ViewModel).Info1, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </Border>
                                 <Border
                                     Grid.Row="1"
                                     Width="Auto"
-                                    Height="20"
-                                    Margin="5,0,5,5"
+                                    Height="25"
+                                    Margin="5,0,5,2"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
                                     Background="{DynamicResource CalendarBackground2}"
@@ -429,14 +429,14 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="20"
-                                        Foreground="{DynamicResource ComponentText}"
+                                               Foreground="{DynamicResource CalendarText2}"
                                         Text="{Binding (local:CalendarHelper.ViewModel).Info2, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </Border>
                                 <Border
                                     Grid.Row="2"
                                     Width="Auto"
-                                    Height="20"
-                                    Margin="5,0,5,5"
+                                    Height="25"
+                                    Margin="5,0,5,2"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Center"
                                     Background="{DynamicResource CalendarBackground3}"
@@ -446,7 +446,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="20"
-                                        Foreground="{DynamicResource SuperText}"
+                                               Foreground="{DynamicResource CalendarText3}"
                                         Text="{Binding (local:CalendarHelper.ViewModel).AdditionalInfo, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </Border>
                             </Grid>

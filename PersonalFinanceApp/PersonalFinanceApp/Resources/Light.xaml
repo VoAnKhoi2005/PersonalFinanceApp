@@ -147,4 +147,12 @@
                      Color="#000000"></SolidColorBrush>
     <SolidColorBrush x:Key="DatagridHeader"
                      Color="#000000"></SolidColorBrush>
+
+
+    <SolidColorBrush x:Key="CalendarText1"
+                     Color="#BCBEBF" />
+    <SolidColorBrush x:Key="CalendarText2"
+                     Color="#CDCECE" />
+    <SolidColorBrush x:Key="CalendarText3"
+                     Color="#DEDEDE" />
 </ResourceDictionary>
