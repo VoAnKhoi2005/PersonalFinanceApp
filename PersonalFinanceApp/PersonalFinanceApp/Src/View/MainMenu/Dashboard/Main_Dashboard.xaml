@@ -430,7 +430,7 @@
                                                             VerticalAlignment="Top"
                                                             IsItemsHost="True"
                                                             ItemHeight="100"
-                                                            ItemWidth="420" />
+                                                            ItemWidth="400" />
                                                     </ItemsPanelTemplate>
                                                 </ItemsControl.ItemsPanel>
                                             </ItemsControl>

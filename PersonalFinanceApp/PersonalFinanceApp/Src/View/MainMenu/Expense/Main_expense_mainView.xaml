@@ -107,6 +107,7 @@
                     Command="{Binding EditBudgetExBCommand}"
                     Content="Total budget:"
                     FontSize="16"
+                    Foreground="{DynamicResource SuperText}"
                     FontWeight="Bold">
                     <Button.Style>
                         <Style TargetType="Button">
@@ -576,25 +577,26 @@
                         PopupMode="Click"
                         StaysOpen="True">
                         <materialDesign:PopupBox.ToggleContent>
-                            <materialDesign:PackIcon
-                                Width="25"
-                                Height="25"
-                                Margin="5,0,0,0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                Foreground="{DynamicResource CommonText}"
-                                Kind="Shape" />
+                            <materialDesign:PackIcon Width="25"
+                                                     Height="25"
+                                                     Margin="5,0,0,0"
+                                                     HorizontalAlignment="Right"
+                                                     VerticalAlignment="Center"
+                                                     Foreground="{DynamicResource CommonText}"
+                                                     Kind="Shape" />
                         </materialDesign:PopupBox.ToggleContent>
-
-                        <!--  ahihi conkiki  -->
                         <ItemsControl
-                            Width="auto"
-                            Height="auto"
+                            Width="150"
+
                             ItemsSource="{Binding SourceCategory}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                        <CheckBox 
+                                            Content="{Binding Name}" 
+                                            IsChecked="{Binding IsChecked,
+                                            Mode=TwoWay}" 
+                                            Margin="10 10 0 5 "/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -632,7 +634,7 @@
                                        Foreground="{DynamicResource SuperText}"
                                        FontSize="13"
                                        FontWeight="Bold"></TextBlock>
-                        </DataGridTextColumn.Header>
+                        </DataGridTextColumn.Header>    
                     </DataGridTextColumn>
 
                     <DataGridTextColumn Binding="{Binding Name}">
@@ -682,6 +684,7 @@
                                     <Button Width="50"
                                             Margin="0,0,5,0"
                                             Background="#31B720"
+                                            BorderThickness="0"
                                             BorderBrush="#FF514D4D" 
                                             Command="{Binding DataContext.EditExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                             CommandParameter="{Binding ElementName=ListExpenseBook, Path=SelectedItem}"
@@ -694,6 +697,8 @@
                                     <Button Width="50"
                                             Background="IndianRed"
                                             BorderBrush="#FF514D4D"
+                                            BorderThickness="0"
+                                            
                                             Command="{Binding DataContext.DeleteExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                             CommandParameter="{Binding}"
                                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"

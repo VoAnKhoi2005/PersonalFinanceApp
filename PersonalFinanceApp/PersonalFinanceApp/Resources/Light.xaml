@@ -138,7 +138,9 @@
                      Color="#A6A1A1"></SolidColorBrush>
     <SolidColorBrush x:Key="Setting_RadioButtonChecked"
                      Color="#34313F"></SolidColorBrush>
-
+    <SolidColorBrush x:Key="Setting_RadioButtonUnChecked"
+                     Color="#FFFFFF"></SolidColorBrush>
+    
     <SolidColorBrush x:Key="DatagridBG"
                      Color="#ECEDEE"></SolidColorBrush>
     <SolidColorBrush x:Key="DatagridFG"

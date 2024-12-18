@@ -8,6 +8,7 @@ using PersonalFinanceApp.ViewModel.Stores;
 using System.Windows.Input;
 using OxyPlot;
 using OxyPlot.Series;
+using System.Windows.Media.Media3D;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -228,11 +229,11 @@ public class GoalplanCardViewModel:BaseViewModel
 
         pieSeries.Slices.Add(new PieSlice("Current Amount", goal.CurrentAmount)
         {
-            Fill = OxyColors.DarkGray
+            Fill = OxyColors.WhiteSmoke
         });
         pieSeries.Slices.Add(new PieSlice("Remaining Amount", goal.Target - goal.CurrentAmount)
         {
-            Fill = OxyColors.WhiteSmoke
+            Fill = OxyColors.DarkGray
         });
 
         plotModel.Series.Add(pieSeries);

@@ -498,14 +498,6 @@
                                 </DockPanel>
                                 <Border Grid.Row="1">
                                     <Grid>
-                                        <TextBlock
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            FontSize="30"
-                                            Opacity="0.5"
-                                            Text="No goal found!"
-                                            TextAlignment="Center"
-                                            Visibility="{Binding HasNoGoal, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                         <ScrollViewer
                                             Margin="0,0,0,5"
                                             Padding="5"
@@ -523,7 +515,7 @@
                                                             VerticalAlignment="Top"
                                                             IsItemsHost="True"
                                                             ItemHeight="auto"
-                                                            ItemWidth="800" />
+                                                            ItemWidth="700" />
                                                     </ItemsPanelTemplate>
                                                 </ItemsControl.ItemsPanel>
                                             </ItemsControl>
