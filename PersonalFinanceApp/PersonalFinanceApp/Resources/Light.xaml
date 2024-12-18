@@ -82,11 +82,24 @@
     <SolidColorBrush x:Key="CalendarSuperText" Color="#FFFFFF" />
     <SolidColorBrush x:Key="CalendarHover" Color="#686868" />
 
-    <SolidColorBrush x:Key="Setting_RadioButtonBG" Color="#A6A1A1" />
-    <SolidColorBrush x:Key="Setting_RadioButtonChecked" Color="#34313F" />
-    <SolidColorBrush x:Key="Setting_RadioButtonUnChecked" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="Setting_RadioButtonBG"
+                     Color="#A6A1A1"></SolidColorBrush>
+    <SolidColorBrush x:Key="Setting_RadioButtonChecked"
+                     Color="#34313F"></SolidColorBrush>
+    <SolidColorBrush x:Key="Setting_RadioButtonUnChecked"
+                     Color="#FFFFFF"></SolidColorBrush>
+    
+    <SolidColorBrush x:Key="DatagridBG"
+                     Color="#ECEDEE"></SolidColorBrush>
+    <SolidColorBrush x:Key="DatagridFG"
+                     Color="#000000"></SolidColorBrush>
+    <SolidColorBrush x:Key="DatagridHeader"
+                     Color="#000000"></SolidColorBrush>
 
-    <SolidColorBrush x:Key="DatagridBG" Color="#ECEDEE" />
-    <SolidColorBrush x:Key="DatagridFG" Color="#000000" />
-    <SolidColorBrush x:Key="DatagridHeader" Color="#000000" />
+    <SolidColorBrush x:Key="CalendarText1"
+                     Color="#BCBEBF" />
+    <SolidColorBrush x:Key="CalendarText2"
+                     Color="#CDCECE" />
+    <SolidColorBrush x:Key="CalendarText3"
+                     Color="#DEDEDE" />
 </ResourceDictionary>

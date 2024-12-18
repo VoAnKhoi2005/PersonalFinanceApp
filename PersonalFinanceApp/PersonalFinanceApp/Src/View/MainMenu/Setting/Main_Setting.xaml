@@ -547,10 +547,10 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                <Button
-                                    Height="50"
-                                    VerticalAlignment="Top"
-                                    DockPanel.Dock="Top">
+                                <Button Height="50"
+                                        VerticalAlignment="Top"
+                                        DockPanel.Dock="Top"
+                                        Command="{Binding ChangedBudgetDefaultCommand}">
                                     <Button.Style>
                                         <Style TargetType="Button">
                                             <Setter Property="Background" Value="Transparent" />

@@ -83,7 +83,7 @@
 
                 <Border Width="280"
                         Height="40"
-                        Margin="15,0,0,0"
+                        Margin="25,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Background="{DynamicResource CommonGridBackground}"

@@ -17,7 +17,7 @@
     </UserControl.Resources>
     <Border
         Width="350"
-        Height="400"
+        Height="300"
         Background="{DynamicResource CommonGridBackground}"
         CornerRadius="30">
         <Grid>
@@ -75,7 +75,6 @@
                         Width="280"
                         Height="40"
                         FontSize="14"
-                        
                         Margin="0 30 0 0"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
