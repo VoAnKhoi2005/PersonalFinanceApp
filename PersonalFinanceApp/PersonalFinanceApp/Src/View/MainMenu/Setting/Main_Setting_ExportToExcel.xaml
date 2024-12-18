@@ -7,10 +7,10 @@
     xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="900"
     Width="900"
     Height="650"
+    d:DesignHeight="450"
+    d:DesignWidth="900"
     mc:Ignorable="d">
     <Grid>
         <Grid.Resources>
@@ -53,8 +53,7 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}"
-                                            Margin="17 0 0 0">
+                                    <Border Margin="17,0,0,0" Background="{TemplateBinding Background}">
                                         <materialDesign:PackIcon
                                             Width="50"
                                             Height="30"
@@ -150,7 +149,7 @@
                 ItemsSource="{Binding SourceDatagrid}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding STT}" Header="STT" />
-                    <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                    <DataGridTextColumn Binding="{Binding FormattedDate}" Header="Date" />
                     <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
                     <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
                     <DataGridTextColumn Binding="{Binding Category}" Header="Category" />

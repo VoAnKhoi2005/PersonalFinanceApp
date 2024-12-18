@@ -9,6 +9,10 @@ public class SharedService : INotifyPropertyChanged {
     public void Notify() {
         TriggerAction?.Invoke();
     }
+    public event Action TriggerActionNotification;
+    public void NotifyNotification() {
+        TriggerActionNotification?.Invoke();
+    }
     public Window? w {  get; set; } // login window
     public MainWindow? m { get; set; } // main window
 

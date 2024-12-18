@@ -48,8 +48,8 @@
                 VerticalContentAlignment="Top"
                 Content="Change your email"
                 FontFamily="Sans Serif Collection"
-                Foreground="{DynamicResource SuperText}"
-                FontSize="30" />
+                FontSize="30"
+                Foreground="{DynamicResource SuperText}" />
             <Label
                 Margin="10,130,430,209"
                 Content="Current email"
@@ -178,6 +178,7 @@
 
             <Button
                 Margin="50,300,300,44"
+                Command="{Binding CancelChangedEmailCommand}"
                 Content="Cancel"
                 FontSize="18"
                 Foreground="{DynamicResource Login_buttonText}">

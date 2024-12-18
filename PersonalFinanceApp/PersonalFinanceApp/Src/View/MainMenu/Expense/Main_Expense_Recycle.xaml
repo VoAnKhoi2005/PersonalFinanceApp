@@ -111,7 +111,7 @@
                 ItemsSource="{Binding Expensesadvances}"
                 SelectedItem="{Binding ItemsExB}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
+                    <DataGridTextColumn Binding="{Binding FormattedDate}" Header="Date" />
                     <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
                     <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
                     <DataGridTextColumn Binding="{Binding Category}" Header="Category" />

@@ -70,25 +70,25 @@ public class CalendarViewModel : BaseViewModel
                     date = (DateTime)dayButton.DataContext;
                     foreach (var rec in recs) {
                         if (rec.Frequency.CompareTo("Daily") == 0) {
-                            if (rec.StartDate.AddDays(rec.Interval).Equals(DateOnly.FromDateTime(date))) {
+                            if (rec.StartDate.AddDays(rec.Interval).Equals(DateOnly.FromDateTime(date)) || rec.StartDate.Equals(DateOnly.FromDateTime(date))) {
                                 rec.StartDate = DateOnly.FromDateTime(date);
                                 info.Add(rec);
                             }
                         }
                         else if (rec.Frequency.CompareTo("Weekly") == 0) {
-                            if (rec.StartDate.AddDays(rec.Interval * 7).Equals(DateOnly.FromDateTime(date))) {
+                            if (rec.StartDate.AddDays(rec.Interval * 7).Equals(DateOnly.FromDateTime(date)) || rec.StartDate.Equals(DateOnly.FromDateTime(date))) {
                                 rec.StartDate = DateOnly.FromDateTime(date);
                                 info.Add(rec);
                             }
                         }
                         else if (rec.Frequency.CompareTo("Monthly") == 0) {
-                            if (rec.StartDate.AddMonths(rec.Interval).Equals(DateOnly.FromDateTime(date))) {
+                            if (rec.StartDate.AddMonths(rec.Interval).Equals(DateOnly.FromDateTime(date)) || rec.StartDate.Equals(DateOnly.FromDateTime(date))) {
                                 rec.StartDate = DateOnly.FromDateTime(date);
                                 info.Add(rec);
                             }
                         }
                         else if (rec.Frequency.CompareTo("Yearly") == 0) {
-                            if (rec.StartDate.AddYears(rec.Interval).Equals(DateOnly.FromDateTime(date))) {
+                            if (rec.StartDate.AddYears(rec.Interval).Equals(DateOnly.FromDateTime(date)) || rec.StartDate.Equals(DateOnly.FromDateTime(date))) {
                                 rec.StartDate = DateOnly.FromDateTime(date);
                                 info.Add(rec);
                             }

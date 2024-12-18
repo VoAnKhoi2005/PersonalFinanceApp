@@ -393,7 +393,7 @@
                                     Foreground="{DynamicResource SuperText}"
                                     Text="GOAL PLAN" />
                                 <!--  item control here  -->
-                                <Grid>
+                                <Grid Grid.Row="1">
                                     <TextBlock
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"

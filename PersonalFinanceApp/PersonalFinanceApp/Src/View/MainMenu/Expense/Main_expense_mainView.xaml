@@ -313,7 +313,13 @@
                         IsEnabled="{Binding HaveExpenseBook}"
                         SelectionBrush="{DynamicResource CommonText}"
                         Text="{Binding DataFilter, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}"
-                        TextAlignment="Left" />
+                        TextAlignment="Left">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding TextChangedFilterCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
                     <materialDesign:PopupBox
                         Width="35"
                         Height="30"
@@ -594,7 +600,16 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                        <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Checked">
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.FilterCategoryCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                                </i:EventTrigger>
+                                                <i:EventTrigger EventName="Unchecked">
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.FilterCategoryCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </CheckBox>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -661,6 +676,15 @@
                                 FontWeight="Bold"
                                 Foreground="{DynamicResource SuperText}"
                                 Text="Category" />
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Recurring}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="Recurring" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     <DataGridTextColumn Width="*" Binding="{Binding Description}">

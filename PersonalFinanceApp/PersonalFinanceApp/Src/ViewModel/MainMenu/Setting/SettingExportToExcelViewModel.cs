@@ -218,6 +218,7 @@ public class SettingExportToExcelViewModel : BaseViewModel {
         public string? Description { get; set; }
         public bool Recurring { get; set; }
         public int CategoryID { get; set; }
+        public string FormattedDate => Date.ToString("dd/MM/yyyy");
         public ExpenseAdvance() { }
         public ExpenseAdvance(int i, Expense ex) {
             STT = i;
