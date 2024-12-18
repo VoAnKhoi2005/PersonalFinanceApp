@@ -11,25 +11,26 @@
     <Grid>
         <Grid.Resources>
 
-            <Style x:Key="CustomRadioButtonStyle"
-                   TargetType="RadioButton">
+            <Style x:Key="CustomRadioButtonStyle" TargetType="RadioButton">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="RadioButton">
                             <BulletDecorator Background="Transparent">
                                 <BulletDecorator.Bullet>
-                                    <Border Width="16"
-                                            Height="16"
-                                            CornerRadius="8"
-                                            BorderThickness="2"
-                                            BorderBrush="{DynamicResource Setting_RadioButtonBG}">
-                                        <!-- Màu viền -->
+                                    <Border
+                                        Width="16"
+                                        Height="16"
+                                        BorderBrush="{DynamicResource Setting_RadioButtonBG}"
+                                        BorderThickness="2"
+                                        CornerRadius="8">
+                                        <!--  Màu viền  -->
                                         <Ellipse Fill="{TemplateBinding Background}" />
                                     </Border>
                                 </BulletDecorator.Bullet>
-                                <ContentPresenter VerticalAlignment="Center"
-                                                  Margin="5,0,0,0"
-                                                  RecognizesAccessKey="True" />
+                                <ContentPresenter
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    RecognizesAccessKey="True" />
                             </BulletDecorator>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsChecked"

@@ -14,75 +14,84 @@
         <convert:NumberToFormattedStringConverter x:Key="NumberFormatter" />
         <PBWConv:ProgressBarWidthConverter x:Key="ProgressBarWidthConverter" />
     </UserControl.Resources>
-    <Grid Margin="5,0,5,0">
-
-        <Grid.Resources>
-            <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Sans Serif Collection" />
-                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
-                <Setter Property="FontWeight" Value="Regular" />
-            </Style>
-        </Grid.Resources>
-        <TextBlock
-            Margin="0,5,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontSize="16"
-            FontWeight="DemiBold"
-            Text="{Binding NameGoalCard}" />
-        <TextBlock
-            Margin="0,7,0,0"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Top"
-            FontSize="14"
-            Foreground="{DynamicResource TextProgressBar}"
-            Text="{Binding AmountTarget, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}" />
-        <ProgressBar
-            x:Name="PBar"
-            Height="30"
-            Maximum="100"
-            Value="{Binding ProcessValue}">
-            <ProgressBar.Style>
-                <Style TargetType="{x:Type ProgressBar}">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ProgressBar}">
-                                <Border
-                                    x:Name="PART_Track"
-                                    Background="White"
-                                    BorderBrush="Black"
-                                    BorderThickness="1"
-                                    CornerRadius="12">
-                                    <Grid Background="Transparent">
-                                        <Rectangle
-                                            x:Name="PART_Indicator"
-                                            Margin="3"
-                                            HorizontalAlignment="Left"
-                                            Fill="{DynamicResource InnerProgress}"
-                                            RadiusX="10"
-                                            RadiusY="10">
-                                            <Rectangle.Width>
-                                                <Binding
-                                                    Converter="{StaticResource ProgressBarWidthConverter}"
-                                                    Path="Value"
-                                                    RelativeSource="{RelativeSource Mode=TemplatedParent}" />
-                                            </Rectangle.Width>
-                                        </Rectangle>
-                                        <TextBlock
-                                            x:Name="PART_IndicatorText"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            FontWeight="Bold"
-                                            Foreground="{DynamicResource percentProgressBar}"
-                                            Opacity="1"
-                                            Text="{Binding Path=Value, ElementName=PBar, StringFormat={}{0}%}" />
-                                    </Grid>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
+    <Button Command="{Binding GoalNavigateCommand}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Sans Serif Collection" />
+                    <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
+                    <Setter Property="FontWeight" Value="Regular" />
                 </Style>
-            </ProgressBar.Style>
-        </ProgressBar>
-    </Grid>
+            </Grid.Resources>
+            <TextBlock
+                Grid.Row="0"
+                Margin="5,-3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                FontSize="16"
+                FontWeight="DemiBold"
+                Text="{Binding NameGoalCard}" />
+            <TextBlock
+                Grid.Row="0"
+                Margin="0,-3,5,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                FontSize="14"
+                Foreground="{DynamicResource TextProgressBar}"
+                Text="{Binding AmountTarget, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}" />
+            <ProgressBar
+                x:Name="PBar"
+                Grid.Row="1"
+                Height="30"
+                Maximum="100"
+                Value="{Binding ProcessValue}">
+                <ProgressBar.Style>
+                    <Style TargetType="{x:Type ProgressBar}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ProgressBar}">
+                                    <Border
+                                        x:Name="PART_Track"
+                                        Background="White"
+                                        BorderBrush="Black"
+                                        BorderThickness="1"
+                                        CornerRadius="12">
+                                        <Grid Background="Transparent">
+                                            <Rectangle
+                                                x:Name="PART_Indicator"
+                                                Margin="3"
+                                                HorizontalAlignment="Left"
+                                                Fill="{DynamicResource InnerProgress}"
+                                                RadiusX="10"
+                                                RadiusY="10">
+                                                <Rectangle.Width>
+                                                    <Binding
+                                                        Converter="{StaticResource ProgressBarWidthConverter}"
+                                                        Path="Value"
+                                                        RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                </Rectangle.Width>
+                                            </Rectangle>
+                                            <TextBlock
+                                                x:Name="PART_IndicatorText"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                FontWeight="Bold"
+                                                Foreground="{DynamicResource percentProgressBar}"
+                                                Opacity="1"
+                                                Text="{Binding Path=Value, ElementName=PBar, StringFormat={}{0}%}" />
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ProgressBar.Style>
+            </ProgressBar>
+        </Grid>
+    </Button>
+
 </UserControl>

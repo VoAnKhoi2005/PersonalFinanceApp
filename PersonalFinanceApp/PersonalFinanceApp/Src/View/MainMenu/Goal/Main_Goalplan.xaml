@@ -230,7 +230,7 @@
                     <ScrollViewer
                         Margin="0,30,0,0"
                         Padding="10"
-                        VerticalScrollBarVisibility="Auto">
+                        VerticalScrollBarVisibility="Hidden">
                         <ItemsControl ItemsSource="{Binding GoalplanCardViewModels}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>

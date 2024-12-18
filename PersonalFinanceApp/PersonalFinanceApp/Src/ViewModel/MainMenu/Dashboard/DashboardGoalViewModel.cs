@@ -38,12 +38,11 @@ public class DashboardGoalViewModel : BaseViewModel {
     }
     private string _amountTarget;
     #region Command
-    public ICommand AddNewGoalCommand { get; set; }
-    public ICommand RefreshGoalCommand { get; set; }
+    public ICommand GoalNavigateCommand { get; set; }
     #endregion
     public DashboardGoalViewModel(IServiceProvider serviceProvider, Goal g) {
         _serviceProvider = serviceProvider;
-        AddNewGoalCommand = new NavigateModalCommand<GoalplanAddNewViewModel>(serviceProvider);
+        GoalNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
         if (g == null)
             return;
         LoadGoal(g);

@@ -33,7 +33,7 @@
         </Style>
         <convert:NumberToFormattedStringConverter x:Key="NumberFormatter" />
         <convert:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-
+        <convert:DateTimeToString x:Key="DateTimeConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.Resources>
@@ -610,17 +610,17 @@
 
         <!--  DataGrid expensebook  -->
         <Grid Grid.Row="2">
-            <DataGrid Name="ListExpenseBook"
-                      Grid.Row="1"
-                      Margin="15,0,15,15"
-                      HorizontalAlignment="Stretch"
-                      AutoGenerateColumns="False"
-                      IsReadOnly="True"
-                      ItemsSource="{Binding Expensesadvances}"
-                      SelectedItem="{Binding ItemsExB}"
-                      Background="{DynamicResource DatagridBG}"
-                      Foreground="{DynamicResource DatagridFG}"
-                      >
+            <DataGrid
+                Name="ListExpenseBook"
+                Grid.Row="1"
+                Margin="15,0,15,15"
+                HorizontalAlignment="Stretch"
+                AutoGenerateColumns="False"
+                Background="{DynamicResource DatagridBG}"
+                Foreground="{DynamicResource DatagridFG}"
+                IsReadOnly="True"
+                ItemsSource="{Binding Expensesadvances}"
+                SelectedItem="{Binding ItemsExB}">
                 <DataGrid.InputBindings>
                     <MouseBinding
                         Command="{Binding EditExpenseCommand}"
@@ -628,7 +628,7 @@
                         Gesture="LeftDoubleClick" />
                 </DataGrid.InputBindings>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Date}">
+                    <DataGridTextColumn Binding="{Binding FormattedDate}">
                         <DataGridTextColumn.Header>
                             <TextBlock Text="Date"
                                        Foreground="{DynamicResource SuperText}"
@@ -639,43 +639,47 @@
 
                     <DataGridTextColumn Binding="{Binding Name}">
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Name"
-                                       Foreground="{DynamicResource SuperText}"
-                                       FontSize="13"
-                                       FontWeight="Bold"></TextBlock>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="Name" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Amount, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}">
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Amount"
-                                       Foreground="{DynamicResource SuperText}"
-                                       FontSize="13"
-                                       FontWeight="Bold"></TextBlock>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="Amount" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Category}">
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Category"
-                                       Foreground="{DynamicResource SuperText}"
-                                       FontSize="13"
-                                       FontWeight="Bold"></TextBlock>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="Category" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Width="*"
-                                        Binding="{Binding Description}">
+                    <DataGridTextColumn Width="*" Binding="{Binding Description}">
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Description"
-                                       Foreground="{DynamicResource SuperText}"
-                                       FontSize="13"
-                                       FontWeight="Bold"></TextBlock>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="Description" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     <DataGridTemplateColumn CanUserResize="False">
                         <DataGridTemplateColumn.Header>
-                                <TextBlock Text="Commands"
-                                           Foreground="{DynamicResource SuperText}"
-                                           FontSize="13"
-                                           FontWeight="Bold"></TextBlock>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="Commands" />
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
