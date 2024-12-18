@@ -1,102 +1,62 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
-    <SolidColorBrush x:Key="MainBackground"
-                     Color="#FFFFFF" />
-    <SolidColorBrush x:Key="CommonText"
-                     Color="#3C3F41" />
-    <SolidColorBrush x:Key="ComponentText"
-                     Color="#DFDFDF" />
-    <SolidColorBrush x:Key="SuperText"
-                     Color="#000000" />
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="MainBackground" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="CommonText" Color="#3C3F41" />
+    <SolidColorBrush x:Key="ComponentText" Color="#DFDFDF" />
+    <SolidColorBrush x:Key="SuperText" Color="#000000" />
 
 
-    <SolidColorBrush x:Key="CommonGridBackground"
-                     Color="#ECEDEE" />
-    <SolidColorBrush x:Key="DockpanelBackGround"
-                     Color="#E8EAF0" />
+    <SolidColorBrush x:Key="CommonGridBackground" Color="#ECEDEE" />
+    <SolidColorBrush x:Key="DockpanelBackGround" Color="#E8EAF0" />
 
-    <SolidColorBrush x:Key="onClicked"
-                     Color="#D6EAF8" />
-    <SolidColorBrush x:Key="onHovered"
-                     Color="#B0D6F3" />
-    <SolidColorBrush x:Key="Underline"
-                     Color="#1A73E8" />
+    <SolidColorBrush x:Key="onClicked" Color="#D6EAF8" />
+    <SolidColorBrush x:Key="onHovered" Color="#B0D6F3" />
+    <SolidColorBrush x:Key="Underline" Color="#1A73E8" />
 
-    <SolidColorBrush x:Key="Login_button"
-                     Color="#D0EAFD" />
-    <SolidColorBrush x:Key="Login_border"
-                     Color="#90CAF9" />
-    <SolidColorBrush x:Key="Login_buttonText"
-                     Color="#FCEEEE" />
-    <SolidColorBrush x:Key="Login_confirm"
-                     Color="#FFFFFF" />
+    <SolidColorBrush x:Key="Login_button" Color="#D0EAFD" />
+    <SolidColorBrush x:Key="Login_border" Color="#90CAF9" />
+    <SolidColorBrush x:Key="Login_buttonText" Color="#FCEEEE" />
+    <SolidColorBrush x:Key="Login_confirm" Color="#FFFFFF" />
 
-    <SolidColorBrush x:Key="Confirm_button"
-                     Color="#66C66D" />
-    <SolidColorBrush x:Key="Confirm_buttonHover"
-                     Color="#66BB6A" />
-    <SolidColorBrush x:Key="Cancel_button"
-                     Color="#E55454" />
-    <SolidColorBrush x:Key="Cancel_buttonHover"
-                     Color="#D32F2F" />
-    <SolidColorBrush x:Key="Sure_confirm"
-                     Color="#0A0101" />
+    <SolidColorBrush x:Key="Confirm_button" Color="#66C66D" />
+    <SolidColorBrush x:Key="Confirm_buttonHover" Color="#66BB6A" />
+    <SolidColorBrush x:Key="Cancel_button" Color="#E55454" />
+    <SolidColorBrush x:Key="Cancel_buttonHover" Color="#D32F2F" />
+    <SolidColorBrush x:Key="Sure_confirm" Color="#0A0101" />
 
-    <!-- Expense Book -->
-    <SolidColorBrush x:Key="ExpenseBook_Uparrow"
-                     Color="#1B5E20" />
-    <SolidColorBrush x:Key="ExpenseBook_DownArrow"
-                     Color="#B71C1C" />
-    <SolidColorBrush x:Key="ExpenseBook_addnew_backgroundBorder"
-                     Color="#74BBDE" />
+    <!--  Expense Book  -->
+    <SolidColorBrush x:Key="ExpenseBook_Uparrow" Color="#1B5E20" />
+    <SolidColorBrush x:Key="ExpenseBook_DownArrow" Color="#B71C1C" />
+    <SolidColorBrush x:Key="ExpenseBook_addnew_backgroundBorder" Color="#74BBDE" />
 
-    <!-- Goal Plan -->
-    <SolidColorBrush x:Key="Goalplan_Hover"
-                     Color="#FFF9C4" />
+    <!--  Goal Plan  -->
+    <SolidColorBrush x:Key="Goalplan_Hover" Color="#FFF9C4" />
 
-    <!-- Summary -->
-    <SolidColorBrush x:Key="Summary_percent"
-                     Color="#424242" />
-    <SolidColorBrush x:Key="Summary_trueColor"
-                     Color="#4CAF50" />
-    <SolidColorBrush x:Key="Summary_falseColor"
-                     Color="#FF5252" />
-    <SolidColorBrush x:Key="Summary_TransactionAndCategoryBackground"
-                     Color="#B2EBF2" />
-    <SolidColorBrush x:Key="Summary_RightArrow"
-                     Color="#0277BD" />
-    <SolidColorBrush x:Key="Summary_LeftArrow"
-                     Color="#03A9F4" />
+    <!--  Summary  -->
+    <SolidColorBrush x:Key="Summary_percent" Color="#424242" />
+    <SolidColorBrush x:Key="Summary_trueColor" Color="#4CAF50" />
+    <SolidColorBrush x:Key="Summary_falseColor" Color="#FF5252" />
+    <SolidColorBrush x:Key="Summary_TransactionAndCategoryBackground" Color="#B2EBF2" />
+    <SolidColorBrush x:Key="Summary_RightArrow" Color="#0277BD" />
+    <SolidColorBrush x:Key="Summary_LeftArrow" Color="#03A9F4" />
 
-    <SolidColorBrush x:Key="Summary_firstBlock"
-                     Color="#FFECB3" />
-    <SolidColorBrush x:Key="Summary_secondBlock"
-                     Color="#FFE082" />
-    <SolidColorBrush x:Key="Summary_thirdBlock"
-                     Color="#FFCA28" />
-    <SolidColorBrush x:Key="Summary_fourthBlock"
-                     Color="#FFA000" />
+    <SolidColorBrush x:Key="Summary_firstBlock" Color="#FFECB3" />
+    <SolidColorBrush x:Key="Summary_secondBlock" Color="#FFE082" />
+    <SolidColorBrush x:Key="Summary_thirdBlock" Color="#FFCA28" />
+    <SolidColorBrush x:Key="Summary_fourthBlock" Color="#FFA000" />
 
-    <!-- User Pop Up -->
-    <SolidColorBrush x:Key="User_background"
-                     Color="#FFFFFF" />
-    <SolidColorBrush x:Key="User_onHovered"
-                     Color="#949495" />
+    <!--  User Pop Up  -->
+    <SolidColorBrush x:Key="User_background" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="User_onHovered" Color="#949495" />
 
-    <SolidColorBrush x:Key="Ntf_goal"
-                     Color="#4FC3F7" />
+    <SolidColorBrush x:Key="Ntf_goal" Color="#4FC3F7" />
 
-    <SolidColorBrush x:Key="GoalCardbackground"
-                     Color="#E1F5FE" />
+    <SolidColorBrush x:Key="GoalCardbackground" Color="#E1F5FE" />
 
 
-    <SolidColorBrush x:Key="InnerProgress"
-                     Color="#FFCDD2" />
-    <SolidColorBrush x:Key="percentProgressBar"
-                     Color="#9E9E9E" />
-    <SolidColorBrush x:Key="TextProgressBar"
-                     Color="#616161" />
+    <SolidColorBrush x:Key="InnerProgress" Color="#FFCDD2" />
+    <SolidColorBrush x:Key="percentProgressBar" Color="#9E9E9E" />
+    <SolidColorBrush x:Key="TextProgressBar" Color="#616161" />
 
     <Color x:Key="Hig1">#FFFFFF</Color>
     <Color x:Key="Hig2">#F5F5F5</Color>
@@ -105,46 +65,28 @@
     <Color x:Key="Hig5">#BDBDBD</Color>
     <Color x:Key="Hig6">#757575</Color>
 
-    <SolidColorBrush x:Key="Notifcation_PopupBox"
-                     Color="#FFFFFF" />
-    <SolidColorBrush x:Key="Notification_onHovered"
-                     Color="#949495" />
+    <SolidColorBrush x:Key="Notifcation_PopupBox" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="Notification_onHovered" Color="#949495" />
 
-    <!--combobox-->
-    <SolidColorBrush x:Key="ComboBoxonHovered"
-                     Color="#C0C0C0" />
-    <SolidColorBrush x:Key="ComboBoxBackground"
-                     Color="Transparent" />
+    <!--  combobox  -->
+    <SolidColorBrush x:Key="ComboBoxonHovered" Color="#C0C0C0" />
+    <SolidColorBrush x:Key="ComboBoxBackground" Color="Transparent" />
 
-    <SolidColorBrush x:Key="NotifiHover"
-                     Color="#A6A1A1" />
+    <SolidColorBrush x:Key="NotifiHover" Color="#A6A1A1" />
 
-    <SolidColorBrush x:Key="MainCalendar"
-                     Color="#2E2E2E"></SolidColorBrush>
-    <SolidColorBrush x:Key="CalendarBackground1"
-                     Color="#B2B2B2"></SolidColorBrush>
-    <SolidColorBrush x:Key="CalendarBackground2"
-                     Color="#929292"></SolidColorBrush>
-    <SolidColorBrush x:Key="CalendarBackground3"
-                     Color="#686868"></SolidColorBrush>
-    <SolidColorBrush x:Key="CalendarBackground"
-                     Color="#575E64" />
-    <SolidColorBrush x:Key="CalendarSuperText"
-                     Color="#FFFFFF" />
-    <SolidColorBrush x:Key="CalendarHover"
-                     Color="#686868" />
+    <SolidColorBrush x:Key="MainCalendar" Color="#2E2E2E" />
+    <SolidColorBrush x:Key="CalendarBackground1" Color="#B2B2B2" />
+    <SolidColorBrush x:Key="CalendarBackground2" Color="#929292" />
+    <SolidColorBrush x:Key="CalendarBackground3" Color="#686868" />
+    <SolidColorBrush x:Key="CalendarBackground" Color="#575E64" />
+    <SolidColorBrush x:Key="CalendarSuperText" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="CalendarHover" Color="#686868" />
 
-    <SolidColorBrush x:Key="Setting_RadioButtonBG"
-                     Color="#A6A1A1"></SolidColorBrush>
-    <SolidColorBrush x:Key="Setting_RadioButtonChecked"
-                     Color="#34313F"></SolidColorBrush>
-    <SolidColorBrush x:Key="Setting_RadioButtonUnChecked"
-                     Color="#FFFFFF"></SolidColorBrush>
-    
-    <SolidColorBrush x:Key="DatagridBG"
-                     Color="#ECEDEE"></SolidColorBrush>
-    <SolidColorBrush x:Key="DatagridFG"
-                     Color="#000000"></SolidColorBrush>
-    <SolidColorBrush x:Key="DatagridHeader"
-                     Color="#000000"></SolidColorBrush>
+    <SolidColorBrush x:Key="Setting_RadioButtonBG" Color="#A6A1A1" />
+    <SolidColorBrush x:Key="Setting_RadioButtonChecked" Color="#34313F" />
+    <SolidColorBrush x:Key="Setting_RadioButtonUnChecked" Color="#FFFFFF" />
+
+    <SolidColorBrush x:Key="DatagridBG" Color="#ECEDEE" />
+    <SolidColorBrush x:Key="DatagridFG" Color="#000000" />
+    <SolidColorBrush x:Key="DatagridHeader" Color="#000000" />
 </ResourceDictionary>

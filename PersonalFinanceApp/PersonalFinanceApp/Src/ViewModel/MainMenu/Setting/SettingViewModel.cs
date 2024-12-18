@@ -18,8 +18,24 @@ public class SettingViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
     private readonly AccountStore _accountStore;
     private readonly SharedService _sharedService;
+    private readonly ThemeStore _themeStore;
     #region Properties
-
+    public bool CheckLight {
+        get => _checkLight;
+        set {
+            _checkLight = value;
+            OnPropertyChanged();
+        }
+    }
+    private bool _checkLight;
+    public bool CheckDark {
+        get => _checkDark;
+        set {
+            _checkDark = value;
+            OnPropertyChanged();
+        }
+    }
+    private bool _checkDark;
     #endregion
     #region Command
     public ICommand ChangedYourEmailCommand {  get; set; }
@@ -30,12 +46,17 @@ public class SettingViewModel : BaseViewModel {
     public ICommand ChangedBudgetDefaultCommand { get; set; }
     public ICommand ChangedThemeLightCommand {  get; set; }
     public ICommand ChangedThemeDarkCommand {  get; set; }
+    public ICommand ChangedNumberPhoneCommand { get; set; }
     #endregion
     public SettingViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _sharedService = serviceProvider.GetRequiredService<SharedService>();
+        _themeStore = serviceProvider.GetRequiredService<ThemeStore>();
+
+        CheckLight = _themeStore.isLightTheme;
+        CheckDark = !CheckLight;
 
         ChangedYourEmailCommand = new NavigateModalCommand<SettingChangedEmailViewModel>(serviceProvider);
         ChangedYourPasswordCommand = new NavigateModalCommand<SettingChangedPasswordViewModel>(serviceProvider);
@@ -43,13 +64,17 @@ public class SettingViewModel : BaseViewModel {
         ChangedBudgetDefaultCommand = new NavigateModalCommand<SettingBudgetDefaultViewModel>(serviceProvider);
         DeleteYourAccountCommand = new NavigateModalCommand<SettingDeleteAccountViewModel>(serviceProvider);
         LogOutCommand = new NavigateModalCommand<SettingLogoutViewModel>(serviceProvider);
+        ChangedNumberPhoneCommand = new NavigateModalCommand<SettingPhoneNumberViewModel>(serviceProvider);
+
         ChangedThemeLightCommand = new RelayCommand<object>(ChangedThemeLight);
         ChangedThemeDarkCommand = new RelayCommand<object>(ChangedThemeDark);
     }
     public void ChangedThemeLight(object? parameter = null) {
-        Apptheme.ChangeTheme(new Uri("Resources/Light.xaml", UriKind.Relative));
+        if(!_themeStore.isLightTheme)
+            _themeStore.Notify();
     }
     public void ChangedThemeDark(object? parameter = null) {
-        Apptheme.ChangeTheme(new Uri("Resources/Dark.xaml", UriKind.Relative));
+        if(_themeStore.isLightTheme)
+            _themeStore.Notify();
     }
 }

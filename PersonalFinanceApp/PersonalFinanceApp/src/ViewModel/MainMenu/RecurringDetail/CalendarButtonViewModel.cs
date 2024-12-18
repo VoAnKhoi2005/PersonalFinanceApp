@@ -1,4 +1,5 @@
-﻿using PersonalFinanceApp.ViewModel;
+﻿using PersonalFinanceApp.Model;
+using PersonalFinanceApp.ViewModel;
 
 namespace PersonalFinanceApp.Src.View;
 
@@ -46,4 +47,13 @@ public class CalendarButtonViewModel : BaseViewModel
         }
     }
     public bool HaveAdditionalInfo => !string.IsNullOrEmpty(AdditionalInfo);
+
+    public List<RecurringExpense> ListInfo {
+        get => _listInfo;
+        set {
+            _listInfo = value;
+            OnPropertyChanged();
+        }
+    }
+    private List<RecurringExpense> _listInfo = new();
 }

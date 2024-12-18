@@ -60,6 +60,7 @@ namespace PersonalFinanceApp
             services.AddSingleton<EmailService>();
             services.AddSingleton<GoalStore>();
             services.AddSingleton<RecurringStore>();
+            services.AddSingleton<ThemeStore>();
 
             //Login window
             services.AddSingleton<LoginMainViewModel>(s => new LoginMainViewModel(s));
@@ -118,6 +119,7 @@ namespace PersonalFinanceApp
             services.AddTransient<SettingBudgetDefaultViewModel>(s => new SettingBudgetDefaultViewModel(s));
             services.AddTransient<SettingLogoutViewModel>(s => new SettingLogoutViewModel(s));
             services.AddTransient<SettingDeleteAccountViewModel>(s => new SettingDeleteAccountViewModel(s));
+            services.AddTransient<SettingPhoneNumberViewModel>(s => new SettingPhoneNumberViewModel(s));
 
 
         }

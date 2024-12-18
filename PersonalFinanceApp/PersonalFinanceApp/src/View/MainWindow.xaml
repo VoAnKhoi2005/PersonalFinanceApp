@@ -651,6 +651,9 @@
                 <DataTemplate DataType="{x:Type viewModels:SettingBudgetDefaultViewModel}">
                     <views:Setting_ChangedDefaultBudgetView />
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:SettingPhoneNumberViewModel}">
+                    <views:Main_Setting_ChangePhoneNumber />
+                </DataTemplate>
             </ContentControl.Resources>
         </custom:Modal>
     </Grid>

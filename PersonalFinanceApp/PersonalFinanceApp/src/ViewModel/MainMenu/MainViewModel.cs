@@ -2,9 +2,11 @@
 using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Input;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
+using PersonalFinanceApp.Src.ViewModel;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.LoginMenu;
@@ -21,6 +23,7 @@ public class MainViewModel : BaseViewModel
     private readonly IServiceProvider _serviceProvider;
     private readonly SharedService _sharedService;  
     private readonly AccountStore _accountStore;
+    private readonly ThemeStore _themeStore;
     public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
     public BaseViewModel? CurrentModalViewModel => _modalNavigationStore.CurrentModalViewModel;
     //notify
@@ -63,11 +66,14 @@ public class MainViewModel : BaseViewModel
         _sharedService = serviceProvider.GetRequiredService<SharedService>();
         _navigationStore = serviceProvider.GetRequiredService<NavigationStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
+        _themeStore = serviceProvider.GetRequiredService<ThemeStore>();
 
         _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         _modalNavigationStore.CurrentModalViewModelChanged += OnCurrentModalViewModelChanged;
-
         _sharedService.TriggerActionNotification += LoadNotify;
+
+        //load theme
+        _themeStore.ChangedThemeLight();
 
         NotifyCardViewModels = new ObservableCollection<object>();
 
@@ -76,7 +82,7 @@ public class MainViewModel : BaseViewModel
         GoalplanNavigateCommand = new NavigateCommand<GoalplanViewModel>(serviceProvider);
         SettingNavigateCommand = new NavigateCommand<SettingViewModel>(serviceProvider);
         RecurringNavigateCommand = new NavigateCommand<RecurringViewModel>(serviceProvider);
-
+       
         CloseCommand = new RelayCommand<Window>(CloseWindow);
         WindowMaximum = new RelayCommand<Window>(w => 
                     w.WindowState = w.WindowState == WindowState.Maximized

@@ -33,9 +33,11 @@ public class SettingBudgetDefaultViewModel : BaseViewModel {
     #endregion
     public SettingBudgetDefaultViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
-
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
+
+        BudgetDefault = _accountStore.Users.DefaultBudget.ToString();
+
         CancelChangedBudgetDefaultCommand = new RelayCommand<object>(CloseModal);
         ConfirmChangedBudgetDefaultCommand = new RelayCommand<object>(ChangedBudgetDefault);
     }

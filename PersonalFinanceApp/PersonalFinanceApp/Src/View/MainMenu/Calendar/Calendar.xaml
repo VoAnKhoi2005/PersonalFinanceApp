@@ -10,16 +10,13 @@
     d:DesignWidth="1000"
     mc:Ignorable="d">
 
-
     <UserControl.Resources>
-
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Sans Serif Collection" />
             <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
             <Setter Property="FontWeight" Value="Regular" />
         </Style>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-
         <Style x:Key="CalendarStyle1" TargetType="{x:Type Calendar}">
             <Setter Property="Foreground" Value="#FFFFFF" />
             <Setter Property="Background" Value="{DynamicResource MainCalendar}" />
@@ -70,7 +67,6 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="1">
-
                                 <Grid>
                                     <Grid.Resources>
                                         <ControlTemplate x:Key="PreviousButtonTemplate" TargetType="{x:Type Button}">
@@ -325,12 +321,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="CalendarCalendarDayButtonStyle1"
-               TargetType="{x:Type CalendarDayButton}">
-            <EventSetter Event="MouseEnter"
-                         Handler="CalendarDayButton_MouseEnter" />
-            <EventSetter Event="MouseLeave"
-                         Handler="CalendarDayButton_MouseLeave" />
+        <Style x:Key="CalendarCalendarDayButtonStyle1" TargetType="{x:Type CalendarDayButton}">
             <Setter Property="MinHeight" Value="120" />
             <Setter Property="FontSize" Value="20" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -409,6 +400,7 @@
                                     CornerRadius="10"
                                     Visibility="{Binding (local:CalendarHelper.ViewModel).HaveInfo1, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <TextBlock
+                                        x:Name="Notify1"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="20"
@@ -595,13 +587,12 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                         </Grid>
+
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
         <Style x:Key="CalendarCalendarButtonStyle1" TargetType="{x:Type CalendarButton}">
-
-
             <Setter Property="Background" Value="#FFBADDE9" />
             <Setter Property="Width" Value="40" />
             <Setter Property="Height" Value="42" />
@@ -771,23 +762,48 @@
                 </Style>
             </Calendar.Resources>
         </Calendar>
-        <Popup x:Name="DayPopup"
-               Placement="Mouse"
-               StaysOpen="False"
-               >
-
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <Grid>
-                <Border Background="LightGray"
-                        Padding="10"
-                        CornerRadius="5"
-                        Width="300"
-                        Height="300" />
-                <TextBlock x:Name="PopupText"
-                               Text="Day Info"
-                               FontWeight="Bold" />
-                </Grid>
-            </ScrollViewer>
+        <Popup
+            x:Name="DayPopup"
+            IsOpen="{Binding PopupOpen}"
+            Placement="MousePoint"
+            StaysOpen="True">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseEnter">
+                    <i:InvokeCommandAction Command="{Binding Popup_MouseEnterCommand}" CommandParameter="{Binding ElementName=DayPopup}" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeave">
+                    <i:InvokeCommandAction Command="{Binding Popup_MouseLeaveCommand}" CommandParameter="{Binding ElementName=DayPopup}" />
+                </i:EventTrigger>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding LoadedPopupCommand}" CommandParameter="{Binding ElementName=DayPopup}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Border
+                    Width="200"
+                    Height="auto"
+                    Padding="10"
+                    Background="LightGray"
+                    CornerRadius="5" />
+                <TextBlock
+                    x:Name="PopupText"
+                    Grid.Row="0"
+                    FontWeight="Bold"
+                    Text="Day Info" />
+                <ScrollViewer Grid.Row="1" MaxHeight="200" VerticalScrollBarVisibility="Hidden">
+                    <ItemsControl ItemsSource="{Binding SourceRecurringInfo}" Background="WhiteSmoke">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="5" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
         </Popup>
     </Grid>
 </UserControl>

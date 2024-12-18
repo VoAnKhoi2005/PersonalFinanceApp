@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq.Expressions;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
@@ -19,7 +19,16 @@ public class CalendarViewModel : BaseViewModel
 {
     private readonly AccountStore _accountStore;
     private readonly RecurringStore _recurringStore;
-
+    public bool PopupOpen {
+        get => _popupOpen;
+        set {
+            if (_popupOpen != value) {
+                _popupOpen = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private bool _popupOpen;
     public User usr {  get; set; }
     public List<CalendarButtonViewModel> DayDataContexts { get; set; } = new List<CalendarButtonViewModel>();
     public Calendar? CalendarGlobal { 
@@ -31,27 +40,100 @@ public class CalendarViewModel : BaseViewModel
         }
     }
     private Calendar? _calendar;
+    //hoverTimer
+    private DispatcherTimer hoverTimer;
+    //popup
+    private Popup popupGlobal { get; set; }
+    //source popup
+    public ObservableCollection<TextBlock> SourceRecurringInfo {
+        get => _sourceRecurringInfo;
+        set {
+            if (value != _sourceRecurringInfo) {
+                _sourceRecurringInfo = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private ObservableCollection<TextBlock> _sourceRecurringInfo ;
 
     public ICommand UpdateDataContextCalenderButton {  get; set; }
+    public ICommand Popup_MouseEnterCommand { get; set; }
+    public ICommand Popup_MouseLeaveCommand { get; set; }
+    public ICommand LoadedPopupCommand { get; set; }
     public CalendarViewModel(IServiceProvider serviceProvider) {
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
-        usr = _accountStore.Users;
         _recurringStore = serviceProvider.GetRequiredService<RecurringStore>();
 
+        LoadCalendarViewModel();
+        
         _recurringStore.TriggerAction += () => LoadDataContextCalenderButton(CalendarGlobal);
-
+        
         UpdateDataContextCalenderButton = new RelayCommand<Calendar>((c) => { CalendarGlobal = c; LoadDataContextCalenderButton(c); });
+        Popup_MouseEnterCommand = new RelayCommand<object>(Popup_MouseEnter);
+        Popup_MouseLeaveCommand = new RelayCommand<object>(Popup_MouseLeave);
+        LoadedPopupCommand = new RelayCommand<Popup>(LoadPopUp);
+    }
+    public void LoadCalendarViewModel() {
+        usr = _accountStore.Users;
+        PopupOpen = false;
+        SourceRecurringInfo = new();
+        hoverTimer = new DispatcherTimer();
+        hoverTimer.Interval = TimeSpan.FromSeconds(0.25);
+        hoverTimer.Tick += HoverTimer_Tick;
+    }
+    public void LoadPopUp(Popup? pu = null) {
+        popupGlobal = pu ?? new Popup();
+    }
+    private void Popup_MouseEnter(object? parameter = null) {
+        //none
+    }
+    private void Popup_MouseLeave(object? parameter = null) {
+        PopupOpen = false;
+    }
+    public void HoverTimer_Tick(object sender, EventArgs e) {
+        hoverTimer.Stop();
+        PopupOpen = true;
+    }
+    private void DayButton_MouseEnter(object sender, MouseEventArgs e) {
+        //load 
+        try {
+            SourceRecurringInfo.Clear();
+            CalendarDayButton cb = sender as CalendarDayButton;
+            if (cb != null) {
+                DateTime date = (DateTime)cb.DataContext;
+                var matchedItems = DayDataContexts
+                .Where(item => item.Date.Equals(date) && item.ListInfo.Count != 0)
+                .ToList();
+                if (matchedItems.Any()) {
+                    hoverTimer.Start();
+                    foreach (var textBlock in matchedItems
+                        .SelectMany(item => item.ListInfo)
+                        .Select(info => new TextBlock() { Text = info.Name })) {
+                        SourceRecurringInfo.Add(textBlock);
+                    }
+                }
+            }
+        }
+        catch (Exception ex) { 
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+    private void DayButton_MouseLeave(object sender, MouseEventArgs e) {
+        hoverTimer.Stop();
+        if (!popupGlobal.IsMouseOver) {
+            PopupOpen = false;
+        }
     }
     public void LoadDataContextCalenderButton(Calendar calendar)
     {
         try {
-
             DayDataContexts.Clear();
-
             ObservableCollection<CalendarDayButton> dayButtons = GetVisualChildren<CalendarDayButton>(calendar);
             var recs = DBManager.GetCondition<RecurringExpense>(re => re.UserID == usr.UserID && re.RecurringExpenseID != null);
             if (recs.Count == 0) {
                 foreach (CalendarDayButton dayButton in dayButtons) {
+                    dayButton.MouseEnter += DayButton_MouseEnter;
+                    dayButton.MouseLeave += DayButton_MouseLeave;
                     DateTime date = (DateTime)dayButton.DataContext;
                     CalendarButtonViewModel calendarDayViewModel = new CalendarButtonViewModel {
                         Date = date,
@@ -66,6 +148,8 @@ public class CalendarViewModel : BaseViewModel
                     rec.StartDate = CatchNewLoadCalendar(rec, date);
                 }
                 foreach (CalendarDayButton dayButton in dayButtons) {
+                    dayButton.MouseEnter += DayButton_MouseEnter;
+                    dayButton.MouseLeave += DayButton_MouseLeave;
                     List<RecurringExpense> info = new();
                     date = (DateTime)dayButton.DataContext;
                     foreach (var rec in recs) {
@@ -100,6 +184,7 @@ public class CalendarViewModel : BaseViewModel
                         Info1 = (count >= 1) ? info[0].Name : string.Empty,
                         Info2 = (count >= 2) ? info[1].Name : string.Empty,
                         AdditionalInfo = (count >= 3) ? $"+{count - 2} More" : string.Empty,
+                        ListInfo = info,
                     };
                     DayDataContexts.Add(calendarDayViewModel);
                     CalendarHelper.SetViewModel(dayButton, calendarDayViewModel);
