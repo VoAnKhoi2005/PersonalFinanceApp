@@ -203,6 +203,7 @@ public class DashboardViewModel : BaseViewModel
         var categoryAxis = new CategoryAxis
         {
             Title = "Days",
+            IsZoomEnabled = false,
             Position = OxyPlot.Axes.AxisPosition.Bottom,
             TextColor = OxyColors.White,
             TitleColor = OxyColors.White,
@@ -218,6 +219,7 @@ public class DashboardViewModel : BaseViewModel
         {
             Position = OxyPlot.Axes.AxisPosition.Left,
             Minimum = 0,
+            IsZoomEnabled = false,
             TextColor = OxyColors.White,
             TitleColor = OxyColors.White,
             LabelFormatter = CustomCurrencyFormat,

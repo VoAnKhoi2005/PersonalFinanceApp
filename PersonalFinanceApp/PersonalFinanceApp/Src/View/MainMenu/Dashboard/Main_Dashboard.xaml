@@ -318,15 +318,28 @@
                                     Text="No data found!"
                                     TextAlignment="Center"
                                     Visibility="{Binding HasNoActivityData, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                <!--<lvc:CartesianChart
-                                    Grid.Row="1"
-                                    Series="{Binding ActivityPlotModel}"
-                                     />-->
                                 <oxy:PlotView
                                     Grid.Row="1"
                                     Background="Transparent"
                                     Controller="{Binding CustomPlotController}"
-                                    Model="{Binding ActivityPlotModel}" />
+                                    Model="{Binding ActivityPlotModel}">
+                                    <oxy:PlotView.DefaultTrackerTemplate>
+                                        <ControlTemplate>
+                                            <oxy:TrackerControl
+                                                Background="GhostWhite"
+                                                LineStroke="Transparent"
+                                                Position="{Binding Position}">
+                                                <oxy:TrackerControl.Content>
+                                                    <TextBlock
+                                                        MaxWidth="150"
+                                                        Margin="5"
+                                                        Text="{Binding}"
+                                                        TextWrapping="Wrap" />
+                                                </oxy:TrackerControl.Content>
+                                            </oxy:TrackerControl>
+                                        </ControlTemplate>
+                                    </oxy:PlotView.DefaultTrackerTemplate>
+                                </oxy:PlotView>
                             </Grid>
                         </Border>
                     </Grid>
