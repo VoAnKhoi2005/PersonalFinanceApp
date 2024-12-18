@@ -325,12 +325,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="CalendarCalendarDayButtonStyle1" TargetType="{x:Type CalendarDayButton}">
-
-
-
-
-
+        <Style x:Key="CalendarCalendarDayButtonStyle1"
+               TargetType="{x:Type CalendarDayButton}">
+            <EventSetter Event="MouseEnter"
+                         Handler="CalendarDayButton_MouseEnter" />
+            <EventSetter Event="MouseLeave"
+                         Handler="CalendarDayButton_MouseLeave" />
             <Setter Property="MinHeight" Value="120" />
             <Setter Property="FontSize" Value="20" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -600,6 +600,8 @@
             </Setter>
         </Style>
         <Style x:Key="CalendarCalendarButtonStyle1" TargetType="{x:Type CalendarButton}">
+
+
             <Setter Property="Background" Value="#FFBADDE9" />
             <Setter Property="Width" Value="40" />
             <Setter Property="Height" Value="42" />
@@ -769,22 +771,23 @@
                 </Style>
             </Calendar.Resources>
         </Calendar>
-        <Popup
-            x:Name="DayPopup"
-            IsOpen="False"
-            Placement="Mouse"
-            StaysOpen="False">
-            <Border
-                Width="300"
-                Height="300"
-                Padding="10"
-                Background="LightGray"
-                CornerRadius="5">
-                <TextBlock
-                    x:Name="PopupText"
-                    FontWeight="Bold"
-                    Text="Day Info" />
-            </Border>
+        <Popup x:Name="DayPopup"
+               Placement="Mouse"
+               StaysOpen="False"
+               >
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <Grid>
+                <Border Background="LightGray"
+                        Padding="10"
+                        CornerRadius="5"
+                        Width="300"
+                        Height="300" />
+                <TextBlock x:Name="PopupText"
+                               Text="Day Info"
+                               FontWeight="Bold" />
+                </Grid>
+            </ScrollViewer>
         </Popup>
     </Grid>
 </UserControl>

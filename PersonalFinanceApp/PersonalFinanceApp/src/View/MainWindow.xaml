@@ -524,7 +524,7 @@
                                                             VerticalAlignment="Top"
                                                             IsItemsHost="True"
                                                             ItemHeight="auto"
-                                                            ItemWidth="800" />
+                                                            ItemWidth="700" />
                                                     </ItemsPanelTemplate>
                                                 </ItemsControl.ItemsPanel>
                                             </ItemsControl>

@@ -86,10 +86,17 @@
     <SolidColorBrush x:Key="CalendarSuperText" Color="#E5E6E8" />
 
 
-    <SolidColorBrush x:Key="Setting_RadioButtonBG" Color="#34313F" />
-    <SolidColorBrush x:Key="Setting_RadioButtonChecked" Color="#A6A1A1" />
-
-    <SolidColorBrush x:Key="DatagridBG" Color="#252525" />
-    <SolidColorBrush x:Key="DatagridFG" Color="#DFDFDF" />
-    <SolidColorBrush x:Key="DatagridHeader" Color="#E5E6E8" />
+    <SolidColorBrush x:Key="Setting_RadioButtonBG"
+                     Color="#CDCDCD"></SolidColorBrush>
+    <SolidColorBrush x:Key="Setting_RadioButtonChecked"
+                     Color="#FFFFFF"></SolidColorBrush>
+    <SolidColorBrush x:Key="Setting_RadioButtonUnChecked"
+                     Color="#34313F"></SolidColorBrush>
+    
+    <SolidColorBrush x:Key="DatagridBG"
+                     Color="#252525"></SolidColorBrush>
+    <SolidColorBrush x:Key="DatagridFG"
+                     Color="#DFDFDF"></SolidColorBrush>
+    <SolidColorBrush x:Key="DatagridHeader"
+                     Color="#E5E6E8"></SolidColorBrush>
 </ResourceDictionary>

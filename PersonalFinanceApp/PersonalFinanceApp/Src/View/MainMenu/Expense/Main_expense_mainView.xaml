@@ -107,6 +107,7 @@
                     Command="{Binding EditBudgetExBCommand}"
                     Content="Total budget:"
                     FontSize="16"
+                    Foreground="{DynamicResource SuperText}"
                     FontWeight="Bold">
                     <Button.Style>
                         <Style TargetType="Button">
@@ -582,20 +583,17 @@
                         PopupMode="Click"
                         StaysOpen="True">
                         <materialDesign:PopupBox.ToggleContent>
-                            <materialDesign:PackIcon
-                                Width="25"
-                                Height="25"
-                                Margin="5,0,0,0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                Foreground="{DynamicResource CommonText}"
-                                Kind="Shape" />
+                            <materialDesign:PackIcon Width="25"
+                                                     Height="25"
+                                                     Margin="5,0,0,0"
+                                                     HorizontalAlignment="Right"
+                                                     VerticalAlignment="Center"
+                                                     Foreground="{DynamicResource CommonText}"
+                                                     Kind="Shape" />
                         </materialDesign:PopupBox.ToggleContent>
-
-                        <!--  ahihi conkiki  -->
                         <ItemsControl
-                            Width="auto"
-                            Height="auto"
+                            Width="150"
+
                             ItemsSource="{Binding SourceCategory}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -643,12 +641,11 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding FormattedDate}">
                         <DataGridTextColumn.Header>
-                            <TextBlock
-                                FontSize="13"
-                                FontWeight="Bold"
-                                Foreground="{DynamicResource SuperText}"
-                                Text="Date" />
-                        </DataGridTextColumn.Header>
+                            <TextBlock Text="Date"
+                                       Foreground="{DynamicResource SuperText}"
+                                       FontSize="13"
+                                       FontWeight="Bold"></TextBlock>
+                        </DataGridTextColumn.Header>    
                     </DataGridTextColumn>
 
                     <DataGridTextColumn Binding="{Binding Name}">
@@ -706,29 +703,33 @@
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                                    <Button
-                                        Width="50"
-                                        Margin="0,0,5,0"
-                                        Background="#31B720"
-                                        BorderBrush="#FF514D4D"
-                                        Command="{Binding DataContext.EditExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                        CommandParameter="{Binding ElementName=ListExpenseBook, Path=SelectedItem}"
-                                        IsEnabled="True"
-                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                        ToolTip="Resource name: MaterialDesignRaisedButton">
-                                        <materialDesign:PackIcon Foreground="White" Kind="pencil" />
+                                <StackPanel HorizontalAlignment="Right"
+                                            Orientation="Horizontal">
+                                    <Button Width="50"
+                                            Margin="0,0,5,0"
+                                            Background="#31B720"
+                                            BorderThickness="0"
+                                            BorderBrush="#FF514D4D" 
+                                            Command="{Binding DataContext.EditExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                            CommandParameter="{Binding ElementName=ListExpenseBook, Path=SelectedItem}"
+                                            IsEnabled="True"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            ToolTip="Resource name: MaterialDesignRaisedButton">
+                                        <materialDesign:PackIcon Foreground="White"
+                                                                 Kind="pencil" />
                                     </Button>
-                                    <Button
-                                        Width="50"
-                                        Background="IndianRed"
-                                        BorderBrush="#FF514D4D"
-                                        Command="{Binding DataContext.DeleteExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                        CommandParameter="{Binding}"
-                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                        ToolTip="Resource name: MaterialDesignRaisedButton">
-                                        <materialDesign:PackIcon Foreground="White" Kind="TrashCanOutline" />
+                                    <Button Width="50"
+                                            Background="IndianRed"
+                                            BorderBrush="#FF514D4D"
+                                            BorderThickness="0"
+                                            
+                                            Command="{Binding DataContext.DeleteExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                            CommandParameter="{Binding}"
+                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            ToolTip="Resource name: MaterialDesignRaisedButton">
+                                        <materialDesign:PackIcon Foreground="White"
+                                                                 Kind="TrashCanOutline" />
                                     </Button>
                                 </StackPanel>
                             </DataTemplate>

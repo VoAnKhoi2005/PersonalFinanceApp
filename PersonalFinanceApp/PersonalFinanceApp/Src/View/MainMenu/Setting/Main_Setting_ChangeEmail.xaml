@@ -71,6 +71,8 @@
                     CaretBrush="{DynamicResource CommonText}"
                     SelectionBrush="{DynamicResource CommonText}"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Foreground="{DynamicResource CommonText}"
+                    FontSize="14"
                     Text="{Binding EmailCurrent}" />
 
             </Border>
@@ -96,7 +98,9 @@
                     BorderBrush="{x:Null}"
                     CaretBrush="{DynamicResource CommonText}"
                     SelectionBrush="{DynamicResource CommonText}"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         Foreground="{DynamicResource CommonText}"
+                         FontSize="14"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding EmailChanged}" />
             </Border>
 
