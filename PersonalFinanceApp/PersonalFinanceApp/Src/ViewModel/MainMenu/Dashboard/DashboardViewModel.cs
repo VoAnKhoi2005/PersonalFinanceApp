@@ -13,6 +13,7 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using System.Windows;
+using System.Drawing;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 

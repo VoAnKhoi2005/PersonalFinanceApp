@@ -1,18 +1,43 @@
-﻿<UserControl
-    x:Class="PersonalFinanceApp.Src.View.Main_Dashboard_GoalplanCard"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:PBWConv="clr-namespace:PersonalFinanceApp.Src.etc"
-    xmlns:convert="clr-namespace:PersonalFinanceApp.Src.etc"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Height="60"
-    d:DesignWidth="300"
-    mc:Ignorable="d">
+﻿<UserControl x:Class="PersonalFinanceApp.Src.View.Main_Dashboard_GoalplanCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:PBWConv="clr-namespace:PersonalFinanceApp.Src.etc"
+             xmlns:convert="clr-namespace:PersonalFinanceApp.Src.etc"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Height="60"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
     <UserControl.Resources>
         <convert:NumberToFormattedStringConverter x:Key="NumberFormatter" />
         <PBWConv:ProgressBarWidthConverter x:Key="ProgressBarWidthConverter" />
+        <Style TargetType="Button">
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource CommonText}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                >
+                            <ContentPresenter HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="true">
+                    <Setter Property="Cursor"
+                            Value="Hand" />
+                    <Setter Property="Background"
+                            Value="{DynamicResource DashBoardGoalCardonHovered}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     <Button Command="{Binding GoalNavigateCommand}">
         <Grid>
@@ -22,67 +47,63 @@
             </Grid.RowDefinitions>
             <Grid.Resources>
                 <Style TargetType="TextBlock">
-                    <Setter Property="FontFamily" Value="Sans Serif Collection" />
-                    <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
-                    <Setter Property="FontWeight" Value="Regular" />
+                    <Setter Property="FontFamily"
+                            Value="Sans Serif Collection" />
+                    <Setter Property="Foreground"
+                            Value="{DynamicResource CommonText}" />
+                    <Setter Property="FontWeight"
+                            Value="Regular" />
                 </Style>
             </Grid.Resources>
-            <TextBlock
-                Grid.Row="0"
-                Margin="5,-3"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                FontSize="16"
-                FontWeight="DemiBold"
-                Text="{Binding NameGoalCard}" />
-            <TextBlock
-                Grid.Row="0"
-                Margin="0,-3,5,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                FontSize="14"
-                Foreground="{DynamicResource TextProgressBar}"
-                Text="{Binding AmountTarget, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}" />
-            <ProgressBar
-                x:Name="PBar"
-                Grid.Row="1"
-                Height="30"
-                Maximum="100"
-                Value="{Binding ProcessValue}">
+            <TextBlock Grid.Row="0"
+                       Margin="5,-3"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="16"
+                       FontWeight="DemiBold"
+                       Text="{Binding NameGoalCard}" />
+            <TextBlock Grid.Row="0"
+                       Margin="0,-3,5,0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       FontSize="14"
+                       Foreground="{DynamicResource TextProgressBar}"
+                       Text="{Binding AmountTarget, Converter={StaticResource NumberFormatter}, UpdateSourceTrigger=PropertyChanged}" />
+            <ProgressBar x:Name="PBar"
+                         Grid.Row="1"
+                         Height="30"
+                         Maximum="100"
+                         Value="{Binding ProcessValue}">
                 <ProgressBar.Style>
                     <Style TargetType="{x:Type ProgressBar}">
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type ProgressBar}">
-                                    <Border
-                                        x:Name="PART_Track"
-                                        Background="White"
-                                        BorderBrush="Black"
-                                        BorderThickness="1"
-                                        CornerRadius="12">
+                                    <Border x:Name="PART_Track"
+                                            Background="White"
+                                            BorderBrush="Black"
+                                            BorderThickness="1"
+                                            CornerRadius="12">
                                         <Grid Background="Transparent">
-                                            <Rectangle
-                                                x:Name="PART_Indicator"
-                                                Margin="3"
-                                                HorizontalAlignment="Left"
-                                                Fill="{DynamicResource InnerProgress}"
-                                                RadiusX="10"
-                                                RadiusY="10">
+                                            <Rectangle x:Name="PART_Indicator"
+                                                       Margin="3"
+                                                       HorizontalAlignment="Left"
+                                                       Fill="{DynamicResource InnerProgress}"
+                                                       RadiusX="10"
+                                                       RadiusY="10">
                                                 <Rectangle.Width>
-                                                    <Binding
-                                                        Converter="{StaticResource ProgressBarWidthConverter}"
-                                                        Path="Value"
-                                                        RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                    <Binding Converter="{StaticResource ProgressBarWidthConverter}"
+                                                             Path="Value"
+                                                             RelativeSource="{RelativeSource Mode=TemplatedParent}" />
                                                 </Rectangle.Width>
                                             </Rectangle>
-                                            <TextBlock
-                                                x:Name="PART_IndicatorText"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                FontWeight="Bold"
-                                                Foreground="{DynamicResource percentProgressBar}"
-                                                Opacity="1"
-                                                Text="{Binding Path=Value, ElementName=PBar, StringFormat={}{0}%}" />
+                                            <TextBlock x:Name="PART_IndicatorText"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontWeight="Bold"
+                                                       Foreground="{DynamicResource percentProgressBar}"
+                                                       Opacity="1"
+                                                       Text="{Binding Path=Value, ElementName=PBar, StringFormat={}{0}%}" />
                                         </Grid>
                                     </Border>
                                 </ControlTemplate>

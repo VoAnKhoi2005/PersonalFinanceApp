@@ -17,10 +17,10 @@ public class CustomBudgetLegend : IChartLegend<SkiaSharpDrawingContext>
 {
     private static readonly int s_zIndex = 10050;
     private readonly StackPanel<RoundedRectangleGeometry, SkiaSharpDrawingContext> _stackPanel = new();
-    private readonly SolidColorPaint _fontPaint = new(SKColors.White)
+    private readonly SolidColorPaint _fontPaint = new(SKColors.CadetBlue)
     {
         SKTypeface = SKTypeface.FromFamilyName("Arial", SKFontStyle.Bold),
-        ZIndex = s_zIndex + 1
+        ZIndex = s_zIndex + 1,
     };
 
     public void Draw(Chart<SkiaSharpDrawingContext> chart)

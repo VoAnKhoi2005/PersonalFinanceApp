@@ -59,20 +59,43 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <!--  binding here  -->
-                <TextBlock
-                    Grid.Row="1"
-                    Foreground="Red"
-                    Text="{Binding NameRecurring}" />
-                <TextBlock
-                    Grid.Row="0"
-                    Foreground="#E5B2E65A"
-                    Text="{Binding StartDate}" />
-                <TextBlock
-                    Grid.Row="2"
-                    Foreground="Aqua"
-                    Opacity="0.6"
-                    Text="{Binding LastTime}" />
+                <DockPanel Grid.Row="0">
+                    <TextBlock Text="Category :"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"></TextBlock>
+
+                    <TextBlock Foreground="{DynamicResource Ntf_goalCategory}"
+                               Text="{Binding NameRecurring}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               FontWeight="Bold"
+                               Margin="10 0 0 0" />
+
+                </DockPanel>
+                <DockPanel Grid.Row="1">
+                    <TextBlock Text="Name :"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock Foreground="{DynamicResource Ntf_goalName}"
+                               FontSize="13"
+                               FontWeight="Bold"
+                               Text="{Binding StartDate}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               Margin="10 0 0 0" />
+                </DockPanel>
+                <DockPanel  Grid.Row="2">
+                    <TextBlock Text="Time :"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"></TextBlock>
+                    <TextBlock Foreground="{DynamicResource Ntf_goalTime}"
+                               Opacity="0.6"
+                               Text="{Binding LastTime}"
+                               VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Left"
+                               Margin="10 0 0 0" />
+                </DockPanel>
             </Grid>
         </Grid>
 

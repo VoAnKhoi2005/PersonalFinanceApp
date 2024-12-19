@@ -2,7 +2,7 @@
 
 namespace PersonalFinanceApp.Src.ViewModel.Stores;
 public class ThemeStore : INotifyPropertyChanged {
-    public bool isLightTheme = true;
+    public bool isLightTheme = false;
 
     public event Action TriggerAction;
 

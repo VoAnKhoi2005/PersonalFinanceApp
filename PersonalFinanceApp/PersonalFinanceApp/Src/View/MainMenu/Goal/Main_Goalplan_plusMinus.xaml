@@ -57,7 +57,7 @@
                     FontSize="20"
                     FontWeight="Bold"
                     Opacity="0.7"
-                    Text="Withdraw" />
+                    Text="Deposit" />
 
                 <TextBlock
                     Margin="0,0,40,0"
@@ -66,7 +66,7 @@
                     FontSize="20"
                     FontWeight="Bold"
                     Opacity="0.7"
-                    Text="Deposit" />
+                           Text="Withdraw" />
                 <ToggleButton
                     Width="80"
                     Height="25"

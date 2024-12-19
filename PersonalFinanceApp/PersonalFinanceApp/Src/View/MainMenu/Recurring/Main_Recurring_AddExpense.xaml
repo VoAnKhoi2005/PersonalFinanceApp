@@ -43,7 +43,12 @@
         <DockPanel Grid.Row="0">
 
             <!--  return here  -->
-            <Button Command="{Binding CloseModalCommand}">
+            <Button Command="{Binding CloseModalCommand}"
+                    Width="60"
+                    Height="40"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left" 
+                    Margin="15 0 0 0">
                 <Button.Resources>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="Transparent" />

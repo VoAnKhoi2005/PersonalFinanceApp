@@ -18,7 +18,8 @@
     Background="{DynamicResource MainBackground}"
     ResizeMode="CanResizeWithGrip"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+        Icon="D:\GitHub\PersonalFinanceApp\PersonalFinanceApp\PersonalFinanceApp\Resources\img\f7e028af-f53f-47b3-91cc-fd1e3a553db1.ico">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closed">
             <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
@@ -74,7 +75,7 @@
                         Margin="20,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        Source="/Resources/img/Logo_UIT_updated.svg.png" />
+                           Source="\Resources\img\f7e028af-f53f-47b3-91cc-fd1e3a553db1.ico" />
                     <TextBlock
                         Margin="50,0,0,0"
                         HorizontalAlignment="Center"
@@ -414,85 +415,11 @@
 
                                 <!--  header  -->
                                 <DockPanel Grid.Row="0">
-                                    <Button
-                                        Width="40"
-                                        Height="30"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Bottom"
-                                        DockPanel.Dock="Left">
-                                        <Button.Style>
-                                            <Style TargetType="Button">
-                                                <Setter Property="Background" Value="Transparent" />
-                                                <Setter Property="Foreground" Value="{DynamicResource Notifcation_PopupBox}" />
-                                                <Setter Property="Template">
-                                                    <Setter.Value>
-                                                        <ControlTemplate TargetType="Button">
-                                                            <Border
-                                                                Width="40"
-                                                                Height="30"
-                                                                Background="{TemplateBinding Background}">
-                                                                <materialDesign:PackIcon
-                                                                    Width="20"
-                                                                    Height="20"
-                                                                    Margin="0,0,0,0"
-                                                                    HorizontalAlignment="Center"
-                                                                    VerticalAlignment="Center"
-                                                                    Kind="ArrowLeft" />
-                                                            </Border>
-                                                        </ControlTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="true">
-                                                        <Setter Property="Cursor" Value="Hand" />
-                                                        <Setter Property="Background" Value="{DynamicResource Notification_onHovered}" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                    </Button>
-                                    <Button
-                                        Width="40"
-                                        Height="30"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom"
-                                        DockPanel.Dock="Right">
-                                        <Button.Style>
-                                            <Style TargetType="Button">
-                                                <Setter Property="Background" Value="Transparent" />
-                                                <Setter Property="Foreground" Value="{DynamicResource Notifcation_PopupBox}" />
-                                                <Setter Property="Template">
-                                                    <Setter.Value>
-                                                        <ControlTemplate TargetType="Button">
-                                                            <Border
-                                                                Width="40"
-                                                                Height="30"
-                                                                Background="{TemplateBinding Background}">
-                                                                <materialDesign:PackIcon
-                                                                    Width="20"
-                                                                    Height="20"
-                                                                    HorizontalAlignment="Center"
-                                                                    VerticalAlignment="Center"
-                                                                    Foreground="{TemplateBinding Foreground}"
-                                                                    Kind="BellCog" />
-                                                            </Border>
-                                                        </ControlTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="true">
-                                                        <Setter Property="Cursor" Value="Hand" />
-                                                        <Setter Property="Background" Value="{DynamicResource Notification_onHovered}" />
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Button.Style>
-                                    </Button>
                                     <TextBlock
                                         Margin="10,0,0,0"
                                         VerticalAlignment="Center"
                                         DockPanel.Dock="Left"
-                                        FontSize="16"
+                                        FontSize="18"
                                         FontWeight="SemiBold"
                                         Foreground="{DynamicResource Notifcation_PopupBox}"
                                         Text="Notification" />

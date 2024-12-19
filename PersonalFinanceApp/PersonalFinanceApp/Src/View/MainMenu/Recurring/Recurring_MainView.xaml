@@ -127,8 +127,8 @@
                                 DockPanel.Dock="Right">
                             <Grid>
                                 <materialDesign:PackIcon Kind="Details"
-                                                         Width="30"
-                                                         Height="30"
+                                                         Width="25"
+                                                         Height="25"
                                                          Foreground="{DynamicResource ComponentText}" 
                                                          VerticalAlignment="Center"
                                                          HorizontalAlignment="Left"
