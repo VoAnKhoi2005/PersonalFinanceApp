@@ -89,61 +89,66 @@
                 Margin="15,0,15,15"
                 HorizontalAlignment="Stretch"
                 AutoGenerateColumns="False"
+                Background="{DynamicResource DatagridBG}"
+                Foreground="{DynamicResource DatagridFG}"
                 IsReadOnly="True"
                 ItemsSource="{Binding Expensesadvances}"
-                      Background="{DynamicResource DatagridBG}"
-                      Foreground="{DynamicResource DatagridFG}"
-                      SelectedItem="{Binding ItemsExB}">
+                SelectedItem="{Binding ItemsExB}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding FormattedDate}">
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Date"
-                                       Foreground="{DynamicResource SuperText}"
-                                       FontSize="13"
-                                       FontWeight="Bold"></TextBlock>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="Date" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
 
                     <DataGridTextColumn Binding="{Binding Name}">
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Name"
-                                       Foreground="{DynamicResource SuperText}"
-                                       FontSize="13"
-                                       FontWeight="Bold"></TextBlock>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="Name" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding Amount}">
+                    <DataGridTextColumn Binding="{Binding FormattedAmount}">
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Amount"
-                                       Foreground="{DynamicResource SuperText}"
-                                       FontSize="13"
-                                       FontWeight="Bold"></TextBlock>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="Amount" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Category}">
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Category"
-                                       Foreground="{DynamicResource SuperText}"
-                                       FontSize="13"
-                                       FontWeight="Bold"></TextBlock>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="Category" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
 
-                    <DataGridTextColumn Width="*"
-                                        Binding="{Binding Description}">
+                    <DataGridTextColumn Width="*" Binding="{Binding Description}">
                         <DataGridTextColumn.Header>
-                            <TextBlock Text="Description"
-                                       Foreground="{DynamicResource SuperText}"
-                                       FontSize="13"
-                                       FontWeight="Bold"></TextBlock>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="Description" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     <DataGridTemplateColumn CanUserResize="False">
                         <DataGridTemplateColumn.Header>
-                        <TextBlock Text="Commands"
-                                   Foreground="{DynamicResource SuperText}"
-                                   FontSize="13"
-                                   FontWeight="Bold"></TextBlock>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="Commands" />
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -152,20 +157,21 @@
                                         Width="50"
                                         Margin="0,0,5,0"
                                         BorderBrush="#FF514D4D"
+                                        BorderThickness="0"
                                         Command="{Binding DataContext.RecoverExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                         CommandParameter="{Binding}"
                                         FontSize="15"
-                                            BorderThickness="0"
-                                            Foreground="White"
+                                        Foreground="White"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                         Style="{StaticResource MaterialDesignRaisedButton}"
                                         ToolTip="Resource name: MaterialDesignRaisedButton">
                                         <materialDesign:PackIcon Foreground="White" Kind="Reload" />
                                     </Button>
-                                    <Button BorderThickness="0"
-                                            Width="50"
+                                    <Button
+                                        Width="50"
                                         Background="IndianRed"
                                         BorderBrush="#FF514D4D"
+                                        BorderThickness="0"
                                         Command="{Binding DataContext.RemoveExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                         CommandParameter="{Binding}"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"

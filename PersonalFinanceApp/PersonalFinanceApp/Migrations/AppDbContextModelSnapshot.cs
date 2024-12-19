@@ -246,6 +246,10 @@ namespace PersonalFinanceApp.Migrations
                     b.Property<DateOnly>("StartDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("UserID")
                         .HasColumnType("INTEGER");
 
@@ -254,6 +258,8 @@ namespace PersonalFinanceApp.Migrations
                     b.ToTable("RecurringExpense", t =>
                         {
                             t.HasCheckConstraint("CK_Frequency", "[Frequency] IN ('Daily', 'Weekly', 'Monthly', 'Yearly')");
+
+                            t.HasCheckConstraint("CK_Status", "[Status] IN ('Active', 'Canceled')");
                         });
                 });
 

@@ -243,14 +243,10 @@ public class GoalEditViewModel : BaseViewModel
         _modalNavigationStore.Close();
     }
     public string GoalStatus() {
-        if (long.Parse(TargetEditGoal) <= long.Parse(CurrentAmountEditGoal) && DateTime.Now <= DeadlineEditGoal) {
-            return "Completed";
-        }
-        else if (long.Parse(TargetEditGoal) > long.Parse(CurrentAmountEditGoal) && DateTime.Now > DeadlineEditGoal) {
-            return "Canceled";
-        }
+        if (long.Parse(TargetEditGoal) <= long.Parse(CurrentAmountEditGoal)) return "Completed";
         else {
-            return "Active";
+            if (DateOnly.FromDateTime(DateTime.Today) >= DateOnly.FromDateTime((DateTime)DeadlineEditGoal)) return "Canceled";
+            else return "Active";
         }
     }
 }

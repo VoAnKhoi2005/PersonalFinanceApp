@@ -226,14 +226,10 @@ public class GoalplanAddNewViewModel : BaseViewModel
         _modalNavigationStore.Close();
     }
     public string GoalStatus() {
-        if (long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal) && DateTime.Today <= DeadlineGoal) {
-            return "Completed";
-        }
-        else if(long.Parse(TargetGoal) > long.Parse(CurrentAmountGoal) && DateTime.Today > DeadlineGoal) {
-            return "Canceled";
-        }
+        if(long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal)) return "Completed";
         else {
-            return "Active";
+            if(DateOnly.FromDateTime(DateTime.Today) >= DateOnly.FromDateTime(DeadlineGoal)) return "Canceled";
+            else return "Active";
         }
     }
 }

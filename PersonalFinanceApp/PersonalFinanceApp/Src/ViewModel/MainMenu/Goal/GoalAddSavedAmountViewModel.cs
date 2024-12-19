@@ -87,14 +87,10 @@ public class GoalAddSavedAmountViewModel : BaseViewModel {
         _modalNavigationStore.Close();
     }
     public string GoalStatus(Goal g) {
-        if (g.Target <= g.CurrentAmount && DateTime.Now <= g.Deadline) {
-            return "Completed";
-        }
-        else if (g.Target > g.CurrentAmount && DateTime.Now > g.Deadline) {
-            return "Canceled";
-        }
+        if (g.Target <= g.CurrentAmount) return "Completed";
         else {
-            return "Active";
+            if (DateOnly.FromDateTime(DateTime.Today) >= DateOnly.FromDateTime((DateTime)g.Deadline)) return "Canceled";
+            else return "Active";
         }
     }
 }

@@ -9,6 +9,9 @@ using PersonalFinanceApp.ViewModel.Command;
 using Microsoft.Win32;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using System.Collections.ObjectModel;
+using System.Data;
+using OfficeOpenXml;
+using System.IO;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -102,32 +105,63 @@ public class SettingExportToExcelViewModel : BaseViewModel {
     public void CloseModal(object? parameter = null) {
         _modalNavigationStore.Close();
     }
-    public void ExportToExcel(DataGrid dtgrid) {
-        SaveFileDialog savefile = new SaveFileDialog();
-        savefile.DefaultExt = ".xls";
-        savefile.Filter = "Excel Files|*.xls;*xlsx;*xlms";
-
-        if (savefile.ShowDialog() == true) {
-            try {
-                dtgrid.SelectAllCells();
-                dtgrid.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
-                ApplicationCommands.Copy.Execute(null, dtgrid);
-
-                String resultat = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
-                String result = (string)Clipboard.GetData(DataFormats.Text);
-
-                System.IO.StreamWriter file = new System.IO.StreamWriter(savefile.FileName);
-                file.WriteLine(result.Replace(',', ' '));
-                file.Close();
-                MessageBox.Show("Xuất file thành công", "Quao thật tuyệt", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex) { 
-                MessageBox.Show("Xuất file thất bại", "Quao thật tuyệt", MessageBoxButton.OK, MessageBoxImage.Error);
+    public void ExportToExcel(DataGrid dataGrid) {
+        try {
+            // Check if the DataGrid has data
+            if (dataGrid.Items.Count == 0) {
+                System.Windows.MessageBox.Show("No data to export.", "Export", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
 
+            // Configure the SaveFileDialog
+            SaveFileDialog saveFileDialog = new SaveFileDialog {
+                Filter = "Excel Files (*.xlsx)|*.xlsx",
+                Title = "Save Excel File",
+                FileName = "DataGridExport.xlsx"
+            };
+
+            // Show the dialog and check if the user clicked Save
+            if (saveFileDialog.ShowDialog() == true) {
+                string filePath = saveFileDialog.FileName;
+
+                // Set the EPPlus license context
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+                // Use EPPlus to create the Excel file
+                using (ExcelPackage package = new ExcelPackage()) {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("DataGridExport");
+
+                    // Add headers
+                    for (int i = 0; i < dataGrid.Columns.Count; i++) {
+                        worksheet.Cells[1, i + 1].Value = dataGrid.Columns[i].Header.ToString();
+                    }
+
+                    // Add data rows
+                    for (int i = 0; i < dataGrid.Items.Count; i++) {
+                        var row = dataGrid.Items[i];
+                        if (row is not null) {
+                            for (int j = 0; j < dataGrid.Columns.Count; j++) {
+                                var cellContent = dataGrid.Columns[j].GetCellContent(row) as TextBlock;
+                                if (cellContent != null) {
+                                    worksheet.Cells[i + 2, j + 1].Value = cellContent.Text;
+                                }
+                            }
+                        }
+                    }
+
+                    // Save the Excel file
+                    FileInfo file = new FileInfo(filePath);
+                    package.SaveAs(file);
+
+                    System.Windows.MessageBox.Show("Data exported successfully!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
         }
-        _modalNavigationStore.Close();
+        catch(Exception ex) {
+            MessageBox.Show($"Have error please try again: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
+
     public void LoadExpenseBook() {
         SourceExpenseBook.Clear();
         var exBitem = DBManager.GetCondition<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID));

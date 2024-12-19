@@ -4,6 +4,7 @@ using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using XAct;
@@ -16,6 +17,27 @@ public class RecurringViewModel : BaseViewModel {
     private readonly RecurringStore _recurringStore;
 
     public CalendarViewModel calendarViewModel { get; set; }
+    public ObservableCollection<RecurringExpense> SourceRecurringExpense {
+        get => _sourceRecurringExpense;
+        set {
+            if (value != _sourceRecurringExpense) {
+                _sourceRecurringExpense = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private ObservableCollection<RecurringExpense> _sourceRecurringExpense;
+
+    public RecurringExpense SelectedRecurringExpense {
+        get => _selectedRecurringExpense;
+        set {
+            if (value != _selectedRecurringExpense) {
+                _selectedRecurringExpense = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private RecurringExpense _selectedRecurringExpense;
 
     public ICommand AddNewRecurringCommand { get; set; }
     public ICommand RefreshRecurringCommand { get; set;}
@@ -30,13 +52,20 @@ public class RecurringViewModel : BaseViewModel {
         calendarViewModel = new CalendarViewModel(serviceProvider);
 
         RecurringExpenseCommand = new NavigateModalCommand<RecurringAddExpenseViewModel>(serviceProvider);
+
         LoadData();
 
         AddNewRecurringCommand = new NavigateModalCommand<RecurringAddnew>(serviceProvider);
     }
 
     public void LoadData(object? parameter = null) {
+        SourceRecurringExpense = new();
+        var items = DBManager.GetCondition<RecurringExpense>(re => re.UserID == _accountStore.Users.UserID);
+        foreach (var item in items) {
+            SourceRecurringExpense.Add(item);
+        }
         AddRecurringExpense();
+
         if (_recurringStore.ShareExpense.Count != 0) RecurringExpenseCommand.Execute(this);
     }
     public void AddRecurringExpense() {

@@ -422,7 +422,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="20"
-                                               Foreground="{DynamicResource CalendarText2}"
+                                        Foreground="{DynamicResource CalendarText2}"
                                         Text="{Binding (local:CalendarHelper.ViewModel).Info2, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </Border>
                                 <Border
@@ -439,7 +439,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="20"
-                                               Foreground="{DynamicResource CalendarText3}"
+                                        Foreground="{DynamicResource CalendarText3}"
                                         Text="{Binding (local:CalendarHelper.ViewModel).AdditionalInfo, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </Border>
                             </Grid>

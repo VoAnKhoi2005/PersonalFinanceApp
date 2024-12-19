@@ -307,7 +307,7 @@ public class DashboardViewModel : BaseViewModel
         ExBTemp.Categories.Add(new Category
         {
             Name = "Remaining budget",
-            Expenses = new List<Expense> { new Expense { Amount = remainBudget } }
+            Expenses = new List<Expense> { new Expense { Amount = remainBudget } },
         });
 
         var pieSeries = new List<PieSeries<double>>();

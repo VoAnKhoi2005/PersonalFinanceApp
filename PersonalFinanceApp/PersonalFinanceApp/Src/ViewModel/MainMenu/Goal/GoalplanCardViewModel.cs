@@ -1,5 +1,4 @@
-﻿using LiveChartsCore.Measure;
-using LiveChartsCore.SkiaSharpView;
+﻿using LiveChartsCore.SkiaSharpView;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
@@ -8,7 +7,6 @@ using PersonalFinanceApp.ViewModel.Stores;
 using System.Windows.Input;
 using OxyPlot;
 using OxyPlot.Series;
-using System.Windows.Media.Media3D;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 

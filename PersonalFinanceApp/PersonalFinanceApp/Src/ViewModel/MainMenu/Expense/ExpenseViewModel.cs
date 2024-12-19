@@ -239,6 +239,8 @@ public class ExpenseViewModel : BaseViewModel {
     public ICommand TextChangedFilterCommand { get; set; }
     public ICommand FilterCategoryCommand { get; set; } 
 
+    public ICommand ChangedExpenseBudgetCommand { get; set; }
+    public ICommand UpdateExpenseBudgetCommand { get; set; }
     #endregion
 
     public ExpenseViewModel(IServiceProvider serviceProvider) {
@@ -274,7 +276,47 @@ public class ExpenseViewModel : BaseViewModel {
         //auto
         TextChangedFilterCommand = new RelayCommand<object>(FilterTextChanged);
         FilterCategoryCommand = new RelayCommand<object>(FilterCategory);
-
+        //expesne budget changed
+        ChangedExpenseBudgetCommand = new RelayCommand<object>(ChangedExpenseBudget);
+        UpdateExpenseBudgetCommand = new RelayCommand<object>(UpdateExpenseBudget);
+    }
+    public void UpdateExpenseBudget(object? parameter = null) {
+        try {
+            var budget = DBManager.GetFirst<ExpensesBook>(e => e.UserID == _accountStore.Users.UserID &&
+                            e.Month == _expenseStore.ExpenseBook.Month && e.Year == _expenseStore.ExpenseBook.Year);
+            if (budget != null) {
+                budget.Budget = long.Parse(BudgetOfficial);
+                bool check = DBManager.Update(budget);
+                if (!check) throw new Exception("Update budget failed");
+            }
+        }
+        catch (Exception ex) {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+    }
+    public void ChangedExpenseBudget(object? parameter = null) {
+        try {
+            BudgetCurrent = string.Empty;
+            if (SelectedExpenseBook == null) {
+                return;
+            }
+            if(long.TryParse(BudgetOfficial, out long budgetcur)) {
+                foreach (var item in Expensesadvances) {
+                    budgetcur -= item.Amount;
+                }
+                BudgetCurrent = budgetcur.ToString();
+                _expenseStore.BudgetCurrentExb = BudgetCurrent;
+            }
+            else {
+                throw new Exception("Can't try to long data");
+            }
+        }
+        catch (Exception ex) {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+        
     }
     public void FilterCategory(object? parameter = null) {
         ReviewCategory();
@@ -377,8 +419,7 @@ public class ExpenseViewModel : BaseViewModel {
                 Content = item.Name.ToString(),
                 IsChecked = false
             };
-            CheckBoxCategory ckb = new CheckBoxCategory(item.CategoryID, cb);
-            SourceCategory.Add(ckb);
+            SourceCategory.Add(new CheckBoxCategory(item.CategoryID, cb));
         }
     }
     public void Filter(string pattern) {
@@ -816,6 +857,7 @@ public class ExpenseViewModel : BaseViewModel {
         public int CategoryID { get; set; }
         public string Category { get; set; }
         public string FormattedDate => Date.ToString("dd/MM/yyyy");
+        public string FormattedAmount => Amount.ToString("N0", new CultureInfo("en-US")).Replace(",", " ");
         public ExpenseAdvance() { }
         public ExpenseAdvance(Expense ex) {
             exp = ex;
