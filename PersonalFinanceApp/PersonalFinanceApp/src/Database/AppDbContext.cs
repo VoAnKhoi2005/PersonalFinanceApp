@@ -54,6 +54,8 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Goal>().Property(g => g.Deadline).IsRequired(false);
         modelBuilder.Entity<Goal>().ToTable(g => g.HasCheckConstraint("CK_Reminder", "[Reminder] IN ('Daily', 'Weekly', 'Monthly', 'Yearly')"));
         modelBuilder.Entity<Goal>().ToTable(g => g.HasCheckConstraint("CK_Status", "[Status] IN ('Completed', 'Active', 'Canceled')"));
+        //Recurring Expenses
+        modelBuilder.Entity<RecurringExpense>().ToTable(g => g.HasCheckConstraint("CK_Status", "[Status] IN ('Active', 'Canceled')"));
 
         //Setup composite key for ExpensesBook and GoalHistory
         modelBuilder.Entity<ExpensesBook>().HasKey(exB => new { exB.Month, exB.Year, exB.UserID });

@@ -22,12 +22,14 @@ namespace PersonalFinanceApp.Migrations
                     Interval = table.Column<int>(type: "INTEGER", nullable: false),
                     StartDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     LastTime = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    Status = table.Column<string>(type: "TEXT", nullable: false),
                     UserID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RecurringExpense", x => x.RecurringExpenseID);
                     table.CheckConstraint("CK_Frequency", "[Frequency] IN ('Daily', 'Weekly', 'Monthly', 'Yearly')");
+                    table.CheckConstraint("CK_Status", "[Status] IN ('Active', 'Canceled')");
                 });
 
             migrationBuilder.CreateTable(

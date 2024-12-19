@@ -22,6 +22,9 @@ public class RecurringExpense
     [Required]
     public DateOnly LastTime { get; set; }
 
+    [Required]
+    public string Status { get; set; }
+
     [Required] 
     public int UserID { get; set; }
 
