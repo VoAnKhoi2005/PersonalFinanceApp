@@ -9,7 +9,6 @@ using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.View;
 using PersonalFinanceApp.ViewModel.Command;
-using PersonalFinanceApp.ViewModel.MainMenu;
 
 namespace PersonalFinanceApp.ViewModel.LoginMenu;
 
@@ -179,7 +178,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
 
             IncorrectPasswordUserName = false;
 
-            loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
+            loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin.Trim());
 
             var factory = _serviceProvider.GetRequiredService<IWindowFactory>();
             if (_sharedService.m != null) {
@@ -211,7 +210,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
     }
 
     private bool VerifyLogin(User? loginUser) {
-        loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin);
+        loginUser = DBManager.GetFirst<User>(u => u.Username == UserNameLogin.Trim());
         if (loginUser == null) {
             IncorrectPasswordUserName = true;
             return false;
@@ -221,9 +220,9 @@ public class LoginNewAccountViewModel : BaseViewModel {
     }
     private void CreateAccount(object parameter) {
         TabItem ti = parameter as TabItem;
-        var user = DBManager.GetFirst<User>(u => u.Username == UserNameNewAccount);
+        var user = DBManager.GetFirst<User>(u => u.Username == UserNameNewAccount.Trim());
         if (ti != null && user == null) {
-            User usr = new User(UserNameNewAccount, PasswordNewAccount, Gmail);
+            User usr = new User(UserNameNewAccount.Trim(), PasswordNewAccount, Gmail);
             usr.DefaultBudget = 100000;
             usr.Saving = 0;
             DBManager.Insert(usr);
@@ -246,6 +245,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
                     InCorrectPasswordConfirm = false;
                     break;
                 case "NewAccountTab":
+                    IncorrectPasswordUserName = false;
                     UserNameLogin = string.Empty;
                     break;
             }
@@ -270,7 +270,7 @@ public class LoginNewAccountViewModel : BaseViewModel {
                     InCorrectName = false;
                 } else InCorrectName = true;
             } else if (p.Name.CompareTo("Gmail") == 0) {
-                pattern = @"^[a-zA-Z0-9._%+-]+@gmail\.com$";
+                pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.]+$";
                 if (Regex.IsMatch(p.Text, pattern)) {
                     InCorrectGmail = false;
                 }
@@ -279,7 +279,8 @@ public class LoginNewAccountViewModel : BaseViewModel {
             
         } else if (parameter is PasswordBox) {
             PasswordBox pb = parameter as PasswordBox;
-            pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
+            //pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
+            pattern = @"^[A-Za-z\d!@#$%^&*]{6,18}$";
             if (Regex.IsMatch(pb.Password, pattern) ) {
                 InCorrectPassword = false;
             }   

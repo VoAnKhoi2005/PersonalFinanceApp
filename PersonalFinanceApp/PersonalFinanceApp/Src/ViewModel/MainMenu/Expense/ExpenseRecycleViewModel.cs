@@ -5,8 +5,10 @@ using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.Stores;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.ServiceProcess;
 using System.Windows.Input;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class ExpenseRecycleViewModel : BaseViewModel {
@@ -87,6 +89,7 @@ public class ExpenseRecycleViewModel : BaseViewModel {
         public int CategoryID { get; set; }
         public string Category { get; set; }
         public string FormattedDate => Date.ToString("dd/MM/yyyy");
+        public string FormattedAmount => Amount.ToString("N0", new CultureInfo("en-US")).Replace(",", " ");
         public ExpenseAdvance() { }
         public ExpenseAdvance(Expense ex) {
             exp = ex;

@@ -5,6 +5,8 @@
     xmlns:command="clr-namespace:PersonalFinanceApp.ViewModel.Command"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:mainmenu="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
@@ -44,11 +46,9 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
-
                 <RowDefinition Height="45" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
             <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="48*" />
@@ -75,96 +75,109 @@
                     VerticalAlignment="Center"
                     FontSize="14"
                     Text="Create financial goals and manage your savings" />
-
-
             </Grid>
             <DockPanel Grid.Row="1">
-
-
-                <Border Width="280"
-                        Height="40"
-                        Margin="25,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Background="{DynamicResource CommonGridBackground}"
-                        CornerRadius="20"
-                        DockPanel.Dock="Left">
+                <Border
+                    Width="280"
+                    Height="40"
+                    Margin="25,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource CommonGridBackground}"
+                    CornerRadius="20"
+                    DockPanel.Dock="Left">
 
                     <Grid>
-                        <materialDesign:PackIcon Width="18"
-                                                 Height="18"
-                                                 Margin="10,0,0,0"
-                                                 HorizontalAlignment="Left"
-                                                 VerticalAlignment="Center"
-                                                 Foreground="{DynamicResource CommonText}"
-                                                 Kind="Magnify" />
-                        <TextBox Width="230"
-                                 Margin="35,0,0,0"
-                                 HorizontalAlignment="Left"
-                                 VerticalAlignment="Center"
-                                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                                 BorderBrush="{x:Null}"
-                                 CaretBrush="{DynamicResource CommonText}"
-                                 DockPanel.Dock="Left"
-                                 FontSize="14"
-                                 Foreground="{DynamicResource CommonText}"
-                                 IsEnabled="{Binding HaveExpenseBook}"
-                                 SelectionBrush="{DynamicResource CommonText}"
-                                 TextAlignment="Left" />
-
+                        <materialDesign:PackIcon
+                            Width="18"
+                            Height="18"
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Foreground="{DynamicResource CommonText}"
+                            Kind="Magnify" />
+                        <TextBox
+                            Width="230"
+                            Margin="35,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                            BorderBrush="{x:Null}"
+                            CaretBrush="{DynamicResource CommonText}"
+                            DockPanel.Dock="Left"
+                            FontSize="14"
+                            Foreground="{DynamicResource CommonText}"
+                            SelectionBrush="{DynamicResource CommonText}"
+                            Text="{Binding DataFilterGoal, UpdateSourceTrigger=PropertyChanged}"
+                            TextAlignment="Left">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding TextChangedFilterCommand}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </Grid>
                 </Border>
-                <!--NAME GOAL-->
-                <Border Width="120"
-                        Height="40"
-                        Margin="5,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Background="{DynamicResource CommonGridBackground}"
-                        CornerRadius="20"
-                        DockPanel.Dock="Left">
+                <!--  NAME GOAL  -->
+                <Border
+                    Width="120"
+                    Height="40"
+                    Margin="5,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource CommonGridBackground}"
+                    CornerRadius="20"
+                    DockPanel.Dock="Left">
                     <Grid>
-                        <TextBlock Margin="10,0,0,0"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   Text="Category" />
-                        <materialDesign:PopupBox Width="110"
-                                                 Height="40"
-                                                 HorizontalAlignment="Center"
-                                                 materialDesign:HintAssist.FloatingHintHorizontalAlignment="Stretch"
-                                                 materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                                                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                                                 BorderBrush="{x:Null}"
-                                                 FontSize="12"
-                                                 Foreground="{DynamicResource CommonText}"
-                                                 IsEnabled="{Binding HaveExpenseBook}"
-                                                 PopupMode="Click"
-                                                 StaysOpen="True">
+                        <TextBlock
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="Category" />
+                        <materialDesign:PopupBox
+                            Width="110"
+                            Height="40"
+                            HorizontalAlignment="Center"
+                            materialDesign:HintAssist.FloatingHintHorizontalAlignment="Stretch"
+                            materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                            materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                            BorderBrush="{x:Null}"
+                            FontSize="12"
+                            Foreground="{DynamicResource CommonText}"
+                            PopupMode="Click"
+                            StaysOpen="True">
                             <materialDesign:PopupBox.ToggleContent>
-                                <materialDesign:PackIcon Width="25"
-                                                         Height="25"
-                                                         Margin="5,0,0,0"
-                                                         HorizontalAlignment="Right"
-                                                         VerticalAlignment="Center"
-                                                         Foreground="{DynamicResource CommonText}"
-                                                         Kind="Shape" />
+                                <materialDesign:PackIcon
+                                    Width="25"
+                                    Height="25"
+                                    Margin="5,0,0,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Foreground="{DynamicResource CommonText}"
+                                    Kind="Shape" />
                             </materialDesign:PopupBox.ToggleContent>
-
                             <!--  ahihi conkiki  -->
-                            <ItemsControl Width="auto"
-                                          Height="auto"
-                                          ItemsSource="{Binding SourceCategory}">
+                            <ItemsControl
+                                Width="auto"
+                                Height="auto"
+                                ItemsSource="{Binding SourceStatus}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
-                                            <CheckBox Content="{Binding Name}"
-                                                      IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                            <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="Checked">
+                                                        <i:InvokeCommandAction Command="{Binding DataContext.FilterStatusCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+                                                    </i:EventTrigger>
+                                                    <i:EventTrigger EventName="Unchecked">
+                                                        <i:InvokeCommandAction Command="{Binding DataContext.FilterStatusCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </CheckBox>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-
-
                         </materialDesign:PopupBox>
                     </Grid>
                 </Border>
@@ -198,20 +211,22 @@
                         </Grid>
                     </Button>
                 </Border>
-                <Border Width="40"
-                        Height="40"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Background="{DynamicResource CommonGridBackground}"
-                        CornerRadius="30"
-                        DockPanel.Dock="Right">
+                <Border
+                    Width="40"
+                    Height="40"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource CommonGridBackground}"
+                    CornerRadius="30"
+                    DockPanel.Dock="Right">
                     <Button Command="{Binding RefreshGoalCommand}">
-                        <materialDesign:PackIcon Width="25"
-                                                 Height="25"
-                                                 HorizontalAlignment="Center"
-                                                 VerticalAlignment="Center"
-                                                 Foreground="{DynamicResource CommonText}"
-                                                 Kind="Refresh" />
+                        <materialDesign:PackIcon
+                            Width="25"
+                            Height="25"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="{DynamicResource CommonText}"
+                            Kind="Refresh" />
                     </Button>
                 </Border>
 

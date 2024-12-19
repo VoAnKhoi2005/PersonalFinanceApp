@@ -73,7 +73,7 @@ public class MainViewModel : BaseViewModel
         _sharedService.TriggerActionNotification += LoadNotify;
 
         //load theme
-        _themeStore.ChangedThemeLight();
+        _themeStore.Notify();
 
         NotifyCardViewModels = new ObservableCollection<object>();
 

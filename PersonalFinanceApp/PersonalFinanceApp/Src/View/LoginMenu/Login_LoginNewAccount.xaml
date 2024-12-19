@@ -358,7 +358,7 @@
                                         Foreground="Red"
                                         Kind="CloseCircle" />
                                     <Label
-                                        Content="Username is already in use!"
+                                        Content="Invalid UserName!"
                                         FontSize="12"
                                         Foreground="Red" />
                                 </WrapPanel>
@@ -384,7 +384,7 @@
                                         Foreground="Red"
                                         Kind="CloseCircle" />
                                     <Label
-                                        Content="Password must 6-16 characters long!"
+                                        Content="Password must 8-16 characters long!"
                                         FontSize="12"
                                         Foreground="Red" />
                                 </WrapPanel>

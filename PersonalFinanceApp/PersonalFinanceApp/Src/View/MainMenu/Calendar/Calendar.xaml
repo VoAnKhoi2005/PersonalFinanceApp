@@ -421,7 +421,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="20"
-                                               Foreground="{DynamicResource CalendarText2}"
+                                        Foreground="{DynamicResource CalendarText2}"
                                         Text="{Binding (local:CalendarHelper.ViewModel).Info2, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </Border>
                                 <Border
@@ -438,7 +438,7 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         FontSize="20"
-                                               Foreground="{DynamicResource CalendarText3}"
+                                        Foreground="{DynamicResource CalendarText3}"
                                         Text="{Binding (local:CalendarHelper.ViewModel).AdditionalInfo, RelativeSource={RelativeSource TemplatedParent}}" />
                                 </Border>
                             </Grid>
@@ -794,8 +794,11 @@
                     Grid.Row="0"
                     FontWeight="Bold"
                     Text="Day Info" />
-                <ScrollViewer Grid.Row="1" MaxHeight="200" VerticalScrollBarVisibility="Hidden">
-                    <ItemsControl ItemsSource="{Binding SourceRecurringInfo}" Background="WhiteSmoke">
+                <ScrollViewer
+                    Grid.Row="1"
+                    MaxHeight="200"
+                    VerticalScrollBarVisibility="Hidden">
+                    <ItemsControl Background="WhiteSmoke" ItemsSource="{Binding SourceRecurringInfo}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Margin="5" />
