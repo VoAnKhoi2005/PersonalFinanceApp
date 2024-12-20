@@ -813,8 +813,8 @@
 
                 <Border
                     Grid.Column="1"
-                    MaxHeight="200"
-                    CornerRadius="30">
+                        Background="{DynamicResource Calendar_popUpBackground2}"
+                    >
                     <ScrollViewer VerticalScrollBarVisibility="Hidden">
                         <ItemsControl
                             Width="200"

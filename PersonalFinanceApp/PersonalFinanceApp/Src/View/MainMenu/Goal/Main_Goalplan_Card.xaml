@@ -148,7 +148,7 @@
                                                                 HorizontalAlignment="Left"
                                                                 VerticalAlignment="Center"
                                                                 DockPanel.Dock="Left"
-                                                                Foreground="{DynamicResource ComponentText}"
+                                                                Foreground="{TemplateBinding Foreground}"
                                                                 Kind="PlusMinusVariant" />
                                                             <TextBlock
                                                                 Margin="15,0,0,0"
@@ -203,8 +203,8 @@
                                                                 HorizontalAlignment="Left"
                                                                 VerticalAlignment="Center"
                                                                 DockPanel.Dock="Left"
-                                                                Foreground="{DynamicResource ComponentText}"
-                                                                Kind="Pencil" />
+                                                                                     Foreground="{TemplateBinding Foreground}"
+                                                                                     Kind="Pencil" />
                                                             <TextBlock
                                                                 Margin="15,0,0,0"
                                                                 HorizontalAlignment="Left"
@@ -255,8 +255,8 @@
                                                                 HorizontalAlignment="Left"
                                                                 VerticalAlignment="Center"
                                                                 DockPanel.Dock="Left"
-                                                                Foreground="{DynamicResource ComponentText}"
-                                                                Kind="History" />
+                                                                                     Foreground="{TemplateBinding Foreground}"
+                                                                                     Kind="History" />
                                                             <TextBlock
                                                                 Margin="15,0,0,0"
                                                                 HorizontalAlignment="Left"

@@ -12,12 +12,12 @@
     <Grid Width="1000"
           Height="700">
         <Grid.Resources>
-            <Style x:Key="ComboBox_style"
-                   TargetType="ComboBoxItem">
+            <Style x:Key="comboboxStyle"
+                TargetType="ComboBoxItem">
                 <Setter Property="Background"
                         Value="{DynamicResource ComboBoxBackground}" />
                 <Setter Property="Foreground"
-                        Value="{DynamicResource SuperText}" />
+                        Value="{DynamicResource ComponentText}" />
                 <Setter Property="BorderBrush"
                         Value="Transparent" />
                 <Setter Property="BorderThickness"
@@ -66,7 +66,8 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0">
+        <DockPanel Grid.Row="0"
+                   Background="{DynamicResource DockpanelBackGround}">
             <Button Height="40"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
@@ -84,7 +85,7 @@
                                                                  Height="25"
                                                                  HorizontalAlignment="Center"
                                                                  VerticalAlignment="Center"
-                                                                 Foreground="White"
+                                                                 Foreground="{DynamicResource SuperText}"
                                                                  Kind="ArrowLeft" />
                                     </Border>
                                 </ControlTemplate>
@@ -102,28 +103,30 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Border Width="120"
-                    Height="40"
-                    Background="{DynamicResource DockpanelBackGround}"
-                    CornerRadius="20"
-                    VerticalAlignment="Center"
-                    Margin="10 0 0 0">
-                
-                <ComboBox Width="100"
+            <TextBlock Text="Recurring details"
+                       FontSize="18"
+                       Margin="5 5 0 0"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource SuperText}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"></TextBlock>
+            
+            <ComboBox Width="100"
+                      Margin="20 0 0 0"
                           ItemsSource="{Binding SourceStatusFilter}"
                           SelectedItem="{Binding SelectedStatusFilter}"
                           materialDesign:HintAssist.Foreground="{DynamicResource ComponentText}"
-                          
                           materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                           BorderBrush="{x:Null}"
-                          Text="{Binding TextStatus}">
+                          Foreground="{DynamicResource SuperText}"
+                          Text="{Binding TextStatus}"
+                          ItemContainerStyle="{StaticResource comboboxStyle}">
                     <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectedChangedFilter}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ComboBox>
-            </Border>
 
 
             <TextBlock Margin="0,0,15,0"
@@ -132,7 +135,7 @@
                        DockPanel.Dock="Right"
                        FontSize="16"
                        FontWeight="Bold"
-                       Foreground="{DynamicResource CalendarSuperText}"
+                       Foreground="{DynamicResource SuperText}"
                        Text="{Binding CountRecurring}" />
             <TextBlock Margin="0,0,15,0"
                        HorizontalAlignment="Right"
@@ -140,7 +143,7 @@
                        DockPanel.Dock="Right"
                        FontSize="16"
                        FontWeight="Bold"
-                       Foreground="{DynamicResource CalendarSuperText}"
+                       Foreground="{DynamicResource SuperText}"
                        Text="Quantity: " />
         </DockPanel>
         <Grid Grid.Row="1">
@@ -219,36 +222,9 @@
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <!--<StackPanel Orientation="Horizontal">
-                                                    <Button
-                                                        Width="50"
-                                                        Margin="0,0,5,0"
-                                                        BorderBrush="#FF514D4D"
-                                                        BorderThickness="0"
-                                                        Command="{Binding DataContext.RecoverExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                                        CommandParameter="{Binding}"
-                                                        FontSize="15"
-                                                        Foreground="White"
-                                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                                        ToolTip="Resource name: MaterialDesignRaisedButton">
-                                                        <materialDesign:PackIcon Foreground="White" Kind="Reload" />
-                                                    </Button>
-                                                    <Button
-                                                        Width="50"
-                                                        Background="IndianRed"
-                                                        BorderBrush="#FF514D4D"
-                                                        BorderThickness="0"
-                                                        Command="{Binding DataContext.RemoveExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                                        CommandParameter="{Binding}"
-                                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                                        ToolTip="Resource name: MaterialDesignRaisedButton">
-                                                        <materialDesign:PackIcon Foreground="White" Kind="TrashCanOutline" />
-                                                    </Button>
-                                                </StackPanel>-->
+                                
                                 <materialDesign:PopupBox Width="auto"
-                                                         Height="40"
+                                                         Height="30"
                                                          Margin="0,5,0,0"
                                                          HorizontalAlignment="Right"
                                                          VerticalAlignment="Center"

@@ -39,16 +39,16 @@
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60" />
+            <RowDefinition Height="45" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0">
+        <DockPanel Grid.Row="0"
+                   Background="{DynamicResource DockpanelBackGround}">
 
             <!--  return here  -->
             <Button Height="40"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
-                    Margin="17,17,0,0"
                     Command="{Binding ExitRecoverCommand}">
                 <Button.Resources>
                     <Style TargetType="Button">
@@ -80,18 +80,26 @@
                     </Style>
                 </Button.Resources>
             </Button>
+            <TextBlock Text="Recover expense"
+                       FontSize="18"
+                       Margin="5 0 0 0"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource SuperText}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"></TextBlock>
         </DockPanel>
         <!--  DataGrid expensebook  -->
         <Grid Grid.Row="2">
             <DataGrid
                 Name="ListReocver"
                 Grid.Row="1"
-                Margin="15,0,15,15"
                 HorizontalAlignment="Stretch"
                 AutoGenerateColumns="False"
                 Background="{DynamicResource DatagridBG}"
                 Foreground="{DynamicResource DatagridFG}"
                 IsReadOnly="True"
+                BorderBrush="Transparent"
+                BorderThickness="0"
                 ItemsSource="{Binding Expensesadvances}"
                 SelectedItem="{Binding ItemsExB}">
                 <DataGrid.Columns>
