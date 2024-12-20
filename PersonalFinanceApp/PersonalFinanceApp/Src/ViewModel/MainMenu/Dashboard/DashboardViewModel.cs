@@ -14,6 +14,8 @@ using OxyPlot.Axes;
 using OxyPlot.Series;
 using System.Windows;
 using System.Drawing;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -303,17 +305,14 @@ public class DashboardViewModel : BaseViewModel
         ExpensesBook ExBTemp = expensesBook;
         var items = DBManager.GetCondition<Expense>(e => e.UserID == expensesBook.UserID && e.ExBMonth == expensesBook.Month && e.ExBYear == expensesBook.Year);
         ExBTemp.Expenses = items;
-        long remainBudget = ExBTemp.Budget - ExBTemp.Expenses.Sum(ex => ex.Amount);
-
         var listcate = DBManager.GetCondition<Category>(c => c.UserID == expensesBook.UserID && c.ExBMonth == expensesBook.Month && c.ExBYear == expensesBook.Year);
-
         ExBTemp.Categories = listcate;
 
-        ExBTemp.Categories.Add(new Category
-        {
-            Name = "Remaining budget",
-            Expenses = new List<Expense> { new Expense { Amount = remainBudget } },
-        });
+        //ExBTemp.Categories.Add(new Category
+        //{
+        //    Name = "Remaining budget",
+        //    Expenses = new List<Expense> { new Expense { Amount = remainBudget } },
+        //});
 
         var pieSeries = new List<PieSeries<double>>();
         foreach (Category category in ExBTemp.Categories)
@@ -332,6 +331,20 @@ public class DashboardViewModel : BaseViewModel
             };
             pieSeries.Add(pieSerie);
         }
+
+        long remainBudget = ExBTemp.Budget - ExBTemp.Expenses.Sum(ex => ex.Amount);
+        var remainBudgetpie = new PieSeries<double>
+        {
+            Values = new List<double> { remainBudget },
+            Name = "Remaining Budget",
+            InnerRadius = 0.6,
+            Fill = new SolidColorPaint(SKColors.Gray),
+            MaxRadialColumnWidth = 60,
+            DataLabelsPosition = PolarLabelsPosition.Outer,
+            ToolTipLabelFormatter = point => point.Model.ToString("N0") + " VND",
+        };
+        pieSeries.Add(remainBudgetpie);
+
 
         return pieSeries;
     }

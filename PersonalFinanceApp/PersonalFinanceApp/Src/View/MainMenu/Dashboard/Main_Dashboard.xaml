@@ -373,7 +373,7 @@
                                            FontWeight="DemiBold"
                                            Foreground="{DynamicResource SuperText}"
                                            Text="BUDGET" />
-                                <lvc:PieChart Grid.Row="1"
+                                <lvc:PieChart Grid.Row="1" InitialRotation="-90"
                                               LegendPosition="Right"
                                               Series="{Binding BudgetSeries}"
                                              LegendTextPaint="{DynamicResource PieChartLegendForeground}"
