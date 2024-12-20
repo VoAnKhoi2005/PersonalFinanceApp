@@ -129,5 +129,14 @@
                      Color="#020DA6" />
     <SolidColorBrush x:Key="NotifiHover"
                      Color="#D1E8F9" />
-    
+
+    <SolidColorBrush x:Key="Recurring_startDate"
+                     Color="#3C3535" />
+    <SolidColorBrush x:Key="Recurring_calendarpickdate"
+                     Color="#DFDFDF" />
+
+    <SolidColorBrush x:Key="HeaderCalendarBackground"
+                     Color="#3C40AE" />
+    <SolidColorBrush x:Key="HeaderCalendarForeground"
+                     Color="#DFDFDF" />
 </ResourceDictionary>

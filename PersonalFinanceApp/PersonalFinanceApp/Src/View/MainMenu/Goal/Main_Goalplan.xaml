@@ -158,13 +158,15 @@
                             </materialDesign:PopupBox.ToggleContent>
                             <!--  ahihi conkiki  -->
                             <ItemsControl
-                                Width="auto"
-                                Height="auto"
+
                                 ItemsSource="{Binding SourceStatus}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
-                                            <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}">
+                                            <CheckBox                           FontSize="14"      
+                                                Width="150"
+                                                                                      Height="30"
+                                                                                      Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}">
                                                 <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="Checked">
                                                         <i:InvokeCommandAction Command="{Binding DataContext.FilterStatusCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />

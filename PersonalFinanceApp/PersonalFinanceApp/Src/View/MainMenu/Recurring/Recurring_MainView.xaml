@@ -110,212 +110,35 @@
                 </Border>
 
                 <!--  Pop up  -->
-                <materialDesign:PopupBox
-                    Margin="0,15,236,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    PlacementMode="LeftAndAlignBottomEdges"
-                    StaysOpen="True">
-                    <materialDesign:PopupBox.ToggleContent>
-                        <Border
-                            Width="90"
-                            Height="40"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            Background="{DynamicResource CalendarBackground}"
-                            CornerRadius="20"
-                            DockPanel.Dock="Right">
-                            <Grid>
-                                <materialDesign:PackIcon Kind="Details"
-                                                         Width="25"
-                                                         Height="25"
-                                                         Foreground="{DynamicResource ComponentText}" 
-                                                         VerticalAlignment="Center"
-                                                         HorizontalAlignment="Left"
-                                                         Margin="5 0 0 0"/>
-                                <TextBlock Text="Detail"
-                                           FontSize="14"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Right"
-                                           Foreground="{DynamicResource ComponentText}"
-                                           Margin="0 0 10 0"></TextBlock>
-                            </Grid>
-                        </Border>
-                    </materialDesign:PopupBox.ToggleContent>
-                    <Grid Width="1000" Height="700">
-                        <Grid.Resources>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="FontFamily" Value="Sans Serif Collection" />
-                                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
-                                <Setter Property="FontWeight" Value="Regular" />
-                            </Style>
-                            <Style TargetType="Button">
-                                <Setter Property="Background" Value="Transparent" />
-                                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Background="{TemplateBinding Background}" CornerRadius="20">
-                                                <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="true">
-                                        <Setter Property="Cursor" Value="Hand" />
-                                        <Setter Property="Background" Value="{DynamicResource onHovered}" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Grid.Resources>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="35" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <DockPanel Grid.Row="0">
-                            <TextBlock
-                                Margin="0,0,15,0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                DockPanel.Dock="Right"
-                                FontSize="16"
-                                FontWeight="Bold"
-                                Foreground="{DynamicResource CalendarSuperText}"
-                                Text="1234 " />
-                            <TextBlock
-                                Margin="0,0,15,0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                DockPanel.Dock="Right"
-                                FontSize="16"
-                                FontWeight="Bold"
-                                Foreground="{DynamicResource CalendarSuperText}"
-                                Text="Quantity: " />
 
+                <Border Width="100"
+                        Height="40"
+                        Margin="0,15,230,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="{DynamicResource Summary_TransactionAndCategoryBackground}"
+                        CornerRadius="20"
+                        DockPanel.Dock="Top">
 
-                        </DockPanel>
-                        <Grid Grid.Row="1">
-                            <DataGrid
-                                Name="ListReocver"
-                                Grid.Row="1"
-                                Margin="5,0,5,5"
-                                HorizontalAlignment="Stretch"
-                                AutoGenerateColumns="False"
-                                Background="{DynamicResource DatagridBG}"
-                                Foreground="{DynamicResource DatagridFG}"
-                                IsReadOnly="True"
-                                ItemsSource="{Binding SourceRecurringExpense}"
-                                SelectedItem="{Binding SelectedRecurringExpense}">
-
-                                <DataGrid.Columns>
-                                    <!--  Name  -->
-                                    <DataGridTextColumn Binding="{Binding Name}">
-                                        <DataGridTextColumn.Header>
-                                            <TextBlock
-                                                FontSize="13"
-                                                FontWeight="Bold"
-                                                Foreground="{DynamicResource SuperText}"
-                                                Text="Name" />
-                                        </DataGridTextColumn.Header>
-                                    </DataGridTextColumn>
-                                    <!--  Frequency  -->
-                                    <DataGridTextColumn Binding="{Binding Frequency}">
-                                        <DataGridTextColumn.Header>
-                                            <TextBlock
-                                                FontSize="13"
-                                                FontWeight="Bold"
-                                                Foreground="{DynamicResource SuperText}"
-                                                Text="Frequency" />
-                                        </DataGridTextColumn.Header>
-                                    </DataGridTextColumn>
-                                    <!--  Interval  -->
-                                    <DataGridTextColumn Binding="{Binding Interval}">
-                                        <DataGridTextColumn.Header>
-                                            <TextBlock
-                                                FontSize="13"
-                                                FontWeight="Bold"
-                                                Foreground="{DynamicResource SuperText}"
-                                                Text="Interval" />
-                                        </DataGridTextColumn.Header>
-                                    </DataGridTextColumn>
-                                    <!--  StartDate  -->
-                                    <DataGridTextColumn Binding="{Binding LastTime}">
-                                        <DataGridTextColumn.Header>
-                                            <TextBlock
-                                                FontSize="13"
-                                                FontWeight="Bold"
-                                                Foreground="{DynamicResource SuperText}"
-                                                Text="LastTime" />
-                                        </DataGridTextColumn.Header>
-                                    </DataGridTextColumn>
-                                    <!--  lasttime  -->
-                                    <DataGridTextColumn Binding="{Binding LastTime}">
-                                        <DataGridTextColumn.Header>
-                                            <TextBlock
-                                                FontSize="13"
-                                                FontWeight="Bold"
-                                                Foreground="{DynamicResource SuperText}"
-                                                Text="StartDate" />
-                                        </DataGridTextColumn.Header>
-                                    </DataGridTextColumn>
-                                    <!--  Status  -->
-                                    <!--<DataGridTextColumn Binding="{Binding Status}">
-                                        <DataGridTextColumn.Header>
-                                            <TextBlock
-                                                FontSize="13"
-                                                FontWeight="Bold"
-                                                Foreground="{DynamicResource SuperText}"
-                                                Text="Status" />
-                                        </DataGridTextColumn.Header>
-                                    </DataGridTextColumn>-->
-
-                                    <DataGridTemplateColumn CanUserResize="False">
-                                        <DataGridTemplateColumn.Header>
-                                            <TextBlock
-                                                FontSize="13"
-                                                FontWeight="Bold"
-                                                Foreground="{DynamicResource SuperText}"
-                                                Text="Commands" />
-                                        </DataGridTemplateColumn.Header>
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Button
-                                                        Width="50"
-                                                        Margin="0,0,5,0"
-                                                        BorderBrush="#FF514D4D"
-                                                        BorderThickness="0"
-                                                        Command="{Binding DataContext.RecoverExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                                        CommandParameter="{Binding}"
-                                                        FontSize="15"
-                                                        Foreground="White"
-                                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                                        ToolTip="Resource name: MaterialDesignRaisedButton">
-                                                        <materialDesign:PackIcon Foreground="White" Kind="Reload" />
-                                                    </Button>
-                                                    <Button
-                                                        Width="50"
-                                                        Background="IndianRed"
-                                                        BorderBrush="#FF514D4D"
-                                                        BorderThickness="0"
-                                                        Command="{Binding DataContext.RemoveExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                                        CommandParameter="{Binding}"
-                                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                                        ToolTip="Resource name: MaterialDesignRaisedButton">
-                                                        <materialDesign:PackIcon Foreground="White" Kind="TrashCanOutline" />
-                                                    </Button>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
+                    <!--binding-->
+                    <Button Command="{Binding AddNewRecurringCommand}">
+                        <Grid>
+                            <materialDesign:PackIcon Kind="BookOpenPageVariant" 
+                            Width="25"
+                                                     Height="25"
+                                                     Foreground="{DynamicResource ComponentText}"
+                                                     VerticalAlignment="Center"
+                                                     HorizontalAlignment="Left"
+                                                     Margin="10 0 0 0" />
+                            <TextBlock Text="Detail"
+                                       FontSize="14"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"
+                                       Foreground="{DynamicResource ComponentText}"
+                                       Margin="0 0 15 0"></TextBlock>
                         </Grid>
-                    </Grid>
-                </materialDesign:PopupBox>
+                    </Button>
+                </Border>
             </Grid>
         </ScrollViewer>
 

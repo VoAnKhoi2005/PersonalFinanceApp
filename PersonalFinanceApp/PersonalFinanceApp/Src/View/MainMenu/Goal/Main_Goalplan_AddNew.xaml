@@ -211,19 +211,30 @@
                 </Grid>
                 <!--  Text="{Binding DeadlineGoal}"  -->
                 <Grid Grid.Column="1">
-                    <DatePicker
-                        Width="180"
-                        Height="40"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
-                        materialDesign:HintAssist.Hint="Deadline"
-                        materialDesign:TextFieldAssist.HasClearButton="True"
-                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
-                        FontSize="14"
-                        Foreground="{DynamicResource CommonText}"
-                        SelectedDate="{Binding DeadlineGoal}"
-                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                    <DatePicker Width="180"
+                                Height="40"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                materialDesign:HintAssist.Foreground="{DynamicResource CommonText}"
+                                materialDesign:HintAssist.Hint="Deadline"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                                FontSize="14"
+                                Foreground="{DynamicResource CommonText}"
+                                SelectedDate="{Binding DeadlineGoal}"
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                        <DatePicker.CalendarStyle>
+                            <Style TargetType="Calendar"
+                                   BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                <Setter Property="Background"
+                                        Value="{DynamicResource CommonGridBackground}"></Setter>
+                                <Setter Property="materialDesign:CalendarAssist.HeaderBackground"
+                                        Value="{DynamicResource HeaderCalendarBackground}"></Setter>
+                                <Setter Property="Foreground"
+                                        Value="{DynamicResource HeaderCalendarForeground}"></Setter>
+                            </Style>
+                        </DatePicker.CalendarStyle>
+                    </DatePicker>
                 </Grid>
             </Grid>
 
