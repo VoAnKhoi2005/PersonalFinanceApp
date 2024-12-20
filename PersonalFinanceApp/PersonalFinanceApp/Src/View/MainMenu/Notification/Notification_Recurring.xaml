@@ -60,7 +60,7 @@
                 </Grid.RowDefinitions>
 
                 <DockPanel Grid.Row="0">
-                    <TextBlock Text="Category :"
+                    <TextBlock Text="Recurring name :"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"></TextBlock>
 
@@ -73,7 +73,7 @@
 
                 </DockPanel>
                 <DockPanel Grid.Row="1">
-                    <TextBlock Text="Name :"
+                    <TextBlock Text="Start date :"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"></TextBlock>
                     <TextBlock Foreground="{DynamicResource Ntf_goalName}"
