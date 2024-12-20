@@ -9,45 +9,20 @@
         mc:Ignorable="d"
         Background="Transparent"
         Title="TestWindow"
-        Width="200 "
+        Width="300 "
         Foreground="{DynamicResource CommonText}"
-        Height="1000">
-
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Border Width="200"
-                Height="auto"
-                Padding="10"
-                Background="{DynamicResource CommonGridBackground}"
-                Grid.Column="0">
-            <TextBlock x:Name="PopupText"
-                       FontWeight="Bold"
-                       Text="Day Info"
-                       Foreground="{DynamicResource SuperText}"
-                       FontSize="16"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center" />
-        </Border>
-
-        <Border CornerRadius="30"
-                Grid.Column="1"
-                >
-            <ScrollViewer VerticalScrollBarVisibility="Hidden"
-                          MaxHeight="200">
-                <ItemsControl ItemsSource="{Binding SourceRecurringInfo}"
-                              Background="{DynamicResource CalendarBackground1}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Margin="5 10 5 5"
-                                       FontSize="14"
-                                       Foreground="{DynamicResource ComponentText}" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </Border>
-    </Grid>
+        Height="500">
+    <Calendar>
+        <Calendar.Style>
+            <Style TargetType="Calendar"
+                   BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                <Setter Property="Background"
+                        Value="{DynamicResource CommonGridBackground}"></Setter>
+                <Setter Property="materialDesign:CalendarAssist.HeaderBackground"
+                        Value="{DynamicResource HeaderCalendarBackground}"></Setter>
+                <Setter Property="Foreground"
+                        Value="{DynamicResource HeaderCalendarForeground}"></Setter>
+            </Style>
+        </Calendar.Style>
+    </Calendar>
 </Window>

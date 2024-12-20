@@ -301,19 +301,8 @@
                                 </Style>
                             </Grid.Resources>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="16*" />
                                 <RowDefinition Height="19*" />
                             </Grid.RowDefinitions>
-                            <!--  avatar  -->
-                            <Border
-                                Width="150"
-                                Height="150"
-                                Margin="0,10,0,0"
-                                CornerRadius="90" />
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Text="User avatar here" />
                             <Grid Grid.Row="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="4*" />

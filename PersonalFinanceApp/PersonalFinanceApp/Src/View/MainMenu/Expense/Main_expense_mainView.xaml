@@ -591,10 +591,9 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <CheckBox
-                                            Height="30"
-                                            Content="{Binding Name}"
-                                            IsChecked="{Binding IsChecked, Mode=TwoWay}">
+                                        <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                                  Height="30"
+                                                  FontSize="14">
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="Checked">
                                                     <i:InvokeCommandAction Command="{Binding DataContext.FilterCategoryCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />

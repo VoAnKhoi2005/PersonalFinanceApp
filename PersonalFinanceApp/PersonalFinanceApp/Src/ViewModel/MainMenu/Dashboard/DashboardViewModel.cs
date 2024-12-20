@@ -207,8 +207,8 @@ public class DashboardViewModel : BaseViewModel
             Title = "Days",
             IsZoomEnabled = false,
             Position = OxyPlot.Axes.AxisPosition.Bottom,
-            TextColor = OxyColors.Black,
-            TitleColor = OxyColors.Black,
+            TextColor = OxyColors.CornflowerBlue,
+            TitleColor = OxyColors.CornflowerBlue,
             Key = "DaysAxis",
         };
         for (int day = 1; day <= DateTime.DaysInMonth(exB.Year, exB.Month); day++)
@@ -222,8 +222,8 @@ public class DashboardViewModel : BaseViewModel
             Position = OxyPlot.Axes.AxisPosition.Left,
             Minimum = 0,
             IsZoomEnabled = false,
-            TextColor = OxyColors.Black,
-            TitleColor = OxyColors.Black ,
+            TextColor = OxyColors.CornflowerBlue,
+            TitleColor = OxyColors.CornflowerBlue,
             LabelFormatter = CustomCurrencyFormat,
             MajorGridlineStyle = LineStyle.Solid,
             Key = "ValueAxis",
@@ -243,7 +243,7 @@ public class DashboardViewModel : BaseViewModel
         BarSeries columnSeries = new BarSeries
         {
             LabelPlacement = LabelPlacement.Outside,
-            TextColor = OxyColors.Black,
+            TextColor = OxyColors.CornflowerBlue,
             ItemsSource = expensesDaily,
             XAxisKey = "ValueAxis",
             YAxisKey = "DaysAxis",
