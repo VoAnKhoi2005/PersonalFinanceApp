@@ -29,6 +29,16 @@ public class CalendarViewModel : BaseViewModel
         }
     }
     private bool _popupOpen;
+    public string DateTimeRecurringDetail {
+        get => _dateTimeRecurringDetail;
+        set {
+            if (_dateTimeRecurringDetail != value) {
+                _dateTimeRecurringDetail = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _dateTimeRecurringDetail;
     public User usr {  get; set; }
     public List<CalendarButtonViewModel> DayDataContexts { get; set; } = new List<CalendarButtonViewModel>();
     public Calendar? CalendarGlobal { 
@@ -101,6 +111,7 @@ public class CalendarViewModel : BaseViewModel
             CalendarDayButton cb = sender as CalendarDayButton;
             if (cb != null) {
                 DateTime date = (DateTime)cb.DataContext;
+                DateTimeRecurringDetail = date.ToString("dd/MM/yyyy");
                 var matchedItems = DayDataContexts
                 .Where(item => item.Date.Equals(date) && item.ListInfo.Count != 0)
                 .ToList();

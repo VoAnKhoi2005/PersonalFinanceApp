@@ -288,34 +288,6 @@
                                         </DataGridTemplateColumn.Header>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <!--<StackPanel Orientation="Horizontal">
-                                                    <Button
-                                                        Width="50"
-                                                        Margin="0,0,5,0"
-                                                        BorderBrush="#FF514D4D"
-                                                        BorderThickness="0"
-                                                        Command="{Binding DataContext.RecoverExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                                        CommandParameter="{Binding}"
-                                                        FontSize="15"
-                                                        Foreground="White"
-                                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                                        ToolTip="Resource name: MaterialDesignRaisedButton">
-                                                        <materialDesign:PackIcon Foreground="White" Kind="Reload" />
-                                                    </Button>
-                                                    <Button
-                                                        Width="50"
-                                                        Background="IndianRed"
-                                                        BorderBrush="#FF514D4D"
-                                                        BorderThickness="0"
-                                                        Command="{Binding DataContext.RemoveExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                                        CommandParameter="{Binding}"
-                                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                                        ToolTip="Resource name: MaterialDesignRaisedButton">
-                                                        <materialDesign:PackIcon Foreground="White" Kind="TrashCanOutline" />
-                                                    </Button>
-                                                </StackPanel>-->
                                                 <StackPanel>
                                                     <materialDesign:PopupBox
                                                         Width="40"
@@ -325,8 +297,8 @@
                                                         VerticalAlignment="Top"
                                                         Background="Transparent"
                                                         Foreground="{DynamicResource CommonText}"
-                                                        IsEnabled="True"
-                                                        PopupMode="Click"
+                                                        StaysOpen="True"
+                                                        IsPopupOpen="False"
                                                         Style="{StaticResource MaterialDesignPopupBox}">
                                                         <StackPanel>
                                                             <!--  adjust recurring  -->
@@ -483,7 +455,6 @@
                                     </DataGridTemplateColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
-
                         </Grid>
                     </Grid>
                 </materialDesign:PopupBox>
