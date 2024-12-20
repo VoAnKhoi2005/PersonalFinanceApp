@@ -210,6 +210,7 @@ public class DashboardViewModel : BaseViewModel
             TextColor = OxyColors.CornflowerBlue,
             TitleColor = OxyColors.CornflowerBlue,
             Key = "DaysAxis",
+            
         };
         for (int day = 1; day <= DateTime.DaysInMonth(exB.Year, exB.Month); day++)
         {
@@ -227,6 +228,9 @@ public class DashboardViewModel : BaseViewModel
             LabelFormatter = CustomCurrencyFormat,
             MajorGridlineStyle = LineStyle.Solid,
             Key = "ValueAxis",
+            TitleFontWeight = OxyPlot.FontWeights.Bold, 
+            TitleFontSize = 16,                
+            FontSize = 14,
         };
         plotModel.Axes.Add(valueAxis);
 
@@ -249,6 +253,7 @@ public class DashboardViewModel : BaseViewModel
             YAxisKey = "DaysAxis",
             FillColor = OxyColor.FromRgb(228, 134, 134),
             TrackerFormatString = "{2:N0} VND",
+            FontSize = 14,
         };
         plotModel.Series.Add(columnSeries);
         return plotModel;

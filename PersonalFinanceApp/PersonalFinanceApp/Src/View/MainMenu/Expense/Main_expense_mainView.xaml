@@ -184,7 +184,7 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             FontSize="10"
-                            FontWeight="Normal"
+                            FontWeight="Bold"
                             Foreground="{DynamicResource SuperText}"
                             Text="New expense" />
                         <materialDesign:PackIcon
@@ -193,6 +193,7 @@
                             Margin="5,0,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
+                            FontWeight="Bold"
                             Foreground="{DynamicResource CommonText}"
                             Kind="PlusCircle" />
                     </Grid>
@@ -232,6 +233,7 @@
                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                     DisplayMemberPath="DateExB"
                     FontSize="13"
+                    FontWeight="Bold"
                     Foreground="{DynamicResource CommonText}"
                     IsEditable="False"
                     ItemContainerStyle="{StaticResource ComboBox_style}"
@@ -260,6 +262,7 @@
                     materialDesign:HintAssist.Hint="Filter"
                     materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                     FontSize="13"
+                    FontWeight="Bold"
                     Foreground="{DynamicResource CommonText}"
                     IsEditable="False"
                     IsEnabled="{Binding HaveExpenseBook}"
@@ -591,9 +594,11 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <CheckBox Content="{Binding Name}" IsChecked="{Binding IsChecked, Mode=TwoWay}"
-                                                  Height="30"
-                                                  FontSize="14">
+                                        <CheckBox
+                                            Height="30"
+                                            Content="{Binding Name}"
+                                            FontSize="14"
+                                            IsChecked="{Binding IsChecked, Mode=TwoWay}">
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="Checked">
                                                     <i:InvokeCommandAction Command="{Binding DataContext.FilterCategoryCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding}" />
