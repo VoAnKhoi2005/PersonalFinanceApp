@@ -32,8 +32,6 @@ public class RecurringExpense
 
     public virtual List<Expense> Expenses { get; set; } = new List<Expense>();
 
-    //public virtual DateTime Date { get; set; } = DateTime.MinValue;
-
     private RecurringExpense() { }
 
     public RecurringExpense(string name, string frequency, int interval, DateOnly startDate, int id)
@@ -42,8 +40,8 @@ public class RecurringExpense
         Frequency = frequency;
         Interval = interval;
         StartDate = startDate;
-        //LastTime = DateOnly.FromDateTime(DateTime.Now);
         LastTime = StartDate;
         UserID = id;
+        Status = "Active";
     }
 }

@@ -183,30 +183,33 @@
                         </materialDesign:PopupBox>
                     </Grid>
                 </Border>
-                <Border Width="100"
-                        Height="40"
-                        Margin="5,0,15,0"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Background="{DynamicResource CommonGridBackground}"
-                        CornerRadius="20"
-                        DockPanel.Dock="Right">
+                <Border
+                    Width="100"
+                    Height="40"
+                    Margin="5,0,15,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource CommonGridBackground}"
+                    CornerRadius="20"
+                    DockPanel.Dock="Right">
                     <Button Command="{Binding AddNewGoalCommand}">
                         <Grid>
-                            <TextBlock Margin="0,0,10,0"
-                                       HorizontalAlignment="Right"
-                                       VerticalAlignment="Center"
-                                       FontSize="12"
-                                       FontWeight="Normal"
-                                       Foreground="{DynamicResource SuperText}"
-                                       Text="New goal" />
-                            <materialDesign:PackIcon Width="25"
-                                                     Height="25"
-                                                     Margin="5,0,0,0"
-                                                     HorizontalAlignment="Left"
-                                                     VerticalAlignment="Center"
-                                                     Foreground="{DynamicResource CommonText}"
-                                                     Kind="PlusCircle" />
+                            <TextBlock
+                                Margin="0,0,10,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                FontWeight="Normal"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="New goal" />
+                            <materialDesign:PackIcon
+                                Width="25"
+                                Height="25"
+                                Margin="5,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Foreground="{DynamicResource CommonText}"
+                                Kind="PlusCircle" />
                         </Grid>
                     </Button>
                 </Border>
