@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="clr-namespace:PersonalFinanceApp.ViewModel.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -116,6 +117,11 @@
                     VerticalAlignment="Top"
                     PlacementMode="LeftAndAlignBottomEdges"
                     StaysOpen="True">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="GotFocus">
+                            <i:InvokeCommandAction Command="{Binding LoadDataRecurringCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <materialDesign:PopupBox.ToggleContent>
                         <Border
                             Width="90"
@@ -126,19 +132,21 @@
                             CornerRadius="20"
                             DockPanel.Dock="Right">
                             <Grid>
-                                <materialDesign:PackIcon Kind="Details"
-                                                         Width="25"
-                                                         Height="25"
-                                                         Foreground="{DynamicResource ComponentText}" 
-                                                         VerticalAlignment="Center"
-                                                         HorizontalAlignment="Left"
-                                                         Margin="5 0 0 0"/>
-                                <TextBlock Text="Detail"
-                                           FontSize="14"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Right"
-                                           Foreground="{DynamicResource ComponentText}"
-                                           Margin="0 0 10 0"></TextBlock>
+                                <materialDesign:PackIcon
+                                    Width="25"
+                                    Height="25"
+                                    Margin="5,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="{DynamicResource ComponentText}"
+                                    Kind="Details" />
+                                <TextBlock
+                                    Margin="0,0,10,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Foreground="{DynamicResource ComponentText}"
+                                    Text="Detail" />
                             </Grid>
                         </Border>
                     </materialDesign:PopupBox.ToggleContent>
@@ -195,16 +203,16 @@
 
 
                         </DockPanel>
+                        <!--  list recurring  -->
                         <Grid Grid.Row="1">
                             <DataGrid
-                                Name="ListReocver"
+                                Name="ListReccurring"
                                 Grid.Row="1"
                                 Margin="5,0,5,5"
                                 HorizontalAlignment="Stretch"
                                 AutoGenerateColumns="False"
                                 Background="{DynamicResource DatagridBG}"
                                 Foreground="{DynamicResource DatagridFG}"
-                                IsReadOnly="True"
                                 ItemsSource="{Binding SourceRecurringExpense}"
                                 SelectedItem="{Binding SelectedRecurringExpense}">
 
@@ -260,7 +268,7 @@
                                         </DataGridTextColumn.Header>
                                     </DataGridTextColumn>
                                     <!--  Status  -->
-                                    <!--<DataGridTextColumn Binding="{Binding Status}">
+                                    <DataGridTextColumn Binding="{Binding Status}">
                                         <DataGridTextColumn.Header>
                                             <TextBlock
                                                 FontSize="13"
@@ -268,7 +276,7 @@
                                                 Foreground="{DynamicResource SuperText}"
                                                 Text="Status" />
                                         </DataGridTextColumn.Header>
-                                    </DataGridTextColumn>-->
+                                    </DataGridTextColumn>
 
                                     <DataGridTemplateColumn CanUserResize="False">
                                         <DataGridTemplateColumn.Header>
@@ -276,11 +284,11 @@
                                                 FontSize="13"
                                                 FontWeight="Bold"
                                                 Foreground="{DynamicResource SuperText}"
-                                                Text="Commands" />
+                                                Text="Tools" />
                                         </DataGridTemplateColumn.Header>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
+                                                <!--<StackPanel Orientation="Horizontal">
                                                     <Button
                                                         Width="50"
                                                         Margin="0,0,5,0"
@@ -307,12 +315,175 @@
                                                         ToolTip="Resource name: MaterialDesignRaisedButton">
                                                         <materialDesign:PackIcon Foreground="White" Kind="TrashCanOutline" />
                                                     </Button>
+                                                </StackPanel>-->
+                                                <StackPanel>
+                                                    <materialDesign:PopupBox
+                                                        Width="40"
+                                                        Height="40"
+                                                        Margin="0,5,0,0"
+                                                        HorizontalAlignment="Right"
+                                                        VerticalAlignment="Top"
+                                                        Background="Transparent"
+                                                        Foreground="{DynamicResource CommonText}"
+                                                        IsEnabled="True"
+                                                        PopupMode="Click"
+                                                        Style="{StaticResource MaterialDesignPopupBox}">
+                                                        <StackPanel>
+                                                            <!--  adjust recurring  -->
+                                                            <Button
+                                                                Grid.Column="3"
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Bottom"
+                                                                Command="{Binding DataContext.EditRecurringExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                                                CommandParameter="{Binding}">
+                                                                <Button.Style>
+                                                                    <Style TargetType="Button">
+                                                                        <Setter Property="Background" Value="Transparent" />
+                                                                        <Setter Property="Foreground" Value="{DynamicResource ComponentText}" />
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate>
+                                                                                    <Border
+                                                                                        Height="30"
+                                                                                        Background="{TemplateBinding Background}"
+                                                                                        CornerRadius="30 30 0 0">
+                                                                                        <DockPanel>
+                                                                                            <materialDesign:PackIcon
+                                                                                                Width="20"
+                                                                                                Height="20"
+                                                                                                Margin="15,0,0,0"
+                                                                                                HorizontalAlignment="Left"
+                                                                                                VerticalAlignment="Center"
+                                                                                                DockPanel.Dock="Left"
+                                                                                                Foreground="{DynamicResource ComponentText}"
+                                                                                                Kind="Pencil" />
+                                                                                            <TextBlock
+                                                                                                Margin="15,0,0,0"
+                                                                                                HorizontalAlignment="Left"
+                                                                                                VerticalAlignment="Center"
+                                                                                                DockPanel.Dock="Left"
+                                                                                                FontSize="14"
+                                                                                                Foreground="{TemplateBinding Foreground}"
+                                                                                                Text="Edit" />
+                                                                                        </DockPanel>
+                                                                                    </Border>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                        <Style.Triggers>
+                                                                            <Trigger Property="IsMouseOver" Value="true">
+                                                                                <Setter Property="Cursor" Value="Hand" />
+                                                                            </Trigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Button.Style>
+                                                            </Button>
+                                                            <!--  suspend  -->
+                                                            <Button
+                                                                Grid.Column="4"
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Bottom"
+                                                                Command="{Binding DataContext.SuspendRecurringExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                                                CommandParameter="{Binding}">
+                                                                <Button.Style>
+                                                                    <Style TargetType="Button">
+                                                                        <Setter Property="Background" Value="Transparent" />
+                                                                        <Setter Property="Foreground" Value="{DynamicResource ComponentText}" />
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate>
+                                                                                    <Border Height="30" Background="{TemplateBinding Background}">
+                                                                                        <DockPanel>
+                                                                                            <materialDesign:PackIcon
+                                                                                                Width="20"
+                                                                                                Height="20"
+                                                                                                Margin="15,0,0,0"
+                                                                                                HorizontalAlignment="Left"
+                                                                                                VerticalAlignment="Center"
+                                                                                                DockPanel.Dock="Left"
+                                                                                                Foreground="{DynamicResource ComponentText}"
+                                                                                                Kind="History" />
+                                                                                            <TextBlock
+                                                                                                Margin="15,0,0,0"
+                                                                                                HorizontalAlignment="Left"
+                                                                                                VerticalAlignment="Center"
+                                                                                                DockPanel.Dock="Left"
+                                                                                                FontSize="14"
+                                                                                                Foreground="{TemplateBinding Foreground}"
+                                                                                                Text="Suspend" />
+                                                                                        </DockPanel>
+                                                                                    </Border>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                        <Style.Triggers>
+                                                                            <Trigger Property="IsMouseOver" Value="true">
+                                                                                <Setter Property="Cursor" Value="Hand" />
+
+                                                                            </Trigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Button.Style>
+                                                            </Button>
+                                                            <!--  delete  -->
+                                                            <Button
+                                                                Grid.Column="5"
+                                                                HorizontalAlignment="Left"
+                                                                VerticalAlignment="Bottom"
+                                                                Command="{Binding DataContext.DeleteRecurringExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                                                CommandParameter="{Binding}">
+                                                                <Button.Style>
+                                                                    <Style TargetType="Button">
+                                                                        <Setter Property="Background" Value="Transparent" />
+                                                                        <Setter Property="Foreground" Value="#FFE35D5D" />
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate>
+                                                                                    <Border
+                                                                                        Height="30"
+                                                                                        Background="{TemplateBinding Background}"
+                                                                                        CornerRadius="0 0 30 30">
+                                                                                        <DockPanel>
+                                                                                            <materialDesign:PackIcon
+                                                                                                Width="20"
+                                                                                                Height="20"
+                                                                                                Margin="15,0,0,0"
+                                                                                                HorizontalAlignment="Left"
+                                                                                                VerticalAlignment="Center"
+                                                                                                DockPanel.Dock="Left"
+                                                                                                Foreground="#FFE35D5D"
+                                                                                                Kind="Delete" />
+                                                                                            <TextBlock
+                                                                                                Margin="15,0,0,0"
+                                                                                                HorizontalAlignment="Left"
+                                                                                                VerticalAlignment="Center"
+                                                                                                DockPanel.Dock="Left"
+                                                                                                FontSize="14"
+                                                                                                Foreground="{TemplateBinding Foreground}"
+                                                                                                Text="Delete" />
+                                                                                        </DockPanel>
+                                                                                    </Border>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                        <Style.Triggers>
+                                                                            <Trigger Property="IsMouseOver" Value="true">
+                                                                                <Setter Property="Cursor" Value="Hand" />
+                                                                                <Setter Property="Foreground" Value="#FFF42B2B" />
+                                                                            </Trigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Button.Style>
+                                                            </Button>
+                                                        </StackPanel>
+                                                    </materialDesign:PopupBox>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
+
                         </Grid>
                     </Grid>
                 </materialDesign:PopupBox>

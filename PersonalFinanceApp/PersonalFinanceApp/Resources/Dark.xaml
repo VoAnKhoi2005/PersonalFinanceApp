@@ -1,6 +1,8 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:lvcPaint="clr-namespace:LiveChartsCore.SkiaSharpView.Painting;assembly=LiveChartsCore.SkiaSharpView"
-                    xmlns:skia="clr-namespace:SkiaSharp;assembly=SkiaSharp">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lvcPaint="clr-namespace:LiveChartsCore.SkiaSharpView.Painting;assembly=LiveChartsCore.SkiaSharpView"
+    xmlns:skia="clr-namespace:SkiaSharp;assembly=SkiaSharp">
     <!--  overall  -->
     <SolidColorBrush x:Key="MainBackground" Color="#202123" />
 
@@ -88,36 +90,22 @@
     <SolidColorBrush x:Key="Setting_RadioButtonChecked" Color="#FFFFFF" />
     <SolidColorBrush x:Key="Setting_RadioButtonUnChecked" Color="#34313F" />
 
-    <SolidColorBrush x:Key="CalendarText1"
-                     Color="#E6ECEF" />
-    <SolidColorBrush x:Key="CalendarText2"
-                     Color="#ECF5F7" />
-    <SolidColorBrush x:Key="CalendarText3"
-                     Color="#F8FDFF" />
+    <SolidColorBrush x:Key="CalendarText1" Color="#E6ECEF" />
+    <SolidColorBrush x:Key="CalendarText2" Color="#ECF5F7" />
+    <SolidColorBrush x:Key="CalendarText3" Color="#F8FDFF" />
 
-    <SolidColorBrush x:Key="DashBoardGoalCardonHovered"
-                     Color="#525252" />
+    <SolidColorBrush x:Key="DashBoardGoalCardonHovered" Color="#525252" />
 
-    <lvcPaint:SolidColorPaint x:Key="PieChartLegendForeground"
-                              Color="{x:Static skia:SKColors.Red}" />
-    <SolidColorBrush x:Key="Calendar_popUpBackground"
-                     Color="#5591B3" />
-    <SolidColorBrush x:Key="Calendar_popUpSuperText"
-                     Color="White" />
-    <SolidColorBrush x:Key="Calendar_popUpText"
-                     Color="White" />
-    <SolidColorBrush x:Key="Calendar_popUpBackground2"
-                     Color="#3D4446" />
+    <lvcPaint:SolidColorPaint x:Key="PieChartLegendForeground" Color="{x:Static skia:SKColors.Red}" />
+    <SolidColorBrush x:Key="Calendar_popUpBackground" Color="#5591B3" />
+    <SolidColorBrush x:Key="Calendar_popUpSuperText" Color="White" />
+    <SolidColorBrush x:Key="Calendar_popUpText" Color="White" />
+    <SolidColorBrush x:Key="Calendar_popUpBackground2" Color="#3D4446" />
 
-    <SolidColorBrush x:Key="Ntf_goal"
-                     Color="CadetBlue" />
-    <SolidColorBrush x:Key="Ntf_goalCategory"
-                     Color="#354A04" />
-    <SolidColorBrush x:Key="Ntf_goalName"
-                     Color="#C76269" />
-    <SolidColorBrush x:Key="Ntf_goalTime"
-                     Color="#020DA6" />
-    <SolidColorBrush x:Key="NotifiHover"
-                     Color="#D1E8F9" />
+    <SolidColorBrush x:Key="Ntf_goal" Color="CadetBlue" />
+    <SolidColorBrush x:Key="Ntf_goalCategory" Color="#354A04" />
+    <SolidColorBrush x:Key="Ntf_goalName" Color="#C76269" />
+    <SolidColorBrush x:Key="Ntf_goalTime" Color="#020DA6" />
+    <SolidColorBrush x:Key="NotifiHover" Color="#D1E8F9" />
 
 </ResourceDictionary>

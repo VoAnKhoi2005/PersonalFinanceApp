@@ -129,7 +129,7 @@ public class CalendarViewModel : BaseViewModel
         try {
             DayDataContexts.Clear();
             ObservableCollection<CalendarDayButton> dayButtons = GetVisualChildren<CalendarDayButton>(calendar);
-            var recs = DBManager.GetCondition<RecurringExpense>(re => re.UserID == usr.UserID && re.RecurringExpenseID != null);
+            var recs = DBManager.GetCondition<RecurringExpense>(re => re.UserID == usr.UserID && re.RecurringExpenseID != null && re.Status.CompareTo("Active") == 0);
             if (recs.Count == 0) {
                 foreach (CalendarDayButton dayButton in dayButtons) {
                     dayButton.MouseEnter += DayButton_MouseEnter;

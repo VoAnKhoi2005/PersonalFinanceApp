@@ -12,10 +12,8 @@
 
     <UserControl.Resources>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily"
-                    Value="Sans Serif Collection" />
-            <Setter Property="FontWeight"
-                    Value="Regular" />
+            <Setter Property="FontFamily" Value="Sans Serif Collection" />
+            <Setter Property="FontWeight" Value="Regular" />
         </Style>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <Style x:Key="CalendarStyle1" TargetType="{x:Type Calendar}">
@@ -770,16 +768,13 @@
             StaysOpen="True">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseEnter">
-                    <i:InvokeCommandAction Command="{Binding Popup_MouseEnterCommand}"
-                                           CommandParameter="{Binding ElementName=DayPopup}" />
+                    <i:InvokeCommandAction Command="{Binding Popup_MouseEnterCommand}" CommandParameter="{Binding ElementName=DayPopup}" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="MouseLeave">
-                    <i:InvokeCommandAction Command="{Binding Popup_MouseLeaveCommand}"
-                                           CommandParameter="{Binding ElementName=DayPopup}" />
+                    <i:InvokeCommandAction Command="{Binding Popup_MouseLeaveCommand}" CommandParameter="{Binding ElementName=DayPopup}" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="Loaded">
-                    <i:InvokeCommandAction Command="{Binding LoadedPopupCommand}"
-                                           CommandParameter="{Binding ElementName=DayPopup}" />
+                    <i:InvokeCommandAction Command="{Binding LoadedPopupCommand}" CommandParameter="{Binding ElementName=DayPopup}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <Grid>
@@ -787,49 +782,48 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Border Width="200"
-                        Height="auto"
-                        Padding="10"
-                        Background="{DynamicResource Calendar_popUpBackground}"
-                        Grid.Column="0"
-                        >
+                <Border
+                    Grid.Column="0"
+                    Width="200"
+                    Height="auto"
+                    Padding="10"
+                    Background="{DynamicResource Calendar_popUpBackground}">
                     <Grid>
-                    <TextBlock x:Name="PopupText"
-                               FontWeight="Bold"
-                               Text="Recurring in"
-                                   Foreground="{DynamicResource Calendar_popUpSuperText}"
-                               FontSize="16"
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Center" 
-                               Margin="0 5 0 0"/>
-                    
-                    <!--binding date-->
-                    <TextBlock 
-                               FontWeight="Bold"
-                               Text="17th, December, 2024"
-                                   Foreground="{DynamicResource Calendar_popUpSuperText}"
-                               FontSize="16"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center" 
-                        Margin=" 0 20 0 0"/>
+                        <TextBlock
+                            x:Name="PopupText"
+                            Margin="0,5,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="{DynamicResource Calendar_popUpSuperText}"
+                            Text="Recurring in" />
+
+                        <!--  binding date  -->
+                        <TextBlock
+                            Margin="0,20,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="{DynamicResource Calendar_popUpSuperText}"
+                            Text="{Binding DateTimeRecurringDetail}" />
                     </Grid>
                 </Border>
 
-                <Border CornerRadius="30"
-                        Grid.Column="1"
-                        MaxHeight="200"
-                        >
-                    <ScrollViewer VerticalScrollBarVisibility="Hidden"
-                                  >
-                        <ItemsControl ItemsSource="{Binding SourceRecurringInfo}"
-                                      Background="{DynamicResource Calendar_popUpBackground2}"
-                                      Width="200"
-                                      FontSize="16"
-                                      Foreground="{DynamicResource Calendar_popUpText}"
-                                      VerticalAlignment="Center"
-                                      HorizontalAlignment="Center"
-                                       
-                                      >
+                <Border
+                    Grid.Column="1"
+                    MaxHeight="200"
+                    CornerRadius="30">
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                        <ItemsControl
+                            Width="200"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="{DynamicResource Calendar_popUpBackground2}"
+                            FontSize="16"
+                            Foreground="{DynamicResource Calendar_popUpText}"
+                            ItemsSource="{Binding SourceRecurringInfo}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock />

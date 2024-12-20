@@ -105,6 +105,7 @@ public class RecurringAddExpenseViewModel : BaseViewModel {
         var result = MessageBox.Show("Bạn có chắc không muốn thêm expense này!", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Information);
         if (result == MessageBoxResult.Yes) {
             SourceRecurringExpense.Remove(ItemRecurring);
+
         }
     }
     public void LoadData() {

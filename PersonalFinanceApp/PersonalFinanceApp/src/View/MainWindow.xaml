@@ -16,10 +16,10 @@
     MinWidth="1152"
     MinHeight="780"
     Background="{DynamicResource MainBackground}"
+    Icon="\Resources\img\f7e028af-f53f-47b3-91cc-fd1e3a553db1.ico"
     ResizeMode="CanResizeWithGrip"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d"
-        Icon="D:\GitHub\PersonalFinanceApp\PersonalFinanceApp\PersonalFinanceApp\Resources\img\f7e028af-f53f-47b3-91cc-fd1e3a553db1.ico">
+    mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closed">
             <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
@@ -75,7 +75,7 @@
                         Margin="20,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                           Source="\Resources\img\f7e028af-f53f-47b3-91cc-fd1e3a553db1.ico" />
+                        Source="\Resources\img\f7e028af-f53f-47b3-91cc-fd1e3a553db1.ico" />
                     <TextBlock
                         Margin="50,0,0,0"
                         HorizontalAlignment="Center"
@@ -558,6 +558,9 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type viewModels:RecurringAddExpenseViewModel}">
                     <views:Main_Recurring_AddExpense />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:RecurringEditViewModel}">
+                    <views:Recurring_Expense_Edit />
                 </DataTemplate>
                 <!--  Setting  -->
                 <DataTemplate DataType="{x:Type viewModels:SettingChangedEmailViewModel}">
