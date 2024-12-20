@@ -33,6 +33,10 @@ public class RecurringStore : INotifyPropertyChanged {
     public void NotifyRecurring() {
         TriggerAction?.Invoke();
     }
+    public event Action TriggerEditRecurring;
+    public void NotifyRecurringEdit() {
+        TriggerEditRecurring?.Invoke();
+    }
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged(string? propertyName = null) {

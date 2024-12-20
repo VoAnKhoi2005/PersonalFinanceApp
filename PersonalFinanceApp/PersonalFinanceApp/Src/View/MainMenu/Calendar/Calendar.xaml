@@ -826,7 +826,7 @@
                             ItemsSource="{Binding SourceRecurringInfo}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock />
+                                    <TextBlock TextAlignment="Center"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

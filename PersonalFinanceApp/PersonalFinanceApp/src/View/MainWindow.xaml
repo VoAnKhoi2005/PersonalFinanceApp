@@ -317,7 +317,7 @@
                                     VerticalAlignment="Bottom"
                                     FontSize="16"
                                     FontWeight="Bold"
-                                    Text="@username" />
+                                    Text="{Binding UserNameAdmin}" />
 
                                 <!--  sign out  -->
                                 <Border Grid.Row="1">
@@ -550,6 +550,9 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type viewModels:RecurringEditViewModel}">
                     <views:Recurring_Expense_Edit />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:RecurringDetailViewModel}">
+                    <views:Main_Recurring_Detail />
                 </DataTemplate>
                 <!--  Setting  -->
                 <DataTemplate DataType="{x:Type viewModels:SettingChangedEmailViewModel}">

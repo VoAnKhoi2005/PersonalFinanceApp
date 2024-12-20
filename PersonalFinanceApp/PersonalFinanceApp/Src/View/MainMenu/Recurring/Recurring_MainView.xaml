@@ -111,31 +111,34 @@
                 </Border>
 
 
-                <Border Width="100"
-                        Height="40"
-                        Margin="0,15,230,0"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        Background="{DynamicResource Summary_TransactionAndCategoryBackground}"
-                        CornerRadius="20"
-                        DockPanel.Dock="Top">
+                <Border
+                    Width="100"
+                    Height="40"
+                    Margin="0,15,230,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Background="{DynamicResource Summary_TransactionAndCategoryBackground}"
+                    CornerRadius="20"
+                    DockPanel.Dock="Top">
 
-                    <!--binding-->
-                    <Button Command="{Binding AddNewRecurringCommand}">
+                    <!--  binding  -->
+                    <Button Command="{Binding RecurringDetailCommand}">
                         <Grid>
-                            <materialDesign:PackIcon Kind="BookOpenPageVariant" 
-                            Width="25"
-                                                     Height="25"
-                                                     Foreground="{DynamicResource ComponentText}"
-                                                     VerticalAlignment="Center"
-                                                     HorizontalAlignment="Left"
-                                                     Margin="10 0 0 0" />
-                            <TextBlock Text="Detail"
-                                       FontSize="14"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Right"
-                                       Foreground="{DynamicResource ComponentText}"
-                                       Margin="0 0 15 0"></TextBlock>
+                            <materialDesign:PackIcon
+                                Width="25"
+                                Height="25"
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Foreground="{DynamicResource ComponentText}"
+                                Kind="BookOpenPageVariant" />
+                            <TextBlock
+                                Margin="0,0,15,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FontSize="14"
+                                Foreground="{DynamicResource ComponentText}"
+                                Text="Detail" />
                         </Grid>
                     </Button>
                 </Border>

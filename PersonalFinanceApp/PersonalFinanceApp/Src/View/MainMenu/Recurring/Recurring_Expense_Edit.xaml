@@ -156,10 +156,9 @@
                         FontSize="14"
                         Foreground="{DynamicResource ComponentText}"
                         SelectedDate="{Binding DateTimeRecurring}"
-                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        Text="{Binding PickDate}" />
                 </Grid>
-
-
 
             </Grid>
 

@@ -24,6 +24,14 @@ public class MainViewModel : BaseViewModel
     private readonly SharedService _sharedService;  
     private readonly AccountStore _accountStore;
     private readonly ThemeStore _themeStore;
+    public string UserNameAdmin {
+        get => _userNameAdmin;
+        set {
+            _userNameAdmin = value;
+            OnPropertyChanged();
+        }
+    }
+    private string _userNameAdmin;
     public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
     public BaseViewModel? CurrentModalViewModel => _modalNavigationStore.CurrentModalViewModel;
     //notify
@@ -74,7 +82,7 @@ public class MainViewModel : BaseViewModel
 
         //load theme
         _themeStore.Notify();
-
+        
         NotifyCardViewModels = new ObservableCollection<object>();
 
         DashBoardNavigateCommand = new NavigateCommand<DashboardViewModel>(serviceProvider);
@@ -94,6 +102,7 @@ public class MainViewModel : BaseViewModel
         CloseWindowCommand = new RelayCommand<Window>(CloseWindow);//exit
     }
     public void LoadNotify() {
+        UserNameAdmin = "@" + _accountStore.Users.Username;
         LoadNotifyGoal();
         LoadNotifyRecurring();
     }

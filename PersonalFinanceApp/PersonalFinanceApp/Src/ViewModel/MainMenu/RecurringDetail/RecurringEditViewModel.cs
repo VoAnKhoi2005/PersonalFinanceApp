@@ -60,6 +60,16 @@ public class RecurringEditViewModel : BaseViewModel {
         }
     }
     private string _selectedFrequency;
+    public string TextFrequency {
+        get => _textFrequency;
+        set {
+            if (_textFrequency != value) {
+                _textFrequency = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _textFrequency;
     //date
     public DateTime? DateTimeRecurring {
         get => _dateTimeRecurring;
@@ -113,6 +123,17 @@ public class RecurringEditViewModel : BaseViewModel {
         }
     }
     private string _descriptionRecurring;
+    //pick date
+    public string PickDate {
+        get => _pickDate;
+        set {
+            if (_pickDate != value) {
+                _pickDate = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _pickDate;
 
     public User usr { get; set; }
 
@@ -167,21 +188,24 @@ public class RecurringEditViewModel : BaseViewModel {
             }
             //update recurring
             var re = DBManager.GetFirst<RecurringExpense>(rec => rec.UserID == usr.UserID && rec.RecurringExpenseID == _recurringStore.RecurringExpense.RecurringExpenseID);
+            re.Name = NameRecurring;
+            re.Interval = int.Parse(IntervalRecurring);
+            re.StartDate = DateOnly.FromDateTime((DateTime)DateTimeRecurring);
+            re.Frequency = SelectedFrequency;
             check = DBManager.Update(re);
             if (check == false) {
                 throw new Exception("Update Recurring thất bại");
             }
             //create expense
             Expense exp = new Expense(long.Parse(AmountRecurring), NameRecurring, DateOnlyRecurring, cate, exB, DescriptionRecurring);
-            var recurring = DBManager.GetFirst<RecurringExpense>(re => re.StartDate == DateOnlyRecurring &&
-                                                                re.Name == NameRecurring && re.Frequency == SelectedFrequency &&
-                                                                re.Interval == int.Parse(IntervalRecurring) && re.UserID == int.Parse(_accountStore.UsersID));
-            exp.RecurringExpenseID = recurring.RecurringExpenseID;
+            
+            exp.RecurringExpenseID = _recurringStore.RecurringExpense.RecurringExpenseID;
             check = DBManager.Insert(exp);
             if (check == false) {
                 throw new Exception("Thêm Expense thất bại");
             }
             _recurringStore.NotifyRecurring();
+            _recurringStore.NotifyRecurringEdit();
         }
         catch (Exception ex) {
             MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -196,5 +220,17 @@ public class RecurringEditViewModel : BaseViewModel {
         ItemsSourceFrequency.Add("Weekly");
         ItemsSourceFrequency.Add("Monthly");
         ItemsSourceFrequency.Add("Yearly");
+        //load data
+        var item = DBManager.GetFirst<RecurringExpense>(re => re.UserID == _accountStore.Users.UserID && re.RecurringExpenseID == _recurringStore.RecurringExpense.RecurringExpenseID);
+        NameRecurring = item.Name;
+        IntervalRecurring = item.Interval.ToString();
+        SelectedFrequency = item.Frequency;
+        TextFrequency = item.Frequency.ToString();
+        var exp = DBManager.GetFirst<Expense>(e => e.UserID == _accountStore.Users.UserID && e.RecurringExpenseID == item.RecurringExpenseID);
+        PickDate = item.StartDate.ToString();
+        AmountRecurring = exp.Amount.ToString();
+        var cate = DBManager.GetFirst<Category>(c => c.UserID == _accountStore.Users.UserID && exp.CategoryID == c.CategoryID);
+        CategoryRecurring = cate.Name;
+        DescriptionRecurring = exp.Description;
     }
 }
