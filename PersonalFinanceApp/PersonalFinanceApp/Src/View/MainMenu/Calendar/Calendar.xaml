@@ -811,10 +811,7 @@
                     </Grid>
                 </Border>
 
-                <Border
-                    Grid.Column="1"
-                        Background="{DynamicResource Calendar_popUpBackground2}"
-                    >
+                <Border Grid.Column="1" Background="{DynamicResource Calendar_popUpBackground2}">
                     <ScrollViewer VerticalScrollBarVisibility="Hidden">
                         <ItemsControl
                             Width="200"
@@ -826,7 +823,7 @@
                             ItemsSource="{Binding SourceRecurringInfo}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock TextAlignment="Center"/>
+                                    <TextBlock TextAlignment="Center" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

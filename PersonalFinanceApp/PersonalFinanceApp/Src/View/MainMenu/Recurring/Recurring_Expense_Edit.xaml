@@ -157,7 +157,13 @@
                         Foreground="{DynamicResource ComponentText}"
                         SelectedDate="{Binding DateTimeRecurring}"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                        Text="{Binding PickDate}" />
+                        Text="{Binding PickDate}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectedDateChanged">
+                                <i:InvokeCommandAction Command="{Binding LoadSourceCategoryCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </DatePicker>
                 </Grid>
 
             </Grid>
@@ -239,7 +245,7 @@
                         Text="*"
                         Visibility="Visible" />
 
-                    <TextBox
+                    <ComboBox
                         Width="160"
                         Height="40"
                         Margin="0,47,0,0"
@@ -248,12 +254,11 @@
                         materialDesign:HintAssist.Hint="Your category"
                         materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                         BorderBrush="{x:Null}"
-                        CaretBrush="{DynamicResource CommonText}"
                         FontSize="14"
                         Foreground="{DynamicResource CommonText}"
-                        SelectionBrush="{DynamicResource CommonText}"
-                        Text="{Binding CategoryRecurring}"
-                        TextAlignment="Left" />
+                        ItemsSource="{Binding SourceCategory}"
+                        SelectedItem="{Binding SelectedCategory}"
+                        Text="{Binding CategoryRecurring}" />
                     <!--  when choose Your custom Category : this shown  -->
                     <TextBox
                         Width="160"

@@ -45,7 +45,7 @@ public class ExpenseNewCategoryViewModel : BaseViewModel {
             ExBMonth = _expenseStore.ExpenseBook.Month,
             ExBYear = _expenseStore.ExpenseBook.Year,
         };
-        DBManager.Insert<Category>(newCategory);
+        DBManager.Insert(newCategory);
         _expenseStore.Categorys = newCategory;
         _expenseStore.NotifyHaveNewCategory();
         _modalNavigationStore.Close();

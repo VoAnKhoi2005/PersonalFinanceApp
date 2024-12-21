@@ -43,12 +43,13 @@
         <DockPanel Grid.Row="0">
 
             <!--  return here  -->
-            <Button Command="{Binding CloseModalCommand}"
-                    Width="60"
-                    Height="40"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Left" 
-                    Margin="15 0 0 0">
+            <Button
+                Width="60"
+                Height="40"
+                Margin="15,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Command="{Binding CloseModalCommand}">
                 <Button.Resources>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="Transparent" />
@@ -112,7 +113,7 @@
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                         Style="{StaticResource MaterialDesignRaisedButton}"
                                         ToolTip="Resource name: MaterialDesignRaisedButton">
-                                        <materialDesign:PackIcon Foreground="White" Kind="Reload" />
+                                        <materialDesign:PackIcon Foreground="White" Kind="Add" />
                                     </Button>
                                     <Button
                                         Width="50"

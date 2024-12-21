@@ -126,7 +126,7 @@ public class ExpenseNewExBViewModel : BaseViewModel {
             };
 
         Years = new ObservableCollection<int>();
-        for (int year = 2000; year <= DateTime.Now.Year; year++) {
+        for (int year = 2000; year <= DateTime.Now.Year + 5; year++) {
             Years.Add(year);
         }
     }
@@ -153,7 +153,33 @@ public class ExpenseNewExBViewModel : BaseViewModel {
             }
             DBManager.Insert(expenseBook);
             _expenseStore.TextChangedExp = expenseBook.Month.ToString() + "/" + expenseBook.Year.ToString();
-
+            if(expenseBook.Month == 1) {
+                var categoryPrevious = DBManager.GetCondition<Category>(c => c.UserID == _accountStore.Users.UserID && 12 == c.ExBMonth && expenseBook.Year - 1 == c.ExBYear);
+                if (categoryPrevious.Count != 0) {
+                    var choose = MessageBox.Show("Bạn có muốn sử dụng category tháng trước không", "Notifcation", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                    if (choose == MessageBoxResult.Yes) {
+                        foreach (var item in categoryPrevious) {
+                            var cate = new Category(item.Name, expenseBook.Month, expenseBook.Year, _accountStore.Users.UserID);
+                            bool check = DBManager.Insert(cate);
+                            if (!check) throw new Exception("Thêm category tháng trước thất bại");
+                        }
+                    }
+                }
+            }
+            else {
+                var categoryPrevious = DBManager.GetCondition<Category>(c => c.UserID == _accountStore.Users.UserID && expenseBook.Month - 1 == c.ExBMonth && expenseBook.Year - 1 == c.ExBYear);
+                if (categoryPrevious.Count != 0) {
+                    var choose = MessageBox.Show("Bạn có muốn sử dụng category tháng trước không", "Notifcation", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                    if (choose == MessageBoxResult.Yes) {
+                        foreach (var item in categoryPrevious) {
+                            var cate = new Category(item.Name, expenseBook.Month, expenseBook.Year, _accountStore.Users.UserID);
+                            bool check = DBManager.Insert(cate);
+                            if (!check) throw new Exception("Thêm category tháng trước thất bại");
+                        }
+                    }
+                }
+            }
+            
             _expenseStore.ExpenseBook = expenseBook;
             _sharedService.Notify();
 

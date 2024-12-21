@@ -9,8 +9,8 @@ using PersonalFinanceApp.Model;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Globalization;
+using Syncfusion.Windows.Controls.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class ExpenseViewModel : BaseViewModel {
@@ -167,6 +167,7 @@ public class ExpenseViewModel : BaseViewModel {
         }
     }
     private ObservableCollection<ExpenseBookAdvance> _sourceExpenseBook = new();
+
     //selected exb
     public ExpenseBookAdvance SelectedExpenseBook {
         get => _selectedExpenseBook;
@@ -220,6 +221,21 @@ public class ExpenseViewModel : BaseViewModel {
         }
     }
     private string _budgetCurrent;
+    //all checked
+    private bool _isAllChecked;
+
+    public bool IsAllChecked {
+        get => _isAllChecked;
+        set {
+            if (_isAllChecked != value) {
+                _isAllChecked = value;
+                OnPropertyChanged(nameof(IsAllChecked));
+                UpdateItemsCheckState();
+                OnPropertyChanged(nameof(SourceCategory));
+            }
+        }
+    }
+
     #endregion
     #region Command
     public ICommand AddNewExpenseCommand { get; set; }
@@ -238,9 +254,9 @@ public class ExpenseViewModel : BaseViewModel {
     public ICommand EditBudgetExBCommand { get; set; } 
     public ICommand TextChangedFilterCommand { get; set; }
     public ICommand FilterCategoryCommand { get; set; } 
-
     public ICommand ChangedExpenseBudgetCommand { get; set; }
     public ICommand UpdateExpenseBudgetCommand { get; set; }
+    public ICommand AddNewCategoryCommand { get; set; }
     #endregion
 
     public ExpenseViewModel(IServiceProvider serviceProvider) {
@@ -256,10 +272,11 @@ public class ExpenseViewModel : BaseViewModel {
         RecycleExpenseCommand = new NavigateModalCommand<ExpenseRecycleViewModel>(serviceProvider);
         NewExpenseBookCommand = new NavigateModalCommand<ExpenseNewExBViewModel>(serviceProvider);
         EditBudgetExBCommand = new NavigateModalCommand<ExpenseEditBudgetViewModel>(serviceProvider);
+        AddNewCategoryCommand = new NavigateModalCommand<ExpenseNewCategoryViewModel>(serviceProvider);
 
         GetNewest();
         LoadExpenses();
-
+        IsAllChecked = true;
         _sharedService.TriggerAction += LoadNewExpenseBook;
 
         RefreshExpenseCommand = new RelayCommand<object>(LoadExpenses);
@@ -279,6 +296,7 @@ public class ExpenseViewModel : BaseViewModel {
         //expesne budget changed
         ChangedExpenseBudgetCommand = new RelayCommand<object>(ChangedExpenseBudget);
         UpdateExpenseBudgetCommand = new RelayCommand<object>(UpdateExpenseBudget);
+
     }
     public void UpdateExpenseBudget(object? parameter = null) {
         try {
@@ -371,7 +389,36 @@ public class ExpenseViewModel : BaseViewModel {
     public void CreateNewExpenseBook() {
         try {
             ExpensesBook exB = new ExpensesBook(DateTime.Now.Month, DateTime.Now.Year, _accountStore.Users, _accountStore.Users.DefaultBudget);
-            DBManager.Insert<ExpensesBook>(exB);
+            
+            bool check = DBManager.Insert(exB);
+            if (!check) throw new Exception("Thêm expense book thất bại");
+
+            if (exB.Month == 1) {
+                var categoryPrevious = DBManager.GetCondition<Category>(c => c.UserID == _accountStore.Users.UserID && 12 == c.ExBMonth && exB.Year - 1 == c.ExBYear);
+                if (categoryPrevious.Count != 0) {
+                    var choose = MessageBox.Show("Bạn có muốn sử dụng category tháng trước không", "Notifcation", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                    if (choose == MessageBoxResult.Yes) {
+                        foreach (var item in categoryPrevious) {
+                            var cate = new Category(item.Name, exB.Month, exB.Year, _accountStore.Users.UserID);
+                            bool check1 = DBManager.Insert(cate);
+                            if (!check1) throw new Exception("Thêm category tháng trước thất bại");
+                        }
+                    }
+                }
+            }
+            else {
+                var categoryPrevious = DBManager.GetCondition<Category>(c => c.UserID == _accountStore.Users.UserID && exB.Month - 1 == c.ExBMonth && exB.Year - 1 == c.ExBYear);
+                if (categoryPrevious.Count != 0) {
+                    var choose = MessageBox.Show("Bạn có muốn sử dụng category tháng trước không", "Notifcation", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                    if (choose == MessageBoxResult.Yes) {
+                        foreach (var item in categoryPrevious) {
+                            var cate = new Category(item.Name, exB.Month, exB.Year, _accountStore.Users.UserID);
+                            bool check1 = DBManager.Insert(cate);
+                            if (!check1) throw new Exception("Thêm category tháng trước thất bại");
+                        }
+                    }
+                }
+            }
             HaveExpenseBook = true;
             ExpenseBookAdvance ex = new ExpenseBookAdvance(exB.Month, exB.Year, exB);
             SelectedExpenseBook = ex;
@@ -402,10 +449,62 @@ public class ExpenseViewModel : BaseViewModel {
     }
     public void ReviewCategory() {
         if (SourceCategory.Count == 0) return;
-        CategoryFilter.Clear();
-        foreach (var item in SourceCategory) {
-            if (item.IsChecked == true) {
-                CategoryFilter.Add(item);
+        if (IsAllChecked == true) {
+            CategoryFilter.Clear();
+            foreach (var item in SourceCategory) {
+                if (item.IsChecked == true && item.Name.CompareTo("All") != 0) {
+                    CategoryFilter.Add(item);
+                }
+            }
+            if (CategoryFilter.Count > 0) {
+                IsAllChecked = false;
+                LoadCategory2();
+            }
+            else {
+                IsAllChecked = true;
+                LoadCategory();
+            }
+        }
+        else if(IsAllChecked == false && SourceCategory[0].IsChecked == true) {
+            IsAllChecked = true;
+            LoadCategory();
+            CategoryFilter.Clear();
+            foreach (var item in SourceCategory) {
+                if (item.IsChecked == true && item.Name.CompareTo("All") != 0) {
+                    CategoryFilter.Add(item);
+                }
+            }
+        }
+        else {
+            CategoryFilter.Clear();
+            foreach (var item in SourceCategory) {
+                if (item.IsChecked == true && item.Name.CompareTo("All") != 0) {
+                    CategoryFilter.Add(item);
+                }
+            }
+        }
+        
+    }
+    private void UpdateItemsCheckState() {
+        if (IsAllChecked) {
+            foreach (var item in SourceCategory) {
+                if (item.Name != "All") {
+                    item.ckb.IsChecked = false;
+                    item.IsChecked = false;
+                }
+            }
+        }
+    }
+    public void LoadCategory2(object? parameter = null) {
+        var exB = _expenseStore.ExpenseBook;
+        var items = DBManager.GetCondition<Category>(c => c.UserID == int.Parse(_accountStore.UsersID) && c.ExBMonth == exB.Month && c.ExBYear == exB.Year);
+        if (items == null) return;
+        ObservableCollection<CheckBoxCategory> categories = new(SourceCategory);
+        SourceCategory.Clear();
+        SourceCategory.Add(new CheckBoxCategory(-1, new CheckBox() { Content = "All", IsChecked = false }));
+        foreach (var item in categories) {
+            if(item.Name != "All") {
+                SourceCategory.Add(item);
             }
         }
     }
@@ -414,6 +513,7 @@ public class ExpenseViewModel : BaseViewModel {
         var items = DBManager.GetCondition<Category>(c => c.UserID == int.Parse(_accountStore.UsersID) && c.ExBMonth == exB.Month && c.ExBYear == exB.Year);
         if (items == null) return;
         SourceCategory.Clear();
+        SourceCategory.Add(new CheckBoxCategory(-1, new CheckBox() { Content = "All", IsChecked = true }));
         foreach (var item in items) {
             CheckBox cb = new CheckBox() {
                 Content = item.Name.ToString(),
@@ -842,7 +942,7 @@ public class ExpenseViewModel : BaseViewModel {
             IDCategory = id;
             ckb = cb;
             Name = cb.Content.ToString();
-            IsChecked = false;
+            IsChecked = (bool)cb.IsChecked;
         }
     }
     public class ExpenseAdvance {

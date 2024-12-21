@@ -93,7 +93,7 @@ public class RecurringAddExpenseViewModel : BaseViewModel {
         
     }
     public void AddNewExpense(object? parameter = null) {
-        Expense exp = new Expense(ItemRecurring.Amount, ItemRecurring.Name, DateOnly.FromDateTime(DateTime.Now),
+        Expense exp = new Expense(ItemRecurring.Amount, ItemRecurring.Name, ItemRecurring.Date,
                        ItemRecurring.CategoryID, ItemRecurring.ExBMonth, ItemRecurring.ExBYear, usr.UserID, ItemRecurring.Description);
         exp.RecurringExpenseID = ItemRecurring.RecurringExpenseID;
         DBManager.Insert(exp);

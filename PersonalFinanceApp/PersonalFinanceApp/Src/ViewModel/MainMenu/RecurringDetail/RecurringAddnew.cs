@@ -7,6 +7,7 @@ using PersonalFinanceApp.ViewModel.Stores;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using XAct;
 using XAct.Messages;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu; 
@@ -15,6 +16,7 @@ public class RecurringAddnew : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly AccountStore _accountStore;
     private readonly RecurringStore _recurringStore;
+    private readonly ExpenseStore _expenseStore;
 
     #region Properties
     //name
@@ -90,7 +92,33 @@ public class RecurringAddnew : BaseViewModel {
         }
     }
     private string _categoryRecurring;
+    //source category
+    public ObservableCollection<Category> SourceCategory {
+        get => _sourceCategory;
+        set {
+            if (_sourceCategory != value) {
+                _sourceCategory = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private ObservableCollection<Category> _sourceCategory;
+    //selected Item category
+    public Category SelectedCategory {
+        get => _selectedCategory;
+        set {
+            if (_selectedCategory != value) {
+                if (value != null && value.Name.CompareTo("<New>") == 0) {
+                    //excute new category
 
+                    NewCategoryCommand.Execute(this);
+                }
+                _selectedCategory = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private Category _selectedCategory;
     //amount
     public string AmountRecurring {
         get => _amountRecurring;
@@ -119,52 +147,79 @@ public class RecurringAddnew : BaseViewModel {
     #endregion
     public ICommand CancelRecurringCommand {  get; set; }
     public ICommand ConfirmRecurringCommand { get; set; }
+    public ICommand NewCategoryCommand { get; set; }
+    public ICommand LoadSourceCategoryCommand {  get; set; }
     public RecurringAddnew(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
+        _expenseStore = serviceProvider.GetRequiredService<ExpenseStore>();
         _accountStore = serviceProvider.GetRequiredService<AccountStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         usr = _accountStore.Users;
         _recurringStore = serviceProvider.GetRequiredService<RecurringStore>();
-
+        NewCategoryCommand = new NavigateModalCommand<ExpenseNewCategoryViewModel>(serviceProvider);
         LoadItemsource();
-
+        SourceCategory = new();
+        _expenseStore.TriggerNewCategory += () => LoadSourceCategory();
         CancelRecurringCommand = new RelayCommand<object>(CloseModal);
         ConfirmRecurringCommand = new RelayCommand<object>(NewRecurring);
+        LoadSourceCategoryCommand = new RelayCommand<object>(LoadSourceCategory);
     }
     public void CloseModal(object? parameter = null) {
         _modalNavigationStore.Close();
     }
-    public void NewRecurring(object? parameter = null) {
+    public void LoadSourceCategory(object ? parameter = null) {
         try {
-            bool check = true;
-            //create expensebook
             var exB = DBManager.GetFirst<ExpensesBook>(ex => ex.UserID == usr.UserID &&
                                                        ex.Month == DateTimeRecurring.Value.Month &&
                                                        ex.Year == DateTimeRecurring.Value.Year);
-            if (exB == null) {
-                exB = new ExpensesBook(DateTimeRecurring.Value.Month, DateTimeRecurring.Value.Year,
-                                        _accountStore.Users, _accountStore.Users.DefaultBudget);
-                if (long.Parse(AmountRecurring) > exB.Budget) {
-                    var result = MessageBox.Show("Ngân sách sẽ âm nếu bạn thêm vào, bạn có muốn tiếp tục không", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                    if (result == MessageBoxResult.No) {
-                        return;
+
+            if (exB != null) {
+                //load category
+                var categories = DBManager.GetCondition<Category>(c => c.UserID == _accountStore.Users.UserID && c.ExBMonth == exB.Month && c.ExBYear == exB.Year);
+                SourceCategory.Clear();
+                SourceCategory.Add(new Category("<New>", exB));
+                foreach (var category in categories) {
+                    SourceCategory.Add(category);
+                }
+                _expenseStore.ExpenseBook = exB;
+                if(_expenseStore.Categorys != null) {
+                    SelectedCategory = _expenseStore.Categorys;
+                    CategoryRecurring = _expenseStore.Categorys.Name;
+                }
+                
+            }
+            else {
+                var results = MessageBox.Show("ExpenseBook này hiện chưa có bạn có muốn tạo không", "Notification", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                if (results == MessageBoxResult.Yes) {
+                    //create expensebook
+
+                    if (exB == null) {
+                        exB = new ExpensesBook(DateTimeRecurring.Value.Month, DateTimeRecurring.Value.Year,
+                                                _accountStore.Users, _accountStore.Users.DefaultBudget);
+                        bool check = DBManager.Insert(exB);
+                        if (check == false) {
+                            throw new Exception("Thêm ExpenseBook thất bại");
+                        }
                     }
+                    SourceCategory.Clear();
+                    SourceCategory.Add(new Category("<New>", exB));
+                    _expenseStore.ExpenseBook = exB;
                 }
-                check = DBManager.Insert(exB);
-                if(check == false) {
-                    throw new Exception("Thêm ExpenseBook thất bại");
+                else {
+                    SourceCategory.Clear();
                 }
+
             }
-            //create catgory
-            var cate = DBManager.GetFirst<Category>(c => c.UserID == usr.UserID && c.ExBYear == exB.Year &&
-                                                    c.ExBMonth == exB.Month && c.Name == CategoryRecurring);
-            if (cate == null) {
-                cate = new Category(CategoryRecurring, exB);
-                check = DBManager.Insert(cate);
-                if (check == false) {
-                    throw new Exception("Thêm Category thất bại");
-                }
-            }
+        }
+        catch (Exception ex) {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+    public void NewRecurring(object? parameter = null) {
+        try {
+            bool check = true;
+            
+            
             //create recurring
             RecurringExpense re = new RecurringExpense(NameRecurring, SelectedFrequency, int.Parse(IntervalRecurring), DateOnlyRecurring, int.Parse(_accountStore.UsersID));
             check = DBManager.Insert(re);
@@ -172,16 +227,21 @@ public class RecurringAddnew : BaseViewModel {
                 throw new Exception("Thêm Recurring thất bại");
             }
             //create expense
-            
-            Expense exp = new Expense(long.Parse(AmountRecurring), NameRecurring, DateOnlyRecurring, cate, exB, DescriptionRecurring);
-            var recurring = DBManager.GetFirst<RecurringExpense>(re => re.StartDate == DateOnlyRecurring && 
-                                                                re.Name == NameRecurring && re.Frequency == SelectedFrequency && 
-                                                                re.Interval == int.Parse(IntervalRecurring) && re.UserID == int.Parse(_accountStore.UsersID));
-            exp.RecurringExpenseID = recurring.RecurringExpenseID;
-            check = DBManager.Insert(exp);
-            if (check == false) {
-                throw new Exception("Thêm Expense thất bại");
+            if(re.StartDate <= DateOnly.FromDateTime(DateTime.Today)) {
+                var result = MessageBox.Show("Bạn có muốn thêm expense ngay không", "Notification", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                if (result == MessageBoxResult.Yes) {
+                    Expense exp = new Expense(long.Parse(AmountRecurring), NameRecurring, DateOnlyRecurring, SelectedCategory, _expenseStore.ExpenseBook, DescriptionRecurring);
+                    var recurring = DBManager.GetFirst<RecurringExpense>(re => re.StartDate == DateOnlyRecurring &&
+                                                                        re.Name == NameRecurring && re.Frequency == SelectedFrequency &&
+                                                                        re.Interval == int.Parse(IntervalRecurring) && re.UserID == int.Parse(_accountStore.UsersID));
+                    exp.RecurringExpenseID = recurring.RecurringExpenseID;
+                    check = DBManager.Insert(exp);
+                    if (check == false) {
+                        throw new Exception("Thêm Expense thất bại");
+                    }
+                }
             }
+            
             _recurringStore.NotifyRecurring();
         }
         catch (Exception ex) {

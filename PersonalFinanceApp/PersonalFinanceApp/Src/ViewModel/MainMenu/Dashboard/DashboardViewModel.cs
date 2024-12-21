@@ -406,7 +406,7 @@ public class DashboardViewModel : BaseViewModel
 
 
         UpdatePieChart(SelectedExpenseBook.expensesBook);
-        //UpdateColumnChart(SelectedExpenseBook.expensesBook);
+        ActivityPlotModel = CreateActivityPlotModel(SelectedExpenseBook.expensesBook);
         LoadTotal();
     }
     public void CreateNewExpenseBook() {

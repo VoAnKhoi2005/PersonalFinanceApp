@@ -61,11 +61,15 @@ public class RecurringViewModel : BaseViewModel {
     }
     public void LoadData(object? parameter = null) {
         AddRecurringExpense();
+        if(_recurringStore.ShareExpense.Count != 0) {
+            RecurringExpenseCommand.Execute(this);
+        }
     }
     public void AddRecurringExpense() {
         try {
             DateTime date = DateTime.Today;
             var recs = DBManager.GetCondition<RecurringExpense>(re => re.UserID == int.Parse(_accountStore.UsersID) && re.Status.CompareTo("Active") == 0);
+            
             foreach (var rec in recs) {
                 rec.LastTime = CatchNow(rec);
 
@@ -84,28 +88,30 @@ public class RecurringViewModel : BaseViewModel {
     public DateOnly CatchNow(RecurringExpense rec) {
         try {
             rec.Expenses = DBManager.GetCondition<Expense>(ex => ex.UserID == rec.UserID && ex.RecurringExpenseID == rec.RecurringExpenseID);
-            Expense exp = rec.Expenses.OrderByDescending(e => e.Date).First();
-            while (rec.LastTime < DateOnly.FromDateTime(DateTime.Today)) {
-                if (exp != null && !exp.Date.Equals(rec.LastTime))
-                    _recurringStore.ShareExpense.Add(new Expense(exp.Amount, exp.Name, rec.LastTime, exp.CategoryID,
-                    exp.ExBMonth, exp.ExBYear, exp.UserID, rec.RecurringExpenseID, exp.Description));
-                if (rec.Frequency.CompareTo("Daily") == 0) {
-                    rec.LastTime = rec.LastTime.AddDays(rec.Interval);
+            if(rec.Expenses.Count != 0) {
+                Expense exp = rec.Expenses.OrderByDescending(e => e.Date).First();
+                while (rec.LastTime < DateOnly.FromDateTime(DateTime.Today)) {
+                    if (exp != null && !exp.Date.Equals(rec.LastTime))
+                        _recurringStore.ShareExpense.Add(new Expense(exp.Amount, exp.Name, rec.LastTime, exp.CategoryID,
+                        exp.ExBMonth, exp.ExBYear, exp.UserID, rec.RecurringExpenseID, exp.Description));
+                    if (rec.Frequency.CompareTo("Daily") == 0) {
+                        rec.LastTime = rec.LastTime.AddDays(rec.Interval);
+                    }
+                    else if (rec.Frequency.CompareTo("Weekly") == 0) {
+                        rec.LastTime = rec.LastTime.AddDays(rec.Interval * 7);
+                    }
+                    else if (rec.Frequency.CompareTo("Monthly") == 0) {
+                        rec.LastTime = rec.LastTime.AddMonths(rec.Interval);
+                    }
+                    else if (rec.Frequency.CompareTo("Yearly") == 0) {
+                        rec.LastTime = rec.LastTime.AddYears(rec.Interval);
+                    }
                 }
-                else if (rec.Frequency.CompareTo("Weekly") == 0) {
-                    rec.LastTime = rec.LastTime.AddDays(rec.Interval * 7);
+                exp = rec.Expenses.OrderByDescending(e => e.Date).First();
+                if (rec.LastTime.Equals(DateOnly.FromDateTime(DateTime.Today)) && !rec.StartDate.Equals(DateOnly.FromDateTime(DateTime.Today))) {
+                    if (exp != null && !exp.Date.Equals(rec.LastTime)) _recurringStore.ShareExpense.Add(new Expense(exp.Amount, exp.Name, rec.LastTime, exp.CategoryID,
+                        exp.ExBMonth, exp.ExBYear, exp.UserID, rec.RecurringExpenseID, exp.Description));
                 }
-                else if (rec.Frequency.CompareTo("Monthly") == 0) {
-                    rec.LastTime = rec.LastTime.AddMonths(rec.Interval);
-                }
-                else if (rec.Frequency.CompareTo("Yearly") == 0) {
-                    rec.LastTime = rec.LastTime.AddYears(rec.Interval);
-                }
-            }
-            exp = rec.Expenses.OrderByDescending(e => e.Date).First();
-            if (rec.LastTime.Equals(DateOnly.FromDateTime(DateTime.Today)) && !rec.StartDate.Equals(DateOnly.FromDateTime(DateTime.Today))) {
-                if (exp != null && !exp.Date.Equals(rec.LastTime)) _recurringStore.ShareExpense.Add(new Expense(exp.Amount, exp.Name, rec.LastTime, exp.CategoryID,
-                    exp.ExBMonth, exp.ExBYear, exp.UserID, rec.RecurringExpenseID, exp.Description));
             }
             return rec.LastTime;
         }

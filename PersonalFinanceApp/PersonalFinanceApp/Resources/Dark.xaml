@@ -90,19 +90,13 @@
     <SolidColorBrush x:Key="Setting_RadioButtonChecked" Color="#FFFFFF" />
     <SolidColorBrush x:Key="Setting_RadioButtonUnChecked" Color="#34313F" />
 
-    <SolidColorBrush x:Key="DatagridBG"
-                     Color="#37373A"></SolidColorBrush>
-    <SolidColorBrush x:Key="DatagridFG"
-                     Color="#ECEDEE"></SolidColorBrush>
-    <SolidColorBrush x:Key="DatagridHeader"
-                     Color="#ECEDEE"></SolidColorBrush>
-    
-    <SolidColorBrush x:Key="CalendarText1"
-                     Color="#E6ECEF" />
-    <SolidColorBrush x:Key="CalendarText2"
-                     Color="#ECF5F7" />
-    <SolidColorBrush x:Key="CalendarText3"
-                     Color="#F8FDFF" />
+    <SolidColorBrush x:Key="DatagridBG" Color="#37373A" />
+    <SolidColorBrush x:Key="DatagridFG" Color="#ECEDEE" />
+    <SolidColorBrush x:Key="DatagridHeader" Color="#ECEDEE" />
+
+    <SolidColorBrush x:Key="CalendarText1" Color="#E6ECEF" />
+    <SolidColorBrush x:Key="CalendarText2" Color="#ECF5F7" />
+    <SolidColorBrush x:Key="CalendarText3" Color="#F8FDFF" />
 
     <SolidColorBrush x:Key="DashBoardGoalCardonHovered" Color="#525252" />
 
@@ -118,14 +112,10 @@
     <SolidColorBrush x:Key="Ntf_goalTime" Color="#020DA6" />
     <SolidColorBrush x:Key="NotifiHover" Color="#D1E8F9" />
 
-    <SolidColorBrush x:Key="Recurring_startDate"
-                     Color="#DFDFDF" />
+    <SolidColorBrush x:Key="Recurring_startDate" Color="#DFDFDF" />
 
-    <SolidColorBrush x:Key="Recurring_calendarpickdate"
-                     Color="#DFDFDF" />
+    <SolidColorBrush x:Key="Recurring_calendarpickdate" Color="#DFDFDF" />
 
-    <SolidColorBrush x:Key="HeaderCalendarBackground"
-                     Color="#32636F" />
-    <SolidColorBrush x:Key="HeaderCalendarForeground"
-                     Color="#DEDEDF" />
+    <SolidColorBrush x:Key="HeaderCalendarBackground" Color="#32636F" />
+    <SolidColorBrush x:Key="HeaderCalendarForeground" Color="#DEDEDF" />
 </ResourceDictionary>
