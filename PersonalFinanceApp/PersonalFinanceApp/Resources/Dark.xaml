@@ -118,4 +118,7 @@
 
     <SolidColorBrush x:Key="HeaderCalendarBackground" Color="#32636F" />
     <SolidColorBrush x:Key="HeaderCalendarForeground" Color="#DEDEDF" />
+
+    <SolidColorBrush x:Key="onFocused"
+                     Color="#4A4A51" />
 </ResourceDictionary>

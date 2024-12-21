@@ -36,9 +36,11 @@
                 <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
                 <Setter Property="FontWeight" Value="Regular" />
             </Style>
-            <Style TargetType="Button">
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
+            <Style TargetType="RadioButton">
+                <Setter Property="Foreground"
+                        Value="{DynamicResource CommonText}" />
+                <Setter Property="Background"
+                        Value="Transparent" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -55,6 +57,11 @@
                     <Trigger Property="IsMouseOver" Value="true">
                         <Setter Property="Cursor" Value="Hand" />
                         <Setter Property="Background" Value="{DynamicResource onHovered}" />
+                    </Trigger>
+                    <Trigger Property="IsChecked"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="{DynamicResource onFocused}" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -87,161 +94,166 @@
                 </Grid>
             </Border>
             <!--  Dashboard  -->
-            <Button
-                Height="60"
-                VerticalAlignment="top"
-                Command="{Binding DashBoardNavigateCommand}"
-                DockPanel.Dock="Top"
-                IsHitTestVisible="True">
-                <DockPanel
-                    Width="210"
-                    Height="60"
-                    Background="Transparent">
+            <RadioButton Height="60"
+                         VerticalAlignment="Top"
+                         Command="{Binding DashBoardNavigateCommand}"
+                         DockPanel.Dock="Top"
+                         IsHitTestVisible="True"
+                         GroupName="Navigation"
+                         >
+                <RadioButton.Template>
+                    <ControlTemplate TargetType="RadioButton">
+                        <DockPanel Width="210"
+                                   Height="60"
+                                   Background="{TemplateBinding Background}">
+                            <materialDesign:PackIcon Width="30"
+                                                     Height="30"
+                                                     Margin="10,0,0,0"
+                                                     VerticalAlignment="Center"
+                                                     DockPanel.Dock="Left"
+                                                     Kind="Signal" />
+                            <TextBlock Margin="40,0,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       DockPanel.Dock="Left"
+                                       FontSize="18"
+                                       FontWeight="Normal"
+                                       Text="Dashboard" />
+                        </DockPanel>
+                    </ControlTemplate>
+                </RadioButton.Template>
+            </RadioButton>
 
-                    <materialDesign:PackIcon
-                        Width="30"
-                        Height="30"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Left"
-                        Kind="Signal" />
-                    <TextBlock
-                        Margin="40,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Left"
-                        FontSize="18"
-                        FontWeight="Normal"
-                        Text="Dashboard" />
+            <!-- Expense Book -->
+            <RadioButton Height="60"
+                         VerticalAlignment="Top"
+                         Command="{Binding ExpenseBookNavigateCommand}"
+                         DockPanel.Dock="Top"
+                         IsHitTestVisible="True"
+                         GroupName="Navigation"
+                        >
+                <RadioButton.Template>
+                    <ControlTemplate TargetType="RadioButton">
+                        <DockPanel Width="210"
+                                   Height="60"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Background="{TemplateBinding Background}">
+                            <materialDesign:PackIcon Width="30"
+                                                     Height="30"
+                                                     Margin="10,0,0,0"
+                                                     VerticalAlignment="Center"
+                                                     DockPanel.Dock="Left"
+                                                     Kind="BookOpenPageVariant" />
+                            <TextBlock Margin="40,0,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       DockPanel.Dock="Left"
+                                       FontSize="18"
+                                       FontWeight="Normal"
+                                       Text="Expense book" />
+                        </DockPanel>
+                    </ControlTemplate>
+                </RadioButton.Template>
+            </RadioButton>
 
-                </DockPanel>
-            </Button>
-            <!--  Expense book  -->
-            <Button
-                Height="60"
-                VerticalAlignment="top"
-                Command="{Binding ExpenseBookNavigateCommand}"
-                DockPanel.Dock="Top"
-                IsHitTestVisible="True">
-                <DockPanel
-                    Width="210"
-                    Height="60"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="Transparent">
+            <!-- Goal Plan -->
+            <RadioButton Height="60"
+                         VerticalAlignment="Top"
+                         Command="{Binding GoalplanNavigateCommand}"
+                         DockPanel.Dock="Top"
+                         IsHitTestVisible="True"
+                         GroupName="Navigation"
+                        >
+                <RadioButton.Template>
+                    <ControlTemplate TargetType="RadioButton">
+                        <DockPanel Width="210"
+                                   Height="60"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Background="{TemplateBinding Background}">
+                            <materialDesign:PackIcon Width="30"
+                                                     Height="30"
+                                                     Margin="10,0,0,0"
+                                                     VerticalAlignment="Center"
+                                                     DockPanel.Dock="Left"
+                                                     Kind="FlagCheckered" />
+                            <TextBlock Margin="40,0,0,0"
+                                       VerticalAlignment="Center"
+                                       DockPanel.Dock="Left"
+                                       FontSize="18"
+                                       FontWeight="Normal"
+                                       Text="Goal plan" />
+                        </DockPanel>
+                    </ControlTemplate>
+                </RadioButton.Template>
+            </RadioButton>
 
-                    <materialDesign:PackIcon
-                        Width="30"
-                        Height="30"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Left"
-                        Kind="BookOpenPageVariant" />
-                    <TextBlock
-                        Margin="40,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Left"
-                        FontSize="18"
-                        FontWeight="Normal"
-                        Text="Expense book" />
+            <!-- Recurring -->
+            <RadioButton Height="60"
+                         VerticalAlignment="Top"
+                         Command="{Binding RecurringNavigateCommand}"
+                         DockPanel.Dock="Top"
+                         IsHitTestVisible="True"
+                         GroupName="Navigation"
+                         >
+                <RadioButton.Template>
+                    <ControlTemplate TargetType="RadioButton">
+                        <DockPanel Width="210"
+                                   Height="60"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Background="{TemplateBinding Background}">
+                            <materialDesign:PackIcon Width="30"
+                                                     Height="30"
+                                                     Margin="10,0,0,0"
+                                                     VerticalAlignment="Center"
+                                                     DockPanel.Dock="Left"
+                                                     Kind="CalendarClockOutline" />
+                            <TextBlock Margin="40,0,0,0"
+                                       VerticalAlignment="Center"
+                                       DockPanel.Dock="Left"
+                                       FontSize="18"
+                                       FontWeight="Normal"
+                                       Text="Recurring" />
+                        </DockPanel>
+                    </ControlTemplate>
+                </RadioButton.Template>
+            </RadioButton>
 
+            <!-- Setting -->
+            <RadioButton Height="60"
+                         VerticalAlignment="Bottom"
+                         Command="{Binding SettingNavigateCommand}"
+                         DockPanel.Dock="Bottom"
+                         IsHitTestVisible="True"
+                         GroupName="Navigation"
+                         >
+                <RadioButton.Template>
+                    <ControlTemplate TargetType="RadioButton">
+                        <DockPanel Width="210"
+                                   Height="60"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Background="{TemplateBinding Background}">
+                            <materialDesign:PackIcon Width="30"
+                                                     Height="30"
+                                                     Margin="10,0,0,0"
+                                                     VerticalAlignment="Center"
+                                                     DockPanel.Dock="Left"
+                                                     Kind="CogBox" />
+                            <TextBlock Margin="40,0,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       DockPanel.Dock="Left"
+                                       FontSize="18"
+                                       FontWeight="Normal"
+                                       Text="Setting" />
+                        </DockPanel>
+                    </ControlTemplate>
+                </RadioButton.Template>
+            </RadioButton>
 
-                </DockPanel>
-            </Button>
-            <!--  Goal plan  -->
-            <Button
-                Height="60"
-                VerticalAlignment="top"
-                Command="{Binding GoalplanNavigateCommand}"
-                DockPanel.Dock="Top"
-                IsHitTestVisible="True">
-                <DockPanel
-                    Width="210"
-                    Height="60"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="Transparent">
-                    <materialDesign:PackIcon
-                        Width="30"
-                        Height="30"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Left"
-                        Kind="FlagCheckered" />
-                    <TextBlock
-                        Margin="40,0,0,0"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Left"
-                        FontSize="18"
-                        FontWeight="Normal"
-                        Text="Goal plan" />
-
-                </DockPanel>
-            </Button>
-            <!--  Recurring  -->
-            <!--  Binding here  -->
-            <Button
-                Height="60"
-                VerticalAlignment="top"
-                Command="{Binding RecurringNavigateCommand}"
-                DockPanel.Dock="Top"
-                IsHitTestVisible="True">
-                <DockPanel
-                    Width="210"
-                    Height="60"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="Transparent">
-                    <materialDesign:PackIcon
-                        Width="30"
-                        Height="30"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Left"
-                        Kind="CalendarClockOutline" />
-
-                    <TextBlock
-                        Margin="40,0,0,0"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Left"
-                        FontSize="18"
-                        FontWeight="Normal"
-                        Text="Recurring" />
-                </DockPanel>
-            </Button>
-            <!--  Option  -->
-            <Button
-                Height="60"
-                VerticalAlignment="Bottom"
-                Command="{Binding SettingNavigateCommand}"
-                DockPanel.Dock="Bottom">
-                <DockPanel
-                    Width="210"
-                    Height="60"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Background="Transparent">
-
-
-                    <materialDesign:PackIcon
-                        Width="30"
-                        Height="30"
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Left"
-                        Kind="CogBox" />
-
-                    <TextBlock
-                        Margin="40,0,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Left"
-                        FontSize="18"
-                        FontWeight="Normal"
-                        Text="Setting" />
-                </DockPanel>
-            </Button>
         </DockPanel>
 
         <Grid Grid.Column="1" Grid.ColumnSpan="2">

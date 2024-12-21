@@ -62,7 +62,7 @@
                                                                  Height="25"
                                                                  HorizontalAlignment="Center"
                                                                  VerticalAlignment="Center"
-                                                                 Foreground="White"
+                                                                 Foreground="{DynamicResource SuperText}"
                                                                  Kind="ArrowLeft" />
                                     </Border>
                                 </ControlTemplate>
