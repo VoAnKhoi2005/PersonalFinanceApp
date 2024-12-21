@@ -8,7 +8,7 @@ public class StatusToColorConverter : IValueConverter {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
         if (value is string status) {
             return status switch {
-                "Completed" => Brushes.GreenYellow,
+                "Completed" => Brushes.Green,
                 "Canceled" => Brushes.IndianRed,
                 "Active" => Brushes.Orchid,
                 _ => Brushes.Black

@@ -167,19 +167,18 @@
                                     <RowDefinition Height="79*" />
                                 </Grid.RowDefinitions>
                                 <TextBlock
-                                    Margin="10,0,0,0"
-                                    HorizontalAlignment="Left"
+                                    HorizontalAlignment="Center" 
                                     VerticalAlignment="Center"
-                                    FontSize="15"
+                                    FontSize="18"
                                     FontWeight="Bold"
                                     Foreground="{DynamicResource SuperText}"
                                     Text="BUDGET LEFT" />
                                 <!--  Binding here  -->
                                 <DockPanel Grid.Row="1">
                                     <TextBlock
-                                        Margin="10,0,0,0"
+                                        Margin="15,0,0,0"
                                         VerticalAlignment="Center"
-                                        FontSize="14"
+                                        FontSize="18"
                                         FontWeight="DemiBold"
                                         Text="VND" />
                                     <TextBlock
@@ -207,21 +206,19 @@
                                     <RowDefinition Height="79*" />
                                 </Grid.RowDefinitions>
                                 <TextBlock
-                                    Margin="10,0,0,0"
-                                    HorizontalAlignment="Left"
+                                    HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    FontSize="15"
+                                    FontSize="18"
                                     FontWeight="Bold"
                                     Foreground="{DynamicResource SuperText}"
                                     Text="EXPENSE" />
                                 <!--  Binding here  -->
                                 <DockPanel Grid.Row="1">
-                                    <TextBlock
-                                        Margin="10,0,0,0"
-                                        VerticalAlignment="Center"
-                                        FontSize="14"
-                                        FontWeight="DemiBold"
-                                        Text="VND" />
+                                    <TextBlock Margin="15,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontSize="18"
+                                               FontWeight="DemiBold"
+                                               Text="VND" />
                                     <TextBlock
                                         Width="auto"
                                         Height="auto"
@@ -249,21 +246,19 @@
                                     <RowDefinition Height="79*" />
                                 </Grid.RowDefinitions>
                                 <TextBlock
-                                    Margin="10,0,0,0"
-                                    HorizontalAlignment="Left"
+                                    HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    FontSize="15"
+                                    FontSize="18"
                                     FontWeight="Bold"
                                     Foreground="{DynamicResource SuperText}"
                                     Text="TOTAL SAVING" />
                                 <!--  Binding here  -->
                                 <DockPanel Grid.Row="1">
-                                    <TextBlock
-                                        Margin="10,0,0,0"
-                                        VerticalAlignment="Center"
-                                        FontSize="14"
-                                        FontWeight="DemiBold"
-                                        Text="VND" />
+                                    <TextBlock Margin="15,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontSize="18"
+                                               FontWeight="DemiBold"
+                                               Text="VND" />
                                     <TextBlock
                                         Width="auto"
                                         Height="auto"
