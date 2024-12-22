@@ -1,17 +1,13 @@
-﻿<Window x:Class="PersonalFinanceApp.Src.View.TestWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
-        mc:Ignorable="d"
-        Background="Transparent"
-        Title="TestWindow"
-        Width="1000 "
-        Foreground="{DynamicResource CommonText}"
-        Height="1000">
+﻿<UserControl x:Class="PersonalFinanceApp.Src.View.MainMenu.Expense.Main_Expense_ExpenseBookDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Expense"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="700"
+             d:DesignWidth="1000">
     <Grid Width="1000"
           Height="700">
         <Grid.Resources>
@@ -115,15 +111,15 @@
                        Text="Expense book details" />
 
             <Button Command="{Binding AddNewExpenseBookCommand}"
-                    Width="160" DockPanel.Dock="Right"
+                    Width="160"
+                    DockPanel.Dock="Right"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
                     Height="40"
                     Margin="0 0 15 0">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <DockPanel Background="{TemplateBinding Background}"
-                                  >
+                        <DockPanel Background="{TemplateBinding Background}">
                             <materialDesign:PackIcon Width="20"
                                                      Height="20"
                                                      Margin="5,0,0,0"
@@ -395,4 +391,4 @@
             </DataGrid>
         </Grid>
     </Grid>
-</Window>
+</UserControl>

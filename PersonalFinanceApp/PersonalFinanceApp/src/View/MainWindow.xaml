@@ -11,6 +11,7 @@
     xmlns:viewModels="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu"
     xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
     x:Name="MainWindows"
+    Title="Personal Finance App"
     Width="1152"
     Height="750"
     MinWidth="1152"
@@ -385,6 +386,7 @@
                         </Grid>
                     </materialDesign:PopupBox>
                     <!--  NOTIFY  -->
+
                     <materialDesign:PopupBox
                         Margin="0,12,5,0"
                         HorizontalAlignment="Right"
@@ -484,6 +486,17 @@
                         </DataTemplate>
                     </ContentControl.Resources>
                 </ContentControl>
+
+
+                <!--notification <3-->
+                <Ellipse Width="10"
+                         Height="10"
+                         Fill="red"
+                         Stroke="Transparent"
+                         VerticalAlignment="Top"
+                         HorizontalAlignment="Right"
+                         Margin="0 12 55 0"
+                         Visibility="{Binding}"></Ellipse> 
             </Grid>
         </Grid>
         <custom:Modal

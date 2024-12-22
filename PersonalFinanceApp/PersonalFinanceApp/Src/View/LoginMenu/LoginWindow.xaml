@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:view="clr-namespace:PersonalFinanceApp.Src.View"
     x:Name="LoginMain"
-    Title="LoginWindow"
+    Title="Personal Finance App"
     Width="1152"
     Height="760"
     MinWidth="1152"

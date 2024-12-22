@@ -1,19 +1,15 @@
-﻿<Window x:Class="PersonalFinanceApp.Src.View.TestWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
-        mc:Ignorable="d"
-        Background="Transparent"
-        Title="TestWindow"
-        Width="1000 "
-        Foreground="{DynamicResource CommonText}"
-        Height="1000">
-    <Grid Width="1000"
-          Height="700">
+﻿<UserControl x:Class="PersonalFinanceApp.Src.View.MainMenu.Expense.Main_Expense_CategoryDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Expense"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             Width="1000"
+             Height="700"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid >
         <Grid.Resources>
             <Style x:Key="comboboxStyle"
                    TargetType="ComboBoxItem">
@@ -112,18 +108,18 @@
                        FontSize="18"
                        FontWeight="Bold"
                        Foreground="{DynamicResource SuperText}"
-                       Text="Expense book details" />
+                       Text="Category details" />
 
-            <Button Command="{Binding AddNewExpenseBookCommand}"
-                    Width="160" DockPanel.Dock="Right"
+            <Button Command="{Binding AddNewCategoryCommand}"
+                    Width="130"
+                    DockPanel.Dock="Right"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
                     Height="40"
                     Margin="0 0 15 0">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <DockPanel Background="{TemplateBinding Background}"
-                                  >
+                        <DockPanel Background="{TemplateBinding Background}">
                             <materialDesign:PackIcon Width="20"
                                                      Height="20"
                                                      Margin="5,0,0,0"
@@ -137,7 +133,7 @@
                                        FontSize="14"
                                        FontWeight="Normal"
                                        Foreground="{DynamicResource SuperText}"
-                                       Text="New expense book" />
+                                       Text="New category" />
 
                         </DockPanel>
                     </ControlTemplate>
@@ -395,4 +391,4 @@
             </DataGrid>
         </Grid>
     </Grid>
-</Window>
+</UserControl>
