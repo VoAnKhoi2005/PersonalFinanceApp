@@ -231,11 +231,13 @@
                         Padding="10"
                         VerticalScrollBarVisibility="Hidden">
                         <ItemsControl ItemsSource="{Binding GoalplanCardViewModels}">
+
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <views:UC_Main_Goalplan_PlanCard Margin="10" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
+
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel
@@ -246,11 +248,6 @@
                                         ItemWidth="420" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
-                            <!--<ItemsControl.ItemContainerStyle>
-                                <Style TargetType="ContentPresenter">
-                                    <Setter Property="HorizontalAlignment" Value="600" />
-                                </Style>
-                            </ItemsControl.ItemContainerStyle>-->
                         </ItemsControl>
                     </ScrollViewer>
                 </Grid>

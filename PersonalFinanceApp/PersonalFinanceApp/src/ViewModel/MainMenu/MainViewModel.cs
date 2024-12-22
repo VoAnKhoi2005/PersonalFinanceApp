@@ -1,18 +1,12 @@
-﻿using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using MaterialDesignThemes.Wpf;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
-using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
-using PersonalFinanceApp.Src.ViewModel;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.LoginMenu;
 using PersonalFinanceApp.ViewModel.Stores;
-using Syncfusion.Windows.Controls.Input;
-using XAct;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -34,25 +28,18 @@ public class MainViewModel : BaseViewModel
     private string _userNameAdmin;
     public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
     public BaseViewModel? CurrentModalViewModel => _modalNavigationStore.CurrentModalViewModel;
-    //notify
-    private ObservableCollection<object> _notifyCardViewModels = new ObservableCollection<object>();
-    public ObservableCollection<object> NotifyCardViewModels {
-        get => _notifyCardViewModels;
-        set {
-            if (_notifyCardViewModels != value) {
-                _notifyCardViewModels.CollectionChanged -= OnGoalNotifyViewModelsChanged;
-                _notifyCardViewModels = value;
-                _notifyCardViewModels.CollectionChanged += OnGoalNotifyViewModelsChanged;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(HasNoNotify));
-            }
+    public bool IsModalOpen => _modalNavigationStore.IsOpen;
+
+    private NotificationMainViewModel _notificationMainViewModel;
+    public NotificationMainViewModel NotificationMainVM
+    {
+        get => _notificationMainViewModel;
+        set
+        {
+            _notificationMainViewModel = value;
+            OnPropertyChanged();
         }
     }
-    private void OnGoalNotifyViewModelsChanged(object? sender, NotifyCollectionChangedEventArgs e) {
-        OnPropertyChanged(nameof(HasNoNotify));
-    }
-    public bool HasNoNotify => !NotifyCardViewModels.Any();
-    public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
     public ICommand DashBoardNavigateCommand { get; set; }
     public ICommand ExpenseBookNavigateCommand { get; set; }
@@ -66,6 +53,7 @@ public class MainViewModel : BaseViewModel
     public ICommand ExitAccountCommand { get; set; }
     public ICommand CloseWindowCommand { get; set; }
 
+    public ICommand MyTestCommand { get; set; }
 
     public MainViewModel(IServiceProvider serviceProvider)
     {
@@ -78,12 +66,12 @@ public class MainViewModel : BaseViewModel
 
         _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         _modalNavigationStore.CurrentModalViewModelChanged += OnCurrentModalViewModelChanged;
-        _sharedService.TriggerActionNotification += LoadNotify;
+
+        NotificationMainVM = serviceProvider.GetRequiredService<NotificationMainViewModel>();
+        MyTestCommand = new RelayCommand(AddNewNotify);
 
         //load theme
         _themeStore.Notify();
-        
-        NotifyCardViewModels = new ObservableCollection<object>();
 
         DashBoardNavigateCommand = new NavigateCommand<DashboardViewModel>(serviceProvider);
         ExpenseBookNavigateCommand = new NavigateCommand<ExpenseViewModel>(serviceProvider);
@@ -91,83 +79,17 @@ public class MainViewModel : BaseViewModel
         SettingNavigateCommand = new NavigateCommand<SettingViewModel>(serviceProvider);
         RecurringNavigateCommand = new NavigateCommand<RecurringViewModel>(serviceProvider);
        
-        CloseCommand = new RelayCommand<Window>(CloseWindow);
-        WindowMaximum = new RelayCommand<Window>(w => 
-                    w.WindowState = w.WindowState == WindowState.Maximized
-                                    ? WindowState.Normal
-                                    : WindowState.Maximized);
-        WindowMinimum = new RelayCommand<Window>(w => w.WindowState = WindowState.Minimized);
-        MoveCommand = new RelayCommand<Window>(w => w?.DragMove());
-        ExitAccountCommand = new RelayCommand<object>(ExitMain);//logout
-        CloseWindowCommand = new RelayCommand<Window>(CloseWindow);//exit
-    }
-    public void LoadNotify() {
-        UserNameAdmin = "@" + _accountStore.Users.Username;
-        LoadNotifyGoal();
-        LoadNotifyRecurring();
-    }
-    public void LoadNotifyGoal() {
-        try {
-            NotifyCardViewModels.Clear();
-            var items = DBManager.GetCondition<Goal>(g => g.UserID == int.Parse(_accountStore.UsersID) && g.Deadline >= DateTime.Today);
-            foreach (var item in items) {
-                DateTime dt = (DateTime)item.StartDay;
-                if (item.Reminder.CompareTo("Daily") == 0) {
-                    NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
-                }
-                else if (item.Reminder.CompareTo("Weekly") == 0) {
-                    if (dt.AddDays(7) == DateTime.Today) {
-                        NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
-                    }
-                }
-                else if (item.Reminder.CompareTo("Monthly") == 0) {
-                    if (dt.AddMonths(1) == DateTime.Today) {
-                        NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
-                    }
-                }
-                else {//yearly
-                    if (dt.AddYears(1) == DateTime.Today) {
-                        NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
-                    }
-                }
-
-            }
-        }
-        catch (Exception ex) {
-            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
+        CloseCommand = new Command.RelayCommand<Window>(CloseWindow);
+        WindowMaximum = new Command.RelayCommand<Window>(w => 
+                                                             w.WindowState = w.WindowState == WindowState.Maximized
+                                                                 ? WindowState.Normal
+                                                                 : WindowState.Maximized);
+        WindowMinimum = new Command.RelayCommand<Window>(w => w.WindowState = WindowState.Minimized);
+        MoveCommand = new Command.RelayCommand<Window>(w => w?.DragMove());
+        ExitAccountCommand = new Command.RelayCommand<object>(ExitMain);//logout
+        CloseWindowCommand = new Command.RelayCommand<Window>(CloseWindow);//exit
     }
 
-    public void LoadNotifyRecurring() {
-        try {
-            var recurring = DBManager.GetCondition<RecurringExpense>(re => re.LastTime <= DateOnly.FromDateTime(DateTime.Now) && re.UserID == _accountStore.Users.UserID);
-            foreach(var rec in recurring) {
-
-                while (rec.LastTime <= DateOnly.FromDateTime(DateTime.Today)) {
-
-                    if (rec.Frequency.CompareTo("Daily") == 0) {
-                        rec.LastTime = rec.LastTime.AddDays(rec.Interval);
-                    }
-                    else if (rec.Frequency.CompareTo("Weekly") == 0) {
-                        rec.LastTime = rec.LastTime.AddDays(rec.Interval * 7);
-                    }
-                    else if (rec.Frequency.CompareTo("Monthly") == 0) {
-                        rec.LastTime = rec.LastTime.AddMonths(rec.Interval);
-                    }
-                    else if (rec.Frequency.CompareTo("Yearly") == 0) {
-                        rec.LastTime = rec.LastTime.AddYears(rec.Interval);
-                    }
-
-                    if(rec.LastTime <= DateOnly.FromDateTime(DateTime.Today)){
-                        NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, rec));
-                    }
-                }
-            }
-        }
-        catch(Exception ex) {
-            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-    }
     public void CloseWindow(Window window) {
         window?.Close();
         _sharedService.w?.Close();
@@ -205,5 +127,16 @@ public class MainViewModel : BaseViewModel
         base.Dispose();
         _navigationStore.CurrentViewModelChanged -= OnCurrentViewModelChanged;
         _modalNavigationStore.CurrentModalViewModelChanged -= OnCurrentModalViewModelChanged;
+    }
+
+    public void AddNewNotify()
+    {
+        NotificationMainVM?.NotifyCardViewModels.Add(new NotificationRecurringCard(_serviceProvider, new RecurringExpense
+        {
+            Name = "Hello",
+            Frequency = "Monthly",
+            Interval = 1,
+            StartDate = DateOnly.FromDateTime(DateTime.Now),
+        }));
     }
 }

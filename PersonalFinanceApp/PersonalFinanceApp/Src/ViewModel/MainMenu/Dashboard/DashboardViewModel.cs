@@ -7,13 +7,11 @@ using PersonalFinanceApp.ViewModel.Command;
 using System.Collections.ObjectModel;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using System.Collections.Specialized;
-using System.Windows.Controls;
 using System.Windows.Input;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using System.Windows;
-using System.Drawing;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 

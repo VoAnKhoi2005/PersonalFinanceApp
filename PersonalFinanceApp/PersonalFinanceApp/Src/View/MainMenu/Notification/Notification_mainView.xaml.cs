@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PersonalFinanceApp.Src.View.MainMenu.Notification
+namespace PersonalFinanceApp.Src.View
 {
     /// <summary>
     /// Interaction logic for Notification_mainView.xaml

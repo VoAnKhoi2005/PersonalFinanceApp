@@ -727,7 +727,7 @@
                                 FontSize="13"
                                 FontWeight="Bold"
                                 Foreground="{DynamicResource SuperText}"
-                                Text="Commands" />
+                                Text="" />
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

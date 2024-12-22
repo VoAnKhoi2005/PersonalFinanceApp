@@ -32,7 +32,7 @@ public class RecurringExpense
 
     public virtual List<Expense> Expenses { get; set; } = new List<Expense>();
 
-    private RecurringExpense() { }
+    public RecurringExpense() { }
 
     public RecurringExpense(string name, string frequency, int interval, DateOnly startDate, int id)
     {

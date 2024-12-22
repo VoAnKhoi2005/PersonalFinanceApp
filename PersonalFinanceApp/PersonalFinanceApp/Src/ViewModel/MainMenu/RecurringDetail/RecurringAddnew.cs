@@ -7,8 +7,6 @@ using PersonalFinanceApp.ViewModel.Stores;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using XAct;
-using XAct.Messages;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu; 
 public class RecurringAddnew : BaseViewModel {

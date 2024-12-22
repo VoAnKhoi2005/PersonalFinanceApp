@@ -1,77 +1,83 @@
-﻿<UserControl
-    x:Class="PersonalFinanceApp.Src.View.MainMenu.Notification.Notification_mainView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Notification"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="650"
-    Height="700"
-    Margin="0,50,30,0"
-    HorizontalAlignment="Right"
-    VerticalAlignment="Center"
-    mc:Ignorable="d">
+﻿<UserControl x:Class="PersonalFinanceApp.Src.View.Notification_mainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu"
+             xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
+             Width="500"
+             Height="600"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center"
+             mc:Ignorable="d">
+
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
-    <Grid Width="650" Height="650">
-        <Grid.Resources>
-            <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Sans Serif Collection" />
-                <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
-                <Setter Property="FontWeight" Value="Regular" />
-            </Style>
-        </Grid.Resources>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
 
-        <!--  header  -->
-        <DockPanel Grid.Row="0">
-            <TextBlock
-                Margin="10,0,0,0"
-                VerticalAlignment="Center"
-                DockPanel.Dock="Left"
-                FontSize="16"
-                FontWeight="SemiBold"
-                Text="Notification" />
-        </DockPanel>
+    <Border>
+        <Grid>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="Sans Serif Collection" />
+                    <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
+                    <Setter Property="FontWeight" Value="Regular" />
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <Border Grid.Row="1">
-            <Grid>
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    FontSize="30"
-                    Opacity="0.5"
-                    Text="No goal found!"
-                    TextAlignment="Center"
-                    Visibility="{Binding HasNoGoal, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <ScrollViewer
-                    Margin="0,30,0,0"
-                    Padding="10"
-                    VerticalScrollBarVisibility="Auto">
-                    <ItemsControl ItemsSource="{Binding GoalNotifyCardViewModels}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <local:Notifcation_Goal Margin="10" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Top"
-                                    IsItemsHost="True"
-                                    ItemHeight="100"
-                                    ItemWidth="auto" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </ScrollViewer>
-            </Grid>
-        </Border>
-    </Grid>
+            <!--  header  -->
+            <TextBlock Grid.Row="0" Margin="10,0,0,0"
+                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                       DockPanel.Dock="Left"
+                       FontSize="18"
+                       FontWeight="SemiBold"
+                       Foreground="{DynamicResource Notifcation_PopupBox}"
+                       Text="Notification" />
+            <Border Grid.Row="1">
+                <Grid>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="30"
+                        Opacity="0.5"
+                        Text="No notification found!"
+                        TextAlignment="Center"
+                        Visibility="{Binding HasNoNotify, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <ScrollViewer
+                        Margin="0,0,0,5"
+                        Padding="5"
+                        VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding NotifyCardViewModels}">
+
+                            <ItemsControl.Resources>
+                                <DataTemplate DataType="{x:Type viewModels:NotificationGoalCard}">
+                                    <views:Notifcation_Goal Margin="5" />
+                                </DataTemplate>
+
+                                <DataTemplate DataType="{x:Type viewModels:NotificationRecurringCard}">
+                                    <views:Notification_Recurring Margin="5" />
+                                </DataTemplate>
+                            </ItemsControl.Resources>
+
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        IsItemsHost="True"
+                                        ItemHeight="auto"
+                                        ItemWidth="700" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
 </UserControl>

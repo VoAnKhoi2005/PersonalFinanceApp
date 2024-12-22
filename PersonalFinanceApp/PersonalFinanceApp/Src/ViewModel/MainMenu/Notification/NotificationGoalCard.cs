@@ -53,8 +53,8 @@ public class NotificationGoalCard : BaseViewModel {
     public void LoadGoal(Goal g) {
         NameGoal = g.Name;
         CategoryGoal = g.CategoryName;
-
-        StartEndDate = DateOnly.FromDateTime((DateTime)g.StartDay).ToString() + " - " + DateOnly.FromDateTime((DateTime)g.Deadline).ToString("dd/MM/yyyy");
+        if (g.StartDay != null && g.Deadline != null)
+            StartEndDate = DateOnly.FromDateTime((DateTime)g.StartDay).ToString("dd/MM/yyyy") + " - " + DateOnly.FromDateTime((DateTime)g.Deadline).ToString("dd/MM/yyyy");
     }
     public void LoadRecurring(RecurringExpense re) {
         NameGoal = re.Name;

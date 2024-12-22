@@ -7,7 +7,6 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:notify="clr-namespace:PersonalFinanceApp.Src.View.MainMenu.Notification"
     xmlns:viewModels="clr-namespace:PersonalFinanceApp.ViewModel.MainMenu"
     xmlns:views="clr-namespace:PersonalFinanceApp.Src.View"
     x:Name="MainWindows"
@@ -76,6 +75,8 @@
                 VerticalAlignment="Top"
                 DockPanel.Dock="Top">
                 <Grid>
+                    <Button VerticalAlignment="Top" HorizontalAlignment="Left" Panel.ZIndex="10" Width="100"
+                            Command="{Binding MyTestCommand}"></Button>
                     <Image
                         Width="44"
                         Height="44"
@@ -400,73 +401,13 @@
                                 Foreground="{DynamicResource SuperText}"
                                 Kind="Bell" />
                         </materialDesign:PopupBox.ToggleContent>
-                        <Border Width="650" Height="650">
-                            <Grid>
-                                <Grid.Resources>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="FontFamily" Value="Sans Serif Collection" />
-                                        <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
-                                        <Setter Property="FontWeight" Value="Regular" />
-                                    </Style>
-                                </Grid.Resources>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30" />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-
-                                <!--  header  -->
-                                <DockPanel Grid.Row="0">
-                                    <TextBlock
-                                        Margin="10,0,0,0"
-                                        VerticalAlignment="Center"
-                                        DockPanel.Dock="Left"
-                                        FontSize="18"
-                                        FontWeight="SemiBold"
-                                        Foreground="{DynamicResource Notifcation_PopupBox}"
-                                        Text="Notification" />
-                                </DockPanel>
-                                <Border Grid.Row="1">
-                                    <Grid>
-                                        <TextBlock
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            FontSize="30"
-                                            Opacity="0.5"
-                                            Text="No goal found!"
-                                            TextAlignment="Center"
-                                            Visibility="{Binding HasNoNotify, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                        <ScrollViewer
-                                            Margin="0,0,0,5"
-                                            Padding="5"
-                                            VerticalScrollBarVisibility="Auto">
-                                            <ItemsControl ItemsSource="{Binding NotifyCardViewModels}">
-                                                <ItemsControl.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <notify:Notifcation_Goal Margin="5" />
-                                                    </DataTemplate>
-                                                </ItemsControl.ItemTemplate>
-                                                <ItemsControl.ItemsPanel>
-                                                    <ItemsPanelTemplate>
-                                                        <WrapPanel
-                                                            HorizontalAlignment="Center"
-                                                            VerticalAlignment="Top"
-                                                            IsItemsHost="True"
-                                                            ItemHeight="auto"
-                                                            ItemWidth="700" />
-                                                    </ItemsPanelTemplate>
-                                                </ItemsControl.ItemsPanel>
-                                            </ItemsControl>
-                                        </ScrollViewer>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </Border>
+                        
+                        <views:Notification_mainView DataContext="{Binding NotificationMainViewModel}"/>
                     </materialDesign:PopupBox>
 
                 </DockPanel>
                 <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}">
                     <ContentControl.Resources>
-
                         <DataTemplate DataType="{x:Type viewModels:ExpenseViewModel}">
                             <views:Main_expense_mainView />
                         </DataTemplate>
