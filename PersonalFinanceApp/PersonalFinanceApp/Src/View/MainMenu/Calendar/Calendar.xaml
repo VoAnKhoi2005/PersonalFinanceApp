@@ -791,9 +791,9 @@
                     <Grid>
                         <TextBlock
                             x:Name="PopupText"
-                            Margin="0,5,0,0"
+                            Margin="0,0,0,20"
                             HorizontalAlignment="Center"
-                            VerticalAlignment="Top"
+                            VerticalAlignment="Center"
                             FontSize="16"
                             FontWeight="Bold"
                             Foreground="{DynamicResource Calendar_popUpSuperText}"
@@ -801,7 +801,7 @@
 
                         <!--  binding date  -->
                         <TextBlock
-                            Margin="0,20,0,0"
+                            Margin="0,25,0,0"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontSize="16"
@@ -815,15 +815,16 @@
                     <ScrollViewer VerticalScrollBarVisibility="Hidden">
                         <ItemsControl
                             Width="200"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
                             Background="{DynamicResource Calendar_popUpBackground2}"
                             FontSize="16"
+                            TextBlock.TextAlignment="Center"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
                             Foreground="{DynamicResource Calendar_popUpText}"
                             ItemsSource="{Binding SourceRecurringInfo}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock TextAlignment="Center" />
+                                    <TextBlock  />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

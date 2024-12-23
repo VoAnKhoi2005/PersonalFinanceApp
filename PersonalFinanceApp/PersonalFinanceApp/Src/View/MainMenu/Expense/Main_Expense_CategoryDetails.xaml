@@ -6,10 +6,8 @@
     xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Width="1000"
-    Height="700"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+             Width="400"
+             Height="400"
     mc:Ignorable="d">
     <Grid>
         <Grid.Resources>
@@ -160,7 +158,8 @@
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     <!--  Count Expense  -->
-                    <DataGridTextColumn Binding="{Binding cExpenses}">
+                    <DataGridTextColumn Binding="{Binding cExpenses}"
+                                        Width="*">
                         <DataGridTextColumn.Header>
                             <TextBlock
                                 FontSize="13"
@@ -182,8 +181,7 @@
 
                                 <materialDesign:PopupBox
                                     Width="auto"
-                                    Height="30"
-                                    Margin="0,5,0,0"
+                                    Height="20"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     Background="Transparent"

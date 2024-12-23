@@ -4,8 +4,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Height="100"
+             Width="500"
              mc:Ignorable="d">
-    <Button Height="100" Width="500"
+    <Button
             Background="#FFCDE0DF" HorizontalContentAlignment="Left">
         <Grid Width="500">
             <Grid.Resources>
@@ -109,10 +111,6 @@
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver"
                              Value="true">
-                        <Setter Property="Cursor"
-                                Value="Hand" />
-                        <Setter Property="Background"
-                                Value="red" />
                     </Trigger>
                 </Style.Triggers>
             </Style>

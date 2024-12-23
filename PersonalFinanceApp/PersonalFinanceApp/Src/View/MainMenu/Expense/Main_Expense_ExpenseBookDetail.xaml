@@ -6,10 +6,12 @@
     xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="700"
-    d:DesignWidth="1000"
+    d:DesignHeight="500"
+    d:DesignWidth="330"
+    Width="500"
+    Height="500"
     mc:Ignorable="d">
-    <Grid Width="1000" Height="700">
+    <Grid>
         <Grid.Resources>
             <Style x:Key="comboboxStyle" TargetType="ComboBoxItem">
                 <Setter Property="Background" Value="{DynamicResource ComboBoxBackground}" />
@@ -168,13 +170,15 @@
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     <!--  cCategories  -->
-                    <DataGridTextColumn Binding="{Binding cCategories}">
+                    <DataGridTextColumn Binding="{Binding cCategories}"
+                                        Width="*">
                         <DataGridTextColumn.Header>
                             <TextBlock
                                 FontSize="13"
                                 FontWeight="Bold"
                                 Foreground="{DynamicResource SuperText}"
-                                Text="Categories" />
+                                Text="Categories"
+                                />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     <DataGridTemplateColumn CanUserResize="False">
@@ -188,8 +192,7 @@
                             <DataTemplate>
                                 <materialDesign:PopupBox
                                     Width="auto"
-                                    Height="30"
-                                    Margin="0,5,0,0"
+                                    Height="20"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     Background="Transparent"

@@ -15,7 +15,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
 
-    <Border>
+    <Border CornerRadius="30">
         <Grid>
             <Grid.Resources>
                 <Style TargetType="TextBlock">
@@ -77,7 +77,7 @@
                                         VerticalAlignment="Top"
                                         IsItemsHost="True"
                                         ItemHeight="auto"
-                                        ItemWidth="700" />
+                                        ItemWidth="500" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
 

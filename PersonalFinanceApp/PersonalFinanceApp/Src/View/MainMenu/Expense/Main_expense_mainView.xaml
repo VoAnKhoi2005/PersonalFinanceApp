@@ -177,6 +177,7 @@
                 Foreground="{DynamicResource CommonText}"
                 PlacementMode="BottomAndAlignRightEdges"
                 PopupMode="Click"
+                PopupUniformCornerRadius="10"
                 Style="{StaticResource MaterialDesignPopupBox}">
                 <materialDesign:PopupBox.ToggleContent>
                     <materialDesign:PackIcon
@@ -215,7 +216,7 @@
                                                         HorizontalAlignment="Left"
                                                         VerticalAlignment="Center"
                                                         Foreground="{TemplateBinding Foreground}"
-                                                        Kind="PlusCircle" />
+                                                        Kind="PlusBox" />
                                                     <TextBlock
                                                         Margin="15,0,0,0"
                                                         HorizontalAlignment="Left"
@@ -270,7 +271,7 @@
                                                         VerticalAlignment="Center"
                                                         FontSize="14"
                                                         Foreground="{TemplateBinding Foreground}"
-                                                        Text="New Category" />
+                                                        Text="New category" />
                                                 </DockPanel>
                                             </Border>
                                         </ControlTemplate>

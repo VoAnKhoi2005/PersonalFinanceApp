@@ -266,7 +266,7 @@
                         Foreground="{DynamicResource CommonText}"
                         PlacementMode="BottomAndAlignRightEdges"
                         PopupMode="Click"
-                        PopupUniformCornerRadius="30"
+                        PopupUniformCornerRadius="20"
                         StaysOpen="True"
                         Style="{StaticResource MaterialDesignPopupBox}">
                         <materialDesign:PopupBox.ToggleContent>
@@ -363,23 +363,20 @@
                                                 <ColumnDefinition Width="7*" />
                                                 <ColumnDefinition Width="23*" />
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock
-                                                Grid.Column="1"
-                                                Margin="15,0,0,0"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Center"
-                                                Text="Exit" />
-                                            <materialDesign:PackIcon
-                                                Width="30"
-                                                Height="30"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Foreground="{DynamicResource Notifcation_PopupBox}"
-                                                Kind="LogoutVariant" />
+                                            <TextBlock Grid.Column="1"
+                                                       Margin="15,0,0,0"
+                                                       HorizontalAlignment="Left"
+                                                       VerticalAlignment="Center"
+                                                       Text="Exit" />
+                                            <materialDesign:PackIcon Width="30"
+                                                                     Height="30"
+                                                                     HorizontalAlignment="Center"
+                                                                     VerticalAlignment="Center"
+                                                                     Foreground="{DynamicResource Notifcation_PopupBox}"
+                                                                     Kind="LogoutVariant" />
                                         </Grid>
                                     </Button>
                                 </Border>
-
                             </Grid>
                         </Grid>
                     </materialDesign:PopupBox>
@@ -389,7 +386,8 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         PlacementMode="BottomAndAlignRightEdges"
-                        StaysOpen="True">
+                        StaysOpen="True"
+                        PopupUniformCornerRadius="10">
                         <materialDesign:PopupBox.ToggleContent>
                             <materialDesign:PackIcon
                                 Width="28"
