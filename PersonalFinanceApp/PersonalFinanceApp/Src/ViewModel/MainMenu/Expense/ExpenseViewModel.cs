@@ -257,6 +257,8 @@ public class ExpenseViewModel : BaseViewModel {
     public ICommand ChangedExpenseBudgetCommand { get; set; }
     public ICommand UpdateExpenseBudgetCommand { get; set; }
     public ICommand AddNewCategoryCommand { get; set; }
+    public ICommand CategoryDetailCommand { get;set; }
+    public ICommand ExpenseBookDetailCommand { get;set; }
     #endregion
 
     public ExpenseViewModel(IServiceProvider serviceProvider) {
@@ -273,11 +275,14 @@ public class ExpenseViewModel : BaseViewModel {
         NewExpenseBookCommand = new NavigateModalCommand<ExpenseNewExBViewModel>(serviceProvider);
         EditBudgetExBCommand = new NavigateModalCommand<ExpenseEditBudgetViewModel>(serviceProvider);
         AddNewCategoryCommand = new NavigateModalCommand<ExpenseNewCategoryViewModel>(serviceProvider);
+        ExpenseBookDetailCommand = new NavigateModalCommand<ExpenseBookDetailViewModel>(serviceProvider);
+        CategoryDetailCommand = new NavigateModalCommand<CategoryDetailViewModel>(serviceProvider);
 
         GetNewest();
         LoadExpenses();
         IsAllChecked = true;
         _sharedService.TriggerAction += LoadNewExpenseBook;
+        _expenseStore.TriggerNewCategory += () => LoadCategory();
 
         RefreshExpenseCommand = new RelayCommand<object>(LoadExpenses);
         //changed selected item exB
@@ -439,12 +444,19 @@ public class ExpenseViewModel : BaseViewModel {
         else {
             HaveExpenseBook = true;
             ExpensesBook itemmax = items[0];
+            ExpensesBook exB = null;
             foreach(var item in items) {
                 if(item.Year > itemmax.Year || (item.Month > itemmax.Month && item.Year == itemmax.Year)) {
                     itemmax = item;
                 }
+                if(item.Year == DateTime.Now.Year && item.Month == DateTime.Now.Month) exB = item;
             }
-            _expenseStore.ExpenseBook = itemmax;
+            if(exB != null) {
+                _expenseStore.ExpenseBook = exB;
+            }
+            else {
+                _expenseStore.ExpenseBook = itemmax;
+            }
         }
     }
     public void ReviewCategory() {

@@ -98,6 +98,8 @@ namespace PersonalFinanceApp
             services.AddTransient<ExpenseNewCategoryViewModel>(s => new ExpenseNewCategoryViewModel(s));
             services.AddTransient<ExpenseRecycleViewModel>(s => new ExpenseRecycleViewModel(s));
             services.AddTransient<ExpenseEditBudgetViewModel>(s => new ExpenseEditBudgetViewModel(s));
+            services.AddTransient<CategoryDetailViewModel>(s => new CategoryDetailViewModel(s));
+            services.AddTransient<ExpenseBookDetailViewModel>(s => new ExpenseBookDetailViewModel(s));
 
             //goal
             services.AddTransient<GoalEditViewModel>(s => new GoalEditViewModel(s));

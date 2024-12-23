@@ -2,17 +2,13 @@
 using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Input;
-using MaterialDesignThemes.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
-using PersonalFinanceApp.Src.ViewModel;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
 using PersonalFinanceApp.ViewModel.LoginMenu;
 using PersonalFinanceApp.ViewModel.Stores;
-using Syncfusion.Windows.Controls.Input;
-using XAct;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -24,6 +20,7 @@ public class MainViewModel : BaseViewModel
     private readonly SharedService _sharedService;  
     private readonly AccountStore _accountStore;
     private readonly ThemeStore _themeStore;
+    
     public string UserNameAdmin {
         get => _userNameAdmin;
         set {
@@ -79,7 +76,6 @@ public class MainViewModel : BaseViewModel
         _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         _modalNavigationStore.CurrentModalViewModelChanged += OnCurrentModalViewModelChanged;
         _sharedService.TriggerActionNotification += LoadNotify;
-
         //load theme
         _themeStore.Notify();
         
@@ -105,6 +101,7 @@ public class MainViewModel : BaseViewModel
         UserNameAdmin = "@" + _accountStore.Users.Username;
         LoadNotifyGoal();
         LoadNotifyRecurring();
+        
     }
     public void LoadNotifyGoal() {
         try {
@@ -188,7 +185,6 @@ public class MainViewModel : BaseViewModel
     private void OnCurrentModalViewModelChanged()
     {
         OnPropertyChanged(nameof(CurrentModalViewModel));
-        //CurrentModalViewModel.StartUp();
         OnPropertyChanged(nameof(IsModalOpen));
         
     }

@@ -46,7 +46,7 @@
                     VerticalAlignment="Center"
                     FontSize="30"
                     Opacity="0.5"
-                    Text="No goal found!"
+                    Text="No notification!"
                     TextAlignment="Center"
                     Visibility="{Binding HasNoGoal, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <ScrollViewer
