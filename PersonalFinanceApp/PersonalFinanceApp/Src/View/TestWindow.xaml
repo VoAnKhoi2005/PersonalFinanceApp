@@ -12,686 +12,387 @@
         Width="1000 "
         Foreground="{DynamicResource CommonText}"
         Height="1000">
-    <Window.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="FontFamily"
-                    Value="Sans Serif Collection" />
-            <Setter Property="FontWeight"
-                    Value="Regular" />
-        </Style>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <Style x:Key="CalendarStyle1"
-               TargetType="{x:Type Calendar}">
-            <Setter Property="Foreground"
-                    Value="#FFFFFF" />
-            <Setter Property="Background"
-                    Value="{DynamicResource MainCalendar}" />
-            <Setter Property="BorderThickness"
-                    Value="0" />
-            <Setter Property="HorizontalAlignment"
-                    Value="Stretch" />
-            <Setter Property="VerticalAlignment"
-                    Value="Stretch" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Calendar}">
-                        <StackPanel x:Name="PART_Root"
-                                    HorizontalAlignment="Center">
-                            <CalendarItem x:Name="PART_CalendarItem"
-                                          Background="{TemplateBinding Background}"
-                                          BorderBrush="{TemplateBinding BorderBrush}"
-                                          BorderThickness="{TemplateBinding BorderThickness}"
-                                          Style="{DynamicResource CalendarCalendarItemStyle1}" />
-                        </StackPanel>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="CalendarCalendarItemStyle1"
-               TargetType="{x:Type CalendarItem}">
-            <Setter Property="Margin"
-                    Value="0,3,0,3" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type CalendarItem}">
-                        <ControlTemplate.Resources>
-                            <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
-                                <TextBlock Margin="0,6,0,6"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           FontFamily="Trebuchet MS"
-                                           FontSize="14"
-                                           FontWeight="Bold"
-                                           Foreground="{DynamicResource CalendarSuperText}"
-                                           Text="{Binding}" />
-                            </DataTemplate>
-                        </ControlTemplate.Resources>
-                        <Grid x:Name="PART_Root">
-                            <Grid.Resources>
-                                <SolidColorBrush x:Key="DisabledColor"
-                                                 Color="#A5FFFFFF" />
-                            </Grid.Resources>
-                            <Border HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="1">
-                                <Grid>
-                                    <Grid.Resources>
-                                        <ControlTemplate x:Key="PreviousButtonTemplate"
-                                                         TargetType="{x:Type Button}">
-                                            <Border Background="{DynamicResource CalendarBackground}"
-                                                    CornerRadius="20"
-                                                    Cursor="Hand">
-                                                <Grid>
-                                                    <Path x:Name="path"
-                                                          Height="8"
-                                                          HorizontalAlignment="Center"
-                                                          VerticalAlignment="Center"
-                                                          Data="M19.03125 4.28125L8.03125 15.28125L7.34375 16L8.03125 16.71875L19.03125 27.71875L20.46875 26.28125L10.1875 16L20.46875 5.71875Z"
-                                                          Fill="#FFFFFFFF"
-                                                          Stretch="Uniform" />
-                                                </Grid>
-                                                <VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name="CommonStates">
-                                                        <VisualState x:Name="Normal" />
-                                                        <VisualState x:Name="MouseOver">
-                                                            <Storyboard>
-                                                                <ColorAnimation Storyboard.TargetName="path"
-                                                                                Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
-                                                                                To="#FF73A9D8"
-                                                                                Duration="0" />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name="Disabled">
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetName="path"
-                                                                                 Storyboard.TargetProperty="(Shape.Fill).(Brush.Opacity)"
-                                                                                 To=".5"
-                                                                                 Duration="0" />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>
-                                            </Border>
-                                        </ControlTemplate>
-                                        <ControlTemplate x:Key="NextButtonTemplate"
-                                                         TargetType="{x:Type Button}">
-                                            <Border Background="{DynamicResource CalendarBackground}"
-                                                    CornerRadius="20"
-                                                    Cursor="Hand">
-                                                <Grid>
-                                                    <Path x:Name="path"
-                                                          Height="8"
-                                                          HorizontalAlignment="Center"
-                                                          VerticalAlignment="Center"
-                                                          Data="M12.96875 4.28125L11.53125 5.71875L21.8125 16L11.53125 26.28125L12.96875                                                            27.71875L23.96875 16.71875L24.65625 16L23.96825 15.28125Z"
-                                                          Fill="#FFFFFFFF"
-                                                          Stretch="Uniform" />
-                                                </Grid>
-                                                <VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name="CommonStates">
-                                                        <VisualState x:Name="Normal" />
-                                                        <VisualState x:Name="MouseOver">
-                                                            <Storyboard>
-                                                                <ColorAnimation Storyboard.TargetName="path"
-                                                                                Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)"
-                                                                                To="#FF73A9D8"
-                                                                                Duration="0" />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name="Disabled">
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetName="path"
-                                                                                 Storyboard.TargetProperty="(Shape.Fill).(Brush.Opacity)"
-                                                                                 To=".5"
-                                                                                 Duration="0" />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>
-                                            </Border>
-                                        </ControlTemplate>
-                                        <ControlTemplate x:Key="HeaderButtonTemplate"
-                                                         TargetType="{x:Type Button}">
-                                            <Grid Cursor="Hand">
-                                                <ContentPresenter x:Name="buttonContent"
-                                                                  Width="auto"
-                                                                  Height="auto"
-                                                                  Margin="15,10,0,0"
-                                                                  HorizontalAlignment="Left"
-                                                                  VerticalAlignment="Top"
-                                                                  Content="{TemplateBinding Content}"
-                                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                                  Opacity="0.7"
-                                                                  TextBlock.FontSize="20"
-                                                                  TextBlock.TextAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                                  TextElement.Foreground="{DynamicResource CalendarSuperText}" />
-                                                <VisualStateManager.VisualStateGroups>
-                                                    <VisualStateGroup x:Name="CommonStates">
-                                                        <VisualState x:Name="Normal" />
-                                                        <VisualState x:Name="MouseOver">
-                                                            <Storyboard>
-                                                                <ColorAnimation Storyboard.TargetName="buttonContent"
-                                                                                Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
-                                                                                To="#606467"
-                                                                                Duration="0" />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                        <VisualState x:Name="Disabled">
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetName="buttonContent"
-                                                                                 Storyboard.TargetProperty="Opacity"
-                                                                                 To=".5"
-                                                                                 Duration="0" />
-                                                            </Storyboard>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateManager.VisualStateGroups>
-                                            </Grid>
-                                        </ControlTemplate>
-                                    </Grid.Resources>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"
-                                                          MinWidth="80" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="100" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="40" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Button x:Name="PART_HeaderButton"
-                                            Grid.Row="0"
-                                            Grid.Column="0"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Bottom"
-                                            Focusable="False"
-                                            FontSize="14"
-                                            FontWeight="Bold"
-                                            Template="{StaticResource HeaderButtonTemplate}" />
-                                    <StackPanel Grid.Row="0"
-                                                Grid.Column="2"
-                                                Width="100"
-                                                Height="40"
-                                                Orientation="Horizontal">
-                                        <Button x:Name="PART_PreviousButton"
-                                                Width="35"
-                                                Height="35"
-                                                Focusable="False"
-                                                Template="{StaticResource PreviousButtonTemplate}" />
-
-                                        <Button x:Name="PART_NextButton"
-                                                Grid.Column="2"
-                                                Width="35"
-                                                Height="35"
-                                                Margin="5,0,0,0"
-                                                HorizontalAlignment="Right"
-                                                Focusable="False"
-                                                Template="{StaticResource NextButtonTemplate}" />
-                                    </StackPanel>
-                                    <Grid x:Name="PART_MonthView"
-                                          Grid.Row="1"
-                                          Grid.ColumnSpan="3"
-                                          Margin="6"
-                                          HorizontalAlignment="Center"
-                                          Visibility="Visible">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition />
-                                            <RowDefinition />
-                                            <RowDefinition />
-                                            <RowDefinition />
-                                            <RowDefinition />
-                                            <RowDefinition />
-                                            <RowDefinition />
-                                        </Grid.RowDefinitions>
-                                    </Grid>
-                                    <Grid x:Name="PART_YearView"
-                                          Grid.Row="1"
-                                          Grid.ColumnSpan="3"
-                                          HorizontalAlignment="Center"
-                                          Visibility="Hidden">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="100" />
-                                            <RowDefinition Height="100" />
-                                            <RowDefinition Height="100" />
-                                        </Grid.RowDefinitions>
-                                    </Grid>
-                                </Grid>
-                            </Border>
-                            <Rectangle x:Name="PART_DisabledVisual"
-                                       Fill="{StaticResource DisabledColor}"
-                                       Opacity="0"
-                                       RadiusX="2"
-                                       RadiusY="2"
-                                       Stretch="Fill"
-                                       Stroke="{StaticResource DisabledColor}"
-                                       StrokeThickness="1"
-                                       Visibility="Collapsed" />
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal" />
-                                    <VisualState x:Name="Disabled">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="PART_DisabledVisual"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To="1"
-                                                             Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled"
-                                     Value="False">
-                                <Setter TargetName="PART_DisabledVisual"
-                                        Property="Visibility"
-                                        Value="Visible" />
-                            </Trigger>
-                            <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}"
-                                         Value="Year">
-                                <Setter TargetName="PART_MonthView"
-                                        Property="Visibility"
-                                        Value="Hidden" />
-                                <Setter TargetName="PART_YearView"
-                                        Property="Visibility"
-                                        Value="Visible" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding DisplayMode, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}"
-                                         Value="Decade">
-                                <Setter TargetName="PART_MonthView"
-                                        Property="Visibility"
-                                        Value="Hidden" />
-                                <Setter TargetName="PART_YearView"
-                                        Property="Visibility"
-                                        Value="Visible" />
-                            </DataTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="CalendarCalendarDayButtonStyle1"
-               TargetType="{x:Type CalendarDayButton}">
-            <Setter Property="MinHeight"
-                    Value="120" />
-            <Setter Property="FontSize"
-                    Value="20" />
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Center" />
-            <Setter Property="VerticalContentAlignment"
-                    Value="Center" />
-            <Setter Property="Cursor"
-                    Value="Hand" />
-            <Setter Property="Background"
-                    Value="Transparent" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type CalendarDayButton}">
-                        <Grid>
-                            <Rectangle x:Name="TodayBackground"
-                                       Fill="{DynamicResource CalendarBackground}"
-                                       Opacity="0"
-                                       RadiusX="20"
-                                       RadiusY="20" />
-                            <Rectangle x:Name="SelectedBackground"
-                                       Fill="{DynamicResource CalendarBackground}"
-                                       Opacity="0"
-                                       RadiusX="20"
-                                       RadiusY="20" />
+    <Grid Width="1000"
+          Height="700">
+        <Grid.Resources>
+            <Style x:Key="comboboxStyle"
+                   TargetType="ComboBoxItem">
+                <Setter Property="Background"
+                        Value="{DynamicResource ComboBoxBackground}" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource ComponentText}" />
+                <Setter Property="BorderBrush"
+                        Value="Transparent" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Height"
+                        Value="40" />
+                <Setter Property="Width"
+                        Value="150" />
+            </Style>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily"
+                        Value="Sans Serif Collection" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource CommonText}" />
+                <Setter Property="FontWeight"
+                        Value="Regular" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Background"
+                        Value="Transparent" />
+                <Setter Property="Foreground"
+                        Value="{DynamicResource CommonText}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}" />
-                            <Rectangle x:Name="HighlightBackground"
-                                       Opacity="0"
-                                       RadiusX="20"
-                                       RadiusY="20"
-                                       Stroke="{DynamicResource CalendarBackground}"
-                                       StrokeThickness="2" />
-                            <ContentPresenter x:Name="NormalText"
-                                              Margin="10"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Top"
-                                              TextElement.Foreground="#FFFFFF" />
-                            <Path x:Name="Blackout"
-                                  Margin="3"
-                                  HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Stretch"
-                                  Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633,11.029181 L15.191895,11.029181 L12.844727,13.999395 L15.21875,17.060919 L12.962891,17.060919 L11.673828,15.256231 L10.352539,17.060919 L8.1396484,17.060919 L10.519043,14.042364 z"
-                                  Fill="#FF000000"
-                                  Opacity="0"
-                                  RenderTransformOrigin="0.5,0.5"
-                                  Stretch="Fill" />
-
-                            <Rectangle x:Name="DayButtonFocusVisual"
-                                       IsHitTestVisible="false"
-                                       RadiusX="1"
-                                       RadiusY="1"
-                                       Stroke="Transparent"
-                                       Visibility="Collapsed" />
-                            <Grid x:Name="AdditionalDataGrid"
-                                  Margin="0,40,0,0"
-                                  Opacity="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-
-                            </Grid>
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition GeneratedDuration="0:0:0.1" />
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="Normal" />
-                                    <VisualState x:Name="MouseOver">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="HighlightBackground"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To="0.5"
-                                                             Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="HighlightBackground"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To="0.5"
-                                                             Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Disabled">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="HighlightBackground"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To="0"
-                                                             Duration="0" />
-                                            <DoubleAnimation Storyboard.TargetName="NormalText"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To=".35"
-                                                             Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="SelectionStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition GeneratedDuration="0" />
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="Unselected" />
-                                    <VisualState x:Name="Selected">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="SelectedBackground"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To=".75"
-                                                             Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="CalendarButtonFocusStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition GeneratedDuration="0" />
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="CalendarButtonFocused">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DayButtonFocusVisual"
-                                                                           Storyboard.TargetProperty="Visibility"
-                                                                           Duration="0">
-                                                <DiscreteObjectKeyFrame KeyTime="0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <Visibility>Visible</Visibility>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="CalendarButtonUnfocused">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DayButtonFocusVisual"
-                                                                           Storyboard.TargetProperty="Visibility"
-                                                                           Duration="0">
-                                                <DiscreteObjectKeyFrame KeyTime="0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <Visibility>Collapsed</Visibility>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="ActiveStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition GeneratedDuration="0" />
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="Active" />
-
-                                    <VisualState x:Name="Inactive">
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetName="NormalText"
-                                                            Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
-                                                            To="#606467"
-                                                            Duration="0" />
-                                            <DoubleAnimation Storyboard.TargetName="AdditionalDataGrid"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To="0.4"
-                                                             Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="DayStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition GeneratedDuration="0" />
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="RegularDay" />
-                                    <VisualState x:Name="Today">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="TodayBackground"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To="1"
-                                                             Duration="0" />
-                                            <ColorAnimation Storyboard.TargetName="NormalText"
-                                                            Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
-                                                            To="#FFFFFFFF"
-                                                            Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="BlackoutDayStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition GeneratedDuration="0" />
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="NormalDay" />
-                                    <VisualState x:Name="BlackoutDay">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="Blackout"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To=".2"
-                                                             Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Grid>
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="CalendarCalendarButtonStyle1"
-               TargetType="{x:Type CalendarButton}">
-            <Setter Property="Background"
-                    Value="#FFBADDE9" />
-            <Setter Property="Width"
-                    Value="200" />
-            <!-- Increased width -->
-            <Setter Property="Height"
-                    Value="200" />
-            <!-- Increased height -->
-            <Setter Property="FontSize"
-                    Value="14" />
-            <!-- Slightly larger font size -->
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Center" />
-            <Setter Property="VerticalContentAlignment"
-                    Value="Center" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type CalendarButton}">
-                        <Grid>
-                            <Rectangle x:Name="SelectedBackground"
-                                       Width="60"
-                                       Height="60"
-                                       RadiusX="3"
-                                       RadiusY="3"
-                                       Fill="{TemplateBinding Background}"
-                                       Opacity="0" />
-                            <Rectangle x:Name="Background"
-                                       Width="60"
-                                       Height="60"
-                                       RadiusX="3"
-                                       RadiusY="3"
-                                       Fill="{TemplateBinding Background}"
-                                       Opacity="0" />
-                            <ContentPresenter x:Name="NormalText"
-                                              Margin="2"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              TextElement.Foreground="#FFFFFF" />
-                            <Rectangle x:Name="CalendarButtonFocusVisual"
-                                       Width="60"
-                                       Height="60"
-                                       RadiusX="3"
-                                       RadiusY="3"
-                                       IsHitTestVisible="false"
-                                       Stroke="{DynamicResource CommonGridBackground}"
-                                       Visibility="Collapsed" />
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition GeneratedDuration="0:0:0.1" />
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="Normal" />
-                                    <VisualState x:Name="MouseOver">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="Background"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To=".5"
-                                                             Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="Background"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To=".5"
-                                                             Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="SelectionStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition GeneratedDuration="0" />
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="Unselected" />
-                                    <VisualState x:Name="Selected">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="SelectedBackground"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             To=".75"
-                                                             Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="ActiveStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition GeneratedDuration="0" />
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="Active" />
-                                    <VisualState x:Name="Inactive">
-                                        <Storyboard>
-                                            <ColorAnimation Storyboard.TargetName="NormalText"
-                                                            Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
-                                                            To="#FF777777"
-                                                            Duration="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                                <VisualStateGroup x:Name="CalendarButtonFocusStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition GeneratedDuration="0" />
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="CalendarButtonFocused">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CalendarButtonFocusVisual"
-                                                                           Storyboard.TargetProperty="Visibility"
-                                                                           Duration="0">
-                                                <DiscreteObjectKeyFrame KeyTime="0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <Visibility>Visible</Visibility>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="CalendarButtonUnfocused">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CalendarButtonFocusVisual"
-                                                                           Storyboard.TargetProperty="Visibility"
-                                                                           Duration="0">
-                                                <DiscreteObjectKeyFrame KeyTime="0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <Visibility>Collapsed</Visibility>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsFocused"
-                                     Value="True">
-                                <Setter TargetName="CalendarButtonFocusVisual"
-                                        Property="Visibility"
-                                        Value="Visible" />
+                                    CornerRadius="20">
+                                <ContentPresenter HorizontalAlignment="Stretch"
+                                                  VerticalAlignment="Stretch" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="true">
+                        <Setter Property="Cursor"
+                                Value="Hand" />
+                        <Setter Property="Background"
+                                Value="{DynamicResource onHovered}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0"
+                   Background="{DynamicResource DockpanelBackGround}">
+            <Button Height="40"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Command="{Binding ExitRecurringExpenseCommand}"
+                    DockPanel.Dock="Left">
+                <Button.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background"
+                                Value="Transparent" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <materialDesign:PackIcon Width="50"
+                                                                 Height="25"
+                                                                 HorizontalAlignment="Center"
+                                                                 VerticalAlignment="Center"
+                                                                 Foreground="{DynamicResource SuperText}"
+                                                                 Kind="ArrowLeft" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="true">
+                                <Setter Property="Cursor"
+                                        Value="Hand" />
+                                <Setter Property="Background"
+                                        Value="{DynamicResource Cancel_buttonHover}" />
                             </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <TextBlock Margin="5,5,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="{DynamicResource SuperText}"
+                       Text="Expense book details" />
 
-    </Window.Resources>
-    <!--
-        Loaded="UpdateDataContextCalenderButton"
-        DisplayDateChanged="UpdateDataContextCalenderButton"
-    -->
-    <Grid>
-        <Calendar x:Name="CalendarXaml"
-                  Grid.Row="1"
-                  Margin="0,10,0,0"
-                  CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle1}"
-                  CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}"
-                  CalendarItemStyle="{DynamicResource CalendarCalendarItemStyle1}"
-                  FontFamily="Trebuchet MS"
-                  Style="{DynamicResource CalendarStyle1}" />
+            <Button Command="{Binding AddNewExpenseBookCommand}"
+                    Width="160" DockPanel.Dock="Right"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Height="40"
+                    Margin="0 0 15 0">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <DockPanel Background="{TemplateBinding Background}"
+                                  >
+                            <materialDesign:PackIcon Width="20"
+                                                     Height="20"
+                                                     Margin="5,0,0,0"
+                                                     HorizontalAlignment="Left"
+                                                     VerticalAlignment="Center"
+                                                     Foreground="{DynamicResource CommonText}"
+                                                     Kind="PlusCircle" />
+                            <TextBlock Margin="0,0,10,0"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="Normal"
+                                       Foreground="{DynamicResource SuperText}"
+                                       Text="New expense book" />
+
+                        </DockPanel>
+                    </ControlTemplate>
+                </Button.Template>
+
+            </Button>
+        </DockPanel>
+        <Grid Grid.Row="1">
+            <DataGrid Name="ListReocver"
+                      HorizontalAlignment="Stretch"
+                      AutoGenerateColumns="False"
+                      Background="{DynamicResource DatagridBG}"
+                      Foreground="{DynamicResource DatagridFG}"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding SourceRecurringExpense}"
+                      SelectedItem="{Binding SelectedRecurringExpense}">
+
+                <DataGrid.Columns>
+                    <!--  Name  -->
+                    <DataGridTextColumn Binding="{Binding Name}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock FontSize="13"
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource SuperText}"
+                                       Text="Name" />
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <!--  Frequency  -->
+                    <DataGridTextColumn Binding="{Binding Frequency}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock FontSize="13"
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource SuperText}"
+                                       Text="Frequency" />
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <!--  Interval  -->
+                    <DataGridTextColumn Binding="{Binding Interval}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock FontSize="13"
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource SuperText}"
+                                       Text="Interval" />
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <!--  StartDate  -->
+                    <DataGridTextColumn Binding="{Binding LastTime}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock FontSize="13"
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource SuperText}"
+                                       Text="LastTime" />
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <!--  lasttime  -->
+                    <DataGridTextColumn Binding="{Binding LastTime}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock FontSize="13"
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource SuperText}"
+                                       Text="StartDate" />
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <!--  Status  -->
+                    <DataGridTextColumn Width="*"
+                                        Binding="{Binding Status}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock FontSize="13"
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource SuperText}"
+                                       Text="Status" />
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+
+                    <DataGridTemplateColumn CanUserResize="False">
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock FontSize="13"
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource SuperText}" />
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+
+                                <materialDesign:PopupBox Width="auto"
+                                                         Height="30"
+                                                         Margin="0,5,0,0"
+                                                         HorizontalAlignment="Right"
+                                                         VerticalAlignment="Center"
+                                                         Background="Transparent"
+                                                         Foreground="{DynamicResource CommonText}"
+                                                         IsEnabled="True"
+                                                         PopupMode="Click"
+                                                         Style="{StaticResource MaterialDesignPopupBox}">
+                                    <StackPanel Width="150">
+                                        <!--  adjust recurring  -->
+                                        <Button Grid.Column="3"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Bottom"
+                                                Command="{Binding DataContext.EditRecurringExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                                CommandParameter="{Binding}">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Background"
+                                                            Value="Transparent" />
+                                                    <Setter Property="Foreground"
+                                                            Value="{DynamicResource ComponentText}" />
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate>
+                                                                <Border Height="30"
+                                                                        Background="{TemplateBinding Background}"
+                                                                        CornerRadius="30 30 0 0">
+                                                                    <DockPanel>
+                                                                        <materialDesign:PackIcon Width="20"
+                                                                                                 Height="20"
+                                                                                                 Margin="15,0,0,0"
+                                                                                                 HorizontalAlignment="Left"
+                                                                                                 VerticalAlignment="Center"
+                                                                                                 DockPanel.Dock="Left"
+                                                                                                 Foreground="{TemplateBinding Foreground}"
+                                                                                                 Kind="Pencil" />
+                                                                        <TextBlock Margin="15,0,0,0"
+                                                                                   HorizontalAlignment="Left"
+                                                                                   VerticalAlignment="Center"
+                                                                                   DockPanel.Dock="Left"
+                                                                                   FontSize="14"
+                                                                                   Foreground="{TemplateBinding Foreground}"
+                                                                                   Text="Edit" />
+                                                                    </DockPanel>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver"
+                                                                 Value="true">
+                                                            <Setter Property="Cursor"
+                                                                    Value="Hand" />
+                                                            <Setter Property="Foreground"
+                                                                    Value="{DynamicResource Goalplan_Hover}" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                        <!--  suspend  -->
+                                        <Button Grid.Column="4"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Bottom"
+                                                Command="{Binding DataContext.SuspendRecurringExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                                CommandParameter="{Binding}">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Background"
+                                                            Value="Transparent" />
+                                                    <Setter Property="Foreground"
+                                                            Value="{DynamicResource ComponentText}" />
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate>
+                                                                <Border Height="30"
+                                                                        Background="{TemplateBinding Background}">
+                                                                    <DockPanel>
+                                                                        <materialDesign:PackIcon Width="20"
+                                                                                                 Height="20"
+                                                                                                 Margin="15,0,0,0"
+                                                                                                 HorizontalAlignment="Left"
+                                                                                                 VerticalAlignment="Center"
+                                                                                                 DockPanel.Dock="Left"
+                                                                                                 Foreground="{TemplateBinding Foreground}"
+                                                                                                 Kind="History" />
+                                                                        <TextBlock Margin="15,0,0,0"
+                                                                                   HorizontalAlignment="Left"
+                                                                                   VerticalAlignment="Center"
+                                                                                   DockPanel.Dock="Left"
+                                                                                   FontSize="14"
+                                                                                   Foreground="{TemplateBinding Foreground}"
+                                                                                   Text="Suspend" />
+                                                                    </DockPanel>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver"
+                                                                 Value="true">
+                                                            <Setter Property="Cursor"
+                                                                    Value="Hand" />
+
+                                                            <Setter Property="Foreground"
+                                                                    Value="{DynamicResource Goalplan_Hover}" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                        <!--  delete  -->
+                                        <Button Grid.Column="5"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Bottom"
+                                                Command="{Binding DataContext.DeleteRecurringExpenseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                                CommandParameter="{Binding}">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Background"
+                                                            Value="Transparent" />
+                                                    <Setter Property="Foreground"
+                                                            Value="#FFE35D5D" />
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate>
+                                                                <Border Height="30"
+                                                                        Background="{TemplateBinding Background}"
+                                                                        CornerRadius="0 0 30 30">
+                                                                    <DockPanel>
+                                                                        <materialDesign:PackIcon Width="20"
+                                                                                                 Height="20"
+                                                                                                 Margin="15,0,0,0"
+                                                                                                 HorizontalAlignment="Left"
+                                                                                                 VerticalAlignment="Center"
+                                                                                                 DockPanel.Dock="Left"
+                                                                                                 Foreground="#FFE35D5D"
+                                                                                                 Kind="Delete" />
+                                                                        <TextBlock Margin="15,0,0,0"
+                                                                                   HorizontalAlignment="Left"
+                                                                                   VerticalAlignment="Center"
+                                                                                   DockPanel.Dock="Left"
+                                                                                   FontSize="14"
+                                                                                   Foreground="{TemplateBinding Foreground}"
+                                                                                   Text="Delete" />
+                                                                    </DockPanel>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver"
+                                                                 Value="true">
+                                                            <Setter Property="Cursor"
+                                                                    Value="Hand" />
+                                                            <Setter Property="Foreground"
+                                                                    Value="#FFF42B2B" />
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </StackPanel>
+                                </materialDesign:PopupBox>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>

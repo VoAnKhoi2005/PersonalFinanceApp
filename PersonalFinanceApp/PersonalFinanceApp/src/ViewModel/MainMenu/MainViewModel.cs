@@ -156,6 +156,7 @@ public class MainViewModel : BaseViewModel
         NotifyCardViewModels.Add(new NotificationRecurringCard(_serviceProvider, new RecurringExpense()));
         LoadNotifyGoal();
         LoadNotifyRecurring();
+        
     }
 
     public void LoadNotifyGoal()

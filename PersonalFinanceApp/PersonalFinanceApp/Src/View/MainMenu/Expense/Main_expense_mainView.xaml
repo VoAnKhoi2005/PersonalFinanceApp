@@ -167,86 +167,273 @@
 
         </Grid>
         <DockPanel Grid.Row="1">
-            <!--  add new  -->
-            <Border
-                Width="100"
-                Height="40"
-                Margin="0,0,15,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
-                Background="{DynamicResource CommonGridBackground}"
-                CornerRadius="20"
-                DockPanel.Dock="Right">
-                <Button Command="{Binding AddNewExpenseCommand}" IsEnabled="{Binding HaveExpenseBook}">
-                    <Grid>
-                        <TextBlock
-                            Margin="0,0,5,0"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            FontSize="10"
-                            FontWeight="Bold"
-                            Foreground="{DynamicResource SuperText}"
-                            Text="New expense" />
-                        <materialDesign:PackIcon
-                            Width="25"
-                            Height="25"
-                            Margin="5,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            FontWeight="Bold"
-                            Foreground="{DynamicResource CommonText}"
-                            Kind="PlusCircle" />
-                    </Grid>
-                </Button>
-            </Border>
-            <Border Width="100"
-                    Height="40"
-                    Margin="0,0,5,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Background="{DynamicResource CommonGridBackground}"
-                    CornerRadius="20"
-                    DockPanel.Dock="Right">
-                <Button Command="{Binding AddNewCategoryCommand}"
-                        IsEnabled="{Binding HaveExpenseBook}">
-                    <Grid>
-                        <TextBlock Margin="0,0,5,0"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                   FontSize="10"
-                                   FontWeight="Bold"
-                                   Foreground="{DynamicResource SuperText}"
-                                   Text="New category" />
-                        <materialDesign:PackIcon Width="25"
-                                                 Height="25"
-                                                 Margin="5,0,0,0"
-                                                 HorizontalAlignment="Left"
-                                                 VerticalAlignment="Center"
-                                                 FontWeight="Bold"
-                                                 Foreground="{DynamicResource CommonText}"
-                                                 Kind="PlusCircle" />
-                    </Grid>
-                </Button>
-            </Border>
-            <Border
-                Width="40"
-                Height="40"
+            <materialDesign:PopupBox
+                Grid.Column="1"
                 Margin="0,0,5,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                Background="{DynamicResource CommonGridBackground}"
-                CornerRadius="30"
-                DockPanel.Dock="Right">
-                <Button Command="{Binding RecycleExpenseCommand}" IsEnabled="{Binding HaveExpenseBook}">
+                Background="Transparent"
+                DockPanel.Dock="Right"
+                Foreground="{DynamicResource CommonText}"
+                PlacementMode="BottomAndAlignRightEdges"
+                PopupMode="Click"
+                Style="{StaticResource MaterialDesignPopupBox}">
+                <materialDesign:PopupBox.ToggleContent>
                     <materialDesign:PackIcon
-                        Width="25"
-                        Height="25"
-                        HorizontalAlignment="Center"
+                        Width="30"
+                        Height="30"
+                        Margin="0,0,10,0"
+                        HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        Foreground="Red"
-                        Kind="Delete" />
-                </Button>
-            </Border>
+                        FontWeight="Bold"
+                        Foreground="{DynamicResource CommonText}"
+                        Kind="DotsHorizontalCircle" />
+                </materialDesign:PopupBox.ToggleContent>
+                <StackPanel>
+                    <!--  add expense  -->
+                    <Button
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding AddNewExpenseCommand}"
+                        CommandParameter="{Binding}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="{DynamicResource ComponentText}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Border
+                                                Height="30"
+                                                Background="{TemplateBinding Background}"
+                                                CornerRadius="30 30 0 0">
+                                                <DockPanel>
+                                                    <materialDesign:PackIcon
+                                                        Width="20"
+                                                        Height="20"
+                                                        Margin="10,0,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        Foreground="{TemplateBinding Foreground}"
+                                                        Kind="PlusCircle" />
+                                                    <TextBlock
+                                                        Margin="15,0,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="14"
+                                                        Foreground="{TemplateBinding Foreground}"
+                                                        Text="New expense" />
+                                                </DockPanel>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Foreground" Value="{DynamicResource Goalplan_Hover}" />
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <!--  add category  -->
+                    <Button
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding AddNewCategoryCommand}"
+                        CommandParameter="{Binding}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="{DynamicResource ComponentText}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Border
+                                                Height="30"
+                                                Background="{TemplateBinding Background}"
+                                                CornerRadius="30 30 0 0">
+                                                <DockPanel>
+                                                    <materialDesign:PackIcon
+                                                        Width="20"
+                                                        Height="20"
+                                                        Margin="10,0,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        Foreground="{TemplateBinding Foreground}"
+                                                        Kind="PlusCircle" />
+                                                    <TextBlock
+                                                        Margin="15,0,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="14"
+                                                        Foreground="{TemplateBinding Foreground}"
+                                                        Text="New Category" />
+                                                </DockPanel>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Foreground" Value="{DynamicResource Goalplan_Hover}" />
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <!--  category details  -->
+                    <Button
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding CategoryDetailCommand}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="{DynamicResource ComponentText}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Border
+                                                Width="150"
+                                                Height="30"
+                                                Background="{TemplateBinding Background}">
+                                                <DockPanel>
+                                                    <materialDesign:PackIcon
+                                                        Width="20"
+                                                        Height="20"
+                                                        Margin="10,0,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        FontWeight="Bold"
+                                                        Foreground="{TemplateBinding Foreground}"
+                                                        Kind="CreditCardMultiple" />
+                                                    <TextBlock
+                                                        Margin="15,0,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="14"
+                                                        Foreground="{TemplateBinding Foreground}"
+                                                        Text="Category details" />
+                                                </DockPanel>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Foreground" Value="{DynamicResource Goalplan_Hover}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <!--  Expense book details  -->
+                    <Button
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding ExpenseBookDetailCommand}"
+                        CommandParameter="{Binding}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="{DynamicResource ComponentText}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Border
+                                                Height="30"
+                                                Background="{TemplateBinding Background}"
+                                                CornerRadius="30 30 0 0">
+                                                <DockPanel>
+                                                    <materialDesign:PackIcon
+                                                        Width="20"
+                                                        Height="20"
+                                                        Margin="10,0,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        Foreground="{TemplateBinding Foreground}"
+                                                        Kind="BookOpenPageVariant" />
+                                                    <TextBlock
+                                                        Margin="15,0,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="14"
+                                                        Foreground="{TemplateBinding Foreground}"
+                                                        Text="Expense book details" />
+                                                </DockPanel>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Foreground" Value="{DynamicResource Goalplan_Hover}" />
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <!--  recover  -->
+                    <Button
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding RecycleExpenseCommand}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Foreground" Value="#FFE35D5D" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Border
+                                                Width="190"
+                                                Height="30"
+                                                Background="{TemplateBinding Background}">
+                                                <DockPanel>
+                                                    <materialDesign:PackIcon
+                                                        Width="20"
+                                                        Height="20"
+                                                        Margin="10,0,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        DockPanel.Dock="Left"
+                                                        Foreground="#FFE35D5D"
+                                                        Kind="Delete" />
+                                                    <TextBlock
+                                                        Margin="15,0,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Center"
+                                                        DockPanel.Dock="Left"
+                                                        FontSize="14"
+                                                        Foreground="{TemplateBinding Foreground}"
+                                                        Text="Recover expenses" />
+                                                </DockPanel>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Foreground" Value="#FFF42B2B" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+            </materialDesign:PopupBox>
+
+
             <Border
                 Width="120"
                 Height="40"
@@ -625,6 +812,7 @@
                                     <StackPanel>
                                         <CheckBox
                                             Height="30"
+                                            Margin="10,0,0,0"
                                             Content="{Binding Name}"
                                             FontSize="14"
                                             IsChecked="{Binding IsChecked, Mode=TwoWay}">

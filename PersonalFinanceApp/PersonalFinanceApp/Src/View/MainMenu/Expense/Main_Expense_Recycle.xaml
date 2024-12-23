@@ -151,13 +151,6 @@
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     <DataGridTemplateColumn CanUserResize="False">
-                        <DataGridTemplateColumn.Header>
-                            <TextBlock
-                                FontSize="13"
-                                FontWeight="Bold"
-                                Foreground="{DynamicResource SuperText}"
-                                Text="Commands" />
-                        </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
