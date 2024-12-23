@@ -6,10 +6,9 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Button Height="100" Width="500" 
-            HorizontalContentAlignment="Left"
+    <Border Height="100" Width="500"
             Background="{DynamicResource CommonGridBackground}">
-        <Grid Width="500">
+        <Grid Width="500" Background="Transparent">
             <Grid.Resources>
                 <Style TargetType="materialDesign:PackIcon">
                     <Setter Property="Foreground" Value="{DynamicResource Ntf_goal}" />
@@ -54,7 +53,7 @@
                     Kind="NoteText" />
             </Grid>
 
-            <Grid Grid.Column="1" Margin="15">
+            <Grid Grid.Column="1" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
@@ -64,13 +63,14 @@
 
                 <DockPanel Grid.Row="0">
                     <TextBlock Text="Recurring expense:"
-                               FontSize="10"
+                               FontSize="15"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"></TextBlock>
 
                     <TextBlock Foreground="{DynamicResource Ntf_goalCategory}"
                                Text="{Binding NameRecurring}"
                                VerticalAlignment="Center"
+                               FontSize="15"
                                HorizontalAlignment="Left"
                                FontWeight="Bold"
                                Margin="10 0 0 0" />
@@ -78,11 +78,11 @@
                 </DockPanel>
                 <DockPanel Grid.Row="1">
                     <TextBlock Text="Start date :"
-                               FontSize="10"
+                               FontSize="15"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"></TextBlock>
                     <TextBlock Foreground="{DynamicResource Ntf_goalName}"
-                               FontSize="13"
+                               FontSize="15"
                                FontWeight="Bold"
                                Text="{Binding StartDate}"
                                VerticalAlignment="Center"
@@ -91,11 +91,12 @@
                 </DockPanel>
                 <DockPanel  Grid.Row="2">
                     <TextBlock Text="Time :"
-                               FontSize="10"
+                               FontSize="15"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"></TextBlock>
                     <TextBlock Foreground="{DynamicResource Ntf_goalTime}"
                                Opacity="0.6"
+                               FontSize="15"
                                Text="{Binding LastTime}"
                                VerticalAlignment="Center"
                                FontWeight="Bold"
@@ -105,11 +106,12 @@
 
                 <DockPanel  Grid.Row="3">
                     <TextBlock Text="Category :"
-                               FontSize="10"
+                               FontSize="15"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"></TextBlock>
                     <ComboBox Width="60" HorizontalAlignment="Left"
-                              Margin="5, 0, 0, 0"></ComboBox>
+                              Margin="5, 0, 0, 0"
+                              FontSize="15"></ComboBox>
                 </DockPanel>
             </Grid>
 
@@ -119,26 +121,34 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" 
+                <materialDesign:Badged
+                    x:Name="CopyBadge" BadgeColorZoneMode="PrimaryDark"
+                    DockPanel.Dock="Bottom"
+                    HorizontalAlignment="Right">
+                </materialDesign:Badged>
+
+                <Button Grid.Row="0"
                         Background="Green"
-                        Content="Create" FontSize="10"
+                        Content="Create" FontSize="15"
                         Padding="0"
                         BorderBrush="Transparent"
                         VerticalAlignment="Bottom"
-                        Width="70" Height="20"
-                        Margin="10, 0, 10, 5"></Button>
+                        Width="100" Height="30"
+                        Margin="10, 0, 10, 5"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"></Button>
                 <Button Grid.Row="1" 
                         Background="Red"
-                        Content="Cancel" FontSize="10"
+                        Content="Cancel" FontSize="15"
                         Padding="0"
                         BorderBrush="Transparent"
                         VerticalAlignment="Top"
-                        Width="70" Height="20"
-                        Margin="10, 5, 10, 0"></Button>
+                        Width="100" Height="30"
+                        Margin="10, 5, 10, 0"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"></Button>
             </Grid>
         </Grid>
 
-        <Button.Style>
+        <!--<Button.Style>
             <Style TargetType="{x:Type Button}">
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="true">
@@ -147,7 +157,6 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
-
-        </Button.Style>
-    </Button>
+        </Button.Style>-->
+    </Border>
 </UserControl>

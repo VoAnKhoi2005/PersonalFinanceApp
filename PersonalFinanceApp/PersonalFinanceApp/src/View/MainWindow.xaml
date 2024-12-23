@@ -384,7 +384,6 @@
                         </Grid>
                     </materialDesign:PopupBox>
                     <!--  NOTIFY  -->
-
                     <materialDesign:PopupBox
                         Margin="0,12,5,0"
                         HorizontalAlignment="Right"

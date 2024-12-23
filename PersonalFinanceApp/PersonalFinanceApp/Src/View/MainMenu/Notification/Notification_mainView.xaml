@@ -29,6 +29,14 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <!--  header  -->
+            <!--<DockPanel Grid.Row="0" HorizontalAlignment="Center" Width="100">
+                    <Button
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        Tag="{Binding Xaml, RelativeSource={RelativeSource TemplatedParent}}"
+                        CommandParameter="{Binding Xaml, RelativeSource={RelativeSource TemplatedParent}}"
+                        Content="Copy"/>
+            </DockPanel>-->
+
             <TextBlock Grid.Row="0" Margin="10,0,0,0"
                        VerticalAlignment="Center" HorizontalAlignment="Left"
                        DockPanel.Dock="Left"
