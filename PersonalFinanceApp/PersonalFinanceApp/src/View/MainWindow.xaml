@@ -21,7 +21,8 @@
     mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closed">
-            <i:InvokeCommandAction Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+            <i:InvokeCommandAction Command="{Binding CloseWindowCommand}"
+                                   CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
@@ -75,8 +76,6 @@
                 VerticalAlignment="Top"
                 DockPanel.Dock="Top">
                 <Grid>
-                    <Button VerticalAlignment="Top" HorizontalAlignment="Left" Panel.ZIndex="10" Width="100"
-                            Command="{Binding MyTestCommand}"></Button>
                     <Image
                         Width="44"
                         Height="44"
@@ -100,8 +99,7 @@
                          Command="{Binding DashBoardNavigateCommand}"
                          DockPanel.Dock="Top"
                          IsHitTestVisible="True"
-                         GroupName="Navigation"
-                         >
+                         GroupName="Navigation">
                 <RadioButton.Template>
                     <ControlTemplate TargetType="RadioButton">
                         <DockPanel Width="210"
@@ -131,8 +129,7 @@
                          Command="{Binding ExpenseBookNavigateCommand}"
                          DockPanel.Dock="Top"
                          IsHitTestVisible="True"
-                         GroupName="Navigation"
-                        >
+                         GroupName="Navigation">
                 <RadioButton.Template>
                     <ControlTemplate TargetType="RadioButton">
                         <DockPanel Width="210"
@@ -164,8 +161,7 @@
                          Command="{Binding GoalplanNavigateCommand}"
                          DockPanel.Dock="Top"
                          IsHitTestVisible="True"
-                         GroupName="Navigation"
-                        >
+                         GroupName="Navigation">
                 <RadioButton.Template>
                     <ControlTemplate TargetType="RadioButton">
                         <DockPanel Width="210"
@@ -196,8 +192,7 @@
                          Command="{Binding RecurringNavigateCommand}"
                          DockPanel.Dock="Top"
                          IsHitTestVisible="True"
-                         GroupName="Navigation"
-                         >
+                         GroupName="Navigation">
                 <RadioButton.Template>
                     <ControlTemplate TargetType="RadioButton">
                         <DockPanel Width="210"
@@ -228,8 +223,7 @@
                          Command="{Binding SettingNavigateCommand}"
                          DockPanel.Dock="Bottom"
                          IsHitTestVisible="True"
-                         GroupName="Navigation"
-                         >
+                         GroupName="Navigation">
                 <RadioButton.Template>
                     <ControlTemplate TargetType="RadioButton">
                         <DockPanel Width="210"
@@ -299,7 +293,8 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="Button">
                                                 <Border Background="{TemplateBinding Background}">
-                                                    <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                                    <ContentPresenter HorizontalAlignment="Stretch"
+                                                                      VerticalAlignment="Stretch" />
                                                 </Border>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -359,7 +354,8 @@
 
                                 <!--  exit program  -->
                                 <Border Grid.Row="2">
-                                    <Button Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                                    <Button Command="{Binding CloseWindowCommand}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="7*" />
@@ -401,8 +397,8 @@
                                 Foreground="{DynamicResource SuperText}"
                                 Kind="Bell" />
                         </materialDesign:PopupBox.ToggleContent>
-                        
-                        <views:Notification_mainView DataContext="{Binding NotificationMainViewModel}"/>
+
+                        <views:Notification_mainView></views:Notification_mainView>
                     </materialDesign:PopupBox>
 
                 </DockPanel>

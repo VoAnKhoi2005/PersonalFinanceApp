@@ -6,8 +6,10 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Button Height="100" Background="{DynamicResource CommonGridBackground}">
-        <Grid Width="590">
+    <Button Height="100" Width="500" 
+            HorizontalContentAlignment="Left"
+            Background="{DynamicResource CommonGridBackground}">
+        <Grid Width="500">
             <Grid.Resources>
                 <Style TargetType="materialDesign:PackIcon">
                     <Setter Property="Foreground" Value="{DynamicResource Ntf_goal}" />
@@ -23,6 +25,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Border
@@ -56,10 +59,12 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <DockPanel Grid.Row="0">
-                    <TextBlock Text="Recurring name :"
+                    <TextBlock Text="Recurring expense:"
+                               FontSize="10"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"></TextBlock>
 
@@ -73,6 +78,7 @@
                 </DockPanel>
                 <DockPanel Grid.Row="1">
                     <TextBlock Text="Start date :"
+                               FontSize="10"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"></TextBlock>
                     <TextBlock Foreground="{DynamicResource Ntf_goalName}"
@@ -85,6 +91,7 @@
                 </DockPanel>
                 <DockPanel  Grid.Row="2">
                     <TextBlock Text="Time :"
+                               FontSize="10"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"></TextBlock>
                     <TextBlock Foreground="{DynamicResource Ntf_goalTime}"
@@ -95,6 +102,39 @@
                                HorizontalAlignment="Left"
                                Margin="10 0 0 0" />
                 </DockPanel>
+
+                <DockPanel  Grid.Row="3">
+                    <TextBlock Text="Category :"
+                               FontSize="10"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"></TextBlock>
+                    <ComboBox Width="60" HorizontalAlignment="Left"
+                              Margin="5, 0, 0, 0"></ComboBox>
+                </DockPanel>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="0" 
+                        Background="Green"
+                        Content="Create" FontSize="10"
+                        Padding="0"
+                        BorderBrush="Transparent"
+                        VerticalAlignment="Bottom"
+                        Width="70" Height="20"
+                        Margin="10, 0, 10, 5"></Button>
+                <Button Grid.Row="1" 
+                        Background="Red"
+                        Content="Cancel" FontSize="10"
+                        Padding="0"
+                        BorderBrush="Transparent"
+                        VerticalAlignment="Top"
+                        Width="70" Height="20"
+                        Margin="10, 5, 10, 0"></Button>
             </Grid>
         </Grid>
 

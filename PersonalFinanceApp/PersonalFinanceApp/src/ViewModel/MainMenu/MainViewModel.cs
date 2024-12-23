@@ -1,7 +1,10 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using PersonalFinanceApp.Database;
 using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
 using PersonalFinanceApp.ViewModel.Command;
@@ -18,6 +21,8 @@ public class MainViewModel : BaseViewModel
     private readonly SharedService _sharedService;  
     private readonly AccountStore _accountStore;
     private readonly ThemeStore _themeStore;
+
+    #region Properties
     public string UserNameAdmin {
         get => _userNameAdmin;
         set {
@@ -30,17 +35,30 @@ public class MainViewModel : BaseViewModel
     public BaseViewModel? CurrentModalViewModel => _modalNavigationStore.CurrentModalViewModel;
     public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
-    private NotificationMainViewModel _notificationMainViewModel;
-    public NotificationMainViewModel NotificationMainVM
+    public bool HasNoNotify => !NotifyCardViewModels.Any();
+    private ObservableCollection<object> _notifyCardViewModels = new ObservableCollection<object>();
+    public ObservableCollection<object> NotifyCardViewModels
     {
-        get => _notificationMainViewModel;
+        get => _notifyCardViewModels;
         set
         {
-            _notificationMainViewModel = value;
-            OnPropertyChanged();
+            if (_notifyCardViewModels != value)
+            {
+                _notifyCardViewModels.CollectionChanged -= OnNotifyViewModelsChanged;
+                _notifyCardViewModels = value;
+                _notifyCardViewModels.CollectionChanged += OnNotifyViewModelsChanged;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(HasNoNotify));
+            }
         }
     }
+    private void OnNotifyViewModelsChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        OnPropertyChanged(nameof(HasNoNotify));
+    }
+    #endregion Properties
 
+    #region Commands
     public ICommand DashBoardNavigateCommand { get; set; }
     public ICommand ExpenseBookNavigateCommand { get; set; }
     public ICommand GoalplanNavigateCommand { get; set; }
@@ -52,8 +70,8 @@ public class MainViewModel : BaseViewModel
     public ICommand MoveCommand { get; set; }
     public ICommand ExitAccountCommand { get; set; }
     public ICommand CloseWindowCommand { get; set; }
+    #endregion Commands
 
-    public ICommand MyTestCommand { get; set; }
 
     public MainViewModel(IServiceProvider serviceProvider)
     {
@@ -67,8 +85,10 @@ public class MainViewModel : BaseViewModel
         _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         _modalNavigationStore.CurrentModalViewModelChanged += OnCurrentModalViewModelChanged;
 
-        NotificationMainVM = serviceProvider.GetRequiredService<NotificationMainViewModel>();
-        MyTestCommand = new RelayCommand(AddNewNotify);
+        //Notification
+        LoadNotify();
+        //User
+        UserNameAdmin = _accountStore.Users.Username;
 
         //load theme
         _themeStore.Notify();
@@ -110,7 +130,6 @@ public class MainViewModel : BaseViewModel
     private void OnCurrentModalViewModelChanged()
     {
         OnPropertyChanged(nameof(CurrentModalViewModel));
-        //CurrentModalViewModel.StartUp();
         OnPropertyChanged(nameof(IsModalOpen));
         
     }
@@ -129,14 +148,95 @@ public class MainViewModel : BaseViewModel
         _modalNavigationStore.CurrentModalViewModelChanged -= OnCurrentModalViewModelChanged;
     }
 
-    public void AddNewNotify()
+    #region Notification
+    public void LoadNotify()
     {
-        NotificationMainVM?.NotifyCardViewModels.Add(new NotificationRecurringCard(_serviceProvider, new RecurringExpense
-        {
-            Name = "Hello",
-            Frequency = "Monthly",
-            Interval = 1,
-            StartDate = DateOnly.FromDateTime(DateTime.Now),
-        }));
+        NotifyCardViewModels.Clear();
+        NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, new Goal()));
+        NotifyCardViewModels.Add(new NotificationRecurringCard(_serviceProvider, new RecurringExpense()));
+        LoadNotifyGoal();
+        LoadNotifyRecurring();
     }
+
+    public void LoadNotifyGoal()
+    {
+        try
+        {
+            var items = DBManager.GetCondition<Goal>(g => g.UserID == _accountStore.Users.UserID && g.Deadline >= DateTime.Today);
+            foreach (var item in items)
+            {
+                DateTime dt = (DateTime)item.StartDay;
+                if (item.Reminder.CompareTo("Daily") == 0)
+                {
+                    NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
+                }
+                else if (item.Reminder.CompareTo("Weekly") == 0)
+                {
+                    if (dt.AddDays(7) == DateTime.Today)
+                    {
+                        NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
+                    }
+                }
+                else if (item.Reminder.CompareTo("Monthly") == 0)
+                {
+                    if (dt.AddMonths(1) == DateTime.Today)
+                    {
+                        NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
+                    }
+                }
+                else
+                {
+                    //yearly
+                    if (dt.AddYears(1) == DateTime.Today)
+                    {
+                        NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    public void LoadNotifyRecurring()
+    {
+        try
+        {
+            var recurring = DBManager.GetCondition<RecurringExpense>(re => re.LastTime <= DateOnly.FromDateTime(DateTime.Now) && re.UserID == _accountStore.Users.UserID);
+            foreach (var rec in recurring)
+            {
+                while (rec.LastTime <= DateOnly.FromDateTime(DateTime.Today))
+                {
+                    if (rec.Frequency.CompareTo("Daily") == 0)
+                    {
+                        rec.LastTime = rec.LastTime.AddDays(rec.Interval);
+                    }
+                    else if (rec.Frequency.CompareTo("Weekly") == 0)
+                    {
+                        rec.LastTime = rec.LastTime.AddDays(rec.Interval * 7);
+                    }
+                    else if (rec.Frequency.CompareTo("Monthly") == 0)
+                    {
+                        rec.LastTime = rec.LastTime.AddMonths(rec.Interval);
+                    }
+                    else if (rec.Frequency.CompareTo("Yearly") == 0)
+                    {
+                        rec.LastTime = rec.LastTime.AddYears(rec.Interval);
+                    }
+
+                    if (rec.LastTime <= DateOnly.FromDateTime(DateTime.Today))
+                    {
+                        NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, rec));
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+    #endregion Notification
 }

@@ -81,7 +81,6 @@ namespace PersonalFinanceApp
             services.AddTransient<RecurringViewModel>(s => new RecurringViewModel(s));
             services.AddTransient<SettingViewModel>(s => new SettingViewModel(s));
             services.AddTransient<CalendarViewModel>(s => new CalendarViewModel(s));
-            services.AddTransient<NotificationMainViewModel>(s => new NotificationMainViewModel(s));
 
             //Modal-Popup
             //expense
