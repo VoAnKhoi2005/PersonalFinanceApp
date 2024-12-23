@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class NotificationRecurringCard : BaseViewModel {
@@ -40,10 +42,28 @@ public class NotificationRecurringCard : BaseViewModel {
         }
     }
     private string _lastTime;
+
+
+    public ICommand CreateCommand { get; set; }
+    public ICommand CancelCommand { get; set; }
+
     public NotificationRecurringCard(IServiceProvider serviceProvider, RecurringExpense re) {
         _serviceProvider = serviceProvider;
         LoadRecurring(re);
+        CreateCommand = new RelayCommand(CreateExpense);
+        CancelCommand = new RelayCommand(CancelExpense);
     }
+
+    private void CreateExpense()
+    {
+        Console.WriteLine("hello");
+    }
+
+    private void CancelExpense()
+    {
+
+    }
+
     public void LoadRecurring(RecurringExpense re) {
         NameRecurring = re.Name;
         StartDate = re.StartDate.ToString();
