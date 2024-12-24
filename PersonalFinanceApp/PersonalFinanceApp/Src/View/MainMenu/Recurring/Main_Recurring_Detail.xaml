@@ -178,7 +178,17 @@
                                 Text="Interval" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
-                    <!--  StartDate  -->
+                    <!--  startDate  -->
+                    <DataGridTextColumn Binding="{Binding StartDate}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock
+                                FontSize="13"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource SuperText}"
+                                Text="StartDate" />
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <!--  LastTime  -->
                     <DataGridTextColumn Binding="{Binding LastTime}">
                         <DataGridTextColumn.Header>
                             <TextBlock
@@ -186,16 +196,6 @@
                                 FontWeight="Bold"
                                 Foreground="{DynamicResource SuperText}"
                                 Text="LastTime" />
-                        </DataGridTextColumn.Header>
-                    </DataGridTextColumn>
-                    <!--  lasttime  -->
-                    <DataGridTextColumn Binding="{Binding LastTime}">
-                        <DataGridTextColumn.Header>
-                            <TextBlock
-                                FontSize="13"
-                                FontWeight="Bold"
-                                Foreground="{DynamicResource SuperText}"
-                                Text="StartDate" />
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     <!--  Status  -->

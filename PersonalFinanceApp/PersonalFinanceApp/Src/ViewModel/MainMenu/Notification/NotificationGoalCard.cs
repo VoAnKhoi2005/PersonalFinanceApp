@@ -35,30 +35,15 @@ public class NotificationGoalCard : BaseViewModel {
         }
     }
     private string _startEndDate;
-    public NotificationGoalCard(IServiceProvider serviceProvider, object o) {
+    public NotificationGoalCard(IServiceProvider serviceProvider, Goal g) {
         _serviceProvider = serviceProvider;
-
-        Load(o);
+        LoadGoal(g);
     }
-    public void Load(object o) {
-        if (o == null) { throw new ArgumentNullException(nameof(o)); }
-        if (o is Goal goal) {
-            LoadGoal(goal);
-        }
-        else if(o is RecurringExpense re){
-            LoadRecurring(re);
-        }
 
-    }
     public void LoadGoal(Goal g) {
         NameGoal = g.Name;
         CategoryGoal = g.CategoryName;
         if (g.StartDay != null && g.Deadline != null)
             StartEndDate = DateOnly.FromDateTime((DateTime)g.StartDay).ToString("dd/MM/yyyy") + " - " + DateOnly.FromDateTime((DateTime)g.Deadline).ToString("dd/MM/yyyy");
-    }
-    public void LoadRecurring(RecurringExpense re) {
-        NameGoal = re.Name;
-        CategoryGoal = re.StartDate.ToString("dd/MM/yyyy");
-        StartEndDate = re.LastTime.ToString("dd/MM/yyyy");
     }
 }

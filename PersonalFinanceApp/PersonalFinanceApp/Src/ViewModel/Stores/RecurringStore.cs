@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace PersonalFinanceApp.Src.ViewModel.Stores;
 public class RecurringStore : INotifyPropertyChanged {
-    public ObservableCollection<RecurringExpense> ShareRecurring { get; set; } = new ObservableCollection<RecurringExpense>();
+    public ObservableCollection<object> ShareRecurring { get; set; } = new ObservableCollection<object>();
     public ObservableCollection<Expense> ShareExpense { get; set; } = new ObservableCollection<Expense>();
 
     private RecurringExpense? _recurringExpense;
@@ -36,6 +36,10 @@ public class RecurringStore : INotifyPropertyChanged {
     public event Action TriggerEditRecurring;
     public void NotifyRecurringEdit() {
         TriggerEditRecurring?.Invoke();
+    }
+    public event Action TriggerUpload;
+    public void NotifyUpload() {
+        TriggerUpload?.Invoke();
     }
     public event PropertyChangedEventHandler? PropertyChanged;
 

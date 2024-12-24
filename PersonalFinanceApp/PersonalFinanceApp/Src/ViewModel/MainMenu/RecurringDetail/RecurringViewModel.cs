@@ -60,10 +60,10 @@ public class RecurringViewModel : BaseViewModel {
 
     }
     public void LoadData(object? parameter = null) {
-        AddRecurringExpense();
-        if(_recurringStore.ShareExpense.Count != 0) {
-            RecurringExpenseCommand.Execute(this);
-        }
+        //AddRecurringExpense();
+        //if(_recurringStore.ShareExpense.Count != 0) {
+        //    RecurringExpenseCommand.Execute(this);
+        //}
     }
     public void AddRecurringExpense() {
         try {

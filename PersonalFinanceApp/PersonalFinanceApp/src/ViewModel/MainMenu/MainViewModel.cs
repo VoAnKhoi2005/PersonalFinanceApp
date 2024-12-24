@@ -20,6 +20,7 @@ public class MainViewModel : BaseViewModel
     private readonly SharedService _sharedService;  
     private readonly AccountStore _accountStore;
     private readonly ThemeStore _themeStore;
+    private readonly RecurringStore _recurringStore;
 
     #region Properties
     public string UserNameAdmin {
@@ -35,6 +36,8 @@ public class MainViewModel : BaseViewModel
     public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
     public bool HasNoNotify => !NotifyCardViewModels.Any();
+    public bool RedPoint => NotifyCardViewModels.Any();
+
     private ObservableCollection<object> _notifyCardViewModels = new ObservableCollection<object>();
     public ObservableCollection<object> NotifyCardViewModels
     {
@@ -48,12 +51,14 @@ public class MainViewModel : BaseViewModel
                 _notifyCardViewModels.CollectionChanged += OnNotifyViewModelsChanged;
                 OnPropertyChanged();
                 OnPropertyChanged(nameof(HasNoNotify));
+                OnPropertyChanged(nameof(RedPoint));
             }
         }
     }
     private void OnNotifyViewModelsChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         OnPropertyChanged(nameof(HasNoNotify));
+        OnPropertyChanged(nameof(RedPoint));
     }
     #endregion Properties
 
@@ -80,12 +85,14 @@ public class MainViewModel : BaseViewModel
         _navigationStore = serviceProvider.GetRequiredService<NavigationStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _themeStore = serviceProvider.GetRequiredService<ThemeStore>();
+        _recurringStore = serviceProvider.GetRequiredService<RecurringStore>();
 
         _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         _modalNavigationStore.CurrentModalViewModelChanged += OnCurrentModalViewModelChanged;
 
         //Notification
         LoadNotify();
+        _recurringStore.TriggerUpload += Upload;
         //User
         UserNameAdmin = _accountStore.Users.Username;
 
@@ -148,14 +155,20 @@ public class MainViewModel : BaseViewModel
     }
 
     #region Notification
+    public void Upload() {
+        NotifyCardViewModels.Clear();
+        foreach(var item in _recurringStore.ShareRecurring) {
+            NotifyCardViewModels.Add(item);
+        }
+    }
     public void LoadNotify()
     {
         NotifyCardViewModels.Clear();
-        NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, new Goal()));
-        NotifyCardViewModels.Add(new NotificationRecurringCard(_serviceProvider, new RecurringExpense()));
+        //NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, new Goal()));
+        //NotifyCardViewModels.Add(new NotificationRecurringCard(_serviceProvider, new RecurringExpense()));
         LoadNotifyGoal();
         LoadNotifyRecurring();
-        
+        _recurringStore.ShareRecurring = new(NotifyCardViewModels);
     }
 
     public void LoadNotifyGoal()
@@ -166,32 +179,37 @@ public class MainViewModel : BaseViewModel
             foreach (var item in items)
             {
                 DateTime dt = (DateTime)item.StartDay;
-                if (item.Reminder.CompareTo("Daily") == 0)
-                {
-                    NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
-                }
-                else if (item.Reminder.CompareTo("Weekly") == 0)
-                {
-                    if (dt.AddDays(7) == DateTime.Today)
-                    {
+                while (dt <= DateTime.Today) {
+                    if (item.Reminder.CompareTo("Daily") == 0) {
                         NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
                     }
-                }
-                else if (item.Reminder.CompareTo("Monthly") == 0)
-                {
-                    if (dt.AddMonths(1) == DateTime.Today)
-                    {
-                        NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
+                    else if (item.Reminder.CompareTo("Weekly") == 0) {
+                        if (dt.AddDays(7) == DateTime.Today) {
+                            NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
+                        }
+                        else {
+                            dt = dt.AddDays(7);
+                        }
+                    }
+                    else if (item.Reminder.CompareTo("Monthly") == 0) {
+                        if (dt.AddMonths(1) == DateTime.Today) {
+                            NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
+                        }
+                        else {
+                            dt = dt.AddMonths(1);
+                        }
+                    }
+                    else {
+                        //yearly
+                        if (dt.AddYears(1) == DateTime.Today) {
+                            NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
+                        }
+                        else {
+                            dt = dt.AddYears(1);
+                        }
                     }
                 }
-                else
-                {
-                    //yearly
-                    if (dt.AddYears(1) == DateTime.Today)
-                    {
-                        NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
-                    }
-                }
+                
             }
         }
         catch (Exception ex)
@@ -207,6 +225,8 @@ public class MainViewModel : BaseViewModel
             var recurring = DBManager.GetCondition<RecurringExpense>(re => re.LastTime <= DateOnly.FromDateTime(DateTime.Now) && re.UserID == _accountStore.Users.UserID);
             foreach (var rec in recurring)
             {
+                rec.Expenses = DBManager.GetCondition<Expense>(e => e.UserID == rec.UserID && e.RecurringExpenseID == rec.RecurringExpenseID);
+                if (rec.Expenses.Count == 0) continue;
                 while (rec.LastTime <= DateOnly.FromDateTime(DateTime.Today))
                 {
                     if (rec.Frequency.CompareTo("Daily") == 0)
@@ -228,7 +248,7 @@ public class MainViewModel : BaseViewModel
 
                     if (rec.LastTime <= DateOnly.FromDateTime(DateTime.Today))
                     {
-                        NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, rec));
+                        NotifyCardViewModels.Add(new NotificationRecurringCard(_serviceProvider, rec));
                     }
                 }
             }
