@@ -1,4 +1,4 @@
-<UserControl
+﻿<UserControl
     x:Class="PersonalFinanceApp.Src.View.Calendar"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -257,25 +257,25 @@
                                             <RowDefinition />
                                         </Grid.RowDefinitions>
                                     </Grid>
-                                    <Grid
-                                        x:Name="PART_YearView"
-                                        Grid.Row="1"
-                                        Grid.ColumnSpan="3"
-                                        Margin="6"
-                                        HorizontalAlignment="Center"
-                                        Visibility="Hidden">
+                                    <Grid x:Name="PART_YearView"
+                                          Grid.Row="1"
+                                          Grid.ColumnSpan="3"
+                                          Margin="6"
+                                          HorizontalAlignment="Center"
+                                          Visibility="Hidden">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="150" />
+                                            <ColumnDefinition Width="150" />
+                                            <ColumnDefinition  Width="150"  />
+                                            <ColumnDefinition Width="150"  />
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="100" />
+                                            <RowDefinition Height="100" />
+                                            <RowDefinition Height="100" />
                                         </Grid.RowDefinitions>
                                     </Grid>
+
                                 </Grid>
                             </Border>
                             <Rectangle
@@ -323,6 +323,8 @@
         <Style x:Key="CalendarCalendarDayButtonStyle1" TargetType="{x:Type CalendarDayButton}">
             <Setter Property="MinHeight" Value="120" />
             <Setter Property="FontSize" Value="20" />
+            <Setter Property="Padding"
+                    Value="10" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Cursor" Value="Hand" />
@@ -593,9 +595,9 @@
         </Style>
         <Style x:Key="CalendarCalendarButtonStyle1" TargetType="{x:Type CalendarButton}">
             <Setter Property="Background" Value="#FFBADDE9" />
-            <Setter Property="Width" Value="40" />
-            <Setter Property="Height" Value="42" />
-            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="100" />
+            <Setter Property="FontSize" Value="18" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Template">
@@ -608,16 +610,16 @@
                                 Height="100"
                                 Fill="{TemplateBinding Background}"
                                 Opacity="0"
-                                RadiusX="20"
-                                RadiusY="20" />
+                                RadiusX="1"
+                                RadiusY="1" />
                             <Rectangle
                                 x:Name="Background"
                                 Width="100"
                                 Height="100"
                                 Fill="{TemplateBinding Background}"
                                 Opacity="0"
-                                RadiusX="20"
-                                RadiusY="20" />
+                                RadiusX="1"
+                                RadiusY="1" />
                             <ContentPresenter
                                 x:Name="NormalText"
                                 Margin="1,0,1,1"
@@ -629,8 +631,8 @@
                                 Width="100"
                                 Height="100"
                                 IsHitTestVisible="false"
-                                RadiusX="20"
-                                RadiusY="20"
+                                RadiusX="1"
+                                RadiusY="1"
                                 Stroke="{DynamicResource CommonGridBackground}"
                                 Visibility="Collapsed" />
                             <VisualStateManager.VisualStateGroups>
