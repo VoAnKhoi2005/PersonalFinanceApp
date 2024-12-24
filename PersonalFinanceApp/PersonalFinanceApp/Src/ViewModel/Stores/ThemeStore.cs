@@ -2,9 +2,15 @@
 
 namespace PersonalFinanceApp.Src.ViewModel.Stores;
 public class ThemeStore : INotifyPropertyChanged {
-    public bool isLightTheme = true;
+    public bool isLightTheme;
 
     public event Action TriggerAction;
+
+    public ThemeStore()
+    {
+        isLightTheme = Properties.Settings.Default.IsLightTheme;
+        Notify();
+    }
 
     public void Notify() {
         if (isLightTheme) {
@@ -15,6 +21,9 @@ public class ThemeStore : INotifyPropertyChanged {
         }
 
         TriggerAction?.Invoke();
+
+        Properties.Settings.Default.IsLightTheme = isLightTheme;
+        Properties.Settings.Default.Save();
     }
     public void ChangedThemeLight() {
         App.Current.Resources.Clear();
