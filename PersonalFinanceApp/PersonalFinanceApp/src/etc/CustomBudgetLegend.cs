@@ -17,6 +17,7 @@ public class CustomBudgetLegend : IChartLegend<SkiaSharpDrawingContext>
 {
     private static readonly int s_zIndex = 10050;
     private readonly StackPanel<RoundedRectangleGeometry, SkiaSharpDrawingContext> _stackPanel = new();
+
     private readonly SolidColorPaint _fontPaint = new(SKColors.CornflowerBlue)
     {
         SKTypeface = SKTypeface.FromFamilyName("Arial", SKFontStyle.Bold),
@@ -37,6 +38,8 @@ public class CustomBudgetLegend : IChartLegend<SkiaSharpDrawingContext>
     public LvcSize Measure(Chart<SkiaSharpDrawingContext> chart)
     {
         _stackPanel.Orientation = ContainerOrientation.Vertical;
+        _stackPanel.VerticalAlignment = Align.Start;
+        _stackPanel.HorizontalAlignment = Align.Start;
         _stackPanel.MaxWidth = double.MaxValue;
         _stackPanel.MaxHeight = chart.ControlSize.Height;
 
@@ -49,8 +52,15 @@ public class CustomBudgetLegend : IChartLegend<SkiaSharpDrawingContext>
 
         var theme = LiveCharts.DefaultSettings.GetTheme<SkiaSharpDrawingContext>();
 
+        var totalValue = chart.Series.Where(x => x.IsVisibleAtLegend).Sum(series => series.Values.Cast<double>().Sum());
+
         foreach (var series in chart.Series.Where(x => x.IsVisibleAtLegend))
         {
+            var seriesValue = series.Values.Cast<double>().Sum();
+            var percentage = totalValue > 0 ? seriesValue / totalValue * 100 : 0;
+
+            var seriesColor = series.Name == "Remaining" ? SKColors.Gray : theme.GetSeriesColor(series).AsSKColor();
+
             var panel = new StackPanel<RectangleGeometry, SkiaSharpDrawingContext>
             {
                 Padding = new Padding(12, 6),
@@ -63,22 +73,23 @@ public class CustomBudgetLegend : IChartLegend<SkiaSharpDrawingContext>
                         Path = SKPath.ParseSvgPathData(SVGPoints.Circle),
                         Width = 10,
                         Height = 10,
-                        ClippingMode = ClipMode.None, // required on legends 
-                        Fill = new SolidColorPaint(theme.GetSeriesColor(series).AsSKColor())
+                        ClippingMode = ClipMode.None,
+                        Fill = new SolidColorPaint(seriesColor)
                         {
                             ZIndex = s_zIndex + 1
                         }
                     },
-                    // series.GetMiniature(null, s_zIndex), or get the miniature defined in the series.
+
                     new LabelVisual
                     {
-                        Text = series.Name ?? string.Empty,
+                        Text = $"{series.Name ?? string.Empty} ({percentage:N1}%)",
                         Paint = _fontPaint,
                         TextSize = 15,
-                        ClippingMode = ClipMode.None, // required on legends 
+                        ClippingMode = ClipMode.None,
                         Padding = new Padding(8, 0, 0, 0),
                         VerticalAlignment = Align.Start,
-                        HorizontalAlignment = Align.Start
+                        HorizontalAlignment = Align.Start,
+                        MaxWidth = 150,
                     }
                 }
             };
@@ -93,9 +104,6 @@ public class CustomBudgetLegend : IChartLegend<SkiaSharpDrawingContext>
     private static VisualElementHandler<SkiaSharpDrawingContext> GetPointerDownHandler(
         IChartSeries<SkiaSharpDrawingContext> series)
     {
-        return (visual, args) =>
-        {
-            series.IsVisible = !series.IsVisible;
-        };
+        return (visual, args) => { series.IsVisible = !series.IsVisible; };
     }
 }

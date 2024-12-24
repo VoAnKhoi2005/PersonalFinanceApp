@@ -916,7 +916,7 @@
                                 FontSize="13"
                                 FontWeight="Bold"
                                 Foreground="{DynamicResource SuperText}"
-                                Text="" />
+                                Text="Command" />
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

@@ -385,7 +385,6 @@
                                 <lvc:PieChart Grid.Row="1"
                                               InitialRotation="-90"
                                               LegendPosition="Right"
-                                              LegendTextPaint="{DynamicResource PieChartLegendForeground}"
                                               Series="{Binding BudgetSeries}">
                                     <lvc:PieChart.Legend>
                                         <etc:CustomBudgetLegend />

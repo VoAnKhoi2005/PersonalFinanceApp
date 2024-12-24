@@ -12,8 +12,13 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using System.Windows;
+using System.Windows.Documents;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
+using OxyPlot.Legends;
+using FontWeights = OxyPlot.FontWeights;
+using LegendOrientation = OxyPlot.Legends.LegendOrientation;
+using LegendPosition = OxyPlot.Legends.LegendPosition;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 
@@ -141,7 +146,6 @@ public class DashboardViewModel : BaseViewModel
         }
     }
 
-    //Them vao
     public bool HasNoActivityData => ActivityPlotModel == null;
     private PlotModel? _activityPlotModel;
     public PlotModel? ActivityPlotModel
@@ -185,22 +189,27 @@ public class DashboardViewModel : BaseViewModel
 
         _sharedService.NotifyNotification();
 
-
-        //them vao
         CustomPlotController = new PlotController();
         CustomPlotController.UnbindMouseDown(OxyMouseButton.Left);
         CustomPlotController.BindMouseEnter(PlotCommands.HoverSnapTrack);
-
-        //ActivityPlotModel = CreateActivityPlotModel(null);
     }
 
-    //them vao
     public PlotModel CreateActivityPlotModel(ExpensesBook exB)
     {
         if (exB == null)
             return null;
 
         PlotModel plotModel = new PlotModel();
+        plotModel.IsLegendVisible = true;
+        plotModel.Legends.Add(new Legend
+        {
+            LegendPosition = LegendPosition.BottomCenter,
+            LegendPlacement = LegendPlacement.Outside,
+            LegendOrientation = LegendOrientation.Horizontal,
+            LegendBorderThickness = 1,
+            LegendTextColor = OxyColors.CornflowerBlue,
+            FontWeight = FontWeights.Bold,
+        });
 
         var categoryAxis = new CategoryAxis
         {
@@ -234,28 +243,59 @@ public class DashboardViewModel : BaseViewModel
         };
         plotModel.Axes.Add(valueAxis);
 
-        List<BarItem> expensesDaily = new List<BarItem>();
-        for (int day = 1; day <= DateTime.DaysInMonth(exB.Year, exB.Month); day++)
+        foreach (Category category in exB.Categories)
         {
-            expensesDaily.Add(new BarItem
+            List<BarItem> expensesDaily = new List<BarItem>();
+            for (int day = 1; day <= DateTime.DaysInMonth(exB.Year, exB.Month); day++)
             {
-                Value = exB.Expenses.Where(ex => ex.Date.Day == day && ex.UserID == exB.UserID).Sum(ex => ex.Amount),
+                expensesDaily.Add(new BarItem
+                {
+                    Value = category.Expenses.Where(ex => ex.Date.Day == day && ex.UserID == exB.UserID).Sum(ex => ex.Amount),
 
-            });
+                });
+            }
+
+            BarSeries barSeries = new BarSeries
+            {
+                Title = category.Name,
+                IsStacked = true,
+                LabelPlacement = LabelPlacement.Outside,
+                TextColor = OxyColors.CornflowerBlue,
+                ItemsSource = expensesDaily,
+                XAxisKey = "ValueAxis",
+                YAxisKey = "DaysAxis",
+                //FillColor = OxyColor.FromRgb(228, 134, 134),
+                TrackerFormatString = "{2:N0} VND",
+                FontSize = 14,
+            };
+
+            plotModel.Series.Add(barSeries);
         }
 
-        BarSeries columnSeries = new BarSeries
-        {
-            LabelPlacement = LabelPlacement.Outside,
-            TextColor = OxyColors.CornflowerBlue,
-            ItemsSource = expensesDaily,
-            XAxisKey = "ValueAxis",
-            YAxisKey = "DaysAxis",
-            FillColor = OxyColor.FromRgb(228, 134, 134),
-            TrackerFormatString = "{2:N0} VND",
-            FontSize = 14,
-        };
-        plotModel.Series.Add(columnSeries);
+        //List<BarItem> expensesDaily = new List<BarItem>();
+        //for (int day = 1; day <= DateTime.DaysInMonth(exB.Year, exB.Month); day++)
+        //{
+        //    expensesDaily.Add(new BarItem
+        //    {
+        //        Value = exB.Expenses.Where(ex => ex.Date.Day == day && ex.UserID == exB.UserID).Sum(ex => ex.Amount),
+
+        //    });
+        //}
+
+        //BarSeries columnSeries = new BarSeries
+        //{
+        //    IsStacked = true,
+        //    LabelPlacement = LabelPlacement.Outside,
+        //    TextColor = OxyColors.CornflowerBlue,
+        //    ItemsSource = expensesDaily,
+        //    XAxisKey = "ValueAxis",
+        //    YAxisKey = "DaysAxis",
+        //    FillColor = OxyColor.FromRgb(228, 134, 134),
+        //    TrackerFormatString = "{2:N0} VND",
+        //    FontSize = 14,
+        //};
+        //plotModel.Series.Add(columnSeries);
+        
         return plotModel;
     }
 
@@ -267,37 +307,12 @@ public class DashboardViewModel : BaseViewModel
             return (value / 1000).ToString("F1") + "K";
         return value.ToString("N0");
     }
-    //.///////////////////////////////////////////////////////////////////
-
 
     public void UpdatePieChart(ExpensesBook expensesBook) {
         var newSeries = CreateDoughnutChart(expensesBook);
         BudgetSeries = newSeries;
     }
-//    public void UpdateColumnChart(ExpensesBook expensesBook) {
-//        XAxisActivity = new List<ICartesianAxis>
-//{
-//            new DateTimeAxis(TimeSpan.FromDays(1), date => date.ToString("dd"))
-//            {
-//                LabelsPaint = new SolidColorPaint(SKColors.White),
-//                TextSize = 13,
-//                Padding = new Padding(0, 0, 0, 10),
-//                SeparatorsPaint = null,
-//                MinStep = TimeSpan.FromDays(1).Ticks,
-//                ForceStepToMin = true,
-//            }
-//        };
 
-//        YAxisActivity = new List<ICartesianAxis>
-//        {
-//            new Axis
-//            {
-//                LabelsPaint = new SolidColorPaint(SKColors.White),
-//            }
-//        };
-//        var newSeries = CreateActivityChart(expensesBook);
-//        ActivitySeries = newSeries;
-//    }
     public List<PieSeries<double>> CreateDoughnutChart(ExpensesBook expensesBook)
     {
         ExpensesBook ExBTemp = expensesBook;
@@ -305,12 +320,6 @@ public class DashboardViewModel : BaseViewModel
         ExBTemp.Expenses = items;
         var listcate = DBManager.GetCondition<Category>(c => c.UserID == expensesBook.UserID && c.ExBMonth == expensesBook.Month && c.ExBYear == expensesBook.Year);
         ExBTemp.Categories = listcate;
-
-        //ExBTemp.Categories.Add(new Category
-        //{
-        //    Name = "Remaining budget",
-        //    Expenses = new List<Expense> { new Expense { Amount = remainBudget } },
-        //});
 
         var pieSeries = new List<PieSeries<double>>();
         foreach (Category category in ExBTemp.Categories)
@@ -334,7 +343,7 @@ public class DashboardViewModel : BaseViewModel
         var remainBudgetpie = new PieSeries<double>
         {
             Values = new List<double> { remainBudget },
-            Name = "Remaining Budget",
+            Name = "Remaining",
             InnerRadius = 0.6,
             Fill = new SolidColorPaint(SKColors.Gray),
             MaxRadialColumnWidth = 60,
