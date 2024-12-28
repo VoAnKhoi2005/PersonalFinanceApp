@@ -43,7 +43,7 @@
             <RowDefinition Height="60" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0">
+        <DockPanel Grid.Row="0" Background="{DynamicResource DockpanelBackGround}" Margin="15,0,15,0">
 
             <!--  return here  -->
             <Button Command="{Binding BackModalCommand}">

@@ -179,12 +179,12 @@ public class MainViewModel : BaseViewModel
             foreach (var item in items)
             {
                 DateTime dt = (DateTime)item.StartDay;
-                while (dt <= DateTime.Today) {
+                while (DateOnly.FromDateTime(dt) <= DateOnly.FromDateTime(DateTime.Today)) {
                     if (item.Reminder.CompareTo("Daily") == 0) {
                         NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
                     }
                     else if (item.Reminder.CompareTo("Weekly") == 0) {
-                        if (dt.AddDays(7) == DateTime.Today) {
+                        if (DateOnly.FromDateTime(dt.AddDays(7)) == DateOnly.FromDateTime(DateTime.Today)) {
                             NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
                         }
                         else {
@@ -192,7 +192,7 @@ public class MainViewModel : BaseViewModel
                         }
                     }
                     else if (item.Reminder.CompareTo("Monthly") == 0) {
-                        if (dt.AddMonths(1) == DateTime.Today) {
+                        if (DateOnly.FromDateTime(dt.AddMonths(1)) == DateOnly.FromDateTime(DateTime.Today)) {
                             NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
                         }
                         else {
@@ -201,7 +201,7 @@ public class MainViewModel : BaseViewModel
                     }
                     else {
                         //yearly
-                        if (dt.AddYears(1) == DateTime.Today) {
+                        if (DateOnly.FromDateTime(dt.AddYears(1)) == DateOnly.FromDateTime(DateTime.Today)) {
                             NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
                         }
                         else {
