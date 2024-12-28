@@ -168,6 +168,7 @@
         </Grid>
         <DockPanel Grid.Row="1">
             <materialDesign:PopupBox Grid.Column="1"
+                                     Width="30"
                                      Margin="0,0,5,0"
                                      HorizontalAlignment="Right"
                                      VerticalAlignment="Center"
