@@ -236,37 +236,7 @@ public class GoalplanCardViewModel:BaseViewModel
         });
 
         plotModel.Series.Add(pieSeries);
-        double percentage = goal.CurrentAmount * 100.0 / goal.Target;
-        ProgressPercentage = percentage.ToString("0.0") + "%";
-        return plotModel;
-    }
-    public PlotModel CreateProgressPlotModelRandom()
-    {
-        Random random = new Random();
-        PlotModel plotModel = new PlotModel();
-        var pieSeries = new PieSeries
-        {
-            InnerDiameter = 0.7,
-            StrokeThickness = 0,
-            OutsideLabelFormat = null,
-            InsideLabelFormat = null,
-            AngleSpan = 360,
-            StartAngle = -90,
-            TextColor = OxyColors.White,
-            TrackerFormatString = "{Label}: {Value:#,0} VND ({3:P1})",
-        };
-        long CurrentAmount = random.Next(1000000, 100000000);
-        pieSeries.Slices.Add(new PieSlice("Current Amount", CurrentAmount)
-        {
-            Fill = OxyColors.DodgerBlue
-        });
-        pieSeries.Slices.Add(new PieSlice("Remaining Amount", 100000000 - CurrentAmount)
-        {
-            Fill = OxyColors.Gray
-        });
-
-        plotModel.Series.Add(pieSeries);
-        double percentage = CurrentAmount * 100.0 / 100000000;
+        double percentage = Math.Clamp(goal.CurrentAmount * 100.0 / goal.Target, 0, 100);
         ProgressPercentage = percentage.ToString("0.0") + "%";
         return plotModel;
     }

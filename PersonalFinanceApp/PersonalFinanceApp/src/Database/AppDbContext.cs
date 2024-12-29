@@ -1,7 +1,6 @@
 ﻿using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using PersonalFinanceApp.Model;
-using SQLitePCL;
 
 namespace PersonalFinanceApp.Database;
 
@@ -23,7 +22,6 @@ public class AppDbContext : DbContext
         if (connStr == null)
             throw new InvalidOperationException("Connection string not found.");
         optionsBuilder.UseSqlite(connStr);
-        //optionsBuilder.UseSqlite("Data Source=PFA.db");
     }
 
     public void EnsureDatabaseCreated()

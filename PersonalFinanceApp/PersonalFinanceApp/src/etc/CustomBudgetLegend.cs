@@ -43,7 +43,6 @@ public class CustomBudgetLegend : IChartLegend<SkiaSharpDrawingContext>
         _stackPanel.MaxWidth = double.MaxValue;
         _stackPanel.MaxHeight = chart.ControlSize.Height;
 
-        // clear the previous elements.
         foreach (var visual in _stackPanel.Children.ToArray())
         {
             _ = _stackPanel.Children.Remove(visual);
