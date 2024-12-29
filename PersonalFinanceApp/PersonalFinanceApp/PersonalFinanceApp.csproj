@@ -1,84 +1,85 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows10.0.22000.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UseWPF>true</UseWPF>
-	  <WindowsSdkPackageVersion>10.0.22000.53</WindowsSdkPackageVersion>
-    <SelfContained>true</SelfContained>
-    <PublishSingleFile>true</PublishSingleFile>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-  </PropertyGroup>
+	<PropertyGroup>
+		<ApplicationIcon>Resources\img\f7e028af-f53f-47b3-91cc-fd1e3a553db1.ico</ApplicationIcon>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows10.0.22000.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<WindowsSdkPackageVersion>10.0.22000.53</WindowsSdkPackageVersion>
+		<SelfContained>true</SelfContained>
+		<PublishSingleFile>true</PublishSingleFile>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Picture\**" />
-    <EmbeddedResource Remove="Picture\**" />
-    <None Remove="Picture\**" />
-    <Page Remove="Picture\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Picture\**" />
+		<EmbeddedResource Remove="Picture\**" />
+		<None Remove="Picture\**" />
+		<Page Remove="Picture\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Resources\img\ac8257e1cfc4e63f5c63f3d4869eb7c4.jpg" />
-    <None Remove="Resources\img\f7e028af-f53f-47b3-91cc-fd1e3a553db1.ico" />
-    <None Remove="Resources\img\Logo_UIT_updated.svg.png" />
-    <None Remove="Resources\img\png-transparent-personal-finance-android-budget-android-blue-personal-finance-logo.png" />
-    <None Remove="Resources\PigBackground.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Resources\img\ac8257e1cfc4e63f5c63f3d4869eb7c4.jpg" />
+		<None Remove="Resources\img\f7e028af-f53f-47b3-91cc-fd1e3a553db1.ico" />
+		<None Remove="Resources\img\Logo_UIT_updated.svg.png" />
+		<None Remove="Resources\img\png-transparent-personal-finance-android-budget-android-blue-personal-finance-logo.png" />
+		<None Remove="Resources\PigBackground.png" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="EPPlus" Version="7.5.2" />
-    <PackageReference Include="FontAwesome" Version="4.7.0" />
-    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc4.5" />
-    <PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
-    <PackageReference Include="OxyPlot.Wpf" Version="2.2.0" />
-    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlcipher" Version="2.1.10" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="EPPlus" Version="7.5.2" />
+		<PackageReference Include="FontAwesome" Version="4.7.0" />
+		<PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc4.5" />
+		<PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+		<PackageReference Include="OxyPlot.Wpf" Version="2.2.0" />
+		<PackageReference Include="SQLitePCLRaw.bundle_e_sqlcipher" Version="2.1.10" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="Resources\img\ac8257e1cfc4e63f5c63f3d4869eb7c4.jpg" />
-    <Resource Include="Resources\img\f7e028af-f53f-47b3-91cc-fd1e3a553db1.ico" />
-    <Resource Include="Resources\img\Logo_UIT_updated.svg.png" />
-    <Resource Include="Resources\img\PigBackground.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<Resource Include="Resources\img\ac8257e1cfc4e63f5c63f3d4869eb7c4.jpg" />
+		<Resource Include="Resources\img\f7e028af-f53f-47b3-91cc-fd1e3a553db1.ico" />
+		<Resource Include="Resources\img\Logo_UIT_updated.svg.png" />
+		<Resource Include="Resources\img\PigBackground.png" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Properties\Settings.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="msvcr100.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="PFA.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Update="SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Testdatabase\User.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Update="msvcr100.dll">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="PFA.db">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Properties\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+		</None>
+		<None Update="SQLite.Interop.dll">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Testdatabase\User.db">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>
