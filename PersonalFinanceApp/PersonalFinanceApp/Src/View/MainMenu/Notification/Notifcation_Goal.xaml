@@ -58,7 +58,7 @@
                     Height="20"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    Margin="0 2 7 0"
+                    Margin="0 2 15 0"
                     Background="#FFC8386C"
                     CornerRadius="30">
                 <Button Command="{Binding CloseGoalNotificationCommand}">

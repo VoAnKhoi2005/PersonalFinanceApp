@@ -67,6 +67,9 @@
 		<None Update="msvcr100.dll">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="PFA.db">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Properties\Settings.settings">
 			<Generator>SettingsSingleFileGenerator</Generator>
 			<LastGenOutput>Settings.Designer.cs</LastGenOutput>

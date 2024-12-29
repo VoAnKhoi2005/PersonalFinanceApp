@@ -1,10 +1,5 @@
 ﻿using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using PersonalFinanceApp.Database;
@@ -105,7 +100,10 @@ public class NotificationRecurringCard : BaseViewModel {
                 DBManager.Update(recurring);
             }
             var exp = DBManager.GetFirst<Expense>(e => e.UserID == Rec.UserID && e.RecurringExpenseID == Rec.RecurringExpenseID);
-            if (exp != null) {
+            if (exp != null)
+            {
+                if (SelectionCategory == null)
+                    throw new Exception("Category không hợp lệ.");
                 var expense = new Expense() {
                     Amount = exp.Amount,
                     Name = exp.Name,
