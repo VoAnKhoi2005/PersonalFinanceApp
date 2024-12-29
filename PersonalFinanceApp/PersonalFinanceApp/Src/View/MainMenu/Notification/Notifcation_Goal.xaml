@@ -103,14 +103,12 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                    <TextBlock Foreground="{DynamicResource Ntf_goalCategory}"
-                               Text="{Binding NameGoal}"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Left"
-                               FontWeight="Bold"
-                               Margin="10 0 0 0" />
-
-                </DockPanel>
+                <TextBlock Foreground="{DynamicResource Ntf_goalCategory}"
+                           Text="{Binding NameGoal}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           FontWeight="Bold"
+                           Margin="10 0 0 0" />
                 <DockPanel Grid.Row="1">
                     <TextBlock
                         HorizontalAlignment="Left"
@@ -126,10 +124,11 @@
                         Text="{Binding CategoryGoal}" />
                 </DockPanel>
 
-                <DockPanel  Grid.Row="2">
+                <DockPanel Grid.Row="2">
                     <TextBlock Text="Time :"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Left"></TextBlock>
+                               HorizontalAlignment="Left">
+                    </TextBlock>
                     <TextBlock Foreground="{DynamicResource Ntf_goalTime}"
                                Opacity="0.6"
                                Text="{Binding StartEndDate}"

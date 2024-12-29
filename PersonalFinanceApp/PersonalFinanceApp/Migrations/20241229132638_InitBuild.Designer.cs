@@ -11,7 +11,7 @@ using PersonalFinanceApp.Database;
 namespace PersonalFinanceApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241219163348_InitBuild")]
+    [Migration("20241229132638_InitBuild")]
     partial class InitBuild
     {
         /// <inheritdoc />
