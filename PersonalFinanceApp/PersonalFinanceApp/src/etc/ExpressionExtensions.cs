@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace PersonalFinanceApp;
+namespace PersonalFinanceApp.etc;
 
 public static class ExpressionExtensions
 {

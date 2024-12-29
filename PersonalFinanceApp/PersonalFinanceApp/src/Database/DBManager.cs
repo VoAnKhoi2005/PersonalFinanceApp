@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using PersonalFinanceApp.etc;
 using PersonalFinanceApp.Model;
 
 namespace PersonalFinanceApp.Database;
@@ -56,23 +57,6 @@ public static class DBManager
 
     public static T? GetFirst<T>(Expression<Func<T, bool>> condition, bool haveForeignKey = true, bool getDeleted = false) where T : class
     {
-        using (var connection = new SqliteConnection(ConfigurationManager.ConnectionStrings["MyDatabase"]?.ConnectionString))
-        {
-            connection.Open();
-            var command = connection.CreateCommand();
-            command.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name='USER';";
-            var result = command.ExecuteScalar();
-            if (result == null)
-            {
-                Console.WriteLine("Table does not exist.");
-            }
-            else
-            {
-                Console.WriteLine("Table exists.");
-            }
-        }
-
-
         if (!CheckTypeDatabase(typeof(T)))
             throw new InvalidOperationException("Data type not found in database.");
 
@@ -306,7 +290,7 @@ public static class DBManager
     public static void AutoDelete()
     {
         using var context = new AppDbContext();
-        List<Expense> expenses = GetAll<Expense>(true);
+        List<Expense> expenses = GetAll<Expense>(false, true);
         expenses = expenses.Where(ex => ex.DeletedDate.HasValue && (DateTime.Now - (DateTime)ex.DeletedDate).TotalDays >= 30).ToList();
 
         foreach (Expense expense in expenses)
@@ -314,6 +298,7 @@ public static class DBManager
 
         context.SaveChanges();
     }
+
     public static void PermanentlyDelete(Expense exp) {
         using var context = new AppDbContext();
 
@@ -327,9 +312,5 @@ public static class DBManager
     {
         using var context = new AppDbContext();
         return context.Model.FindEntityType(type) != null;
-    }
-
-    internal static Expression<Func<object, bool>> where(bool v) {
-        throw new NotImplementedException();
     }
 }
