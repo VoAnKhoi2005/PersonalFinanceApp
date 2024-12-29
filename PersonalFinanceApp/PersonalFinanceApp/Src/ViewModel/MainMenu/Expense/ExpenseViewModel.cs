@@ -10,7 +10,6 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Globalization;
-using Syncfusion.Windows.Controls.Input;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;
 public class ExpenseViewModel : BaseViewModel {

@@ -10,8 +10,6 @@ using CommunityToolkit.Mvvm.Input;
 using PersonalFinanceApp.Database;
 using System.Collections.ObjectModel;
 using Microsoft.Extensions.DependencyInjection;
-using static MaterialDesignThemes.Wpf.Theme.ToolBar;
-using XAct.Messages;
 using System.Windows;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu;

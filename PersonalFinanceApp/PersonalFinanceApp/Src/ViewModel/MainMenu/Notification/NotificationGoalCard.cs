@@ -1,10 +1,15 @@
-﻿using PersonalFinanceApp.Model;
+﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
+using PersonalFinanceApp.Model;
 using PersonalFinanceApp.Src.ViewModel.Stores;
+using System.Windows.Input;
+using static MaterialDesignThemes.Wpf.Theme.ToolBar;
 
 namespace PersonalFinanceApp.ViewModel.MainMenu; 
 public class NotificationGoalCard : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
     private readonly AccountStore _accountStore;
+    private readonly RecurringStore _recurringStore;
     public string NameGoal {
         get => _nameGoal;
         set {
@@ -35,11 +40,19 @@ public class NotificationGoalCard : BaseViewModel {
         }
     }
     private string _startEndDate;
+    //public Goal goal { get; set; }
+    public ICommand CloseGoalNotificationCommand { get; set; }
     public NotificationGoalCard(IServiceProvider serviceProvider, Goal g) {
         _serviceProvider = serviceProvider;
+        _recurringStore = serviceProvider.GetRequiredService<RecurringStore>();
+        //goal = g;
         LoadGoal(g);
+        CloseGoalNotificationCommand = new RelayCommand<object>(CloseGoalNotification);
     }
-
+    public void CloseGoalNotification(object? parameter = null) {
+        _recurringStore.ShareRecurring.Remove(this);
+        _recurringStore.NotifyUpload();
+    }
     public void LoadGoal(Goal g) {
         NameGoal = g.Name;
         CategoryGoal = g.CategoryName;

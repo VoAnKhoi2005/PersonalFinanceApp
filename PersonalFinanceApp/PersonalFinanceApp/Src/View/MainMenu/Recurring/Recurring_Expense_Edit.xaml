@@ -254,6 +254,7 @@
                         materialDesign:HintAssist.Hint="Your category"
                         materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
                         BorderBrush="{x:Null}"
+                        DisplayMemberPath="Name"
                         FontSize="14"
                         Foreground="{DynamicResource CommonText}"
                         ItemsSource="{Binding SourceCategory}"

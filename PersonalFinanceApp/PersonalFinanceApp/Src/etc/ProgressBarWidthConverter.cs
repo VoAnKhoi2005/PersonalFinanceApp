@@ -13,13 +13,13 @@ namespace PersonalFinanceApp.Src.etc
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             double progress = (double)value;
-            double maximum = 100; // Default maximum value
-            return (progress / maximum) * 100; // Scale the width based on the value and maximum
+            double maximum = 100;
+            return (progress / maximum) * 100;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value; // Not needed for this example
+            return value;
         }
 
     }
