@@ -160,6 +160,7 @@ public class MainViewModel : BaseViewModel
         foreach(var item in _recurringStore.ShareRecurring) {
             NotifyCardViewModels.Add(item);
         }
+        if (_recurringStore.ShareRecurring.Count == 0) NotifyCardViewModels = new();
     }
     public void LoadNotify()
     {
@@ -182,6 +183,7 @@ public class MainViewModel : BaseViewModel
                 while (DateOnly.FromDateTime(dt) <= DateOnly.FromDateTime(DateTime.Today)) {
                     if (item.Reminder.CompareTo("Daily") == 0) {
                         NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
+                        break;
                     }
                     else if (item.Reminder.CompareTo("Weekly") == 0) {
                         if (DateOnly.FromDateTime(dt.AddDays(7)) == DateOnly.FromDateTime(DateTime.Today)) {
