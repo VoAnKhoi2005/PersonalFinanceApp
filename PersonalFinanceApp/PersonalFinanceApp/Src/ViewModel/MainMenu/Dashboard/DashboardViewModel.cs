@@ -12,7 +12,6 @@ using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using System.Windows;
-using System.Windows.Documents;
 using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using OxyPlot.Legends;
@@ -51,7 +50,7 @@ public class DashboardViewModel : BaseViewModel
             }
         }
     }
-    private string _budgetLeft;
+    private string _budgetLeft = "0";
     //expense
     public string ExpenseTotal {
         get => _expenseTotal;
@@ -62,7 +61,7 @@ public class DashboardViewModel : BaseViewModel
             }
         }
     }
-    private string _expenseTotal;
+    private string _expenseTotal = "0";
     //saving
     public string SavingTotal {
         get => _savingTotal;
@@ -73,7 +72,7 @@ public class DashboardViewModel : BaseViewModel
             }
         }
     }
-    private string _savingTotal;
+    private string _savingTotal = "0";
     //EXPENSE BOOK
     public ObservableCollection<ExpenseBookAdvance> SourceExpenseBook {
         get => _sourceExpenseBook;

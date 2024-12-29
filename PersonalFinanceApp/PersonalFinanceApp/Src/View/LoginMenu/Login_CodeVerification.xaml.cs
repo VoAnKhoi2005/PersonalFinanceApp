@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using XAct.Messages;
 
 namespace PersonalFinanceApp.Src.View
 {
