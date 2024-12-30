@@ -53,13 +53,13 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
-                                    <Border Margin="17,0,0,0" Background="{TemplateBinding Background}">
+                                    <Border Margin="0,0,0,0" Background="{TemplateBinding Background}">
                                         <materialDesign:PackIcon
                                             Width="50"
                                             Height="30"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                            Foreground="White"
+                                            Foreground="{DynamicResource SuperText}"
                                             Kind="ArrowLeft" />
                                     </Border>
                                 </ControlTemplate>
@@ -148,7 +148,7 @@
                 IsReadOnly="True"
                 ItemsSource="{Binding SourceDatagrid}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding STT}" Header="STT" />
+                    <DataGridTextColumn Binding="{Binding STT}" Header="No." />
                     <DataGridTextColumn Binding="{Binding FormattedDate}" Header="Date" />
                     <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
                     <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />

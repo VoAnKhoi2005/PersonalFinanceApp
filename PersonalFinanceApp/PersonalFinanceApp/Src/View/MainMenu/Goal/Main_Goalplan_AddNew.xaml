@@ -12,6 +12,35 @@
     d:DesignWidth="400"
     mc:Ignorable="d">
     <UserControl.Resources>
+        <Style x:Key="ComboBox_style"
+               TargetType="ComboBoxItem">
+            <Setter Property="Background"
+                    Value="{DynamicResource ComboBoxBackground}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource ComponentText}" />
+            <Setter Property="BorderBrush"
+                    Value="Transparent" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Height"
+                    Value="40" />
+            <Setter Property="Width"
+                    Value="150" />
+            <Style.Triggers>
+                <!--  Highlight selected item  -->
+                <Trigger Property="IsSelected"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="LightGreen" />
+                </Trigger>
+                <!--  Highlight item on hover  -->
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Background"
+                            Value="{DynamicResource ComboBoxonHovered}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <nib:NumberToFormattedStringConverter x:Key="NumberFormatter" />
     </UserControl.Resources>
     <i:Interaction.Triggers>
@@ -191,8 +220,8 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <ComboBox
-                        Width="180"
+                    <ComboBox ItemContainerStyle="{StaticResource ComboBox_style}"
+                              Width="180"
                         Height="40"
                         Margin="10,0,0,0"
                         HorizontalAlignment="Left"

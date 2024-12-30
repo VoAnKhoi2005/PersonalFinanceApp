@@ -102,14 +102,16 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-
+                <DockPanel Grid.Row="0">
+                    <TextBlock HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Text="Name :" />
                     <TextBlock Foreground="{DynamicResource Ntf_goalCategory}"
                                Text="{Binding NameGoal}"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Left"
                                FontWeight="Bold"
                                Margin="10 0 0 0" />
-
                 </DockPanel>
                 <DockPanel Grid.Row="1">
                     <TextBlock
