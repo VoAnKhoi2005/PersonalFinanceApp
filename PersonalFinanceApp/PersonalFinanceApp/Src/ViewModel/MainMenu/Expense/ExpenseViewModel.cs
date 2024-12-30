@@ -442,19 +442,21 @@ public class ExpenseViewModel : BaseViewModel {
         }
         else {
             HaveExpenseBook = true;
-            ExpensesBook itemmax = items[0];
-            ExpensesBook exB = null;
-            foreach(var item in items) {
-                if(item.Year > itemmax.Year || (item.Month > itemmax.Month && item.Year == itemmax.Year)) {
-                    itemmax = item;
+            if(_expenseStore.ExpenseBook == null) {
+                ExpensesBook itemmax = items[0];
+                ExpensesBook exB = null;
+                foreach (var item in items) {
+                    if (item.Year > itemmax.Year || (item.Month > itemmax.Month && item.Year == itemmax.Year)) {
+                        itemmax = item;
+                    }
+                    if (item.Year == DateTime.Now.Year && item.Month == DateTime.Now.Month) exB = item;
                 }
-                if(item.Year == DateTime.Now.Year && item.Month == DateTime.Now.Month) exB = item;
-            }
-            if(exB != null) {
-                _expenseStore.ExpenseBook = exB;
-            }
-            else {
-                _expenseStore.ExpenseBook = itemmax;
+                if (exB != null) {
+                    _expenseStore.ExpenseBook = exB;
+                }
+                else {
+                    _expenseStore.ExpenseBook = itemmax;
+                }
             }
         }
     }

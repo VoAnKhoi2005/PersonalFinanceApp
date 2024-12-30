@@ -272,7 +272,8 @@ public class ExpenseAddNewViewModel : BaseViewModel {
             };
             DBManager.Insert(expense);
 
-            LoadSaving();
+            //LoadSaving();
+            _accountStore.UploadSaving();
 
             _shareService.Notify();
         }catch(Exception ex) {
@@ -289,6 +290,10 @@ public class ExpenseAddNewViewModel : BaseViewModel {
             foreach (var item in items) {
                 item.Expenses = DBManager.GetCondition<Expense>(e => e.UserID == int.Parse(_accountStore.UsersID) && item.Month == e.ExBMonth && item.Year == e.ExBYear);
                 saving += item.Expenses.Sum(ex => ex.Amount);
+            }
+            var itemgoal = DBManager.GetCondition<Goal>(g => g.UserID == _accountStore.Users.UserID);
+            foreach(var item in itemgoal) {
+                saving += item.CurrentAmount;
             }
             var usr = DBManager.GetFirst<User>(u => u.UserID == int.Parse(_accountStore.UsersID));
             if (usr != null) { usr.Saving = saving; }

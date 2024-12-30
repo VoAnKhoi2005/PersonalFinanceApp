@@ -376,11 +376,13 @@ public class DashboardViewModel : BaseViewModel
         BudgetLeft = (_expenseStore.ExpenseBook.Budget - sum).ToString();
 
         //saving
-        decimal saving = 0;
-        foreach (var item in SourceExpenseBook) {
-            saving += decimal.Parse(item.BudgetRemain);
-        }
-        SavingTotal = saving.ToString();
+        //decimal saving = 0;
+        //foreach (var item in SourceExpenseBook) {
+        //    saving += decimal.Parse(item.BudgetRemain);
+        //}
+        //SavingTotal = saving.ToString();
+        _accountStore.UploadSaving();
+        SavingTotal = _accountStore.Users.Saving.ToString();
     }
     public void LoadSourceExpeseBook() {
         //load exB
@@ -445,27 +447,34 @@ public class DashboardViewModel : BaseViewModel
             HaveExpenseBook = true;
             ExpensesBook itemmax = items[0];
             ExpensesBook exB = null;
-            foreach (var item in items) {
-                if (item.Year > itemmax.Year || (item.Month > itemmax.Month && item.Year == itemmax.Year)) {
-                    itemmax = item;
+            if (_expenseStore.ExpenseBook == null) {
+                foreach (var item in items) {
+                    if (item.Year > itemmax.Year || (item.Month > itemmax.Month && item.Year == itemmax.Year)) {
+                        itemmax = item;
+                    }
+                    if (item.Month == DateTime.Now.Month && item.Year == DateTime.Now.Year) {
+                        exB = item;
+                    }
                 }
-                if(item.Month == DateTime.Now.Month && item.Year == DateTime.Now.Year) {
-                    exB = item;
-                }
-            }
-            if (exB != null) { 
-                _expenseStore.ExpenseBook = exB;
-                BudgetSeries = CreateDoughnutChart(exB);
+                if (exB != null) {
+                    _expenseStore.ExpenseBook = exB;
+                    BudgetSeries = CreateDoughnutChart(exB);
 
-                ActivityPlotModel = CreateActivityPlotModel(exB);
+                    ActivityPlotModel = CreateActivityPlotModel(exB);
+                }
+                else {
+                    _expenseStore.ExpenseBook = itemmax;
+                    BudgetSeries = CreateDoughnutChart(itemmax);
+
+                    ActivityPlotModel = CreateActivityPlotModel(itemmax);
+                }
             }
             else {
-                _expenseStore.ExpenseBook = itemmax;
-                BudgetSeries = CreateDoughnutChart(itemmax);
 
-                ActivityPlotModel = CreateActivityPlotModel(itemmax);
+                BudgetSeries = CreateDoughnutChart(_expenseStore.ExpenseBook);
+
+                ActivityPlotModel = CreateActivityPlotModel(_expenseStore.ExpenseBook);
             }
-
             
         }
     }

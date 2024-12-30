@@ -216,6 +216,9 @@ public class GoalplanAddNewViewModel : BaseViewModel
                 StartDay = DateTime.Now,
             };
             DBManager.Insert(goal);
+
+            _accountStore.UploadSaving();
+            
             _goalStore.NotifyGoal();
         }
         catch (Exception ex) {
@@ -224,6 +227,27 @@ public class GoalplanAddNewViewModel : BaseViewModel
         }
         _goalStore.TriggerActionNewCategory -= LoadNewCategory;
         _modalNavigationStore.Close();
+    }
+    public void LoadSaving() {
+        //load saving in user
+        try {
+            long saving = 0;
+            var items = DBManager.GetCondition<ExpensesBook>(e => e.UserID == int.Parse(_accountStore.UsersID));
+            foreach (var item in items) {
+                item.Expenses = DBManager.GetCondition<Expense>(e => e.UserID == int.Parse(_accountStore.UsersID) && item.Month == e.ExBMonth && item.Year == e.ExBYear);
+                saving += item.Expenses.Sum(ex => ex.Amount);
+            }
+            var itemgoal = DBManager.GetCondition<Goal>(g => g.UserID == _accountStore.Users.UserID);
+            foreach (var item in itemgoal) {
+                saving += item.CurrentAmount;
+            }
+            var usr = DBManager.GetFirst<User>(u => u.UserID == int.Parse(_accountStore.UsersID));
+            if (usr != null) { usr.Saving = saving; }
+            DBManager.Update(usr);
+        }
+        catch (Exception ex) {
+            MessageBox.Show("Có lỗi xảy ra vui lòng thử lại", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
     public string GoalStatus() {
         if(long.Parse(TargetGoal) <= long.Parse(CurrentAmountGoal)) return "Completed";

@@ -51,6 +51,18 @@ public class GoalplanViewModel : BaseViewModel
         }
     }
     private string _dataFilterGoal;
+
+    //total goal
+    public string TotalGoal {
+        get => _totalGoal;
+        set {
+            if (_totalGoal != value) {
+                _totalGoal = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+    private string _totalGoal;
     #endregion
     #region Command
     public ICommand AddNewGoalCommand { get; set; }
@@ -81,9 +93,6 @@ public class GoalplanViewModel : BaseViewModel
     }
 
     public bool HasNoGoal => !GoalplanCardViewModels.Any();
-
-    
-
 
     public GoalplanViewModel(IServiceProvider serviceProvider)
     {
@@ -209,6 +218,9 @@ public class GoalplanViewModel : BaseViewModel
         foreach (var goal in goals) {
             GoalplanCardViewModels.Add(new GoalplanCardViewModel(_serviceProvider, goal) { ID = goal.GoalID.ToString()});
         }
+        //load total goal
+        _accountStore.UploadSaving();
+        TotalGoal = _accountStore.Users.Saving.ToString();
     }
     public class CheckBoxStatus {
         public int ID { get; set; }

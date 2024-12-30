@@ -13,6 +13,7 @@ public class GoalAddSavedAmountViewModel : BaseViewModel {
     private readonly ModalNavigationStore _modalNavigationStore;
     private readonly IServiceProvider _serviceProvider;
     private readonly GoalStore _goalStore;
+    private readonly AccountStore _accountStore;
     #region Properties
     //Plus
     public bool IsDeposit {
@@ -43,6 +44,7 @@ public class GoalAddSavedAmountViewModel : BaseViewModel {
 
     public GoalAddSavedAmountViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
+        _accountStore = serviceProvider.GetService<AccountStore>();
         _goalStore = _serviceProvider.GetRequiredService<GoalStore>();
         _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
 
@@ -78,6 +80,9 @@ public class GoalAddSavedAmountViewModel : BaseViewModel {
             DBManager.Insert(goalhistory);
             bool checkUpdate = DBManager.Update<Goal>(item);
             if (!checkUpdate) { throw new Exception("Update Goal failed"); }
+
+            _accountStore.UploadSaving();
+
             _goalStore.NotifyGoal();
         }
         catch (Exception ex) {

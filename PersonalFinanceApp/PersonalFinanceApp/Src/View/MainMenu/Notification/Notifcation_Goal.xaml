@@ -58,7 +58,7 @@
                     Height="20"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    Margin="0 2 7 0"
+                    Margin="0 2 15 0"
                     Background="#FFC8386C"
                     CornerRadius="30">
                 <Button Command="{Binding CloseGoalNotificationCommand}">
@@ -128,10 +128,11 @@
                         Text="{Binding CategoryGoal}" />
                 </DockPanel>
 
-                <DockPanel  Grid.Row="2">
+                <DockPanel Grid.Row="2">
                     <TextBlock Text="Time :"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Left"></TextBlock>
+                               HorizontalAlignment="Left">
+                    </TextBlock>
                     <TextBlock Foreground="{DynamicResource Ntf_goalTime}"
                                Opacity="0.6"
                                Text="{Binding StartEndDate}"
