@@ -32,70 +32,70 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <Border Width="80"
-                        Height="80"
-                        Background="White"
-                        CornerRadius="90" />
-                <Border Width="70"
-                        Height="70"
-                        Background="#FFD0F3EC"
-                        CornerRadius="90" />
-                <Border Width="60"
-                        Height="60"
-                        Background="#FFCDE0DF"
-                        CornerRadius="90" />
-                <Border Width="50"
-                        Height="50"
-                        Background="#FF69D0D4"
-                        CornerRadius="90" />
-                <materialDesign:PackIcon HorizontalAlignment="Center"
-                                         VerticalAlignment="Center"
-                                         Kind="Trophy"
-                                         Foreground="CadetBlue" />
+                <Border
+                    Width="80"
+                    Height="80"
+                    Background="White"
+                    CornerRadius="90" />
+                <Border
+                    Width="70"
+                    Height="70"
+                    Background="#FFD0F3EC"
+                    CornerRadius="90" />
+                <Border
+                    Width="60"
+                    Height="60"
+                    Background="#FFCDE0DF"
+                    CornerRadius="90" />
+                <Border
+                    Width="50"
+                    Height="50"
+                    Background="#FF69D0D4"
+                    CornerRadius="90" />
+                <materialDesign:PackIcon
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="CadetBlue"
+                    Kind="Trophy" />
             </Grid>
-            <Border Grid.Column="1"
-                    Width="20"
-                    Height="20"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Margin="0 2 15 0"
-                    Background="#FFC8386C"
-                    CornerRadius="30">
+            <Border
+                Grid.Column="1"
+                Width="20"
+                Height="20"
+                Margin="0,2,15,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="#FFC8386C"
+                CornerRadius="30">
                 <Button Command="{Binding CloseGoalNotificationCommand}">
-                    <materialDesign:PackIcon Width="20"
-                                             Height="20"
-                                             Foreground="White"
-                                             Kind="Close" />
+                    <materialDesign:PackIcon
+                        Width="20"
+                        Height="20"
+                        Foreground="White"
+                        Kind="Close" />
                     <Button.Resources>
                         <Style TargetType="Button">
-                            <Setter Property="Background"
-                                    Value="Transparent" />
+                            <Setter Property="Background" Value="Transparent" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
-                                        <Border Background="{TemplateBinding Background}"
-                                                CornerRadius="30">
-                                            <ContentPresenter HorizontalAlignment="Stretch"
-                                                              VerticalAlignment="Stretch" />
+                                        <Border Background="{TemplateBinding Background}" CornerRadius="30">
+                                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
                             <Style.Triggers>
-                                <Trigger Property="IsMouseOver"
-                                         Value="true">
-                                    <Setter Property="Cursor"
-                                            Value="Hand" />
-                                    <Setter Property="Background"
-                                            Value="Red" />
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Cursor" Value="Hand" />
+                                    <Setter Property="Background" Value="Red" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Resources>
                 </Button>
             </Border>
-            <Grid Grid.Column="1"
-                  Margin="15">
+            <Grid Grid.Column="1" Margin="15">
 
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -103,15 +103,17 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <DockPanel Grid.Row="0">
-                    <TextBlock HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Text="Name :" />
-                    <TextBlock Foreground="{DynamicResource Ntf_goalCategory}"
-                               Text="{Binding NameGoal}"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Left"
-                               FontWeight="Bold"
-                               Margin="10 0 0 0" />
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Text="Name :" />
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Foreground="{DynamicResource Ntf_goalCategory}"
+                        Text="{Binding NameGoal}" />
                 </DockPanel>
                 <DockPanel Grid.Row="1">
                     <TextBlock
@@ -129,17 +131,18 @@
                 </DockPanel>
 
                 <DockPanel Grid.Row="2">
-                    <TextBlock Text="Time :"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Left">
-                    </TextBlock>
-                    <TextBlock Foreground="{DynamicResource Ntf_goalTime}"
-                               Opacity="0.6"
-                               Text="{Binding StartEndDate}"
-                               VerticalAlignment="Center"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Left"
-                               Margin="10 0 0 0" />
+                    <TextBlock
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Text="Time :" />
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Foreground="{DynamicResource Ntf_goalTime}"
+                        Opacity="0.6"
+                        Text="{Binding StartEndDate}" />
                 </DockPanel>
 
             </Grid>

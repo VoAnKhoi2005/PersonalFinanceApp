@@ -8,6 +8,7 @@ namespace PersonalFinanceApp.ViewModel.LoginMenu;
 public class CodeVerificationViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
     private readonly SharedDataService _sharedDataService;
+    private readonly ModalNavigationStore _modalNavigationStore;
     #region Properties
     public string code;
     public bool flag = false;
@@ -75,20 +76,31 @@ public class CodeVerificationViewModel : BaseViewModel {
     public ICommand FocusNextCommand { get; set; }
     public ICommand FocusPreviousCommand {  get; set; }
     public ICommand LoadedCommand { get; set; }
+    public ICommand CancelEmailCommand { get; set; }
+    public ICommand ConfirmCodeCommand { get; set; }
     #endregion
     public CodeVerificationViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
+        _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _sharedDataService = serviceProvider.GetRequiredService<SharedDataService>();
         NavigationConfirmCodeCommand = new NavigateCommand<CreateNewPasswordViewModel>(serviceProvider, VerifyCode);
+        ConfirmCodeCommand = new RelayCommand<object>(ConfirmCode);
         //Focus
         FocusNextCommand = new RelayCommand<System.Windows.Controls.TextBox>( p => FocusNext(p));
         FocusPreviousCommand = new RelayCommand<System.Windows.Controls.TextBox>(p => FocusPrevious(p));
         LoadedCommand = new RelayCommand<System.Windows.Controls.TextBox>(p => FocusFirst(p));
+        CancelEmailCommand = new NavigateCommand<LoginNewAccountViewModel>(serviceProvider);
     }
-
+    public void ConfirmCode(object? parameter = null) {
+        if (VerifyCode()) NavigationConfirmCodeCommand.Execute(this);
+    }
     public bool VerifyCode()
     {
         code = _sharedDataService.RandomCode;
+        if(Verify1 == null || Verify2 == null || Verify3 == null || Verify4 == null || Verify5 == null || Verify6 == null) {
+            IncorrectVerify = true;
+            return false;
+        }
         if (Verify1.Length < 1 || Verify2.Length < 1 || Verify3.Length < 1 || Verify4.Length < 1 || Verify5.Length < 1 || Verify6.Length < 1) {
             IncorrectVerify = true;
             return false;

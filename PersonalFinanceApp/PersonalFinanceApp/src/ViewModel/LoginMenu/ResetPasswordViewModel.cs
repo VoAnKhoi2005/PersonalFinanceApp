@@ -13,6 +13,7 @@ public class ResetPasswordViewModel : BaseViewModel
     private readonly IServiceProvider _serviceProvider;
     private readonly SharedDataService _sharedDataService;
     private readonly EmailService _emailService;
+    private readonly ModalNavigationStore _modalNavigationStore;
 
     #region Properties
     public static string _to;
@@ -53,6 +54,7 @@ public class ResetPasswordViewModel : BaseViewModel
     public ResetPasswordViewModel(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
+        _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _sharedDataService = serviceProvider.GetRequiredService<SharedDataService>();
         _emailService = serviceProvider.GetRequiredService<EmailService>();
 

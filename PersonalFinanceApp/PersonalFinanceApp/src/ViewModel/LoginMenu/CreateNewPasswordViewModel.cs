@@ -12,6 +12,7 @@ namespace PersonalFinanceApp.ViewModel.LoginMenu;
 public class CreateNewPasswordViewModel : BaseViewModel {
     private readonly IServiceProvider _serviceProvider;
     private readonly SharedDataService _sharedDataService;
+    private readonly ModalNavigationStore _modalNavigationStore;
     #region Properties
     public string name;
     public bool correct = false;
@@ -55,9 +56,11 @@ public class CreateNewPasswordViewModel : BaseViewModel {
     public ICommand PasswordResetConfirmChangedCommand { get; set; }
     public ICommand CheckMathConfirmPasswordNewCommand { get; set; }
     public ICommand CheckFormatPassowrdNewCommand { get; set; }
+    public ICommand CancelEmailCommand { get; set; }
     #endregion
     public CreateNewPasswordViewModel(IServiceProvider serviceProvider) {
         _serviceProvider = serviceProvider;
+        _modalNavigationStore = serviceProvider.GetRequiredService<ModalNavigationStore>();
         _sharedDataService = serviceProvider.GetRequiredService<SharedDataService>();
         NavigationConfirmNewPassword = new NavigateCommand<LoginNewAccountViewModel>(serviceProvider, VerifyNewPassword);
         //Password Binding
@@ -65,6 +68,7 @@ public class CreateNewPasswordViewModel : BaseViewModel {
         //Format
         CheckMathConfirmPasswordNewCommand = new RelayCommand<PasswordBox>( p => CheckFormat(p));
         CheckFormatPassowrdNewCommand = new RelayCommand<TextBox>( p => CheckFormat(p));
+        CancelEmailCommand = new NavigateCommand<LoginNewAccountViewModel>(serviceProvider);
     }
 
     public bool VerifyNewPassword() {

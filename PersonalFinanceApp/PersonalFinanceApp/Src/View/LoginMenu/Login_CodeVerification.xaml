@@ -297,11 +297,13 @@
                     </WrapPanel>
                 </StackPanel>
 
-                <Button x:Name="ConfirmResetGmail"
-                        Margin="300,320,50,25"
-                        Content="Confirm"
-                        FontSize="18"
-                        Foreground="{DynamicResource Login_buttonText}">
+                <Button
+                    x:Name="ConfirmResetGmail"
+                    Margin="300,320,50,25"
+                    
+                    Content="Confirm"
+                    FontSize="18"
+                    Foreground="{DynamicResource Login_buttonText}">
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
@@ -310,48 +312,44 @@
                     </i:Interaction.Triggers>
                     <Button.Style>
                         <Style TargetType="Button">
-                            <Setter Property="Background"
-                                    Value="{DynamicResource Confirm_button}" />
-                            <Setter Property="Foreground"
-                                    Value="#E5CBBFBF" />
+                            <Setter Property="Background" Value="{DynamicResource Confirm_button}" />
+                            <Setter Property="Foreground" Value="#E5CBBFBF" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}">
-                                            <ContentPresenter HorizontalAlignment="Center"
-                                                              VerticalAlignment="Center" />
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
                             <Style.Triggers>
-                                <Trigger Property="IsMouseOver"
-                                         Value="true">
-                                    <Setter Property="Cursor"
-                                            Value="Hand" />
-                                    <Setter Property="Background"
-                                            Value="{DynamicResource Confirm_buttonHover}" />
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Cursor" Value="Hand" />
+                                    <Setter Property="Background" Value="{DynamicResource Confirm_buttonHover}" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}"
-                                    BorderBrush="Transparent"
-                                    BorderThickness="1"
-                                    CornerRadius="30">
-                                <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center" />
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="Transparent"
+                                BorderThickness="1"
+                                CornerRadius="30">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
 
-                <Button Margin="50,320,300,25"
-                        Content="Cancel"
-                        FontSize="18"
-                        Foreground="{DynamicResource Login_buttonText}">
+                <Button
+                    Margin="50,320,300,25"
+                    Command="{Binding CancelEmailCommand}"
+                    Content="Cancel"
+                    FontSize="18"
+                    Foreground="{DynamicResource Login_buttonText}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:InvokeCommandAction Command="{Binding CancelEmailCommand}" />
@@ -359,39 +357,33 @@
                     </i:Interaction.Triggers>
                     <Button.Style>
                         <Style TargetType="Button">
-                            <Setter Property="Background"
-                                    Value="{DynamicResource Cancel_button}" />
-                            <Setter Property="Foreground"
-                                    Value="{DynamicResource CommonText}" />
+                            <Setter Property="Background" Value="{DynamicResource Cancel_button}" />
+                            <Setter Property="Foreground" Value="{DynamicResource CommonText}" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}">
-                                            <ContentPresenter HorizontalAlignment="Center"
-                                                              VerticalAlignment="Center" />
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
                             <Style.Triggers>
-                                <Trigger Property="IsMouseOver"
-                                         Value="true">
-                                    <Setter Property="Cursor"
-                                            Value="Hand" />
-                                    <Setter Property="Background"
-                                            Value="{DynamicResource Cancel_buttonHover}" />
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="Cursor" Value="Hand" />
+                                    <Setter Property="Background" Value="{DynamicResource Cancel_buttonHover}" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}"
-                                    BorderBrush="Transparent"
-                                    BorderThickness="1"
-                                    CornerRadius="30">
-                                <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center" />
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="Transparent"
+                                BorderThickness="1"
+                                CornerRadius="30">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
