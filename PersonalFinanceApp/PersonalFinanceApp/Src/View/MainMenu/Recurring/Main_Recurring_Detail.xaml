@@ -7,12 +7,12 @@
     xmlns:local="clr-namespace:PersonalFinanceApp.Src.View"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="700"
+    Height="700"
     d:DesignHeight="700"
     d:DesignWidth="1000"
-             Width="650"
-             Height="700"
-             mc:Ignorable="d">
-    <Grid >
+    mc:Ignorable="d">
+    <Grid>
         <Grid.Resources>
             <Style x:Key="comboboxStyle" TargetType="ComboBoxItem">
                 <Setter Property="Background" Value="{DynamicResource ComboBoxBackground}" />
@@ -21,8 +21,7 @@
                 <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="Height" Value="40" />
                 <Setter Property="Width" Value="150" />
-                <Setter Property="FontSize"
-                        Value="14" />
+                <Setter Property="FontSize" Value="14" />
             </Style>
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Sans Serif Collection" />
@@ -100,9 +99,9 @@
                 Width="100"
                 Height="50"
                 Margin="20,0,0,0"
-                Background="{DynamicResource DockpanelBackGround}"
                 materialDesign:HintAssist.Foreground="{DynamicResource ComponentText}"
                 materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource Underline}"
+                Background="{DynamicResource DockpanelBackGround}"
                 BorderBrush="{x:Null}"
                 Foreground="{DynamicResource SuperText}"
                 ItemContainerStyle="{StaticResource comboboxStyle}"
@@ -222,7 +221,7 @@
                                 <materialDesign:PopupBox
                                     Width="auto"
                                     Height="20"
-                                    Margin="0 0 0 3"
+                                    Margin="0,0,0,3"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     Background="Transparent"
