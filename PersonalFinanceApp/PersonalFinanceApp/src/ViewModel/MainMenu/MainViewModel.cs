@@ -180,14 +180,16 @@ public class MainViewModel : BaseViewModel
             foreach (var item in items)
             {
                 DateTime dt = (DateTime)item.StartDay;
-                while (DateOnly.FromDateTime(dt) <= DateOnly.FromDateTime(DateTime.Today)) {
+                while (DateOnly.FromDateTime(dt) < DateOnly.FromDateTime(DateTime.Today)) {
                     if (item.Reminder.CompareTo("Daily") == 0) {
                         NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
+                        dt = dt.AddDays(1);
                         break;
                     }
                     else if (item.Reminder.CompareTo("Weekly") == 0) {
                         if (DateOnly.FromDateTime(dt.AddDays(7)) == DateOnly.FromDateTime(DateTime.Today)) {
                             NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
+                            dt = dt.AddDays(7);
                         }
                         else {
                             dt = dt.AddDays(7);
@@ -196,6 +198,7 @@ public class MainViewModel : BaseViewModel
                     else if (item.Reminder.CompareTo("Monthly") == 0) {
                         if (DateOnly.FromDateTime(dt.AddMonths(1)) == DateOnly.FromDateTime(DateTime.Today)) {
                             NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
+                            dt = dt.AddMonths(1);
                         }
                         else {
                             dt = dt.AddMonths(1);
@@ -205,6 +208,7 @@ public class MainViewModel : BaseViewModel
                         //yearly
                         if (DateOnly.FromDateTime(dt.AddYears(1)) == DateOnly.FromDateTime(DateTime.Today)) {
                             NotifyCardViewModels.Add(new NotificationGoalCard(_serviceProvider, item));
+                            dt = dt.AddYears(1);
                         }
                         else {
                             dt = dt.AddYears(1);
