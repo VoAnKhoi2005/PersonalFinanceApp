@@ -69,10 +69,10 @@
                     Background="Transparent"
                     BorderBrush="{x:Null}"
                     CaretBrush="{DynamicResource CommonText}"
+                    FontSize="14"
+                    Foreground="{DynamicResource CommonText}"
                     SelectionBrush="{DynamicResource CommonText}"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Foreground="{DynamicResource CommonText}"
-                    FontSize="14"
                     Text="{Binding EmailCurrent}" />
 
             </Border>
@@ -97,10 +97,10 @@
                     Background="Transparent"
                     BorderBrush="{x:Null}"
                     CaretBrush="{DynamicResource CommonText}"
+                    FontSize="14"
+                    Foreground="{DynamicResource CommonText}"
                     SelectionBrush="{DynamicResource CommonText}"
-                         Foreground="{DynamicResource CommonText}"
-                         FontSize="14"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding EmailChanged}" />
             </Border>
 
@@ -140,6 +140,7 @@
             <!--  Confirm  -->
             <Button
                 Margin="300,300,50,45"
+                Command="{Binding ChangedEmailCommand}"
                 Content="Confirm"
                 FontSize="18"
                 Foreground="{DynamicResource Login_buttonText}">
